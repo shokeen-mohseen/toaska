@@ -1,0 +1,210 @@
+<div>
+  <form #equipment="ngForm">
+    <div class="row" *ngIf="editPage">
+      <div class="col-md-6"></div>
+      <div class="col-md-6 text-right">
+        <span class="fw600">{{ 'key_LastUpdate' | translate }}:	</span>{{selectedEquipmentTypeToEdit.updateDateTimeBrowser | momentDateWithZonePipe}}
+        <br><span class="fw600">{{ 'key_By' | translate }}</span> {{selectedEquipmentTypeToEdit.updatedBy}}
+      </div>
+    </div>
+    <!--Last Updated Section End//////////////-->
+
+
+
+    <div class="row">
+      <div class="col-md-3 custom-flex-w-15">
+        <div class="card">
+          <div class="card-header" *ngIf="addPage">{{ 'key_AddedList' | translate }}</div>
+          <div class="card-header" *ngIf="editPage">{{ 'key_EditList' | translate }}</div>
+          <div class="card-body p-0" *ngIf="addPage">
+            <ul class="list-group" #nextList>
+              <li class="list-group-item list-group-item-action"
+                  *ngFor="let equipmentType of equipmentTypesToEdit; let i = index"
+                  (click)="selectedEquipmentType(equipmentType,i)"
+                  [ngClass]="{ 'active': equipmentType.id == equipmentTypeCheckmodel.id}">
+                <a>{{equipmentType?.description}}</a>
+                <button class="close" type="button" *ngIf="equipmentType.id != equipmentTypeCheckmodel.id"
+                        (click)="removeEquipmentTypeFromEditList(equipmentType)">
+                  <i class="fa fa-times" aria-hidden="true"></i>
+                </button>
+              </li>
+            </ul>
+
+          </div>
+          <div class="card-body p-0" *ngIf="editPage">
+            <ul class="list-group" #nextList>
+              <li class="list-group-item list-group-item-action"
+                  *ngFor="let equipmentType of equipmentTypesToEdit; let i = index"
+                  (click)="selectedEquipmentType(equipmentType,i)"
+                  [ngClass]="{ 'active': equipmentType.id == selectedEquipmentTypeToEdit.id }">
+                <a>{{equipmentType?.description}}</a>
+                <button class="close" type="button" *ngIf="equipmentType.id!=selectedEquipmentTypeToEdit.id"
+                        (click)="removeEquipmentTypeFromEditList(equipmentType)">
+                  <i class="fa fa-times" aria-hidden="true"></i>
+                </button>
+              </li>
+            </ul>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-9 custom-flex-w-85">
+        <div class="tab-content">
+          <!--=============== Start profile =================-->
+          <div class="e-profile">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="box-children">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <!--<div class="form-group">
+                      <label for="firstname">
+                        {{ 'key_Equipmentclass' | translate}} <span class="text-danger">*</span>
+                      </label>
+                      <input type="text" class="form-control" value="" required />
+                    </div>-->
+                      <!--<div *ngIf="editPage" class="form-group">
+                      <label for="firstname">
+                        {{ 'key_Equipmenttypecode' | translate}} <span class="text-danger">*</span>
+                      </label>
+                      <input type="text" name="etCode" disabled [(ngModel)]="selectedEquipmentTypeToEdit.code" class="form-control" required />
+                    </div>-->
+                      <div class="form-group">
+                        <label for="firstname">
+                          {{ 'key_Equipmenttypecode' | translate}} <span class="text-danger">*</span>
+                        </label>
+                        <input type="text" name="etCode" [(ngModel)]="selectedEquipmentTypeToEdit.code" class="form-control" required />
+                      </div>
+
+                      <div class="form-group">
+                        <label for="lastname">{{ 'key_TMSCode' | translate}} <span class="text-danger">*</span></label>
+                        <input type="text" name="tmscode" [(ngModel)]="selectedEquipmentTypeToEdit.tmsCode" class="form-control" value="" required />
+                      </div>
+
+                      <div class="form-group">
+                        <label for="firstname">
+                          {{ 'key_Equipmentname' | translate}} <span class="text-danger">*</span>
+                        </label>
+                        <input type="text" name="etName" [(ngModel)]="selectedEquipmentTypeToEdit.name" class="form-control" required />
+                      </div>
+                    </div>
+
+
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="box-children">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label>{{ 'key_MaxPalletQty' | translate}} <span class="text-danger">*</span></label>
+                        <input type="number" name="etMaxPQty" [(ngModel)]="selectedEquipmentTypeToEdit.maxPalletQty" class="form-control" required />
+                      </div>
+                    </div>
+
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label>{{ 'key_FreightMode' | translate}} <span class="text-danger">*</span></label>
+                        <angular2-multiselect fixFilterBug [data]="freightList"
+                                              [(ngModel)]="freightListItem"
+                                              [settings]="settingsA"
+                                              name="freightList" class="right" required>
+                        </angular2-multiselect>
+                      </div>
+                    </div>
+
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="lastname">{{ 'key_LeastFillPalletQty' | translate}}</label>
+                        <input type="number" name="etLeFillPQty" [(ngModel)]="selectedEquipmentTypeToEdit.leastFillPalletQty" class="form-control" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!--<div class="col-md-4">
+            <div class="box-children">
+              <div class="row">-->
+              <!--<div class="col-md-12">
+              <div class="form-group">
+                <span class="fw600 mr-3 " for="lastname"> {{ 'key_Status' | translate }} </span>
+                <span for="lastname"> {{ 'key_Active' | translate }} </span>
+
+              </div>
+            </div>-->
+              <!--<div class="col-md-12">
+                    <div class="form-group">
+                      <div class="form-check checkbox pl-0">
+                        <label class="form-check-label" for="check1"> {{ 'key_SetupCompleted' | translate }} </label>
+                        <input class="form-check-input ml-2" type="checkbox"
+                               #saveSetupStatusCheckBox
+                               id="saveSetupStatusCheckBox"
+                               [checked]="selectedEquipmentTypeToEdit?.setupComplete"
+                               (change)="onSetupSaveStatusChanged(saveSetupStatusCheckBox.checked)"
+                               value="">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <div class="form-group d-flex">
+                      <span class="fw600 mr-3 " for="lastname"> {{ 'key_SetupDatetime' | translate }} </span>
+                      <span for="lastname" class="text-break"> {{selectedEquipmentTypeToEdit?.setupCompleteDateTime | date:'MM-dd-yyyy hh:mm:ss'}}</span>
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <div class="form-group d-flex">
+                      <span class="fw600 mr-3 " for="lastname"> {{ 'key_SetupCompletedby' | translate }} </span>
+                      <span for="lastname" class="text-break"> {{selectedEquipmentTypeToEdit?.updatedBy}}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>-->
+            </div>
+          </div>
+          <!--=============== End e-profile =================-->
+        </div>
+      </div>
+
+      <!--Hide for now-->
+
+      <div class="col-lg-12" [class.disabled-contenct]="isDisabledContent">
+        <div id="accordionEquipmentMaterial" class="accordion">
+          <div class="card mb-0">
+            <div class="card-header collapsed" data-toggle="collapse" href="#DefineEquipmentMaterial" (click)="openAccordion('equipmentMaterial')">
+              <a class="card-title">
+                {{ 'key_DefineEquipmentMaterialCharacteristics' | translate}}
+              </a>
+            </div>
+            <div id="DefineEquipmentMaterial" class="card-body collapse" data-parent="#accordionEquipmentMaterial">
+              <div *ngIf="equipmentMaterial">
+                <app-define-equipment-material [sendMatIDToChild]="selectedEquipmentTypeToEdit?.id" [sendDataToChild]="selectedEquipmentTypeToEdit?.code"></app-define-equipment-material>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="row justify-content-center my-5">
+      <div class="col-xl-2 col-lg-4 col-md-4 col-sm-12">
+        <button class="btn btn-block btn-save" (click)="saveEquipmentType()" [disabled]="(!equipment.form.valid || Inactive)?true:false" type="button">{{ 'key_Save' | translate }}</button>
+      </div>
+      <div class="col-xl-2 col-lg-4 col-md-4 col-sm-12" *ngIf="addPage">
+        <button class="btn btn-block btn-next" type="button" [disabled]="(!equipment.form.valid || Inactive)?true:false" (click)="saveNextEquipment()">
+          <span class="fw600">{{ 'key_Add' | translate }}</span> <span class="fs-13"> > {{ 'key_Next' | translate }}</span>
+        </button>
+      </div>
+      <div class="col-xl-2 col-lg-4 col-md-4 col-sm-12" *ngIf="editPage">
+        <button class="btn btn-block btn-next" type="button" [disabled]="(!equipment.form.valid || equipmentTypesToEdit.length === 1 || Inactive)?true:false" (click)="saveAndEditNext()">
+          <span class="fw600">{{ 'key_Edit' | translate }}</span> <span class="fs-13"> > {{ 'key_Next' | translate }}</span>
+        </button>
+      </div>
+    </div>
+
+  </form>
+
+</div>

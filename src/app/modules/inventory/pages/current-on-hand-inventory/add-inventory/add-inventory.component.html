@@ -1,0 +1,58 @@
+<!-- Modal Header -->
+<div class="modal-header">
+  <h5 class="modal-title"> {{ 'key_LampsAddNewOnhandInventory' | translate }} </h5>
+  <button type="button" class="close" data-dismiss="modal" (click)="close()">&times;</button>
+</div>
+
+<!-- Modal body -->
+<form #inventoryadd="ngForm">
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="form-group">
+          <label> {{ 'key_LocationFunction' | translate }} <span class="text-danger">*</span> </label>
+          <angular2-multiselect fixFilterBug [data]="locationFunctionList" [(ngModel)]="selectedLocationFunction" [settings]="LFsettings"
+                                (onSelect)="onLocationFunctionSelect($event)"
+                                (onDeSelect)="OnLocationFunctionDeSelect($event)"
+                                (onSelectAll)="onSelectAll($event)"
+                                (onDeSelectAll)="onLocationFunctionDeSelectAll($event)"
+                                (onAddFilterNewItem)="onAddItem($event)" name="locationFunctionList" required>
+          </angular2-multiselect>
+        </div>
+        <div class="form-group">
+          <label> {{ 'key_Location' | translate }} <span class="text-danger">*</span> </label>
+          <angular2-multiselect fixFilterBug [data]="locationList" [(ngModel)]="selectedLocation" [settings]="Locsettings"
+                                (onSelect)="onItemSelect($event)"
+                                (onDeSelect)="OnItemDeSelect($event)"
+                                (onSelectAll)="onSelectAll($event)"
+                                (onDeSelectAll)="onDeSelectAll($event)"
+                                (onAddFilterNewItem)="onAddItem($event)" name="locationList" required>
+          </angular2-multiselect>
+        </div>
+        <div class="form-group">
+          <label> {{ 'key_Materialname' | translate }} <span class="text-danger">*</span> </label>
+          <angular2-multiselect fixFilterBug [data]="materialList" [(ngModel)]="selectedMaterial" [settings]="Matsettings"
+                                (onSelect)="onItemSelect($event)"
+                                (onDeSelect)="OnItemDeSelect($event)"
+                                (onSelectAll)="onSelectAll($event)"
+                                (onDeSelectAll)="onDeSelectAll($event)"
+                                (onAddFilterNewItem)="onAddItem($event)" name="materialList" required>
+          </angular2-multiselect>
+        </div>
+        <div class="form-group">
+          <label> {{ 'key_Quantity' | translate }} <span class="text-danger">*</span> </label>
+          <input type="number" [(ngModel)]="model.quantity" class="form-control" name="quantity" required />
+        </div>
+        <div class="form-group">
+          <label> {{ 'key_UOM' | translate }}</label>
+          <input type="text" [(ngModel)]="model.uom" class="form-control" disabled name="uom"/>
+        </div>        
+      </div>
+    </div>
+    <div class="row justify-content-center my-3">
+      <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 text-center">
+        <button class="btn btn-save popup-btn-width" id="btnSave" [disabled]="!inventoryadd.form.valid" name="btnSave" (click)="saveCurrentOnHandMaterial()" type="button">{{ 'key_Save' | translate }}</button>
+      </div>
+    </div>
+  </div>
+</form>

@@ -1,0 +1,270 @@
+<div class="row">
+  <div class="col-md-4 col-sm-12">
+    <div class="box-children">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group">
+            <label>
+              {{ 'key_Ordertype' | translate }}
+            </label>
+            <!--<select class="form-control" disabled>
+        <option selected>CPU Order</option>
+      </select>-->
+            <input type="text" value="{{SalesOrderData[0].OrderTypeName}}" class="form-control" readonly>
+
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="form-group">
+            <label for="">
+              {{ 'key_Status' | translate }}
+            </label>
+            <!--<select class="form-control" disabled>
+       <option selected>Shipped Inventory And AR Charges Sent To MAS</option>
+      </select>-->
+            <input type="text" value="{{SalesOrderData[0].OrderStatusName}}" class="form-control" readonly>
+          </div>
+        </div>
+
+        <div class="col-md-12">
+          <div class="form-group">
+            <label>
+              {{ 'key_ShipFromType' | translate }}
+            </label>
+            <!--<select class="form-control" disabled>
+      <option selected>Wash Facility</option>
+      </select>-->
+            <input type="text" value="{{SalesOrderData[0].FLocationFunctionName}}" class="form-control" readonly>
+          </div>
+        </div>
+
+       <div class="col-md-12">
+          <div class="form-group">
+            <label>
+              {{ 'key_ShipFrom' | translate }}
+            </label>
+            <!--<select class="form-control" disabled>
+        <option selected>Tosca Bridgeview [Tosca Ltd For Operating Location]</option>
+      </select>-->
+            <input type="text" value="{{SalesOrderData[0].FLocationName}}" class="form-control" readonly>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="form-group">
+            <label>{{ 'key_FromAddress' | translate }}  </label>
+            <textarea class="mt-1 form-control" name="FromAdress" readonly>{{SalesOrderData[0].FromLocationAddressName}}</textarea>
+          </div>
+        </div>
+       <!-- <div class="col-md-12">
+          <div class="form-group">
+            <label>{{ 'key_ToContact' | translate }} </label>
+            <div class="input-group">
+              <input type="text" value="{{SalesOrderData[0].FromContactName}}" class="form-control" readonly>
+              <div class="input-group-append ml-1">
+                <span class="input-group-text">
+                  <i class="fa fa-user" aria-hidden="true" (click)="openShiptocontact()" style="cursor:pointer"></i>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>-->
+        <div class="col-md-12">
+          <div class="form-group">
+            <label>{{ 'key_FromContract' | translate }}</label>
+            <!--<select class="form-control" disabled>
+        <option>1</option>
+      </select>-->
+            <input type="text" value="{{SalesOrderData[0].FromLocationContract}}" class="form-control" readonly>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="form-group">
+            <label>{{ 'Key_EquipmentType' | translate }} </label>
+            <!--<select class="form-control" disabled>
+        <option selected>53 FT DRY VAN (60 Pallets)</option>
+      </select>-->
+
+            <input type="text" value="{{SalesOrderData[0].EquipmentTypeName}}" class="form-control" readonly>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="form-group">
+            <label>{{ 'key_Carrier' | translate }}</label>
+            <!--<select class="form-control" disabled>
+        <option selected>CPU1 - CPU (Customer Pick up)</option>
+      </select>-->
+
+            <input type="text" value="{{SalesOrderData[0].CarrierName}}" class="form-control" readonly>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="form-group">
+            <label for="">{{'key_FreightMode' | translate}}</label>
+            <input type="text" value="{{SalesOrderData[0].FreightModeName}}" class="form-control" readonly>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="form-group">
+            <label for="">{{ 'key_EquipmentNo' | translate }}</label>
+            <input type="text" value="{{SalesOrderData[0].TrailerNumber}}" class="form-control" readonly>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="form-group">
+            <label for="">{{ 'key_SealNO' | translate }}</label>
+            <input type="text" value="{{SalesOrderData[0].TrailerSealNumber}}" class="form-control" readonly>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="box-children pl-0 pr-0">
+      <div class="col-md-12">
+        <div class="form-group">
+          <label>
+            {{ 'key_RequestedDeliveryDate' | translate }}
+          </label>
+          <input type="text" value="{{SalesOrderData[0].RequestedDeliveryDate}}" class="form-control" readonly>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="form-group">
+          <label>
+            {{ 'key_ScheduleShipDate' | translate }}
+          </label>
+          <input type="text" value="{{SalesOrderData[0].ScheduledShipDate}}" class="form-control" readonly>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="form-group">
+          <label>
+            {{ 'key_MustArriveByDate' | translate }}
+          </label>
+          <input type="text" value="{{SalesOrderData[0].MustArriveByDate}}" class="form-control" readonly>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="form-group">
+          <label>{{ 'key_ShiptoType' | translate }} </label>
+          <!--<select class="form-control" disabled>
+            <option selected>Customer Location</option>
+          </select>-->
+
+          <input type="text" value="{{SalesOrderData[0].TLocationFunctionName}}" class="form-control" readonly>
+
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="form-group">
+          <label>{{ 'key_ShipToLocationto' | translate }} </label>
+           <input type="text" value="{{SalesOrderData[0].TLocationName}}" class="form-control" readonly>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="form-group">
+          <label>{{ 'key_ToAddress' | translate }}</label>
+          
+          <textarea class="mt-1 form-control" name="address" readonly>{{SalesOrderData[0].ToLocationAddressName}}</textarea>
+        </div>
+      </div>
+     <!-- <div class="col-md-12">
+        <div class="form-group">
+          <label>{{ 'key_ToContact' | translate }} </label>
+          <div class="input-group">
+             <input type="text" value="{{SalesOrderData[0].ToContactName}}" class="form-control" readonly>
+            <div class="input-group-append ml-1">
+              <span class="input-group-text">
+                <i class="fa fa-user" aria-hidden="true" (click)="openShiptocontact()" style="cursor:pointer"></i>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>-->      
+      <div class="col-md-12">
+        <div class="form-group">
+          <label>{{ 'key_AddressName' | translate }}  </label>
+           <input type="text" value="{{SalesOrderData[0].EndAddress}}" class="form-control" readonly>
+          
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="form-group">
+          <label>{{ 'key_ToContract' | translate }}</label>
+           <input type="text" value="{{SalesOrderData[0].ToLocationContract}}" class="form-control" readonly>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="box-children">
+      <div class="form-check checkbox">
+        <input id="check1" name="check1" type="checkbox" [(ngModel)]="IsChecked" disabled>
+        <label for="check1" class="form-check-label ml-2">{{ 'key_SuppressEmailNotification' | translate }} </label>
+      </div>
+      <hr />
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group">
+            <label>
+              {{ 'key_PONumber' | translate }}
+            </label>
+              <input type="text" class="form-control" value="{{SalesOrderData[0].PurchaseOrderNumber}}" name="" disabled>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="form-group">
+            <label>{{ 'key_AvailableCredit' | translate }}</label>
+            <input type="text" class="form-control" value="{{AvailableCredit}}" name="" disabled>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="form-group">
+            <label>{{ 'key_SalesManager' | translate }}</label>
+            <!--<select class="form-control" disabled>
+              <option selected>
+                Tony M
+              </option>
+            </select>-->
+             <input type="text" class="form-control" value="{{SalesManager}}" name="" disabled>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="form-group">
+            <label>{{ 'key_Invoicenumber' | translate }}</label>
+            <input type="text" class="form-control" value="{{SalesOrderData[0].InvoiceNo}}" name="" disabled>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="form-group">
+            <label>{{ 'key_AllocFreightCharges' | translate }}</label>
+            <input type="text" class="form-control" value="{{SalesOrderData[0].AllocatedFreightCharge}}" name="" disabled>
+          </div>
+        </div>
+        <hr />
+        <div class="col-sm-12">
+          <h5 class="mt-3">{{ 'key_FuelChargeParameterValue' | translate }}</h5>
+          <table class="table table-bordered">
+            <tr>
+              <td> <span for="" class="fw600 mr-3">{{ 'key_MilesOverrideforCustomerFuelCharge' | translate }}</span></td>
+              <td><span for="">{{fuelChargesMiles}}</span></td>
+            </tr>
+            <tr>
+              <td><span for="" class="fw600 mr-3">{{ 'key_RatePerMile' | translate }}</span></td>
+              <td><span for="">{{fuelChargesRatePerMile}}</span></td>
+            </tr>
+            <tr>
+              <td> <span for="" class="fw600 mr-3">{{ 'key_CustomerFuelCostPassthroughPercent' | translate }}</span></td>
+              <td><span for="">{{fuelChargesPercentage}}</span></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

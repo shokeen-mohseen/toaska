@@ -1,0 +1,50 @@
+<app-top-btn-group #btnBar [actionGroupConfig]="actionGroupConfig" (action)="actionHandler($event)"></app-top-btn-group>
+<div class="mb-3">
+  <div class="form-area">
+    <div class="wrapper">
+      <div class="content-wrapper">
+        <div>
+          <h5>{{ 'key_IssueOrder' | translate }}</h5>
+        </div>
+        <mat-tab-group #tabGroupA class="mt-18" animationDuration="0ms" (selectedTabChange)="tabChange($event)">
+
+          <mat-tab #tab1 *ngIf="tab1">
+            <ng-template mat-tab-label>
+              {{ 'key_IssueOrderList' | translate }}
+            </ng-template>
+            <div class="tab-content" *ngIf="tab1Data">
+              <app-issue-order-list></app-issue-order-list>
+            </div>
+          </mat-tab>
+
+          <mat-tab #tab2 *ngIf="tab2">
+            <ng-template mat-tab-label>
+              {{ 'key_Addnew' | translate }}
+              <button class="close" type="button" (click)="closeTab()">
+                <i class="fa fa-times-circle-o" aria-hidden="true"></i>
+              </button>
+            </ng-template>
+            <div class="tab-content" *ngIf="tab2Data">
+              dddd
+            </div>
+          </mat-tab>
+
+          <mat-tab #tab3 *ngIf="tab3">
+            <ng-template mat-tab-label>
+              {{ 'key_Edit' | translate }}
+              <button class="close" type="button" (click)="closeTab()">
+                <i class="fa fa-times-circle-o" aria-hidden="true"></i>
+              </button>
+            </ng-template>
+            <div class="tab-content" *ngIf="tab3Data">
+              ddddd
+            </div>
+          </mat-tab>
+
+        </mat-tab-group>
+
+      </div>
+    </div>
+  </div>
+</div>
+<app-show-notes></app-show-notes>

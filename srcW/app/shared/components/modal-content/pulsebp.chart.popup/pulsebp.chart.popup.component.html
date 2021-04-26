@@ -1,0 +1,199 @@
+<!--Code comment template example -
+  Developer Name: Satyen Singh  Date: July 07 , 2020
+ TFS ID: 16549 Logic Description:Design popup for BP & Pulse chart.
+Code Start
+-->
+   <div class="modal-header">
+     <h4 class="modal-title" id="modal-basic-title">
+       {{modalData.modelStagename | translate}}
+
+     </h4>
+     <a class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+       <span aria-hidden="true">&times;</span>
+     </a>
+   </div>
+
+   <div class="modal-body modalbg">     
+       <div class="nav-tabs-boxed">        
+           <ul class="nav nav-tabs tabwidth" role="tablist">
+             <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#home-1" role="tab" aria-controls="home" aria-selected="true" [innerHTML]="'partographChart.Key_PulseChart' | translate"></a></li>
+             <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#profile-1" role="tab" aria-controls="profile" aria-selected="false" id="modal-basic-title" [innerHTML]="'partographChart.key_BPChart' | translate"></a></li>
+
+           </ul>
+         
+         <div class="tab-content">
+           <div class="tab-pane active" id="home-1" role="tabpanel">
+             <!--add time and user with comment history session-->
+             <div class="row">
+               <div class="col-sm-6 bg-whites pdr">
+                 <div class="cardpdrtop card">
+                   <div class="row">
+                     <div class="col-lg-6 col-xs-6 col-sm-6 col-md-12">
+                       <span><i class="fa fa-clock-o fa-3" aria-hidden="true"></i></span>
+                       <span class="ml-1" [innerHTML]="modalData.pulseData.DisplayTime +' '+ modalData.pulseData.timeZone"> </span>
+                     </div>
+                     <div class="col-lg-6 col-xs-6 col-sm-6 col-md-12">
+                       <span><i class="fa fa-user-circle-o" aria-hidden="true"></i></span>
+                       <span class="ml-1">{{userName}}</span>
+                     </div>
+                   </div>
+                 </div>
+               </div>
+               <div class="col-sm-6 bg-whites pdrright">
+                 <div class="cardpdrtop card">
+                   <div class="row">
+                     <div class="col-xs-6">
+                       <span class="ml-3"><i class="fa fa-history" aria-hidden="true"></i></span>
+                       <span class="ml-1">{{ 'key_Commenthistory' | translate }}</span>
+                     </div>
+
+                   </div>
+                 </div>
+               </div>
+             </div>
+             <!--add time and user with comment history session-->
+
+             <div class="row">
+               
+                 <div class="col-sm-6 pdr">
+                   <div class="panelbg card commentheight" id="tblCervixpopupChart">
+                     <form (ngSubmit)="passBackUserPulseSave()" [formGroup]="UserPulseForm">
+                       <div class="form-group">
+                         <label for="company" class=" font-600">{{ 'key_Pulse' | translate }}</label>
+                         <input type="text" formControlName="value" class="HeartRate form-control" />
+                         <app-control-messages [control]="f['value']"></app-control-messages>
+                         <!--<input type="text" [(ngModel)]="modalData.pulseData.value" class="HeartRate form-control" />-->
+                       </div>
+                       <div class="form-group">
+                         <label for="company">{{ 'key_Commentsarea' | translate }}</label>
+                         <textarea [attr.placeholder]="'key_Comments' | translate" class="Comments form-control" formControlName="remarks" rows="3"></textarea>
+                         <!--<textarea [attr.placeholder]="'key_Comments' | translate" class="Comments form-control" [(ngModel)]="modalData.pulseData.remarks" rows="3"></textarea>-->
+                       </div>
+                       <div class="form-group text-center">
+                         <button type="submit" class="btn btn-pill btnsave  btn-raised btnbg"
+                                 [disabled]="UserPulseForm.controls['value'].invalid">
+                           <span [innerHTML]="'key_Save' | translate"></span>
+                         </button>
+                       </div>
+                       <!--<div class="form-group text-center">
+    <input type="button" (click)="passBackData('P')" class="btn btn-pill btnsave btn-raised btnbg" [value]="'key_Save' | translate">
+  </div>-->
+                     </form>
+                   </div>
+                 </div>
+                
+                 <div class="col-sm-6">
+                   <div class="panelbg card commentheight">
+                     <app-recentcomment [posts]="pulseList"></app-recentcomment>
+                   </div>
+                 </div>
+             </div>
+           </div>
+          
+           <!--TFS Task Id 16718 Latent Phase - Add all language  attributes ..-->
+           <!---Author name Satyen Singh 06/07/2020 start for comment collapse area section-->
+          
+           <div class="tab-pane" id="profile-1" role="tabpanel">
+             <!--add time and user with comment history session-->
+             <div class="row">
+               <div class="col-sm-6 bg-whites pdr">
+                 <div class="cardpdrtop card">
+                   <div class="row">
+                     <div class="col-lg-6 col-xs-6 col-sm-6 col-md-12">
+                       <span><i class="fa fa-clock-o fa-3" aria-hidden="true"></i></span>
+                       <span class="ml-1" [innerHTML]="modalData.pulseData.DisplayTime +' '+ modalData.pulseData.timeZone"> </span>
+                     </div>
+                     <div class="col-lg-6 col-xs-6 col-sm-6 col-md-12">
+                       <span><i class="fa fa-user-circle-o" aria-hidden="true"></i></span>
+                       <span class="ml-1">{{userName}}</span>
+                     </div>
+                   </div>
+                 </div>
+               </div>
+               <div class="col-sm-6 bg-whites pdrright">
+                 <div class="cardpdrtop card">
+                   <div class="row">
+                     <div class="col-xs-6">
+                       <span class="ml-3"><i class="fa fa-history" aria-hidden="true"></i></span>
+                       <span class="ml-1">{{ 'key_Commenthistory' | translate }}</span>
+                     </div>
+
+                   </div>
+                 </div>
+               </div>
+             </div>
+             <!--add time and user with comment history session-->
+             <div class="row panelpdr">
+               
+               <div class="col-sm-6 pdr">
+                 <form (ngSubmit)="passBackUserBPSave()" [formGroup]="UserBPForm">
+                   <div class="panelbg  card bgdecent commentheight" id="tblBPpopupChart">
+                     <div class="row">
+                       <div class="col-sm-6">
+                         <div class="form-group">
+                           <label for="company" class=" font-600">{{ 'key_Systolic' | translate }}</label>
+                           <input type="text" formControlName="upperbp" class="HeartRate form-control" />
+                           <app-control-messages [control]="f1['upperbp']"></app-control-messages>
+                           <!--<input type="text" [(ngModel)]="modalData.bpData.upperbp" class="HeartRate form-control" />-->
+                         </div>
+                       </div>
+                       <div class="col-sm-6">
+                         <div class="form-group">
+                           <label for="company" class=" font-600">{{ 'key_Diastolic' | translate }}</label>
+                           <input type="text" formControlName="lowerbp" class="HeartRate form-control" />
+                           <app-control-messages [control]="f1['lowerbp']"></app-control-messages>
+                           <!-- <input type="text" [(ngModel)]="modalData.bpData.lowerbp" class="HeartRate form-control" />-->
+                         </div>
+                       </div>
+                     </div>
+
+                     <div class="form-group">
+                       <label for="company">{{ 'key_Commentsarea' | translate }}</label>
+                       <textarea [attr.placeholder]="'key_Comments' | translate" class="Comments form-control" formControlName="remarks" rows="3"></textarea>
+                       <!--<textarea [attr.placeholder]="'key_Comments' | translate" class="Comments form-control" [(ngModel)]="modalData.bpData.remarks" rows="3"></textarea>-->
+                     </div>
+
+                     <div class="form-group text-center">
+                       <button type="submit" class="btn btn-pill btnsave  btn-raised btnbg"
+                               [disabled]="UserBPForm.invalid"
+                               >
+                         <span [innerHTML]="'key_Save' | translate"></span>
+                       </button>
+                     </div>
+
+                     <!--<div class="form-group text-center">
+      <input type="button" (click)="passBackData('BP')" class="btn btn-pill btnsave btn-raised btnbg" [value]="'key_Save' | translate">
+    </div>-->
+
+                   </div>
+                 </form>
+               </div>
+               
+                 <div class="col-sm-6">
+                   <div class="panelbg card commentheight bgdecent">
+                     <app-recentcomment [posts]="bpList"></app-recentcomment>
+                   </div>
+                 </div>
+             </div>
+           </div>
+         </div>
+       </div>
+       
+       <!--<div class="col-sm-4">
+        <input type="text" [(ngModel)]="modalData.pulseData.inputBy" class="inputby form-control" disabled />
+      </div>
+      <div class="col-sm-4">
+        <input type="text" [(ngModel)]="modalData.pulseData.currentTime" class="time form-control" disabled />
+      </div>-->
+     
+             
+      <!--<div class="col-sm-3">
+        <input type="text" [(ngModel)]="modalData.bpData.inputBy" class="inputby form-control" disabled />
+      </div>
+      <div class="col-sm-3">
+        <input type="text" [(ngModel)]="modalData.bpData.currentTime" class="time form-control" disabled />
+      </div>-->
+</div>
+     <!---end code-->
+ 
+

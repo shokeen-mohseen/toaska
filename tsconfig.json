@@ -1,0 +1,40 @@
+{
+  "compilerOptions": {
+    "downlevelIteration": true,
+    "importHelpers": true,
+    "module": "esnext",
+    "outDir": "./dist/out-tsc",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "noImplicitAny": false,
+    "suppressImplicitAnyIndexErrors": true,
+    "target": "es2015",
+    "types": [
+        "hammerjs",
+        "jasmine"
+      ],
+      "typeRoots": [
+        "node_modules/@types"
+      ],
+    "lib": [
+      "es2017",
+      "dom"
+    ],
+    "baseUrl": "src",
+    "paths": {
+      "@app/*": [ "app/*" ],
+      "@env/*": [ "environments/*" ],
+      "crypto": [
+        "node_modules/crypto-browserify"
+      ],
+      "stream": [
+        "node_modules/stream-browserify"
+      ]
+    },
+    "esModuleInterop": true,
+    "resolveJsonModule": true
+  }
+}

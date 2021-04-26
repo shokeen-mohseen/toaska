@@ -1,0 +1,43 @@
+/*--Developer Name: Prabhash Poddar, Date: 21Nov2020, TFS ID: 18835, Logic Description: work on spinner scss file and manage--*/
+.loading-spinner {
+  background: rgba(250, 250, 250, 0.5);
+  position: fixed;
+  width: 100%;
+  top: 0px;
+  left: 0px;
+  bottom: 0;
+  right: 0;
+  align-items: center;
+  justify-content: center;
+  display: grid;
+  z-index: 999999;
+
+  .favIco {
+    padding: 0;
+    position: absolute;
+    z-index: auto;
+    left: 0;
+    right: 0;
+    text-align: center;
+  }  
+}
+.tosca {
+  .mat-progress-spinner circle {
+    stroke: #f48120;
+  }
+
+  .mat-spinner circle {
+      @extend .mat-progress-spinner
+  }
+}
+.partograph {
+  .mat-progress-spinner circle {
+    stroke: #d93670;
+  }
+
+  .mat-spinner circle {
+    @extend .mat-progress-spinner
+  }
+}
+
+

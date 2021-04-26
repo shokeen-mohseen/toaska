@@ -1,0 +1,9 @@
+mat-cell,
+mat-footer-cell,
+mat-header-cell {
+  width: 140px;
+}
+
+.mat-column-Show_On_BOL, .mat-column-Auto_Added, .mat-column-Add_Pallet, .mat-column-Delete, .mat-column-Add_New {
+  width: 82px;
+}

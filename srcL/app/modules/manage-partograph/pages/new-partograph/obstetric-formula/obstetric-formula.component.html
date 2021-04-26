@@ -1,0 +1,114 @@
+<!--TFS:-17203, Author: Monu Ram Yadav, Des:- Correct Sqatting to Squatting, Date:-27-08-2020-->
+<div class="row">
+  <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+    <div class="row">
+      <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+        <div class="form-group">
+          <label for="dateReferral">{{ 'key_Gravida' | translate }} </label>
+          <input id="dateReferral" type="number" placeholder="" class="form-control" />
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+        <div class="form-group">
+          <label for="dateReferral">{{ 'key_Para' | translate }} </label>
+          <input id="dateReferral" type="number" placeholder="" class="form-control" />
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+        <div class="form-group">
+          <label for="dateReferral">{{ 'key_NumberofLivingChildren' | translate }}</label>
+          <input id="dateReferral" type="number" placeholder="" class="form-control" />
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+        <div class="form-group">
+          <label for="dateReferral">{{ 'key_NumberofAbortions' | translate }}</label>
+          <input id="dateReferral" type="number" placeholder="" class="form-control" />
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+        <label for="ccmonth">{{ 'key_Rupturedmembranes' | translate }}  </label>
+        <div class="form-group">
+          <div class="form-check form-check-inline mr-3">
+            <input class="form-check-input" id="inline-checkbox1" type="radio" name="check1">
+            <label class="form-check-label" for="inline-checkbox1">{{ 'key_Yes' | translate }} </label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" id="inline-checkbox2" type="radio" name="check1">
+            <label class="form-check-label" for="inline-checkbox2">{{ 'key_No' | translate }} </label>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+        <div class="form-group">
+          <label for="Uterinecontraction">{{ 'key_Uterinecontraction' | translate }} </label>
+          <input class="form-control" id="Uterinecontraction" type="datetime-local" data-date-inline-picker="true" placeholder="">
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+        <div class="form-group">
+          <label for="dateReferral">{{ 'key_Birthingpartner' | translate }} </label>
+          <ng-select2 [data]="exampleData" [options]="options"></ng-select2>
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+        <label for="ccmonth">{{ 'key_Respectfulmaternity' | translate }}  </label>
+        <div class="form-group">
+          <div class="form-check form-check-inline mr-3">
+            <input class="form-check-input" id="inline-checkbox1" type="radio" name="check2">
+            <label class="form-check-label" for="inline-checkbox1">{{ 'key_Yes' | translate }} </label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" id="inline-checkbox2" type="radio" name="check2">
+            <label class="form-check-label" for="inline-checkbox2">{{ 'key_No' | translate }} </label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--Row End-->
+  </div>
+  <!--Col-md-6 End-->
+
+  <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+    <div class="d-flex align-items-center pl-2">
+      <div>
+        <span class="fw600">{{ 'key_Alternatebirthingposition' | translate }} </span>
+      </div>
+      <div class="ml-2">
+        <span><button class="plusBtn2" (click)="addnewPosition()"><i class="fa fa-plus" aria-hidden="true"></i></button></span>
+      </div>
+    </div>
+    <form class="form formimg cf mt-2 adpimg">
+      <section class="plan cf">
+        <input type="radio" name="radio1" id="AllFours" value="AllFours">
+        <label class="free-label  four col" for="AllFours">
+          <img src="assets/images/all-four.png" />
+          All Four
+        </label>
+        <input type="radio" name="radio1" id="LyingDown" value="LyingDown"><label class="basic-label formimg four col" for="LyingDown">
+          <img src="assets/images/lying-down.png" />
+          Lying Down
+        </label>
+        <input type="radio" name="radio1" id="Sqatting" value="Sqatting">
+        <label class="premium-label formimg four col" for="Sqatting">
+          <img src="assets/images/sqating.png" />
+          Squatting
+        </label>
+        <input type="radio" name="radio1" id="Sqattingpartner" value="Sqattingpartner">
+        <label class="premium-label formimg four col" for="Sqattingpartner">
+          <img src="assets/images/sqating-partner.png" />
+          Squatting with Partner
+        </label>
+      </section>
+    </form>
+
+  </div>
+  <!--col-md-6 end-->
+</div>
+<!--Row End-->
+
+<app-dynamic-webcontrol-parameter [stageModule]="stageCode"></app-dynamic-webcontrol-parameter>
+
+<!--<div class="row">
+  <input type="button" class="btn btn-secondary ml-3 btnbrd" (click)="AddMoreComplication()" value="{{ 'key_AddNewParameter' | translate }}" />
+</div>-->

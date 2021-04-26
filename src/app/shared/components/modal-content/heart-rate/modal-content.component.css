@@ -1,0 +1,11 @@
+
+.brd {
+  margin-bottom: 14px;
+  border-bottom: 1px solid #f3f1f1;
+  padding-bottom: 8px;
+}
+
+.xdsoft_scrollbar {
+  height: 250px;
+  overflow-x: auto;
+}

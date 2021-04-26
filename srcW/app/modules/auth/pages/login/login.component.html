@@ -1,0 +1,95 @@
+<!--<div class="alert alert-info" role="alert">
+  Username: rizwan \\
+  Password: 12345
+</div>-->
+<!---16509
+Task
+Login - Login Page Design-->
+<!---change login bg image by satyen singh-->
+<!-- 16509 task id, checked in by amit agrahari with satyen - date 04-07-2020 -->
+<!-- 16509 task id, checked in by amit agrahari - date 06-07-2020 -->
+<!--TFSID-17050:Task 17050: Login Page - clicking on email field brings scrollbar on page, screen 1366px
+  Author:-Monu Ram yadav, date: 10/08/2020-->
+<div [hidden]="!error" class="alert alert-danger">
+  {{ error }}
+</div>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-8 nopadding" style="background-color:#f5f5f5;">
+      <div class="card1">
+        <p class="logo-text">arcPartograph</p>
+        <!--<img src="assets/images/Osofteclogo.png" class="logo">-->
+        <div class="justify-content-center text-center pt-5">
+          <img src="assets/images/World_map_Doctor.png" class="image" />
+          <!-- <img src="assets/images/svgworld.svg" class="image" /> -->
+          <!-- <img src="https://www.smartp.ly/content/uploads/map.svg" class="image" /> -->
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4 nopadding">
+      <form (ngSubmit)="login()" [formGroup]="loginForm">
+        <div class="card2">
+          <div class="custom-lang">
+            <ul class="nav navbar-nav w-25 ml-auto">
+              <li class="nav-item selectLang">
+                <select class="form-control">
+                  <option>English</option>
+                  <option>Hindi</option>
+                </select>
+              </li>
+            </ul>
+          </div>
+          <div class="loginWelcomeText mt-5">
+
+            <h3>Welcome to arcPartograph</h3>
+            <!--<p>
+      Login with your credential, you can login with email id
+      <i class="fa fa-info-circle" title="User: rizwan | Pass: 12345"></i>
+    </p>-->
+          </div>
+          <div class="form-group">
+            <label for="email" class="font-600">
+              Email
+            </label>
+            <input type="email" class="form-control" placeholder="Enter your email" formControlName="username">
+            <app-control-messages [control]="f['username']"></app-control-messages>
+          </div>
+          <div class="form-group">
+            <label for="password" class="font-600">
+              Password
+            </label>
+            <div class="input-group">
+              <input [type]="password" class="form-control" placeholder="Enter your password" formControlName="password">
+              <div class="input-group-prepend">
+                <button type="button" class="btn btn-primary" placement="top" ngbTooltip="Show Password" (click)="showPassword()">
+                  <i class="fa fa-eye" aria-hidden="true" *ngIf="!show"></i>
+                  <i class="fa fa-eye-slash" aria-hidden="true" *ngIf="show"></i>
+                </button>
+              </div>
+            </div>
+            <app-control-messages [control]="f['password']"></app-control-messages>
+          </div>
+          <div class="form-group d-flex mb-5">
+            <div class="custom-control custom-checkbox custom-control-inline">
+              <input id="chk1" type="checkbox" name="chk" class="custom-control-input">
+              <label for="chk1" class="custom-control-label text-sm font-600">Remember me</label>
+            </div>
+            <a [routerLink]="['/auth/forgotpassword']" class="ml-auto mb-0 text-sm text-red font-600">Forgot Password?</a>
+          </div>
+          <div class="form-group">
+            <button type="submit" class="btn btn-blue text-center" [disabled]="loginForm.invalid">
+              <span [hidden]="isLoading">Login</span>
+              <span [hidden]="!isLoading">
+                <i class="fa fa-asterisk fa-spin" aria-hidden="true"></i>
+              </span>
+            </button>
+            <a class="btn btn-gray" [routerLink]="['/auth/register']">Register</a>
+            <a class="dropdown-item" (click)="multiple()"><i class="fa fa-shield"></i>Demo link</a>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+

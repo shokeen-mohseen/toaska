@@ -1,0 +1,199 @@
+<div>
+  <!--<div class="row">
+    <div class="col-md-6"></div>
+    <div class="col-md-6 text-right">
+      <span class="fw600">Last Updated:	</span> 8/13/2020 8:35:24 IST
+      <br><span class="fw600">By</span> Jay Coleman (lampsdemo@osoftec.com)
+    </div>
+  </div>-->
+  <!--Last Updated Section End//////////////--> 
+    <div class="row">
+      <div class="col-md-3 custom-flex-w-15">
+        <div class="card">
+          <div class="card-header">{{ 'key_AddedList' | translate }}</div>
+          <div class="card-body p-0">
+            <ul class="list-group">
+              <li class="list-group-item list-group-item-action active">Added Name</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-9 custom-flex-w-85">
+        <div class="tab-content">
+          <!--=============== Start profile =================-->
+          <div class="e-profile">
+            <div class="row">
+              <div class="col-md-4">
+                <div class="box-children">
+                  <div class="form-group">
+                    <label for="firstname">{{ 'key_claimdate' | translate }}  <sup class="text-danger sup1">*</sup></label>
+                    <ejs-datepicker [format]='dateFormat' placeholder='MM-DD-YYYY' id="Date" required></ejs-datepicker>
+                  </div>
+                  <div class="form-group">
+                    <label for="firstname">{{ 'key_Claimstatus' | translate }}<sup class="text-danger sup1">*</sup></label>
+                    <angular2-multiselect [data]="itemListB" [(ngModel)]="selectedItemsB" [settings]="settingsB"
+                                          (onSelect)="onItemSelect($event)"
+                                          (onDeSelect)="OnItemDeSelect($event)"
+                                          (onSelectAll)="onSelectAll($event)"
+                                          (onDeSelectAll)="onDeSelectAll($event)"
+                                          (onAddFilterNewItem)="onAddItemA($event)" required>
+                    </angular2-multiselect>
+                  </div>
+                  <div class="form-group">
+                    <label for="firstname">{{ 'key_ClaimFor' | translate }}<sup class="text-danger sup1">*</sup></label>
+                    <angular2-multiselect [data]="itemListB" [(ngModel)]="selectedItemsB" [settings]="settingsB"
+                                          (onSelect)="onItemSelect($event)"
+                                          (onDeSelect)="OnItemDeSelect($event)"
+                                          (onSelectAll)="onSelectAll($event)"
+                                          (onDeSelectAll)="onDeSelectAll($event)"
+                                          (onAddFilterNewItem)="onAddItemA($event)" required>
+                    </angular2-multiselect>
+                  </div>
+                  <div class="form-group">
+                    <label for="firstname">{{ 'key_Claimcomnt' | translate }}</label>
+                    <textarea class="form-control" rows="3"></textarea>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="box-children">
+                  <div class="form-group">
+                    <label for="firstname">{{ 'key_Shipno' | translate }}</label>
+                    <angular2-multiselect [data]="itemListA" [(ngModel)]="selectedItemsA" [settings]="settingsA"
+                                          (onSelect)="onItemSelect($event)"
+                                          (onDeSelect)="OnItemDeSelect($event)"
+                                          (onSelectAll)="onSelectAll($event)"
+                                          (onDeSelectAll)="onDeSelectAll($event)"
+                                          (onAddFilterNewItem)="onAddItemA($event)">
+                    </angular2-multiselect>
+                  </div>
+                  <div class="form-group">
+                    <label for="firstname">{{ 'key_Ordno' | translate }}</label>
+                    <angular2-multiselect [data]="itemListA" [(ngModel)]="selectedItemsA" [settings]="settingsA"
+                                          (onSelect)="onItemSelect($event)"
+                                          (onDeSelect)="OnItemDeSelect($event)"
+                                          (onSelectAll)="onSelectAll($event)"
+                                          (onDeSelectAll)="onDeSelectAll($event)"
+                                          (onAddFilterNewItem)="onAddItemA($event)">
+                    </angular2-multiselect>
+                  </div>
+                  <div class="form-group">
+                    <label for="firstname">{{ 'key_Customerbill' | translate }}</label>
+                    <angular2-multiselect [data]="itemListA" [(ngModel)]="selectedItemsA" [settings]="settingsA"
+                                          (onSelect)="onItemSelect($event)"
+                                          (onDeSelect)="OnItemDeSelect($event)"
+                                          (onSelectAll)="onSelectAll($event)"
+                                          (onDeSelectAll)="onDeSelectAll($event)"
+                                          (onAddFilterNewItem)="onAddItemA($event)">
+                    </angular2-multiselect>
+                  </div>
+                  <div class="form-group">
+                    <label for="firstname">{{ 'key_Businesspart' | translate }}</label>
+                    <angular2-multiselect [data]="itemListA" [(ngModel)]="selectedItemsA" [settings]="settingsA"
+                                          (onSelect)="onItemSelect($event)"
+                                          (onDeSelect)="OnItemDeSelect($event)"
+                                          (onSelectAll)="onSelectAll($event)"
+                                          (onDeSelectAll)="onDeSelectAll($event)"
+                                          (onAddFilterNewItem)="onAddItemA($event)">
+                    </angular2-multiselect>
+                  </div>
+
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="box-children">
+                  <div class="card-body-">
+                    <div class="form-group">
+                      <div class="form-check checkbox pl-0">
+                        <label class="form-check-label fw600" for="check1">{{ 'key_Approved' | translate }}</label>
+                        <input class="form-check-input ml-2" id="check1" type="checkbox" value="">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <span for="status" class="fw600 mr-3">
+                        {{ 'key_Approvedby' | translate }}
+                      </span>
+                      <span for="active">
+                        User Name
+                      </span>
+                    </div>
+                    <div class="form-group">
+                      <div class="form-check checkbox pl-0">
+                        <label class="form-check-label fw600" for="check1">{{ 'key_Completesetup' | translate }}</label>
+                        <input class="form-check-input ml-2" id="check1" type="checkbox" value="">
+                      </div>
+                    </div>
+                    <div class="form-group row ml-0">
+                      <span class="fw600 mr-3" for="lastname"> {{ 'key_SetupDatetime' | translate }} </span>
+                      <span for="lastname"> 8/31/2020 7:05:24 IST </span>
+                    </div>
+
+                  </div>
+                </div>
+
+                <div class="box-children mt-2 position-relative">
+                  <div class="form-group">
+                    <label>{{ 'key_Invoicenumber' | translate }}</label>
+                    <input class="form-control" type="text" value="">
+                  </div>
+                  <div class="info-siubscription">
+                    <span placement="left" ngbTooltip="Invoice number for the charge with status as Approved will get overwritten with the invoice number." class="badge badge-danger badge-pill">
+                      <i class="fa fa-exclamation" aria-hidden="true"></i>
+                    </span>
+                  </div>
+                  <div class="form-group row">
+                    <div for="" class="col-md-6">{{ 'key_Claimamount' | translate }} </div>
+                    <div for="" class="col-md-6 pl-0"> $0.00</div>
+                  </div>
+                  <div class="form-group row">
+                    <div for="" class="col-md-6">{{ 'key_Approvedamount' | translate }}  </div>
+                    <div for="" class="col-md-6 pl-0"> $0.00</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--=============== End e-profile =================-->
+        </div>
+      </div>     
+      <div class="col-lg-12">
+        <div id="accordionTab1" class="accordion mt-5">
+          <p>{{ 'key_panlelbl' | translate }}</p>
+          <div class="card mb-0">
+            <div class="card-header collapsed" data-toggle="collapse" href="#Chrgedetail">
+              <a class="card-title">
+                Charge Detail
+              </a>
+            </div>
+            <div id="Chrgedetail" class="card-body collapse" data-parent="#accordionTab1">
+              <app-charge-detail></app-charge-detail>
+            </div>
+            <div class="card-header collapsed" data-toggle="collapse" href="#characteristics">
+              <a class="card-title">
+                Document
+              </a>
+            </div>
+            <div id="characteristics" class="card-body collapse" data-parent="#accordionTab1">
+              <app-document></app-document>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row justify-content-center my-5">
+     
+      <div class="col-xl-2 col-lg-4 col-md-4 col-sm-12">
+        <button class="btn btn-block btn-save" type="submit">{{ 'key_Save' | translate }}</button>
+      </div>
+      <div class="col-xl-2 col-lg-4 col-md-4 col-sm-12">
+        <button class="btn btn-block btn-next">
+          <span class="fw600">{{ 'key_Add' | translate }}</span> <span class="fs-13"> > {{ 'key_Next' | translate }}</span>
+        </button>
+      </div>
+    </div>
+ 
+</div>
+
+

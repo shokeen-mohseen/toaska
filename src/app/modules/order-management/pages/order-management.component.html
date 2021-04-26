@@ -1,0 +1,63 @@
+<app-top-btn-group #btnBar [actionGroupConfig]="actionGroupConfig" (action)="actionHandler($event)" [ParentPageName]="OrderWorkbench"></app-top-btn-group>
+<div class="mb-3 order-container">
+  <div class="form-area">
+    <div class="wrapper">
+      <div class="content-wrapper">
+        <div>
+          <h5>{{'key_order' | translate}}</h5>
+        </div>
+
+
+        <mat-tab-group #tabGroupA class="mt-18" animationDuration="0ms" (selectedTabChange)="tabChange($event)">
+          <mat-tab #tab1 *ngIf="tab1">
+            <ng-template mat-tab-label>
+              {{ 'key_orderWorkBench' | translate }}<!--2-->
+            </ng-template>
+            <div class="tab-content order-workbench" *ngIf="tab1Data">
+              <app-order-workbench (EdittedOrderNumberLink)="modifyOrderNumberLink($event)" [buttonBar]="btnBar"></app-order-workbench>
+              <!--<app-order-workbench [buttonBar]="btnBar"></app-order-workbench>-->
+            </div>
+          </mat-tab>
+
+          <mat-tab #tab2 *ngIf="tab2">
+            <ng-template mat-tab-label>
+              {{ 'key_new_Order' | translate }}
+              <button class="close" type="button" (click)="closeTab()">
+                <i class="fa fa-times-circle-o" aria-hidden="true"></i>
+              </button>
+            </ng-template>
+            <div class="tab-content" *ngIf="tab2Data">
+              <app-regular-order [buttonBar]="btnBar" (closeRegular)="closeTab()"></app-regular-order>
+            </div>
+          </mat-tab>
+
+          <mat-tab #tab3 *ngIf="tab3">
+            <ng-template mat-tab-label>
+              {{ 'key_bulk_Order' | translate }}
+              <button class="close" type="button" (click)="closeTab()">
+                <i class="fa fa-times-circle-o" aria-hidden="true"></i>
+              </button>
+            </ng-template>
+            <div class="tab-content" *ngIf="tab3Data">
+              <app-bulk-order [buttonBar]="btnBar" (closeBulk)="closeTab()"></app-bulk-order>
+            </div>
+          </mat-tab>
+          <mat-tab #tab4 *ngIf="tab4">
+            <ng-template mat-tab-label>
+              {{ 'key_Edit' | translate }} ({{EditedOrderNumber}}) <!--5-->
+              <button class="close" type="button" (click)="closeTab()">
+                <i class="fa fa-times-circle-o" aria-hidden="true"></i>
+              </button>
+            </ng-template>
+            <div class="tab-content" *ngIf="tab4Data">
+              <app-regular-order (EdittedOrderNumber)="modifyOrderNumber($event)" [buttonBar]="btnBar" (closeRegular)="closeTab()"></app-regular-order>
+            </div>
+          </mat-tab>
+        </mat-tab-group>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+<app-show-notes></app-show-notes>

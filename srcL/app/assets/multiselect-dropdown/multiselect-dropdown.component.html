@@ -1,0 +1,20 @@
+
+<div style="margin-top:150px;">
+  <mat-form-field appearance="outline" fxFlex="100">
+    <mat-label>Select</mat-label>
+    <mat-select [formControl]="listMultiCtrl" [multiple]="true" #multiSelect>
+      <mat-option>
+        <ngx-mat-select-search placeholderLabel="Search"
+                               noEntriesFoundLabel="No Data Available"
+                               [showToggleAllCheckbox]="true"
+                               (toggleAll)="toggleSelectAll($event)"
+                               [formControl]="listMultiFilterCtrl">
+
+        </ngx-mat-select-search>
+      </mat-option>
+      <mat-option *ngFor="let list of filteredListsMulti | async" [value]="list">
+        {{list.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>

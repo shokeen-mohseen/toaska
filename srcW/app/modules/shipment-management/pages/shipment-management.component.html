@@ -1,0 +1,54 @@
+<app-top-btn-group #btnBar [actionGroupConfig]="actionGroupConfig" (action)="actionHandler($event)"></app-top-btn-group>
+<div class="mb-3" id="contentToConvert">
+  <div class="form-area">
+    <div class="wrapper">
+      <div class="content-wrapper">
+        <div>
+          <h5>{{'key_shipment' | translate}}</h5>
+        </div>
+
+        <mat-tab-group #tabGroupA class="mt-18" animationDuration="0ms" (selectedTabChange)="tabChange($event)">
+          <mat-tab #tab1 *ngIf="tab1">
+            <ng-template mat-tab-label>
+              {{ 'key_shipmentWorkbench' | translate }}
+            </ng-template>
+            <div class="tab-content order-workbench" *ngIf="tab1Data">
+              <app-workbench [buttonBar]="btnBar"></app-workbench>
+            </div>
+          </mat-tab>
+
+          <mat-tab #tab2 *ngIf="tab2">
+            <ng-template mat-tab-label>
+              {{ 'key_add' | translate }} New
+              <button class="close" type="button" (click)="closeTab()">
+                <i class="fa fa-times-circle-o" aria-hidden="true"></i>
+              </button>
+            </ng-template>
+            <div class="tab-content" *ngIf="tab2Data">
+              Data
+            </div>
+          </mat-tab>
+
+          <mat-tab #tab3 *ngIf="tab3">
+            <ng-template mat-tab-label>
+              {{ 'key_Edit' | translate }}<span> -- {{this.shipmentManagementService.EditingShipment}}</span>
+              <button class="close" type="button" (click)="closeTab()">
+                <i class="fa fa-times-circle-o" aria-hidden="true"></i>
+              </button>
+            </ng-template>
+            <div class="tab-content" *ngIf="tab3Data">
+              <app-add-new [buttonBar]="btnBar"></app-add-new>
+            </div>
+          </mat-tab>
+
+        </mat-tab-group>
+
+
+
+
+      </div>
+    </div>
+
+  </div>
+</div>
+<app-show-notes></app-show-notes>

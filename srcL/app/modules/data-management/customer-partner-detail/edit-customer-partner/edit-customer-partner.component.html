@@ -1,0 +1,410 @@
+<div>
+  <div class="row">
+    <div class="col-md-6"></div>
+    <div class="col-md-6 text-right">
+      <span class="fw600">{{ 'key_LastUpdate' | translate }}:</span> {{this.lastUpdate}}
+      <br><span class="fw600">{{ 'key_By' | translate }}</span> {{this.updatedBy}}
+    </div>
+  </div>
+  <!--Last Updated Section End//////////////-->
+  <div class="row">
+    <div class="col-md-3 custom-flex-w-15">
+      <div class="card">
+        <div class="card-header">{{ 'key_EditList' | translate }}</div>
+        <div class="card-body p-0">
+          <ul class="list-group" #nextList>
+            <li class="list-group-item list-group-item-action"
+                *ngFor="let customer of selectedCustomers; let i = index"
+                (click)="selectedCustomer(customer)"
+                [ngClass]="{ 'active': selectedCustomerToEdit && customer?.id == selectedCustomerToEdit?.id }">
+              <a title="{{customer.customerName}}">{{customer.customerName}}</a>
+              <button class="close" *ngIf="customer?.id != selectedCustomerToEdit?.id" type="button"
+                      (click)="removeCustomerFromEditList(customer)">
+                <i class="fa fa-times" aria-hidden="true"></i>
+              </button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-9 custom-flex-w-85">
+      <div class="tab-content">
+        <!--=============== Start profile =================-->
+        <div class="e-profile">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="box-children">
+                <div class="form-group">
+                  <label> {{ 'key_Name' | translate }} </label>
+                  <input type="text" class="form-control" [(ngModel)]="selectedCustomerToEdit.customerName" disabled>
+                </div>
+                <div class="form-group">
+                  <label> {{ 'key_Salesmanager' | translate }} <sup class="text-danger sup1">*</sup></label>
+                  <angular2-multiselect fixFilterBug [data]="salesManagerList" [(ngModel)]="selectedSalesManager" [settings]="settingsSalesManager"
+                                        (onSelect)="onSalesManagerSelect($event)"
+                                        name="salesManager" required>
+                  </angular2-multiselect>
+                </div>
+                <div class="form-group">
+                  <label> {{ 'key_Salesbroker' | translate }} </label>
+                  <angular2-multiselect fixFilterBug [data]="salesBrokerList" [(ngModel)]="selectedSalesBroker" [settings]="settingsSalesBroker"
+                                        (onSelect)="onSalesBrokerSelect($event)">
+                  </angular2-multiselect>
+                </div>
+                <div class="form-group">
+                  <label> {{ 'key_Defaultcommodity' | translate }} <span class="text-danger">*</span></label>
+                  <angular2-multiselect fixFilterBug [data]="commodityList" [(ngModel)]="selectedCommodity" [settings]="settingsCommodity"
+                                        (onSelect)="onCommoditySelect($event)" name="commodity" required>
+                  </angular2-multiselect>
+                </div>
+                <div class="form-group">
+                  <label> {{ 'key_LoadingComment' | translate }}</label>
+                  <textarea rows="2" class="form-control" [(ngModel)]="selectedCustomerToEdit.loadingComment"
+                            value=""></textarea>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="box-children">
+                <div class="d-flex flex-nowrap justify-content-between align-items-center">
+                  <h5>{{ 'key_Organization' | translate }}</h5>
+                </div>
+                <app-organizationinfo [viewMode]="true"
+                                      [PageActionType]="pageActionType"
+                                      [organizationId]="selectedCustomerToEdit.organizationID">
+
+                </app-organizationinfo>
+              </div>
+              <div class="box-children">
+                <div class="form-group">
+                  <label> {{ 'key_Transportationcomment' | translate }}</label>
+                  <textarea rows="2" class="form-control"
+                            [(ngModel)]="selectedCustomerToEdit.transportationComment" value=""></textarea>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="box-children">
+                <div class="form-group">
+                  <span class="fw600 mr-3 " for="lastname"> {{ 'key_Status' | translate }} </span>
+                  <span for="lastname"> {{selectedCustomerToEdit?.isActive ? 'Active': 'Inactive'}}  </span>
+                </div>
+                <div class="form-group">
+                  <div class="form-check checkbox pl-0">
+                    <label class="form-check-label" for="check1"> {{ 'key_SetupCompleted' | translate }} </label>
+                    <input class="form-check-input ml-2" id="check1" type="checkbox"
+                           [(ngModel)]="setupDone" (change)="setupChange($event)"
+                           value="">
+                  </div>
+                  <div class="" for="check1">
+                    <small>"In order to send to MAS check setup complete" </small>
+                  </div>
+                </div>
+                <div class="form-group d-flex">
+                  <span class="fw600 mr-3 " for="lastname"> {{ 'key_SetupDatetime' | translate }} </span>
+                  <span for="lastname" class="text-break" [hidden]="!setupDone"> {{setupDoneDateTimetoDisplay}} </span>
+                </div>
+                <div class="form-group d-flex">
+                  <span class="fw600 mr-3 " for="lastname"> {{ 'key_SetupCompletedby' | translate }} </span>
+                  <span for="lastname" class="text-break" [hidden]="!setupDone"> {{setupDoneBy}}</span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+
+        </div>
+
+        <!--=============== End e-profile =================-->
+      </div>
+    </div>
+    <div class="col-lg-12">
+      <!--================= address and contact tabs ==============-->
+      <div id="accordionTab1" class="accordion mt-3">
+        <div class="card mb-0">
+          <div class="card-header collapsed" data-toggle="collapse" href="#collapseTwo">
+            <a class="card-title">
+              {{ 'key_Contact' | translate }} ( {{this.contactCount}} )
+            </a>
+          </div>
+          <div id="collapseTwo" class="card-body collapse" data-parent="#accordionTab1">
+            <app-contact-panel (listLength)="getContactCount($event)"
+                               [getContactById]="selectedCustomerToEdit?.customerId"
+                               [PageActionType]="pageActionType">
+
+            </app-contact-panel>
+          </div>
+
+          <div class="card-header collapsed" data-toggle="collapse" href="#address">
+            <a class="card-title">
+              {{ 'key_Address' | translate }} ({{this.addressCount}})
+            </a>
+          </div>
+          <div id="address" class="card-body collapse" data-parent="#accordionTab1">
+            <app-address-panel (addressListCount)="getAddressCount($event)"
+                               [getAddresById]="selectedCustomerToEdit?.customerId"
+                               [PageActionType]="pageActionType">
+
+            </app-address-panel>
+          </div>
+
+          <!--================add charactrics===-->
+          <div class="card-header collapsed" data-toggle="collapse" href="#Characteristics">
+            <a class="card-title">
+              {{'key_Characteristicss' | translate}} ( {{statOfCharacteristics}} )
+            </a>
+          </div>
+          <div id="Characteristics" class="card-body collapse" data-parent="#accordionTab1">
+            <app-customer-characteristics-panel
+                                                [customerId]="selectedCustomerToEdit.customerId"
+                                                (statOfCharacteristics)="setStatOfCharacteristics($event)"
+                                                ></app-customer-characteristics-panel>
+          </div>
+          <!--================add charactrics===-->
+          <!--================start ship from location===-->
+          <div class="card-header collapsed" data-toggle="collapse" href="#mapforcast">
+            <a class="card-title">
+              {{'key_Mapforcast' | translate}} ( {{countOfForecastMaterial}})
+            </a>
+          </div>
+          <div id="mapforcast" class="card-body collapse" data-parent="#accordionTab1">
+            <app-map-forecast-material-panel [customerId]="selectedCustomerToEdit?.customerId"
+                                             (setCountOfForecastMaterial)="setCountOfForecastMaterial($event)"></app-map-forecast-material-panel>
+
+          </div>
+          <!--================end ship from location===-->
+          <!--================add charactrics===-->
+          <div class="card-header collapsed" data-toggle="collapse" href="#Contracts">
+            <a class="card-title">
+              {{'key_Contracts' | translate}} ({{this.customerContractList.length}})
+            </a>
+          </div>
+          <div id="Contracts" class="card-body collapse" data-parent="#accordionTab1">
+            <!--<app-contracts-panel></app-contracts-panel>--> <!--use this control for development remove noram table code in this page--->
+            <div class="row">
+              <div class="col-md-12">
+                <table class="table table-striped table-bordered tblalign">
+                  <thead>
+                    <tr>
+                      <!--<th class="no-sort" width="5%">
+        <div class="form-check-inline">
+          <label class="form-check-label">
+            <input type="checkbox" class="form-check-input" value="" data-toggle="tooltip" data-placement="top" title="Select all">
+          </label>
+        </div>
+      </th>-->
+                      <th>{{'key_Contractsdec' | translate}}</th>
+                      <th>{{'key_Effectivestrt' | translate}}</th>
+                      <th>{{'key_Effectiveend' | translate}}</th>
+
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of customerContractList">
+                      <td>{{item.description}}</td>
+                      <td class="">{{item.termStartDate | date: 'MM-dd-yyyy'}}</td>
+                      <td class="">{{item.termEndDate | date: 'MM-dd-yyyy'}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <!--================start ship from location===-->
+          <div class="card-header collapsed" data-toggle="collapse" href="#shiplocation">
+            <a class="card-title">
+              {{'key_Shiplocavg' | translate}} ({{this.shipfromLocationList.length}})
+            </a>
+          </div>
+          <div id="shiplocation" class="card-body collapse" data-parent="#accordionTab1">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="d-flex flex-nowrap justify-content-between align-items-center mb-3">
+                  <div class="row">
+                    <div class="col-sm-12 ml-3 p-0">
+                      <div class="btn-group btn-group-toggle btn-group-md" data-toggle="buttons">
+                        <button id="addCharacteristicsButton" [disabled]="Inactive" (click)="openShipLoc('addLocationMilesButton')" class="btn btn-outline-primary" type="button" placement="bottom" ngbTooltip="{{ 'key_Add' | translate }}">
+                          <i class="fa fa-plus" aria-hidden="true"></i>
+                          <span>
+                            {{ 'key_Add' | translate }}
+                          </span>
+                        </button>
+                        <button id="editContactButton" [disabled]="!isMilesLocationSelected || Inactive" (click)="openShipLoc('editLocationMilesButton')" class="btn btn-outline-primary" type="button" placement="bottom" ngbTooltip="{{ 'key_Edit' | translate }}">
+                          <i class="fa fa-pencil" aria-hidden="true"></i>
+                          <span>
+                            {{ 'key_Edit' | translate }}
+                          </span>
+                        </button>
+                        <button id="deleteButton" [disabled]="!isMilesLocationSelected || Inactive"  class="btn btn btn-outline-danger" (click)="openShipLoc('deleteLocationMilesButton')" type="button" placement="bottom" ngbTooltip="{{ 'key_Delete' | translate }}">
+                          <i class="fa fa-trash-o" aria-hidden="true"></i>
+                          <span>
+                            {{ 'key_Delete' | translate }}
+                          </span>
+                        </button>
+                        <button id="updateMilesButton" class="btn btn btn-outline-primary" (click)="updateMilesOverride(overrideMiles.value)" [disabled]="isValidNumber === 0 || Inactive" type="button" placement="bottom" ngbTooltip="{{ 'key_Updatemiles' | translate }}">
+                          <i class="fa fa-save" aria-hidden="true"></i>
+                          <span>
+                            {{ 'key_Updatemiles' | translate }}
+                          </span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div class="row">
+                  <div class="col-md-12">
+                    <table class="table table-striped table-bordered tbldesign">
+                      <thead>
+                        <tr>
+                          <th class="no-sort" width="5%">
+                            <div class="form-check-inline">
+                              <label class="form-check-label">
+                                <!--<input type="checkbox" class="form-check-input" value="" data-toggle="tooltip" data-placement="top" title="Select all">-->
+                                <mat-checkbox [checked]="isMilesAllLocationSelected" (change)="selectMilesAll($event); false" class="form-check-input"></mat-checkbox>
+                              </label>
+                            </div>
+                          </th>
+                          <th>{{'key_LocationFunction'| translate}}</th>
+                          <th>{{'key_Location'| translate}}</th>
+                          <th>{{'key_Freightlanesmiles'| translate}}</th>
+                          <th>{{'key_Modifiedmiles'| translate}}</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let item of shipfromLocationList" (click)="selectMilesCheckbox(item)" [ngClass]="[item.isSelected === true ? 'activeRow' : '']">
+                          <td>
+                            <div class="form-check-inline">
+                              <label class="form-check-label">
+                                <!--<input type="checkbox" class="form-check-input" value="">-->
+                                <mat-checkbox [checked]="item.isSelected" (click)="$event.stopPropagation()" class="form-check-input"
+                                              (change)="selectMilesCheckbox(item)"></mat-checkbox>
+                              </label>
+                            </div>
+                          </td>
+                          <!--<td colspan="4">No Data</td>-->
+                          <td>{{item.locationFunctionName}}</td>
+                          <td>{{item.shipFromLocationName}}</td>
+                          <td>{{item.miles}}</td>
+                          <td>{{item.modifiedMiles.toFixed(2)}}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-sm-6"></div>
+              <div class="col-sm-3">
+                <div class="form-group row mb-0">
+                  <label class="col-md-6 col-form-label fw600 text-right">{{'key_Averagemiles' | translate}}</label>
+                  <div class="col-md-6">
+                    <!--<p class="form-control-static mt-1"></p>-->
+                    <input type="text" class="form-control" value="{{this.finalAverageMile.toFixed(2)}}" disabled />
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-3">
+                <div class="form-group row mb-0">
+                  <label for="text-input" class="col-md-6 col-form-label fw600 text-right">{{'key_Milesoverride' | translate}}</label>
+                  <div class="col-md-6">
+                    <input class="form-control" #overrideMiles id="overrideMiles" type="text" [(ngModel)]="propertyDetailsViewModel.propertyValue"
+                           (ngModelChange)="validateNumber(propertyDetailsViewModel.propertyValue)" name="text-input" placeholder="0">
+                    <div *ngIf="!!propertyDetailsViewModel.propertyValue && isMiles === 0 && isValidInput === 1" class="errorMessage text-danger col-sm-12 col-md-12">
+                      {{'ValiationMessages.key_ValidInput' | translate }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--================end ship from location===-->
+          <!--================add map===-->
+          <div class="card-header collapsed" data-toggle="collapse" href="#Mapequipment">
+            <a class="card-title">
+              {{'key_MapEquipmentType' | translate}} ({{this.preferredEquipmentListCount}})
+            </a>
+          </div>
+          <div id="Mapequipment" class="card-body collapse" data-parent="#accordionTab1">
+            <div class="row">
+              <div class="col-md-12">
+                <app-map-equipment-type [InputlocationId]="selectedCustomerToEdit?.customerId"
+                                        (listEquipmentLength)="getpreferredEquipmentCount($event)"></app-map-equipment-type>
+
+              </div>
+            </div>
+          </div>
+          <!----map equipment-->
+
+          <div class="card-header collapsed" data-toggle="collapse" href="#Mapequipmentpallet">
+            <a class="card-title">
+              {{'key_Mapdefaultpallettype' | translate}} ({{this.defaultPalletCount}})
+            </a>
+          </div>
+          <div id="Mapequipmentpallet" class="card-body collapse" data-parent="#accordionTab1">
+            <div class="row">
+              <div class="col-md-12">
+                <app-map-pallet-type [InputlocationId]="selectedCustomerToEdit?.customerId"
+                                     (listPalletLength)="getDefaultPalletCount($event)"></app-map-pallet-type>
+              </div>
+            </div>
+          </div>
+          <div class="card-header collapsed" data-toggle="collapse" href="#Mapequipmentpreferred">
+            <a class="card-title">
+              {{'key_Mappre' | translate}} ({{this.preferredMaterialListCount}})
+            </a>
+          </div>
+          <div id="Mapequipmentpreferred" class="card-body collapse" data-parent="#accordionTab1">
+            <div class="row">
+              <div class="col-md-12">
+                <app-map-preferred-materials [ScreenAction]="screenAction"
+                                             [InputlocationId]="selectedCustomerToEdit?.customerId"
+                                             (listMaterialLength)="getPreferredMaterialCount($event)"></app-map-preferred-materials>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--================= end  address and contact tabs ==============-->
+      </div>
+      <!--=============== End profile =================-->
+    </div>
+  </div>
+  <form (ngSubmit)="saveCustomerByLocation()">
+    <div class="row justify-content-center my-5">
+      <!--<div class="col-xl-2 col-lg-4 col-md-4 col-sm-12">
+        <button class="btn btn-block btn-previous" type="submit">{{ 'key_Previous' | translate }}</button>
+      </div>-->
+      <div class="col-xl-2 col-lg-4 col-md-4 col-sm-12">
+        <button class="btn btn-block btn-save" [disabled]="Inactive" type="submit">{{ 'key_Save' | translate }}</button>
+      </div>
+      <div class="col-xl-2 col-lg-4 col-md-4 col-sm-12">
+        <button class="btn btn-block btn-next" [disabled]="selectedCustomers.length<2" (click)="saveAndNextCustomerByLocation()" type="button">
+          <span class="fw600">{{ 'key_Edit' | translate }}</span> <span class="fs-13"> > {{ 'key_Next' | translate }}</span>
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

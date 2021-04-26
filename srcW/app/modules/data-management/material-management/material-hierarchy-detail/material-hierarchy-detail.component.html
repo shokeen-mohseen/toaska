@@ -1,0 +1,44 @@
+<!--TFS ID: 17222, Author: Monu Ram Yadav, Date: 05-09-2020, Des: Design Material Screens-->
+<!-- Modal Header -->
+<div class="modal-header">
+  <h5 class="modal-title">{{ 'key_mhgd' | translate }}</h5>
+  <button type="button" class="close" data-dismiss="modal" (click)="activeModal.dismiss('Cross click')">&times;</button>
+</div>
+
+<!-- Modal body -->
+<div class="modal-body">
+  <div class="text-center"><span class="fw600">{{ 'key_HierarachyCode' | translate }}:</span> 	<span> F1</span></div>
+  <div class="text-center"><span class="fw600">{{ 'key_HierarachyName' | translate }}:</span> 	<span> TOSCA-Egg-HH Egg</span></div>
+  <div class="row mt-2">
+    <div class="col-lg-12">
+      <!--<mat-form-field appearance="outline" fxFlex="100">
+    <mat-label>{{ 'key_Filter' | translate }}</mat-label>
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+  </mat-form-field>-->
+      <app-table-filter (filterOn)="applyFilter($event)"></app-table-filter>
+      <div class="scroll">
+        <mat-table #table [dataSource]="dataSource" matSort>
+          <ng-container matColumnDef="materialGroupID">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'key_level' | translate }}</mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.materialGroupID}} </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="materialGroupValueDesc">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'key_mgd' | translate }}</mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.materialGroupValueDesc}} </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+      </div>
+
+      <div class="row pt-5 pb-2">
+        <div class="col-lg-12 text-center">
+          <input type="submit" id="btnSave" name="btnSave" class="btn btn-save popup-btn-width" value="Refresh">
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</div>

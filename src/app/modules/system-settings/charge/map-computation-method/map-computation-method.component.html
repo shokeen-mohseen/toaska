@@ -1,0 +1,133 @@
+<!--TFS ID: 17265, Author: Monu Ram Yadav, Date: 04-09-2020, Des: Design Charges screen taking reference from tosca project-->
+<!-- Modal Header -->
+<div class="modal-header">
+  <h5 class="modal-title">{{'key_MapComputationMethod' | translate}}</h5>
+  <button type="button" class="close" data-dismiss="modal" (click)="activeModal.dismiss('Cross click')">&times;</button>
+</div>
+
+<!-- Modal body -->
+<div class="modal-body">
+  <div class="row">
+    <div class="card-body pl-0 pt-0 pb-0">
+      <div class="col-md-12">
+        <div class="d-flex flex-nowrap justify-content-between align-items-center mb-2">
+
+          <div class="btn-group btn-group-toggle btn-group-md">
+            <button *ngIf="!isEditMode" [disabled]="isMultipleSelected()" class="btn btn-outline-primary" [ngClass]="{'active': btn==='btn1'}" (click)="buttonAction('edit')" type="button">
+              <i class="fa fa-pencil" aria-hidden="true"></i>
+              <span>{{'key_Edit' | translate}}</span>
+            </button>
+            <button *ngIf="!isEditMode" class="btn btn-outline-primary" [ngClass]="{'active': btn==='btn2'}" (click)="buttonAction('refresh')" type="button">
+              <i class="fa fa-refresh" aria-hidden="true"></i>
+              <span>
+                {{'key_Refresh' | translate}}
+              </span>
+            </button>
+            <button *ngIf="isEditMode" class="btn btn-outline-success" [ngClass]="{'active': btn==='btn3'}" (click)="buttonAction('save')" type="button">
+              <i class="fa fa-folder-open" aria-hidden="true"></i>
+              <span>
+                {{'key_Save' | translate}}
+              </span>
+            </button>
+
+            <button *ngIf="isEditMode" id="cancelButton" class="btn btn btn-outline-danger" [ngClass]="{'active': btn==='btn4'}" (click)="buttonAction('cancel')" type="button">
+              <i class="fa fa-close" aria-hidden="true"></i>
+              <span>
+                {{'key_Cancel' | translate}}
+              </span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-2 mb-4">
+    <mat-form-field appearance="outline" fxFlex="100">
+      <mat-label>{{ 'key_Filter' | translate }}</mat-label>
+      <input matInput (keyup.enter)="applyFilter($event.target.value)"
+             (keyup)="clearFilter($event.target.value)"
+             [(ngModel)]="filterValue"
+             placeholder="Press enter to filter">
+    </mat-form-field>
+    <mat-table #table [dataSource]="dataSource" matSort (matSortChange)="customSort($event)">
+      <ng-container matColumnDef="selectRow">
+
+        <mat-header-cell class="t-center tw-5" *matHeaderCellDef>
+          <div class="form-check-inline">
+            <label class="form-check-label">
+              <input type="checkbox" class="form-check-input" value="" data-toggle="tooltip" data-placement="top" title="Select all"
+                     (click)="$event ? masterToggle() : null"
+                     [checked]="selection.hasValue() && isAllSelected()"
+                     [indeterminate]="selection.hasValue() && !isAllSelected()">
+            </label>
+          </div>
+
+        </mat-header-cell>
+        <mat-cell class="t-center tw-5" *matCellDef="let row">
+          <div class="form-check-inline">
+            <label class="form-check-label">
+              <input type="checkbox" class="form-check-input" value="" data-toggle="tooltip" data-placement="top"
+                     (click)="$event.stopPropagation()"
+                     (change)="onSelectionChange(row,  $event.target.checked)"
+                     [checked]="selection.isSelected(row)">
+            </label>
+          </div>
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="ChargeCategoryDescription">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Charge Category Description </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.chargeCategoryDescription}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="ChargetypeDescription">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Charge type Description </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.chargeTypeDescription}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="ChargeDescription">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Charge Description </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.chargeDescription}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="MappedComputationMethods">
+        <mat-header-cell *matHeaderCellDef> Mapped Computation Methods </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <div *ngIf="isEditMode && element.isEdited">
+            <angular2-multiselect [data]="chargeDefaultComputationMethodList" [(ngModel)]="chargeDefaultComputationMethodListSelectedItems" [settings]="settings"
+                                  name="skill2" #skill2="ngModel">
+            </angular2-multiselect>
+
+          </div>
+          <div *ngIf="!element.isEdited">
+
+            {{ element.computationMappingDescription }}
+
+          </div>
+        </mat-cell>
+
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <div *ngIf="isLoading" style="display: flex; justify-content: center; align-items: center; background: white;">
+        <mat-row *matRowDef="let row; columns: displayedColumns;"
+                 [ngClass]="{hovered: row.hovered, highlighted: row.highlighted,
+                 'selected': selection.isSelected(row)}"
+                 (click)="onSelectionChange(row, row.isSelected)"></mat-row>
+      </div>
+    </mat-table>
+    <div *ngIf="isLoading"
+         style="display: flex; justify-content: center; align-items: center; background: white;">
+      <mat-progress-spinner color="primary"
+                            mode="indeterminate" [diameter]="25">
+      </mat-progress-spinner>
+    </div>
+    <div class="col-lg-12 text-center" *ngIf="dataSource.data.length == 0"><p>No records to display.</p></div>
+    <mat-paginator #paginator
+                   [length]="paginationModel.itemsLength"
+                   [pageSize]="paginationModel.pageSize"
+                   [pageSizeOptions]="paginationModel.pageSizeOptions"
+                   (page)="onPaginationEvent($event)">
+    </mat-paginator>
+  </div>
+  
+   
+
+</div>

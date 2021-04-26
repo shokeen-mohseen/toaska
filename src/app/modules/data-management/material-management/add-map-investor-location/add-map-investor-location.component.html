@@ -1,0 +1,71 @@
+<!--TFS ID: 17357, Author: Monu Ram Yadav, Date: 10-09-2020, Des: design add new in material -->
+<div class="row">
+  <div class="col-md-12">
+    <div class="d-flex flex-nowrap justify-content-between align-items-center mb-2">
+
+      <div class="btn-group btn-group-toggle btn-group-md" data-toggle="buttons">
+        <button id="addAddressButton" class="btn btn-outline-primary" type="button" placement="bottom" ngbTooltip="Add New">
+          <i class="fa fa-plus" aria-hidden="true"></i>
+          <span>
+            Add New
+          </span>
+        </button>
+        <button id="deleteButton" class="btn btn btn-outline-danger" type="button" placement="bottom" ngbTooltip="Delete">
+          <i class="fa fa-trash-o" aria-hidden="true"></i>
+          <span>
+            Delete
+          </span>
+        </button>
+        <button id="btnRefresh" class="btn btn-outline-primary" type="button" placement="bottom" ngbTooltip="Refresh">
+          <i class="fa fa-refresh" aria-hidden="true"></i>
+          <span>
+            Refresh
+          </span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-12">
+    <div class="scroll">
+      <mat-table #table [dataSource]="dataSource" matSort>
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="selectRow">
+
+          <mat-header-cell class="t-center tw-5" *matHeaderCellDef>
+            <div class="form-check-inline">
+              <label class="form-check-label">
+                <input type="checkbox" class="form-check-input" value="" data-toggle="tooltip" data-placement="top" title="Select all" (change)="$event ? masterToggle() : null"
+                       [checked]="selection.hasValue() && isAllSelected()"
+                       [indeterminate]="selection.hasValue() && !isAllSelected()">
+              </label>
+            </div>
+
+          </mat-header-cell>
+          <mat-cell class="t-center tw-5" *matCellDef="let row">
+            <div class="form-check-inline">
+              <label class="form-check-label">
+                <input type="checkbox" class="form-check-input" value="" data-toggle="tooltip" data-placement="top" title="Select" (click)="$event.stopPropagation()"
+                       (change)="$event ? selection.toggle(row) : null"
+                       [checked]="selection.isSelected(row)">
+              </label>
+            </div>
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="function">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Function </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.function}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="Description">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Description </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.Description}} </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
+    </div>
+  </div>
+</div>
+

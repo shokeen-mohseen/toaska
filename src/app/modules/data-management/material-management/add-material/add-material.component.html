@@ -1,0 +1,169 @@
+<!--TFS ID: 17357, Author: Monu Ram Yadav, Date: 10-09-2020, Des: design add new in material -->
+
+<div class="custom-tab row">
+  <div class="col-lg-12">
+    <div class="tab-pane">
+      <div class="row">
+        <div class="col-md-6"></div>
+        <div class="col-md-6 text-right">
+          <span class="fw600">{{ 'key_LastUpdate' | translate }}:</span> 8/13/2020 8:35:24 IST
+          <br><span class="fw600">{{ 'key_By' | translate }}</span> Jay Coleman (lampsdemo@osoftec.com)
+        </div>
+      </div>
+      <!--Last Updated Section End//////////////-->
+
+      <div class="row mt-3">
+        <div class="col-md-3 custom-flex-w-15">
+          <div class="card">
+            <div class="card-header">{{ 'key_AddNewMaterial' | translate }}</div>
+            <div class="card-body p-0">
+              <ul class="list-group" #nextList>
+                <li class="list-group-item list-group-item-action active">Clean Pal Pallet</li>
+                <li class="list-group-item list-group-item-action">SL-00101</li>
+                <li class="list-group-item list-group-item-action">PL-08891</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <!--Left panel tab menu End//////-->
+        <div class="col-md-9 custom-flex-w-85">
+          <div class="tab-content">
+            <!--=============== Start profile =================-->
+            <div class="e-profile">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="box-children">
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <label for="firstname">
+                            {{ 'key_MaterialCode' | translate }}<span class="text-danger">*</span>
+                          </label>
+                          <input type="text" class="form-control" value="" required />
+                        </div>
+                      </div>
+
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <label>{{ 'key_MaterialDescription' | translate }}<span class="text-danger">*</span></label>
+                          <input type="text" class="form-control" value="" required />
+                        </div>
+                      </div>
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <label>{{ 'key_materialHistory' | translate }}</label>
+                          <angular2-multiselect fixFilterBug [data]="itemList" [(ngModel)]="selectedItems" [settings]="settings"
+                                                (onSelect)="onItemSelect($event)"
+                                                (onDeSelect)="OnItemDeSelect($event)"
+                                                (onSelectAll)="onSelectAll($event)"
+                                                (onDeSelectAll)="onDeSelectAll($event)"
+                                                (onAddFilterNewItem)="onAddItem($event)">
+                          </angular2-multiselect>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="box-children">
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <div class="form-check pl-0">
+                          <label class="form-check-label">{{ 'key_AllowInventoryReservation' | translate }}</label>
+                          <input type="checkbox" class="form-check-input ml-2" value="" />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <span class="fw600 mr-3 " for="lastname"> {{ 'key_Status' | translate }} </span>
+                        <span for="lastname"> {{ 'key_Active' | translate }} </span>
+
+                      </div>
+                    </div>
+                    <!--<div class="col-md-12">
+                      <div class="form-group">
+                        <div class="form-check checkbox pl-0">
+                          <label class="form-check-label" for="check1"> {{ 'key_SetupCompleted' | translate }} </label>
+                          <input class="form-check-input ml-2" id="check1" type="checkbox" value="" checked>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <span class="fw600 mr-3 " for="lastname"> {{ 'key_SetupDatetime' | translate }} </span>
+                        <span for="lastname"> 8/31/2020 7:05:24 IST </span>
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <span class="fw600 mr-3 " for="lastname"> {{ 'key_SetupCompletedby' | translate }} </span>
+                        <span for="lastname"> John</span>
+                      </div>
+                    </div>-->
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--=============== End e-profile =================-->
+
+
+
+          </div>
+          <!--Tab Content End////////////-->
+        </div>
+        <!--Accordian Start-->
+        <div class="col-md-12">
+          <div id="accordionTab1" class="accordion mt-5">
+            <p>{{ 'key_psamfatafp' | translate }}</p>
+            <div class="card mb-0">
+              <div class="card-header collapsed" data-toggle="collapse" (click)="openAccordion('definechar')" href="#DefineCharacteristics">
+                <a class="card-title">
+                  {{ 'key_DefineCharacteristics' | translate }}
+                </a>
+              </div>
+              <div id="DefineCharacteristics" class="card-body collapse" data-parent="#accordionTab1">
+                <app-define-characteristics *ngIf="definechar"></app-define-characteristics>
+              </div>
+              <div class="card-header collapsed" data-toggle="collapse" (click)="openAccordion('mapforecast')" href="#MapForecast">
+                <a class="card-title">
+                  {{ 'key_mfcl' | translate }}
+                </a>
+              </div>
+              <div id="MapForecast" class="card-body collapse"  data-parent="#accordionTab1">
+                <app-map-forecast *ngIf="mapforecast"></app-map-forecast>
+              </div>
+              <div class="card-header collapsed" data-toggle="collapse" (click)="openAccordion('mapinvestor')" href="#MapInvestor">
+                <a class="card-title">
+                  {{ 'key_mil' | translate }}
+                </a>
+              </div>
+              <div id="MapInvestor" class="card-body collapse" data-parent="#accordionTab1">
+                <app-add-map-investor-location *ngIf="mapinvestor"></app-add-map-investor-location>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <!--Accordian End////-->
+      </div>
+      <!--Row End//////-->
+
+
+      <div class="row justify-content-center my-5">
+        <div class="col-xl-2 col-lg-4 col-md-4 col-sm-12">
+          <button class="btn btn-block btn-save" type="submit">{{ 'key_Save' | translate }}</button>
+        </div>
+        <div class="col-xl-2 col-lg-4 col-md-4 col-sm-12" (click)="selectNext(nextList)">
+          <button class="btn btn-block btn-next">
+            <span class="fw600">{{ 'key_Add' | translate }}</span> <span class="fs-13"> > {{ 'key_Next' | translate }}</span>
+          </button>
+        </div>
+      </div>
+
+    </div>
+    <!--tab-pane stepper-child-content-wrap end/////-->
+  </div>
+</div>

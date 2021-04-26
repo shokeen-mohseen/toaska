@@ -1,0 +1,249 @@
+<form (ngSubmit)="addUserContact()">
+  <div class="address-form px-3">
+    <div class="row">
+      <div class="col-sm-12 col-md-12 col-lg-10">
+        <div class="form-inline row">
+          <div class="col-sm-12 col-md-3 pr-0">
+            <label for="searchaddress">{{ 'key_Selectexisting' | translate }}</label>
+          </div>
+          <div class="col-sm-12 col-md-8">
+            <!--<select [(ngModel)]="userContactId"
+                    class="js-example-tags form-control"
+                    id="searchContact" name="searchContact" (change)="onSearchContactSelected(userContactId);">
+              <option></option>
+              <option *ngFor="let search of searchContactlist" [ngValue]="search.id">{{search.name}}</option>
+            </select>-->
+            <!--==emplement this control==---->
+            <angular2-multiselect fixFilterBug [data]="searchContactlist" [(ngModel)]="searchContact" [disabled]="isLoading" [settings]="settingsA"
+                                  (onSelect)="onSearchContactSelected()"
+                                  (onDeSelect)="OnItemDeSelect($event)"
+                                  (onAddFilterNewItem)="onAddItemA($event)" name="searchContact">
+            </angular2-multiselect>
+            <!--==emplement this control==---->
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--Row End-->
+    <div class="row">
+      <div class="col-sm-12 col-md-12 col-lg-10">
+        <div class="form-inline row">
+          <div class="col-sm-12 col-md-3 pr-0">
+            <label for="addesstype">{{ 'key_ContactType' | translate }} <span class="text-danger ml-1">*</span></label>
+          </div>
+          <div class="col-sm-12 col-md-8">
+            <!--==emplement this control==---->
+            <angular2-multiselect fixFilterBug [data]="contactTypelist" [(ngModel)]="userData.listB" [settings]="settingsB"
+                                  (onSelect)="onItemSelect($event)"
+                                  (onDeSelect)="OnItemDeSelect($event)"
+                                  (onSelectAll)="onSelectAll($event)"
+                                  (onDeSelectAll)="onDeSelectAll($event)"
+                                  (onAddFilterNewItem)="onAddItem($event)" name="listB" required>
+            </angular2-multiselect>
+            <!--==emplement this control==---->
+            <!--<select [(ngModel)]="contactTypeId"
+                    class="form-control" id="contactTypeId" name="contactTypeId" (ngModelChange)="validation('contactTypeId');">
+              <option></option>
+              <option *ngFor="let type of contactTypelist" [value]="type.id">{{type.name}}</option>
+            </select>-->
+            <div *ngIf="!!!contactTypeId && isContactTypeId === 1" class="errorMessage text-danger col-sm-12 col-md-12">{{'ValiationMessages.key_Required' | translate }}</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <!--Row End-->
+    <div class="row">
+      <div class="col-sm-12 col-md-12 col-lg-10">
+        <div class="form-inline row">
+          <div class="col-sm-12 col-md-3 pr-0">
+            <label for="addesstype">{{ 'key_Firstname' | translate }} <span class="text-danger ml-1">*</span></label>
+          </div>
+          <div class="col-sm-12 col-md-8">
+            <div class="input-group">
+              <div class="input-group-prepend append-custombg3">
+                <select [(ngModel)]="usersContactViewModel.prefix" class="form-control" id="prefix" name="Prefix">
+                  <option value="Mr.">Mr.</option>
+                  <option value="Ms.">Ms.</option>
+                  <option value="Mrs.">Mrs.</option>
+                </select>
+              </div>
+              <input [(ngModel)]="usersContactViewModel.firstName" id="firstName" name="FirstName" type="text" class="form-control" required=""
+                     (ngModelChange)="validation('firstName');">
+            </div>
+            <div *ngIf="!!!usersContactViewModel.firstName && isFirstName === 1" class="errorMessage text-danger col-sm-12 col-md-12">{{'ValiationMessages.key_Required' | translate }}</div>
+            <div *ngIf="usersContactViewModel.firstName!='' && isFirstNameAlphabets === 1" class="errorMessage text-danger col-sm-12 col-md-12">{{'ValiationMessages.key_charactersOnly' | translate }}</div>
+           
+            <!--<div *ngIf="!!!usersContactViewModel.firstName && isFirstName === 1" class="errorMessage text-danger col-sm-12 col-md-12">{{'ValiationMessages.key_Required' | translate }}</div>-->
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--Row End-->
+    <div class="row">
+      <div class="col-sm-12 col-md-12 col-lg-10">
+        <div class="form-inline row">
+          <div class="col-sm-12 col-md-3 pr-0">
+            <label for="addesstype">{{ 'key_Middlename' | translate }}</label>
+          </div>
+          <div class="col-sm-12 col-md-8">
+            <input type="text" [(ngModel)]="usersContactViewModel.middleName" id="middleName" name="MiddleName" class="form-control"
+                   (ngModelChange)="validation('middleName');" />
+            <div *ngIf="usersContactViewModel.middleName!='' && isMiddleNameAlphabets === 1" class="errorMessage text-danger col-sm-12 col-md-12">{{'ValiationMessages.key_charactersOnly' | translate }}</div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <!--Row End-->
+    <div class="row">
+      <div class="col-sm-12 col-md-12 col-lg-10">
+        <div class="form-inline row">
+          <div class="col-sm-12 col-md-3 pr-0">
+            <label for="addesstype">{{ 'key_Lastname' | translate }} <span class="text-danger ml-1">*</span></label>
+          </div>
+          <div class="col-sm-12 col-md-8">
+            <div class="input-group">
+              <input type="text" id="lastName" name="LastName" [(ngModel)]="usersContactViewModel.lastName" class="form-control" required=""
+                     (ngModelChange)="validation('lastName');" />
+
+              <div class="input-group-prepend append-custombg">
+                <select class="form-control" id="suffix" name="Suffix" [(ngModel)]="usersContactViewModel.suffix">
+                  <option value="None">None</option>
+                  <option value="Jr.">Jr.</option>
+                  <option value="Sr.">Sr.</option>
+                  <option value="III">III</option>
+                </select>
+              </div>
+            </div>
+            <div *ngIf="!!!usersContactViewModel.lastName && isLastName === 1" class="errorMessage text-danger col-sm-12 col-md-12">{{'ValiationMessages.key_Required' | translate }}</div>
+            <div *ngIf="usersContactViewModel.lastName!='' && isLastNameAlphabets === 1" class="errorMessage text-danger col-sm-12 col-md-12">{{'ValiationMessages.key_charactersOnly' | translate }}</div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <!--Row End-->
+    <div class="row">
+      <div class="col-sm-12 col-md-12 col-lg-10">
+        <div class="form-inline row">
+          <div class="col-sm-12 col-md-3 pr-0">
+            <label for="addesstype">{{ 'key_email' | translate }} <span class="text-danger ml-1">*</span></label>
+          </div>
+          <div class="col-sm-12 col-md-8 col-lg-8">
+              <div class="input-prepend input-group">
+                <div class="input-group-prepend append-custombg3">
+                  <span class="form-control">@</span>
+                </div>
+                  <input [(ngModel)]="usersContactViewModel.email" id="email" name="Email" type="email" class="form-control" required=""
+                         (ngModelChange)="validation('email');" />
+              </div>
+              <div *ngIf="!!!usersContactViewModel.email && isEmail === 1" class="errorMessage text-danger col-sm-12 col-md-12">{{'ValiationMessages.key_Required' | translate }}</div>
+              <div *ngIf="!!usersContactViewModel.email && isEmail === 0 && isValidEmail === 1" class="errorMessage text-danger col-sm-12 col-md-12">
+                  {{'ValiationMessages.key_ValidEmail' | translate }}
+              </div>
+              <div *ngIf="!!usersContactViewModel.email && isExistUserContact === 1 && isEmail === 0 && isValidEmail === 0"
+                   class="errorMessage text-danger col-sm-12 col-md-12">
+                  {{'ValiationMessages.key_Exists' | translate }}
+              </div>
+              
+              <!--<div class="form-check checkbox">
+                  <input type="checkbox" [(ngModel)]="usersContactViewModel.emailNotificationAllow" name="list_name3" [checked]="usersContactViewModel.emailNotificationAllow" (ngModelChange)="changeNotification('Email',$event)" />-->
+                  <!-- <input class="form-check-input" (change)="changeNotification('Email',$event)" id="check1" type="checkbox" value="usersContactViewModel.emailNotificationAllow" [(ngModel)]="usersContactViewModel.emailNotificationAllow">-->
+                  <!--<label class="form-check-label" for="check1"> <span class="ml-1">{{ 'key_AllowNotification' | translate }}</span></label>
+              </div>-->
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <!--Row End-->
+    <div class="row">
+      <div class="col-sm-12 col-md-12 col-lg-10">
+        <div class="form-inline row">
+          <div class="col-sm-12 col-md-3 pr-0">
+            <label for="addesstype">{{ 'key_WorkPhone' | translate }}</label>
+          </div>
+          <div class="col-sm-12 col-md-8 col-lg-8">
+            <div class="input-group">
+              <div class="input-group-prepend append-custombg3">
+                <select [(ngModel)]="usersContactViewModel.workPhoneCountryCode"
+                        class="form-control" id="WorkPhoneCountryCode" name="WorkPhoneCountryCode">
+                  <option value="+01">+01</option>
+                  <option value="+91">+91</option>
+                  <option value="+94">+94</option>
+
+                </select>
+              </div>
+
+              <input type="number" maxlength="12" [(ngModel)]="usersContactViewModel.workPhone" id="WorkPhone" name="WorkPhone" class="form-control"
+                     (ngModelChange)="validation('workPhone');" (keypress)="keyphone($event)" />
+              <div *ngIf="usersContactViewModel.workPhone!='' && isWorkPhone === 1" class="errorMessage text-danger col-sm-12 col-md-12">{{'ValiationMessages.key_MaxLengthMobile' | translate }}</div>
+              <div *ngIf="usersContactViewModel.workPhone!='' && isWorkminPhone === 1" class="errorMessage text-danger col-sm-12 col-md-12">{{'ValiationMessages.key_MinLengthMobile' | translate }}</div>
+                           
+              <!--<div *ngIf="usersContactViewModel.workPhone!='' && isWorkPhoneValid === 1" class="errorMessage text-danger col-sm-12 col-md-12">Not valid work phone number</div>-->
+              <!--<div *ngIf="!!!usersContactViewModel.workPhone && isWorkPhone === 1" class="errorMessage text-danger col-sm-12 col-md-12">{{'ValiationMessages.key_Required' | translate }}</div>-->
+
+            </div>
+
+            <!--<div class="form-check checkbox">
+              <input type="checkbox" [(ngModel)]="usersContactViewModel.workPhoneNotificationAllow" name="list_name2" [checked]="usersContactViewModel.workPhoneNotificationAllow" (ngModelChange)="changeNotification('workPhone',$event)" />-->
+              <!--<input class="form-check-input" (change)="changeNotification('workPhone',$event)" id="check2" type="checkbox" value="usersContactViewModel.workPhoneNotificationAllow" [(ngModel)]="usersContactViewModel.workPhoneNotificationAllow">-->
+              <!--<label class="form-check-label" for="check2"> <span class="ml-1">{{ 'key_AllowNotification' | translate }}</span></label>
+            </div>-->
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <!--Row End-->
+    <div class="row">
+      <div class="col-sm-12 col-md-12 col-lg-10">
+        <div class="form-inline row">
+          <div class="col-sm-12 col-md-3 pr-0">
+            <label for="addesstype">{{ 'key_MobilePhone' | translate }}</label>
+          </div>
+          <div class="col-sm-12 col-md-8 col-lg-8">
+              <div class="input-group">
+                  <div class="input-group-prepend append-custombg3">
+                    <select [(ngModel)]="usersContactViewModel.mobilePhoneCountryCode"
+                            class="form-control" id="MobilePhoneCountryCode" name="MobilePhoneCountryCode">
+                      <option value="+01">+01</option>
+                      <option value="+91">+91</option>
+                      <option value="+94">+94</option>
+
+                    </select>
+                  </div>
+
+                  <input type="number" maxlength="12" [(ngModel)]="usersContactViewModel.mobilePhone" id="MobilePhone" name="MobilePhone" class="form-control"
+                         (ngModelChange)="validation('mobilePhone');" (keypress)="keyphone($event)" />
+                  <div *ngIf="usersContactViewModel.mobilePhone!='' && isMobilePhone === 1" class="errorMessage text-danger col-sm-12 col-md-12">{{'ValiationMessages.key_MaxLengthMobile' | translate }}</div>
+                  <div *ngIf="usersContactViewModel.mobilePhone!='' && isMobileMinPhone === 1" class="errorMessage text-danger col-sm-12 col-md-12">{{'ValiationMessages.key_MinLengthMobile' | translate }}</div>
+                  <!--<div *ngIf="!!!usersContactViewModel.mobilePhone && isMobilePhone === 1" class="errorMessage text-danger">{{'ValiationMessages.key_Required' | translate }}</div>-->
+
+              </div>
+             
+              <!--<div class="form-check checkbox">
+                  <input type="checkbox" [(ngModel)]="usersContactViewModel.mobilePhoneNotificationAllow" name="list_name1" [checked]="usersContactViewModel.mobilePhoneNotificationAllow" (ngModelChange)="changeNotification('mobilePhone',$event)" />-->
+                  <!--<input type="checkbox" [(ngModel)]="usersContactViewModel.mobilePhoneNotificationAllow" name="list_name" value="usersContactViewModel.mobilePhoneNotificationAllow" (change)="changeNotification('mobilePhone',$event)" />-->
+                  <!--<input class="form-check-input" [checked]="usersContactViewModel.MobilePhoneNotificationAllow" id="check3" type="checkbox" value="usersContactViewModel.MobilePhoneNotificationAllow" [(ngModel)]="usersContactViewModel.MobilePhoneNotificationAllow" (change)="changeNotification('mobilePhone',$event)">-->
+                  <!--<label class="form-check-label" for="check3"> <span class="ml-1">{{ 'key_AllowNotification' | translate }}</span></label>
+              </div>-->
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--Row End-->
+  </div>
+  <!--Bg-white end-->
+
+  <div class="row pt-3">
+    <div class="col-lg-12 text-center">
+      <button type="submit" id="btnSave" name="btnSave" [disabled]="isValidated === 0 && isInterface || Inactive"
+              class="btn btn-save mr-2 popup-btn-width">{{ 'key_Save' | translate }}</button>
+      <!--<input type="submit" id="btnSave" name="btnSave" [disabled]="isValidated === 0 && isInterface || Inactive"
+             class="btn btn-save mr-2 popup-btn-width" value="{{ 'key_Save' | translate }}">-->
+    </div>
+  </div>
+</form>

@@ -1,0 +1,95 @@
+<!-- Modal Header -->
+<div class="modal-header">
+  <h5 class="modal-title"> {{DocumentSectionTitle}} {{ 'key_OperationalExport' | translate }}</h5>
+  <button type="button" class="close" data-dismiss="modal" (click)="activeModal.dismiss('Cross click')">&times;</button>
+</div>
+
+<!-- Modal body -->
+<div class="modal-body">
+  <div class="row">
+
+    <div class="col-md-4">
+      <div class="form-group">
+        <label> {{ 'key_ApplyCustomFilter' | translate }} </label>
+        <angular2-multiselect fixFilterBug [data]="customFilterItemListData" [(ngModel)]="customFilterItemListDataModel"
+                              [settings]="{ singleSelection: true, text: 'Select Custom Filter', addNewItemOnFilter: false, enableSearchFilter: true, searchBy: ['name'], labelKey: 'name'}"
+                              (onSelect)="onItemSelect($event)"
+                              (onDeSelect)="OnItemDeSelect($event)"
+                              (onSelectAll)="onSelectAll($event)"
+                              (onDeSelectAll)="onDeSelectAll($event)"
+                              (onAddFilterNewItem)="onAddItemA($event)">
+        </angular2-multiselect>
+        <!--<angular2-multiselect fixFilterBug [data]="itemListA" [(ngModel)]="selectedItemsA" [settings]="settingsA"
+                              (onSelect)="onItemSelect($event)"
+                              (onDeSelect)="OnItemDeSelect($event)"
+                              (onSelectAll)="onSelectAll($event)"
+                              (onDeSelectAll)="onDeSelectAll($event)"
+                              (onAddFilterNewItem)="onAddItemA($event)">
+        </angular2-multiselect>-->
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="mt-4">
+        <button name="btnSave" class="btn popup-btn-width btn-next btn-sm mb-2 mr-2">{{ 'key_ResetFilter' | translate }}</button>
+      </div>
+    </div>
+      <div class="col-md-2">
+        
+        <div class="form-check form-check-inline mr-1 mt-4">
+          <label class="form-check-label  mr-1" for="exportAllVersions">Export All Versions</label>
+          <input class="form-check-input" id="exportAllVersions" type="checkbox" value="check1">
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="mt-4 text-right">
+          <button id="" name="btnNext" class="btn popup-btn-width btn-save btn-sm mb-2">{{ 'key_Export' | translate }}</button>
+          <button name="btnSave" class="btn popup-btn-width btn-next btn-sm mb-2 ml-2">{{ 'key_Refresh' | translate }}</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mt-2">
+      <div class="col-lg-12">
+        <div class="scroll">
+          <mat-table #table [dataSource]="dataSource" matSort>
+            <ng-container *ngFor="let column of displayedColumns; let i=index;" [matColumnDef]="column">
+              <mat-header-cell *matHeaderCellDef mat-sort-header [resizeColumn]="true" [index]="i">
+                <div *ngIf="column != selectRow"> {{ displayedColumnsReplace[i] | translate }}</div>
+              </mat-header-cell>
+              <mat-cell *matCellDef="let item">
+
+                <div class="w-100 justify-content-around d-flex align-items-center" *ngIf="column === download">
+                  <a class="" placement="top" ngbTooltip="Download">
+                    <i class="fa fa-download text-primary"></i>
+                  </a>
+                </div>
+                <div class="w-100 justify-content-around d-flex align-items-center" *ngIf="column === delete">
+                  <a class="" placement="top" ngbTooltip="Delete">
+                    <i class="fa fa-trash text-danger" aria-hidden="true"></i>
+                  </a>
+                </div>
+                <div class="text-center">
+                  {{ item[column] }}
+                </div>
+
+              </mat-cell>
+            </ng-container>
+
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{ 'selected': selection.isSelected(row)}"
+                     (click)="selection.toggle(row)">
+            </mat-row>
+
+          </mat-table>
+        </div>
+        <mat-paginator #paginator
+                       [pageSize]="10"
+                       [pageSizeOptions]="[5, 10, 20]">
+        </mat-paginator>
+
+
+      </div>
+    </div>
+
+  </div>

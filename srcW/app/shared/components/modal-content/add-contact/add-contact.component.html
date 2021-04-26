@@ -1,0 +1,16 @@
+      <!-- Modal Header -->
+<div class="modal-header">
+  <h5 class="modal-title">{{ 'key_AddeditContactDetails' | translate }}</h5>
+  <button type="button" class="close" data-dismiss="modal" (click)="activeModal.dismiss('Cross click')">&times;</button>
+</div>
+<!-- Modal body -->
+<div class="modal-body">
+  <app-contactfields [modalData1]="mode" [isEditRights]="isEditRights" [userId]="userId" [getContactById]="ContactById" [contactActionType]="contactActionType"
+                     (addEntry)="addEditUserContact($event)"
+                     (editEntry)="addEditUserContact($event)"
+                     [contactIds]="contactIds"></app-contactfields>
+</div>
+
+<!--[userId]="userId"
+                    [locationId]="locationId"-->
+<!--[getContactById]="getContactById"-->

@@ -1,0 +1,91 @@
+<div class="modal-header">
+  <h5 class="modal-title"> {{ 'key_AddRows' | translate }}</h5>
+  <button type="button" class="close" data-dismiss="modal" (click)="activeModal.dismiss('Cross click')">&times;</button>
+</div>
+
+<!-- Modal body -->
+<div class="modal-body">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="d-flex flex-nowrap justify-content-between align-items-center mb-2">
+
+        <div class="btn-group btn-group-toggle btn-group-md" data-toggle="buttons">
+          <button id="addAddressButton" (click)="editDefinechar()" class="btn btn-outline-primary" type="button" placement="bottom" ngbTooltip="Add New">
+            <i class="fa fa-plus" aria-hidden="true"></i>
+            <span>
+              {{ 'key_addnew' | translate }}
+            </span>
+          </button>
+          <button id="addAddressButton" class="btn btn-outline-success" type="button" placement="bottom" ngbTooltip="Add New">
+            <i class="fa fa-pencil" aria-hidden="true"></i>
+            <span>
+              {{ 'key_Edit' | translate }}
+            </span>
+          </button>
+          <button id="deleteButton" class="btn btn btn-outline-danger" type="button" placement="bottom" ngbTooltip="Delete">
+            <i class="fa fa-trash-o" aria-hidden="true"></i>
+            <span>
+              {{ 'key_Delete' | translate }}
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-12">
+      <div class="scroll">
+        <mat-table #table [dataSource]="dataSource" matSort>
+          <ng-container matColumnDef="selectRow">
+
+            <mat-header-cell class="t-center tw-5" *matHeaderCellDef>
+              <div class="form-check-inline">
+                <label class="form-check-label">
+                  <input type="checkbox" class="form-check-input" value="" data-toggle="tooltip" data-placement="top" title="Select all" (change)="$event ? masterToggle() : null"
+                         [checked]="selection.hasValue() && isAllSelected()"
+                         [indeterminate]="selection.hasValue() && !isAllSelected()">
+                </label>
+              </div>
+
+            </mat-header-cell>
+            <mat-cell class="t-center tw-5" *matCellDef="let row">
+              <div class="form-check-inline">
+                <label class="form-check-label">
+                  <input type="checkbox" class="form-check-input" value="" data-toggle="tooltip" data-placement="top" title="Select" (click)="$event.stopPropagation()"
+                         (change)="$event ? selection.toggle(row) : null"
+                         [checked]="selection.isSelected(row)">
+                </label>
+              </div>
+            </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="Location">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'key_Llocation' | translate }}</mat-header-cell>
+            <mat-cell *matCellDef="let element"> <select class="form-control"><option>Select</option></select></mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="Material">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>  {{ 'key_Material' | translate }}</mat-header-cell>
+            <mat-cell *matCellDef="let element"> <select class="form-control"><option>Select</option></select> </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="col1">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> 202001</mat-header-cell>
+            <mat-cell *matCellDef="let element"> <input class="form-control" /> </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="col2">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> 202002</mat-header-cell>
+            <mat-cell *matCellDef="let element"> <input class="form-control" /> </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="col3">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> 202003</mat-header-cell>
+            <mat-cell *matCellDef="let element"> <input class="form-control" /> </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+      </div>
+    </div>
+
+    <div class="col-lg-12 text-center mt-4">
+      <input type="button" value="{{ 'key_Save' | translate }}" class="btn btn-save popup-btn-width">
+    </div>
+  </div>
+</div>

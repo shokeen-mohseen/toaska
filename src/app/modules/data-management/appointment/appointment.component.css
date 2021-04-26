@@ -1,0 +1,13 @@
+
+.e-checkbox-wrapper.personal .e-frame {
+  background-color: #ea7a57;
+  border-color: transparent;
+}
+
+.e-checkbox-wrapper.team .e-frame {
+  background-color: #865fcf;
+  border-color: transparent;
+}
+.e-dialog.e-popup {
+    width:600px !important;
+}

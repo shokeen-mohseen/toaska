@@ -1,0 +1,113 @@
+<!--TFS ID: 17462,
+  Author: Monu Ram Yadav,
+  Date: 17-09-2020,
+  Des:  Design Adjust final Forecast screen -->
+<!-- Modal Header -->
+<div class="modal-header">
+  <h5 class="modal-title">{{ 'key_AdjustedForecast' | translate }}</h5>
+  <button type="button" class="close" data-dismiss="modal" (click)="activeModal.dismiss('Cross click')">&times;</button>
+</div>
+
+<!-- Modal body -->
+
+<div class="modal-body">
+
+  <div class="row mt-3">
+    <div class="col-md-12">
+      <div class="scroll">
+
+        <mat-table #table [dataSource]="AdjustedForecastDS" matSort>
+          <ng-container *ngFor="let column of displayedColumns;  let i=index;" [matColumnDef]="column">
+            <mat-header-cell *matHeaderCellDef mat-sort-header [resizeColumn]="true" [index]="i">
+              <div *ngIf="column != selectRow"> {{ displayedColumnsReplace[i] | translate }}</div>
+            </mat-header-cell>
+
+            <mat-cell *matCellDef="let item">
+              <div *ngIf="column === LocationCode"> {{ item[column] }}</div>
+              <div *ngIf="column === Location"> {{ item[column] }}</div>
+              <div *ngIf="column === Material"> {{ item[column] }}</div>
+              <div *ngIf="column != LocationCode && column != Location && column != Material">
+                <input type="text" class="form-control w-100" [(ngModel)]="item[column]" />
+              </div>
+            </mat-cell>
+          </ng-container>
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"> </mat-row>
+        </mat-table>
+
+        <!--<mat-table #table [dataSource]="dataSource" matSort>
+          <ng-container *ngFor="let column of displayedColumns; let i=index;" [matColumnDef]="column">
+            <mat-header-cell *matHeaderCellDef mat-sort-header mwlResizable [enableGhostResize]="true" (resizeEnd)="onResizeEnd($event, column)"
+                             [resizeEdges]="{bottom: false, right: true, top: false, left: true}">
+
+              <div *ngIf="column != selectRow"> {{ displayedColumnsReplace[i] | translate }}</div>
+            </mat-header-cell>
+            <mat-cell *matCellDef="let item">
+
+              <div class="w-100" *ngIf="column != LocationCode && column != Location && column != Material">
+
+                <div *ngFor="let col of filteredColumnList; let j=index;">
+                  <div *ngIf="column == col">
+                    <input type="text" class="form-control w-100" [(ngModel)]="item.col+" j"+" />
+                  </div>
+                </div>
+              </div>
+              {{ item[column] }}
+            </mat-cell>
+          </ng-container>
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>-->
+
+
+
+      </div>
+
+
+
+
+
+    </div>
+  </div>
+  <div class="col-lg-12 text-center mt-4">
+    <button class="btn btn-save mr-2 popup-btn-width" (click)="UpdateAdjustedForecast()">{{ 'key_Save' | translate }}</button>
+    <button class="btn btn-next popup-btn-width">{{ 'key_Refresh' | translate }}</button>
+  </div>
+</div>
+
+<!--<div class="modal-body">
+
+  <div class="row mt-3">
+    <div class="col-md-12">
+      <div class="scroll">
+        <mat-table #table [dataSource]="dataSource" matSort>
+          <ng-container *ngFor="let column of displayedColumns; let i=index;" [matColumnDef]="column">
+            <mat-header-cell *matHeaderCellDef mat-sort-header mwlResizable [enableGhostResize]="true" (resizeEnd)="onResizeEnd($event, column)"
+                             [resizeEdges]="{bottom: false, right: true, top: false, left: true}">
+
+              <div *ngIf="column != selectRow"> {{ displayedColumnsReplace[i] | translate }}</div>
+            </mat-header-cell>
+            <mat-cell *matCellDef="let item">
+              <div class="w-100" *ngIf="column === oct">
+                <input type="text" class="form-control w-100" />
+              </div>
+              <div class="w-100" *ngIf="column === nov">
+                <input type="text" class="form-control w-100" />
+              </div>
+              <div class="w-100" *ngIf="column === dec">
+                <input type="text" class="form-control w-100" />
+              </div>
+              {{ item[column] }}
+            </mat-cell>
+          </ng-container>
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-12 text-center mt-4">
+    <button class="btn btn-save mr-2 popup-btn-width">{{ 'key_Save' | translate }}</button>
+    <button class="btn btn-next popup-btn-width">{{ 'key_Refresh' | translate }}</button>
+  </div>
+</div>-->

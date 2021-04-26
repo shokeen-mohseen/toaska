@@ -1,0 +1,167 @@
+
+<div>
+  <!--<div class="row">
+    <div class="col-md-6"></div>
+    <div class="col-md-6 text-right">
+      <span class="fw600">Last Updated:	</span> 8/13/2020 8:35:24 IST
+      <br><span class="fw600">By</span> Jay Coleman (lampsdemo@osoftec.com)
+    </div>
+  </div>-->
+  <!--Last Updated Section End//////////////-->
+  <div class="row mb-2">
+    <div class="col-md-5"></div>
+    <div class="col-md-7 text-right" *ngIf="OrderCommentData.length>0">
+      <!--<span class="fw600">{{'key_LastUpdated' | translate}}:	</span> {{orderManagement.UpdateDateTimeServerStrFromat}}
+    <br><span class="fw600">By</span> {{orderManagement.CreatedBy}}-->
+      <strong> LastUpdated:om</strong> {{OrderCommentData[0].UpdateDate | date: 'MM/dd/yyyy HH:mm:ss a' }} By {{OrderCommentData[0].UpdatedBy}}<br />
+      <strong> Created By:</strong> {{OrderCommentData[0].CreateDate | date: 'MM/dd/yyyy HH:mm:ss a' }} By {{OrderCommentData[0].CreatedBy}}
+    </div>
+  </div>
+    <form>
+
+      <div class="row">
+        <div class="col-md-3 custom-flex-w-15" *ngIf="this.IsLeftList">
+          <div class="card">
+            <div class="card-header">
+
+              <span class="fs-13">{{ 'key_EditList' | translate }}</span>
+            </div>
+            <div class="card-body p-0">
+              <div class="list-group" #nextList>
+                <div class="list-group-item list-group-item-action active" *ngFor="let order of OrderforEdit">
+                  <a (click)="BindOrderDetails(order.OrderId)" href="javascript:void(0)">{{order.OrderNumber}}</a>
+                  <button *ngIf="order.OrderId != SelectedOrderIdTemp" class="close" type="button" (click)="RemoveSalesOrder(order.OrderId)">
+                    <i class="fa fa-times" aria-hidden="true"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-9 custom-flex-w-85">
+          <div class="tab-content">
+            <!--=============== Start profile =================-->
+            <div class="e-profile mb-4">
+              <app-show-order-filter (CommentData)="GetCommentData($event)" [values]="currentItems"></app-show-order-filter>
+            </div>
+            <!--=============== End e-profile =================-->
+          </div>
+        </div>
+        <div class="col-lg-12">
+          <div id="accordionTab1" class="accordion mt-5">
+            <div class="card mb-0">
+              <div class="card-header " data-toggle="collapse" href="#Orderdetail">
+                <a class="card-title">
+                  {{ 'key_Orderdetail' | translate }}
+                </a>
+              </div>
+              <div id="Orderdetail" class="card-body collapse in order-deails p-o pt-0 show" data-parent="#accordionTab1">
+                <!-----=========adjust charge===============----->
+                <!-- <app-order-adjust-charge></app-order-adjust-charge>-->
+                <!-----=========end adjust charge===============----->
+                <app-order-detail [value]="currentItem"></app-order-detail>
+              </div>
+              <div class="card-header collapsed" data-toggle="collapse" href="#characteristics">
+                <a class="card-title">
+                  {{ 'key_document' | translate }}
+                </a>
+              </div>
+              <div id="characteristics" class="card-body collapse " data-parent="#accordionTab1">
+                <app-document></app-document>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mt-4">
+        <div class="col-sm-12">
+          <h4>{{'key_OrderComments' | translate}}</h4>
+        </div>
+        <div class="col-md-12 col-sm-12">
+          <div class="row">
+            <div class="col-md-6 col-sm-12">
+              <div class="form-group">
+                <label for="Transportation Comment" class="">{{'key_TransportationComment' | translate}}</label>
+                <textarea name="TComment" rows="2" class="form-control" readonly>{{OrderCommentData[0].TransportationComment}}</textarea>
+              </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+              <div class="form-group">
+                <label for="Loading Comment" class="">{{'key_LoadingComment' | translate}}</label>
+                <textarea name="Loading" rows="2" class="form-control" readonly>{{OrderCommentData[0].LoadingComment}}</textarea>
+              </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+              <div class="form-group">
+                <label for="Transportation Comment" class="">
+                  {{'key_TransplaceOrderComment' | translate}}
+                </label>
+                <input type="text" name="OCTransportation" value="{{OrderCommentData[0].TransplaceOrderComment}}" class="form-control" readonly>
+              </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+              <div class="form-group">
+                <label for="Loading Comment" class="">
+                  {{'key_TransplaceDeliveryComment' | translate}}
+                </label>
+                <input type="text" name="DCTransportation" value="{{OrderCommentData[0].TransplaceDeliveryComment}}" class="form-control" readonly>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row justify-content-center my-5">
+        <div class="col-xl-2 col-lg-4 col-md-4 col-sm-12">
+          <button class="btn btn-block btn-next" (click)="SelectNextClaimForEdit()">
+            <span class="fs-13">  {{ 'key_Next' | translate }}</span>
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

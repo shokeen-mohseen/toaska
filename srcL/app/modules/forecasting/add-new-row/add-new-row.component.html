@@ -1,0 +1,79 @@
+<div class="modal-header">
+  <h5 class="modal-title"> {{ 'key_AddRows' | translate }}</h5>
+  <button type="button" class="close" data-dismiss="modal" (click)="activeModal.dismiss('Cross click')">&times;</button>
+</div>
+
+<!-- Modal body -->
+<div class="modal-body">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="d-flex flex-nowrap justify-content-between align-items-center mb-2">
+
+        <div class="btn-group btn-group-toggle btn-group-md" data-toggle="buttons">
+          <button id="addAddressButton" (click)="AddRowstoGrid()" class="btn btn-outline-primary" type="button" placement="bottom" ngbTooltip="Add New">
+            <i class="fa fa-plus" aria-hidden="true"></i>
+            <span>
+              {{ 'key_addnew' | translate }}
+            </span>
+          </button>
+          <button id="addAddressButton" class="btn btn-outline-success" type="button" placement="bottom" ngbTooltip="Add New">
+            <i class="fa fa-pencil" aria-hidden="true"></i>
+            <span>
+              {{ 'key_Edit' | translate }}
+            </span>
+          </button>
+          <button id="deleteButton" class="btn btn btn-outline-danger" type="button" placement="bottom" ngbTooltip="Delete">
+            <i class="fa fa-trash-o" aria-hidden="true"></i>
+            <span>
+              {{ 'key_Delete' | translate }}
+            </span>
+          </button>
+        </div>
+
+        <div class="form-group col-md-4">
+          <label> {{ 'key_Llocation' | translate }}</label>
+          <angular2-multiselect fixFilterBug [data]="LocationData" [(ngModel)]="selectedLocation"
+                                [settings]="dropdownSettings"
+                                (onSelect)="onItemSelect($event)"
+                                (onDeSelect)="OnItemDeSelect($event)"
+                                (onSelectAll)="onSelectAll($event)"
+                                (onDeSelectAll)="onDeSelectAll($event)" name="name"></angular2-multiselect>
+
+        </div>
+        <div class="form-group col-md-4 pr-0">
+          <label>{{'key_Material' | translate}}</label>
+          <angular2-multiselect fixFilterBug [data]="MaterialData" [(ngModel)]="selectedMaterial"
+                                [settings]="dropdownSettings1"
+                                (onSelect)="onItemSelect1($event)"
+                                (onDeSelect)="OnItemDeSelect1($event)"
+                                (onSelectAll)="onSelectAll1($event)"
+                                (onDeSelectAll)="onDeSelectAll1($event)" name="name1"></angular2-multiselect>
+        </div>
+      </div>
+      </div>
+
+    <div class="col-md-12">
+      <div class="scroll">
+        <mat-table #table [dataSource]="ForecastNewRows" matSort>
+          <ng-container *ngFor="let column of displayedColumns;  let i=index;" [matColumnDef]="column">
+            <mat-header-cell *matHeaderCellDef mat-sort-header [resizeColumn]="true" [index]="i">
+              <div> {{ displayedColumns[i] | translate}}</div>
+            </mat-header-cell>
+
+            <mat-cell *matCellDef="let item">
+              <div *ngIf="column === Location"> {{ item[column] }}</div>
+              <div *ngIf="column === Material"> {{ item[column] }}</div>
+              <div *ngIf="column != Location  && column != Material"><input type="text" [(ngModel)]="item[column]"/></div>
+            </mat-cell>
+          </ng-container>
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"> </mat-row>
+        </mat-table>
+      </div>
+    </div>
+
+    <div class="col-lg-12 text-center mt-4">
+      <button class="btn btn-save popup-btn-width" (click)="SaveForeCastNewRows()">{{ 'key_Save' | translate }}</button>
+    </div>
+  </div>
+</div>

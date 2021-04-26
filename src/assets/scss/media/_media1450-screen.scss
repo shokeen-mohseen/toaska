@@ -1,0 +1,64 @@
+@media(min-width:1300px) and (max-width:1450px) {
+
+  .view-line{
+      mat-cell, mat-footer-cell, mat-header-cell {width: 64px;}
+    }
+  .existing .mat-table {
+    mat-header-cell,
+    mat-cell,
+    mat-footer-cell {
+      width: 65px;
+    }
+  }
+  .editLineItems {
+    .mat-column-Quantity_per_UOM, .mat-column-Rate {
+      width: 58px;
+    }
+
+    .mat-column-UOM {
+      width: 95px;
+    }
+  }
+
+  .sidebar-minimized {
+    .editLineItems {
+      .mat-column-Quantity_per_UOM, .mat-column-Rate {
+        width: 60px;
+      }
+
+      .mat-column-UOM {
+        width: 70px;
+      }
+    }
+  }
+  
+  app-customer-list .resize-table {
+    mat-cell, mat-footer-cell, mat-header-cell {
+      width: 130px;
+    }
+  }
+
+  app-customer-list, app-businesspartner-list, app-carrierpartnerlist {
+    .resize-table {
+      mat-cell, mat-footer-cell, mat-header-cell {
+        width: 110px;
+      }
+    }
+  }
+  .contract-list {
+      .mat-table {
+          width:1852px;
+      }
+    /* mat-cell, mat-footer-cell, mat-header-cell {width: 85px;}
+    .mat-column-Effective_End,
+    .mat-column-Effective_Start,
+    .mat-column-EarliestPriceEnd,
+    .mat-column-End_Alert_Days,
+    .mat-column-Business_Partner,
+    .mat-column-Customer_Ship_To_Location,
+    .mat-column-Approved_Datetime {
+      width: 65px;
+    }*/
+    }
+  }
+/*--media-end-(min-width:1300px) and (max-width:1450px)--*/

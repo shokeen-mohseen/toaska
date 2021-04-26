@@ -1,0 +1,63 @@
+<!---Task 17983: Partograph workbench > Prepartum > History > 3rd page >
+  Method dropdown> make it searchable and should have add new option---
+  Satyen Singh--->
+<!--TFS ID:- 17414,
+  Date: 15-09-2020,
+  Author: Monu Ram YAdav,
+  Des:-  Fix Stepper Steps Data in Sub Component for Prepartum Care Section-->
+<div class="contraception-history">
+  <!---Heading start row-->
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="subHeading-red fw600">
+        {{ 'Key_ContraceptionHistory' | translate }}
+      </div>
+    </div>
+  </div>
+  <!---Heading end row-->
+  <!--row start-->
+  <div class="row mt-2">
+    <div class="col-lg-3 col-md-3 col-sm-12">
+      <div class="form-group">
+        <label for="">{{ 'Key_Method' | translate }}</label>
+        <angular2-multiselect [data]="itemListA" [(ngModel)]="selectedItemsA" [settings]="settingsA"
+                              (onSelect)="onItemSelect($event)"
+                              (onDeSelect)="OnItemDeSelect($event)"
+                              (onSelectAll)="onSelectAll($event)"
+                              (onDeSelectAll)="onDeSelectAll($event)"
+                              (onAddFilterNewItem)="onAddItemA($event)">
+        </angular2-multiselect>
+      </div>
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-12">
+      <div class="form-group">
+        <label for="">{{ 'Key_Durationofuse' | translate }}</label>
+        <input class="form-control" type="number" name="">
+      </div>
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-12">
+      <div class="d-flex">
+        <div class="form-group">
+          <label for="">{{ 'Key_LeftusageSince' | translate }}</label>
+          <input class="form-control" type="date" name="">
+        </div>
+        <div class="form-group ml-2">
+          <label for=""></label>
+          <div class="clearfix"></div>
+          <button class="plusBtn mt-1"><i class="fa fa-plus" aria-hidden="true"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--row End-->
+  <div class="row">
+    <div class="col-sm-12 col-md-12">
+      <textarea class="form-control" rows="3" placeholder="{{ 'key_AddCommentHere' | translate }}"></textarea>
+    </div>
+  </div>
+  <!--Row start for other-->
+  <div class="row mt-3">
+    <input type="button" class="btn btn-secondary ml-3 btnbrd" (click)="AddMoreComplication()" value="{{ 'key_AddNewParameter' | translate }}" />
+  </div>
+  <!--Row end for other-->
+</div>

@@ -1,0 +1,3 @@
+::ng-deep .mat-checkbox-inner-container:hover .mat-checkbox-persistent-ripple {
+  opacity: 0 !important
+}

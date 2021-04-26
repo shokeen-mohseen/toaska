@@ -1,0 +1,59 @@
+<div class="innertabs">
+  <mat-tab-group animationDuration="0ms" (selectedTabChange)="tabChange($event)">
+
+    <mat-tab>
+      <ng-template mat-tab-label>
+        {{ 'key_AllInvoice' | translate }}
+      </ng-template>
+      <div class="tab-content" *ngIf="tab1Data">
+        <app-invoice-report [selectedRecord]="selectedRecord"></app-invoice-report>
+      </div>
+    </mat-tab>
+
+    <mat-tab>
+      <ng-template mat-tab-label>
+        1-9 {{ 'key_Days' | translate }}
+      </ng-template>
+      <div class="tab-content" *ngIf="tab2Data">
+        <app-invoice-report [selectedRecord]="selectedRecord"></app-invoice-report>
+      </div>
+    </mat-tab>
+
+    <mat-tab>
+      <ng-template mat-tab-label>
+        10-30 {{ 'key_Days' | translate }}
+      </ng-template>
+      <div class="tab-content" *ngIf="tab3Data">
+        <app-invoice-report [selectedRecord]="selectedRecord"></app-invoice-report>
+      </div>
+    </mat-tab>
+
+    <mat-tab>
+      <ng-template mat-tab-label>
+        31-60 {{ 'key_Days' | translate }}
+      </ng-template>
+      <div class="tab-content" *ngIf="tab4Data">
+        <app-invoice-report [selectedRecord]="selectedRecord"></app-invoice-report>
+      </div>
+    </mat-tab>
+
+    <mat-tab>
+      <ng-template mat-tab-label>
+        61-90 {{ 'key_Days' | translate }}
+      </ng-template>
+      <div class="tab-content" *ngIf="tab5Data">
+        <app-invoice-report [selectedRecord]="selectedRecord"></app-invoice-report>
+      </div>
+    </mat-tab>
+
+    <mat-tab>
+      <ng-template mat-tab-label>
+        90+ {{ 'key_Days' | translate }}
+      </ng-template>
+      <div class="tab-content" *ngIf="tab6Data">
+        <app-invoice-report [selectedRecord]="selectedRecord"></app-invoice-report>
+      </div>
+    </mat-tab>
+
+  </mat-tab-group>
+</div>

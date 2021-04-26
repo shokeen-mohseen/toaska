@@ -1,0 +1,44 @@
+<!-- Modal Header -->
+<div class="modal-header">
+  <h4 class="modal-title">Document Information</h4>
+  <button type="button" class="close" data-dismiss="modal" (click)="activeModal.dismiss('Cross click')">&times;</button>
+</div>
+
+<!-- Modal body -->
+<div class="modal-body">
+
+
+
+
+  <div class="form-group">
+    <label for="name">Name</label>
+    <input type="text" class="form-control" />
+  </div>
+
+  <div class="form-group">
+    <label for="name">Enter/Paste Document Link <sup class="text-danger sup1">*</sup></label>
+    <input type="text" name="" class="form-control" required/>
+  </div>
+  <div class="form-group">
+    <label for="name">Upload Document<sup class="text-danger sup1">*</sup></label>
+    <div class="custom-file">
+      <input id="inputGroupFile01" type="file" class="custom-file-input" required>
+      <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="name">Description </label>
+    <textarea name="description" class="form-control"></textarea>
+  </div>
+
+  <div id="startScreen">
+    <div class="row justify-content-center">
+      <div class="col-xl-3 col-lg-4 col-md-4 col-sm-12 text-center">
+        <button class="btn popup-btn-width btn-next">Ok</button>
+      </div>
+
+    </div>
+  </div>
+
+</div>

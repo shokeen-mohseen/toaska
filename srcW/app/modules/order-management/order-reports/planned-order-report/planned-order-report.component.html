@@ -1,0 +1,220 @@
+<app-top-btn-group #btnBar [actionGroupConfig]="actionGroupConfig" (action)="actionHandler($event)"></app-top-btn-group>
+
+<!--End Btn Group Section-->
+<div>
+  <h5>{{ 'key_pol' | translate }}</h5>
+</div>
+<mat-tab-group #tabGroupA class="mt-18" animationDuration="0ms">
+
+  <mat-tab>
+    <ng-template mat-tab-label>
+      {{ 'key_pol' | translate }}
+    </ng-template>
+    <div class="tab-content">
+      <div class="filter-section">
+        <mat-accordion>
+          <mat-expansion-panel (opened)="panelOpenState = true"
+                       (closed)="panelOpenState = false" [expanded]="panelOpenState">
+            <mat-expansion-panel-header>
+              <mat-panel-description>
+                {{panelOpenState ? '- Hide' : '+ Show'}}  {{ 'key_bpdf' | translate }}
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+
+
+            <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+              <div class="row">
+                <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4">
+                  <div class="form-group">
+                    <label> {{ 'key_Salesmanager' | translate }}</label>
+                    <angular2-multiselect [data]="itemList" [(ngModel)]="selectedItems" [settings]="settings"
+                                          (onSelect)="onItemSelect($event)"
+                                          (onDeSelect)="OnItemDeSelect($event)"
+                                          (onSelectAll)="onSelectAll($event)"
+                                          (onDeSelectAll)="onDeSelectAll($event)"
+                                          (onAddFilterNewItem)="onAddItem($event)">
+                    </angular2-multiselect>
+                  </div>
+                </div>
+                <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4">
+                  <div class="form-group">
+                    <label> {{ 'key_LocationType' | translate }}</label>
+                    <angular2-multiselect [data]="itemList" [(ngModel)]="selectedItems" [settings]="settings"
+                                          (onSelect)="onItemSelect($event)"
+                                          (onDeSelect)="OnItemDeSelect($event)"
+                                          (onSelectAll)="onSelectAll($event)"
+                                          (onDeSelectAll)="onDeSelectAll($event)"
+                                          (onAddFilterNewItem)="onAddItem($event)">
+                    </angular2-multiselect>
+                  </div>
+                </div>
+                <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4">
+                  <div class="form-group">
+                    <label> {{ 'key_FromDate' | translate }}</label>
+                    <input type="date" class="form-control" />
+                  </div>
+                </div>
+                <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4">
+                  <div class="form-group">
+                    <label> {{ 'key_Status' | translate }}</label>
+                    <angular2-multiselect [data]="itemList" [(ngModel)]="selectedItems" [settings]="settings"
+                                          (onSelect)="onItemSelect($event)"
+                                          (onDeSelect)="OnItemDeSelect($event)"
+                                          (onSelectAll)="onSelectAll($event)"
+                                          (onDeSelectAll)="onDeSelectAll($event)"
+                                          (onAddFilterNewItem)="onAddItem($event)">
+                    </angular2-multiselect>
+                  </div>
+                </div>
+                <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4">
+                  <div class="form-group">
+                    <label> {{ 'key_Location' | translate }}</label>
+                    <angular2-multiselect [data]="itemList" [(ngModel)]="selectedItems" [settings]="settings"
+                                          (onSelect)="onItemSelect($event)"
+                                          (onDeSelect)="OnItemDeSelect($event)"
+                                          (onSelectAll)="onSelectAll($event)"
+                                          (onDeSelectAll)="onDeSelectAll($event)"
+                                          (onAddFilterNewItem)="onAddItem($event)">
+                    </angular2-multiselect>
+                  </div>
+                </div>
+                <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4">
+                  <div class="form-group">
+                    <label> {{ 'key_toDate' | translate }}</label>
+                    <input type="date" class="form-control" />
+                  </div>
+                </div>
+                <div class="col-sm-12 col-lg-12 row justify-content-center mt-3 mb-3">
+                  <button class="btn btn-next font-weight-normal mr-2"> {{ 'key_GenerateReport' | translate }}</button>
+                  <button class="btn btn-next font-weight-normal">{{ 'key_ResetFilter' | translate }}</button>
+                </div>
+              </div>
+
+            </div>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </div>
+      <!--End Filter Section-->
+      <div class="row">
+        <div class="col-lg-12">
+          <mat-form-field appearance="outline" fxFlex="100">
+            <mat-label>{{ 'key_Filter' | translate }}</mat-label>
+            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+          </mat-form-field>
+          <div class="mb-2">
+            <button class="btn btn-save font-weight-normal mr-2"> {{ 'key_ ExporttoExcel' | translate }}</button>
+            <a routerLinkActive="active" class="btn btn-save font-weight-normal" [routerLink]="['/order-management/order-reports/planned-orderreport-pdf']">
+              {{ 'key_ ExporttoPdf' | translate }}
+            </a>
+            <a routerLinkActive="active" class="btn btn-save font-weight-normal ml-2" [routerLink]="['/order-management/order-reports/shipped-order-report']">
+              Ship Order Report
+            </a>
+          </div>
+          <div class="scroll">
+            <mat-table #table [dataSource]="dataSource" matSort>
+
+              <ng-container matColumnDef="orderType">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'key_Ordertype' | translate }}</mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.orderType}} </mat-cell>
+
+              </ng-container>
+              <ng-container matColumnDef="Location">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'key_Llocation' | translate }}</mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.Location}} </mat-cell>
+
+              </ng-container>
+              <ng-container matColumnDef="orderNo">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'key_OrderNo' | translate }}</mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.orderNo}} </mat-cell>
+
+              </ng-container>
+              <ng-container matColumnDef="orderDate">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'key_OrderDate' | translate }}</mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.orderDate}} </mat-cell>
+
+              </ng-container>
+              <ng-container matColumnDef="ship">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'key_sdrq' | translate }}</mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.ship}} </mat-cell>
+
+              </ng-container>
+              <ng-container matColumnDef="reqDeliveryDate">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'key_ddate' | translate }}</mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.reqDeliveryDate}} </mat-cell>
+
+              </ng-container>
+              <ng-container matColumnDef="mustArriveDate">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'key_mabd' | translate }}</mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.mustArriveDate}} </mat-cell>
+
+              </ng-container>
+              <ng-container matColumnDef="modal">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'key_Model' | translate }}</mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.modal}} </mat-cell>
+
+              </ng-container>
+              <ng-container matColumnDef="orderQuantity">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'key_OrderQuantity' | translate }}</mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.orderQuantity}} </mat-cell>
+
+              </ng-container>
+              <ng-container matColumnDef="ptsq">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'key_ptsq' | translate }}</mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.ptsq}} </mat-cell>
+
+              </ng-container>
+              <ng-container matColumnDef="shippedquality">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'key_Shipqunt' | translate }}</mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.shippedquality}} </mat-cell>
+
+              </ng-container>
+              <ng-container matColumnDef="po">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'key_po' | translate }}</mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.po}} </mat-cell>
+
+              </ng-container>
+              <ng-container matColumnDef="enteredBy">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'key_EnteredBy' | translate }}</mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.enteredBy}} </mat-cell>
+
+              </ng-container>
+              <ng-container matColumnDef="status">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'key_Status' | translate }}</mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.status}} </mat-cell>
+
+              </ng-container>
+              <ng-container matColumnDef="carrier">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'key_Carrier' | translate }}</mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.carrier}} </mat-cell>
+
+              </ng-container>
+              <ng-container matColumnDef="bl">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'key_bl' | translate }}</mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.bl}} </mat-cell>
+
+              </ng-container>
+
+
+
+              <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+
+              <mat-row *matRowDef="let row; columns: displayedColumns;"
+                       [ngClass]="{hovered: row.hovered, highlighted: row.highlighted}"
+                       (click)="selection.toggle(row) || row.highlighted = !row.highlighted"
+                       (mouseover)="row.hovered = true" (mouseout)="row.hovered = false">
+              </mat-row>
+
+
+            </mat-table>
+          </div>
+          <mat-paginator #paginator
+                         [pageSize]="10"
+                         [pageSizeOptions]="[5, 10, 20]">
+          </mat-paginator>
+
+
+        </div>
+      </div>
+    </div>
+  </mat-tab>
+</mat-tab-group>

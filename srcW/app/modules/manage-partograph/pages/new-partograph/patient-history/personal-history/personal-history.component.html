@@ -1,0 +1,161 @@
+<!--TFS ID:- 17414,
+  Date: 15-09-2020,
+  Author: Monu Ram YAdav,
+  Des:-  Fix Stepper Steps Data in Sub Component for Prepartum Care Section-->
+<div class="personal-history">
+  <!---Heading start row-->
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="subHeading-red fw600">
+        {{ 'Key_PersonalHistory' | translate }}
+      </div>
+    </div>
+  </div>
+  <!---Heading end row-->
+  <div class="center-form">
+    <!--Row Start-->
+    <div class="row">
+      <div class="col-sm-12 col-md-12 col-lg-10">
+        <div class="form-inline row form-group">
+          <div class="col-sm-12 col-md-5 pr-0">
+            <label for="addesstype">{{ 'Key_Diet' | translate }}</label>
+          </div>
+          <div class="col-sm-12 col-md-4">
+            <input type="text" class="form-control w-100">
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--Row End-->
+    <!--Row Start-->
+    <div class="row">
+      <div class="col-sm-12 col-md-12 col-lg-10">
+        <div class="form-inline row form-group">
+          <div class="col-sm-12 col-md-5 pr-0">
+            <label for="addesstype">{{ 'Key_Appetite' | translate }}</label>
+          </div>
+          <div class="col-sm-12 col-md-4">
+            <input type="text" class="form-control w-100">
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--Row End-->
+    <!--Row Start-->
+    <div class="row">
+      <div class="col-sm-12 col-md-12 col-lg-10">
+        <div class="form-inline row form-group">
+          <div class="col-sm-12 col-md-5 pr-0">
+            <label for="addesstype">{{ 'Key_Sleep' | translate }}</label>
+          </div>
+          <div class="col-sm-12 col-md-4">
+            <input type="text" class="form-control w-100">
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--Row End-->
+    <!--Row Start-->
+    <div class="row">
+      <div class="col-sm-12 col-md-12 col-lg-10">
+        <div class="form-inline row form-group">
+          <div class="col-sm-12 col-md-5 pr-0">
+            <label for="addesstype">{{ 'Key_Bowel' | translate }}</label>
+          </div>
+          <div class="col-sm-12 col-md-4">
+            <input type="text" class="form-control w-100">
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--Row End-->
+    <!--Row Start-->
+    <div class="row">
+      <div class="col-sm-12 col-md-12 col-lg-10">
+        <div class="form-inline row form-group">
+          <div class="col-sm-12 col-md-5 pr-0">
+            <label for="addesstype">{{ 'Key_Bladder' | translate }}</label>
+          </div>
+          <div class="col-sm-12 col-md-4">
+            <input type="text" class="form-control w-100">
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--Row End-->
+    <!--Row Start-->
+    <div class="row">
+      <div class="col-sm-12 col-md-12 col-lg-10">
+        <div class="form-inline row form-group">
+          <div class="col-sm-12 col-md-5 pr-0">
+            <label for="addesstype">{{ 'Key_Addiction' | translate }}</label>
+          </div>
+          <div class="col-sm-12 col-md-4">
+            <input type="text" class="form-control w-100">
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--Row End-->
+    <!--Row Start-->
+    <div class="row">
+      <div class="col-sm-12 col-md-12 col-lg-10">
+        <div class="form-inline row form-group">
+          <div class="col-sm-12 col-md-5 pr-0">
+            <label for="addesstype">{{ 'Key_Others' | translate }}</label>
+          </div>
+          <div class="col-sm-12 col-md-4">
+            <input type="text" class="form-control w-100">
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--Row End-->
+  </div>
+  <!--Center form  div end-->
+
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="form-group">
+        <textarea class="form-control" rows="2" placeholder="{{ 'key_AddCommentHere' | translate }}"></textarea>
+      </div>
+    </div>
+  </div>
+  <!--Row End-->
+  <!--<div class="fs-16 fw600 mt-3"><u>{{ 'Key_Addiction' | translate }}</u></div>-->
+  <div class="fw600 mt-2">{{ 'Key_HoexposuretoMedication' | translate }}</div>
+  <!--Row Start-->
+  <div class="row mt-2">
+    <div class="col-sm-12">
+      <div class="form-check-inline mr-4 mb-2">
+        <label class="form-check-label">
+          <input type="checkbox" class="form-check-input" value="">{{ 'Key_Medication' | translate }}
+        </label>
+      </div>
+      <div class="form-check-inline mr-4 mb-2">
+        <label class="form-check-label">
+          <input type="checkbox" class="form-check-input" value="">{{ 'Key_Infection' | translate }}
+        </label>
+      </div>
+      <div class="form-check-inline mr-4 mb-2">
+        <label class="form-check-label">
+          <input type="checkbox" class="form-check-input" value="">{{ 'Key_Rediation' | translate }}
+        </label>
+      </div>
+    </div>
+  </div>
+  <!--Row End-->
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="form-group">
+        <textarea class="form-control" rows="2" placeholder="{{ 'key_AddCommentHere' | translate }}"></textarea>
+      </div>
+    </div>
+  </div>
+  <!--Row start for other-->
+  <div class="row">
+    <input type="button" class="btn btn-secondary ml-3 btnbrd" (click)="AddMoreComplication()" value="{{ 'key_AddNewParameter' | translate }}" />
+  </div>
+  <!--Row end for other-->
+
+</div>

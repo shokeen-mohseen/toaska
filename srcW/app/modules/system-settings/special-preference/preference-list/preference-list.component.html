@@ -1,0 +1,71 @@
+<div class="row">
+  <div class="col-lg-12">
+    <app-table-filter (filterOn)="applyFilter($event)"></app-table-filter>
+    <div class="scroll">
+      <mat-table [dataSource]="dataSource">
+
+        <ng-container *ngFor="let column of columns; let i = index" matColumnDef="{{ column.field }}">
+
+          <mat-header-cell *matHeaderCellDef>
+
+            <div class="form-check-inline" *ngIf="column.field === selectRow">
+              <label class="form-check-label">
+                <input type="checkbox" class="form-check-input" value="" placement="top" ngbTooltip="Select all" (change)="$event ? masterToggle() : null"
+                       [checked]="selection.hasValue() && isAllSelected()"
+                       [indeterminate]="selection.hasValue() && !isAllSelected()">
+              </label>
+            </div>
+
+            <div *ngIf="column.field != selectRow"> {{ displayedColumnsReplace[i] | translate }} </div>
+
+
+          </mat-header-cell>
+
+          <mat-cell *matCellDef="let row">
+
+            <div class="form-check-inline" *ngIf="column.field === selectRow">
+              <label class="form-check-label">
+                <input type="checkbox" class="form-check-input" value="" (click)="$event.stopPropagation()"
+                       (change)="$event ? selection.toggle(item) : null"
+                       [checked]="selection.isSelected(item)">
+              </label>
+            </div>
+
+            <div *ngIf="column.field === Help">
+              <button class="badge badge-success badge-pill" (click)="openaddPallet()">
+                <i class="fa fa-comment-o" aria-hidden="true" placement="top" ngbTooltip="{{ 'key_AddComment' | translate }}"></i>
+                <!--<i class="fa fa-commenting-o" aria-hidden="true" placement="top" ngbTooltip="{{ 'key_AddComment' | translate }}"></i>-->
+              </button>
+               
+            </div>
+
+
+
+            {{ row[column.field] }}
+
+          </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{ 'selected': selection.isSelected(row)}"
+                 (click)="selection.toggle(row)"></mat-row>
+
+        <!-- Group header -->
+        <ng-container matColumnDef="groupHeader">
+          <mat-cell colspan="999" *matCellDef="let group">
+            <mat-icon *ngIf="group.expanded">expand_less</mat-icon>
+            <mat-icon *ngIf="!group.expanded">expand_more</mat-icon>
+            <strong>{{group[groupByColumns[group.level-1]]}} ({{group.totalCounts}})</strong>
+          </mat-cell>
+        </ng-container>
+
+        <mat-row *matRowDef="let row; columns: ['groupHeader']; when: isGroup;" (click)="groupHeaderClick(row)"> </mat-row>
+
+      </mat-table>
+    </div>
+    <mat-paginator #paginator
+                   [pageSize]="10"
+                   [pageSizeOptions]="[5, 10, 20]">
+    </mat-paginator>
+  </div>
+</div>

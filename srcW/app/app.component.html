@@ -1,0 +1,90 @@
+<!-- <router-outlet>https://stackoverflow.com/questions/64625050/error-node-sass-version-5-0-0-is-incompatible-with-4-0-0</router-outlet> -->
+<ion-app >
+    <ion-split-pane contentId="main-content">
+  
+      <ion-menu contentId="main-content" menuId="menuId" >
+        <ion-content>
+         
+          <ion-list lines="none">
+            <div class="sidebar-header-inside">
+                <div class="side-title">Navigation</div>
+                <div class="home-blocks">
+                  <span class="col-6 pull-left  pl-0"><a routerLink="/dashboard/home"><img src="assets/images/toscaHome.png" alt="" />
+                    <strong class="ml-2 mt-2 position-absolute">{{'key_Home' | translate}}</strong>
+                    </a></span>
+                  <span class="col-6 pull-right pr-0"><a routerLink="#" (click)="logout()"><img src="assets/images/logout_btn.png" alt="" />
+                    <strong class="ml-2 mt-2 position-absolute">{{'key_Logout' | translate}}</strong></a></span>
+                </div>
+              </div>
+           
+                <!-- <ion-list-header>
+                    Navigation
+                </ion-list-header> -->
+              <div  *ngFor="let item of tnavItem;let i=index;">
+          
+                    <ion-list-header (click)="hideSubMenu[i] = !hideSubMenu[i]"  [ngClass]="{'active-menu-Bg': hideSubMenu[i]?true:false}">
+                        <div style="width: 100%;">
+                            <ion-label>
+                                <i *ngIf="item.icon!=''" [ngClass]="item.icon"
+                                        class="nav-icon "></i> 
+                                {{item.name}}
+                                <ion-icon [name]="hideSubMenu[i]?'caret-down-outline':'caret-back-outline'" style="float: right;"></ion-icon>
+                            </ion-label>
+                           
+                        </div>
+                        
+                    </ion-list-header>
+                    <div *ngFor="let p of item.children;let i2=index" [hidden]="!hideSubMenu[i]">
+                        <div *ngIf="p.url=='/pagenotfound'">
+                            <ion-list-header (click)="innerHideSubMenu[i2] = !innerHideSubMenu[i2]" 
+                            [ngClass]="{'active-menu-Bg': innerHideSubMenu[i2]?true:false}">
+                                <div style="width: 100%;">
+                                    <ion-label>
+                                        <i *ngIf="p.icon!=''" [ngClass]="p.icon"
+                                        class="nav-icon "></i>
+                                        {{p.name}}
+                                        <ion-icon [name]="innerHideSubMenu[i2]?'caret-down-outline':'caret-back-outline'" style="float: right;"></ion-icon>
+                                    </ion-label>
+                                   
+                                </div>
+                                
+                            </ion-list-header>
+                            <div *ngFor="let innerItem of p.children;let i3=index" [hidden]="!innerHideSubMenu[i2]">
+                                <ion-menu-toggle  autoHide="false" >
+                                    <ion-item [routerLink]="innerItem.url" routerLinkActive="active" routerDirection="root" detail="false" lines="full">
+                                        <i *ngIf="innerItem.icon!=''" [ngClass]="innerItem.icon"
+                                        class="nav-icon "></i>  {{innerItem.name}}
+                                    </ion-item>
+                                </ion-menu-toggle>
+                            </div>
+                            
+                            
+                        </div>
+                        <div *ngIf="p.url!='/pagenotfound'">
+                            <ion-menu-toggle  autoHide="false" >
+                                <ion-item [routerLink]="p.url" routerLinkActive="active" routerDirection="root" detail="false" lines="full">
+                                    <i *ngIf="p.icon!=''" [ngClass]="p.icon"
+                                    class="nav-icon "></i>    {{p.name}}
+                                </ion-item>
+                            </ion-menu-toggle>
+                            
+                        </div>
+                       
+                    </div>
+                    
+                   
+                </div>
+
+  
+          </ion-list>
+        </ion-content>
+      </ion-menu>
+  
+      <ion-router-outlet id="main-content"></ion-router-outlet>
+      <!-- <app-spinner></app-spinner> -->
+    </ion-split-pane>
+  
+  </ion-app>
+  
+<!--<app-spinner></app-spinner>-->
+

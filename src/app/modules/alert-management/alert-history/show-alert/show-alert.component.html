@@ -1,0 +1,113 @@
+<div>
+  <!--<div class="row">
+    <div class="col-md-6"></div>
+    <div class="col-md-6 text-right">
+      <span class="fw600">Last Updated:	</span> 8/13/2020 8:35:24 IST
+      <br><span class="fw600">By</span> Jay Coleman (lampsdemo@osoftec.com)
+    </div>
+  </div>-->
+  <!--Last Updated Section End//////////////-->
+  <form>
+    <div class="row">
+      <!--<div class="col-md-3 custom-flex-w-15">
+        <div class="card">
+          <div class="card-header">{{ 'key_AddedList' | translate }}</div>
+          <div class="card-body p-0">
+            <ul class="list-group">
+              <li class="list-group-item list-group-item-action active">
+                Added Name
+                <button class="close" type="button">
+                  <i class="fa fa-times" aria-hidden="true"></i>
+                </button>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>-->
+      <div class="col-md-12">
+        <div class="tab-content">
+          <!--=============== Start profile =================-->
+         
+            <div class="e-profile">
+              <div class="row mb-3">
+                <div class="col-md-6">
+                  <div class="box-children">
+                    <div class="form-group">
+                      <span class="fw600 mr-3 " for="lastname"> {{ 'key_Name' | translate }} </span>
+                      <span for="lastname" id="name">
+                        {{selectedUserAlertHistoryToView.name}} </span>
+                    </div>
+                    <div class="form-group">
+                      <span class="fw600 mr-3 " for="lastname"> {{ 'key_email' | translate
+                        }}
+                      </span>
+                      <span for="lastname" id="email" style="word-break: break-all;"> {{selectedUserAlertHistoryToView.sentToEmailAddress}} </span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="box-children">
+                    <div class="form-group">
+                      <span class="fw600 mr-3 " for="lastname"> {{ 'key_Sentdate' | translate }} </span>
+                      <span for="lastname" id="sentDate"> {{selectedUserAlertHistoryToView.dateDispatched | momentDateWithZonePipe}} </span>
+                    </div>
+                    <div class="form-group">
+                      <span class="fw600 mr-3 " for="lastname"> {{ 'key_Mobnumber' | translate }} </span>
+                      <span for="lastname" id="phoneNumber"> </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row mb-3">
+                <div class="col-md-12">
+                  <div class="box-children">
+                    <div class="form-group">
+                      <span class="fw600 mr-3 " for="lastname"> {{ 'key_Subject' | translate }} </span>
+                      <span for="lastname"> {{selectedUserAlertHistoryToView.dispatchedNotificationSubject}}</span>
+                    </div>
+                    <div class="form-group">
+                      <label class="fw600 mr-3 " for="lastname"> {{ 'key_Body' | translate }} </label>
+                    </div>
+                    <div class="card p-2 bg-grey">
+                      <div [innerHTML]="selectedUserAlertHistoryToView.dispatchNotificationBody"></div>
+                      
+                    <!--<div class="form-group">
+  <p>Dear Admin,</p>
+  <p>
+    <b>Satyen Osoftec,</b>  username <b>Satyen</b> has registered for a LAMPS Account.<br />
+    Please approve the registration.
+  </p>
+  <p> Thanks,</p>
+  <p>
+    LAMPS Administrator
+  </p>
+</div>-->
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+         
+          <!--=============== End e-profile =================-->
+        </div>
+      </div>   
+    </div>
+
+    <!--<div class="row justify-content-center my-5">     
+      <div class="col-xl-2 col-lg-4 col-md-4 col-sm-12">
+        <button class="btn btn-block btn-save" type="submit">{{ 'key_Save' | translate }}</button>
+      </div>
+      <div class="col-xl-2 col-lg-4 col-md-4 col-sm-12">
+        <button class="btn btn-block btn-next">
+          <span class="fw600">{{ 'key_Add' | translate }}</span> <span class="fs-13"> > {{ 'key_Next' | translate }}</span>
+        </button>
+      </div>
+    </div>-->
+  </form>
+</div>
+
+
+
+
+

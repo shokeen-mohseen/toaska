@@ -1,0 +1,7 @@
+::ng-deep .mat-expansion-panel-body {
+  background-color: #f9f9f9;
+}
+
+::ng-deep .mat-tab-group .mat-tab-body-wrapper .mat-tab-body.mat-tab-body-active {
+  width: 100%;
+}

@@ -1,0 +1,54 @@
+/*::ng-deep .mat-expansion-panel-body {
+  background-color: #fff;
+  border:none;
+}*/
+::ng-deep .mat-expansion-panel-spacing {
+    margin:0; border-radius:0;
+}
+::ng-deep .mat-form-field-wrapper {
+  padding-bottom: 0 !important
+}
+/*----*/
+::ng-deep .mat-form-field-appearance-fill .mat-form-field-flex {
+  border-radius: 0 !important;
+  padding: 0 !important;
+  background: none !important
+}
+
+::ng-deep .mat-form-field-suffix {
+  background: #ddd;
+  padding-top: 1px;
+  top: 4px;
+}
+/*::ng-deep input.mat-input-element {
+  background: #fff !important;
+}*/
+/*::ng-deep .mat-calendar-table {
+  border-top: 0px !important;
+  border-left: 0px !important;
+}*/
+
+/*.mat-form-field-infix.ng-tns-c131-2 {
+  padding-top: 0px !important;
+  top: -10px !important;
+}*/
+.tosca .order-deails h4 {
+  font-size: 14px;
+  font-weight: 600
+}
+.lm {
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 12px;
+}
+.order-deails .scroll {
+  background-color: #f9f9f9;
+  padding: 12px;
+}
+.accordion > .card > .card-header a {
+  font-size: 15px;
+  font-weight: 400;
+}
+
+.highlightrequiredControl {
+  background-color: #ffe5ad !important;
+}

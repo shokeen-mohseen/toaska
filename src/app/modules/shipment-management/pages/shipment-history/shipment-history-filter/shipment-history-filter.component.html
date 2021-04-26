@@ -1,0 +1,508 @@
+<!--Filters-->
+<mat-accordion>
+  <mat-expansion-panel (opened)="panelOpenState = true"
+                       (closed)="panelOpenState = false" [expanded]="false">
+    <mat-expansion-panel-header>
+      <mat-panel-description>
+        {{panelOpenState ? '- Hide' : '+ Show'}} {{'key_ShipmentFilter'| translate}}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <div class="row custom-form">
+      <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 d-flex w-100">
+        <div class="card">
+          <div class="card-header mb-2">
+            <div class="card-title">{{ 'key_ShipmentFilter' | translate }} </div>
+          </div>
+          <div class="card-body p-0">
+            <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+              <div class="form-group">
+                <label for="nf-password">{{ 'key_ShipmentNo' | translate }}</label>
+                <input class="form-control" id="nf-number" type="text" name="nf-number" autocomplete="current-password">
+              </div>
+            </div>
+            <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+              <div class="form-group">
+                <label for="ccmonth">{{ 'key_ShipmentType' | translate }}</label>
+                <angular2-multiselect fixFilterBug [data]="shipmentTypeList"
+                                      [(ngModel)]="shipmentworkbenchFilterModel.shipmentTypeSelected"
+                                      [settings]="shipmentTypeSetting">
+                </angular2-multiselect>
+              </div>
+            </div>
+            <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+              <div class="form-group">
+                <label for="ccmonth">{{ 'key_ShipmentStatus' | translate }}</label>
+                <angular2-multiselect fixFilterBug [data]="shipmentStatusList"
+                                      [(ngModel)]="shipmentworkbenchFilterModel.shipmentStatusSelected"
+                                      [settings]="shipmentStatusSetting">
+                </angular2-multiselect>
+              </div>
+            </div>
+            <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+              <div class="form-group">
+                <label for="ccmonth">{{ 'key_ShipmentCondition' | translate }}</label>
+                <angular2-multiselect fixFilterBug [data]="shipmentConditionList"
+                                      [(ngModel)]="shipmentworkbenchFilterModel.shipmentConditionSelected"
+                                      [settings]="shipmentConditionSetting">
+                </angular2-multiselect>
+              </div>
+            </div>
+            <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+              <div class="form-group">
+                <label for="ccmonth">{{ 'key_TenderStatus' | translate }}</label>
+                <angular2-multiselect fixFilterBug [data]="tenderStatusList"
+                                      [(ngModel)]="shipmentworkbenchFilterModel.tenderStatusSelected"
+                                      [settings]="tenderStatusSetting">
+                </angular2-multiselect>
+              </div>
+            </div>
+            <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+              <div class="form-group">
+                <label for="ccmonth">{{ 'key_Carrier' | translate }}</label>
+                <angular2-multiselect fixFilterBug [data]="carrierList"
+                                      [(ngModel)]="shipmentworkbenchFilterModel.carrierSelected"
+                                      [settings]="carrierSetting">
+                </angular2-multiselect>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 d-flex w-100">
+        <div class="card">
+          <div class="card-header mb-2">
+            <div class="card-title">{{ 'key_ShipmentLocationFilter' | translate }}</div>
+          </div>
+          <div class="card-body p-0">
+            <div class="row" style="padding: 2px 14px;">
+              <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+
+                <div class="form-group row">
+                  <div class="col-md-6 pr-1">
+                    <label for="ccmonth">{{ 'key_Shiptype' | translate }}</label>
+                    <angular2-multiselect fixFilterBug [data]="LocationTypeFromList" [(ngModel)]="shipmentworkbenchFilterModel.locationTypeFromSelected"
+                                          [settings]="{singleSelection: false,text: 'Select', enableSearchFilter: true, addNewItemOnFilter: false, badgeShowLimit: 1, disabled: false, labelKey: 'name', searchBy: ['name'] }"
+                                          name="ShipFromType" #items="ngModel"
+                                          (onSelect)="OnShipFromTypeSelect($event)"
+                                          (onDeSelect)="OnShipFromTypeDeSelect($event)"
+                                          (onSelectAll)="OnShipFromTypeSelectAll($event)"
+                                          (onDeSelectAll)="OnShipFromTypeDeSelectAll($event)">
+                    </angular2-multiselect>
+                  </div>
+                  <div class="col-md-6 pl-1">
+                    <label for="nf-password">{{ 'key_Shiploc' | translate }}</label>
+                    <angular2-multiselect fixFilterBug [data]="LocationFromList" [(ngModel)]="shipmentworkbenchFilterModel.locationFromSelected" [settings]="LocationListSetting">
+
+                    </angular2-multiselect>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <div class="col-md-6 pr-1">
+                    <label for="ccmonth">{{ 'key_Shiptypeloc' | translate }}</label>
+                    <angular2-multiselect fixFilterBug [data]="LocationTypeToList" [(ngModel)]="shipmentworkbenchFilterModel.locationTypeToSelected"
+                                          [settings]="{singleSelection: false,text: 'Select', enableSearchFilter: true, addNewItemOnFilter: false, badgeShowLimit: 1, disabled: false, labelKey: 'name', searchBy: ['name'] }"
+                                          name="ShipToType" #items="ngModel"
+                                          (onSelect)="OnShipToTypeSelect($event)"
+                                          (onDeSelect)="OnShipToTypeDeSelect($event)"
+                                          (onSelectAll)="OnShipToTypeSelectAll($event)"
+                                          (onDeSelectAll)="OnShipToTypeDeSelectAll($event)">
+                    </angular2-multiselect>
+                  </div>
+                 
+                  <div class="col-md-6 pl-1">
+                    <label for="ccmonth">{{ 'key_Shipto' | translate }}</label>
+                    <angular2-multiselect fixFilterBug [data]="LocationToList" [(ngModel)]="shipmentworkbenchFilterModel.locationToSelected" [settings]="LocationListSetting">
+
+                    </angular2-multiselect>
+                  </div>
+                </div>
+
+
+              </div>
+
+            </div>
+            <hr />
+            <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+              <div class="form-group">
+                <label for="ccmonth">{{ 'key_OrderNo' | translate }}</label>
+               <input class="form-control" id="orderNumber" type="text" [(ngModel)]="shipmentworkbenchFilterModel.orderNumber" name="nf-ship" placeholder="Type order no.">
+             </div>
+            </div>
+            <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+              <div class="form-group">
+                <label for="ccmonth">{{ 'key_PONo' | translate }}</label>
+                <input class="form-control" id="poNumber" type="text" name="nf-ship" [(ngModel)]="shipmentworkbenchFilterModel.poNumber" placeholder="Type PO no.">
+              </div>
+            </div>
+
+            <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+              <div class="form-group">
+                <label for="ccmonth" class="mr-3">{{'key_ShipWith' | translate}}</label>
+                <div class="form-check form-check-inline mt-1">
+                  <input type="radio" class="form-check-input" id="all"  [(ngModel)]="shipmentworkbenchFilterModel.shipWith" [value]="" name="radion11">
+                  <label class="form-check-label mb-0" for="all">All</label>
+                </div>
+                <div class="form-check form-check-inline mt-1">
+                  <input type="radio" class="form-check-input"   [(ngModel)]="shipmentworkbenchFilterModel.shipWith" [value]="true" id="yes" name="radion11">
+                  <label class="form-check-label mb-0" for="yes">Yes</label>
+                </div>
+                <div class="form-check form-check-inline mt-1">
+                  <input type="radio" class="form-check-input" [(ngModel)]="shipmentworkbenchFilterModel.shipWith" [value]="false" id="no" name="radion11">
+                  <label class="form-check-label mb-0" for="no">No</label>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 d-flex w-100">
+        <div class="card">
+          <div class="card-header mb-2">
+            <a class="card-title">{{ 'key_ShipmentDataFilter' | translate }}</a>
+          </div>
+          <div class="card-body p-0">
+
+            <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+              <div class="form-group">
+                <label for="ccmonth">{{ 'key_shipDate' | translate }}</label>
+                <ejs-daterangepicker [format]='dateFormat' separator='to' [(ngModel)]="shipmentworkbenchFilterModel.shipDate" placeholder='MM-DD-YYYY to MM-DD-YYYY' id="shipDate"></ejs-daterangepicker>
+              </div>
+            </div>
+
+            <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+              <div class="form-group">
+                <label for="ccmonth">{{ 'key_ReqDeliveryDate' | translate }}</label>
+                <ejs-daterangepicker [format]='dateFormat' separator='to' [(ngModel)]="shipmentworkbenchFilterModel.reqDeliveryDate" placeholder='MM-DD-YYYY to MM-DD-YYYY' id="ReqDeliveryDate"></ejs-daterangepicker>
+              </div>
+            </div>
+
+            <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+              <div class="form-group">
+                <label for="ccmonth">{{ 'key_MustArriveByDate' | translate }}</label>
+                <ejs-daterangepicker [format]='dateFormat' separator='to' [(ngModel)]="shipmentworkbenchFilterModel.mustArriveByDate"  placeholder='MM-DD-YYYY to MM-DD-YYYY' id="MustArriveByDate"></ejs-daterangepicker>
+              </div>
+            </div>
+            <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+              <div class="form-group">
+                <label for="ccmonth">{{ 'key_PickupAppointment' | translate }}</label>
+                <ejs-daterangepicker [format]='dateFormat' separator='to' [(ngModel)]="shipmentworkbenchFilterModel.pickupAppointment" placeholder='MM-DD-YYYY to MM-DD-YYYY' id="PickupAppointment"></ejs-daterangepicker>
+              </div>
+            </div>
+            <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+              <div class="form-group">
+                <label for="ccmonth">{{ 'key_DeliveryAppointment' | translate }}</label>
+                <ejs-daterangepicker [format]='dateFormat' separator="From" [(ngModel)]="shipmentworkbenchFilterModel.deliveryAppointment" placeholder='MM-DD-YYYY to MM-DD-YYYY' id="DeliveryAppointment"></ejs-daterangepicker>
+              </div>
+            </div>
+
+
+            <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+              <div class="form-group">
+                <label for="ccmonth">{{ 'key_ActDeliveryDate' | translate }}</label>
+                <ejs-daterangepicker [format]='dateFormat' separator='to' [(ngModel)]="shipmentworkbenchFilterModel.actDeliveryDate"  placeholder='MM-DD-YYYY to MM-DD-YYYY' id=""></ejs-daterangepicker>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="row">
+      <div class="col-sm-12 col-lg-12 row justify-content-center mt-4 mb-3">
+        <div class=""><button type="button" (click)="ApplyGlobalFilter()" class="btn btn-save mr-2 font-weight-normal">{{'key_ApplyFilter' | translate}}</button></div>
+        <div class=""> <button type="button" (click)="ResetGlobalFilter()" class="btn btn-next mr-2 font-weight-normal">{{'key_ResetFilter' | translate}}</button></div>
+      </div>
+      <!-- <div class="col-sm-3 col-lg-3 text-center mt-4 mb-3 pr-3">
+     <button type="button" class="btn btn-save font-weight-normal pt-1 pb-1 " data-toggle="modal" (click)="OpenManageCustomFilter()">Manage Custom Filters</button>
+   </div>-->
+    </div>
+    <!-- <div class="row custom-form">
+      <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 d-flex w-100">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">{{ 'key_ShipmentFilter' | translate }} </div>
+          </div>
+          <div class="card-body">
+            <div class="row">
+
+              <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                <div class="form-group">
+                  <label for="nf-password">{{ 'key_ShipmentNo' | translate }}</label>
+                  <input class="form-control" id="nf-number" type="text" name="nf-number" autocomplete="current-password">
+                </div>
+              </div>
+              <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                <div class="form-group">
+                  <label for="ccmonth">{{ 'key_ShipmentType' | translate }}</label>
+                 <angular2-multiselect fixFilterBug [data]="shipmentTypeList"
+                                        [(ngModel)]="shipmentworkbenchFilterModel.shipmentTypeSelected"
+                                        [settings]="shipmentTypeSetting">
+                  </angular2-multiselect>
+                </div>
+              </div>
+              <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                <div class="form-group">
+                  <label for="ccmonth">{{ 'key_TenderStatus' | translate }}</label>
+                  <angular2-multiselect fixFilterBug [data]="tenderStatusList"
+                                        [(ngModel)]="shipmentworkbenchFilterModel.tenderStatusSelected"
+                                        [settings]="tenderStatusSetting">
+                  </angular2-multiselect>
+                </div>
+              </div>
+              <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                <div class="form-group">
+                  <label for="ccmonth">{{ 'key_Carrier' | translate }}</label>
+                  <angular2-multiselect fixFilterBug [data]="carrierList"
+                                        [(ngModel)]="shipmentworkbenchFilterModel.carrierSelected"
+                                        [settings]="carrierSetting">
+                  </angular2-multiselect>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 d-flex w-100">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">{{ 'key_ShipmentLocationFilter' | translate }}</div>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+
+                <div class="form-group row">
+                  <div class="col-md-6 pr-1">
+                    <label>{{'key_FromLocation' | translate}}</label>
+
+                    <angular2-multiselect fixFilterBug [data]="LocationTypeFromList" [(ngModel)]="shipmentworkbenchFilterModel.locationTypeFromSelected"
+                                          [settings]="{singleSelection: false,text: 'Select', enableSearchFilter: true, addNewItemOnFilter: false, badgeShowLimit: 1, disabled: false, labelKey: 'name', searchBy: ['name'] }"
+                                          name="ShipFromType" #items="ngModel"
+                                          (onSelect)="OnShipFromTypeSelect($event)"
+                                          (onDeSelect)="OnShipFromTypeDeSelect($event)"
+                                          (onSelectAll)="OnShipFromTypeSelectAll($event)"
+                                          (onDeSelectAll)="OnShipFromTypeDeSelectAll($event)">
+                    </angular2-multiselect>
+                  </div>
+                  <div class="col-md-6 pl-1">
+                    <label>{{'key_Location' | translate}}</label>
+                   <angular2-multiselect fixFilterBug [data]="LocationFromList" [(ngModel)]="shipmentworkbenchFilterModel.locationFromSelected"
+                                          [settings]="LocationListSetting">
+
+                    </angular2-multiselect>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <div class="col-md-6 pr-1">
+                    <label>{{'key_ToLocation' | translate}}</label>
+                    <angular2-multiselect fixFilterBug [data]="LocationTypeToList" [(ngModel)]="shipmentworkbenchFilterModel.locationTypeToSelected"
+                                          [settings]="{singleSelection: false,text: 'Select', enableSearchFilter: true, addNewItemOnFilter: false, badgeShowLimit: 1, disabled: false, labelKey: 'name', searchBy: ['name'] }"
+                                          name="ShipToType" #items="ngModel"
+                                          (onSelect)="OnShipToTypeSelect($event)"
+                                          (onDeSelect)="OnShipToTypeDeSelect($event)"
+                                          (onSelectAll)="OnShipToTypeSelectAll($event)"
+                                          (onDeSelectAll)="OnShipToTypeDeSelectAll($event)">
+                    </angular2-multiselect>
+                  </div>
+                  <div class="col-md-6 pl-1">
+                    <label>{{'key_Location' | translate}}</label>
+                   <angular2-multiselect fixFilterBug [data]="LocationToList"
+                                          [(ngModel)]="shipmentworkbenchFilterModel.locationToSelected"
+                                          [settings]="LocationListSetting">
+
+                    </angular2-multiselect>
+                  </div>
+                </div>
+
+
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 d-flex w-100">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">{{ 'key_ShipmentDataFilter' | translate }}</div>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                <div class="form-group">
+                  <label for="ccmonth">{{ 'key_shipDate' | translate }}</label>
+                  <ejs-daterangepicker [format]='dateFormat' separator='to' placeholder='MM-DD-YYYY to MM-DD-YYYY' id="shipDate"></ejs-daterangepicker>
+                </div>
+              </div>
+
+              <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                <div class="form-group">
+                  <label for="ccmonth">{{ 'key_ReqDeliveryDate' | translate }}</label>
+                  <ejs-daterangepicker [format]='dateFormat' separator='to' placeholder='MM-DD-YYYY to MM-DD-YYYY' id="ReqDeliveryDate"></ejs-daterangepicker>
+                </div>
+              </div>
+
+              <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                <div class="form-group">
+                  <label for="ccmonth">{{ 'key_PickupAppointment' | translate }}</label>
+                  <ejs-daterangepicker [format]='dateFormat' separator='to' placeholder='MM-DD-YYYY to MM-DD-YYYY' id="PickupAppointment"></ejs-daterangepicker>
+                </div>
+              </div>
+
+              <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                <div class="form-group">
+                  <label for="ccmonth">{{ 'key_DeliveryAppointment' | translate }}</label>
+                  <ejs-daterangepicker [format]='dateFormat' separator='to' placeholder='MM-DD-YYYY to MM-DD-YYYY' id="DeliveryAppointment"></ejs-daterangepicker>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="col-sm-12 col-lg-12 row justify-content-center mt-3">
+        <div class="">
+          <button class="btn btn-save mr-2 font-weight-normal" type="button" (click)="ApplyGlobalFilter()">{{ 'key_ApplyFilter' | translate }}</button>
+        </div>
+        <div class="">
+          <button class="btn btn-next font-weight-normal" type="button" (click)="ResetGlobalFilter()">{{ 'key_ResetFilter' | translate }}</button>
+        </div>
+      </div>
+    </div>-->
+
+  </mat-expansion-panel>
+</mat-accordion>
+<!--end filter-->
+<!--manage-filter-->
+<!--<div class="modal" id="manageFilter">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">
+          {{'key_SaveCurrentFilterAs' | translate}}
+        </h5>
+        <button type="button" class="close" (click)="CloseManageFilter()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="row mt-3 mb-3">
+          <div class="col-md-2 pr-0 mt-2">
+            {{'key_NewFilterName' | translate}}
+          </div>
+          <div class="col-md-6">
+            <input type="text" name="filter" class="form-control" />
+          </div>
+          <div class="col-md-3 mt-1">
+            <div class="form-check checkbox">
+              <input id="check1" type="checkbox" class="form-check-input" >
+              <label for="check1" class="form-check-label">
+                {{'key_SetAsDefault' | translate}}
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="text-center mt-4 mb-3">
+          <button type="button" id="btnNext" class="btn btn-next font-weight-normal  mr-3"
+                   value="Create New Filter">
+            Create New Filter
+          </button>
+        </div>
+        <hr />
+        <h5> {{'key_ResetDefault' | translate}}</h5>
+        <div class="card-body filterpopscroll">
+
+          <div class="bg">
+            <div class="row">
+
+              <div class="d-flex flex-nowrap justify-content-between align-items-center mb-2">
+                <div class="btn-group btn-group-toggle btn-group-md" data-toggle="buttons">
+                  <button class="btn btn-outline-primary" type="button" placement="bottom" ngbTooltip="{{'key_Edit' | translate}}">
+                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                    <span>
+                      {{'key_Edit' | translate}}
+                    </span>
+                  </button>
+                  <button id="deleteButton" class="btn btn btn-outline-danger" type="button" placement="bottom" ngbTooltip="{{'key_Delete' | translate}}">
+                    <i class="fa fa-trash-o" aria-hidden="true"></i>
+                    <span>
+                      {{'key_Delete' | translate}}
+                    </span>
+                  </button>
+                  <button class="btn btn btn-outline-success" type="button" placement="bottom" ngbTooltip="{{'key_Save' | translate}}">
+                    <i class="fa fa-floppy-o" aria-hidden="true"></i>
+                    <span>
+                      {{'key_Save' | translate}}
+                    </span>
+                  </button>
+                  <button class="btn btn btn-outline-danger" type="button"  placement="bottom" ngbTooltip="{{'key_Cancel' | translate}}">
+                    <i class="fa fa-times" aria-hidden="true"></i>
+                    <span>
+                      {{'key_Cancel' | translate}}
+                    </span>
+                  </button>
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div class="row"> 
+                  <div class="scroll resize-table">
+                    <mat-table #table [dataSource]="dataSource" matSort>
+                      <ng-container matColumnDef="selectRow">
+                        <mat-header-cell class="t-center tw-5" *matHeaderCellDef>
+                        </mat-header-cell>
+                        <mat-cell *matCellDef="let row">
+                          <div class="form-check-inline">
+                            <label class="form-check-label">
+                              <input type="checkbox" class="form-check-input" value="" data-toggle="tooltip" data-placement="top"
+                                     (click)="$event.stopPropagation()"
+                                     (change)="onSelectionChangeCustomFilter(row,  $event.target.checked)"
+                                     [checked]="selection.isSelected(row)">
+                            </label>
+                          </div>
+                        </mat-cell>
+                      </ng-container>
+
+                      <ng-container matColumnDef="FilterName" style="width: 70% !important;">
+                        <mat-header-cell style="width:70% !important;" class="" *matHeaderCellDef mat-sort-header>Filter Name</mat-header-cell>
+                        <mat-cell *matCellDef="let element" style="width: 70% !important;">
+                          <div class="dd-field" *ngIf="isEditMode && element.isEdited">
+                            <input type="text" class="form-control" value="{{ element.FilterName }}" (blur)="onBlurFilterName($event.target.value)" [(ngModel)]="FilterNameEdit" />
+                          </div>
+                          <div *ngIf="!element.isEdited">
+                            {{ element.FilterName }}
+                          </div>
+                        </mat-cell>
+                      </ng-container>
+                      <ng-container matColumnDef="DefaultFilter" style="width: 20% !important;">
+                        <mat-header-cell style="width: 20% !important;" *matHeaderCellDef mat-sort-header>Default Filter</mat-header-cell>
+                        <mat-cell *matCellDef="let element" style="width: 20% !important;">
+                          <div class="dd-field" *ngIf="isEditMode && element.isEdited">
+                            <input style="margin-left: 10px;" id="check1" type="checkbox" class="form-check-input" [checked]="DefaultFilterEdit" (change)="DefaultFilterEdit = !DefaultFilterEdit">
+                          </div>
+                          <div *ngIf="!element.isEdited">
+                            {{ element.DefaultFilter }}
+                          </div>
+                        </mat-cell>
+                      </ng-container>
+
+                      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                      <mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{ 'selected': selection.isSelected(row)}"
+                               (click)="selection.toggle(row)"></mat-row>
+                    </mat-table>
+                  </div>
+                  <div class="col-lg-12 text-center"><p>No records to display.</p></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>-->

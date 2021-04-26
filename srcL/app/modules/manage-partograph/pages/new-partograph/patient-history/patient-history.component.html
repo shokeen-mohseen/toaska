@@ -1,0 +1,106 @@
+<!--->16672 Partograph - Patient History - Add language attributes.-->
+<!---16671  Partograph - Patient History - Design patient setup page.-->
+<!--Task 17057: Add popup window on every Plus Sign Button
+  Author:- Monu Ram Yadav
+  Date:- 10-08-2020-->
+<!--Task 17089: Show Notes on click open - window with notes,
+  Author:- Monu Ram Yadav
+  Date:- 10-08-2020-->
+<!--<app-progress-bar></app-progress-bar>
+<h4 class="main-heading">{{ 'key_Patienthistory' | translate }}</h4>-->
+<!--TSC-16671 Partograph - Patient History
+  Author:- Monu Ram Yadav
+  Date :- 05/08/2020 -->
+<!--TSC:17202, Author:Monu Ram Yadav, date:27/08/2020, Des:- Addiction New text box added -->
+<!--TSC:17204, Author:Monu Ram Yadav, date:27/08/2020, Des:- Past medical history option added again -->
+<!--TFS ID:- 17414,
+  Date: 15-09-2020,
+  Author: Monu Ram YAdav,
+  Des:-  Fix Stepper Steps Data in Sub Component for Prepartum Care Section-->
+<div id="stepper1" class="bs-stepper">
+  <div class="bs-stepper-header">
+    <div class="step" data-target="#test1">
+      <button class="step-trigger">
+        <span class="bs-stepper-circle">1</span>
+      </button>
+    </div>
+    <div class="line"></div>
+    <div class="step" data-target="#test2">
+      <button class="step-trigger">
+        <span class="bs-stepper-circle">2</span>
+      </button>
+    </div>
+    <div class="line"></div>
+    <div class="step" data-target="#test3">
+      <button class="step-trigger">
+        <span class="bs-stepper-circle">3</span>
+      </button>
+    </div>
+    <div class="line"></div>
+    <div class="step" data-target="#test4">
+      <button class="step-trigger">
+        <span class="bs-stepper-circle">4</span>
+      </button>
+    </div>
+    <div class="line"></div>
+    <div class="step" data-target="#test5">
+      <button class="step-trigger">
+        <span class="bs-stepper-circle">5</span>
+      </button>
+    </div>
+    <div class="line"></div>
+    <div class="step" data-target="#test6">
+      <button class="step-trigger">
+        <span class="bs-stepper-circle">6</span>
+      </button>
+    </div>
+    <div class="line"></div>
+    <div class="step" data-target="#test7">
+      <button class="step-trigger">
+        <span class="bs-stepper-circle">7</span>
+      </button>
+    </div>
+  </div>
+  <div class="bs-stepper-content">
+
+    <div id="test1" class="content">
+      <!--History of Present Illness section start-->
+      <app-history-of-present-illness></app-history-of-present-illness>
+      <!--History of Present Illness Sention End/////////////-->
+    </div>
+    <div id="test2" class="content">
+      <!--Menstrual History Section Start-->
+      <app-menstrual-history></app-menstrual-history>
+      <!--Menstrual History Section End/////////////////-->
+    </div>
+    <div id="test3" class="content">
+      <!--Contraception History Section Start-->
+      <app-contraception-history></app-contraception-history>
+      <!--Contraception History Section End///////////////-->
+    </div>
+    <div id="test4" class="content">
+      <!--Obstetric History Section Start-->
+      <app-obstetric-history></app-obstetric-history>
+      <!--Obstetric History Section End///////////////-->
+    </div>
+    <div id="test5" class="content">
+      <!--Personal History Section Start-->
+      <app-personal-history></app-personal-history>
+      <!--Personal History Section End///////-->
+    </div>
+    <div id="test6" class="content">
+      <!--Past History Section start-->
+      <app-past-history></app-past-history>
+      <!--Past History Section End/////////-->
+    </div>
+    <div id="test7" class="content">
+      <!--Family History Section Start-->
+      <app-family-history></app-family-history>
+
+    </div>
+
+  </div>
+
+
+</div>
+

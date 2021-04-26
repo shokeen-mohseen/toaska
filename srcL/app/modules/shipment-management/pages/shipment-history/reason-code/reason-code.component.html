@@ -1,0 +1,81 @@
+<!-- Modal Header -->
+<div class="modal-header">
+  <h5 class="modal-title"> {{ 'key_Lamps' | translate }}: {{ 'key_ReasonCodeHistory' | translate }} </h5>
+  <button type="button" class="close" data-dismiss="modal" (click)="activeModal.dismiss('Cross click')">&times;</button>
+</div>
+
+<!-- Modal body -->
+<div class="modal-body">
+
+  <div class="row">
+    <div class="col-lg-12">
+      <div>
+        <mat-form-field appearance="outline" fxFlex="100">
+          <mat-label>{{ 'key_Filter' | translate }}</mat-label>
+          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="{{ 'key_Filter' | translate }}">
+        </mat-form-field>
+      </div>
+      <div class="scroll">
+        <mat-table #table [dataSource]="dataSource" matSort>
+
+          <ng-container matColumnDef="Date">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'key_Date' | translate }} </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.Date}} </mat-cell>
+          </ng-container>
+
+
+          <ng-container matColumnDef="Module">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'key_Module' | translate }} </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              {{element.Module}}
+            </mat-cell>
+          </ng-container>
+
+
+          <ng-container matColumnDef="ReferenceNumber">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'key_ReferenceNumber' | translate }} </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.ReferenceNumber}} </mat-cell>
+          </ng-container>
+
+
+          <ng-container matColumnDef="AddedBy">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'key_AddedBy' | translate }} </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.AddedBy}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="FieldName">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'key_FieldName' | translate }} </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.FieldName}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="OldValue">
+            <mat-header-cell class="t-right" *matHeaderCellDef mat-sort-header> {{ 'key_OldValue' | translate }} </mat-header-cell>
+            <mat-cell class="t-right" *matCellDef="let element"> {{element.OldValue}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="NewValue">
+            <mat-header-cell class="t-right" *matHeaderCellDef mat-sort-header> {{ 'key_NewValue' | translate }} </mat-header-cell>
+            <mat-cell class="t-right" *matCellDef="let element"> {{element.NewValue}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="ReasonCode">
+            <mat-header-cell class="t-right" *matHeaderCellDef mat-sort-header> {{ 'key_ReasonCode' | translate }} </mat-header-cell>
+            <mat-cell class="t-right" *matCellDef="let element"> {{element.ReasonCode}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="Comments">
+            <mat-header-cell class="t-center" *matHeaderCellDef mat-sort-header> {{ 'key_Comments' | translate }} </mat-header-cell>
+            <mat-cell class="t-center" *matCellDef="let element"> {{element.Comments}} </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+      </div>
+      <mat-paginator #paginator
+                     [pageSize]="10"
+                     [pageSizeOptions]="[5, 10, 20]">
+      </mat-paginator>
+    </div>
+  </div>
+</div>

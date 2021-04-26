@@ -1,0 +1,318 @@
+<app-top-btn-group #btnBar [actionGroupConfig]="actionGroupConfig" (action)="actionHandler($event)"></app-top-btn-group>
+
+<div class="d-flex flex-nowrap justify-content-center align-items-center mt-3 mb-4">
+  <div>
+    <h3 class="font-weig ht-light text-center">{{ 'key_Subscription' | translate }}</h3>
+    <!--<h4 class="mb-3 mt-3 ml-3 text-center">
+      {{ 'key_Annuarates' | translate }}
+    </h4>-->
+  </div>
+</div>
+<!---start here---->
+<!---end  here---->
+
+
+<div class="custom-tab row">
+  <div class="col-lg-12">
+    <div class="stepper-child-content-wrap">
+      <!-- Tab panes -->
+      <div class="tab-content">
+        <div class="tab-pane active" id="existingUsers">
+          <div class="row">
+            <div class="col-lg-12">
+              <div>
+
+                <mat-form-field appearance="outline" fxFlex="100">
+                  <mat-label>{{ 'key_Filter' | translate }}</mat-label>
+                  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="{{ 'key_Filter' | translate }}">
+                </mat-form-field>
+              </div>
+              <form [formGroup]="form" autocomplete="off">
+                <div class="scroll">
+                  <mat-table [dataSource]="dataSource" matSort>
+                    <ng-container matColumnDef="country">
+                      <mat-header-cell class="tw-30"  *matHeaderCellDef> Country (Currency Code) </mat-header-cell>
+                      <mat-cell class="tw-30" *matCellDef="let element" [formGroup]="element">
+                        <div class="form-check-inline d-none">
+                          <label class="form-check-label">
+                            <input style="display:none;" type="checkbox" (change)="onCountryChange($event,element)" formControlName="ChooseCountry"
+                                   class="form-check-input"
+                                   placement="top" ngbTooltip="Select">
+                          </label>
+                        </div>
+                        {{element.get('countryname').value}} ({{element.get('CurrencyCode').value}})
+                      </mat-cell>
+                    </ng-container>
+                    <!-- client plan -->
+                    <ng-container matColumnDef="plan">
+                      <mat-header-cell *matHeaderCellDef class="position-relative tw-70">
+                        Per Partograph Rate (Years of storage)
+                        <div class="info-siubscription">
+                          <span placement="left" (click)="openHintMessage()" class="badge badge-danger badge-pill">
+                            <i class="fa fa-exclamation" aria-hidden="true"></i>
+                          </span>
+                        </div>
+                      </mat-header-cell>
+                      <mat-cell class="tw-70" *matCellDef="let element" [formGroup]="element">
+                        <mat-radio-group (change)="onPackageChange($event,element)" formControlName="ChoosePackage1" class="smallRadio">
+                          <mat-radio-button *ngFor="let package of element.get('Packages').value" [value]="package.Id">
+                            <b>{{package.Amount}} ({{package.PackageTypeName}})</b>
+                          </mat-radio-button>
+                        </mat-radio-group>
+                      </mat-cell>
+                    </ng-container>
+                    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                  </mat-table>
+
+                  <div class="form-group col-sm-2 p-0">
+                    <button (click)="AddSubmit()" type="submit" class="btn btn-next btn-block mt-4">
+                      Add
+                    </button>
+                  </div>
+
+                </div>
+                <mat-paginator [pageSize]="10" [pageSizeOptions]="[10, 50, 100, 200, 500]" showFirstLastButtons></mat-paginator>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!---==========start select plan==============-->
+      <form (ngSubmit)="subscribePlan()" [formGroup]="formAppendData">
+        <div class="row">
+          <div class="card-body">
+            <h4>
+              {{ 'key_SelectedPlan' | translate }}
+            </h4>
+            <div class="alert-warning" *ngIf="!formAppendData">
+              No record found!
+            </div>
+            <div class="w-100">
+              <table class="table table-striped table-bordered tblth">
+                <thead>
+                  <tr>
+                    <th>
+                      <div class="form-check-inline">
+                        <label class="form-check-label">
+                          <input type="checkbox" style="display:none" (click)="IsAllSelect($event)" class="form-check-input" data-toggle="tooltip" data-placement="top" title="Select all">
+                        </label>
+                      </div>
+                    </th>
+                    <th class="no-sort fw600 w-20">
+                      Plan
+                    </th>
+                    <th class="fw600">Storage Plan</th>
+                    <th class="fw600">Currency</th>
+                    <th class="fw600">Rate</th>
+                    <th class="fw600 w-tbl">Effective Start Date</th>
+                    <th class="fw600">Effective End Date</th>
+                    <th class="fw600">Subscription Status</th>
+                    <th class="fw600">Action</th>
+                    <th class="fw600">Auto Renew</th>
+                  </tr>
+                </thead>
+                <tbody formArrayName="formList" *ngIf="formAppendData">
+                  <ng-container *ngIf="formAppendData.controls.formList.controls.length>0">
+                    <tr *ngFor="let item of formAppendData.controls.formList.controls; let i=index"
+                        [formGroupName]="i">
+                      <td>
+                        <div class="form-check-inline">
+                          <label class="form-check-label">
+                            <input type="checkbox" [disabled]="(item.get('IsNew').value)==2" (change)="IsRowSelect($event,item)" [checked]="item.get('Iselection').value" class="form-check-input" data-placement="top" title="Select">
+                          </label>
+                        </div>
+                      </td>
+                      <td class="">{{item.get('CountryName').value}}</td>
+                      <td>{{item.get('PlanType').value}}</td>
+                      <td>{{item.get('CurrencyCode').value}}</td>
+                      <td>{{item.get('PlanType').value}}</td>
+                      <!--<td>{{item.get('FreePartograph').value}}</td>-->
+                      <td>
+                        <input [matDatepicker]="EffectiveDate" readonly formControlName="EffectiveDate" (dateChange)="ChangeDate($event,item)">
+                        <mat-datepicker-toggle *ngIf="!item.get('IsActive').value" [for]="EffectiveDate"></mat-datepicker-toggle>
+                        <mat-datepicker #EffectiveDate></mat-datepicker>
+                        <!--<input type="hidden" #dateP formControlName="EffectiveDate" [value]="item.get('EffectiveDate').value" />-->
+                        <!--formControlName="EffectiveDate" [value]="item.get('EffectiveDate').value"-->
+                        <!-- <input type="date" class="form-control" (change)="ChangeDate($event,item)" placeholder="effectiveEndDate">-->
+                        <!--<input type="hidden" #dateP formControlName="EffectiveDate" [value]="item.get('EffectiveDate').value" />-->
+                      </td>
+                      <td>{{item.get('EndDate').value | date : 'MM/dd/yyyy' }}</td>
+                      <td>{{item.get('SubscriptionStatus').value }}</td>
+                      <!--<td class="text-danger text-center">
+    delete
+  </td>-->
+                      <td class="text-danger text-center" style="cursor:pointer">
+                        <i aria-hidden="true" *ngIf="item.get('IsDelete').value" (click)="DeleteRow($event,i,item)" class="fa fa-trash-o"></i>
+                      </td>
+                      <td class="text-center">
+                        <div class="form-check-inline">
+                          <label class="form-check-label">
+                            <input type="checkbox" (change)="AutoRenewalPackage($event,item)"
+                                   [checked]="item.get('IsAutoRenewal').value" formControlName="IsAutoRenewal" class="form-check-input">
+                          </label>
+                        </div>
+                      </td>
+                    </tr>
+                  </ng-container>
+                  <tr *ngIf="formAppendData.controls.formList.controls.length==0">
+                    <td colspan="10" class="alert-warning">No record found!</td>
+                  </tr>
+
+                </tbody>
+              </table>
+            </div>
+
+          </div>
+        </div>
+        <div class="row" *ngIf="!IsCouponApplied">
+          <div class="card-body">
+            <h4>
+              {{ 'key_DiscountCoupon' | translate }}
+            </h4>
+            <div class="w-100">
+              <table class="table table-striped table-bordered tblth">
+                <thead>
+                  <tr>
+                    <!--<th class="fw600">User</th>
+                    <th class="fw600">Code</th>-->
+                    <th class="fw600">Name</th>
+                    <!--<th class="fw600">Discount </th>-->
+                    <!--<th class="fw600">Discount UOM</th>-->
+                    <th class="fw600">Effective Start Date</th>
+                    <th class="fw600">End Date</th>
+                    <th class="fw600">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let promote of promotionListUsedByClient; let i = index;">
+
+                    <!--<td class="">{{userName}}</td>
+                    <td class="">{{promote.Code}}</td>-->
+                    <td>{{promote.Description}}</td>
+                    <!--<td>{{promote.Discount}}</td>
+                    <td>PerINR</td>-->
+                    <td>{{promote.EffectiveDate | date: 'MM/dd/yyyy'}}</td>
+                    <td>{{promote.EndDate | date: 'MM/dd/yyyy'}}</td>
+                    <td class="text-danger text-center" style="cursor:pointer" (click)="DeleteRow($event,i)">
+                      <i aria-hidden="true" style="margin-left: -147px;" class="fa fa-trash-o"></i>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="row" *ngIf="IsCouponApplied">
+          <div class="card-body">
+            <div class="row">
+              <div class="form-group col-sm-9">
+                <label for="ccmonth">
+                  {{ 'key_DiscountCoupon' | translate }}
+                </label>
+                <select class="form-control" (change)="OnPromotionChange($event)">
+                  <option value="0">--select--</option>
+                  <option *ngFor="let promotion of promotionList" value={{promotion.Id}}>
+                    {{promotion.Description}}
+                  </option>
+                </select>
+              </div>
+              <div class="form-group col-sm-3">
+                <button type="button" id="btnSave" (click)="DiscountApply()" name="btnSave" class="btn btn-next btn-block mt-4">{{ 'key_Apply' | translate }}</button>
+              </div>
+            </div>
+            <div class="mt-2" *ngIf="IsCouponSelection">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                      <span class="fw600 fs-13">{{ 'key_Couponapplied' | translate }}</span>
+                    </div>
+                  </div>
+                  <div class="bg-grey mt-1 py-1 p-2">
+                    <span class="ml-0">{{userName}}</span>
+                    <span class="ml-5">{{couponDescription}}</span>
+                    <span class="ml-5">Ends on {{endPromotionate}}</span>
+                    <!--<span class="ml-5  text-danger text-right"><i class="fa fa-trash-o" aria-hidden="true"></i></span>-->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="formAppendData.value.formList.length>0">
+          <div class="form-group col-sm-2 p-0">
+            <button type="submit" class="btn btn-next btn-block mt-4" [disabled]="formAppendData.invalid">
+              <span [hidden]="isLoading">Subscribe</span>
+              <span [hidden]="!isLoading">
+                <i class="fa fa-asterisk fa-spin" aria-hidden="true"></i>
+              </span>
+            </button>
+          </div>
+          <!--<div class="form-group col-sm-3">
+            <button type="button" id="btnSave" (click)="subscribePlan()" name="btnSave" class="btn btn-next btn-block mt-4">Subcribe</button>
+          </div>-->
+        </div>
+      </form>
+      <!---==========end select plan==============-->
+    </div>
+
+
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="containermt-5 p-0">
+  <div class="row">
+    <div class="col-sm-12 col-xl-12 pr-5">
+      <div class="card-body">
+        <div class="box-children-">
+          <!--<h1>Subscription and Billing Management</h1>-->
+
+          <div class="row">
+            <div class="card-body">
+
+
+            </div>
+          </div>
+          <!--<mat-accordion>
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Form value
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <code>
+                {{form.value | json}}
+              </code>
+              <br />
+              <br />
+              <br />
+              <code> Form
+                 {{formAppendData.value | json}}
+              </code>
+            </mat-expansion-panel>
+          </mat-accordion>-->
+          <!--</form>-->
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>

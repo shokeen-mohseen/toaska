@@ -1,0 +1,202 @@
+<!--TFS ID: 17222, Author: Monu Ram Yadav, Date: 31-08-2020, Des: Design Material Screens-->
+
+<div class="row">
+  <div class="col-lg-12">
+    <div class="tab-pane">
+      <div class="row">
+        <div class="col-md-6"></div>
+        <div class="col-md-6 text-right">
+          <span class="fw600">{{ 'key_LastUpdate' | translate }}:</span> {{selectedMaterialToEdit?.updateDateTimeBrowser | date:'MM-dd-yyyy hh:mm:ss'}}
+          <br><span class="fw600">{{ 'key_By' | translate }}</span> {{selectedMaterialToEdit?.updatedBy}}
+        </div>
+      </div>
+      <!--Last Updated Section End//////////////-->
+      <form [formGroup]="materialEditForm" novalidate>
+        <div class="row mt-3">
+          <div class="col-md-12 custom-flex-w-100">
+            <div class="card">
+              <div class="card-header">{{ 'key_EditList' | translate }}</div>
+              <div class="card-body p-0">
+                <ul class="list-group" #nextList>
+                  <li class="list-group-item list-group-item-action"
+                      *ngFor="let material of materialsToEdit; let i = index"
+                      (click)="selectedMaterialEdit(material,i)"
+                      [ngClass]="{ 'active': material.id == selectedMaterialToEdit.id }">
+                    <a>{{material.name}}</a>
+                    <button class="close" type="button" *ngIf="material.id!=selectedMaterialToEdit.id"
+                            (click)="removeMaterialFromEditList(material)">
+                      <i class="fa fa-times" aria-hidden="true"></i>
+                    </button>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <!--Left panel tab menu End//////-->
+          <div class="col-md-12 custom-flex-w-100">
+            <div class="tab-content">
+              <!--=============== Start profile =================-->
+              <div class="e-profile">
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="box-children">
+                      <div class="row">
+                        <div class="col-md-12">
+                          <div class="form-group">
+                            <label for="firstname">
+                              {{ 'key_MaterialCode' | translate }} <span class="text-danger">*</span>
+                            </label>
+                            <input type="text" name="materialCode" formControlName="matCode" [(ngModel)]="selectedMaterialToEdit.code" class="form-control" value="" disabled />
+                          </div>
+                        </div>
+                        <div class="col-md-12">
+                          <div class="form-group">
+                            <label for="firstname">
+                              {{ 'key_Description' | translate }} <span class="text-danger">*</span>
+                            </label>
+                            <input type="text" name="materialDescription" formControlName="matDesc" [(ngModel)]="selectedMaterialToEdit.description" class="form-control" value="" required />
+                          </div>
+                        </div>
+
+                        <div class="col-md-12">
+                          <div class="form-group">
+                            <label> {{ 'key_MaterialGroup' | translate }} <span class="text-danger">*</span></label>
+                            <!--<angular2-multiselect required [data]="materialHierarchyList" [(ngModel)]="selectedMatHierarchy" [settings]="settingsA"
+                        name="materialHierarchyList"
+                        formControlName="matHierarchyList">
+  </angular2-multiselect>-->
+                            <input type="text" name="materialHierarchyList" formControlName="matHierarchyList" [(ngModel)]="selectedMaterialToEdit.materialHierarchyName" class="form-control" value="" disabled />
+                          </div>
+                        </div>
+
+
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="box-children">
+                      <div class="row">
+                        <div class="col-md-12">
+                          <div class="form-group">
+                            <label for="lastname">{{ 'key_Defaultcommodity' | translate }}</label>
+                            <angular2-multiselect [data]="defaultCommodityList" [(ngModel)]="selectedCommodityItem" [settings]="settingsB"
+                                                  name="defaultCommodityList"
+                                                  formControlName="matCommodityList">
+                            </angular2-multiselect>
+                          </div>
+                        </div>
+                        <div class="col-md-12 mt-2">
+                          <div class="form-check pl-0">
+                            <label class="form-check-label">{{ 'key_AllowInventoryReservation' | translate }}</label>
+                            <input type="checkbox"
+                                   #saveReserveStatusCheckBox
+                                   id="saveReserveStatusCheckBox"
+                                   [checked]="selectedMaterialToEdit?.isReserve"
+                                   (change)="onReserveSaveStatusChanged(saveReserveStatusCheckBox.checked)"
+                                   class="form-check-input ml-2" value="" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="box-children">
+                      <div class="row">
+                        <div class="col-md-12">
+                          <div class="form-group">
+                            <span class="fw600 mr-3 " for="lastname"> {{ 'key_Status' | translate }} </span>
+                            <!--<span for="lastname"> {{ 'key_Active' | translate }} </span>-->
+                            {{selectedMaterialToEdit?.isActive == true ? 'Active':'Inactive'}}
+                          </div>
+                        </div>
+                        <div class="col-md-12">
+                          <div class="form-group">
+                            <div class="form-check checkbox pl-0">
+                              <label class="form-check-label" for="check1"> {{ 'key_SetupCompleted' | translate }} </label>
+                              <input type="checkbox"
+                                     #saveSetupStatusCheckBox
+                                     id="saveSetupStatusCheckBox"
+                                     [checked]="selectedMaterialToEdit?.setupComplete"
+                                     (change)="onSetupSaveStatusChanged(saveSetupStatusCheckBox.checked)"
+                                     class="form-check-input ml-2" value="">
+
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-12">
+                          <div class="form-group d-flex">
+                            <span class="fw600 mr-3"> {{ 'key_SetupDatetime' | translate }} </span>
+                            <span class="text-break">{{selectedMaterialToEdit?.setupCompleteDateTime | date:'MM-dd-yyyy hh:mm:ss'}}</span>
+                          </div>
+                        </div>
+                        <div class="col-md-12">
+                          <div class="form-group d-flex">
+                            <span class="fw600 mr-3"> {{ 'key_SetupCompletedby' | translate }} </span>
+                            <span class="text-break"> {{selectedMaterialToEdit?.updatedBy}}</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!--=============== End e-profile =================-->
+            </div>
+            <!--Tab Content End////////////-->
+          </div>
+
+
+
+          <!--Accordian Start-->
+          <div class="col-md-12">
+            <div id="accordionTab1" class="accordion mt-5">
+              <div class="card mb-0">
+                <div class="card-header collapsed" data-toggle="collapse" (click)="openAccordion('definechar')" href="#DefineCharacteristics">
+                  <a class="card-title">
+                    {{ 'key_DefineCharacteristics' | translate }}
+                  </a>
+                </div>
+                <div id="DefineCharacteristics" class="card-body collapse" data-parent="#accordionTab1">
+                  <app-define-characteristics [sendMatIDToChild]="selectedMaterialToEdit?.id" [sendDataToChild]="selectedMaterialToEdit?.code"></app-define-characteristics>
+                </div>
+                <div class="card-header collapsed" (click)="openAccordion('defineequip')" data-toggle="collapse" href="#DefineEquipment">
+                  <a class="card-title">
+                    {{ 'key_DefineEquipmentMaterialCharacteristics' | translate }}
+                  </a>
+                </div>
+                <div id="DefineEquipment" class="card-body collapse" data-parent="#accordionTab1">
+                  <app-define-equipment-material [sendMatIDToChild]="selectedMaterialToEdit?.id" [sendDataToChild]="selectedMaterialToEdit?.code"></app-define-equipment-material>
+                </div>
+                <div class="card-header collapsed" (click)="openAccordion('mapforecast')" data-toggle="collapse" href="#MapForecast">
+                  <a class="card-title">
+                    {{ 'key_mfcl' | translate }}
+                  </a>
+                </div>
+                <div id="MapForecast" class="card-body collapse" data-parent="#accordionTab1">
+                  <app-map-forecast [sendMatIDToChild]="selectedMaterialToEdit?.id" [sendDataToChild]="selectedMaterialToEdit?.code"></app-map-forecast>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--Accordian End////-->
+        </div>
+        <!--Row End-->
+        <div class="row justify-content-center my-5">
+
+          <div class="col-xl-2 col-lg-4 col-md-4 col-sm-12">
+            <button class="btn btn-block btn-save" [disabled]="!materialEditForm.valid" (click)="save()" type="submit">{{ 'key_Save' | translate }}</button>
+          </div>
+          <div class="col-xl-2 col-lg-4 col-md-4 col-sm-12">
+            <button class="btn btn-block btn-next" [disabled]="!materialEditForm.valid" type="button" (click)="saveAndEditNext()">
+              <span class="fw600">{{ 'key_Add' | translate }}</span> <span class="fs-13"> > {{ 'key_Next' | translate }}</span>
+            </button>
+          </div>
+        </div>
+
+      </form>
+
+    </div>
+    <!--tab-pane stepper-child-content-wrap end/////-->
+</div>
+</div>
+    <app-show-notes></app-show-notes>

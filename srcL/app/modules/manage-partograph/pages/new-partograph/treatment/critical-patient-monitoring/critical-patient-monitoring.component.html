@@ -1,0 +1,186 @@
+<!--TFS ID:- 17413,
+  Date: 15-09-2020,
+  Author: Monu Ram YAdav,
+  Des:-  Need to convert table in Material Format for Prepartum Care-->
+<form #criticalpatientinfoform="ngForm">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="subHeading-red fw600"> {{ 'key_CriticalPatientMonitoring' | translate }}</div>
+    </div>
+  </div>
+  <div class="row mt-2">
+    <div class="col-sm-12">
+      <div class="fw600 fs-16">{{ 'key_PatientName' | translate }}<label>&nbsp;&nbsp;{{criticalPatientInfoViewModel.patientName}}</label></div>
+    </div>
+  </div>
+  <div class="row mt-2 formlabel-mb">
+    <div class="col-sm-12 col-md-3">
+      <div class="form-inline row">
+        <div class="col-sm-12 col-md-4">
+          <label class="justify-content-start">{{ 'key_crnumber' | translate }}</label>
+        </div>
+        <div class="col-sm-12 col-md-8">
+          <input type="text" class="form-control w-100" [(ngModel)]="criticalPatientInfoViewModel.crNo" id="crNo" name="crNo" readonly>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-12 col-md-3">
+      <div class="form-inline row">
+        <div class="col-sm-12 col-md-7 pl-0 pr-0">
+          <label class="justify-content-start">{{ 'key_MedicalRecordNumber' | translate }}</label>
+        </div>
+        <div class="col-sm-12 col-md-5 pl-0 pr-0">
+          <input type="text" class="form-control w-100" [(ngModel)]="criticalPatientInfoViewModel.mrdNo" id="mrdNo" name="mrdNo" readonly>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-12 col-md-4">
+      <div class="form-inline row">
+        <div class="col-sm-12 col-md-6">
+          <label class="justify-content-end">{{ 'key_DateofAdminssionIn' | translate }}</label>
+        </div>
+        <div class="col-sm-12 col-md-6">
+          <input type="datetime-local" class="form-control w-100" date="mm-dd-yyy"   value={{meeting}}  id="admissionDate" name="admissionDate" readonly>          
+          <!--{{this.criticalPatientInfoViewModel.admissionDate}}{{this.meeting}}-->
+          <!--[(ngModel)]="this.criticalPatientInfoViewModel.admissionDate"-->
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-12 col-md-2 pt-2">
+      <div class="form-check-inline">
+        <label class="form-check-label">
+          <input type="radio" name="optradio" class="form-check-input">{{ 'key_HDU' | translate }}
+        </label>
+      </div>
+      <div class="form-check-inline">
+        <label class="form-check-label">
+          <input type="radio" name="optradio" class="form-check-input">{{ 'key_ICU' | translate }}
+        </label>
+      </div>
+    </div>
+  </div>
+  <!--Row End-->
+  <div class="row mt-2">
+    <div class="col-sm-12 col-md-6">
+      <div class="form-inline row">
+        <div class="col-sm-12 col-md-2">
+          <label class="justify-content-start">{{ 'key_Diagnosis' | translate }}</label>
+        </div>
+        <div class="col-sm-12 col-md-10">
+          <textarea class="form-control w-100"></textarea>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-12 col-md-4">
+      <div class="form-inline row">
+        <div class="col-sm-12 col-md-6">
+          <label class="justify-content-end">{{ 'key_Unit' | translate }}</label>
+        </div>
+        <div class="col-sm-12 col-md-6">
+          <select class="js-example-tags form-control" id="unitNo" name="unitNo" >
+            <option>{{criticalPatientInfoViewModel.unitNo}}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--Row End-->
+  <!--Table Row Start-->
+  <div class="row mt-3">
+    <div class="col-lg-12">
+      <div class="scroll resize-table">
+        <mat-table #table [dataSource]="dataSource" matSort>
+          <ng-container *ngFor="let column of displayedColumns; let i=index;" [matColumnDef]="column">
+            <mat-header-cell *matHeaderCellDef mat-sort-header mwlResizable [enableGhostResize]="true" (resizeEnd)="onResizeEnd($event, column)"
+                             [resizeEdges]="{bottom: false, right: true, top: false, left: true}">
+
+
+              <div *ngIf="column != selectRow"> {{ displayedColumnsReplace[i] | translate }}</div>
+            </mat-header-cell>
+            <mat-cell *matCellDef="let item">
+
+              <div class="form-check-inline w-100 py-3" *ngIf="column === Date">
+                <input type="text" class="form-control mb-0" />
+              </div>
+              <div class="form-check-inline w-100 py-3" *ngIf="column === Time">
+                <input type="text" class="form-control mb-0" />
+              </div>
+              <div class="form-check-inline w-100 py-3" *ngIf="column === Temp">
+                <input type="text" class="form-control mb-0" />
+              </div>
+              <div class="form-check-inline w-100 py-3" *ngIf="column === pr">
+                <input type="text" class="form-control mb-0" />
+              </div>
+              <div class="form-check-inline w-100 py-3" *ngIf="column === bp">
+                <input type="text" class="form-control mb-0" />
+              </div>
+              <div class="form-check-inline w-100 py-3" *ngIf="column === rr">
+                <input type="text" class="form-control mb-0" />
+              </div>
+              <div class="form-check-inline w-100 py-3" *ngIf="column === spo2">
+                <input type="text" class="form-control mb-0" />
+              </div>
+              <div class="form-check-inline w-100 py-3" *ngIf="column === AbdominalGirth">
+                <input type="text" class="form-control mb-0" />
+              </div>
+              <div class="form-check-inline w-100 py-3" *ngIf="column === PerAbdominalExam">
+                <input type="text" class="form-control mb-0" />
+              </div>
+              <div class="form-check-inline w-100 py-3" *ngIf="column === LocalExamination">
+                <input type="text" class="form-control mb-0" />
+              </div>
+              <div class="form-check-inline w-100 py-3" *ngIf="column === UrinaryOutput">
+                <input type="text" class="form-control mb-0" />
+              </div>
+              <div class="form-check-inline w-100 py-3" *ngIf="column === Drain">
+                <input type="text" class="form-control mb-0" />
+              </div>
+              <div class="form-check-inline w-100 py-3" *ngIf="column === KneeReflex">
+                <input type="text" class="form-control mb-0" />
+              </div>
+              <div class="form-check-inline w-100 py-3" *ngIf="column === RyleTube">
+                <input type="text" class="form-control mb-0" />
+              </div>
+              <div class="form-check-inline w-100 py-3" *ngIf="column === Remark">
+                <input type="text" class="form-control mb-0" />
+              </div>
+              <div class="form-check-inline w-100 py-3" *ngIf="column === Action">
+                <span class="d-flex">
+                  <a class="a_hover"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                  <a class="a_hover ml-1"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                </span>
+              </div>
+              <div class="form-check-inline w-100 py-3 justify-content-around d-flex" *ngIf="column === Add_New">
+                <a class="a_hover" (click)="addRow()"><i class="fa fa-plus" aria-hidden="true"></i></a>
+              </div>
+              {{ item[column] }}
+            </mat-cell>
+           
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+      </div>
+      <!--<mat-paginator #paginator
+                     [pageSize]="10"
+                     [pageSizeOptions]="[5, 10, 20]">
+      </mat-paginator>-->
+    </div>
+  </div>
+  <!--Table Row End/////-->
+
+  <div class="row mt-3">
+    <!--<div class="col-sm-12 col-md-2">
+      <input type="button" class="btn btn-secondary btnbrd" (click)="AddMoreComplication()" value="{{ 'key_AddNewParameter' | translate }}" />
+    </div>-->
+    <div class="col-sm-12 col-md-10">
+      <div class="form-group">
+        <textarea class="form-control" rows="3" placeholder="{{ 'key_AddCommentHere' | translate }}"></textarea>
+      </div>
+    </div>
+
+    <app-dynamic-webcontrol-parameter [stageModule]="stageCode"></app-dynamic-webcontrol-parameter>
+  </div>
+  </form>
+  <!--Row End-->

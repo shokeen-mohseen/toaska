@@ -1,0 +1,95 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="d-flex flex-nowrap justify-content-between align-items-center mb-3">
+      <div class="row col-sm-12 p-0">
+        <div class="col-sm-3">
+          <div class="btn-group btn-group-toggle btn-group-md" data-toggle="buttons">
+            <button id="addCharacteristicsButton" (click)="openCharacteristics()" class="btn btn-outline-primary" type="button" placement="bottom" ngbTooltip="Add New">
+              <i class="fa fa-plus" aria-hidden="true"></i>
+              <span>
+                {{ 'key_Add' | translate }}
+              </span>
+            </button>
+            <!--<button id="editContactButton" (click)="openCharacteristics()" class="btn btn-outline-primary" type="button" placement="bottom" ngbTooltip="Edit">
+              <i class="fa fa-pencil" aria-hidden="true"></i>
+              <span>
+                {{ 'key_Edit' | translate }}
+              </span>
+            </button>-->
+            <button (click)="deleteSelectedItem()" [disabled]="!selectedItem" class="btn btn btn-outline-danger" type="button" placement="bottom" ngbTooltip="Delete">
+              <i class="fa fa-trash-o" aria-hidden="true"></i>
+              <span>
+                {{ 'key_Delete' | translate }}
+              </span>
+            </button>
+          </div>
+        </div>
+        <div class="col-sm-9">
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-inline row">
+                <!-- <label class="col-md-6 col-sm-4 col-form-label" for="select1"></label>-->
+                <div class="col-md-6 col-sm-8">
+                  <!--<angular2-multiselect [data]="itemListB" [(ngModel)]="selectedItemsB" [settings]="settingsB"
+                          (onSelect)="onItemSelect($event)"
+                          (onDeSelect)="OnItemDeSelect($event)"
+                          (onSelectAll)="onSelectAll($event)"
+                          (onDeSelectAll)="onDeSelectAll($event)"
+                          (onAddFilterNewItem)="onAddItemB($event)">
+    </angular2-multiselect>-->
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-inline row">
+                <!-- <label class="col-md-6 col-sm-4 col-form-label" for="select1"></label>-->
+                <div class="col-md-6 col-sm-8">
+                  <!-- <angular2-multiselect [data]="itemListA" [(ngModel)]="selectedItemsA" [settings]="settingsA"
+                          (onSelect)="onItemSelect($event)"
+                          (onDeSelect)="OnItemDeSelect($event)"
+                          (onSelectAll)="onSelectAll($event)"
+                          (onDeSelectAll)="onDeSelectAll($event)"
+                          (onAddFilterNewItem)="onAddItemA($event)">
+    </angular2-multiselect>-->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-12">
+    <table class="table table-striped table-bordered">
+      <thead>
+        <tr>
+          <th class="no-sort" width="5%">
+            <div class="form-check-inline">
+              <label class="form-check-label">
+                <input type="checkbox" class="form-check-input" value="" data-toggle="tooltip" data-placement="top" title="Select all">
+              </label>
+            </div>
+          </th>
+          <th>Description</th>
+          <th>Value</th>
+          <th>UOM</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of characteristicsList">
+          <td>
+            <div class="form-check-inline">
+              <label class="form-check-label">
+                <input type="checkbox" class="form-check-input" value="" (click)="select($event, item)" >
+              </label>
+            </div>
+          </td>
+          <td>{{item.entityPropertyName}}</td>
+          <td>{{item.propertyValue}}</td>
+          <td>{{item.propertiesUom}}</td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+</div>

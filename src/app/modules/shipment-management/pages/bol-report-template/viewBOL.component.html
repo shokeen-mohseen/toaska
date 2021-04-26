@@ -1,0 +1,363 @@
+<div class="container" style="padding-left: 30px; padding-right: 30px; padding-bottom: 10px;">
+
+	<div class="row justify-content-center mt-2">
+		<div class="col-xl-2 col-lg-4 col-md-4 col-sm-12">
+			<button type="button" (click)="downloadPdf()" class="btn btn-block btn-save">Download</button>
+		</div>
+		<div class="col-xl-2 col-lg-4 col-md-4 col-sm-12">
+			<button type="button" (click)="closeWindow()" class="btn btn-block btn-secondary">Close</button>
+		</div>
+	</div>
+	<!--</form>-->
+	<div id="viewBolReport" class="row justify-content-center reportContainer">
+		<div  *ngFor="let order of bolReportOrders; let i = index">
+			<table class="pageBreakElement" style="border: 2px solid black; padding: 0 10px; width: 100%;">
+				<tr>
+					<td>
+						<table style="width: 100%;">
+							<tr>
+								<td align="left" style="padding-left: 10px; width:33%;">
+									Shipped Date
+									<span>{{bolReport.shipDate | date:'shortDate'}}</span>
+								</td>
+								<td align="center" style="font-size: 20px; width:33%; font-weight:bold;">
+									BOL No
+									<span>{{bolReport.shipmentNumber}}</span>
+								</td>
+								<!--<td align="right" style="width:33%;">{{bolReport.shipmentNumber}}</td>-->
+								<td align="right" style="width:33%;" rowspan="2">
+									<ngx-barcode [bc-value]="bolReport.shipmentNumber" [bc-display-value]="true"
+															 [bc-height]="35" [bc-text-position]="top"
+															 [bc-margin-top]="0" [bc-margin-bottom]="0" [bc-margin-left]="0" [bc-margin-right]="0"></ngx-barcode>
+								</td>
+							</tr>
+							<tr>
+								<td align="left" style="padding-left:10px; width:33%;">Stop {{i + 1 }} of {{bolReportOrders.length}}</td>
+								<td style="font-size: 25px; width:33%;" align="center">BILL OF LADING</td>
+								
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<table style="width: 100%;">
+							<tr>
+								<td style="width:50%;">
+									<table style="border: 2px solid black; width: 100%; padding-bottom: 10px;" cellpadding="0" cellspacing="0">
+										<tr>
+											<td colspan="2" style="background-color: black;
+												padding:1px 5px; text-align:center; color:white;">
+												SHIP FROM
+											</td>
+										</tr>
+										<tr>
+											<td style="padding:1px 5px; width:18%;">Name:</td>
+											<td>{{order.fromLocation?.name}}</td>
+										</tr>
+										<tr>
+											<td style="padding:1px 5px; width:18%;">Address:</td>
+											<td>
+												{{order.fromLocation?.address}}
+											</td>
+										</tr>
+										<tr>
+											<td style="padding:1px 5px; width:18%;">City/State/Zip:</td>
+											<td>
+												{{order.fromLocation?.cityState}}
+											</td>
+										</tr>
+									</table>
+								</td>
+								<td style="width:50%;">
+									<table style="border: 2px solid black; width: 100%; padding-bottom: 10px;" cellpadding="0" cellspacing="0">
+										<tr>
+											<td colspan="2" style="background-color: black; padding:1px 5px; text-align:center; color:white;">
+												BILL TO
+											</td>
+										</tr>
+										<tr>
+											<td style="padding:1px 5px; width:18%;">Name:</td>
+											<td>
+												{{order.billToLocation?.name}}
+											</td>
+										</tr>
+										<tr>
+											<td style="padding:1px 5px; width:18%;">Address:</td>
+											<td>
+												{{order.billToLocation?.address}}
+											</td>
+										</tr>
+										<tr>
+											<td style="padding:1px 5px; width:18%;">City/State/Zip:</td>
+											<td>
+												{{order.billToLocation?.cityState}}
+											</td>
+										</tr>
+									</table>
+								</td>
+
+							</tr>
+							<tr>
+								<td>
+									<table style="border: 2px solid black; width: 100%; padding-bottom: 10px;" cellpadding="0" cellspacing="0">
+										<tr>
+											<td colspan="2" style="background-color: black; padding:1px 5px; text-align:center; color:white;">
+												SHIP TO
+											</td>
+										</tr>
+										<tr>
+											<td style="padding:1px 5px; width:18%;">Name:</td>
+											<td>{{order.toLocation?.name}}</td>
+										</tr>
+										<tr>
+											<td style="padding:1px 5px; width:18%;">Address:</td>
+											<td>
+												{{order.toLocation?.address}}
+											</td>
+										</tr>
+										<tr>
+											<td style="padding:1px 5px; width:18%;">City/State/Zip:</td>
+											<td>
+												{{order.toLocation?.cityState}}
+											</td>
+										</tr>
+										<tr>
+											<td style="padding:1px 5px;">&nbsp;</td>
+											<td> </td>
+										</tr>
+									</table>
+								</td>
+								<td>
+									<table style="border: 2px solid black; width: 100%; padding-bottom: 10px;" cellpadding="0" cellspacing="0">
+										<tr>
+											<td colspan="2" style="background-color: black; padding:1px 5px; text-align:center; color:white;">CARRIER</td>
+										</tr>
+										<tr>
+											<td style="padding:1px 5px;">Carrier Name:</td>
+											<td>{{bolReport.carrierName}}</td>
+										</tr>
+										<tr>
+											<td style="padding:1px 5px;">Trailer Number:</td>
+											<td>
+												{{bolReport.trailerNumber}}
+											</td>
+										</tr>
+										<tr>
+											<td style="padding:1px 5px;">Seal Number:</td>
+											<td>
+												{{bolReport.trailerSealNumber}}
+											</td>
+										</tr>
+										<tr>
+											<td style="padding:1px 5px;">Equipment Type:</td>
+											<td>{{bolReport.equipment}}</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+						</table>
+						<table style="width: 100%;">
+							<tr>
+								<td>
+									<table style="width: 100%; border:2px solid black;" cellpadding="0" cellspacing="0">
+										<tr>
+											<td colspan="2" style="background-color: black; padding:1px 5px; text-align:center; color:white;">Instructions/Special Notes/Delivery Instructions</td>
+										</tr>
+										<tr>
+											<td style="border-right:2px solid black; padding:0 5px; width: 50%; vertical-align:top;">
+												Loading Comment: <br>
+												<span>{{order.loadingComment}}</span>
+												<br><br>
+												Spanish:<br>
+																<span>{{order.spanishLoadingComment}}</span>
+											</td>
+											<td style="padding: 0 5px; width: 50%; vertical-align: top;">
+												Transportation Comment: <br>
+																								<span>{{order.transportationComment}}</span>
+												<br><br>
+												Spanish:<br>
+																<span>{{order.spanishTransportationComment}}</span>
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+
+						</table>
+						<table style="width:100%;">
+							<tr>
+								<td>
+									<table style="width: 100%;" cellpadding="0" cellspacing="0">
+										<tr style="background-color: #7ed4f6; text-align:center;" border="10">
+											<th style="padding: 5px; border-left:2px solid black; border-top:2px solid black;">Customer Ref No</th>
+											<th style="padding: 5px; border-left:2px solid black; border-top:2px solid black;">Order No</th>
+											<th style="padding: 5px; border-left:2px solid black; border-top:2px solid black;">Description</th>
+											<th style="padding: 5px; border-left:2px solid black; border-top:2px solid black;">Quantity</th>
+											<th style="padding: 5px; border-left:2px solid black; border-top:2px solid black; border-right:2px solid black;">Weight</th>
+										</tr>
+										<tr style="border-bottom:2px solid black;"
+												*ngFor="let item of getShipmentOrdersDetailById(order.orderId)">
+											<td style="padding: 5px; border-left:2px solid black;
+												border-top:2px solid black; border-bottom:2px solid black;">
+												{{order.purchaseOrderNumber}}
+											</td>
+											<td style="padding: 5px; border-left:2px solid black;
+												border-top:2px solid black; border-bottom:2px solid black;">
+												{{item.orderNumber}}
+											</td>
+											<td style="padding: 5px; border-left:2px solid black;
+												border-top:2px solid black; border-bottom:2px solid black;">
+												{{getMatName(item.name)}}
+											</td>
+											<td style="padding: 5px;
+															border-left: 2px solid black;
+															border-top: 2px solid black;
+															border-bottom: 2px solid black;
+															text-align: end;">
+												{{item.orderQuantity}}
+											</td>
+											<td style="    padding: 5px;
+														border-left: 2px solid black;
+														border-top: 2px solid black;
+														border-right: 2px solid black;
+														border-bottom: 2px solid black;
+														text-align: end;
+												">
+												{{item.weight * item.orderQuantity}}
+											</td>
+										</tr>
+										<tr>
+											<td colspan="3" style="font-weight: bold; padding-top:5px;" align="right">Total:</td>
+											<td style="font-weight: bold; padding-right:5px; padding-top:5px;" align="right">
+												{{getTotalQuantity()}}
+											</td>
+											<td style="font-weight: bold; padding-right:5px; padding-top:5px;" align="right">
+												{{getTotalWeight()}}
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+						</table>
+						<p>
+							The property described herein has been received by carrier in apparent good order, except as noted herein, and is marked, consigned and
+							destined as indicated herein. Carrier agrees to carry the property to destination. If on its route, otherwise to deliver to another carrier on the route
+							to said destination. Each carrier of, and any party at any time interested in, all or any of said property over all or any of said property over all or
+							any portion of said routeto destination agrees to perform any servicerequired hereby in accordance with the applicable contract(s), if any between
+							Tosca LTD and Carrier and otherwise subject to the terms and conditions of the Uniform Domestic Straight Bill of Lading set forth (1) if this is rail
+							or rail-water shipment, in the Uniform Freight Classificaiton, and (2) If this is a motor carrier shipment in the Bational Motor Freight
+							Classification.All transportation provided hereunder is subject to the term of section 7 of the respective bill of lading identified herein as if Tosca
+							LTD initiated the Section 7 provision on the face of Bill of Lading with respect to each shipment described herein.
+						</p>
+						<p>
+							All transportation provided hereunder is subject to the term of section 7 of the respective bill of lading identified herein as if Tosca LTD initiated
+							the Section 7 provision on the face of Bill of Lading with respect to each shipment described herein.
+						</p>
+
+						<p style="text-align:center;">(This Bill of Lading is to be signed by the shipper and agent of the carrier issuing the same.)</p>
+
+						<table style="width: 100%;">
+							<tr>
+								<td style="width:50%;">
+									<table style="border: 2px solid black; width: 100%; padding-bottom: 10px;" cellpadding="0" cellspacing="0">
+										<tr>
+											<td colspan="2" style="background-color: black; padding:1px 5px; color:white;">Driver</td>
+										</tr>
+										<tr>
+											<td style="padding:1px 5px; width: 10%;">Name:</td>
+											<td style="border-bottom:1px solid black;">&nbsp;</td>
+										</tr>
+										<tr>
+											<td style="padding:1px 5px; width: 10%;">Signature:</td>
+											<td style="border-bottom:1px solid black;">&nbsp;</td>
+										</tr>
+										<tr>
+											<td style="padding:1px 5px;">Date:</td>
+											<td></td>
+										</tr>
+									</table>
+								</td>
+								<td style="width:50%;">
+									<table style="border: 2px solid black; width: 100%; padding-bottom: 10px;" cellpadding="0" cellspacing="0">
+										<tr>
+											<td colspan="2" style="background-color: black; padding:1px 5px; color:white;">Driver</td>
+										</tr>
+										<tr>
+											<td style="padding:1px 5px; width: 10%;">Name:</td>
+											<td style="border-bottom:1px solid black;">&nbsp;</td>
+										</tr>
+										<tr>
+											<td style="padding:1px 5px; width: 10%;">Signature:</td>
+											<td style="border-bottom:1px solid black;">&nbsp;</td>
+										</tr>
+										<tr>
+											<td style="padding:1px 5px;">Date:</td>
+											<td></td>
+										</tr>
+									</table>
+								</td>
+
+							</tr>
+							<tr>
+								<td style="width:50%;">
+									<table style="min-height:120px; width: 100%; padding-bottom: 10px;" cellpadding="0" cellspacing="5">
+										<tr>
+											<td style="font-weight:bold;">Driver In Time:</td>
+											<td>{{bolReport.fromCarrierInTime | date:'short'}}</td>
+										</tr>
+										<tr>
+											<td style="font-weight:bold;">Driver Out Time:</td>
+											<td>{{bolReport.fromCarrierOutTime | date:'short'}}</td>
+										</tr>
+										<tr>
+											<td style="font-weight:bold;">Must Arrive By Date(MABD):</td>
+											<td>{{order.mustArriveByDate | date:'shortDate'}}</td>
+										</tr>
+										<tr>
+											<td style="font-weight:bold;">Driver provided securement devices:</td>
+											<td>[ &nbsp;&nbsp;] Yes &nbsp;&nbsp;[&nbsp;&nbsp; ] No</td>
+										</tr>
+									</table>
+								</td>
+								<td style="width:50%;">
+									<table style="border: 2px solid black; width: 100%; padding-bottom: 10px;" cellpadding="0" cellspacing="0">
+										<tr>
+											<td colspan="2" style="background-color: black; padding:1px 5px; color:white;">Consignee</td>
+										</tr>
+										<tr>
+											<td style="padding:1px 5px; width: 10%;">Name:</td>
+											<td style="border-bottom:1px solid black;">&nbsp;</td>
+										</tr>
+										<tr>
+											<td style="padding:1px 5px; width: 10%;">Signature:</td>
+											<td style="border-bottom:1px solid black;">&nbsp;</td>
+										</tr>
+										<tr>
+											<td style="padding:1px 5px;">Date:</td>
+											<td></td>
+										</tr>
+									</table>
+								</td>
+
+							</tr>
+						</table>
+
+						<table style="width:100%;">
+							<tr>
+								<td style="font-size:12px; width:33%;" align="left">{{todaysDate | date:'short'}}</td>
+								<td style="font-size:12px; width:33%; color: grey;" align="center">85000000007290000000 {{1+1}} 14</td>
+								<td style="font-size:12px; width:33%;" align="right">{{i+1}}</td>
+							</tr>
+						</table>
+
+
+
+					<td>
+				</tr>
+
+			</table>
+
+		</div>
+	</div>
+</div>

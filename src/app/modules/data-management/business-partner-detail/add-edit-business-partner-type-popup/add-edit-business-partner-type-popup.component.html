@@ -1,0 +1,29 @@
+<form #preferredMaterial="ngForm" (ngSubmit)="addBpType()">
+  <div class="modal-header">
+    <h4 class="modal-title">{{'key_Add' | translate}} / {{'key_Edit' | translate}}</h4>
+    <button type="button" class="close" data-dismiss="modal" (click)="activeModal.dismiss('Cross click')">&times;</button>
+  </div>
+
+  <!-- Modal body -->
+  <div class="modal-body">
+
+    <div class="row mt-3">
+      <div class="col-lg-12">
+        <div class="form-group">
+          <label> {{ 'key_BusinessPartnerTypeDescription' | translate }} <span class="text-danger">*</span> </label>
+          <!--<input type="text" class="form-control" required />-->
+          <textarea class="form-control" required id="name" name="Name" type="text" maxlength="100" (ngModelChange)="validation('name');" [(ngModel)]="locationFunctionViewModel.name"></textarea>
+          <div *ngIf="isName === 1" class="errorMessage text-danger col-sm-12 col-md-12">{{'ValiationMessages.key_Required' | translate }}</div>
+          <div *ngIf="!!locationFunctionViewModel.name && isName === 0 && isDuplicate === 1" class="errorMessage text-danger col-sm-12 col-md-12">
+            {{'ValiationMessages.key_Exists' | translate }}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row justify-content-center my-3">
+      <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
+        <button class="btn btn-block btn-save" type="submit" [disabled]="isValidated === 0">{{ 'key_Save' | translate }}</button>
+      </div>
+    </div>
+  </div>
+  </form>

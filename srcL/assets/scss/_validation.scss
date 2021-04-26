@@ -1,0 +1,127 @@
+angular2-multiselect {
+  &.ng-invalid, &[required], &[ng-reflect-required] {
+    .c-btn, .countplaceholder {
+      background-color: $required-color;
+    }
+
+    .selected-list {
+      .c-btn {
+        span {
+          span {
+            font-weight: 800;
+            color: #3a3838;
+          }
+        }
+
+        .c-list {
+          .c-token {
+            .c-label {
+              font-weight: 800;
+              color: #3a3838;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+.ng-invalid {
+  &.form-control {
+    background-color: $required-color;
+
+    .select2-selection--multiple {
+      background-color: $required-color !important;
+
+      input {
+        background-color: $required-color !important;
+        font-weight: 800;
+        color: #3a3838;
+      }
+    }
+
+    .ng-select-container {
+      background-color: $required-color !important;
+
+      input {
+        font-weight: 800;
+        color: #3a3838;
+      }
+    }
+  }
+}
+
+input, select, textarea {
+  &.ng-invalid, &[required], &[ng-reflect-required] {
+    background-color: $required-color;
+    font-weight: 800;
+    color: #3a3838;
+
+    &[ng-reflect-model="0"] {
+      font-weight: normal;
+    }
+
+    &.p-inputtext {
+      font-weight: 800;
+      color: #3a3838;
+    }
+
+    &:focus {
+      background-color: $required-color;
+
+      option {
+        background-color: $white;
+      }
+    }
+
+    &::placeholder {
+      font-weight: normal;
+    }
+  }
+
+  &.e-input {
+    &:required {
+      background-color: $required-color !important;
+      font-weight: 800 !important;
+      color: #3a3838;
+
+      &::placeholder {
+        font-weight: normal !important;
+      }
+    }
+  }
+
+  &[required="false"] {
+    background: $white !important;
+    font-weight: normal !important;
+  }
+}
+
+input {
+  &[required] + .custom-file-label {
+    background-color: $required-color;
+    font-weight: 800;
+    color: #3a3838;
+  }
+}
+.border-danger {
+  &:focus {
+    box-shadow: 0 0 0 0.2rem rgb(248 108 107 / 25%);
+  }
+}
+
+.btn-group {
+  .btn {
+    &:disabled, &.disabled {
+      opacity: 1;
+      background: #e4e7ea;
+      color: #ccc;
+      cursor: not-allowed;
+      border-color: #ccc;
+    }
+  }
+}
+
+:disabled {
+  cursor: not-allowed;
+}
+

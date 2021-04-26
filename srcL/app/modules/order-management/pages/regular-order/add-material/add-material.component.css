@@ -1,0 +1,7 @@
+::ng-deep .fs {
+  font-size: 18px;
+}
+::ng-deep .order-deails h5 {
+  font-size: 14px;
+  margin-top: 3px;
+}

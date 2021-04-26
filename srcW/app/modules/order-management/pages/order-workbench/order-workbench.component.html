@@ -1,0 +1,611 @@
+<!--Filters-->
+<mat-accordion>
+  <mat-expansion-panel (opened)="panelOpenState = true"
+                       (closed)="panelOpenState = false" [expanded]="true">
+    <mat-expansion-panel-header>
+      <mat-panel-description>
+        {{panelOpenState ? '- Hide' : '+ Show'}}   {{ 'key_OrderFilter' | translate }}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <form #addOrderForm="ngForm" novalidate>
+
+
+      <div class="row custom-form">
+        <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 d-flex w-100">
+          <div class="card">
+            <div class="card-header mb-2">
+              <div class="card-title">{{ 'key_OrderFilter' | translate }} </div>
+            </div>
+            <div class="card-body p-0">
+              <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                <div class="form-group">
+                  <label for="nf-password">{{ 'key_OrderNo' | translate }}</label>
+                  <input class="form-control" id="nf-number" type="number" name="nf-number" autocomplete="current-password">
+                </div>
+              </div>
+              <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+
+                <div class="form-group">
+                  <label for="ccmonth">{{ 'key_Ordertype' | translate }}</label>
+
+                  <angular2-multiselect [data]="itemList" [(ngModel)]="selectedItems" [settings]="settings"
+                                        (onSelect)="onItemSelect($event)"
+                                        (onDeSelect)="OnItemDeSelect($event)"
+                                        (onSelectAll)="onSelectAll($event)"
+                                        (onDeSelectAll)="onDeSelectAll($event)"
+                                        (onAddFilterNewItem)="onAddItem($event)" name="skill1">
+                  </angular2-multiselect>
+
+                </div>
+              </div>
+              <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                <div class="form-group">
+                  <label for="ccmonth">{{ 'key_Status' | translate }}</label>
+                  <angular2-multiselect [data]="itemList" [(ngModel)]="selectedItems" [settings]="settings"
+                                        (onSelect)="onItemSelect($event)"
+                                        (onDeSelect)="OnItemDeSelect($event)"
+                                        (onSelectAll)="onSelectAll($event)"
+                                        (onDeSelectAll)="onDeSelectAll($event)"
+                                        (onAddFilterNewItem)="onAddItem($event)" name="skill2" #skill2="ngModel">
+                  </angular2-multiselect>
+                </div>
+              </div>
+              <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                <div class="form-group">
+                  <label for="ccmonth">{{ 'key_Showversion' | translate }}</label>
+                  <angular2-multiselect [data]="itemListCheck" [(ngModel)]="selectedItemsCheck" [settings]="settingsCheck"
+                                        (onSelect)="onItemSelect($event)"
+                                        (onDeSelect)="OnItemDeSelect($event)"
+                                        (onSelectAll)="onSelectAll($event)"
+                                        (onDeSelectAll)="onDeSelectAll($event)"
+                                        (onAddFilterNewItem)="onAddItemCheck($event)" name="skill3">
+                  </angular2-multiselect>
+                </div>
+              </div>
+              <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                <div class="form-group">
+                  <label for="ccmonth">{{ 'key_OrderCondition' | translate }}</label>
+                  <angular2-multiselect [data]="itemList" [(ngModel)]="selectedItems" [settings]="settings"
+                                        (onSelect)="onItemSelect($event)"
+                                        (onDeSelect)="OnItemDeSelect($event)"
+                                        (onSelectAll)="onSelectAll($event)"
+                                        (onDeSelectAll)="onDeSelectAll($event)"
+                                        (onAddFilterNewItem)="onAddItem($event)" name="skill4">
+                  </angular2-multiselect>
+                </div>
+              </div>
+              <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                <div class="form-group">
+                  <label for="ccmonth">{{ 'key_InvoiceNumber' | translate }}</label>
+                  <angular2-multiselect [data]="itemList" [(ngModel)]="selectedItems" [settings]="settings"
+                                        (onSelect)="onItemSelect($event)"
+                                        (onDeSelect)="OnItemDeSelect($event)"
+                                        (onSelectAll)="onSelectAll($event)"
+                                        (onDeSelectAll)="onDeSelectAll($event)"
+                                        (onAddFilterNewItem)="onAddItem($event)" name="skill5">
+                  </angular2-multiselect>
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label for="ccmonth">{{ 'key_OrderAmount' | translate }}</label>
+                  <div class="input-group input-group-sm">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">Max Value </span>
+                    </div>
+                    <input class="form-control" id="OrderAmount" type="number" name="OrderAmount" placeholder="Max Value" autocomplete="current-password">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">Min Value </span>
+                    </div>
+                    <input class="form-control" id="nf-number" type="number" name="nf-number" placeholder="Min Value" autocomplete="current-password">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 d-flex w-100">
+          <div class="card">
+            <div class="card-header mb-2">
+              <div class="card-title">{{ 'key_OrderDateFilter' | translate }}</div>
+            </div>
+            <div class="card-body p-0">
+              <div class="row" style="padding: 2px 14px;">
+                <div class="col-md-6 col-sm-6 col-lg-6 col-xl-6">
+                  <div class="form-group">
+                    <label for="nf-password">{{ 'key_Shiploc' | translate }}</label>
+                    <angular2-multiselect [data]="itemList" [(ngModel)]="selectedItems" [settings]="settings"
+                                          (onSelect)="onItemSelect($event)"
+                                          (onDeSelect)="OnItemDeSelect($event)"
+                                          (onSelectAll)="onSelectAll($event)"
+                                          (onDeSelectAll)="onDeSelectAll($event)"
+                                          (onAddFilterNewItem)="onAddItem($event)" name="skill6">
+                    </angular2-multiselect>
+                  </div>
+                </div>
+                <div class="col-md-6 col-sm-6 col-lg-6 col-xl-6">
+                  <div class="form-group">
+                    <label for="ccmonth">{{ 'key_Shipto' | translate }}</label>
+                    <angular2-multiselect [data]="itemList" [(ngModel)]="selectedItems" [settings]="settings"
+                                          (onSelect)="onItemSelect($event)"
+                                          (onDeSelect)="OnItemDeSelect($event)"
+                                          (onSelectAll)="onSelectAll($event)"
+                                          (onDeSelectAll)="onDeSelectAll($event)"
+                                          (onAddFilterNewItem)="onAddItem($event)" name="skill7">
+                    </angular2-multiselect>
+                  </div>
+                </div>
+              </div>
+              <div class="row" style="padding: 2px 14px;">
+                <div class="col-md-6 col-sm-6 col-lg-6 col-xl-6">
+                  <div class="form-group">
+                    <label for="ccmonth">{{ 'key_Shiptype' | translate }}</label>
+                    <angular2-multiselect [data]="itemList" [(ngModel)]="selectedItems" [settings]="settings"
+                                          (onSelect)="onItemSelect($event)"
+                                          (onDeSelect)="OnItemDeSelect($event)"
+                                          (onSelectAll)="onSelectAll($event)"
+                                          (onDeSelectAll)="onDeSelectAll($event)"
+                                          (onAddFilterNewItem)="onAddItem($event)" name="skill8">
+                    </angular2-multiselect>
+
+                  </div>
+                </div>
+                <div class="col-md-6 col-sm-6 col-lg-6 col-xl-6">
+                  <div class="form-group">
+                    <label for="ccmonth">{{ 'key_Shiptypeloc' | translate }}</label>
+                    <angular2-multiselect [data]="itemList" [(ngModel)]="selectedItems" [settings]="settings"
+                                          (onSelect)="onItemSelect($event)"
+                                          (onDeSelect)="OnItemDeSelect($event)"
+                                          (onSelectAll)="onSelectAll($event)"
+                                          (onDeSelectAll)="onDeSelectAll($event)"
+                                          (onAddFilterNewItem)="onAddItem($event)" name="skill9">
+                    </angular2-multiselect>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                <div class="form-group">
+                  <label for="ccmonth">{{ 'key_ShipmentNo' | translate }}</label>
+                  <input class="form-control" id="nf-ship" type="number" name="nf-ship" placeholder="Type your shipment no.">
+                </div>
+              </div>
+              <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                <div class="form-group">
+                  <label for="ccmonth">{{ 'key_PONo' | translate }}</label>
+                  <input class="form-control" id="nf-ship" type="number" name="nf-ship" placeholder="Type yopur PO no.">
+                </div>
+              </div>
+              <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                <div class="form-group">
+                  <label for="ccmonth">{{ 'key_Material' | translate }}</label>
+                  <angular2-multiselect [data]="itemList" [(ngModel)]="selectedItems" [settings]="settings"
+                                        (onSelect)="onItemSelect($event)"
+                                        (onDeSelect)="OnItemDeSelect($event)"
+                                        (onSelectAll)="onSelectAll($event)"
+                                        (onDeSelectAll)="onDeSelectAll($event)"
+                                        (onAddFilterNewItem)="onAddItem($event)" name="skill10">
+                  </angular2-multiselect>
+
+                </div>
+              </div>
+              <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                <div class="form-group">
+                  <label for="ccmonth">{{ 'key_Carrier' | translate }}</label>
+                  <angular2-multiselect [data]="itemList" [(ngModel)]="selectedItems" [settings]="settings"
+                                        (onSelect)="onItemSelect($event)"
+                                        (onDeSelect)="OnItemDeSelect($event)"
+                                        (onSelectAll)="onSelectAll($event)"
+                                        (onDeSelectAll)="onDeSelectAll($event)"
+                                        (onAddFilterNewItem)="onAddItem($event)" name="skill11">
+                  </angular2-multiselect>
+                </div>
+              </div>
+              <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                <div class="form-group">
+                  <label for="ccmonth" class="mr-3 mt-2">{{'key_ShipWith' | translate}}</label>
+
+                  <div class="form-check form-check-inline mt-1">
+                    <input type="radio" class="form-check-input" id="yes" name="radion11">
+                    <label class="form-check-label mb-0" for="yes">Yes</label>
+                  </div>
+                  <div class="form-check form-check-inline mt-1">
+                    <input type="radio" class="form-check-input" id="no" name="radion11">
+                    <label class="form-check-label mb-0" for="no">No</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 d-flex w-100">
+          <div class="card">
+            <div class="card-header mb-2">
+              <div class="card-title">{{ 'key_OrderDateFilters' | translate }}</div>
+            </div>
+
+            <div class="card-body p-0">
+              <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                <div class="form-group">
+                  <label for="ccmonth">{{ 'key_SSSdate' | translate }}</label>
+                  <ejs-daterangepicker [format]='dateFormat' separator='to' placeholder='MM-DD-YYYY to MM-DD-YYYY' id="ReqDeliveryDate" class="form-control"></ejs-daterangepicker>
+                </div>
+              </div>
+              <!-- <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                <div class="form-group">
+                  <label for="ccmonth">{{ 'key_SSSdate' | translate }}</label>
+                  <mat-form-field appearance="fill">
+                    <input matInput [matDatepicker]="picker1" class="form-control" [formControl]="date" placeholder=" MM/DD/YYYY">
+                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                    <mat-datepicker #picker1></mat-datepicker>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                <div class="form-group">
+                  <label for="ccmonth">{{ 'key_SSEdate' | translate }}</label>
+                  <input class="form-control" id="date-input" type="date" name="date-input" placeholder="End Date">
+                </div>
+              </div>-->
+              <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                <div class="form-group">
+                  <label for="ccmonth">{{ 'key_ReqDeliveryDate' | translate }}</label>
+                  <ejs-daterangepicker [format]='dateFormat' separator='to' placeholder='MM-DD-YYYY to MM-DD-YYYY' id="ReqDeliveryDate" class="form-control"></ejs-daterangepicker>
+                </div>
+              </div>
+              <!--<div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                <div class="form-group">
+                  <label for="ccmonth">{{ 'key_RDSdate' | translate }}</label>
+                  <input class="form-control" id="date-input" type="date" name="date-input" placeholder="date">
+                 </div>
+              </div>-->
+              <!-- <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                <div class="form-group">
+                  <label for="ccmonth">{{ 'key_Rdedate' | translate }}</label>
+                  <input class="form-control" id="date-input" type="date" name="date-input" placeholder="date">
+                 </div>
+              </div>-->
+              <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                <div class="form-group">
+                  <label for="ccmonth">{{ 'key_Source' | translate }}</label>
+                  <input class="form-control" id="nf-ship" type="number" name="nf-ship" placeholder="">
+                </div>
+              </div>
+              <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                <div class="form-group">
+                  <label for="ccmonth">{{ 'key_SalesManager' | translate }}</label>
+                  <angular2-multiselect [data]="itemList" [(ngModel)]="selectedItems" [settings]="settings"
+                                        (onSelect)="onItemSelect($event)"
+                                        (onDeSelect)="OnItemDeSelect($event)"
+                                        (onSelectAll)="onSelectAll($event)"
+                                        (onDeSelectAll)="onDeSelectAll($event)"
+                                        (onAddFilterNewItem)="onAddItem($event)" name="skill12">
+                  </angular2-multiselect>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+      <div class="row">
+        <div class="col-sm-9 col-lg-9 text-right mt-4 mb-3">
+          <div class="row">
+            <div class="col-md-3 pr-0 text-right">
+              <input type="button" class="btn btn-save pt-1 pb-1 font-weight-normal" value="Apply Filter">
+            </div>
+            <div class="col-md-2 pr-0 pt-1 mt-1">
+              Apply Custom Filter
+            </div>
+            <div class="col-md-5">
+              <angular2-multiselect [data]="itemList" [(ngModel)]="selectedItems" [settings]="settings"
+                                    (onSelect)="onItemSelect($event)"
+                                    (onDeSelect)="OnItemDeSelect($event)"
+                                    (onSelectAll)="onSelectAll($event)"
+                                    (onDeSelectAll)="onDeSelectAll($event)"
+                                    (onAddFilterNewItem)="onAddItem($event)" name="skill2" #skill2="ngModel">
+              </angular2-multiselect>
+            </div>
+            <div class="col-md-2 text-left">
+              <button type="button" class="btn btn-next pt-1 pb-1 font-weight-normal">Reset Filter</button>
+              <!--<button class="btn btn-save font-weight-normal" data-toggle="modal" data-target="#customfilter">Apply Custom Filter</button>-->
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-3 col-lg-3 text-right mt-4 mb-3 pr-3">
+          <button type="button" class="btn btn-save font-weight-normal pt-1 pb-1 " data-toggle="modal" data-target="#manageFilter">Manage Custom Filters</button>
+        </div>
+      </div>
+      <!-----------modal------------------->
+      <div class="modal" id="customfilter">
+        <div class="modal-dialog modal-md">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">
+                <i aria-hidden="true" class="fa fa fa-sliders fa-3x"></i> {{ 'key_ChangeFilter' | translate }}
+              </h5>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+              <p class="text-center">
+                Customize your search by adding or removing filters. A saved search will retain the custom filters.
+              </p>
+              <div class="card-body brd filterpopscroll">
+                <div class="bg">
+                  <div>
+                    <div class="">
+                      <input id="myCheckbox" type="checkbox">
+                      <label for="myCheckbox" class="ml-2">{{ 'key_SelectFromExiting' | translate }} {{ 'key_OrderNo' | translate }}.</label>
+                      <span></span>
+                    </div>
+                    <div class="">
+                      <input id="myCheckbox2" type="checkbox">
+                      <label for="myCheckbox2" class="ml-2">{{ 'key_SelectFromExiting' | translate }} {{ 'key_ShowAllVersions' | translate }}</label>
+                      <span></span>
+                    </div>
+                    <div class="">
+                      <input id="myCheckbox3" type="checkbox">
+                      <label for="myCheckbox3" class="ml-2">{{ 'key_SelectFromExiting' | translate }} {{ 'key_ShipFromLocationType' | translate }}</label>
+                      <span></span>
+                    </div>
+                    <div class="">
+                      <input id="myCheckbox4" type="checkbox">
+                      <label for="myCheckbox4" class="ml-2">{{ 'key_SelectFromExiting' | translate }} {{ 'key_ScheduleShipDate' | translate }}</label>
+                      <span></span>
+                    </div>
+                    <div class="">
+                      <input id="myCheckbox5" type="checkbox">
+                      <label for="myCheckbox5" class="ml-2">{{ 'key_SelectFromExiting' | translate }} {{ 'key_OrderCondition' | translate }} </label>
+                      <span></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="text-center">
+                <input type="button" id="btnNext" class="btn btn-next font-weight-normal  mr-3" value="Update">
+              </div>
+            </div>
+
+            <!-- Modal footer -->
+
+          </div>
+        </div>
+      </div>
+
+      <!--manage-filter-->
+      <!--manage-filter-->
+      <div class="modal" id="manageFilter">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">
+                {{'key_SaveCurrentFilterAs' | translate}}
+              </h5>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+              <div class="row mt-3 mb-3">
+                <div class="col-md-2 pr-0 mt-2">
+                  {{'key_NewFilterName' | translate}}
+                </div>
+                <div class="col-md-6">
+                  <input type="text" name="filter" class="form-control" />
+                </div>
+                <div class="col-md-3 mt-2">
+                  <div class="form-check checkbox">
+                    <input id="check1" type="checkbox" value="" checked="" class="form-check-input">
+                    <label for="check1" class="form-check-label">
+                      {{'key_SetAsDefault' | translate}}
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div class="text-center mt-4 mb-3">
+                <input type="button" id="btnNext" class="btn btn-next font-weight-normal  mr-3" value="Create New Filter">
+              </div>
+              <hr />
+              <h5> {{'key_ResetDefault' | translate}}</h5>
+              <div class="card-body filterpopscroll">
+
+                <div class="bg">
+                  <div class="row">
+
+                    <div class="d-flex flex-nowrap justify-content-between align-items-center mb-2">
+                      <div class="btn-group btn-group-toggle btn-group-md" data-toggle="buttons">
+                        <button class="btn btn-outline-primary" type="button" placement="bottom" ngbTooltip="Edit">
+                          <i class="fa fa-plus" aria-hidden="true"></i>
+                          <span>
+                            {{'key_Edit' | translate}}
+                          </span>
+                        </button>
+                        <button id="deleteButton" class="btn btn btn-outline-danger" type="button" placement="bottom" ngbTooltip="Delete">
+                          <i class="fa fa-trash-o" aria-hidden="true"></i>
+                          <span>
+                            {{'key_Delete' | translate}}
+                          </span>
+                        </button>
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="row">
+                        <table class="col-sm-12 table" border="1">
+                          <tr>
+                            <th width="5%"></th>
+                            <th width="80%">Filter Name</th>
+                            <th>Default Filter</th>
+                          </tr>
+                          <tr>
+                            <td class="text-center"><input type="checkbox" name="checked" /></td>
+                            <td>demo</td>
+                            <td>Yes</td>
+                          </tr>
+                          <tr>
+                            <td class="text-center"><input type="checkbox" name="checked" /></td>
+                            <td>Test</td>
+                            <td>No</td>
+                          </tr>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </mat-expansion-panel>
+</mat-accordion>
+<!--end filter-->
+
+<section class="moreOptions mt-4" id="more-option">
+  <ul class="nav nav-tabs" role="tablist">
+    <li class="nav-item" (click)="tabClick('outbound')" *ngIf="isCustomer">
+      <a class="nav-link active" id="inbound-tab" data-toggle="tab" href="#inbound" role="tab" aria-controls="Inbound" aria-selected="false">{{'key_customerr'| translate}}</a>
+    </li>
+    <li class="nav-item" (click)="tabClick('inbound')" *ngIf="isStockCollection">
+      <a class="nav-link " id="outbound-tab" #outboundtab data-toggle="tab" href="#outbound" role="tab" aria-controls="Outbound" aria-selected="true">{{'key_stockcollection'| translate}}</a>
+    </li>
+  </ul>
+  <div class="tab-content pb-3 pt-3" id="myTabContent">
+    <app-table-filter (filterOn)="applyFilter($event)"></app-table-filter>
+    <div class="tab-pane fade show active" id="inbound" role="tabpanel"
+         aria-labelledby="inbound-tab" *ngIf="isCustomer">
+      <div class="row">
+        <div class="col-lg-12">
+
+          <!-- <div>
+          <mat-form-field appearance="outline" fxFlex="100">
+            <mat-label>{{ 'key_Filter' | translate }}</mat-label>
+            <input matInput (keyup.enter)="applyFilter($event.target.value)" (keyup)="clearFilter($event.target.value)" [(ngModel)]="filterValue" placeholder="Press enter to filter">
+          </mat-form-field>
+
+        </div>-->
+          <div class="scroll resize-table">
+
+            <mat-table #table [dataSource]="dataSource" matSort (matSortChange)="customSort($event)">
+              <ng-container *ngFor="let column of displayedColumns; let i=index;" [matColumnDef]="column">
+                <mat-header-cell *matHeaderCellDef mat-sort-header mwlResizable [enableGhostResize]="true" (resizeEnd)="onResizeEnd($event, column)"
+                                 [resizeEdges]="{bottom: false, right: true, top: false, left: true}">
+                  <div class="form-check-inline" *ngIf="column === selectRow">
+                    <label class="form-check-label">
+                      <input type="checkbox" class="form-check-input" value="" placement="top" ngbTooltip="Select all"
+                             (change)="$event ? masterToggle() : null"
+                             [checked]="selection.hasValue() && isAllSelected()"
+                             [indeterminate]="selection.hasValue() && !isAllSelected()">
+                    </label>
+                  </div>
+                  <div *ngIf="column != selectRow">  {{ displayedColumnsReplace[i] | translate}}</div>
+                </mat-header-cell>
+                <mat-cell *matCellDef="let item">
+                  <!--for-checkbox-->
+                  <div class="form-check-inline" *ngIf="column === selectRow">
+                    <label class="form-check-label">
+                      <input type="checkbox" class="form-check-input" value=""
+                             (click)="$event.stopPropagation()"
+                             (change)="selectedvalue(item, $event, $event.target.checked)"
+                             [checked]="selection.isSelected(item)">
+                    </label>
+                  </div>
+                  {{ item[column] }}
+                </mat-cell>
+              </ng-container>
+
+              <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+              <!--<mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{ 'selected': selection.isSelected(row)}"
+                     (click)="selection.toggle(row)">
+            </mat-row>-->
+
+              <mat-row *matRowDef="let row; columns: displayedColumns;"
+                       (click)="selectedvalue(row, $event, $event.target.checked)"
+                       [ngClass]="{hovered: row.hovered, highlighted: selection.isSelected(row)}"
+                       (mouseover)="row.hovered = true" (mouseout)="row.hovered = false">
+              </mat-row>
+
+            </mat-table>
+
+          </div>
+          <div class="col-lg-12 text-center" *ngIf="dataSource.data.length == 0"><p>No records to display.</p></div>
+          <mat-paginator #paginator
+                         [length]="paginationModel.itemsLength"
+                         [pageSize]="paginationModel.pageSize"
+                         [pageSizeOptions]="paginationModel.pageSizeOptions"
+                         (page)="onPaginationEvent($event)">
+          </mat-paginator>
+
+        </div>
+      </div>
+    </div>
+    <div class="tab-pane fade" id="outbound" #outboundtabDiv
+         role="tabpanel" aria-labelledby="outbound-tab" *ngIf="isStockCollection">
+      <div class="row">
+        <div class="col-lg-12">
+          <!--<app-table-filter (filterOn)="applyFilter($event)" [resetFilter]="resetFilter"></app-table-filter>-->
+          <!-- <div>
+          <mat-form-field appearance="outline" fxFlex="100">
+            <mat-label>{{ 'key_Filter' | translate }}</mat-label>
+            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="{{ 'key_Filter' | translate }}">
+          </mat-form-field>
+        </div>-->
+
+          <div class="scroll resize-table">
+
+            <mat-table #table [dataSource]="dataSourceIB" matSort
+                       (matSortChange)="customSort1($event)">
+              <ng-container *ngFor="let column of displayedColumns1; let i=index;" [matColumnDef]="column">
+                <mat-header-cell *matHeaderCellDef mat-sort-header mwlResizable [enableGhostResize]="true" (resizeEnd)="onResizeEnd($event, column)"
+                                 [resizeEdges]="{bottom: false, right: true, top: false, left: true}">
+                  <div class="form-check-inline" *ngIf="column === selectRow">
+                    <label class="form-check-label">
+                      <input type="checkbox" class="form-check-input" value="" placement="top" ngbTooltip="Select all" (change)="$event ? masterToggle1() : null"
+                             [checked]="selection1.hasValue() && isAllSelected1()"
+                             [indeterminate]="selection1.hasValue() && !isAllSelected1()">
+                    </label>
+                  </div>
+                  <div *ngIf="column != selectRow">  {{ displayedColumnsReplaceIB[i] | translate}}</div>
+                </mat-header-cell>
+                <mat-cell *matCellDef="let item">
+                  <!--for-checkbox-->
+                  <div class="form-check-inline" *ngIf="column === selectRow">
+                    <label class="form-check-label">
+                      <input type="checkbox" class="form-check-input" value="" (click)="$event.stopPropagation()"
+                             (change)="selectedvalueIB(item, $event, $event.target.checked)"
+                             [checked]="selection1.isSelected(item)">
+                    </label>
+                  </div>
+                  {{ item[column] }}
+                </mat-cell>
+              </ng-container>
+
+              <mat-header-row *matHeaderRowDef="displayedColumns1"></mat-header-row>
+              <!--<mat-row *matRowDef="let row; columns: displayedColumns1;">
+            </mat-row>-->
+              <mat-row *matRowDef="let row; columns: displayedColumns1;"
+                       (click)="selectedvalueIB(row, $event, $event.target.checked)"
+                       [ngClass]="{hovered: row.hovered, highlighted: selection.isSelected(row)}"
+                       (mouseover)="row.hovered = true" (mouseout)="row.hovered = false">
+              </mat-row>
+
+            </mat-table>
+
+
+          </div>
+          <!--<mat-paginator #paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 20]">
+        </mat-paginator>-->
+          <div class="col-lg-12 text-center" *ngIf="dataSourceIB.data.length == 0"><p>No records to display.</p></div>
+          <mat-paginator #paginator
+                         [length]="paginationModel.itemsLength"
+                         [pageSize]="paginationModel.pageSize"
+                         [pageSizeOptions]="paginationModel.pageSizeOptions"
+                         (page)="onPaginationEvent1($event)">
+          </mat-paginator>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<app-show-notes></app-show-notes>

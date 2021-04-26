@@ -1,0 +1,6 @@
+#heightpopup {  
+  max-height: 400px;
+  overflow: auto;
+  overflow-x: hidden
+}
+.mat-table .mat-row .mat-cell{overflow:inherit;}

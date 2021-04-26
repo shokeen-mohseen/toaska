@@ -1,0 +1,55 @@
+
+<div class="modal-header">
+  <h4 class="modal-title">Freight Lanes: Import</h4>
+  <button type="button" class="close" data-dismiss="modal" (click)="activeModal.dismiss('Cross click')">&times;</button>
+</div>
+
+<!-- Modal body -->
+<div class="modal-body">
+  <div class="col-md-12 col-form-label">
+    <!--<div class="row mb-4">
+      <div class="col-md-12 col-sm-12 ">
+        <div class="form-check form-check-inline mr-3">
+          <input class="form-check-input" id="inline-radio1" type="radio" value="option1" name="inline-radios">
+          <label class="form-check-label" for="inline-radio1">Show sheet name in the dropdown</label>
+        </div>
+        <div class="form-check form-check-inline mr-1">
+          <input class="form-check-input" id="inline-radio2" type="radio" value="option2" name="inline-radios">
+          <label class="form-check-label" for="inline-radio2">Enter sheet name</label>
+        </div>
+      </div>
+     
+      </div>-->
+      
+    <div class="form-group">
+      <label>Select freight lane excel file to upload:</label>
+      <div class="custom-file">
+        <input id="file-input" type="file" class="custom-file-input"   #fileInput (change)="btnBrowse($event)">
+        <label class="custom-file-label justify-content-start" for="file-input" >Choose File</label>
+      </div>
+    </div>
+      <div class="form-group">
+        <label>Select sheet name</label>
+        <angular2-multiselect fixFilterBug [data]="itemListA" [(ngModel)]="selectedItemsA" [settings]="settingsA"
+                              (onSelect)="onItemSelect($event)"
+                              (onDeSelect)="OnItemDeSelect($event)"
+                              (onSelectAll)="onSelectAll($event)"
+                              (onDeSelectAll)="onDeSelectAll($event)"
+                              (onAddFilterNewItem)="onAddItemA($event)">
+        </angular2-multiselect>
+      </div>
+      <div class="col-lg-12 text-center mt-4 mb-4">
+        <button type="button" id="btnimport"  name="btnimport" class="btn btn-save mr-2 popup-btn-width" value="Import" (click)="btnImport()">Import</button>
+      </div>
+    </div>
+  </div>
+
+
+
+<div class="modal-body centerBoxContent" *ngIf="recordsFetched">
+  <h5>
+    Import completed. Of {{totalRecords}} records {{successRecords}} records are imported successfully.<br />
+  </h5>
+            
+  <h5>Check the status at => View > View Import Status.</h5>
+</div>

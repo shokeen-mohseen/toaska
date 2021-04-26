@@ -1,0 +1,234 @@
+<div class="modal-header">
+  <h5 class="modal-title" style=" font-size: 16px;">Ship With Order</h5>
+  <button type="button" class="close" data-dismiss="modal" (click)="activeModal.dismiss('Cross click')">&times;</button>
+</div>
+<div style="margin-left: 15px;">
+  <h6 class="modal-title">
+    <b>
+      Link Orders To {{ParentOrderId}}
+    </b>
+  </h6>
+</div>
+<!-- Modal body -->
+<div class="modal-body">
+  <div class="row mt-2">
+    <div class="col-md-2 col-sm-12 pr-0 pt-2 w-125">Ship To Location</div>
+    <div class="col-md-3 col-sm-12">
+      <!--<select class="form-control" placeholder="Select contract type" name="ShipFromType" [(ngModel)]="LocationId"
+              id="ShipFromType" #ShipFromType="ngModel" (change)="selectShipToLocation(LocationId)">
+        <option value="0" selected>Select</option>
+        <option class='option' *ngFor='let order of LocationDatalist' [value]="order.id">
+          {{order.name
+      }}
+      </option>
+      </select>-->
+
+      <select class="form-control" [(ngModel)]="LocationId" (change)="selectShipToLocation($event)" id="ShipFromType" #ShipFromType="ngModel">
+        <option value="-1">Select</option>
+        <option *ngFor='let order of LocationDatalist' [value]="order.id">{{order.name}}</option>
+      </select>
+    </div>
+
+
+  </div>
+  <div class="row mt-4">
+    <div class="col-lg-12">
+      <div class="scroll">
+
+        <mat-table #table [dataSource]="SalesOrderDatalist" matSort>
+          <!--SalesOrderDatalist-->
+          <ng-container matColumnDef="selectRow">
+            <mat-header-cell class="t-center tw-5" *matHeaderCellDef>
+
+              <div class="form-check-inline">
+                <label class="form-check-label">
+                  <input type="checkbox" class="form-check-input" value="" placement="top" ngbTooltip="Select all" (change)="$event ? masterToggle() : null"
+                         [checked]="selection.hasValue() && isAllSelected()"
+                         [indeterminate]="selection.hasValue() && !isAllSelected()">
+                </label>
+              </div>
+            </mat-header-cell>
+
+
+            <mat-cell *matCellDef="let row">
+              <mat-checkbox (click)="$event.stopPropagation()"
+                            (change)="$event ? selection.toggle(row) : null"
+                            [checked]="selection.isSelected(row)">
+              </mat-checkbox>
+            </mat-cell>
+
+
+          </ng-container>
+          <ng-container matColumnDef="RouteSequence">
+            <mat-header-cell class="" style="display:none" *matHeaderCellDef mat-sort-header>Route Sequence</mat-header-cell>
+            <mat-cell class="" style="display:none" *matCellDef="let element"> {{element.RouteSequence}} </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="OrderNum">
+            <mat-header-cell class="" *matHeaderCellDef mat-sort-header>Order No.</mat-header-cell>
+            <mat-cell class="" *matCellDef="let element"> {{element.OrderNumber}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="ShipToLocation">
+            <mat-header-cell class="" *matHeaderCellDef mat-sort-header>Ship To Location</mat-header-cell>
+            <mat-cell class="" *matCellDef="let element"> {{element.ToLocation}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="OrderQuantity">
+            <mat-header-cell class="" *matHeaderCellDef mat-sort-header> Order Quantity</mat-header-cell>
+            <mat-cell class="" *matCellDef="let element"> {{element.OrderQuantity}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="DeliverbyDate">
+            <mat-header-cell class="" *matHeaderCellDef mat-sort-header>Deliver by Date</mat-header-cell>
+            <mat-cell class="" *matCellDef="let element">
+              {{element.RequestedDeliveryDate | date }}
+            </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="LinkedtoOrder">
+            <mat-header-cell class="" *matHeaderCellDef mat-sort-header>Linked to Order</mat-header-cell>
+            <mat-cell class="" *matCellDef="let element">
+              {{element.LinkOrders}}
+            </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <!--<mat-row *matRowDef="let row; columns: displayedColumns;"
+                   [ngClass]="{hovered: row.hovered, highlighted: row.highlighted}"
+                   (click)="selection.toggle(row) || row.highlighted = !row.highlighted"
+                   (mouseover)="row.hovered = true" (mouseout)="row.hovered = false">
+          </mat-row>-->
+          <mat-row *matRowDef="let row; columns: displayedColumns;"
+                   [ngClass]="{hovered: row.hovered, highlighted: row.highlighted}"
+                   (mouseover)="row.hovered = true" (mouseout)="row.hovered = false">
+          </mat-row>
+        </mat-table>
+
+      </div>
+
+      <div class="col-md-12 mt-3 mb-4 text-right float-right"><button (click)="removeSelectedRows()" class="btn btn-next font-weight-normal">Link Orders</button></div>
+      <div class="row">
+        <div class="card-body pl-0 pt-0">
+          <div class="col-md-12">
+            <div class="d-flex flex-nowrap justify-content-between align-items-center">
+              <div class="btn-group btn-group-toggle btn-group-md" data-toggle="buttons">
+                <button id="addAddressButton" class="btn btn-outline-primary" type="button" [disabled]="IsDisabledMoveUp" (click)="MoveUp()">
+                  <i class="fa fa-arrow-up" aria-hidden="true"></i>
+                  <span>
+                    Move Up
+                  </span>
+                </button>
+                <button id="editAddressButton" class="btn btn-outline-primary" type="button" [disabled]="IsDisabledMoveDown" (click)="MoveDown()">
+                  <i class="fa fa-arrow-down" aria-hidden="true"></i>
+                  <span>
+                    Move Down
+                  </span>
+                </button>
+                <button id="deleteButton" class="btn btn btn-outline-danger" type="button" (click)="RemoveLinkOrder()">
+                  <i class="fa fa-trash-o" aria-hidden="true"></i>
+                  <span>
+                    Remove
+                  </span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="scroll">
+
+        <mat-table #table [dataSource]="LinkSalesOrderDatalistNew" matSort>
+          <ng-container matColumnDef="selectRow">
+            <mat-header-cell class="t-center tw-5" *matHeaderCellDef>
+              <div class="form-check-inline">
+                <label class="form-check-label">
+                  <input type="checkbox" class="form-check-input" value="" placement="top" ngbTooltip="Select all" (change)="$event ? masterToggle() : null"
+                         [checked]="selection.hasValue() && isAllSelected()"
+                         [indeterminate]="selection.hasValue() && !isAllSelected()">
+                </label>
+              </div>
+            </mat-header-cell>
+
+
+            <!--<mat-cell *matCellDef="let row">
+               <mat-checkbox (click)="$event.stopPropagation()"
+                            (change)="$event ? selection.toggle(row) : null"
+                            [checked]="selection.isSelected(row)">
+              </mat-checkbox>
+            </mat-cell>-->
+
+
+            <mat-cell class="t-center tw-5" *matCellDef="let item">
+              <div class="form-check-inline">
+                <label class="form-check-label">
+                  <input type="checkbox" class="form-check-input" value="" (click)="$event.stopPropagation()"
+                         (change)="selectedvalue(item, $event, $event.target.checked)"
+                         [checked]="selection.isSelected(item)">
+                </label>
+              </div>
+            </mat-cell>
+
+
+          </ng-container>
+          <ng-container matColumnDef="RouteSequence">
+            <mat-header-cell class="" *matHeaderCellDef mat-sort-header>Route Sequence</mat-header-cell>
+            <mat-cell class="" *matCellDef="let element"> {{element.RouteSequence}} </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="OrderNum">
+            <mat-header-cell class="" *matHeaderCellDef mat-sort-header>Order No.</mat-header-cell>
+            <mat-cell class="" *matCellDef="let element"> {{element.OrderNumber}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="ShipToLocation">
+            <mat-header-cell class="" *matHeaderCellDef mat-sort-header>Ship To Location</mat-header-cell>
+            <mat-cell class="" *matCellDef="let element"> {{element.ToLocation}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="OrderQuantity">
+            <mat-header-cell class="" *matHeaderCellDef mat-sort-header> Order Quantity</mat-header-cell>
+            <mat-cell class="" *matCellDef="let element"> {{element.OrderQuantity}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="DeliverbyDate">
+            <mat-header-cell class="" *matHeaderCellDef mat-sort-header>Deliver by Date</mat-header-cell>
+            <mat-cell class="" *matCellDef="let element">
+              {{element.RequestedDeliveryDate | date }}
+            </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="LinkedtoOrder">
+            <mat-header-cell class="" *matHeaderCellDef mat-sort-header>Linked to Order</mat-header-cell>
+            <mat-cell class="" *matCellDef="let element">
+              {{element.LinkOrders}}
+            </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <!--<mat-row *matRowDef="let row; columns: displayedColumns;"
+                   [ngClass]="{hovered: row.hovered, highlighted: row.highlighted}"
+                   (click)="selection.toggle(row) || row.highlighted = !row.highlighted"
+                   (mouseover)="row.hovered = true" (mouseout)="row.hovered = false">
+          </mat-row>-->
+          <mat-row *matRowDef="let row; columns: displayedColumns;"
+                   [ngClass]="{hovered: row.hovered, highlighted: row.highlighted}"
+                   (mouseover)="row.hovered = true" (mouseout)="row.hovered = false">
+          </mat-row>
+        </mat-table>
+
+        <br />
+        <br />
+
+
+      </div>
+
+    </div>
+  </div>
+
+  <div class="modal-footer col-12 justify-content-center">
+    <div class="d-flex justify-content-center">
+      <button type="button" class="btn btn-block btn-save" style=" width: 88px;" data-dismiss="modal" (click)="LinkOrderSave()">Save</button>
+    </div>
+    <div class="d-flex justify-content-center">
+      <button type="button" class="btn btn-block btn-next bottom-btn-next" data-dismiss="modal" (click)="activeModal.dismiss('Cross click')">Cancel</button>
+    </div>
+  </div>
+</div>

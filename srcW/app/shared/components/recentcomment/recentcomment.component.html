@@ -1,0 +1,60 @@
+<!---
+Author name- satyen singh
+10-8-2020
+TFS ID-16737 Task-1st release - Design a Comment control with simple text input.
+Description-1st release - Design a Comment control with simple text input.
+    TFS ID 16396 Task
+Description-Latent Phase - Fetal Heart rate Chart popup - Cross browser compatibility
+code start
+-->
+
+<ng-container *ngIf="posts?.length; else elseTemplate">
+  
+      <div class="card-bodybrd">
+          <!---add comment code start here Author name satyen 6-07-2020-->
+          <div class="row mt-10 ml-0 col-md-12 p-0">
+            <!--<div class="col-md-12">
+              <div class="panel-heading panel-headingidea">
+                <h5 class="panel-title"><span class="fa fa-comments"></span> {{ 'key_Recentcomments' | translate }}</h5>
+              </div>
+            </div>
+            <hr />-->
+            <div class="xdsoft_scrollbar col-md-12">
+              <ng-container  *ngFor="let post of sortData; let i = index">
+                <div *ngIf="post.description!=''" class="col-xs-12 col-md-12 brd pb-3 pt-3">
+                  <div class="mic-info pb-2 d-flex">
+                    By: <a class="ml-1"> {{post.createdBy}}</a>
+                   <span class="text-muted float-right ml-2"> {{post.createDateTimeServer| date:'medium'  }} {{GetTimeZone(post.createDateTimeServer)}}</span>
+                  </div>
+                  <div class="d-flex">
+                    <span class="text-danger ml-0"> Value:{{post[this.valueField]}}</span>
+                  </div>
+                
+                  <div *ngIf="post.description!=''" class="comment-text">
+                    {{post.description}}
+                  </div>
+                </div>
+              </ng-container>
+
+            </div>
+          </div>
+        
+      </div>
+
+   
+  
+  <!-----
+  Author name- satyen singh
+  10-8-2020
+  TFS ID-16737 Task-1st release - Design a Comment control with simple text input.
+  Description-1st release - Design a Comment control with simple text input.
+  code start
+  -->
+  </ng-container>
+  <ng-template #elseTemplate>
+
+    <div class="alert alert-danger" role="alert">
+      No recent comments found!
+    </div>
+
+  </ng-template>

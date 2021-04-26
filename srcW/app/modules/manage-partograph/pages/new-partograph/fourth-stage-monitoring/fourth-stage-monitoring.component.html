@@ -1,0 +1,36 @@
+<!---Author Name Satyen Singh TFS ID-16927
+Date- 22-7-2020
+Description- Active Phase - Add header & all charts.
+TFS ID-16928
+Description- Active Phase - Check for responsiveness.
+TFS ID-16929
+Description- Active Phase - Check for cross browser compatibility.
+-->
+
+<div class="row mb-4">
+  <div class="col-lg-12">
+    <app-patientinformation></app-patientinformation>
+  </div>
+</div>
+<div class="row mt-4 mb-4">
+  <div class="col-lg-12">
+    <app-pulsebp-fourth-stage-chart></app-pulsebp-fourth-stage-chart>
+  </div>
+</div>
+
+<div class="row mt-4 mb-4">
+  <div class="col-lg-12">
+    <app-temperature-fourth-stage-chart></app-temperature-fourth-stage-chart>
+  </div>
+</div>
+<!-- start new question and add comment with share and delete like code start here-->
+<h4>{{ 'key_Observation' | translate }}</h4>
+<app-dynamic-webcontrol-parameter [stageModule]="stageCode"></app-dynamic-webcontrol-parameter>
+
+
+<!--start chart history component-->
+<div class="row mt-4 mb-4">
+  <div class="col-lg-12">
+    <app-chart-history-fourth-phase></app-chart-history-fourth-phase>
+  </div>
+</div>

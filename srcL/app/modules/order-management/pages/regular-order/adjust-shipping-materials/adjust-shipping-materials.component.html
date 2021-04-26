@@ -1,0 +1,122 @@
+<!--Adjust Shipping Materials section-->
+<div class="col-md-12 col-sm-12">
+  <div class="row">
+    <div class="col-md-3 col-sm-12">
+      <h4 class="fs pt-2"> {{ 'key_AdjustShippingMaterials' | translate }}:</h4>
+    </div>
+    <div class="col-md-9 col-sm-12">
+      <div class="row">
+        <div class="col-md-4 col-sm-12">
+          <div class="form-group row">
+            <div class="col-md-4 col-sm-12 text-right">
+              <h5 class="pt-2">Material</h5>
+            </div>
+            <div class="col-md-8 col-sm-12">
+              <select class="form-control" required>
+                <option>TF-6317-FIN</option>
+                <option>TF-6317-FIN</option>
+                <option>TF-6317-FIN</option>
+                <option>TF-6317-FIN</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 col-sm-12">
+
+          <div class="form-group row">
+            <div class="col-md-4 col-sm-12 text-right">
+              <h5 class="pt-2">Quantity</h5>
+            </div>
+            <div class="col-md-8 col-sm-12">
+              <input type="text" name="" class="form-control" />
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-12">
+          <div class="form-group row">
+            <div class="col-md-5 col-sm-12 text-right p-0">
+              <h5 class="pt-2">UOM</h5>
+            </div>
+            <div class="col-md-7 col-sm-12">
+              <select class="form-control" name="">
+                <option>EA</option>
+                <option>>Pallet</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-1 col-sm-12 p-0">
+          <button class="btn btn-next">Add</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-12">
+    <!--<div>
+      <mat-form-field appearance="outline" fxFlex="100">
+        <mat-label>{{ 'key_Filter' | translate }}</mat-label>
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="{{ 'key_Filter' | translate }}">
+      </mat-form-field>
+    </div>-->
+    <div class="scroll">
+      <mat-table #table [dataSource]="dataSource" matSort>
+        <!-- Position Column -->
+        <ng-container matColumnDef="selectRow">
+          <mat-header-cell class="t-center tw-5" *matHeaderCellDef>
+            <div class="form-check-inline">
+              <label class="form-check-label">
+                <input type="checkbox" class="form-check-input" value="" placement="top" ngbTooltip="Select all" (change)="$event ? masterToggle() : null"
+                       [checked]="selection.hasValue() && isAllSelected()"
+                       [indeterminate]="selection.hasValue() && !isAllSelected()">
+              </label>
+            </div>
+          </mat-header-cell>
+          <mat-cell class="t-center tw-5" *matCellDef="let row">
+            <div class="form-check-inline">
+              <label class="form-check-label">
+                <input type="checkbox" class="form-check-input" value="" (click)="$event.stopPropagation()"
+                       (change)="$event ? selection.toggle(row) : null"
+                       [checked]="selection.isSelected(row)">
+              </label>
+            </div>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="Material">
+          <mat-header-cell class="" *matHeaderCellDef mat-sort-header>Material</mat-header-cell>
+          <mat-cell class="" *matCellDef="let element"> {{element.Material}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="OrderQuantity">
+          <mat-header-cell class="" *matHeaderCellDef mat-sort-header>Order Quantity</mat-header-cell>
+          <mat-cell class="" *matCellDef="let element"> {{element.OrderQuantity}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="ShippedQuantity">
+          <mat-header-cell class="" *matHeaderCellDef mat-sort-header> Shipped Quantity</mat-header-cell>
+          <mat-cell class="" *matCellDef="let element"> {{element.ShippedQuantity}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="Action">
+          <mat-header-cell class="" *matHeaderCellDef mat-sort-header>Action</mat-header-cell>
+          <mat-cell class="" *matCellDef="let element">
+            <button class="btn">
+              <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+            </button>/<button class="btn"><i class="fa fa-trash-o text-danger" aria-hidden="true"></i></button>
+          </mat-cell>
+        </ng-container>
+
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
+    </div>
+    <mat-paginator #paginator
+                   [pageSize]="10"
+                   [pageSizeOptions]="[5, 10, 20]">
+    </mat-paginator>
+  </div>
+</div>
+<hr class="mt-0 pb-3" />

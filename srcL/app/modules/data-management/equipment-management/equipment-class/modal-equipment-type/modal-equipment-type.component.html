@@ -1,0 +1,95 @@
+<!--Author name satyen singh---->
+<div class="modal-header">
+  <h4 class="modal-title"> {{ 'key_Equipmenttypelist' | translate }} </h4>
+  <button type="button" class="close" data-dismiss="modal" (click)="activeModal.dismiss('Cross click')">&times;</button>
+</div>
+
+<!-- Modal body -->
+<div class="modal-body">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group row">
+        <label class="col-md-6 col-form-label">{{'key_Equipmentclscode' | translate}}</label>
+        <div class="col-md-6">
+          <label class="form-control-static col-form-label">N/A</label>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group row">
+        <label class="col-md-7 col-form-label">{{'key_Equipmentclsdec' | translate}}</label>
+        <div class="col-md-5">
+          <label class="form-control-static col-form-label">N/A</label>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!---table start here-->
+  <div class="row">
+    <div class="col-lg-12">
+      <!--if you need table filter you can uncomment my code--->
+      <!--<div>
+        <mat-form-field appearance="outline" fxFlex="100">
+          <mat-label>{{ 'key_Filter' | translate }}</mat-label>
+          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="{{ 'key_Filter' | translate }}">
+        </mat-form-field>
+      </div>-->
+      <div class="scroll">
+        <mat-table #table [dataSource]="dataSource" matSort>
+
+          <!-- Position Column -->
+          <ng-container matColumnDef="selectRow">
+            <mat-header-cell class="t-center tw-5" *matHeaderCellDef>
+              <div class="form-check-inline">
+                <label class="form-check-label">
+                  <input type="checkbox" class="form-check-input" value="" placement="top" ngbTooltip="Select all" (change)="$event ? masterToggle() : null"
+                         [checked]="selection.hasValue() && isAllSelected()"
+                         [indeterminate]="selection.hasValue() && !isAllSelected()">
+                </label>
+              </div>
+
+            </mat-header-cell>
+            <mat-cell class="t-center tw-5" *matCellDef="let row">
+              <div class="form-check-inline">
+                <label class="form-check-label">
+                  <input type="checkbox" class="form-check-input" value="" (click)="$event.stopPropagation()"
+                         (change)="$event ? selection.toggle(row) : null"
+                         [checked]="selection.isSelected(row)">
+                </label>
+              </div>
+            </mat-cell>
+          </ng-container>
+
+
+          <ng-container matColumnDef="Equipmenttypecode">
+            <mat-header-cell class="tw-25" *matHeaderCellDef mat-sort-header> {{ 'key_Equipmenttypecode' | translate }} </mat-header-cell>
+            <mat-cell class="tw-25" *matCellDef="let element"> {{element.Equipmenttypecode}} </mat-cell>
+          </ng-container>
+
+
+          <ng-container matColumnDef="Resourcetypeequipt">
+            <mat-header-cell class="tw-15 t-right" *matHeaderCellDef mat-sort-header> {{ 'key_Resourcetypeequipt' | translate }} </mat-header-cell>
+            <mat-cell class="tw-15 t-right" *matCellDef="let element"> {{element.Resourcetypeequipt}} </mat-cell>
+          </ng-container>
+
+
+         
+
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"  [ngClass]="{ 'selected': selection.isSelected(row)}"
+                 (click)="selection.toggle(row)"></mat-row>
+        </mat-table>
+      </div>
+      <mat-paginator #paginator
+                     [pageSize]="10"
+                     [pageSizeOptions]="[5, 10, 20]">
+      </mat-paginator>
+    </div>
+  </div>
+  <!---table end here-->
+</div>
+<!--<div class="col-lg-12 text-center mt-4 mb-4">
+  <input type="button" id="btnSave" name="btnSave" class="btn btn-save mr-2 popup-btn-width" value=" {{ 'key_Save' | translate }}">
+</div>-->
+
+

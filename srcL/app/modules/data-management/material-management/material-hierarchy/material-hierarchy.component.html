@@ -1,0 +1,52 @@
+<!--TFS ID: 17222, Author: Monu Ram Yadav, Date: 05-09-2020, Des: Design Material Screens-->
+<app-top-btn-group #btnBar [actionGroupConfig]="actionGroupConfig" (action)="actionHandler($event)" [ParentPageName]="MaterialHierarchyList"></app-top-btn-group>
+<h5>{{ 'key_materialHistory' | translate }}</h5>
+
+<mat-tab-group #tabGroupA class="mt-18" animationDuration="0ms">
+
+  <mat-tab>
+    <ng-template mat-tab-label>
+      {{ 'key_materialHistorylist' | translate }}
+    </ng-template>
+    <div class="tab-content">
+      <div class="tab-pane active" id="existingUsers">
+        <div class="row">
+          <div class="col-lg-12">
+            <app-table-filter (filterOn)="applyFilter($event)"></app-table-filter>
+            <div class="scroll">
+              <mat-table #table [dataSource]="dataSource" matSort (matSortChange)="customSort($event)">
+
+                <ng-container *ngFor="let column of displayColumnsNew; let i=index;" [matColumnDef]="column">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header [resizeColumn]="true" [index]="i">
+                    <div *ngIf="column != selectRow"> {{ displayedColumnsReplace[i] | translate }}</div>
+                  </mat-header-cell>
+                  <mat-cell *matCellDef="let item">
+                    <!--for-checkbox-->
+                    <div *ngIf="column === detail">
+                      <a class="a_link" (click)="opendetail(item)">Detail</a>
+                    </div>
+                    {{ item[column] }}
+                  </mat-cell>
+                </ng-container>
+
+                <mat-header-row *matHeaderRowDef="displayColumnsNew"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayColumnsNew;"></mat-row>
+              </mat-table>
+              <div class="col-lg-12 text-center" *ngIf="dataSource.data.length == 0"><p>No records to display.</p></div>
+            </div>
+            <mat-paginator #paginator
+                           [length]="materialHierarchyModel.itemsLength"
+                           [pageSize]="materialHierarchyModel.pageSize"
+                           [pageSizeOptions]="materialHierarchyModel.pageSizeOptions"
+                           (page)="onPaginationEvent($event)">
+            </mat-paginator>
+          </div>
+        </div>
+        <!--Row End-->
+      </div>
+      <!--tab-pane End-->
+    </div>
+  </mat-tab>
+</mat-tab-group>
+
+<app-show-notes></app-show-notes>

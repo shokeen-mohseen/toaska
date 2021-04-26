@@ -1,0 +1,22 @@
+.info-siubscription {
+  position: absolute;
+  right: 10px;
+  top: 6px;
+}
+
+
+::ng-deep .info-siubscription .tooltip-inner {
+  width: 400px;
+}
+::ng-deep .mat-form-field-appearance-fill .mat-form-field-flex {
+  background: none;
+  padding: 0px;
+}
+
+::ng-deep .mat-form-field-wrapper {
+  padding-bottom: 0px;
+}
+
+::ng-deep .mat-calendar-content {
+  padding: 0px !important;
+}

@@ -1,0 +1,96 @@
+<app-top-btn-group #btnBar [actionGroupConfig]="actionGroupConfig" (action)="actionHandler($event)"></app-top-btn-group>
+<div class="mb-3">
+  <div class="form-area">
+    <div class="wrapper">
+      <div class="content-wrapper">
+        <div>
+          <h5>{{ 'key_Appointment' | translate }}</h5>
+        </div>
+        <mat-tab-group #tabGroupA class="mt-18" animationDuration="0ms" (selectedTabChange)="tabChange($event)">
+
+          <mat-tab #tab1 *ngIf="tab1">
+            <ng-template mat-tab-label>
+              {{ 'key_Calendar' | translate }}
+            </ng-template>
+            <div class="tab-content" *ngIf="tab1Data">
+
+              <div class="row">
+                <div class="col-lg-12 property-section">
+                  <table id="checkboxes" class="table">
+                    <tbody>
+                      <tr style="height: 30px">
+                        <td style="width: 100px;">
+                          <ejs-checkbox #eventTypeOneObj cssClass="personal" label="Personal" value="1" [checked]="true" (change)="onChange()">
+                          </ejs-checkbox>
+                        </td>
+                        <td>
+                          <ejs-checkbox #eventTypeTwoObj cssClass="team" label="Team" value="2" [checked]="true" (change)="onChange()">
+                          </ejs-checkbox>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="col-lg-12 control-section">
+                  <div class="content-wrapper">
+
+                    <ejs-schedule #scheduleObj width='100%' height='550px' [selectedDate]='selectedDate' [views]='views' [eventSettings]='eventSettings' [showQuickInfo]='showQuickInfo' [group]='group'
+                                  (popupOpen)='onPopupOpen($event)'>
+                      <e-resources>
+                        <e-resource field="EventTypeId" title="Event Type" name="EventType"
+                                    [dataSource]="eventTypeDataSource"
+                                    textField="text" idField="id" colorField="color">
+                        </e-resource>
+                      </e-resources>
+                      <ng-template #editorTemplate>
+
+                        <div class="row custom-event-editor">
+                          <div class="col-md-12">
+                            <div class="form-group">
+                              <label class="e-textlabel">Subject</label>
+                              <input id="Subject" class="e-field e-input" type="text" value="" name="Subject" style="width: 100%" />
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label class="e-textlabel">From</label>
+                              <input id="StartTime" class="e-field" type="text" name="StartTime" />
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label class="e-textlabel">To</label>
+                              <input id="EndTime" class="e-field" type="text" name="EndTime" />
+                            </div>
+                          </div>
+                          <div class="col-md-12">
+                            <div class="form-group">
+                              <label class="e-textlabel">Event Type</label>
+                              <input type="text" id="EventTypeId" name="EventTypeId" class="e-field" style="width: 100%" />
+                            </div>
+                          </div>
+                          <div class="col-md-12">
+                            <div class="form-group">
+                              <label class="e-textlabel">Description</label>
+                              <textarea id="Description" class="e-field e-input" name="Description" rows="3" cols="50" style="width: 100%; height: 60px !important; resize: vertical"></textarea>
+                            </div>
+                          </div>
+
+                        </div>
+                      </ng-template>
+                    </ejs-schedule>
+
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </mat-tab>
+
+        </mat-tab-group>
+
+      </div>
+    </div>
+  </div>
+</div>
+<app-show-notes></app-show-notes>

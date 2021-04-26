@@ -1,0 +1,43 @@
+<div class="row">
+  <div class="col-lg-12">
+    <app-table-filter (filterOn)="applyFilter($event)"></app-table-filter>
+    <!--<div>
+    <mat-form-field appearance="outline" fxFlex="100">
+      <mat-label>{{ 'key_Filter' | translate }}</mat-label>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="{{ 'key_Filter' | translate }}">
+    </mat-form-field>
+  </div>-->
+    <div class="scroll resize-table view-line">
+      <mat-table #table [dataSource]="dataSource">
+
+        <ng-container *ngFor="let column of displayedColumns; let i=index;" [matColumnDef]="column">
+         <!-- <mat-header-cell *matHeaderCellDef mwlResizable [enableGhostResize]="true" (resizeEnd)="onResizeEnd($event, column)"
+                           [resizeEdges]="{bottom: false, right: true, top: false, left: true}">-->
+          <mat-header-cell *matHeaderCellDef [resizeColumn]="true" [index]="i">          
+            <div> {{ displayedColumnsReplace[i] | translate}}</div>
+          </mat-header-cell>
+
+          <mat-cell *matCellDef="let item">
+
+            <ng-container *ngIf="column === 'showOnBOL' || column === 'autoAdded' || column === 'addPallet'">
+              {{ item[column] == 1 || item[column] == '1'  ? 'Yes': 'No' }}
+            </ng-container>
+            <ng-container *ngIf="!(column === 'showOnBOL' || column === 'autoAdded' || column === 'addPallet')">
+              {{ item[column] }}
+            </ng-container>
+          </mat-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
+    </div>
+    <!-- <mat-paginator #paginator
+                  [pageSize]="10"
+                  [pageSizeOptions]="[5, 10, 20]">
+   </mat-paginator>-->
+  </div>
+</div>
+
+
+
+

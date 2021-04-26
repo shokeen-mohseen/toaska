@@ -1,0 +1,459 @@
+<div>
+  <div class="row">
+    <div class="col-md-6"></div>
+    <div class="col-md-6 text-right">
+      <span class="fw600">Last Updated:	</span> {{usersViewModel.updatebyTimeBrowser}}
+      <br><span class="fw600">By</span> {{usersViewModel.updatedBy}}
+    </div>
+  </div>
+  <!--Last Updated Section End//////////////-->
+
+
+  <form (ngSubmit)="onSubmit()">
+    <div class="row">
+      <div [ngClass]="[this.dataSource.length > 0 ? 'col-md-3 custom-flex-w-15' : '']" *ngIf="this.dataSource.length > 0">
+        <div class="card">
+          <div class="card-header">{{ 'key_EditList' | translate }}</div>
+          <div class="card-body p-0">
+            <div class="list-group" #nextList>
+              <div class="list-group-item list-group-item-action" [ngClass]="[users.userId === userId ? 'active' : '']"
+                 *ngFor="let users of dataSource; let i = index" (click)="selectedUser(i)">
+                <a>{{users.prefix}} {{users.firstName}}</a>
+                <button class="close" *ngIf="usersViewModel?.userId != users?.userId"  type="button"
+                        (click)="removeUserFromEditList(users)">
+                  <i class="fa fa-times" aria-hidden="true"></i>
+                </button>
+              </div>
+              <!--<a class="list-group-item list-group-item-action" [ngClass]="[users.userId === userId ? 'active' : '']"
+                 *ngFor="let users of dataSource; let i = index" (click)="selectedUser(i)">{{users.prefix}} {{users.firstName}}</a>-->
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-9 custom-flex-w-85" [ngClass]="[this.dataSource.length > 0 ? 'col-md-9 custom-flex-w-85' : 'col-md-12']">
+        <div class="tab-content">
+          <!--=============== Start profile =================-->
+          <div class="e-profile">
+            <div class="row">
+              <div class="col-md-4">
+                <div class="box-children mb-4">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="text-center text-sm-left mb-2 mb-sm-0 text-break">
+                        <h4 class="pb-1 mb-0">{{usersViewModel.prefix}} {{usersViewModel.firstName}} {{usersViewModel.middleName}}</h4>
+                        <p class="mb-0">{{usersViewModel.lastName}} {{usersViewModel.suffix}}</p>
+                        <p class="mb-0">
+                          {{mobilePhoneCode}}
+                        </p>
+                        <div class="text-muted">
+                          <small>
+                            {{addressName}}
+                          </small>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="box-children">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="text-center text-sm-left mb-2 mb-sm-0">
+                        <p class="mb-0"><b>{{ 'key_LoginID' | translate
+                          }}:</b> {{usersViewModel.loginId}}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="box-children">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="d-flex flex-nowrap justify-content-between align-items-center">
+                        <h5>{{ 'key_Organization' | translate }}</h5>
+                      </div>
+                      <app-organizationinfo [organizationId]="usersViewModel.orgnizationId"
+                                            [PageActionType]="pageActionType"
+                                            (changeSelected)="getOrganizationId($event)"
+                                            [organizationlist]="organizationlist"></app-organizationinfo>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="box-children">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <span class="fw600 mr-3 " for="lastname"> {{ 'key_Status' | translate }} </span>
+                        <span for="lastname"> {{ 'key_Active' | translate }} </span>
+
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <div class="form-check checkbox pl-0">
+                          <label class="form-check-label" for="check1"> {{ 'key_SetupCompleted' | translate }} </label>
+                          <input class="form-check-input ml-2" id="check1" type="checkbox" value="" checked>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="form-group d-flex">
+                        <span class="fw600 mr-3 " for="lastname"> {{ 'key_SetupDatetime' | translate }} </span>
+                        <span for="lastname" class="text-break"> {{usersViewModel.updatebyTimeBrowser}} </span>
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="form-group d-flex">
+                        <span class="fw600 mr-3 " for="lastname"> {{ 'key_SetupCompletedby' | translate }} </span>
+                        <span for="lastname" class="text-break"> {{updateBy}}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--=============== End e-profile =================-->
+        </div>
+      </div>
+      <div class="col-lg-12">
+        <div id="accordionTab1" class="accordion">
+          <div class="card mb-0">
+            <!--<div class="card-header collapsed" data-toggle="collapse" href="#contactCtrl">
+              <a class="card-title">
+                {{ 'key_Contact' | translate }} - ( {{userContactList.length}} )
+              </a>
+            </div>
+            <div id="contactCtrl" class="card-body collapse" data-parent="#accordionTab1">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="d-flex flex-nowrap justify-content-between align-items-center mb-3">                    
+                    <div>
+                      <div class="btn-group btn-group-toggle btn-group-md">
+                        <button [ngClass]="{'active': btn==='btn10'}" (click)="openPopup('addContactButton')" class="btn btn-outline-primary" type="button" placement="bottom" ngbTooltip="{{ 'key_addnew' | translate }}">
+                          <i class="fa fa-plus" aria-hidden="true"></i>
+                          <span>
+                            {{ 'key_addnew' | translate }}
+                          </span>
+                        </button>
+                        <button [ngClass]="{'active': btn==='btn11'}" (click)="openPopup('editContactButton')" class="btn btn-outline-primary" type="button" placement="bottom" ngbTooltip="{{ 'key_Edit' | translate }}">
+                          <i class="fa fa-pencil" aria-hidden="true"></i>
+                          <span>
+                            {{ 'key_Edit' | translate }}
+                          </span>
+                        </button>
+                        <button [ngClass]="{'active': btn==='btn12'}" (click)="openPopup('deleteContactButton')" class="btn btn btn-outline-danger" type="button" placement="bottom" ngbTooltip="{{ 'key_Delete' | translate }}">
+                          <i class="fa fa-trash-o" aria-hidden="true"></i>
+                          <span>
+                            {{ 'key_Delete' | translate }}
+                          </span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  
+                  <div class="scroll">
+                    <mat-table #tableContact [dataSource]="userContactList" matSort>
+
+
+                      <ng-container matColumnDef="userContactId">
+                        <mat-header-cell class="t-center" *matHeaderCellDef>
+                          <div class="form-check-inline">
+                            <label class="form-check-label">
+                              <mat-checkbox [checked]="isContactAllSelected" (change)="selectContactAll($event); false" class="form-check-input"></mat-checkbox>
+
+                            </label>
+                          </div>
+
+                        </mat-header-cell>
+                        <mat-cell class="t-center" *matCellDef="let row">
+                          <div class="form-check-inline">
+                            <label class="form-check-label">
+                              <mat-checkbox [checked]="row.isSelected" (click)="$event.stopPropagation()" class="form-check-input"
+                                            (change)="selectContactCheckbox(row)"></mat-checkbox>
+                            </label>
+                          </div>
+                        </mat-cell>
+                      </ng-container>
+
+                      <ng-container matColumnDef="firstName">
+                        <mat-header-cell class="" *matHeaderCellDef mat-sort-header> {{ 'key_Name' | translate }} </mat-header-cell>
+                        <mat-cell class="" *matCellDef="let element"> {{element.prefix}} {{element.firstName}} {{element.middleName}} {{element.lastName}} {{element.suffix}} </mat-cell>
+                      </ng-container>
+
+                      <ng-container matColumnDef="email">
+                        <mat-header-cell class="" *matHeaderCellDef mat-sort-header> {{ 'key_email' | translate }} </mat-header-cell>
+                        <mat-cell class="" *matCellDef="let element"> {{element.email}} </mat-cell>
+                      </ng-container>
+
+                      <ng-container matColumnDef="mobilePhone">
+                        <mat-header-cell class="" *matHeaderCellDef mat-sort-header> {{ 'key_Phone' | translate }} </mat-header-cell>
+                        <mat-cell class="" *matCellDef="let element">{{element.workPhoneCountryCode}} {{element.workPhone}}, {{element.mobilePhoneCountryCode}} {{element.mobilePhone}}
+                        </mat-cell>
+                      </ng-container>
+
+                      <mat-header-row *matHeaderRowDef="displayedColumnsContact"></mat-header-row>
+                      <mat-row *matRowDef="let row; columns: displayedColumnsContact;" [ngClass]="{ 'selected': row.isSelected}"
+                               (click)="selectContactCheckbox(row)"></mat-row>
+                    </mat-table>
+                  </div>
+                </div>
+              </div>
+            </div>-->
+            <!--===============================-->
+            <!--<div class="card-header collapsed" data-toggle="collapse" href="#addressCtrl">
+              <a class="card-title">
+                {{ 'key_Address' | translate }} - ( {{userAddressList.length}} )
+              </a>
+            </div>
+            <div id="addressCtrl" class="card-body collapse" data-parent="#accordionTab1">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="d-flex flex-nowrap justify-content-between align-items-center mb-3">
+                    <div>
+                      <div class="btn-group btn-group-toggle btn-group-md">
+                        <button [ngClass]="{'active': btn==='btn1'}" (click)="openPopup('addAddressButton')" class="btn btn-outline-primary" type="button" placement="bottom" ngbTooltip="{{ 'key_addnew' | translate }}">
+                          <i class="fa fa-plus" aria-hidden="true"></i>
+                          <span>
+                            {{ 'key_addnew' | translate }}
+                          </span>
+                        </button>
+                        <button [ngClass]="{'active': btn==='btn2'}" (click)="openPopup('editAddressButton')" class="btn btn-outline-primary" type="button" placement="bottom" ngbTooltip="{{ 'key_Edit' | translate }}">
+                          <i class="fa fa-pencil" aria-hidden="true"></i>
+                          <span>
+                            {{ 'key_Edit' | translate }}
+                          </span>
+                        </button>
+                        <button [ngClass]="{'active': btn==='btn3'}" (click)="openPopup('deleteAddressButton')" class="btn btn btn-outline-danger" type="button" placement="bottom" ngbTooltip="{{ 'key_Delete' | translate }}">
+                          <i class="fa fa-trash-o" aria-hidden="true"></i>
+                          <span>
+                            {{ 'key_Delete' | translate }}
+                          </span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  
+                  <div class="scroll">
+                    <mat-table #tableAddress [dataSource]="userAddressList" matSort>
+
+
+                      <ng-container matColumnDef="userAddressId">
+                        <mat-header-cell class="t-center" *matHeaderCellDef>
+                          <div class="form-check-inline">
+                            <label class="form-check-label">
+                              <mat-checkbox [checked]="isAddressAllSelected" (change)="selectAddressAll($event); false" class="form-check-input"></mat-checkbox>
+
+                            </label>
+                          </div>
+
+                        </mat-header-cell>
+                        <mat-cell class="t-center" *matCellDef="let row">
+                          <div class="form-check-inline">
+                            <label class="form-check-label">
+                              <mat-checkbox [checked]="row.isAddressSelected" (click)="$event.stopPropagation()" class="form-check-input"
+                                            (change)="selectAddressCheckbox(row)"></mat-checkbox>
+                            </label>
+                          </div>
+                        </mat-cell>
+                      </ng-container>
+
+                      <ng-container matColumnDef="addressTypeName">
+                        <mat-header-cell class="" *matHeaderCellDef mat-sort-header> {{ 'key_AddressType' | translate }} </mat-header-cell>
+                        <mat-cell class="" *matCellDef="let element"> {{element.addressTypeName}} </mat-cell>
+                      </ng-container>
+
+
+                      <ng-container matColumnDef="name">
+                        <mat-header-cell class="" *matHeaderCellDef mat-sort-header> {{ 'key_Address' | translate }} </mat-header-cell>
+                        <mat-cell class="" *matCellDef="let element">
+                          {{element.name}}
+                          {{element.countryName}}, {{element.stateName}}, {{element.cityName}}
+                          {{element.zipCode}}
+                        </mat-cell>
+                      </ng-container>
+
+                      <mat-header-row *matHeaderRowDef="displayedColumnsAddress"></mat-header-row>
+                      <mat-row *matRowDef="let row; columns: displayedColumnsAddress;" [ngClass]="{ 'selected': row.isAddressSelected}"
+                               (click)="selectAddressCheckbox(row)"></mat-row>
+                    </mat-table>
+                  </div>
+                </div>
+              </div>
+            </div>-->
+            <!--===============================-->
+            <div class="card-header collapsed" data-toggle="collapse" href="#roleAssigned">
+              <a class="card-title">
+                {{ 'key_Role' | translate }} - ( {{userRolesList.length}} )
+              </a>
+            </div>
+            <div id="roleAssigned" class="card-body collapse" data-parent="#accordionTab1">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="d-flex flex-nowrap justify-content-between align-items-center mb-3">
+                    <!--<div></div>-->
+                    <div>
+                      <div class="btn-group btn-group-toggle btn-group-md">
+                        <button [ngClass]="{'active': btn==='btn4'}" (click)="openPopup('addRolesButton')" class="btn btn-outline-primary" type="button" placement="bottom" ngbTooltip="{{ 'key_addnew' | translate }}">
+                          <i class="fa fa-plus" aria-hidden="true"></i>
+                          <span>
+                            {{ 'key_addnew' | translate }}
+                          </span>
+                        </button>
+                        <button [ngClass]="{'active': btn==='btn6'}" (click)="openPopup('deleteRolesButton')" class="btn btn btn-outline-danger" type="button" placement="bottom" ngbTooltip="{{ 'key_Delete' | translate }}">
+                          <i class="fa fa-trash-o" aria-hidden="true"></i>
+                          <span>
+                            {{ 'key_Delete' | translate }}
+                          </span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  
+                  <div class="scroll">
+                    <mat-table #tableRole [dataSource]="userRolesList" matSort>
+
+
+                      <ng-container matColumnDef="userRolesListId">
+                        <mat-header-cell class="t-center" *matHeaderCellDef>
+                          <div class="form-check-inline">
+                            <label class="form-check-label">
+                              <mat-checkbox [checked]="isRoleAllSelected" (change)="selectRoleAll($event); false" class="form-check-input"></mat-checkbox>
+
+                            </label>
+                          </div>
+
+                        </mat-header-cell>
+                        <mat-cell class="t-center" *matCellDef="let row">
+                          <div class="form-check-inline">
+                            <label class="form-check-label">
+                              <mat-checkbox [checked]="row.isSelected" (click)="$event.stopPropagation()" class="form-check-input"
+                                            (change)="selectRoleCheckbox(row)"></mat-checkbox>
+                            </label>
+                          </div>
+                        </mat-cell>
+                      </ng-container>
+
+                      <ng-container matColumnDef="userLogin">
+                        <mat-header-cell class="" *matHeaderCellDef mat-sort-header> {{ 'key_UserID' | translate }} </mat-header-cell>
+                        <mat-cell class="" *matCellDef="let element"> {{element.userLogin}} </mat-cell>
+                      </ng-container>
+
+
+                      <ng-container matColumnDef="roleName">
+                        <mat-header-cell class="" *matHeaderCellDef mat-sort-header> {{ 'key_RoleName' | translate }} </mat-header-cell>
+                        <mat-cell class="" *matCellDef="let element"> {{element.roleName}} </mat-cell>
+                      </ng-container>
+
+                      <mat-header-row *matHeaderRowDef="displayedColumnsRoles"></mat-header-row>
+                      <mat-row *matRowDef="let row; columns: displayedColumnsRoles;" [ngClass]="{ 'selected': row.isSelected}"
+                               (click)="selectRoleCheckbox(row)"></mat-row>
+                    </mat-table>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-header collapsed" data-toggle="collapse" href="#planningLocation">
+              <a class="card-title">
+                {{ 'key_PlanningLocation' | translate }} - ( {{size}} )
+              </a>
+            </div>
+            <div id="planningLocation" class="card-body collapse" data-parent="#accordionTab1">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="d-flex flex-nowrap justify-content-between align-items-center mb-3">
+                    <!--<div></div>-->
+                    <div>
+                      <div class="btn-group btn-group-toggle btn-group-md">
+                        <button [ngClass]="{'active': btn==='btn7'}" (click)="openPopup('addPLocationButton')" class="btn btn-outline-primary" type="button" placement="bottom" ngbTooltip="{{ 'key_addnew' | translate }}">
+                          <i class="fa fa-plus" aria-hidden="true"></i>
+                          <span>
+                            {{ 'key_addnew' | translate }}
+                          </span>
+                        </button>
+
+                        <button [ngClass]="{'active': btn==='btn9'}" (click)="openPopup('deletePLocationButton')" class="btn btn btn-outline-danger" type="button" placement="bottom" ngbTooltip="{{ 'key_Delete' | translate }}">
+                          <i class="fa fa-trash-o" aria-hidden="true"></i>
+                          <span>
+                            {{ 'key_Delete' | translate }}
+                          </span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-12">
+                  <div class="scroll">
+                    <mat-table #table [dataSource]="userPlanningLocationList" matSort>
+
+
+                      <ng-container matColumnDef="userLocationListId">
+                        <mat-header-cell class="t-center" *matHeaderCellDef>
+                          <div class="form-check-inline">
+                            <label class="form-check-label">
+                              <mat-checkbox [checked]="isPlanningLocationAllSelected" (change)="selectPlanningLocationAll($event); false" class="form-check-input"></mat-checkbox>
+
+                            </label>
+                          </div>
+
+                        </mat-header-cell>
+                        <mat-cell class="t-center" *matCellDef="let row">
+                          <div class="form-check-inline">
+                            <label class="form-check-label">
+                              <mat-checkbox [checked]="row.isPLocationSelected" (click)="$event.stopPropagation()" class="form-check-input"
+                                            (change)="selectPlanningLocationCheckbox(row)"></mat-checkbox>
+                            </label>
+                          </div>
+                        </mat-cell>
+                      </ng-container>
+
+                      <ng-container matColumnDef="LocationTypeName">
+                        <mat-header-cell class="" *matHeaderCellDef mat-sort-header> {{ 'key_LocationType' | translate }} </mat-header-cell>
+                        <mat-cell class="" *matCellDef="let element"> {{element.LocationTypeName}} </mat-cell>
+                      </ng-container>
+
+
+                      <ng-container matColumnDef="LocationName">
+                        <mat-header-cell class="" *matHeaderCellDef mat-sort-header> {{ 'key_LocationDescription' | translate }} </mat-header-cell>
+                        <mat-cell class="" *matCellDef="let element"> {{element.LocationName}} </mat-cell>
+                      </ng-container>
+
+                      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                      <mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{ 'selected': row.isPLocationSelected}"
+                               (click)="selectPlanningLocationCheckbox(row)"></mat-row>
+                    </mat-table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row justify-content-center my-5">
+      <!--<div class="col-xl-2 col-lg-4 col-md-4 col-sm-12">
+        <div class="btn btn-block btn-previous" type="submit" (click)="selectPrev()">{{ 'key_Previous' | translate }}</div>
+      </div>-->
+      <div class="col-xl-2 col-lg-4 col-md-4 col-sm-12">
+        <button class="btn btn-block btn-save" type="submit">{{ 'key_Save' | translate }}</button>
+      </div>
+      <div class="col-xl-2 col-lg-4 col-md-4 col-sm-12" (click)="selectNext()" [class.isDisabled]="isEditNextuser">
+        <div class="btn btn-block btn-next">
+          <span class="fw600" >{{ 'key_Edit' | translate }}</span> <span class="fs-13"> > {{ 'key_Next' | translate }}</span>
+        </div>
+      </div>
+    </div>
+
+  </form>
+
+</div>

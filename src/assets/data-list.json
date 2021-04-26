@@ -1,0 +1,68 @@
+{
+  "data": [
+    {
+      
+      "GroupName": "ATP",
+      "AppPreferenceDescription": "Default Percentage To Reserve Material",
+      "AppPreferenceValueDefault": "100",
+      "AppPreferenceValueModified": "Yes",
+      "Help": ""
+    },
+    {
+      
+      "GroupName": "Forecasting",
+      "AppPreferenceDescription": "Auto Order Process?",
+      "AppPreferenceValueDefault": "No",
+      "AppPreferenceValueModified": "Yes",
+      "Help": ""
+    },
+    {
+      
+      "GroupName": "General",
+      "AppPreferenceDescription": "Material Planning Horizon (days)",
+      "AppPreferenceValueDefault": "30",
+      "AppPreferenceValueModified": "90",
+      "Help": ""
+    },
+    {
+      
+      "GroupName": "General",
+      "AppPreferenceDescription": "Default Percentage To Reserve Material",
+      "AppPreferenceValueDefault": "100",
+      "AppPreferenceValueModified": "Yes",
+      "Help": ""
+    },
+    {
+      
+      "GroupName": "General",
+      "AppPreferenceDescription": "Default Percentage To Reserve Material",
+      "AppPreferenceValueDefault": "100",
+      "AppPreferenceValueModified": "Yes",
+      "Help": ""
+    },
+    {
+      
+      "GroupName": "Forecasting",
+      "AppPreferenceDescription": "Default Percentage To Reserve Material",
+      "AppPreferenceValueDefault": "100",
+      "AppPreferenceValueModified": "Yes",
+      "Help": ""
+    },
+    {
+      
+      "GroupName": "ATP",
+      "AppPreferenceDescription": "Default Percentage To Reserve Material",
+      "AppPreferenceValueDefault": "100",
+      "AppPreferenceValueModified": "Yes",
+      "Help": ""
+    },
+    {
+      
+      "GroupName": "ATP",
+      "AppPreferenceDescription": "Default Percentage To Reserve Material",
+      "AppPreferenceValueDefault": "100",
+      "AppPreferenceValueModified": "Yes",
+      "Help": ""
+    }
+  ]
+}

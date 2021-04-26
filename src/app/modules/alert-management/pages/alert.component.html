@@ -1,0 +1,88 @@
+<app-top-btn-group #btnBar [actionGroupConfig]="actionGroupConfig" (action)="actionHandler($event)" [ParentPageName]="ManageUserAlertList"></app-top-btn-group>
+
+<div>
+  <div class="form-area">
+    <div class="wrapper">      
+      <div class="content-wrapper">
+        <div>
+          <h5>{{ 'key_AlertManagement' | translate }}</h5>
+        </div>
+        <div *ngIf="!IsTosca" class="d-flex flex-nowrap justify-content-between align-items-center mt-3 mb-4">
+          <h4 class="mb-3 mt-3 ml-3">{{ 'key_AlertManagement' | translate }}</h4>
+          <div>
+            <div class="btn-group btn-group-toggle btn-group-md" data-toggle="buttons">
+              <button (click)="openNav('addNew')" class="btn btn-outline-primary" type="button" placement="bottom" ngbTooltip="{{ 'key_Addnew' | translate }}">
+                <i class="fa fa-plus" aria-hidden="true"></i>
+                <span>
+                  {{ 'key_Addnew' | translate }}
+                </span>
+              </button>
+              <button (click)="openNav('edit')" class="btn btn-outline-primary" type="button" placement="bottom" ngbTooltip="{{ 'key_Edit' | translate }}">
+                <i class="fa fa-pencil" aria-hidden="true"></i>
+                <span>
+                  {{ 'key_Edit' | translate }}
+                </span>
+              </button>
+              <button class="btn btn btn-outline-danger" type="button" placement="bottom" ngbTooltip="{{ 'key_Delete' | translate }}">
+                <i class="fa fa-trash-o" aria-hidden="true"></i>
+                <span>
+                  {{ 'key_Delete' | translate }}
+                </span>
+              </button>
+              <button class="btn btn btn-outline-success" type="button" placement="bottom" ngbTooltip="{{ 'key_Export' | translate }}">
+                <i class="fa fa-file-excel-o" aria-hidden="true"></i>
+                <span>
+                  {{ 'key_Export' | translate }}
+                </span>
+              </button>
+            </div>
+          </div>
+
+
+        </div>
+
+        <mat-tab-group #tabGroupA class="mt-18" animationDuration="0ms" (selectedTabChange)="tabChange($event)">
+          <mat-tab #tab1 *ngIf="tab1">
+            <ng-template mat-tab-label>
+              {{ 'key_FindAlert' | translate }}
+            </ng-template>
+            <div class="tab-content order-workbench" *ngIf="tab1Data">
+              <app-alert-list></app-alert-list>
+            </div>
+          </mat-tab>
+
+          <mat-tab #tab2 *ngIf="tab2">
+            <ng-template mat-tab-label>
+              {{ 'key_add' | translate }} New
+              <button class="close" type="button" (click)="closeTab()">
+                <i class="fa fa-times-circle-o" aria-hidden="true"></i>
+              </button>
+            </ng-template>
+            <div class="tab-content" *ngIf="tab2Data">
+              <app-add-new></app-add-new>
+            </div>
+          </mat-tab>
+
+          <mat-tab #tab3 *ngIf="tab3">
+            <ng-template mat-tab-label>
+              {{ 'key_Edit' | translate }}
+              <button class="close" type="button" (click)="closeTab()">
+                <i class="fa fa-times-circle-o" aria-hidden="true"></i>
+              </button>
+            </ng-template>
+            <div class="tab-content" *ngIf="tab3Data">
+              <app-edit-alert [EditIndex]="editIndexID"></app-edit-alert>
+            </div>
+          </mat-tab>
+
+        </mat-tab-group>
+
+
+
+
+      </div>
+    </div>
+
+  </div>
+</div>
+<app-show-notes></app-show-notes>

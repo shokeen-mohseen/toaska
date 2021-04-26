@@ -1,0 +1,32 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="d-flex flex-nowrap justify-content-between align-items-center mb-2">
+
+      <div class="btn-group btn-group-toggle btn-group-md" data-toggle="buttons">
+        <button id="addAddressButton" (click)="openaddCharge()" class="btn btn-outline-primary" type="button" placement="bottom" ngbTooltip=" {{ 'key_Add' | translate }}">
+          <i class="fa fa-plus" aria-hidden="true"></i>
+          <span>
+            {{ 'key_Add' | translate }}
+          </span>
+        </button>
+        <button id="addAddressButton" (click)="openaddCharge()" class="btn btn-outline-primary" type="button" placement="bottom" ngbTooltip=" {{ 'key_Edit' | translate }}">
+          <i class="fa fa-pencil" aria-hidden="true"></i>
+          <span>
+            {{ 'key_Edit' | translate }}
+          </span>
+        </button>
+        <button id="deleteButton" class="btn btn btn-outline-danger" type="button" placement="bottom" ngbTooltip="Delete">
+          <i class="fa fa-trash-o" aria-hidden="true"></i>
+          <span>
+            {{ 'key_Delete' | translate }}
+          </span>
+        </button>
+
+      </div>
+    </div>
+  </div>
+  <div class="col-md-12">
+    <app-charge-list></app-charge-list>
+  </div>
+</div>
+

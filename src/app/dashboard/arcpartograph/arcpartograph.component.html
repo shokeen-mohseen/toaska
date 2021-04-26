@@ -1,0 +1,811 @@
+<!---16346 Arc Partograph - Design home page.-->
+<!--16622--Login - Resolve console error.-->
+<!--17209-Developer: rajesh, Description -Home-page-desig-->
+<nav class="navbar navbar-expand-md fixed-top top-nav">
+  <div class="container-fluid">
+    <a class="navbar-brand" routerLink="#"><img src="assets/images/logo.png" alt="" class="logo" /></a>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item ">
+          <a class="nav-link" (click)="toHome()">{{'key_NavHome'|translate}}<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" (click)="toAbout()" routerLinkActive="active">{{'key_AboutUs'|translate}}</a>
+        </li>
+        <!-- <li class="nav-item">
+           <a class="nav-link" href="#">Services</a>
+         </li>-->
+        <li class="nav-item">
+          <a class="nav-link" (click)="toProduct()" routerLinkActive="active">{{'key_product'|translate}}</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" (click)="toPrice()" routerLinkActive="active">{{'key_prices'|translate}}</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" (click)="toContact()" routerLinkActive="active">{{'key_contact'|translate}}</a>
+          <!--<a class="nav-link"  [routerLink]="['/arcpartograph/contactus']">Contact</a>-->
+        </li>
+        <li class="nav-item">
+          <a routerLinkActive="active" class="nav-link"
+             [routerLink]="['/auth/login']" id="gotoSignin">{{'key_signin'|translate}}</a>
+        </li>
+        <li class="nav-item">
+          <a routerLinkActive="active" class="nav-link"
+             [routerLink]="['/auth/register']" id="gotoSignup">{{'key_signup'|translate}}</a>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav ml-auto">
+        <li class="nav-item selectLang">
+          <select class="form-control" #selectedLang (change)="switchLang(selectedLang.value)">
+            <option *ngFor="let language of translate.getLangs()" [value]="language"
+                    [selected]="language === translate.currentLang">
+              {{ language }}
+            </option>
+          </select>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<!-- Intro Seven -->
+<section class="intro carousel slide bg-overlay-light h-auto" id="carouselExampleCaptions">
+  <ol class="carousel-indicators">
+    <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
+    <li data-target="#carouselExampleCaptions" data-slide-to="1" class=""></li>
+  </ol>
+  <div class="carousel-inner" role="listbox">
+    <div class="carousel-item active">
+      <!--16622--Login - Resolve console error.-->
+      <img class="d-block img-fluid" alt="First slide" src="assets/images/slider-1.jpg" />
+      <div class="carousel-caption ">
+        <h2 class="display-4 text-white mb-2 mt-4">{{ 'key_SliderContent1' | translate }}</h2>
+        <!--<h2 class="display-4 text-white mb-2 mt-4 ml-10">all stages of labor ...</h2>
+
+        <p class="text-white mb-3 px-5 lead">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+          sed do enim ad minim veniam,
+        </p> -->
+        <!--<a href="#" class="btn btn-primary btn-capsul px-4 py-2">Explore More</a>-->
+      </div>
+    </div>
+    <div class="carousel-item">
+      <!--16622--Login - Resolve console error.-->
+      <img class="d-block img-fluid" alt="First slide" src="assets/images/slider-2.jpg" />
+      <div class="carousel-caption ">
+        <h2 class="display-4 text-white mb-2 mt-4">
+          {{ 'key_SliderContent2' | translate }}
+        </h2>
+        <!--<p class="text-white mb-3 px-5 lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do enim ad minim veniam, </p>
+  <a href="#" class="btn btn-primary btn-capsul px-4 py-2">Explore More</a>-->
+      </div>
+    </div>
+  </div>
+  <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</section>
+<!-- Info block 1 -->
+<div class="clearfix"></div>
+
+<section class="info-section pt-5 pb-5 about-parto" id="about">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-7 col-sm-12 ">
+        <div class="head-box text-left mb-4 col-8">
+          <h2>
+            {{ 'key_About_arcPartographTitle' | translate }}
+          </h2>
+          <h6 class="text-underline-primary"></h6>
+        </div>
+
+        <h4 class="pt-3 mb-4">
+          <strong>{{'key_arcPartograph' | translate}}</strong>
+               {{'key_aboutDescription1' | translate}}
+        </h4>
+        <p>
+          {{'key_aboutDescription2' | translate}}          
+        </p>
+      </div>
+      <div class="col-md-5 col-sm-12">
+        <img src="assets/images/partograph.jpg" alt="" class="img-fluid" />
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<div class="clearfix"></div>
+
+<section class="inprocess p-0 m-0 bg-silver"id="product" style="background: url('assets/images/bg-map.jpg'); background-attachment:fixed">
+  <div class="container work-process  pb-5 pt-3">
+    <div class="head-box text-center mt-5 mb-4">
+      <h2 style=" font-weight: 700; font-size: 2.5rem;">{{'key_productTitle' | translate}}</h2>
+      <h6 class="text-underline-primary"></h6>
+      <h4 class="pt-5 mb-4 pb-3"><strong>{{'key_productSubTitle' | translate}}</strong></h4>
+    </div> 
+
+    <!-- ============ step 1 =========== -->
+    <div class="row process1">
+      <div class="col-md-5">
+        <div class="process-box process-left" data-aos="fade-right" data-aos-duration="1000">
+          <div class="row">
+            <div class="col-md-5">
+              <img src="assets/images/6.jpg" class="img-fluid img-thumbnail" alt="" style="height: 157px;" />
+            </div>
+            <div class="col-md-7">
+              <h5>{{'key_prepartumTitle' | translate}}</h5>
+              <p>
+                {{'key_prepartumDescription' | translate}}
+              </p>
+            </div>
+          </div>
+          <div class="process-line-l"></div>
+        </div>
+      </div>
+      <div class="col-md-2"></div>
+      <div class="col-md-5">
+        <div class="process-point-right"></div>
+      </div>
+    </div>
+    <!-- ============ step 2 =========== -->
+    <div class="row process2">
+
+      <div class="col-md-5">
+        <div class="process-point-left"></div>
+      </div>
+      <div class="col-md-2"></div>
+      <div class="col-md-5">
+        <div class="process-box process-right" data-aos="fade-left" data-aos-duration="1000">
+          <div class="row">
+            <div class="col-md-5">
+              <img src="assets/images/img-1.jpg" class="img-fluid img-thumbnail" alt="" style="height: 157px;" />
+            </div>
+            <div class="col-md-7">
+              <h5>{{'key_Latentstage' | translate}}</h5>
+              <p>
+                {{'key_latent-description' | translate}}
+              </p>
+            </div>
+
+          </div>
+          <div class="process-line-r"></div>
+        </div>
+      </div>
+
+    </div>
+    <!-- ============ step 3 =========== -->
+    <div class="row process3">
+      <div class="col-md-5">
+        <div class="process-box process-left" data-aos="fade-right" data-aos-duration="1000">
+          <div class="row">
+            <div class="col-md-5">
+              <img src="assets/images/img-2.jpg" class="img-fluid img-thumbnail" alt="" style="height: 157px;" />
+            </div>
+            <div class="col-md-7">
+              <h5>{{'key_ActiveStageMonitoringTitle' | translate}}</h5>
+              <p>{{'key_ActiveStageMonitoringDesc' | translate}}</p>
+            </div>
+
+          </div>
+          <div class="process-line-l"></div>
+        </div>
+      </div>
+      <div class="col-md-2"></div>
+      <div class="col-md-5">
+        <div class="process-point-right"></div>
+      </div>
+    </div>
+    <!-- ============ step 4 =========== -->
+    <div class="row process4">
+      <div class="col-md-5">
+        <div class="process-point-left"></div>
+      </div>
+      <div class="col-md-2"></div>
+      <div class="col-md-5">
+        <div class="process-box process-right" data-aos="fade-left" data-aos-duration="1000">
+          <div class="row">
+            <div class="col-md-5">
+              <img src="assets/images/img-3.jpg" class="img-fluid img-thumbnail" alt="" style="height: 157px;" />
+            </div>
+            <div class="col-md-7">
+              <h5>{{'key_SecondStageMonitoringTitle'| translate}}</h5>
+              <p>{{'key_SecondStageMonitoringDesc'| translate}}</p>
+            </div>
+
+          </div>
+          <div class="process-line-r"></div>
+        </div>
+      </div>
+
+
+    </div>
+    <!-- ============ step 4 =========== -->
+    <div class="row process5">
+      <div class="col-md-5">
+        <div class="process-box process-left" data-aos="fade-right" data-aos-duration="1000">
+          <div class="row">
+            <div class="col-md-5">
+              <img src="assets/images/img-4.jpg" class="img-fluid img-thumbnail" alt="" style="height: 157px;" />
+            </div>
+            <div class="col-md-7">
+              <h5>{{'key_ThirdStagMonitoringTitle'| translate}}</h5>
+              <p>
+                {{'key_ThirdStagMonitoringDesc'| translate}}
+              </p>
+            </div>
+
+          </div>
+          <div class="process-line-l"></div>
+        </div>
+      </div>
+      <div class="col-md-2"></div>
+      <div class="col-md-5">
+        <div class="process-point-right"></div>
+      </div>
+    </div>
+    <!-- ============ step 5 =========== -->
+
+    <div class="row process6">
+      <div class="col-md-5">
+        <div class="process-point-left"></div>
+      </div>
+      <div class="col-md-2"></div>
+      <div class="col-md-5">
+        <div class="process-box process-right" data-aos="fade-left" data-aos-duration="1000">
+          <div class="row">
+            <div class="col-md-5">
+              <img src="assets/images/img-5.jpg" class="img-fluid img-thumbnail" alt="" style="height: 157px;" />
+            </div>
+            <div class="col-md-7">
+              <h5> {{'key_FourthStageMonitoring'| translate}}</h5>
+              <p>{{'key_FourthStageMonitoringDesc' | translate}}</p>
+            </div>
+
+          </div>
+          <div class="process-line-r"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row process7">
+      <div class="col-md-5">
+        <div class="process-box process-left" data-aos="fade-right" data-aos-duration="1000">
+          <div class="row">
+            <div class="col-md-5">
+              <img src="assets/images/img-7.jpg" class="img-fluid img-thumbnail" alt="" style="height: 157px;" />
+            </div>
+            <div class="col-md-7">
+              <h5>{{'key_PostpartumCare' | translate}}</h5>
+              <p>{{'key_PostpartumCareDesc' | translate}} </p>
+            </div>
+
+          </div>
+          <div class="process-line-l"></div>
+        </div>
+      </div>
+      <div class="col-md-2"></div>
+      <div class="col-md-5">
+        <div class="process-point-right"></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!--<section class="info-section product-block" id="product" style="background: url('assets/images/bg-map.jpg'); background-attachment:fixed">
+  <div class="container">
+    <div class="roof mt-5">
+      <div class="container">
+        <div class="head-box text-center mb-5">
+          <h2>Product Scope</h2>
+          <h6 class="text-underline-primary"></h6>
+        </div>
+        <div class="row mt-5">
+          <div class="col-md-4">
+            <div class="service-block-overlay">
+              <img src="assets/images/1.jpg" alt="" />
+              <h4> Latent Stage Monitoring</h4>
+              <p class="pt-3">
+                The first stage of labor monitoring starts with the latent phase. The latent phase is from 0 to 4 cm, and it lasts up to 8 hrs.
+              </p>
+              <a href="#">Learn More</a>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="service-block-overlay">
+              <img src="assets/images/2.jpg" alt="" />
+              <h4> Active Stage Monitoring </h4>
+              <p class="pt-3">
+                The active phase is from 4 to 10 cm (full cervical dilatation). It monitors the critical phase of labor.
+              </p>
+              <a href="#">Learn More</a>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="service-block-overlay">
+              <img src="assets/images/3.jpg" alt="" />
+              <h4> Second Stage Monitoring </h4>
+              <p class="pt-3">
+                The Second-stage of the Partogram monitors the descent and position of the fetal head to predict mode of delivery and obstetric outcome.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="row mt-5">
+          <div class="col-md-6">
+            <div class="service-block-overlay">
+              <img src="assets/images/4.jpg" alt="" />
+              <h4>
+                Third Stage Monitoring
+              </h4>
+              <p class="pt-3">
+                The third stage of labor begins with the birth of the newborn and ends with the delivery of the placenta and its attached membranes. This stage monitors any complications that may arise.
+              </p>
+              <a href="#">Learn More</a>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="service-block-overlay">
+              <img src="assets/images/5.jpg" alt="" />
+              <h4>
+                Fourth Stage Monitoring
+              </h4>
+              <p class="pt-3">
+                The fourth stage monitors any post-delivery complications that may occur.
+              </p>
+              <a href="#">Learn More</a>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+-->
+
+
+<section class="info-section bgfirst feature-home pt-5 pb-5">
+  <div class="container">
+    <div class="head-box text-center mb-3">
+      <h2>{{'key_ProductFeature' | translate}}</h2>
+      <h6 class="text-underline-primary"></h6>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12 mb-20 text-center mt-5 mb-3">
+        <h4>
+          {{'key_ProductFeatureSubTitle' | translate}}
+        </h4>
+        <h4 class="subheading text-center">{{'key_ProductFeatureSubDesc' | translate}}</h4>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 col-sm-12 mb-2 mt-3">
+        <div class="process-box process-left">
+          <div class="row">
+            <div class="col-md-4">
+              <img src="assets/images/registration.png" class="img-fluid" alt="" />
+            </div>
+            <div class="col-md-8">
+              <h4>{{'key_EasyPatientRegistrationProcess' | translate}}</h4>
+              <p>{{'key_QuicklyRegisterThePatients' | translate}}</p>
+              <p>
+                {{'key_recordDetail' | translate}}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-sm-12 mb-2 mt-3">
+        <div class="process-box process-right">
+          <div class="row">
+            <div class="col-md-4">
+              <img src="assets/images/portable-document-format.png" class="img-fluid" alt="" />
+            </div>
+            <div class="col-md-8">
+              <h4>{{'key_measurement' | translate }}</h4>
+              <p>{{'key_RecordarcPartographData' | translate}}</p>
+              <p>{{'key_maintainRecordPost' | translate}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+      <div class="col-md-6 col-sm-12 mb-2 mt-3">
+        <div class="process-box process-left">
+          <div class="row">
+            <div class="col-md-4">
+              <img src="assets/images/data.png" class="img-fluid" alt="" />
+            </div>
+            <div class="col-md-8">
+              <h4>{{'key_RobustDataConnectivity' | translate}}</h4>
+              <p>{{'key_internetConnectivity' | translate}}</p>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="col-md-6 col-sm-12 mb-2 mt-3">
+        <div class="process-box process-right">
+          <div class="row">
+            <div class="col-md-4">
+              <img src="assets/images/notification.png" class="img-fluid" alt="" />
+            </div>
+            <div class="col-md-8">
+              <h4>{{'key_AdvanceEPartographAlerts' | translate}}</h4>
+              <p>{{'key_plottedAutomatically' | translate}}</p>
+              <p>
+                {{'key_readingCross' | translate}}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--      <div class="col-md-6 col-sm-12 mb-2 mt-3">
+          <div class="process-box process-left">
+            <div class="row">
+              <div class="col-md-4">
+                <img src="https://image.ibb.co/dDW27U/Work_Section2_freelance_img1.png" class="rounded-circle img-fluid" alt="" />
+              </div>
+              <div class="col-md-8">
+                <h4>Easy Patient Registration Process</h4>
+                <p> Quickly register the patients.</p>
+                <p>
+                  Record detailed obstetric issues, past personal and family history,
+                  and history of any previous difficult events.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>-->
+
+    </div>
+  </div>
+</section>
+
+
+
+<!--<section class="info-section bgfirst">
+  <div class="container">
+    <div class="head-box text-center mb-5">
+      <h2>Product Feature</h2>
+      <h6 class="text-underline-primary"></h6>
+    </div>
+    <div class="how-section1">
+      <div class="row">
+        <div class="col-md-12 mb-20" style="margin-bottom: 40px;">
+          <h4>
+            Easily manage your intrapartum , post-partum parturient until discharged!
+          </h4>
+          <h4 class="subheading text-center">arcPartograph application allows recording and storing patient’s data at the point of care</h4>
+        </div>
+
+        <div class="col-md-6 how-img">
+          <img src="https://image.ibb.co/dDW27U/Work_Section2_freelance_img1.png" class="rounded-circle img-fluid" alt="" />
+        </div>
+        <div class="col-md-6">
+          <h4>
+            Easy Patient Registration Process
+          </h4>
+
+          <h4 class="subheading">
+            Quickly register the patients.
+          </h4>
+          <p class="text-muted">
+            Record detailed obstetric issues, past personal and family history, and history of any previous difficult events.
+          </p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <h4>
+            Intrapartum and Post-partum record measurement
+          </h4>-->
+<!--<h4 class="subheading">GetLance makes it easy to connect with clients and begin doing great work.</h4>-->
+<!--<p class="text-muted">
+            Record arcPartograph data at periodic intervals. Security of retrospective data entry security and share them with peers
+          </p>
+          <p class="text-muted">
+            Maintain past records of discharged patients.
+          </p>
+        </div>
+        <div class="col-md-6 how-img">
+          <img src="https://image.ibb.co/cHgKnU/Work_Section2_freelance_img2.png" class="rounded-circle img-fluid" alt="" />
+        </div>
+      </div>
+
+
+      <div class="row">
+        <div class="col-md-6 how-img">
+          <img src="https://image.ibb.co/dDW27U/Work_Section2_freelance_img1.png" class="rounded-circle img-fluid" alt="" />
+        </div>
+        <div class="col-md-6">
+          <h4>
+            Robust Data Connectivity
+          </h4>
+
+          <p class="text-muted">
+            Capture data even when internet connectivity is not available
+          </p>
+        </div>
+      </div>
+      <div class="row">
+
+        <div class="col-md-6">
+          <h4>
+            Advance E-Partograph Alerts
+
+          </h4>
+          <p class="text-muted">
+            The chart is plotted automatically as the data is entered.
+
+          </p>
+          <p class="text-muted">
+            As soon as the readings cross the action and alert lines, alerts are shown onscreen and sent about the labor status
+          </p>
+        </div>
+        <div class="col-md-6 how-img">
+          <img src="https://image.ibb.co/dDW27U/Work_Section2_freelance_img1.png" class="rounded-circle img-fluid" alt="" />
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</section>-->
+<div class="clearfix"></div>
+<div class="head-box text-center pt-5 pb-5 mb-3">
+  <h2 style="font-weight: 700; font-size: 2.5rem;">{{'key_valueAddedBenefits' | translate}}</h2>
+  <h6 class="text-underline-primary"></h6>
+</div>
+<div class="clearfix"></div>
+<section class="info-section benifit-block py-0">
+  <div class="container-fluid">
+    
+    <div class="row">
+      <div class="col-md-7 col-sm-12 pt-5">
+     
+        <div class="row">
+          <div class="col-md-6 col-lg-6 content-half mt-md-0 pl-5 pt-4">
+            <h4>
+              {{'key_Features' | translate}}
+            </h4>
+            <ul class="benifits">
+              <li>
+                {{'key_ComprehensivelyMonitorsLabour' | translate}}
+              </li>
+              <li>
+                {{'key_laborComplicationsInRealTime' | translate}}
+              </li>
+              <li>
+                {{'key_confidantData' | translate}}
+              </li>
+              <li>
+                {{'key_permissionBasedData' | translate}}
+              </li>
+              <li>
+                {{'ket_GetInstantAlerts' | translate}}
+              </li>
+              <li>
+                {{'key_applicationIntegration' | translate}}
+              </li>
+
+            </ul>
+          </div>
+          <div class="col-md-6 col-lg-6 content-half mt-md-0 pl-5 pt-4">
+            <h4>
+              {{'key_valueAddedBenefits' | translate}}
+            </h4>
+            <ul class="benifits">
+
+              <li>
+                {{'key_advancedTechnology' | translate}}
+              </li>
+
+              <li>
+                {{'key_healthcareSystem' | translate}}
+              </li>
+
+              <li>
+                {{'key_Onlinepermission' | translate}}
+              </li>
+
+              <li>
+                {{'key_monitoringTool' | translate}}
+              </li>
+
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-5 col-sm-12" style="background: url(assets/images/img.jpg); background-size: cover;">
+        <div class="row">
+         <!-- <img src="assets/images/img.jpg" alt="" class="img-fluid" />-->
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="clearfix"></div>
+
+<section class="cta" id="price">
+  <div class="container">
+
+    <div class="row">
+      <div class="head-box text-center m-0-auto pb-5">
+        <h2 class="text-white">{{'key_Price' | translate}}</h2>
+        <h6 class="text-underline-primary"></h6>
+      </div>
+      <div class="col-lg-12 text-center">
+        <p class="text-white">
+          {{'key_priceOffers' | translate}}
+        </p>
+        <p class="text-white">
+          {{'key_priceSubscript' | translate}}
+        </p>
+        <a class="btn btn-next mt-4" routerLink="/auth/register">{{'key_signUp' | translate}}</a>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<section class="info-section" id="contacts" style="background:#f7f7f7;">
+  <div class="container">
+    <div class="head-box text-center pt-5 pb-5">
+      <h2>{{'key_Contactus' | translate}}</h2>
+      <h6 class="text-underline-primary"></h6>
+    </div>
+
+    <div class="container">
+      <div class="row mb-4">
+        <div class="col">
+          <div class="card">
+            <!--<div class="card-header bg-primary text-white">
+              <i class="fa fa-envelope"></i> Contact us.
+            </div>-->
+            <div class="card-body">
+              <form>
+                <div class="form-group">
+                  <label for="name">Name</label>
+                  <input type="text" class="form-control" id="name" aria-describedby="emailHelp" placeholder="Enter name" required>
+                </div>
+                <div class="form-group">
+                  <label for="email">Phone No. with country code</label>
+                  <input type="text" class="form-control" id="phone" aria-describedby="phone" placeholder="Enter phone no." required>
+                 </div>
+                <div class="form-group">
+                  <label for="email">Email address</label>
+                  <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email" required>
+                  <!--<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>-->
+                </div>
+                <div class="form-group">
+                  <label for="message">Message</label>
+                  <textarea class="form-control" id="message" rows="6" required></textarea>
+                </div>
+                <div class="mx-auto">
+                  <button type="submit" class="btn btn-next text-right">Submit</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-sm-4">
+          <!--              <iframe width="410" height="440" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q=1810+Briergate+Drive,+Duluth,+GA+30097,+United+States&amp;aq=&amp;sll=33.7773633,-84.3890535&amp;sspn=0.00984,0.021136&amp;ie=UTF8&amp;hq=&amp;hnear=6340+Sugarloaf+Parkway,+Duluth,+Gwinnett,+Georgia+30097&amp;t=m&amp;z=14&amp;iwloc=A&amp;output=embed"></iframe>
+          -->
+          <div class="card bg-light mb-3">
+            <div class="card-header text-white text-uppercase">
+              {{'key_Contactus' | translate}}
+            </div>
+            <div class="card-body">
+              <h5>US Office</h5>
+              <p>Email:  <a href="mailto:sales@adectec.com">sales@adectec.com</a></p>
+              <p>Tel: +1 770 789 1975</p>
+              <p>Website : <a href="www.adectec.com" target="_blank">www.adectec.com</a></p>
+              <hr>
+              <h5>India Office</h5>
+              <p>Email:  <a href="mailto:sales@osoftec.com">sales@osoftec.com</a></p>
+              <p>Tel: +91 97173 85459</p>
+              <p>Website : <a href="www.osoftec.com" target="_blank">www.osoftec.com</a></p>
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+</section>
+<!-- Info block 1 -->
+<!-- team style 1 -->
+<!--<section class="team-section py-5">
+  <div class="container">
+    <div class="row mb-5">
+      <div class="head-box text-center mb-5 col-md-12">
+        <h2>Meet Our Team</h2>
+        <h6 class="text-underline-primary mb-5">This is information panel</h6>
+      </div>
+      <div class="col-md-4 mb-md-0 mb-sm-4">
+        <div class="member-box anim-lf t-bottom">
+          <img class="img-fluid" src="https://grafreez.com/wp-content/temp_demos/suffi/img/t-member-01.jpg" alt="">
+          <div class="overlay-content">
+            <h3 class="text-white ml-3 my-0">Jim Gorden</h3>
+            <p class="text-white ml-3 mb-3">Developer</p>
+            <span class="socail-l ml-3 mb-3">
+              <a href="#" class="mr-2"><i class="fa fa-facebook box-circle-solid"></i></a>
+              <a href="#" class="mr-2"><i class="fa fa-twitter box-circle-solid"></i></a>
+              <a href="#"><i class="fa fa-dribbble box-circle-solid"></i></a>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 mb-md-0 mb-sm-4">
+        <div class="member-box anim-lf t-bottom">
+          <img class="img-fluid" src="https://grafreez.com/wp-content/temp_demos/suffi/img/t-member-02.jpg" alt="">
+          <div class="overlay-content">
+            <h3 class="text-white ml-3 my-0">Peyton Warren</h3>
+            <p class="text-white ml-3 mb-3">UI/UX</p>
+            <span class="socail-l ml-3 mb-3">
+              <a href="#" class="mr-2"><i class="fa fa-facebook box-circle-solid"></i></a>
+              <a href="#" class="mr-2"><i class="fa fa-twitter box-circle-solid"></i></a>
+              <a href="#"><i class="fa fa-dribbble box-circle-solid"></i></a>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 mb-md-0 mb-sm-4">
+        <div class="member-box anim-lf t-bottom">
+          <img class="img-fluid" src="https://grafreez.com/wp-content/temp_demos/suffi/img/t-member-03.jpg" alt="">
+          <div class="overlay-content">
+            <h3 class="text-white ml-3 my-0">Craig Thompson</h3>
+            <p class="text-white ml-3 mb-3">Manager</p>
+            <span class="socail-l ml-3 mb-3">
+              <a href="#" class="mr-2"><i class="fa fa-facebook box-circle-solid"></i></a>
+              <a href="#" class="mr-2"><i class="fa fa-twitter box-circle-solid"></i></a>
+              <a href="#"><i class="fa fa-dribbble box-circle-solid"></i></a>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>-->
+<div class="footer bg-dark pt-5 pb-3">
+  <div class="container pt-4">
+    <div class="row text-center">
+      <div class="col-md-12">
+        <h6>&nbsp;</h6>
+        <ul class="list-unstyled">
+          <li class="list-inline-item"><a href="#"> {{'key_NavHome' | translate}}</a></li>
+          <li class="list-inline-item"><a href="#"> {{'key_AboutUs' | translate}}</a></li>
+          <li class="list-inline-item"><a href="#"> {{'key_terms' | translate}}</a></li>
+          <li class="list-inline-item"><a href="#"> {{'key_Privacy' | translate}}</a></li>
+          <li class="list-inline-item"><a href="#">{{'key_contact' | translate}}</a></li>
+        </ul>
+        <p>Powered by :  Optimization Software Technologies</p>
+      </div>
+
+    </div>
+  </div>
+</div>
+<!---16346 Arc Partograph - Design home page.-->

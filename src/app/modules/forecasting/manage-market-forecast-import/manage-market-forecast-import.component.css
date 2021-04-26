@@ -1,0 +1,9 @@
+::ng-deep app-manage-market-forecast-import .mat-tab-group .mat-tab-body-wrapper {
+  margin: -15px -0px 0 -0px;
+}
+
+mat-cell,
+mat-footer-cell,
+mat-header-cell {
+  width: 200px;
+}

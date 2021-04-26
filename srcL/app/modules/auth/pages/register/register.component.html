@@ -1,0 +1,202 @@
+<!--Author Name Monu Ram Yadav
+    TSF id=16502
+    Date = 31/07/2020
+    Descrption:- Registration Form HTML
+    -->
+<!---change login bg image by satyen singh-->
+<!--<div [hidden]="!error" class="alert alert-danger">{{ error }}</div>-->
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-8 nopadding">
+      <div class="card1 pb-5"> 
+        <p class="logo-text">arcPartograph</p>
+        <!--<img src="assets/images/Osofteclogo.png" class="logo">-->
+        <div class="justify-content-center">
+          <img src="assets/images/World_map_Doctor.png" class="image" />
+          <!-- <img src="assets/images/svgworld.svg" class="image" /> -->
+          <!-- <img src="https://www.smartp.ly/content/uploads/map.svg" class="image" /> -->
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4 nopadding" style=" background: white;">
+      <form (ngSubmit)="register()" [formGroup]="registerform">
+        <div class="card2">
+          <div class="custom-lang">
+            <ul class="nav navbar-nav w-25 ml-auto">
+              <li class="nav-item selectLang">
+                <select class="form-control">
+                  <option>English</option>
+                  <option>Hindi</option>
+                </select>
+              </li>
+            </ul>
+          </div>
+          <div class="loginWelcomeText text-center">
+            <h1>{{ 'key_Registration' | translate }}</h1>
+          </div>
+
+
+          <div class="form-group">
+            <div class="input-group">
+              <div class="input-group-prepend append-custombg3">
+                <select class="form-control" formControlName="prefix" (change)="selectPrefix($event)" name="prefix">
+                  <option value="" selected>Title</option>
+                  <option *ngFor="let prpfx of PrefixValue; let i = index" [value]="PrefixValue[i].prefix">
+                    {{PrefixValue[i].prefix}}
+                  </option>
+                </select>
+              </div>
+              <input class="form-control" formControlName="FirstName" maxlength="250" placeholder="First Name*" required>
+            </div>
+             <app-control-messages [control]="formData['FirstName']"></app-control-messages>
+          </div>
+          <div class="form-group">
+            <input type="text" class="form-control"  formControlName="MiddleName" maxlength="250" placeholder="Middle Name">
+          </div>
+          <div class="form-group">
+            <div class="input-group">
+              <input class="form-control" type="text" formControlName="LastName" maxlength="250" placeholder="Last Name*" required>
+              <div class="input-group-prepend append-custombg3">                
+                <select class="form-control" formControlName="suffix" (change)="selectSuffix($event)" name="suffix">
+                  <option value="">Title</option>
+                  <option *ngFor="let sfpfx of SuffixValue; let i = index" [value]="sfpfx.suffix">
+                    {{sfpfx.suffix}}
+                  </option>
+                </select>
+              </div>
+            </div>  
+            <app-control-messages [control]="formData['LastName']"></app-control-messages>            
+          </div>
+          <div class="form-group">
+            <input type="Email" ngModel email="true" maxlength="150" class="form-control" formControlName="LoginId" placeholder="Login ID (E-mail)*" required>
+            <app-control-messages [control]="formData['LoginId']"></app-control-messages>   
+          </div>
+          <div class="form-group">
+            <div class="input-group">
+              <div class="input-group-prepend append-custombg3">
+                <select class="form-control" formControlName="CountryCode" (change)="selectCountryCode($event)" name="suffix" required>
+                  <option value="+91">+91</option>
+                  <option value="+1">+1</option>
+                  <option value="+94">+94</option>
+                  <option value="+22">+22</option>
+                </select>
+              </div>
+              <input class="form-control" type="text" maxlength="25" formControlName="MobileNo" placeholder="Mobile No*" required>
+            </div>
+            <app-control-messages [control]="formData['CountryCode']"></app-control-messages>
+            <app-control-messages [control]="formData['MobileNo']"></app-control-messages>
+          </div>
+          <!--============remove password and confirm password=============-->
+          <!--<div class="form-group">
+    <input type="password" class="form-control" placeholder="Password*">
+  </div>
+  <div class="form-group">
+    <input type="password" class="form-control" placeholder="Confirm Password">
+  </div>-->
+          <!--============remove password and confirm password=============-->
+          <div class="form-group">
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="1" formControlName="UserType" value="New" (click)="selectOrg(1)">
+              <label class="form-check-label" for="radio1">
+                New Organization
+              </label>
+            </div>
+            <div class="form-group" *ngIf="newOrg">
+              <div class="input-group">
+                <input type="text" class="form-control" formControlName="OrgName" placeholder="Enter Organization Name"  (keypress)="checkOrgname($event)">                
+              </div>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="1" formControlName="UserType" value="Exist" (click)="selectOrg(2)">
+              <label class="form-check-label" for="radio2" placement="top" >
+                Existing Organization code
+              </label>
+            </div>
+            <div class="form-group" *ngIf="orgCode">
+              <div class="input-group">
+                <input type="text" class="form-control" formControlName="OrgCode" placeholder="Enter Organization Code" (keydown)="checkOrgcode()">
+                <div class="input-group-prepend">
+                  <button type="button" class="btn btn-warning" placement="left" (click)="checkOrg()" ngbTooltip="{{ 'key_ExistingOrganizationcodeTooltip' | translate }}">
+                    <i class="fa fa-exclamation" aria-hidden="true"></i>
+                    Validate
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!-- <div class="form-group">
+     <select #myorg class="form-control" (change)="selectOthrs(myorg.value)">
+       <option>{{ 'key_SelectOrganization' | translate }}</option>
+       <option>2</option>
+       <option>3</option>
+       <option value="other">Other</option>
+     </select>
+   </div>
+   <div class="form-group" *ngIf="orgOthers">
+     <input type="text" class="form-control" formControlName="OrgCode" placeholder="Enter Organization">
+   </div>
+  <div class="form-check">
+     <input class="form-check-input" type="radio" name="1" id="radio1" value="option1" (click)="selectOrg(1)">
+     <label class="form-check-label" for="radio1">
+       {{ 'key_NewOrganization' | translate }}
+     </label>
+   </div>
+   <div class="form-check">
+     <input class="form-check-input" type="radio" name="1" id="radio2" value="option2" (click)="selectOrg(2)">
+     <label class="form-check-label" for="radio2" placement="top" ngbTooltip="{{ 'key_ExistingOrganizationcodeTooltip' | translate }}">
+       {{ 'key_ExistingOrganizationcode' | translate }}
+     </label>
+   </div>
+   <div class="form-check disabled">
+     <input class="form-check-input" type="radio" name="1" id="radio3" value="option3" (click)="selectOrg(3)">
+     <label class="form-check-label" for="radio3">
+       Individual account
+     </label>
+   </div>-->
+          </div>
+         <!-- <div class="form-group" *ngIf="newOrg">
+            <div class="form-group">
+
+              <input type="text" class="form-control" placeholder="Enter new Organization">
+
+              <select #myorg class="form-control" (change)="selectOthrs(myorg.value)">
+                <option>{{ 'key_SelectOrganization' | translate }}</option>
+                <option>2</option>
+                <option>3</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+            <div class="form-group" *ngIf="orgOthers">
+              <input type="password" class="form-control" placeholder="Enter Organization">
+            </div>
+          </div>-->
+
+        <!--  <div class="form-group" *ngIf="orgCode">
+            <div class="input-group">
+              <input type="password" class="form-control" placeholder="Enter Organization Code">
+              <div class="input-group-prepend">
+                <button type="button" class="btn btn-warning" placement="left" ngbTooltip="{{ 'key_ExistingOrganizationcodeTooltip' | translate }}">
+                  <i class="fa fa-exclamation" aria-hidden="true"></i>
+                </button>
+              </div>
+            </div>
+            
+          </div>-->
+
+          <div class="text-center">
+            <button type="submit" class="btn btn-create text-center" [disabled]="registerform.invalid || validate">
+              <span [hidden]="isLoading">Register</span>
+              <span [hidden]="!isLoading">
+                <i class="fa fa-asterisk fa-spin" aria-hidden="true"></i>
+              </span>
+            </button>
+          </div>
+        </div>
+      </form>
+      <div class="clearfix"></div>
+      <p class="text-center login-textColor">{{ 'key_AlreadyAccount' | translate }} <a [routerLink]="['/auth/login']">{{ 'key_Signin' | translate }}</a></p>
+    </div>
+  </div>
+</div>
+
+

@@ -1,0 +1,26 @@
+.resize-table mat-cell,
+.resize-table mat-footer-cell,
+.resize-table mat-header-cell {
+  width: 120px
+}
+
+.radio-optins input[type='radio'] {
+  display: none;
+}
+.radio-optins span.circle {
+  width: 15px;
+  height: 15px;
+  display: inline-block;
+  margin-right: 4px;
+  border-radius: 50%;
+  border: 1px solid #ddd;
+}
+.radio-optins .active span.circle {
+  border: 4px solid;
+}
+.radio-optins .nav-item {
+  height: 34px;
+}
+.radio-optins label {
+  color: #000;
+}

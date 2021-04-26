@@ -1,0 +1,9 @@
+mat-cell,
+mat-footer-cell,
+mat-header-cell {
+  width: 160px;
+}
+
+.mat-column-Status {
+  width: 82px;
+}

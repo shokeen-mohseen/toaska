@@ -1,0 +1,82 @@
+<!--<mat-tab-group *ngIf="withTab else withoutTab" animationDuration="0ms">-->
+  
+  <div class="d-flex align-items-center scroll-top-btn">
+    <div class="top-navigation innertabs flex-grow-1">
+      <mat-tab-group animationDuration="0ms">
+        <ng-container *ngFor="let tab of actionGroupConfig">
+          <mat-tab *ngIf="!tab.hidden">
+            <ng-template mat-tab-label>
+              {{ tab.label | translate }}
+            </ng-template>
+            <div class="tab-content d-flex">
+              <ng-container *ngTemplateOutlet="btnGroups; context:{actionGroups: tab.actionGroups}">
+              </ng-container>
+            </div>
+
+          </mat-tab>
+        </ng-container>
+      </mat-tab-group>
+    </div>
+    <div class="topSearch">
+      <div class="searchBar">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="{{ 'key_searchhere' | translate }}">
+          <div class="input-group-prepend append-searchbar">
+            <span class="btn"><i class="fa fa-search" aria-hidden="true"></i></span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- <div class="logo ml-4">
+      <a routerLinkActive="active" [routerLink]="['/dashboard/home']">
+        <img *ngIf="IsTosca" src="assets/images/toscaOnly.png" />
+        <img *ngIf="!IsTosca" src="assets/images/logo1.png" />
+      </a>
+    </div> -->
+  </div>
+
+  <!--<ng-template #withoutTab>
+    <ng-container *ngFor="let tab of actionGroupConfig">
+      <ng-container
+         *ngTemplateOutlet="btnGroups; context:{actionGroups: tab.actionGroups}">
+      </ng-container>
+    </ng-container>
+  </ng-template>-->
+
+  <ng-template let-actionGroups="actionGroups" #btnGroups>
+    <div *ngFor="let group of actionGroups" class="btn-group btn-group-toggle btn-group-md">
+      <ng-container *ngFor="let actionItem of group">
+        <div class="dropdown d-inline-flex" *ngIf="actionItem.menu else buttunTemp">
+          <button [disabled]="actionItem.disabled" *ngIf="!actionItem.hidden"
+                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                  [class.active]="actionItem.active"
+                  class="btn {{actionItem.colorClass}} dropdown-toggle"
+                  type="button" placement="bottom">
+            <i class="fa {{actionItem.iconClass}}" aria-hidden="true"></i>
+            <span>
+              {{ actionItem.label | translate }}
+            </span>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="{{'menu_'+actionItem.type}}">
+            <ng-container *ngFor="let menuItem of actionItem.menu">
+              <button class="dropdown-item a-cursor" *ngIf="!menuItem.hidden" [disabled]="menuItem.disabled"
+                 (click)="actionHandler(menuItem.type)" [class.active]="menuItem.active">
+                <i class="fa {{menuItem.iconClass}}" aria-hidden="true"></i>
+                {{ menuItem.label | translate }}
+              </button>
+            </ng-container>
+            
+          </div>
+        </div>
+        <ng-template #buttunTemp>
+          <button [disabled]="actionItem.disabled" *ngIf="!actionItem.hidden" [class.active]="actionItem.active" (click)="actionHandler(actionItem.type)" class="btn {{actionItem.colorClass}}" type="button" placement="bottom" ngbTooltip="{{ actionItem.label | translate }}">
+            <i class="fa {{actionItem.iconClass}}" aria-hidden="true"></i>
+            <span>
+              {{ actionItem.label | translate }}
+            </span>
+          </button>
+        </ng-template>
+
+      </ng-container>
+    </div>
+  </ng-template>

@@ -1,0 +1,30 @@
+.report-panel .panel {
+  margin-bottom: 20px;
+  background-color: #fff;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgb(0 0 0 / 5%);
+  box-shadow: 0 1px 1px rgb(0 0 0 / 5%);
+}
+.report-panel .panel-info > .panel-heading {
+  color: #000;
+  background-color: #c5dffb;
+  border-color: #c5dffb;
+}
+
+.report-panel .panel-group .panel-heading {
+  border-bottom: 0;
+}
+
+.report-panel .panel-heading {
+  padding: 10px 15px;
+  border-bottom: 1px solid transparent;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+}
+.report-panel .panel-info {
+  border-color: #bce8f1;
+}
+.report-panel .panel-body {
+  padding: 15px;
+}

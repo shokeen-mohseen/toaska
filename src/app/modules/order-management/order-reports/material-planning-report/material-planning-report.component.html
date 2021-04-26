@@ -1,0 +1,253 @@
+<app-top-btn-group #btnBar [actionGroupConfig]="actionGroupConfig" (action)="actionHandler($event)" [ParentPageName]="MaterialPlanningReportList"></app-top-btn-group>
+
+<div>
+  <h5>{{ 'key_MaterialPlanningReport' | translate }}</h5>
+</div>
+<mat-tab-group #tabGroupA class="mt-18" animationDuration="0ms" *ngIf="isPlaningLocation">
+
+  <mat-tab>
+    <ng-template mat-tab-label>
+      {{ 'key_pol' | translate }}
+    </ng-template>
+    <div class="tab-content">
+      <div class="filter-section">
+        <mat-accordion>
+          <mat-expansion-panel (opened)="panelOpenState = true"
+                               (closed)="panelOpenState = false" [expanded]="panelOpenState">
+            <mat-expansion-panel-header>
+              <mat-panel-description>
+                {{panelOpenState ? '- Hide' : '+ Show'}}  {{ 'key_MaterialPlanningFilter' | translate }}
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+
+
+            <div class="row">
+              <div class="col-md-8 col-sm-12">
+                <div class="row">
+                  <div class="col-md-6 col-sm-12">
+                    <div class="form-group">
+                      <label> {{ 'key_LocationType' | translate }} <sup class="text-danger font-weight-bold sup1">*</sup></label>
+                      <angular2-multiselect fixFilterBug [data]="LocationTypeList" [(ngModel)]="selectedItems" [settings]="settings"
+                                             (onSelectAll)="onLocationTypeSelectAll($event)"
+                                            (onSelect)="onLocationTypeSelect($event)"
+                                            (onDeSelectAll)="onDeLocationTypeAll($event)" required>
+                      </angular2-multiselect>
+                    </div>
+                  </div>
+                  <div class="col-md-6 col-sm-12">
+                    <div class="form-group">
+                      <label> {{ 'key_StartDate' | translate }} <sup class="text-danger font-weight-bold sup1">*</sup></label>
+
+                      <p-calendar [showIcon]="true" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2030"
+                                  placeholder="MM/DD/YYYY" name="SearchCalendar" id="Searchcalendar"
+                                  [(ngModel)]="SearchcalendarDate" required></p-calendar>
+                      <!--(onSelect)="OnsearchClander($event)"-->
+                    </div>
+                  </div>
+                  <div class="col-md-6 col-sm-12">
+                    <div class="form-group">
+                      <label> {{ 'key_FromLocation' | translate }} <sup class="text-danger font-weight-bold sup1">*</sup></label>
+                      <angular2-multiselect fixFilterBug [data]="LocationList" [(ngModel)]="LocationItems" [settings]="settings"
+                                            (onSelectAll)="onItemSelectAll($event)"
+                                            (onSelect)="onItemSelect($event)"
+                                            (onDeSelectAll)="onDeSelectAll($event)"
+                                             required>
+                      </angular2-multiselect>
+                    </div>
+                  </div>
+
+
+                  <div class="col-md-6 col-sm-12">
+                    <div class="form-group">
+                      <label> {{ 'key_NextNumberofDays' | translate }} <sup class="text-danger font-weight-bold sup1">*</sup></label>
+                      <input type="text" class="form-control" name="NextNumberofDays" [(ngModel)]="NextNumberofDays" (keypress)="numberOnly($event)"  maxlength="3"  required />
+                    </div>
+                  </div>
+                  <div class="col-md-6 col-sm-12">
+                    <label class="mt-1 mb-1"> {{ 'key_ReportType' | translate }} <sup class="text-danger font-weight-bold sup1">*</sup></label>
+                    <div class="form-group">
+
+                      <div class="col-md-12 col-sm-12 mb-2">
+                        <div class="custom-control custom-radio col-md-12 pb-2">
+                          <input type="radio" class="custom-control-input" id="radio1" name="fulfillment" [checked]="isMultiple"
+                                 (click)="MaterialPlanningReport()" >
+                          <label class="custom-control-label" for="radio1"> Material Planning Report</label>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6 col-sm-12">
+                    <label class="mt-1 mb-1">  <sup class="text-danger font-weight-bold sup1"></sup></label>
+                   
+                    <div class="form-group">
+                      <div class="col-md-12 col-sm-12 mb-2">
+                        <div class="custom-control custom-radio col-md-12 pb-2">
+                          <input type="radio" class="custom-control-input" id="radio2" name="fulfillment"
+                                 (click)="MaterialSummary()" [checked]="!isMultiple" >
+                          <label class="custom-control-label" for="radio2">Material Summary</label>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+
+
+                  <div class="col-md-6 col-sm-12">
+                    <label class="mt-1 mb-1">Include Open Order <sup class="text-danger font-weight-bold sup1"></sup></label>
+                    
+                    <div class="form-group">
+                      <div class="col-md-12 col-sm-12 mb-2">
+                        <div class="custom-control custom-checkbox col-md-12 pb-2">
+                          <input type="checkbox" class="custom-control-input" id="checkbox" name="OpenOrder"
+                                 (change)="OpenOrderCheckBox(isChecked)" [checked]="isChecked">
+                          <label class="custom-control-label" for="checkbox"> Open Order</label>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4 col-sm-12">
+                <div class="row">
+
+                  <div class="col-sm-12 col-lg-12 row justify-content-center mt-3 mb-3">
+                    <button class="btn btn-save font-weight-normal mr-2" (click)="ApplyFilter()"> {{ 'key_ApplyFilter' | translate }}</button>
+                    <button class="btn btn-next font-weight-normal" (click)="ResetFilter()">{{ 'key_ResetFilter' | translate }}</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </mat-expansion-panel>
+        </mat-accordion>
+      </div>
+      <!--End Filter Section-->
+    </div>
+
+    <div class="tab-content">
+      <div class="tab-pane active" id="tab1" *ngIf="isMultiple">
+        <div class="row">
+          <div class="col-lg-12">
+            <app-table-filter (filterOn)="applyFilter($event)"></app-table-filter>
+
+            <div class="scroll resize-table">
+              <mat-table #table [dataSource]="dataSource" matSort (matSortChange)="customSort($event)">
+                <ng-container *ngFor="let column of displayedColumns; let i=index;" [matColumnDef]="column">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header [resizeColumn]="true" [index]="i">
+                    <div *ngIf="column != selectRow"> {{ displayedColumnsReplace[i] | translate }}</div>
+                  </mat-header-cell>
+                  <mat-cell *matCellDef="let item">
+                    <!--for-checkbox-->
+                    <div class="form-check-inline" *ngIf="column === setupFilter">
+                      <a class="a_link" (click)="openfilter(item.report)" placement="top" ngbTooltip="Filter">
+                        <i class="fa fa-filter" aria-hidden="true"></i>
+                      </a>
+                    </div>
+                    {{ item[column] }}
+                  </mat-cell>
+                </ng-container>
+
+
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+
+                <mat-row *matRowDef="let row; columns: displayedColumns;">
+                </mat-row>
+
+              </mat-table>
+            </div>
+            <div class="col-lg-12 text-center" *ngIf="dataSource.data.length == 0"><p>No records to display.</p></div>
+            <mat-paginator #paginator
+                           [length]="materialPlaningreport.itemsLength"
+                           [pageSize]="materialPlaningreport.pageSize"
+                           [pageSizeOptions]="materialPlaningreport.pageSizeOptions"
+                           (page)="onPaginationEvent($event)">
+            </mat-paginator>
+
+
+          </div>
+        </div>
+      </div>
+
+
+      <div class="tab-pane active" id="tab2" *ngIf="!isMultiple">
+        <div class="row" *ngIf="isSummary" >
+          <div class="col-lg-12" *ngIf="dataSourceSummary.length >= 0">
+            <app-table-filter (filterOn)="applySummaryFilter($event)"></app-table-filter>
+
+            <div class="scroll resize-table">
+              <mat-table #table [dataSource]="dataSourceSummary" matSort (matSortChange)="customSummarySort($event)">
+                <ng-container *ngFor="let column of displayedSummaryColumns; let i=index;" [matColumnDef]="column">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header [resizeColumn]="true" [index]="i">
+                    <div> {{ displayedSummaryColumns[i] | translate }}</div>
+                  </mat-header-cell>
+                  <mat-cell *matCellDef="let item">
+                    <!--for-checkbox-->
+                   
+                    {{ item[column] }}
+                  </mat-cell>
+                </ng-container>
+
+
+                <mat-header-row *matHeaderRowDef="displayedSummaryColumns"></mat-header-row>
+
+                <mat-row *matRowDef="let row; columns: displayedSummaryColumns;">
+                </mat-row>
+
+              </mat-table>
+            </div>
+            <div class="col-lg-12 text-center" *ngIf="dataSourceSummary.length == 0"><p>No records to display.</p></div>
+            <mat-paginator #paginator
+                           [length]="materialSummaryreport.itemsLength"
+                           [pageSize]="materialSummaryreport.pageSize"
+                           [pageSizeOptions]="materialSummaryreport.pageSizeOptions"
+                           (page)="onPaginationSummaryEvent($event)">
+            </mat-paginator>
+
+
+          </div>
+        </div>
+
+
+        <div class="row" *ngIf="!isSummary">
+          <div class="col-lg-12">
+            <app-table-filter ></app-table-filter>
+
+            <div class="scroll resize-table">
+              <mat-table #table [dataSource]="dataSource1" matSort>
+                <ng-container *ngFor="let column of displayedColumnsReplace1; let i=index;" [matColumnDef]="column">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header [resizeColumn]="true" [index]="i">
+                    <div > {{ displayedColumnsReplace1[i] | translate }}</div>
+                  </mat-header-cell>
+                  <mat-cell *matCellDef="let item">
+                    <!--for-checkbox-->
+                    
+                    {{ item[column] }}
+                  </mat-cell>
+                </ng-container>
+
+
+                <mat-header-row *matHeaderRowDef="displayedColumnsReplace1"></mat-header-row>
+
+                <mat-row *matRowDef="let row; columns: displayedColumnsReplace1;">
+                </mat-row>
+
+              </mat-table>
+            </div>
+            <div class="col-lg-12 text-center" *ngIf="dataSource1.data.length == 0"><p>No records to display.</p></div>
+            <mat-paginator #paginator
+                           [length]="materialPlaningreport.itemsLength"
+                           [pageSize]="materialPlaningreport.pageSize"
+                           [pageSizeOptions]="materialPlaningreport.pageSizeOptions"
+                           >
+            </mat-paginator>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-tab>
+</mat-tab-group>
+<app-show-notes></app-show-notes>

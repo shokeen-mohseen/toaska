@@ -1,0 +1,68 @@
+.dropdownone {
+  position: absolute;
+  display: inline-block;
+  top: 7px;
+  right: 0px;
+}
+
+
+.ibcontainer {
+  display: flex;
+  justify-content: flex-end;
+  font-family: "montserrat", sans-serif;
+  font-weight: bold;
+  user-select: none;
+}
+
+.infobar {
+  /*width: 41%;*/
+  height: 40px;
+  padding-left: 10px;
+  padding-right: 10px;
+  background-color: #f3e1e1;
+  border-radius: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  -moz-transition: all 0.3s linear;
+  -webkit-transition: all 0.3s linear;
+  transition: all 0.3s linear;
+  color: #7d5a5a;
+  overflow: hidden;
+}
+
+.togglebtn {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #7d5a5a;
+  border-radius: 20px;
+  -moz-transition: all 0.3s linear;
+  -webkit-transition: all 0.3s linear;
+  transition: all 0.3s linear;
+  cursor: pointer;
+}
+
+.togglerotate {
+  -moz-transform: rotate(180deg);
+  -webkit-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+
+.infobar span {
+  padding: 5px;
+  -moz-transition: all 0.3s linear;
+  -webkit-transition: all 0.3s linear;
+  transition: all 0.3s linear;
+  font-size: 16px;
+  font-family: sans-serif;
+  font-weight: 800;
+}
+
+
+/*chart css*/
+
+
+/*chart css*/

@@ -1,0 +1,3 @@
+.edit-table tbody tr:nth-child(even) {
+  background: #f5f3f9;
+}

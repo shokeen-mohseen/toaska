@@ -1,0 +1,72 @@
+<app-top-btn-group #btnBar [actionGroupConfig]="actionGroupConfig" (action)="actionHandler($event)"></app-top-btn-group>
+<!--Author:- Monu Ram Yadav, date:09/09/20, 17314 TFS--Des:- remove jquery for patient registration, prepartum, partograph monitoring and postpartum-->
+<app-progress-bar></app-progress-bar>
+
+<div class="custom-tab">
+
+  <mat-tab-group #matgroup animationDuration="0ms" (selectedTabChange)="tabChange($event)">
+    <mat-tab>
+      <ng-template mat-tab-label>
+        {{ 'key_LatentPhase' | translate }}
+      </ng-template>
+      <div class="tab-content pb-2" *ngIf="tab1Data">
+        <app-latent-phase-labour></app-latent-phase-labour>
+        <div class="mt-3 text-right">
+          <button class="next-btn nexttab" (click)="selectNext(matgroup)"><span class="fw600">{{ 'key_Next' | translate }}</span> <span class="fs-12"> > {{ 'key_ActivePhase' | translate }}</span></button>
+        </div>
+      </div>
+    </mat-tab>
+    <mat-tab>
+      <ng-template mat-tab-label>
+        {{ 'key_ActivePhase' | translate }}
+      </ng-template>
+      <div class="tab-content pb-2" *ngIf="tab2Data">
+        <app-active-phase-labour></app-active-phase-labour>
+        <div class="mt-3 text-right">
+          <button class="skip-btn nexttab mr-3" (click)="selectPrev(matgroup)"><span class="fw600">{{ 'key_Previous' | translate }}</span> <span class="fs-12"> < {{ 'key_LatentPhase' | translate }}</span></button>
+          <button class="next-btn nexttab" (click)="selectNext(matgroup)"><span class="fw600">{{ 'key_Next' | translate }}</span> <span class="fs-12"> > {{ 'key_SecondStageLabour' | translate }}</span></button>
+        </div>
+      </div>
+    </mat-tab>
+    <mat-tab>
+      <ng-template mat-tab-label>
+        {{ 'key_SecondStageLabour' | translate }}
+      </ng-template>
+      <div class="tab-content pb-2" *ngIf="tab3Data">
+        <app-second-stage-labour></app-second-stage-labour>
+        <div class="mt-3 text-right">
+          <button class="skip-btn nexttab mr-3" (click)="selectPrev(matgroup)"><span class="fw600">{{ 'key_Previous' | translate }}</span> <span class="fs-12"> < {{ 'key_ActivePhase' | translate }} </span></button>
+          <button class="next-btn nexttab" (click)="selectNext(matgroup)"><span class="fw600">{{ 'key_Next' | translate }}</span> <span class="fs-12"> > {{ 'key_3rdStageLabour' | translate }}</span></button>
+        </div>
+      </div>
+    </mat-tab>
+    <mat-tab>
+      <ng-template mat-tab-label>
+        {{ 'key_3rdStageLabour' | translate }}
+      </ng-template>
+      <div class="tab-content pb-2" *ngIf="tab4Data">
+        <app-third-stage-delivery></app-third-stage-delivery>
+        <div class="mt-3 text-right">
+          <button class="skip-btn nexttab mr-3" (click)="selectPrev(matgroup)"><span class="fw600">{{ 'key_Previous' | translate }}</span> <span class="fs-12"> < {{ 'key_SecondStageLabour' | translate }}</span></button>
+          <button class="next-btn nexttab" (click)="selectNext(matgroup)"><span class="fw600">{{ 'key_Next' | translate }}</span> <span class="fs-12"> > {{ 'key_FourthStage' | translate }} </span></button>
+        </div>
+      </div>
+    </mat-tab>
+    <mat-tab>
+      <ng-template mat-tab-label>
+        {{ 'key_FourthStage' | translate }}
+      </ng-template>
+      <div class="tab-content pb-2" *ngIf="tab5Data">
+        <app-fourth-stage-monitoring></app-fourth-stage-monitoring>
+        <div class="mt-3 text-right">
+          <button class="skip-btn nexttab mr-3" (click)="selectPrev(matgroup)"><span class="fw600">{{ 'key_Previous' | translate }}</span> <span class="fs-12"> < {{ 'key_3rdStageLabour' | translate }}</span></button>
+        </div>
+      </div>
+    </mat-tab>
+
+  </mat-tab-group>
+
+</div>
+<!--Custom tab div end-->
+
+<app-next-previous-button></app-next-previous-button>

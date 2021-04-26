@@ -1,0 +1,29 @@
+<app-top-btn-group #btnBar [actionGroupConfig]="actionGroupConfig" (action)="actionHandler($event)"></app-top-btn-group>
+<div class="mb-3">
+  <div class="form-area">
+    <div class="wrapper">
+      <div class="content-wrapper">
+        <div>
+          <h5>{{'key_FPS' | translate}}</h5>
+        </div>
+
+
+        <mat-tab-group #tabGroupA class="mt-18" animationDuration="0ms" (selectedTabChange)="tabChange($event)">
+          <mat-tab #tab1 *ngIf="tab1">
+            <ng-template mat-tab-label>
+              {{ 'key_production_tracking' | translate }}
+            </ng-template>
+            <div class="tab-content" *ngIf="tab1Data">
+              <app-production-filter></app-production-filter>
+
+            </div>
+          </mat-tab>
+
+        </mat-tab-group>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+<app-show-notes></app-show-notes>

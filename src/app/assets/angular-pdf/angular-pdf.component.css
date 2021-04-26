@@ -1,0 +1,11 @@
+@media screen {
+  #htmlData {
+    font-size:10px;
+  }
+}
+
+@media print {
+  #htmlData, #htmlData * {
+    font-size:50px;
+  }
+}

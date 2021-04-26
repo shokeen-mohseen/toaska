@@ -1,0 +1,81 @@
+<div class="row py-3">
+  <div class="col-lg-12">
+    <!--<div>
+    <mat-form-field appearance="outline" fxFlex="100">
+      <mat-label>{{ 'key_Filter' | translate }}</mat-label>
+      <input matInput (keyup.enter)="applyFilter($event.target.value)" (keyup)="clearFilter($event.target.value)" [(ngModel)]="filterValue" placeholder="Press enter to filter">
+    </mat-form-field>
+  </div>-->
+    <app-table-filter (filterOn)="applyFilter($event)"></app-table-filter>
+    <div class="scroll">
+      <mat-table #table [dataSource]="dataSource" matSort (matSortChange)="customSort($event)">
+
+        <ng-container *ngFor="let column of displayedColumns; let i = index" [matColumnDef]="column">
+          <mat-header-cell *matHeaderCellDef mat-sort-header mwlResizable [enableGhostResize]="true" (resizeEnd)="onResizeEnd($event, column)"
+                           [resizeEdges]="{bottom: false, right: true, top: false, left: true}">
+
+            <div> {{ displayedColumnsReplace[i] | translate }}</div>
+          </mat-header-cell>
+
+          <mat-cell *matCellDef="let item">
+            <div *ngIf="column === InvoiceNumber">
+              <a href="javascript:void(0)" (click)="openPopup('invoiceNumber')">
+                {{item.InvoiceNumber}}
+              </a>
+            </div>
+
+            <div class="dollar t-right" *ngIf="column === 'InvoiceAmount'">
+              {{item.InvoiceAmount}}
+            </div>
+
+            <div class="dollar t-right" *ngIf="column === 'OpenAmount'">
+              {{item.OpenAmount}}
+            </div>
+
+            <div class="dollar t-right" *ngIf="column === 'CurrentAmount'">
+              {{item.CurrentAmount}}
+            </div>
+
+            <div class="dollar t-right" *ngIf="column === 'PastDueAmount'">
+              {{item.PastDueAmount}}
+            </div>
+
+            <div *ngIf="column != InvoiceNumber && column != 'InvoiceAmount' && column != 'OpenAmount' && column != 'CurrentAmount' && column != 'PastDueAmount'">
+              {{ item[column] }}
+            </div>
+          </mat-cell>
+
+          <mat-footer-cell *matFooterCellDef>
+
+            {{column === 'Aging' ?  'Total' : ''}}
+            <div class="dollar t-right" *ngIf="column === 'InvoiceAmount'">
+              {{column === 'InvoiceAmount' ?  getTotalCost() : ''}}
+            </div>
+            <div class="dollar t-right" *ngIf="column === 'OpenAmount'">
+              {{column === 'OpenAmount' ?  getTotalCost1() : ''}}
+            </div>
+            <div class="dollar t-right" *ngIf="column === 'CurrentAmount'">
+              {{column === 'CurrentAmount' ?  getTotalCost2() : ''}}
+            </div>
+            <div class="dollar t-right" *ngIf="column === 'PastDueAmount'">
+              {{column === 'PastDueAmount' ?  getTotalCost3() : ''}}
+            </div>
+          </mat-footer-cell>
+
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        <mat-footer-row class="sticky-footer" *matFooterRowDef="displayedColumns; sticky: true"></mat-footer-row>
+      </mat-table>
+
+
+    </div>
+
+    <mat-paginator #paginator
+                   [length]="paginationModel.itemsLength"
+                   [pageSize]="paginationModel.pageSize"
+                   [pageSizeOptions]="paginationModel.pageSizeOptions"
+                   (page)="onPaginationEvent($event)">
+    </mat-paginator>
+  </div>
+  </div>

@@ -1,0 +1,145 @@
+<div class="row bg-header-table" style="border-left:1px solid #ddd;">
+  <div class="col-md-12 col-sm-12 lm">
+    <h4 class="fs pt-2"> {{ 'key_addEditMaterialCharges' | translate }}:</h4>
+  </div>
+  <div class="col-lg-12 greyBg">
+    <div class="scroll">
+      <mat-table #table id="Addmaterial" [dataSource]="dataSourceAddMaterial" matSort>
+
+        <ng-container matColumnDef="Material">
+          <mat-header-cell class="" *matHeaderCellDef mat-sort-header>{{'key_Material' | translate}}</mat-header-cell>
+          <mat-cell class="" *matCellDef="let element"> {{element.name}} </mat-cell>
+
+          <!--<mat-footer-cell *matFooterCellDef>{{'key_Total' | translate}}</mat-footer-cell>-->
+        </ng-container>
+
+
+
+        <ng-container matColumnDef="OrderQuantity">
+          <mat-header-cell class="" *matHeaderCellDef mat-sort-header>{{'key_OrderQuantity' | translate}}</mat-header-cell>
+          <mat-cell class="" *matCellDef="let element"> {{element.displayQuantity}} </mat-cell>
+          <!--<mat-footer-cell *matFooterCellDef>101</mat-footer-cell>-->
+        </ng-container>
+
+        <ng-container matColumnDef="ShippedQuantity">
+          <mat-header-cell class="" *matHeaderCellDef mat-sort-header>{{'key_ShippedQuantity' | translate}} </mat-header-cell>
+          <mat-cell class="" *matCellDef="let element"> {{element.displayShippedQuantity}} </mat-cell>
+          <!--<mat-footer-cell *matFooterCellDef>00</mat-footer-cell>-->
+        </ng-container>       
+
+        <mat-header-row *matHeaderRowDef="displayedColumnsAddMaterial"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumnsAddMaterial;"
+                 (click)="selection.toggle(row)">
+        </mat-row>
+        <!--<mat-footer-row class="sticky-footer" *matFooterRowDef="displayedColumnsAddMaterial; sticky: true"></mat-footer-row>-->
+      </mat-table>
+    </div>
+  </div>
+</div>
+<hr class="mt-0 pb-3">
+<div class="row bg-header-table" style="border-left:1px solid #ddd;">
+  <div class="col-md-12 col-sm-12  lm">
+    <h4 class="fs pt-2"> {{ 'key_AdjustShippingMaterials' | translate }}:</h4>
+  </div>
+  <div class="col-lg-12 greyBg">
+    <div class="scroll">
+      <mat-table #table [dataSource]="dataSource" matSort>
+
+
+        <ng-container matColumnDef="Material">
+          <mat-header-cell class="" *matHeaderCellDef mat-sort-header>{{'key_Material' | translate}}</mat-header-cell>
+          <mat-cell class="" *matCellDef="let element"> {{element.name}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="OrderQuantity">
+          <mat-header-cell class="" *matHeaderCellDef mat-sort-header>{{'key_OrderQuantity' | translate}}</mat-header-cell>
+          <mat-cell class="" *matCellDef="let element"> {{element.displayQuantity}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="ShippedQuantity">
+          <mat-header-cell class="" *matHeaderCellDef mat-sort-header>{{'key_ShippedQuantity' | translate}}</mat-header-cell>
+          <mat-cell class="" *matCellDef="let element"> {{element.displayShippedQuantity}} </mat-cell>
+        </ng-container>
+
+       
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"
+                 (click)="selection.toggle(row)">
+        </mat-row>
+      </mat-table>
+    </div>
+  </div>
+</div>
+
+<hr class="mt-0 pb-3">
+<div class="row bg-header-table" style="border-left:1px solid #ddd;">
+  <div class="col-md-12 col-sm-12 lm">
+    <h4 class="fs pt-2"> {{ 'key_AdjustCharges' | translate }}:</h4>
+  </div>
+  <div class="col-lg-12 greyBg">
+    <div class="scroll">
+      <mat-table #table [dataSource]="dataSourceAdjust" matSort>
+        <!-- Position Column -->
+
+        <ng-container matColumnDef="materialName">
+          <mat-header-cell class="" *matHeaderCellDef mat-sort-header>{{'key_Material' | translate}}</mat-header-cell>
+          <mat-cell class="" *matCellDef="let element"> {{element.materialName}} </mat-cell>
+          <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+        </ng-container>
+        <ng-container matColumnDef="chargeName">
+          <mat-header-cell class="" *matHeaderCellDef mat-sort-header>{{'key_Charge' | translate}}</mat-header-cell>
+          <mat-cell class="" *matCellDef="let element"> {{element.chargeName}} </mat-cell>
+          <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="commodityName">
+          <mat-header-cell class="" *matHeaderCellDef mat-sort-header>{{'key_Commodity' | translate}}</mat-header-cell>
+          <mat-cell class="" *matCellDef="let element"> {{(element.overrideCommodityID>0  ? element.overrideCommodityName : element.commodityName)}} </mat-cell>
+          <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+        </ng-container>
+        <ng-container matColumnDef="showOnBOL">
+          <mat-header-cell class="" *matHeaderCellDef mat-sort-header>{{'key_ShowOnBOL' | translate}} </mat-header-cell>
+          <mat-cell class="" *matCellDef="let element"> {{element.overrideShowOnBOL}} </mat-cell>
+          <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+        </ng-container>
+        <ng-container matColumnDef="chargeUnit">
+          <mat-header-cell class="" *matHeaderCellDef mat-sort-header>Charge Units</mat-header-cell>
+          <mat-cell class="" *matCellDef="let element"> {{element.chargeUnit}} </mat-cell>
+          <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="priceMethod">
+          <mat-header-cell class="" *matHeaderCellDef mat-sort-header>{{'key_PriceMethod' | translate}}</mat-header-cell>
+          <mat-cell class="" *matCellDef="let element"> {{(element.overridePriceMethodID>0  ? element.overridePriceMethodName : element.priceMethod)}} </mat-cell>
+          <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+        </ng-container>
+        <ng-container matColumnDef="rateValue">
+          <mat-header-cell class="" *matHeaderCellDef mat-sort-header>{{'key_RateValue' | translate}}</mat-header-cell>
+
+          <!--<mat-cell class="" *matCellDef="let element"> {{(element.overrideRateValue > 0 ?element.overrideRateValue : element.rateValue) |  currency}} </mat-cell>-->
+          <mat-cell class="" *matCellDef="let element"> ${{(element.overrideRateValue > 0 ? ConvertMoneyToDecimalPreferences(element.overrideRateValue) : ConvertMoneyToDecimalPreferences(element.rateValue))}}  </mat-cell>
+          <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+        </ng-container>
+        <ng-container matColumnDef="rateTypeName">
+          <mat-header-cell class="" *matHeaderCellDef mat-sort-header>{{'key_RateType' | translate}}</mat-header-cell>
+          <mat-cell class="" *matCellDef="let element"> {{(element.overrideRateTypeID>0  ? element.overrideRateTypeName : element.rateTypeName)}} </mat-cell>
+          <mat-footer-cell *matFooterCellDef>Total</mat-footer-cell>
+        </ng-container>
+        <ng-container matColumnDef="amount">
+          <mat-header-cell class="" *matHeaderCellDef mat-sort-header>{{'key_Amount' | translate}}</mat-header-cell>
+          <mat-cell class="" *matCellDef="let element"> ${{ConvertMoneyToDecimalPreferences(element.fullAmount)}} </mat-cell>
+          <mat-footer-cell *matFooterCellDef align="right">${{ConvertMoneyToDecimalPreferences(ShippingCharegsTotalAmount)}}</mat-footer-cell>
+        </ng-container>
+       
+
+
+        <mat-header-row *matHeaderRowDef="displayedColumnsAdjust"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumnsAdjust;"
+                 (click)="selection.toggle(row)">
+        </mat-row>
+        <mat-footer-row class="sticky-footer" *matFooterRowDef="displayedColumnsAdjust; sticky: true"></mat-footer-row>
+      </mat-table>
+    </div>
+  </div>
+</div>

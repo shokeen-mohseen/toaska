@@ -1,0 +1,19 @@
+.tosca .order-deails h4 {
+  font-size: 14px;
+  font-weight: 600
+}
+
+.lm {
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 12px;
+}
+
+.order-deails .greyBg {
+  background-color: #f9f9f9;
+  padding: 12px;
+}
+
+.accordion > .card > .card-header a {
+  font-size: 15px;
+  font-weight: 400;
+}

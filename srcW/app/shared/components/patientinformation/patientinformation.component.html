@@ -1,0 +1,128 @@
+<!--checkIN / 17-07-2020 / WI - 16724 / Done by Amit Agrahari-->
+<!--checkIN / 21-07-2020 / TFS ID - 16724 / Language translation Done by Satyen singh-->
+<div id="accordion">
+  <div class="">
+
+    <div class="card-header card-body prdside" id="headingThree">
+      <div class="card-body position-relative pdrcol pb-0 pt-0">
+        <div class="row">
+          <div class="col-lg-12 col-sm-12 patientinformation-details-header" data-toggle="collapse" data-target="#patientinfo" aria-expanded="false" aria-controls="patientinfo" (click)="toggleDisplay()">
+            <div class="row pt-2">
+              <div class="col-lg-1 col-xs-6 col-sm-6 col-md-3">
+                <strong>
+                  {{ 'key_Name' | translate }}
+                </strong>
+                <span>satyen</span>
+              </div>
+              <div class="col-lg-1 col-xs-6 col-sm-6 col-md-3">
+                <strong>
+                  {{ 'key_Gravida' | translate }}
+                </strong>
+                <span>3</span>
+              </div>
+
+              <div class="col-lg-1 col-xs-6 col-sm-6 col-md-3">
+                <strong>
+                  {{ 'key_Para' | translate }}
+                </strong>
+                <span>3</span>
+              </div>
+              <div class="col-lg-2 col-xs-6 col-sm-6 col-md-3">
+                <strong>
+                  {{ 'key_Hospitalnumber' | translate }}
+                </strong>
+                <span>Apollo</span>
+              </div>
+
+
+              <div class="col-lg-2 col-xs-6 col-sm-6 col-md-3">
+                <strong>
+                  {{ 'key_Dateadmission' | translate }}
+                </strong>
+                <span> July 16 2020</span>
+              </div>
+
+              <div class="col-lg-2 col-xs-6 col-sm-6 col-md-3">
+                <strong>
+                  {{ 'key_Timeadmission' | translate }}
+                </strong>
+                <span> 5:00 AM</span>
+              </div>
+
+
+              <div class="col-lg-2 col-xs-6 col-sm-6 col-md-3">
+                <strong>
+                  {{ 'key_Rupturedmembranes' | translate }}
+                </strong>
+                <span>N/A</span>
+              </div>
+              <div class="col-lg-1 col-xs-6 col-sm-6 col-md-3">
+                <strong>
+                  {{ 'key_Hours' | translate }}
+                </strong>
+                <span>3</span>
+              </div>
+
+            </div>
+
+
+          </div>
+        </div>
+
+
+        <div id="patientinfo" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+          <div class="card-body row" style="padding: 0px;">
+            <div class="ptbox-wrap w-100 d-flex justify-content-center">
+              <div class="box lyt-ping-bg">
+                <div class="d-flex align-items-center">
+                  <span class="mr-3">{{ 'key_Registrationno' | translate }}</span>
+                  <span class="big-font">Is21542</span>
+                </div>
+              </div>
+
+
+              <div class="box">
+                <div class="d-flex">
+                  <div class="w-50 fw600"><span class="mr-3">Dr. Ak Dugal</span></div>
+                  <div class="w-50"><span>{{ 'key_Primaryphysician' | translate }}</span></div>
+                </div>
+                <div class="d-flex">
+                  <div class="w-50">
+                    <span class="fw600"><a href="tel:+4733378901">+47 333 78 901</a></span>
+                  </div>
+                  <div class="w-50">
+                    <span><a href="mailto:someone@example.com">A@domainname.com</a></span>
+                  </div>
+                </div>
+              </div>
+
+              
+              <div class="box">
+                <div class="d-flex">
+                  <div class="w-50 fw600"><span class="mr-3">Dr. Ak Dugal</span></div>
+                  <div class="w-50"><span>{{ 'key_Secondaryphysician' | translate }}</span></div>
+                </div>
+                <div class="d-flex">
+                  <div class="w-50">
+                    <span class="fw600"><a href="tel:+4733378901">+47 333 78 901</a></span>
+                  </div>
+                  <div class="w-50">
+                    <span><a href="mailto:someone@example.com">A@domainname.com</a></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!--<div class="dwn-arrowIcon">
+          <i class="fa fa-caret-down" aria-hidden="true"></i>
+        </div>-->
+      </div>
+      <div class="viewmore-expand" data-toggle="collapse" data-target="#patientinfo" aria-expanded="false" aria-controls="patientinfo" (click)="toggleDisplay()"><span>{{show}}</span></div>
+    </div>
+
+  </div>
+</div>

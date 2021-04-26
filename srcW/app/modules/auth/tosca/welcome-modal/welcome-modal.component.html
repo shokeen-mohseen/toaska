@@ -1,0 +1,21 @@
+
+<div class="modal-header">
+  <h4 class="modal-title">Welcome New User</h4>
+  <button type="button" class="close" data-dismiss="modal" (click)="activeModal.dismiss('Cross click')">&times;</button>
+</div>
+
+<!-- Modal body -->
+<div class="modal-body">
+
+  <p class="text-center text-dark p-2">
+    Thank you for requesting your LAMPSCloud user account. Please wait for the administrator to approve your account.
+    Your approval status will be sent via email. You can access your account immediately after you receive the approval email.
+  </p>
+
+</div>
+<div class="col-lg-12 text-center mt-4 mb-4">
+  <input type="button" id="yes" name="yes" (click)="loginRedirect()" class="btn btn-save mr-2 popup-btn-width" value="Ok">
+ 
+</div>
+
+

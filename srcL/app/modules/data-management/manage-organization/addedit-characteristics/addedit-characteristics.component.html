@@ -1,0 +1,34 @@
+<!-- Modal Header -->
+<div class="modal-header">
+  <h4 class="modal-title">Organization Characteristics</h4>
+  <button type="button" class="close" data-dismiss="modal" (click)="activeModal.dismiss('Cross click')">&times;</button>
+</div>
+
+<!-- Modal body -->
+<div class="modal-body">
+  <table class="table display-table edit-table table-responsive lasttbldesign">
+    <thead class="thead-light">
+      <tr>
+        <th style="width:60%" class="col">{{'key_Description' | translate}}</th>
+        <th style="width:20%" class="col">{{'key_Value' | translate}}</th>
+        <th style="width:20%" class="col">{{'key_UOM' | translate}}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of characteristicsList">
+        <td>{{item.description}}</td>
+        <td>
+          <input type="text" class="form-control" [(ngModel)]="item.value" [disabled]="!item.isEditable"/>
+        </td>
+        <td></td>
+      </tr>
+      <tr>
+    </tbody>
+  </table>
+  <div class="row pt-3">
+    <div class="col-lg-12 text-center">
+      <button (click)="save()" class="btn btn-save mr-2 popup-btn-width">Save</button>
+      <!--<input type="button" (click)="save()" class="btn btn-save mr-2 popup-btn-width" value="Save">-->
+    </div>
+  </div>
+</div>

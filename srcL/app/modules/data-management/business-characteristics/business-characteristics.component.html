@@ -1,0 +1,105 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="d-flex flex-nowrap justify-content-between align-items-center mb-2">
+
+      <div class="btn-group btn-group-toggle btn-group-md" data-toggle="buttons">
+        <button id="addAddressButton" (click)="openCharacteristics()" class="btn btn-outline-primary" type="button" placement="bottom" ngbTooltip="Add New">
+          <i class="fa fa-plus" aria-hidden="true"></i>
+          <span>
+            Add/Edit
+          </span>
+        </button>
+        <button id="deleteButton" class="btn btn btn-outline-danger" type="button" placement="bottom" ngbTooltip="Delete">
+          <i class="fa fa-trash-o" aria-hidden="true"></i>
+          <span>
+            Delete
+          </span>
+        </button>
+        <button id="btnRefresh" class="btn btn-outline-primary" type="button" placement="bottom" ngbTooltip="Refresh">
+          <i class="fa fa-refresh" aria-hidden="true"></i>
+          <span>
+            Refresh
+          </span>
+        </button>
+       
+       
+      </div>
+    </div>
+  </div>
+  <div class="row col-md-12 pr-0">
+    <div class="col-md-1"></div>
+    <div class="col-md-6">
+      <div class="form-inline row form-group">
+        <div class="col-sm-12 col-md-6">
+          <label>Get Characteristics From </label>
+        </div>
+        <div class="col-sm-12 col-md-6">
+          <select class="form-control w-100">
+            <option>option</option>
+            <option>option</option>
+            <option>option</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-5">
+      <div class="form-inline row form-group">
+        <div class="col-sm-12 col-md-5">
+          <label class="justify-content-end">Filter Characteristics</label>
+        </div>
+        <div class="col-sm-12 col-md-7 pr-0">
+          <select class="form-control w-100">
+            <option>option</option>
+            <option>option</option>
+            <option>option</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-12">
+    <div class="scroll">
+      <mat-table #table [dataSource]="dataSource" matSort>
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="selectRow">
+
+          <mat-header-cell class="t-center tw-5" *matHeaderCellDef>
+            <div class="form-check-inline">
+              <label class="form-check-label">
+                <input type="checkbox" class="form-check-input" value="" data-toggle="tooltip" data-placement="top" title="Select all" (change)="$event ? masterToggle() : null"
+                       [checked]="selection.hasValue() && isAllSelected()"
+                       [indeterminate]="selection.hasValue() && !isAllSelected()">
+              </label>
+            </div>
+
+          </mat-header-cell>
+          <mat-cell class="t-center tw-5" *matCellDef="let row">
+            <div class="form-check-inline">
+              <label class="form-check-label">
+                <input type="checkbox" class="form-check-input" value="" data-toggle="tooltip" data-placement="top" title="Select" (click)="$event.stopPropagation()"
+                       (change)="$event ? selection.toggle(row) : null"
+                       [checked]="selection.isSelected(row)">
+              </label>
+            </div>
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="Code">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Code</mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.Code}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="Value">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>  Value </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.Value}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="UOM">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> UOM</mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.UOM}} </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
+    </div>
+  </div>
+</div>

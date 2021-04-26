@@ -1,0 +1,25 @@
+
+<div class="modal-header">
+  <h4 class="modal-title">{{'key_Addforecast' | translate}}</h4>
+  <button type="button" class="close" data-dismiss="modal" (click)="activeModal.dismiss('Cross click')">&times;</button>
+</div>
+
+<!-- Modal body -->
+<div class="modal-body">
+  <div class="form-group">
+    <label for="firstname">{{ 'key_Forecastmaterial' | translate }}</label>
+    <angular2-multiselect [data]="materialList" [(ngModel)]="selectedMaterial" [settings]="settingsMaterial"
+                          (onSelect)="onMaterialSelect($event)">
+    </angular2-multiselect>
+  </div>
+</div>
+<form (ngSubmit)="saveForecastMaterial()">
+  <div class="col-lg-12 text-center mt-4 mb-4">
+    <input type="submit" id="btnSave" name="btnSave"
+           class="btn btn-save mr-2 popup-btn-width" value="Save"
+           [disabled]="isMaterialNotSelected()"
+           />
+
+  </div>
+</form>
+

@@ -1,0 +1,179 @@
+<div>
+  <div class="row" *ngIf="editPage">
+    <div class="col-md-6"></div>
+    <div class="col-md-6 text-right">
+      <span class="fw600">Last Updated:	</span> 8/13/2020 8:35:24 IST
+      <br><span class="fw600">By</span> Jay Coleman (lampsdemo@osoftec.com)
+    </div>
+  </div>
+  <!--Last Updated Section End//////////////-->
+  <form (ngSubmit)="onSubmit(validForm, userData)" #validForm="ngForm">
+    <div class="row">
+      <div class="col-md-3 custom-flex-w-15">
+        <div class="card">
+          <div class="card-header" *ngIf="addPage">{{ 'key_AddedList' | translate }}</div>
+          <div class="card-header" *ngIf="editPage">{{ 'key_EditList' | translate }}</div>
+          <div class="card-body p-0">
+            <div class="list-group" #nextList>
+              <div class="list-group-item list-group-item-action active">
+                <a>Edit Name goes here</a>
+                <button class="close" type="button" *ngIf="editPage">
+                  <i class="fa fa-times" aria-hidden="true"></i>
+                </button>
+              </div>
+              <div class="list-group-item list-group-item-action">
+                <a>Next Edit Name goes here</a>
+                <button class="close" type="button" *ngIf="editPage">
+                  <i class="fa fa-times" aria-hidden="true"></i>
+                </button>
+              </div>
+              <div class="list-group-item list-group-item-action">
+                <a>Next Edit Name goes here</a>
+                <button class="close" type="button" *ngIf="editPage">
+                  <i class="fa fa-times" aria-hidden="true"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-9 custom-flex-w-85">
+        <div class="tab-content">
+          <!--=============== Start profile =================-->
+          <div class="e-profile">
+            <div class="row">
+              <div class="col-md-4">
+                <div class="box-children">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="firstname">
+                          {{ 'key_Location' | translate}} <span class="text-danger">*</span>
+                        </label>
+                        <angular2-multiselect [data]="itemListA" [(ngModel)]="userData.listA" [settings]="settingsA"
+                                              (onSelect)="onItemSelect($event)"
+                                              (onDeSelect)="OnItemDeSelect($event)"
+                                              (onSelectAll)="onSelectAll($event)"
+                                              (onDeSelectAll)="onDeSelectAll($event)"
+                                              (onAddFilterNewItem)="onAddItem($event)" name="listA" required>
+                        </angular2-multiselect>
+                      </div>
+                    </div>
+
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label>{{ 'key_Customer' | translate}} <span class="text-danger">*</span></label>
+                        <angular2-multiselect [data]="itemListA" [(ngModel)]="userData.listA" [settings]="settingsA"
+                                              (onSelect)="onItemSelect($event)"
+                                              (onDeSelect)="OnItemDeSelect($event)"
+                                              (onSelectAll)="onSelectAll($event)"
+                                              (onDeSelectAll)="onDeSelectAll($event)"
+                                              (onAddFilterNewItem)="onAddItem($event)" name="listA" required>
+                        </angular2-multiselect>
+                      </div>
+                    </div>
+
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="lastname">{{ 'key_AvailableQuntity' | translate}} <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" name='key_AvailableQuntity'  [(ngModel)]='userData.key_AvailableQuntity' value="" required />
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="box-children">
+                  <div class="row">
+
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label>{{ 'key_Material' | translate}} <span class="text-danger">*</span></label>
+                        <angular2-multiselect [data]="itemListA" [(ngModel)]="userData.listA" [settings]="settingsA"
+                                              (onSelect)="onItemSelect($event)"
+                                              (onDeSelect)="OnItemDeSelect($event)"
+                                              (onSelectAll)="onSelectAll($event)"
+                                              (onDeSelectAll)="onDeSelectAll($event)"
+                                              (onAddFilterNewItem)="onAddItem($event)" name="listA" required>
+                        </angular2-multiselect>
+                      </div>
+                    </div>
+
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="lastname">{{ 'key_DateRange' | translate}} <span class="text-danger">*</span></label>
+                        <ejs-daterangepicker [format]='dateFormat' separator='to' placeholder='MM-DD-YYYY to MM-DD-YYYY' name='daterangepicker'  [(ngModel)]='userData.daterangepicker' #daterangepicker='ngModel' id="daterangepicker" required></ejs-daterangepicker>
+                      </div>
+                    </div>
+
+
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="lastname">{{ 'key_RemainingToReserve' | translate}} <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" name='RemainingToReserve'  [(ngModel)]='userData.RemainingToReserve' value="" required />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="box-children">
+                  <div class="row">
+                    <!--<div class="col-md-12">
+                    <div class="form-group">
+                      <span class="fw600 mr-3 " for="lastname"> {{ 'key_Status' | translate }} </span>
+                      <span for="lastname"> {{ 'key_Active' | translate }} </span>
+
+                    </div>
+                  </div>-->
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <div class="form-check checkbox">
+                          <input class="form-check-input" id="check1" type="checkbox" value="" checked>
+                          <label class="form-check-label" for="check1"> {{ 'key_SetupCompleted' | translate }} </label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <span class="fw600 mr-3 " for="lastname"> {{ 'key_SetupDatetime' | translate }} </span>
+                        <span for="lastname"> 8/31/2020 7:05:24 IST </span>
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <span class="fw600 mr-3 " for="lastname"> {{ 'key_SetupCompletedby' | translate }} </span>
+                        <span for="lastname"> John</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--=============== End e-profile =================-->
+        </div>
+      </div>
+
+    </div>
+
+    <div class="row justify-content-center my-5">
+      <div class="col-xl-2 col-lg-4 col-md-4 col-sm-12">
+        <button class="btn btn-block btn-save" type="submit" [disabled]="!validForm.valid">{{ 'key_Save' | translate }}</button>
+      </div>
+      <div class="col-xl-2 col-lg-4 col-md-4 col-sm-12" *ngIf="addPage">
+        <button class="btn btn-block btn-next" type="submit" [disabled]="!validForm.valid">
+          <span class="fw600">{{ 'key_Add' | translate }}</span> <span class="fs-13"> > {{ 'key_Next' | translate }}</span>
+        </button>
+      </div>
+      <div class="col-xl-2 col-lg-4 col-md-4 col-sm-12" *ngIf="editPage">
+        <button class="btn btn-block btn-next" type="submit" [disabled]="!validForm.valid">
+          <span class="fw600">{{ 'key_Edit' | translate }}</span> <span class="fs-13"> > {{ 'key_Next' | translate }}</span>
+        </button>
+      </div>
+    </div>
+
+  </form>
+
+</div>

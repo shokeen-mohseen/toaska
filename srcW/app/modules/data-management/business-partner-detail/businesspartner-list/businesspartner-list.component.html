@@ -1,0 +1,78 @@
+<div class="row">
+  <div class="col-lg-12">
+    <app-table-filter (filterOn)="applyFilter($event)"></app-table-filter>
+    <!--   <mat-form-field appearance="outline" fxFlex="100">
+       <mat-label>Filter</mat-label>
+       <input matInput (keyup.enter)="applyFilter($event.target.value)"
+              (keyup)="clearFilter($event.target.value)"
+              [(ngModel)]="filterValue" placeholder="Press enter to filter">
+     </mat-form-field>-->
+    <div class="scroll resize-table">
+      <mat-table #table [dataSource]="dataSource" matSort (matSortChange)="customSort($event)">
+
+        <ng-container *ngFor="let column of displayedColumns, let i=index;" [matColumnDef]="column">
+          <mat-header-cell *matHeaderCellDef mat-sort-header mwlResizable [enableGhostResize]="true" (resizeEnd)="onResizeEnd($event, column)"
+                           [resizeEdges]="{bottom: false, right: true, top: false, left: true}">
+
+            <div class="form-check-inline" *ngIf="column === selectRow">
+              <label class="form-check-label">
+                <input type="checkbox" class="form-check-input" value="" placement="top" (change)="$event ? masterToggle() : null"
+                       [checked]="selection.hasValue() && isAllSelected()"
+                       [indeterminate]="selection.hasValue() && !isAllSelected()">
+              </label>
+            </div>
+            <div *ngIf="column != selectRow"> {{ displayedColumnsReplace[i] | translate }}</div>
+          </mat-header-cell>
+          <mat-cell *matCellDef="let item">
+            <!--for-checkbox-->
+            <div class="form-check-inline" *ngIf="column === selectRow">
+              <label class="form-check-label">
+                <input type="checkbox" class="form-check-input" value="" (click)="$event.stopPropagation()"
+                       (change)="onSelectionChange(item, $event.target.checked)"
+                       [checked]="selection.isSelected(item)">
+              </label>
+            </div>
+            <div *ngIf="column === 'setupDoneDateTime'">
+              <span>
+                {{item.setupDoneDateTime =='0001-01-01T00:00:00' ? '' : item.setupDoneDateTime | date: 'MM/dd/yyyy hh:mm a'   }}
+
+              </span>
+            </div>
+            <div *ngIf="column === 'isActive'">
+              <span>
+                {{item.isActive ? 'Active' : 'Inactive'   }}
+
+              </span>
+            </div>
+            <div *ngIf="column === 'setupDone'">
+              <span>
+                {{item.setupDone ? 'Yes' : 'No'   }}
+
+              </span>
+            </div>
+            <div *ngIf="column != 'setupDoneDateTime'
+                        && column !== 'isActive'
+                        && column !== 'setupDone'">
+              <span>
+                {{ item[column] }}
+              </span>
+            </div>
+          </mat-cell>
+        </ng-container>
+
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"
+                 [ngClass]="{ 'selected': selection.isSelected(row), 'boldRow': row.updatedBy =='Interface' }"
+                 (click)="onSelectionChange(row, row.isSelected)"></mat-row>
+      </mat-table>
+    </div>
+    <div class="col-lg-12 text-center" *ngIf="dataSource.data.length == 0"><p>No records to display.</p></div>
+    <mat-paginator #paginator
+                   [length]="paginationModel.itemsLength"
+                   [pageSize]="paginationModel.pageSize"
+                   [pageSizeOptions]="paginationModel.pageSizeOptions"
+                   (page)="onPaginationEvent($event)">
+    </mat-paginator>
+  </div>
+</div>

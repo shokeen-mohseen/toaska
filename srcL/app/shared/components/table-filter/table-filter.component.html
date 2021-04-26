@@ -1,0 +1,16 @@
+<div class="main-filter mb-2">
+  <div class="input">
+    <div *ngFor="let pill of pills" class="pill">
+      {{pill}}
+      <span (click)="removePill(pill)">x</span>
+    </div>
+    <input type="text" [ngModel]="value" (ngModelChange)="changeValue($event)"
+           (blur)="changeFocussed(false)" (focus)="changeFocussed(true)" placeholder="Filter">
+  </div>
+
+  <ul *ngIf="filteredList?.length && isFocussed" class="dropdown">
+
+    <li *ngFor="let item of filteredList" (click)="addPill(item)">{{item}}</li>
+
+  </ul>
+</div>

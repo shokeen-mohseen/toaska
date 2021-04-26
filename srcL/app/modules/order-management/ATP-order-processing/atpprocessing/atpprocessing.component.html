@@ -1,0 +1,110 @@
+<app-top-btn-group #btnBar [actionGroupConfig]="actionGroupConfig" (action)="actionHandler($event)"></app-top-btn-group>
+
+<div style="margin-bottom:30px;">
+  <div class="form-area">
+    <div class="wrapper">
+      <div class="content-wrapper">
+        <div>
+          <h5> {{ 'key_Atpprocessing' | translate }}</h5>
+        </div>
+        <mat-tab-group #tabGroupA class="mt-18" animationDuration="0ms" (selectedTabChange)="tabChange($event)">
+
+          <mat-tab #tab1 *ngIf="tab1">
+            <ng-template mat-tab-label>
+              {{ 'key_Atpprocessing' | translate }}
+            </ng-template>
+            <div class="tab-content" *ngIf="tab1Data">
+              <app-apt-processing-filter></app-apt-processing-filter>
+              <div class="row">
+                <div class="col-lg-12 mt-2">
+                  <app-atp-detail></app-atp-detail>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-12 mt-0">
+                  <div class="my-0">
+                    <div class="table-responsive">
+                      <table class="table table-bordered">
+                        <thead>
+                          <tr>
+                            <!--<th scope="col" style="width:2%;">
+                              <input type="checkbox" class="ml-2" value="">
+                            </th>-->
+                            <th scope="col" colspan="2" class="text-center">{{ 'key_Customerorddetail' | translate }}</th>                            
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr class="accordion-toggle bgtr" id="accordion1" data-toggle="collapse" aria-expanded="true" data-parent="#accordion1" href="#atp">
+                            <td class="expand-button"></td>
+                            <td colspan="2">Options 1</td>
+                          </tr>
+                          <tr class="hide-table-padding">
+                            <td colspan="2">
+                              <div id="atp" class="collapse in p-3 pl-0 show">
+                                <app-atp-tbl-list></app-atp-tbl-list>
+                              </div>
+                            </td>
+                          </tr>                         
+                          <!--=========end=========--->
+
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </mat-tab>
+
+          <!--<mat-tab #tab2 *ngIf="tab2">
+            <ng-template mat-tab-label>
+              {{ 'key_Addnew' | translate }}
+              <button class="close" type="button" (click)="closeTab()">
+                <i class="fa fa-times-circle-o" aria-hidden="true"></i>
+              </button>
+            </ng-template>
+            <div class="tab-content" *ngIf="tab2Data">
+              fiolter
+            </div>
+          </mat-tab>-->
+          <!--<mat-tab #tab3 *ngIf="tab3">
+            <ng-template mat-tab-label>
+              {{ 'key_Edit' | translate }}
+              <button class="close" type="button" (click)="closeTab()">
+                <i class="fa fa-times-circle-o" aria-hidden="true"></i>
+              </button>
+            </ng-template>
+            <div class="tab-content" *ngIf="tab3Data">
+             filter3
+            </div>
+          </mat-tab>-->
+        </mat-tab-group>
+      </div>
+    </div>
+  </div>
+</div>
+<app-show-notes></app-show-notes>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

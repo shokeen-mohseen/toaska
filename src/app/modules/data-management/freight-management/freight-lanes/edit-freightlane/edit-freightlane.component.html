@@ -1,0 +1,303 @@
+
+<div class="container-fluid p-0">
+
+  <div class="row mb-2 mt-2">
+    <div class="col-md-6"></div>
+    <div class="col-md-6 text-right">
+      <span class="fw600">Last Updated:	</span> {{selectedFreightLaneToEdit.UpdateDateLocaleTime | momentDateWithZonePipe}}
+      <br><span class="fw600">By</span>  {{selectedFreightLaneToEdit.updatedBy}}
+    </div>
+  </div>
+
+  <div class="row mt-3">
+    <div class="col-md-3 custom-flex-w-15">
+      <div class="card">
+        <div class="card-header"> {{'key_EditList'| translate}}</div>
+        <div class="card-body p-0">
+          <ul class="list-group" #nextList *ngIf="FreightList && FreightList.length">
+            <li class="list-group-item list-group-item-action" [ngClass]="[FreightLanemodel.id === freightLane.id ? 'active' : '']"
+                *ngFor="let freightLane of FreightList; let i = index"
+                (click)="selectedFreightLaneFromEditList(i,1)">
+
+              <a title="{{freightLane.addedlistDisplay}}">{{freightLane.addedlistDisplay}}</a>
+              <button class="close" *ngIf="freightLane.id != FreightLanemodel.id" type="button"
+                      (click)="removeFreightLaneFromEditList(freightLane)">
+                <i class="fa fa-times" aria-hidden="true"></i>
+              </button>
+            </li>
+          </ul>
+
+          
+        </div>
+      </div>
+    </div>
+    <div class="col-md-9 custom-flex-w-85">
+      <div class="tab-content" id="nav-tabContent">
+
+        <mat-accordion>
+          <mat-expansion-panel [expanded]="true">
+            <div class="row">
+
+              <div class="col-md-6">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label>{{'key_fromGeoLocation'| translate}}</label>
+                      <input type="text" class="form-control" value="Location" [(ngModel)]="fromGeoLocation" name="fromGeoLocation" disabled />
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label>{{'key_toGeoLocation'| translate}}</label>
+                      <input type="text" class="form-control" value="Location" [(ngModel)]="toGeoLocation" name="toGeoLocation" disabled />
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label>{{'key_FreightMode'| translate}}</label>
+                      <input type="text" class="form-control" value="Mode" [(ngModel)]="freightMode" name="freightMode" disabled />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="row">
+
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label>{{'key_Distance'| translate}} <sup class="text-danger font-weight-bold sup1">*</sup></label>
+                      <div class="row">
+                        <div class="col-md-9">
+                          <input type="number" min="0" class="form-control" required [(ngModel)]="distance" name="distance" oninput="this.value = Math.abs(this.value)"/>
+                        </div>
+                        <input type="button" id="distance" name="btnSave" class="btn btn-next font-weight-normal pt-1 pb-1" value="{{'key_Getdistance' | translate}}">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label>{{'key_Distanceuom'| translate}} <sup class="text-danger font-weight-bold sup1">*</sup></label>
+                      <angular2-multiselect fixFilterBug [data]="DistanceUomList" [(ngModel)]="DistanceUomData" [settings]="{singleSelection: true, text: 'Select', enableSearchFilter: true, labelKey :'name', searchBy: ['name'] }"
+                                            (onSelect)="onItemSelect($event)"
+                                            (onDeSelect)="OnItemDeSelect($event)"
+                                            (onSelectAll)="onSelectAll($event)"
+                                            (onDeSelectAll)="onDeSelectAll($event)"
+                                            (onAddFilterNewItem)="onAddItemA($event)" required>
+                      </angular2-multiselect>
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label>{{'key_Traveltimedays'| translate}} <sup class="text-danger font-weight-bold sup1">*</sup></label>
+                      <input type="number" min="0" class="form-control" required [(ngModel)]="travelTimeDays" name="travelTimeDays" oninput="this.value = Math.abs(this.value)"/>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </mat-expansion-panel>
+        </mat-accordion>
+
+
+
+      </div>
+    </div>
+  </div>
+  <!--=================Accordian ==============-->
+
+  <div id="accordionTab1" class="accordion mt-3 p-0">
+    <div class="card col-sm-12 p-0 mb-0">
+      <div class="card-header collapsed in" data-toggle="collapse" href="#address">
+        <a class="card-title">
+          {{'key_CarrierRate' | translate}}
+        </a>
+      </div>
+      <div id="address" class="card-body collapse show" data-parent="#accordionTab1">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="d-flex flex-nowrap justify-content-between align-items-center mb-3">
+
+              <div>
+                <div class="btn-group btn-group-toggle btn-group-md">
+                  <button data-target="#addFreight" data-toggle="modal" class="btn btn-outline-primary" (click)="btnAdd(ngForm)" type="button" placement="bottom" ngbTooltip="{{'key_Add' | translate}}" [disabled]="Inactive">
+                    <i class="fa fa-plus"></i>
+                    <span>
+                      {{ 'key_Add' | translate }}
+                    </span>
+                  </button>
+                  <button data-target="#addFreight" data-toggle="modal" class="btn btn-outline-primary" (click)="btnEdit()" type="button" placement="bottom" ngbTooltip="{{'key_Edit' | translate}}" [disabled]="Inactive">
+                    <i class="fa fa-pencil"></i>
+                    <span>
+                      {{ 'key_Edit' | translate }}
+                    </span>
+                  </button>
+                  <button id="deleteButton" class="btn btn btn-outline-danger" type="button" placement="bottom" (click)="btnDelete()" ngbTooltip="Delete" [disabled]="Inactive">
+                    <i class="fa fa-trash-o"></i>
+                    <span>
+                      {{ 'key_Delete' | translate }}
+                    </span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="scroll">
+              <mat-table #table [dataSource]="dataSource" matSort>
+
+
+                <ng-container *ngFor="let column of displayedColumns; let i=index;" [matColumnDef]="column">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header [resizeColumn]="true" [index]="i">
+
+
+
+                    <div class="form-check-inline" *ngIf="column === selectRow">
+                      <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input" value="" placement="top" ngbTooltip="Select all" (change)="$event ? masterToggle() : null"
+                               [checked]="selection.hasValue() && isAllSelected()"
+                               [indeterminate]="selection.hasValue() && !isAllSelected()">
+                      </label>
+                    </div>
+                    <div *ngIf="column != selectRow"> {{ displayedColumnsReplace[i] | translate }}</div>
+
+                  </mat-header-cell>
+                  <mat-cell *matCellDef="let item">
+                    <!--for-checkbox-->
+                    <div class="form-check-inline" *ngIf="column === selectRow">
+                      <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input" value="" (click)="$event.stopPropagation()"
+                               (change)="onSelectionChange(item, $event.target.checked)"
+                               [checked]="selection.isSelected(item)">
+                      </label>
+                    </div>
+                    {{ item[column] }}
+                  </mat-cell>
+                </ng-container>
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;"
+                         [ngClass]="{hovered: row.hovered, highlighted: row.highlighted,
+                'inactive': row.status === 'Inactive' && !selection.isSelected(row),
+                'selected': selection.isSelected(row)}"
+                         (click)="onSelectionChange(row, !row.isSelected)"
+                         (mouseover)="row.hovered = true" (mouseout)="row.hovered = false">
+                </mat-row>
+
+              </mat-table>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+
+
+  <!--================= end  address and contact tabs ==============-->
+  <div class="row justify-content-center mt-3 mb-3">
+    <div class="col-xl-2 col-lg-4 col-md-4 col-sm-12">
+      <button class="btn btn-block btn-save" type="submit" (click)="btnSaveAll(3)" [disabled]="Inactive">{{ 'key_Save' | translate }}</button>
+    </div>
+    <div class="col-xl-2 col-lg-4 col-md-4 col-sm-12">
+      <button class="btn btn-block btn-next" [disabled]="FreightLaneToEdit.length<2 || Inactive" (click)="btnEditNext()">
+        <span class="fw600">{{ 'key_Edit' | translate }}</span> <span class="fs-13"> > Next</span>
+      </button>
+    </div>
+  </div>
+</div><!--container-fluid-->
+<!--model here-->
+<form #ngForm="ngForm" novalidate>
+  <div class="modal" id="addFreight" *ngIf="popup">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">
+            {{'key_CarrierRate' | translate}}
+          </h5>
+          <button type="button" for="confirms" class="close" data-dismiss="modal" (click)="closeTab()">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="col-md-12 ">
+            <div class="row">
+
+              <div class="col-sm-12 col-md-12 col-lg-10 mb-2 m-auto">
+                <div class="row">
+                  <div class="col-sm-12 col-md-3 pr-0 text-right mt-2">
+                    <label>{{'key_Carrier'| translate}} <sup class="text-danger font-weight-bold sup1">*</sup></label>
+                  </div>
+                  <div class="col-sm-12 col-md-8">
+                    <input type="text" class="form-control" [(ngModel)]="FreightDetId" name="FreightDetId" [hidden]="true" />
+                    <angular2-multiselect fixFilterBug [data]="CarrierList" [(ngModel)]="CarrierData" [settings]="{singleSelection: true, text: 'Select', enableSearchFilter: true, labelKey :'name', searchBy: ['name'] }"
+                                          (onSelect)="onItemSelect($event)"
+                                          (onDeSelect)="OnItemDeSelect($event)"
+                                          (onSelectAll)="onSelectAll($event)"
+                                          (onDeSelectAll)="onDeSelectAll($event)"
+                                          (onAddFilterNewItem)="onAddItemA($event) " required *ngIf="add" name="CarrierList">
+                    </angular2-multiselect>
+
+                    <input type="text" class="form-control" [(ngModel)]="Carrier" name="Carrier" disabled *ngIf="edit" />
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-sm-12 col-md-12 col-lg-10 mb-2 m-auto">
+                <div class="row">
+                  <div class="col-sm-12 col-md-3 pr-0 text-right mt-2">
+                    <label>{{'key_Equipment'| translate}} <sup class="text-danger font-weight-bold sup1">*</sup></label>
+                  </div>
+                  <div class="col-sm-12 col-md-8">
+                    <angular2-multiselect fixFilterBug [data]="EquipmentList" [(ngModel)]="EquipmentData" [settings]="{singleSelection: true, text: 'Select', enableSearchFilter: true, labelKey :'equimentDescription', searchBy: ['equimentDescription'] }"
+                                          (onSelect)="onItemSelect($event)"
+                                          (onDeSelect)="OnItemDeSelect($event)"
+                                          (onSelectAll)="onSelectAll($event)"
+                                          (onDeSelectAll)="onDeSelectAll($event)"
+                                          (onAddFilterNewItem)="onAddItemA($event)" required *ngIf="add" name="EquipmentList">
+                    </angular2-multiselect>
+                    <input type="text" class="form-control" [(ngModel)]="Equipment" name="Equipment" disabled *ngIf="edit" />
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-12 col-lg-10 mb-2 m-auto">
+                <div class="row">
+                  <div class="col-sm-12 col-md-3 pr-0 text-right mt-2">
+                    <label>{{'key_Rateperload'| translate}} <sup class="text-danger font-weight-bold sup1">*</sup></label>
+                  </div>
+                  <div class="col-sm-12 col-md-8">
+                    <input type="number" min="0" class="form-control" required [(ngModel)]="Rateperload" name="Rateperload" oninput="this.value = Math.abs(this.value)"/>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-12 col-lg-10 mb-2 m-auto">
+                <div class="row">
+                  <div class="col-sm-12 col-md-3 pr-0 text-right mt-2">
+                    <label>{{'key_Rateperuom'| translate}} <sup class="text-danger font-weight-bold sup1">*</sup></label>
+                  </div>
+                  <div class="col-sm-12 col-md-8">
+                    <angular2-multiselect fixFilterBug [data]="RateperuomList" [(ngModel)]="RateperuomData" [settings]="{singleSelection: true, text: 'Select', enableSearchFilter: true, labelKey :'name', searchBy: ['name'] }"
+                                          (onSelect)="onItemSelect($event)"
+                                          (onDeSelect)="OnItemDeSelect($event)"
+                                          (onSelectAll)="onSelectAll($event)"
+                                          (onDeSelectAll)="onDeSelectAll($event)"
+                                          (onAddFilterNewItem)="onAddItemA($event)" required name="RateperuomList">
+                    </angular2-multiselect>
+                  </div>
+                </div>
+              </div>
+
+
+            </div>
+          </div>
+
+
+          <div class="col-sm-4 text-center pt-1 mx-auto mb-4 mt-3">
+            <button class="mt-4 mr-2 pl-4 pr-4 btn btn-save" (click)="btnSave()" [disabled]="Inactive">{{'key_Save'|translate}}</button>
+            <button class="mt-4 btn btn-previous d-none font-weight-normal">{{'key_Cancel'|translate}}</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+

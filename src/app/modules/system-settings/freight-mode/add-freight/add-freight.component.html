@@ -1,0 +1,150 @@
+<div>
+  <!--<div class="row">
+    <div class="col-md-6"></div>
+    <div class="col-md-6 text-right">
+      <span class="fw600">Last Updated:	</span> 8/13/2020 8:35:24 IST
+      <br><span class="fw600">By</span> Jay Coleman (lampsdemo@osoftec.com)
+    </div>
+  </div>-->
+  <!--Last Updated Section End//////////////-->
+  <!--<script>
+     var reloadXML = setInterval(refresh_Div, 5000);
+  </script>-->
+  <form (ngSubmit)="myform.valid && onSubmit()" #myform="ngForm">
+    <div class="row">
+      <div class="col-md-3 custom-flex-w-15">
+        <div class="card">
+          <div class="card-header">{{ 'key_AddedList' | translate }}</div>
+          <div class="card-body p-0">
+            <div class="list-group">
+              <!--<ul class="list-group" #nextList></ul>-->
+              <!--<li class="list-group-item list-group-item-action active">Added Name</li>-->
+
+              <div class="list-group-item list-group-item-action active" *ngFor="let freight of freightViewModel , let i = index"
+                   (click)="selected(i)">
+                <a>{{freight.name}}</a>
+                <button class="close" type="button" *ngIf="freightViewModel.id!=freightViewModel.id"
+                        (click)="removeFreightModeFromEditList(name)">
+                  <i class="fa fa-times" aria-hidden="true"></i>
+                </button>
+                </div>
+              </div>
+
+            </div>
+        </div>
+      </div>
+      <div class="col-md-9 custom-flex-w-85">
+        <div class="tab-content">
+          <!--=============== Start profile =================-->
+          <div class="e-profile">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="box-children">
+                  <div class="form-group">
+                    <label for="name">
+                      {{ 'key_FreightModeName' | translate}} <span class="text-danger">*</span>
+                    </label>
+                    <input type="text" [(ngModel)]="name" name="nameCtrl" #nameCtrl="ngModel" class="form-control" value="" required />
+                    <div *ngIf="nameCtrl.invalid && (nameCtrl.dirty || nameCtrl.touched)" class="errorMessage alert-danger">Freight Mode Name is required</div>
+
+                    <!--<div [hidden]="!name.valid" class="alert alert-danger">Name is required</div>-->
+                    <!--<mat-error *ngIf="myform.invalid">{{getRequiredErrorMessage('name')}}</mat-error>-->
+                  </div>
+
+                  <div class="form-group">
+                    <label>{{ 'key_FuelSurchargePercentageRate' | translate}} (%) <span class="text-danger">*</span></label>
+                    <input type="number" [(ngModel)]="fuelSurFreightModePercentageRate" name="fuelSurFreightModePercentageRateCtrl" #fuelSurFreightModePercentageRateCtrl="ngModel" class="form-control" value="" min="1" required />
+                    <div *ngIf="fuelSurFreightModePercentageRateCtrl.invalid && (fuelSurFreightModePercentageRateCtrl.dirty || fuelSurFreightModePercentageRateCtrl.touched)" class="errorMessage alert-danger">Fuel Surcharge Percentage Rate is required</div>
+                  </div>
+
+                  <div class="form-group">
+                    <label>{{ 'key_MilesPerGallon' | translate}}</label>
+                    <input type="number" [(ngModel)]="milesPerGallon" name="milesPerGallonCtrl" #milesPerGallonCtrl="ngModel" class="form-control" value="" min="1" required />
+                    <div *ngIf="milesPerGallonCtrl.invalid && (milesPerGallonCtrl.dirty || milesPerGallonCtrl.touched)" class="errorMessage alert-danger">Miles Per Gallon is required</div>
+                    </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="box-children">
+                  <div class="form-group">
+                    <label for="lastname">{{ 'key_MilesPerHour' | translate}}</label>
+                    <input type="number" [(ngModel)]="milesPerHour" name="milesPerHourCtrl" #milesPerHourCtrl="ngModel" class="form-control" value="" min="1" />
+                    <!--<div *ngIf="milesPerHourCtrl.invalid && (milesPerHourCtrl.dirty || milesPerHourCtrl.touched)" class="alert alert-danger">MilesPerHour is required</div>-->
+                  </div>
+                  <div class="form-group">
+                    <label for="lastname">{{ 'key_DriverHoursPerDay' | translate}}</label>
+                    <input type="number" [(ngModel)]="driverHoursPerDay" name="driverHoursPerDayCtrl" #driverHoursPerDayCtrl="ngModel" class="form-control" value="" min="1" />
+                    <!--<div *ngIf="driverHoursPerDayCtrl.invalid && (driverHoursPerDayCtrl.dirty || driverHoursPerDayCtrl.touched)" class="alert alert-danger">MilesPerHour is required</div>-->
+                  </div>
+                </div>
+              </div>
+              <!--<div class="col-md-4">
+                <div class="box-children">-->                 
+                  <!--<div class="col-md-12">
+                    <div class="form-group">
+                      <span class="fw600 mr-3 " for="lastname"> {{ 'key_Status' | translate }} </span>
+                      <span for="lastname"> {{ 'key_Active' | translate }} </span>
+
+                    </div>
+                  </div>-->
+
+                  <!--<div class="form-group">
+                    <div class="form-check checkbox pl-0">
+                      <label class="form-check-label" for="check1"> {{ 'key_SetupCompleted' | translate }} </label>
+                      <input class="form-check-input ml-2" id="check1" type="checkbox" [ngModelOptions]="{standalone: true}" (change)="setupCompleteChange()" [(ngModel)]="setupComplete">
+                    </div>
+                  </div>
+                  <div class="form-group d-flex">
+                    <span class="fw600 mr-3 " for="lastname"> {{ 'key_SetupDatetime' | translate }} </span>
+                    <span for="lastname" class="text-break"> {{ setupCompleteDateTime }} </span>
+                  </div>
+                  <div class="form-group d-flex">
+                    <span class="fw600 mr-3 " for="lastname"> {{ 'key_SetupCompletedby' | translate }} </span>
+                    <span for="lastname" class="text-break"> {{ setupCompleteBy }} </span>
+                  </div>
+                </div>
+              </div>-->
+            </div>
+          </div>
+          <!--=============== End e-profile =================-->
+        </div>
+      </div>
+      <!--*ngIf="usersViewModel.userId > 0"-->
+      <div class="col-md-12" *ngIf="freightViewModel.id > 0">
+        <div class="form-group mt-3">
+          <p>{{ 'key_AddEquipmentInstruction' | translate}}</p>
+        </div>
+      </div>
+      <div class="col-lg-12" *ngIf="freightViewModel.id > 0">
+        <div id="accordionMapEquipmentType" class="accordion">
+          <div class="card mb-0">
+            <div class="card-header collapsed" data-toggle="collapse" href="#MapEquipmentType" (click)="openAccordion('mapEquipmentType')">
+              <a class="card-title">
+                {{ 'key_MapEquipmentType' | translate}} - {{equiplist?.length}}
+              </a>
+            </div>
+            <div id="MapEquipmentType" class="card-body collapse" data-parent="#accordionMapEquipmentType">
+              <div *ngIf="mapEquipmentType">
+                <app-map-equipment-type></app-map-equipment-type>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row justify-content-center my-5">
+      <div class="col-xl-2 col-lg-4 col-md-4 col-sm-12">
+        <button class="btn btn-block btn-save" type="submit" [disabled]="myform.invalid">
+          {{ 'key_Save' | translate }}
+        </button>
+      </div>
+      <div class="col-xl-2 col-lg-4 col-md-4 col-sm-12">
+        <button class="btn btn-block btn-next" [disabled]="myform.invalid" (click)="myform.form.valid && useradd(); myform.reset();">
+          <span class="fw600">{{ 'key_Add' | translate }}</span> <span class="fs-13"> > {{ 'key_Next' | translate }}</span>
+        </button>
+      </div>
+    </div>
+
+  </form>
+</div>

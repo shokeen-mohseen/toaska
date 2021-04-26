@@ -1,0 +1,10 @@
+.pageerror {
+  width: 1609px;
+  height: 752px;
+  overflow: auto;
+  border-width: 1px;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}

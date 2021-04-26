@@ -1,0 +1,159 @@
+<mat-accordion>
+  <mat-expansion-panel (opened)="panelOpenState = true"
+                       (closed)="panelOpenState = false" [expanded]="true">
+    <mat-expansion-panel-header>
+      <mat-panel-description>
+        {{panelOpenState ? '- Hide' : '+ Show'}} Freight lanes Filter
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    
+      <div class="row">
+        <div class="col-md-3 col-sm-12 col-lg-3 col-xl-3">
+          <div class="form-group">
+            <label for="Fromstate">{{ 'key_Fromcountry' | translate }}</label>
+            <angular2-multiselect [data]="itemListA" [(ngModel)]="selectedItemsA" [settings]="settingsA"
+                                  (onSelect)="onItemSelect($event)"
+                                  (onDeSelect)="OnItemDeSelect($event)"
+                                  (onSelectAll)="onSelectAll($event)"
+                                  (onDeSelectAll)="onDeSelectAll($event)"
+                                  (onAddFilterNewItem)="onAddItemA($event)">
+            </angular2-multiselect>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-12 col-lg-3 col-xl-3">
+          <div class="form-group">
+            <label for="Fromstate">{{ 'key_Fromstate' | translate }}</label>
+            <angular2-multiselect [data]="itemListA" [(ngModel)]="selectedItemsA" [settings]="settingsA"
+                                  (onSelect)="onItemSelect($event)"
+                                  (onDeSelect)="OnItemDeSelect($event)"
+                                  (onSelectAll)="onSelectAll($event)"
+                                  (onDeSelectAll)="onDeSelectAll($event)"
+                                  (onAddFilterNewItem)="onAddItemA($event)">
+            </angular2-multiselect>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-12 col-lg-3 col-xl-3">
+          <div class="form-group">
+            <label for="Fromcity">{{ 'key_Fromcity' | translate }}</label>
+            <angular2-multiselect [data]="itemListA" [(ngModel)]="selectedItemsA" [settings]="settingsA"
+                                  (onSelect)="onItemSelect($event)"
+                                  (onDeSelect)="OnItemDeSelect($event)"
+                                  (onSelectAll)="onSelectAll($event)"
+                                  (onDeSelectAll)="onDeSelectAll($event)"
+                                  (onAddFilterNewItem)="onAddItemA($event)">
+            </angular2-multiselect>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-12 col-lg-3 col-xl-3">
+          <div class="form-group">
+            <label for="Fromstate">{{ 'key_Fromzip' | translate }}</label>
+            <angular2-multiselect [data]="itemListA" [(ngModel)]="selectedItemsA" [settings]="settingsA"
+                                  (onSelect)="onItemSelect($event)"
+                                  (onDeSelect)="OnItemDeSelect($event)"
+                                  (onSelectAll)="onSelectAll($event)"
+                                  (onDeSelectAll)="onDeSelectAll($event)"
+                                  (onAddFilterNewItem)="onAddItemA($event)">
+            </angular2-multiselect>
+          </div>
+        </div>
+      </div>
+   
+    <div class="row">
+      <div class="col-md-3 col-sm-12 col-lg-3 col-xl-3">
+        <div class="form-group">
+          <label for="Fromstate">{{ 'key_Tocountry' | translate }}</label>
+          <angular2-multiselect [data]="itemListA" [(ngModel)]="selectedItemsA" [settings]="settingsA"
+                                (onSelect)="onItemSelect($event)"
+                                (onDeSelect)="OnItemDeSelect($event)"
+                                (onSelectAll)="onSelectAll($event)"
+                                (onDeSelectAll)="onDeSelectAll($event)"
+                                (onAddFilterNewItem)="onAddItemA($event)">
+          </angular2-multiselect>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-12 col-lg-3 col-xl-3">
+        <div class="form-group">
+          <label for="Fromstate">{{ 'key_Tostate' | translate }}</label>
+          <angular2-multiselect [data]="itemListA" [(ngModel)]="selectedItemsA" [settings]="settingsA"
+                                (onSelect)="onItemSelect($event)"
+                                (onDeSelect)="OnItemDeSelect($event)"
+                                (onSelectAll)="onSelectAll($event)"
+                                (onDeSelectAll)="onDeSelectAll($event)"
+                                (onAddFilterNewItem)="onAddItemA($event)">
+          </angular2-multiselect>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-12 col-lg-3 col-xl-3">
+        <div class="form-group">
+          <label for="Fromcity">{{ 'key_Tocity' | translate }}</label>
+          <angular2-multiselect [data]="itemListA" [(ngModel)]="selectedItemsA" [settings]="settingsA"
+                                (onSelect)="onItemSelect($event)"
+                                (onDeSelect)="OnItemDeSelect($event)"
+                                (onSelectAll)="onSelectAll($event)"
+                                (onDeSelectAll)="onDeSelectAll($event)"
+                                (onAddFilterNewItem)="onAddItemA($event)">
+          </angular2-multiselect>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-12 col-lg-3 col-xl-3">
+        <div class="form-group">
+          <label for="Tostate">{{ 'key_Tozip' | translate }}</label>
+          <angular2-multiselect [data]="itemListA" [(ngModel)]="selectedItemsA" [settings]="settingsA"
+                                (onSelect)="onItemSelect($event)"
+                                (onDeSelect)="OnItemDeSelect($event)"
+                                (onSelectAll)="onSelectAll($event)"
+                                (onDeSelectAll)="onDeSelectAll($event)"
+                                (onAddFilterNewItem)="onAddItemA($event)">
+          </angular2-multiselect>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-3 col-sm-12 col-lg-3 col-xl-3">
+        <div class="form-group">
+          <label for="FreightMode">{{ 'key_FreightMode' | translate }}</label>
+          <angular2-multiselect [data]="itemListA" [(ngModel)]="selectedItemsA" [settings]="settingsA"
+                                (onSelect)="onItemSelect($event)"
+                                (onDeSelect)="OnItemDeSelect($event)"
+                                (onSelectAll)="onSelectAll($event)"
+                                (onDeSelectAll)="onDeSelectAll($event)"
+                                (onAddFilterNewItem)="onAddItemA($event)">
+          </angular2-multiselect>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-12 col-lg-3 col-xl-3">
+        <div class="form-group">
+          <label for="BusinessPartner">{{ 'key_BusinessPartner' | translate }}</label>
+          <angular2-multiselect [data]="itemListA" [(ngModel)]="selectedItemsA" [settings]="settingsA"
+                                (onSelect)="onItemSelect($event)"
+                                (onDeSelect)="OnItemDeSelect($event)"
+                                (onSelectAll)="onSelectAll($event)"
+                                (onDeSelectAll)="onDeSelectAll($event)"
+                                (onAddFilterNewItem)="onAddItemA($event)">
+          </angular2-multiselect>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-12 col-lg-3 col-xl-3">
+        <div class="form-group">
+          <label for="Equipment">{{ 'key_Equipment' | translate }}</label>
+          <angular2-multiselect [data]="itemListA" [(ngModel)]="selectedItemsA" [settings]="settingsA"
+                                (onSelect)="onItemSelect($event)"
+                                (onDeSelect)="OnItemDeSelect($event)"
+                                (onSelectAll)="onSelectAll($event)"
+                                (onDeSelectAll)="onDeSelectAll($event)"
+                                (onAddFilterNewItem)="onAddItemA($event)">
+          </angular2-multiselect>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-12 col-lg-3 col-xl-3">
+        <div class="mt-4">
+          <button class="btn btn-save font-weight-normal btn-w-h">{{'key_ApplyFilter' | translate}}</button>
+          <button class="btn btn-next ml-3 font-weight-normal btn-w-h">{{'key_ResetFilter' | translate}}</button>
+        </div>
+      </div>
+
+    </div>
+    
+    <!--<app-filter></app-filter>-->
+  </mat-expansion-panel>
+</mat-accordion>

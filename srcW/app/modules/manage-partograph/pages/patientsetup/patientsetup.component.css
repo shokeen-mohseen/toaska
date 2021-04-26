@@ -1,0 +1,13 @@
+.activeRow {
+  background: #ffcb60 !important;
+}
+
+.snactive {
+  background: #E4E7EA !important;
+}
+
+mat-cell,
+mat-footer-cell,
+mat-header-cell {
+  width: 130px;
+}

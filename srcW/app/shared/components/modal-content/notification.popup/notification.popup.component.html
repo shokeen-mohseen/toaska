@@ -1,0 +1,94 @@
+<!---Author name satyen singh
+TFS ID - 16739 Task
+Description- Alert history Component - Design alert history component.
+Date- 11-7-2020
+
+TFS ID- 16753 Bug
+Description- Alert History - Resolve the issues
+date- 11-7-2020
+    start code
+ --->
+
+
+<div class="modal-header">
+  <h4 class="modal-title" id="modal-basic-title">Notifications</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div class="alertnotification">
+    <div class=""></div>
+    <div class=""></div>
+    <div class="">
+      <div class="text-center font-600"><strong>Mark as resolved</strong></div>
+    </div>
+  </div>
+
+  <div class="alertnotification" *ngFor="let objnote of modalAlertData; let i = index">
+
+    <div class="item item1">
+      <ng-container *ngIf="objnote.AlertType === 'HA'">
+        <div class="circleone"><i class="fa fa-exclamation-circle" aria-hidden="true"></i></div>
+      </ng-container>
+
+      <ng-container *ngIf="objnote.AlertType === 'MA'">
+        <div class="circletwo"><i class="fa fa-exclamation-circle" aria-hidden="true"></i></div>
+      </ng-container>
+    </div>
+   
+    
+    <div class="item item2">
+      <div class="mb-2">
+        <span>
+          {{objnote.Path}}/{{objnote.ChartName}} / Value: {{objnote.InputValue}}
+
+        </span>
+        <span class="float-right">37 min ago</span>
+      </div>
+      <div>
+        <p>
+          {{objnote.AlertMessageKey | translate}}
+
+        </p>
+      </div>
+    </div>
+    <!--<div class="item3">
+    <span>Resolved by</span>
+    <span>{{objnote.UserName}}</span>
+    <small>{{objnote.CreatedDate | date}}</small>
+  </div>-->
+    <div class=" itemcheck">
+      <input type="checkbox" />
+    </div>
+  </div>
+
+  <!--<div class="alertnotification">
+    <div class="item item1">
+      <div class="circletwo"><i class="fa fa-exclamation-circle" aria-hidden="true"></i></div>
+    </div>
+    <div class="item item2">
+      <div class="mb-2">
+        <span>Latent Phase Labour / Fetal heart rate / Value - 120</span>
+        <span class="float-right">37 min ago</span>
+      </div>
+      <div>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit omnis animi et iure laudantium vitae, praesentium optio,
+          sapiente distinctio illo?
+        </p>
+      </div>
+    </div>
+    <div class=" itemcheck">
+      <input type="checkbox" />
+    </div>
+  </div>-->
+
+</div>
+
+<!---Author name satyen singh
+TFS ID - 16739 Task
+Description- Alert history Component - Design alert history component.
+Date- 11-7-2020
+    start code
+ --->

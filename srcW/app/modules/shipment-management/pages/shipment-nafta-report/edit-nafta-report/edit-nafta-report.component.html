@@ -1,0 +1,171 @@
+<div>
+  <div class="row">
+    <div class="col-md-6"></div>
+    <div class="col-md-6 text-right">
+      <span class="fw600">{{ 'key_LastUpdated1' | translate }}:</span> {{selectedNaftaReportToEdit?.updateDateTimeBrowser | date:'MM-dd-yyyy hh:mm:ss'}}
+      <br><span class="fw600">{{ 'key_By' | translate }}</span> {{selectedNaftaReportToEdit?.updatedBy}}
+    </div>
+  </div>
+  <!--Last Updated Section End//////////////-->
+  <div class="row">
+    <div class="col-md-12">
+      <div class="tab-content">
+        <!--=============== Start profile =================-->
+        <div class="e-profile">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="box-children">
+                <div class="form-group">
+                  <label for="exp">{{ 'key_Exp' | translate }}  <sup class="text-danger sup1">*</sup></label>
+                  <input type="text" class="form-control" [(ngModel)]="expNo" name="expNo" required />
+                </div>
+                <div class="form-group">
+                  <label for="org">{{ 'key_Organization' | translate }}<sup class="text-danger sup1">*</sup></label>
+                  <angular2-multiselect [data]="organizationList" [(ngModel)]="organizationItems" [settings]="{singleSelection: true, text: 'Select Organization', enableSearchFilter: true, badgeShowLimit: 1, labelKey :'name' }"
+                                        (onSelect)="onItemSelect($event)"
+                                        (onDeSelect)="OnItemDeSelect($event)"
+                                        (onSelectAll)="onSelectAll($event)"
+                                        (onDeSelectAll)="onDeSelectAll($event)"
+                                        (onAddFilterNewItem)="onAddItemA($event)" name="listA">
+                  </angular2-multiselect>
+                </div>
+                <div class="form-group">
+                  <label for="orgin">{{ 'key_Origincountry' | translate }}<sup class="text-danger sup1">*</sup></label>
+                  <angular2-multiselect [data]="originCountryList" [(ngModel)]="originCountryItems" [settings]="{singleSelection: true, text: 'Select Country', enableSearchFilter: true, badgeShowLimit: 1, labelKey :'CountryName' }"
+                                        (onSelect)="onItemSelect($event)"
+                                        (onDeSelect)="OnItemDeSelect($event)"
+                                        (onSelectAll)="onSelectAll($event)"
+                                        (onDeSelectAll)="onDeSelectAll($event)"
+                                        (onAddFilterNewItem)="onAddItemA($event)">
+                  </angular2-multiselect>
+                </div>
+                <div class="form-group">
+                  <!--<label for="datefrom">{{ 'key_FromCalendarDate' | translate }} <sup class="text-danger sup1">*</sup></label>-->
+                  <label for="from">{{ 'key_DateRange' | translate }} <sup class="text-danger sup1">*</sup></label>
+                  <ejs-daterangepicker [format]='dateFormat' separator='to' placeholder='MM-DD-YYYY to MM-DD-YYYY' id="dateRange"></ejs-daterangepicker>
+                  <!--<input type="date" class="form-control" [(ngModel)]="fromDate" name="fromDate" required />-->
+                </div>
+                <!--<div class="form-group">
+                  <label for="todate">{{ 'key_ToCalendarDate' | translate }} <sup class="text-danger sup1">*</sup></label>
+                  <input type="date" class="form-control" [(ngModel)]="toDate" name="toDate" required />
+                </div>-->
+              <div class="form-group">
+                <label for="sign">{{ 'key_Uploadauthorizedsignature' | translate }} </label>
+                <div class="custom-file">
+                  <input type="file" class="custom-file-input" [(ngModel)]="authSignature" (change)="onSelectFile($event)" name="authSignature" />
+                  <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                </div>                
+              </div>
+                <div class="form-group">
+                  <div class="d-flex" >
+                    <div class="p-4 bg-grey col-sm-10">
+                      <img id="signature" [src]="authSignature" class="w-100"  />
+                      <h2>Signature</h2>
+                    </div>
+                    <div class="text-right col-sm-2"><i class="fa fa-trash text-danger fa-3x" (click)="deleteSignature()" aria-hidden="true"></i></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="box-children">
+                <div class="form-group">
+                  <label for="prname">{{ 'key_ProducerName' | translate }} <sup class="text-danger sup1">*</sup></label>
+                  <input type="text" class="form-control" [(ngModel)]="producerName" name="producerName" required />
+                </div>
+                <div class="form-group">
+                  <label for="produ">{{ 'key_ProducerTaxIdentificationNo' | translate }} <sup class="text-danger sup1">*</sup></label>
+                  <input type="text" class="form-control" [(ngModel)]="producerTIN" name="producerTIN" required />
+                </div>
+                <div class="form-group">
+                  <label for="add1">{{ 'key_ProducerAddress1' | translate }}</label>
+                  <textarea class="form-control" rows="2" [(ngModel)]="producerAdd1" name="producerAdd1"></textarea>
+                </div>
+                <div class="form-group">
+                  <label for="add2">{{ 'key_ProducerAddress2' | translate }}</label>
+                  <textarea class="form-control" rows="2" [(ngModel)]="producerAdd2" name="producerAdd2"></textarea>
+                </div>
+                <div class="form-group">
+                  <label for="good">{{ 'key_GoodsDescription' | translate }}</label>
+                  <textarea class="form-control" rows="2" [(ngModel)]="goodsDescription" name="goodsDescription"></textarea>
+                </div>
+                <div class="form-group">
+                  <label for="hst">{{ 'key_HSTariffClassificationNo' | translate }} <sup class="text-danger sup1">*</sup></label>
+                  <input type="text" class="form-control" [(ngModel)]="hsTariffClassNo" name="hsTariffClassNo" required>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="box-children">
+                
+                <div class="form-group">
+                  <label for="pref">{{ 'key_PreferenceCriteria' | translate }} <sup class="text-danger sup1">*</sup></label>
+                  <input type="text" class="form-control" [(ngModel)]="preferenceCriteria" name="preferenceCriteria" required>
+                </div>
+                <div class="form-group">
+                  <label for="pro">{{ 'key_Producer' | translate }} <sup class="text-danger sup1">*</sup></label>
+                  <input type="text" class="form-control" [(ngModel)]="producer" name="producer" required>
+                </div>
+                <div class="form-group">
+                  <label for="net">{{ 'key_NetCost' | translate }} <sup class="text-danger sup1">*</sup></label>
+                  <angular2-multiselect [data]="netCostList" [(ngModel)]="netCostItems" [settings]="{singleSelection: true, text: 'Select NetCost', enableSearchFilter: true, badgeShowLimit: 1, labelKey :'value' }"
+                                        (onSelect)="onItemSelect($event)"
+                                        (onDeSelect)="OnItemDeSelect($event)"
+                                        (onSelectAll)="onSelectAll($event)"
+                                        (onDeSelectAll)="onDeSelectAll($event)"
+                                        (onAddFilterNewItem)="onAddItemA($event)" name="listC">
+                  </angular2-multiselect>
+                </div>
+                <div class="form-group">
+                  <label for="name">{{ 'key_Name' | translate }} <sup class="text-danger sup1">*</sup></label>
+                  <input type="text" class="form-control" [(ngModel)]="name" name="name" required>
+                </div>
+                <div class="form-group">
+                  <label for="title">{{ 'key_Title' | translate }} <sup class="text-danger sup1">*</sup></label>
+                  <input type="text" class="form-control" [(ngModel)]="title" name="title" required>
+                </div>
+                <div class="form-group">
+                  <label for="tel">{{ 'key_Telenumber' | translate }} <sup class="text-danger sup1">*</sup></label>
+                  <span placement="left" ngbTooltip="xx (xxx) xxx-xxxx &#34; Starting two digit are indicating international Phone format. These two digit are optional &#34;" class="badge badge-danger badge-pill info-siubscription float-right">
+                    <i class="fa fa-exclamation" aria-hidden="true"></i>
+                  </span>
+                  <input type="text" class="form-control" [(ngModel)]="telenumber" name="telenumber" required>
+                </div>
+                <div class="form-group">
+                  <label for="telep">{{ 'key_Telephonenumberfacsimile' | translate }} <sup class="text-danger sup1">*</sup></label>
+                  <span placement="left" ngbTooltip="xx (xxx) xxx-xxxx &#34; Starting two digit are indicating international Phone format. These two digit are optional &#34;" class="badge badge-danger badge-pill info-siubscription float-right">
+                    <i class="fa fa-exclamation" aria-hidden="true"></i>
+                  </span>
+                  <input type="text" class="form-control" [(ngModel)]="telePhoneFacsimile" name="telePhoneFacsimile" required>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--=============== End e-profile =================-->
+      </div>
+    </div>
+  </div>
+  <form (ngSubmit)="save()">
+    <div class="row justify-content-center my-5">
+      <div class="col-xl-2 col-lg-4 col-md-4 col-sm-12">
+        <button class="btn btn-block btn-save" type="submit">{{ 'key_Save' | translate }}</button>
+      </div>
+
+      <!--<div class="col-xl-2 col-lg-4 col-md-4 col-sm-12">
+      <button class="btn btn-block btn-next">
+        <span class="fw600">{{ 'key_Edit' | translate }}</span> <span class="fs-13"> > {{ 'key_Next' | translate }}</span>
+      </button>
+    </div>-->
+    </div>
+  </form>
+</div>
+
+
+
+
+
+
+
+
+

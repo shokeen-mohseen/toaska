@@ -1,0 +1,78 @@
+<div class="row">
+  <div class="col-md-3">
+    <div class="d-flex flex-nowrap justify-content-between align-items-center mb-2">
+      <div class="btn-group btn-group-toggle btn-group-md" data-toggle="buttons">
+        <button id="addDefaultEquipemntButton"
+                (click)="openeditEquipment('addDefaultEquipemntButton')"
+                class="btn btn-outline-primary" type="button"
+                placement="bottom" ngbTooltip="{{'key_Add' | translate}}" 
+                [disabled]="isDisabled === 0 || Inactive">
+          <i class="fa fa-plus" aria-hidden="true"></i>
+          <span>
+            {{ 'key_Add' | translate }}
+          </span>
+        </button>        
+        <button id="deleteDefaultEquipemntButton"
+
+                [disabled]="!this.isEditRights || Inactive"
+                (click)="openeditEquipment('deleteDefaultEquipemntButton')"
+                class="btn btn btn-outline-danger"
+                type="button"
+                placement="bottom"
+                ngbTooltip="{{'key_Delete' | translate}}">
+          <i class="fa fa-trash-o" aria-hidden="true"></i>
+          <span>
+            {{ 'key_Delete' | translate }}
+          </span>
+        </button>
+      </div>
+    </div>
+  </div>
+  <!--<div class="col-sm-9">
+    <div class="form-group row">
+      <label class="col-form-label" for="select1">{{ 'key_Prefredtype' | translate }}</label>
+      <div class="col-md-6">
+        <angular2-multiselect [data]="equipmentTypeData" [(ngModel)]="selectedItemsB" [settings]="settingsB"
+                              (onSelect)="onItemSelect($event)"
+                              (onDeSelect)="OnItemDeSelect($event)"
+                              (onSelectAll)="onSelectAll($event)"
+                              (onDeSelectAll)="onDeSelectAll($event)"
+                              (onAddFilterNewItem)="onAddItemB($event)" name="equipmentType">
+        </angular2-multiselect>
+      </div>
+    </div>
+  </div>-->
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <table class="table table-striped table-bordered">
+      <thead>
+        <tr>
+          <th class="no-sort" width="5%">
+            <div class="form-check-inline">
+              <label class="form-check-label">
+                <input type="checkbox" class="form-check-input" value="" data-toggle="tooltip" data-placement="top" title="Select all" disabled>
+              </label>
+            </div>
+          </th>
+          <th>Mapped Equipment Type</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of preferredEquipmentList" (click)="selectMaterialCheckbox(item)" [ngClass]="[item.isSelected === true ? 'activeRow' : '']">
+          <td>
+            <div class="form-check-inline">
+              <label class="form-check-label">
+                
+                <mat-checkbox [checked]="item.isSelected" (click)="$event.stopPropagation()" class="form-check-input"
+                              (change)="selectMaterialCheckbox(item)"></mat-checkbox>
+              </label>
+            </div>
+          </td>
+          <td colspan="4">{{item.propertyValueName}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+

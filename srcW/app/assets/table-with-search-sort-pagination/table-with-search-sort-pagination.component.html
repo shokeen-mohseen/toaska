@@ -1,0 +1,72 @@
+<div class="row">
+  <div class="col-lg-12">
+    <div>
+      <mat-form-field appearance="outline" fxFlex="100">
+        <mat-label>{{ 'key_Filter' | translate }}</mat-label>
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="{{ 'key_Filter' | translate }}">
+      </mat-form-field>
+    </div>
+    <div class="scroll">
+      <mat-table #table [dataSource]="dataSource" matSort>
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="selectRow">
+          <mat-header-cell class="t-center tw-5" *matHeaderCellDef>
+            <div class="form-check-inline">
+              <label class="form-check-label">
+                <input type="checkbox" class="form-check-input" value="" placement="top" ngbTooltip="Select all" (change)="$event ? masterToggle() : null"
+                       [checked]="selection.hasValue() && isAllSelected()"
+                       [indeterminate]="selection.hasValue() && !isAllSelected()">
+              </label>
+            </div>
+
+          </mat-header-cell>
+          <mat-cell class="t-center tw-5" *matCellDef="let row">
+            <div class="form-check-inline">
+              <label class="form-check-label">
+                <input type="checkbox" class="form-check-input" value="" (click)="$event.stopPropagation()"
+                       (change)="$event ? selection.toggle(row) : null"
+                       [checked]="selection.isSelected(row)">
+              </label>
+            </div>
+          </mat-cell>
+        </ng-container>
+
+
+        <ng-container matColumnDef="CustomerBillingEntity">
+          <mat-header-cell class="tw-25" *matHeaderCellDef mat-sort-header> {{ 'key_CustomerBillingEntity' | translate }} </mat-header-cell>
+          <mat-cell class="tw-25" *matCellDef="let element"> {{element.CustomerBillingEntity}} </mat-cell>
+        </ng-container>
+
+
+        <ng-container matColumnDef="CreditlimitfromMAS">
+          <mat-header-cell class="tw-15 t-right" *matHeaderCellDef mat-sort-header> {{ 'key_CreditlimitfromMAS' | translate }} </mat-header-cell>
+          <mat-cell class="tw-15 t-right" *matCellDef="let element"> {{element.CreditlimitfromMAS}} </mat-cell>
+        </ng-container>
+
+
+        <ng-container matColumnDef="AvailableCreditLimit">
+          <mat-header-cell class="tw-15 t-right" *matHeaderCellDef mat-sort-header> {{ 'key_AvailableCreditLimit' | translate }} </mat-header-cell>
+          <mat-cell class="tw-15 t-right" *matCellDef="let element"> {{element.AvailableCreditLimit}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="Valueofunshipped">
+          <mat-header-cell class="tw-25 t-right" *matHeaderCellDef mat-sort-header> {{ 'key_Valueofunshipped' | translate }} </mat-header-cell>
+          <mat-cell class="tw-25 t-right" *matCellDef="let element"> {{element.Valueofunshipped}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="Remainingcredit">
+          <mat-header-cell class="tw-15 t-right" *matHeaderCellDef mat-sort-header> {{ 'key_Remainingcredit' | translate }} </mat-header-cell>
+          <mat-cell class="tw-15 t-right" *matCellDef="let element"> {{element.Remainingcredit}} </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
+    </div>
+    <mat-paginator #paginator
+                   [pageSize]="10"
+                   [pageSizeOptions]="[5, 10, 20]">
+    </mat-paginator>
+  </div>
+</div>

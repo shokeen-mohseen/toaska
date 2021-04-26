@@ -1,0 +1,23 @@
+
+<div class="modal-header">
+  <h4 class="modal-title">Update</h4>
+  <button type="button" class="close" data-dismiss="modal" (click)="activeModal.dismiss('Cross click')">&times;</button>
+</div>
+
+<!-- Modal body -->
+<div class="modal-body">
+
+  <p class="text-center">
+    {{msg}}
+  </p>
+
+</div>
+<div class="col-lg-12 text-center mt-4 mb-4" *ngIf="isYesNO">
+  <input type="button" id="yes" name="yes" (click)="closeModal('changes saved!')" class="btn btn-save mr-2 popup-btn-width" value="Yes">
+  <input type="button" id="no" name="no" (click)="activeModal.dismiss('Cross click')" class="btn btn-next mr-2 popup-btn-width" value="No">
+</div>
+<div class="col-lg-12 text-center mt-4 mb-4" *ngIf="isOK">
+  <input type="button" id="ok" name="ok" (click)="closeModal('changes saved!')" class="btn btn-save mr-2 popup-btn-width" value="OK">  
+</div>
+
+

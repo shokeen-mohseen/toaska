@@ -1,0 +1,175 @@
+
+<div>
+  <div class="row" *ngIf="editPage">
+    <div class="col-md-6"></div>
+    <div class="col-md-6 text-right">
+      <span class="fw600">Last Updated:	</span> 8/13/2020 8:35:24 IST
+      <br><span class="fw600">By</span> Jay Coleman (lampsdemo@osoftec.com)
+    </div>
+  </div>
+  <!--Last Updated Section End//////////////-->
+
+
+  <div class="row">
+    <div class="col-md-3 custom-flex-w-15">
+      <div class="card">
+        <div class="card-header" *ngIf="addPage">{{ 'key_AddedList' | translate }}</div>
+        <div class="card-header" *ngIf="editPage">{{ 'key_EditList' | translate }}</div>
+        <div class="card-body p-0">
+          <div class="list-group">
+            <div class="list-group-item list-group-item-action active">
+              <a>TL</a>
+              <button class="close" type="button" *ngIf="editPage">
+                <i class="fa fa-times" aria-hidden="true"></i>
+              </button>
+            </div>
+            <div class="list-group-item list-group-item-action">
+              <a>Next Edit Name goes here</a>
+              <button class="close" type="button" *ngIf="editPage">
+                <i class="fa fa-times" aria-hidden="true"></i>
+              </button>
+            </div>
+            <div class="list-group-item list-group-item-action">
+              <a>Next Edit Name goes here</a>
+              <button class="close" type="button" *ngIf="editPage">
+                <i class="fa fa-times" aria-hidden="true"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-9 custom-flex-w-85">
+      <div class="tab-content">
+        <!--=============== Start profile =================-->
+        <div class="e-profile">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="box-children">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label for="firstname">{{ 'key_Country' | translate }}   </label>
+                      <div class="input-group">
+                        <angular2-multiselect class="form-control" [data]="itemListA" [(ngModel)]="selectedItemsA" [settings]="settingsA"
+                                              (onSelect)="onItemSelect($event)"
+                                              (onDeSelect)="OnItemDeSelect($event)"
+                                              (onSelectAll)="onSelectAll($event)"
+                                              (onDeSelectAll)="onDeSelectAll($event)"
+                                              (onAddFilterNewItem)="onAddItemA($event)">
+                        </angular2-multiselect>                        
+                        <div class="input-group-append">
+                          <input type="text" class="form-control code" placeholder="Country Code">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label for="firstname">{{ 'key_State' | translate }} </label>
+                      <div class="input-group">
+                        <angular2-multiselect class="form-control" [data]="itemListA" [(ngModel)]="selectedItemsA" [settings]="settingsA"
+                                              (onSelect)="onItemSelect($event)"
+                                              (onDeSelect)="OnItemDeSelect($event)"
+                                              (onSelectAll)="onSelectAll($event)"
+                                              (onDeSelectAll)="onDeSelectAll($event)"
+                                              (onAddFilterNewItem)="onAddItemA($event)">
+                        </angular2-multiselect>
+                        <div class="input-group-append">
+                          <input type="text" class="form-control code" placeholder="State Code">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label for="firstname">{{ 'key_City' | translate }}</label>
+                      <angular2-multiselect [data]="itemListA" [(ngModel)]="selectedItemsA" [settings]="settingsA"
+                                            (onSelect)="onItemSelect($event)"
+                                            (onDeSelect)="OnItemDeSelect($event)"
+                                            (onSelectAll)="onSelectAll($event)"
+                                            (onDeSelectAll)="onDeSelectAll($event)"
+                                            (onAddFilterNewItem)="onAddItemA($event)">
+                      </angular2-multiselect>
+                    </div>
+                  </div>
+
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label for="firstname">{{ 'key_Zipcode' | translate }} </label>
+                      <angular2-multiselect [data]="itemListA" [(ngModel)]="selectedItemsA" [settings]="settingsA"
+                                            (onSelect)="onItemSelect($event)"
+                                            (onDeSelect)="OnItemDeSelect($event)"
+                                            (onSelectAll)="onSelectAll($event)"
+                                            (onDeSelectAll)="onDeSelectAll($event)"
+                                            (onAddFilterNewItem)="onAddItemA($event)">
+                      </angular2-multiselect>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="box-children">
+                <div class="row">
+                  <!--<div class="col-md-12">
+                    <div class="form-group">
+                      <span class="fw600 mr-3 " for="lastname"> {{ 'key_Status' | translate }} </span>
+                      <span for="lastname"> {{ 'key_Active' | translate }} </span>
+
+                    </div>
+                  </div>-->
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <div class="form-check checkbox pl-0">
+                        <label class="form-check-label" for="check1"> {{ 'key_SetupCompleted' | translate }} </label>
+                        <input class="form-check-input ml-2" type="checkbox" value="">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <div class="form-group d-flex">
+                      <span class="fw600 mr-3 " for="lastname"> {{ 'key_SetupDatetime' | translate }} </span>
+                      <span for="lastname" class="text-break"> 2020-11-12T13:28:52.747 </span>
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <div class="form-group d-flex">
+                      <span class="fw600 mr-3 " for="lastname"> {{ 'key_SetupCompletedby' | translate }} </span>
+                      <span for="lastname" class="text-break"> adminn </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--=============== End e-profile =================-->
+
+
+        </div>
+        <!--=============== End e-profile =================-->
+      </div>
+    </div>
+
+  </div>
+
+  <div class="row justify-content-center my-5">
+
+    <div class="col-xl-2 col-lg-4 col-md-4 col-sm-12">
+      <button class="btn btn-block btn-save" type="submit">{{ 'key_Save' | translate }}</button>
+    </div>
+    <div class="col-xl-2 col-lg-4 col-md-4 col-sm-12" *ngIf="addPage">
+      <button class="btn btn-block btn-next" type="submit">
+        <span class="fw600">{{ 'key_Add' | translate }}</span> <span class="fs-13"> > {{ 'key_Next' | translate }}</span>
+      </button>
+    </div>
+    <div class="col-xl-2 col-lg-4 col-md-4 col-sm-12" *ngIf="editPage">
+      <button class="btn btn-block btn-next" type="submit">
+        <span class="fw600">{{ 'key_Edit' | translate }}</span> <span class="fs-13"> > {{ 'key_Next' | translate }}</span>
+      </button>
+    </div>
+  </div>
+
+</div>

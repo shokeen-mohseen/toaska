@@ -1,0 +1,31 @@
+::ng-deep .mat-expansion-panel-body {
+  background-color: #f9f9f9;
+}
+#inbound .resize-table mat-cell,
+#inbound .resize-table mat-footer-cell,
+#inbound .resize-table mat-header-cell {
+  width: 100px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+#outbound .resize-table mat-cell,
+#outbound .resize-table mat-footer-cell,
+#outbound .resize-table mat-header-cell {
+  width: 90px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+@media(min-width:1600px) {
+  #inbound .resize-table mat-cell,
+  #inbound .resize-table mat-footer-cell,
+  #inbound .resize-table mat-header-cell {
+    width: 110px;
+  }
+
+  #outbound .resize-table mat-cell,
+  #outbound .resize-table mat-footer-cell,
+  #outbound .resize-table mat-header-cell {
+    width: 110px;
+  }
+}

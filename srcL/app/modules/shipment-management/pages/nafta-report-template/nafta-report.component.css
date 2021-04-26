@@ -1,0 +1,6 @@
+.reportContainer {
+  
+  border: 1px solid black;
+  margin-top:10px;
+  overflow: auto;
+}

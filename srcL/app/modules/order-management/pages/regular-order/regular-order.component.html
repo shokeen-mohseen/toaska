@@ -1,0 +1,1161 @@
+<div class="row mb-2">
+  <div class="col-lg-5">
+    <h5>
+      {{OrderWithVersion}} ({{orderManagement.OrderStatusName}}) - {{orderManagement.OrderCondition}} {{orderManagement.ShipmentStr}}
+    </h5>
+  </div>
+  <div class="col-lg-7 text-right">
+    <div *ngIf="orderManagement.UpdateDate != null && orderManagement.UpdateDate !=undefined ">  <strong> Last Updated:</strong> {{orderManagement.UpdateDate | date: 'MM/dd/yyyy h:mm:ss a' }} By {{orderManagement.UpdatedBy}}<br /></div>
+    <div> <strong> Created By:</strong> {{orderManagement.CreateDate | date: 'MM/dd/yyyy h:mm:ss a' }} By {{orderManagement.CreatedBy}}</div>
+  </div>
+</div>
+<div class="row mt-3">
+  <div class="col-md-3 custom-flex-w-15" *ngIf="SalesOrderforEdit.length>0">
+    <div class="card">
+      <div class="card-header">{{ 'key_EditList' | translate }}</div>
+      <div class="card-body p-0">
+        <div class="list-group" #nextList>
+
+          <div class="list-group-item list-group-item-action" [ngClass]="[salesorder.OrderId === orderManagement.Id ? 'active' : '']" *ngFor="let salesorder of SalesOrderforEdit">
+            <a (click)="BindOrderDetails(salesorder.OrderId,salesorder.OrderType,salesorder)" href="javascript:void(0)">{{salesorder.OrderNumber}}</a>
+            <button *ngIf="salesorder.OrderId!=orderManagement.Id" class="close" type="button" (click)="RemoveSalesOrder(salesorder.OrderId)">
+              <i class="fa fa-times" aria-hidden="true"></i>
+            </button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-12" [ngClass]="{'col-md-9 custom-flex-w-85': SalesOrderforEdit.length>0}">
+    <div class="tab-content" id="nav-tabContent">
+      <div class="tab-pane pt-0 fade show active" id="editList-1" role="tabpanel">
+        <!--Add-Order-form-->
+
+        <div class="e-profile mb-4">
+          <form #addOrderForm="ngForm" (ngSubmit)="addOrderForm.form.valid && onSubmit()" novalidate>
+            <div class="row">
+              <div class="col-md-4 col-sm-12">
+                <div class="box-children">
+                  <div class="row">
+
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label>
+                          {{'key_OrderType' | translate}} <sup class="text-danger font-weight-bold sup1">*</sup>
+                        </label>
+                        <!--Searchable dropdown : developer: rajesh-->
+                        <angular2-multiselect fixFilterBug [data]="OrderTypeData" [(ngModel)]="selectedOrderType" [settings]="settingsOrderType"
+                                              (onSelect)="onOrderTypeChange($event)"
+                                              name="skill" #skill="ngModel" required>
+                        </angular2-multiselect>
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="">
+                          {{'key_Status'| translate}} <sup class="text-danger font-weight-bold sup1">*</sup>
+                        </label>
+
+                        <angular2-multiselect fixFilterBug [data]="OrderStatusData" [(ngModel)]="selectedOrderStatus" [settings]="settingsOrderStatus"
+                                              (onSelect)="selectOrderStatus($event)"
+                                              name="orderStatus" #orderStatus="ngModel" required>
+                        </angular2-multiselect>
+                      </div>
+                    </div>
+
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label>
+                          {{'key_ShipFromType'| translate}}
+                        </label>
+                        <select class="form-control" placeholder="Select contract type" name="ShipFromType"
+                                [(ngModel)]="orderManagement.ShipFromTypeId"
+                                id="ShipFromType" #ShipFromType="ngModel" (change)="selectShipType($event)" [disabled]="IsShipFromType || isTruckOrderNotUsed || isOrderSentToMAS || isChargeOrderSentToMAS">
+                          <option value="0" selected>Select</option>
+                          <option class='option' *ngFor='let order of shipfromtypelist' [value]="order.id">
+                            {{order.name}}
+                          </option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label>
+                          {{'key_ShipFrom'| translate}}
+                        </label>
+
+                        <angular2-multiselect fixFilterBug [data]="shipfromlist" [(ngModel)]="selectedshipfromItems"
+                                              [settings]="settingsShipFromTo"
+                                              (onSelect)="selectShipFrom($event)"
+                                              (onDeSelectAll)="OnItemShipFromDeSelect($event)"
+                                              name="ShipFrom" id="ShipFrom" #items="ngModel">
+                        </angular2-multiselect>
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label>{{'key_FromAddress'| translate}}  </label>
+                        <textarea class="form-control" name="FromAddres" [(ngModel)]="orderManagement.FromAddres" readonly></textarea>
+                      </div>
+                    </div>
+
+                    <div class="col-md-12">
+                      <!--<div class="form-group">
+                        <label>{{'key_FromContact'| translate}}</label>
+                        <select class="form-control" placeholder="Select contract type" id="Fromcontact" name="Fromcontact" [(ngModel)]="orderManagement.ShipFromLocationContactId" #Fromcontact="ngModel" [disabled]="isFromContact">
+                          <option value="0" selected>Select</option>
+                          <option class='option' *ngFor='let c of contactfromlist' [value]="c.id">
+                            {{c.name}}
+                          </option>
+                        </select>
+                      </div>-->
+                    </div>
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label>{{'key_FromContract'| translate}}</label>
+                        <select class="form-control" placeholder="Select contract type" name="FromContract" id="FromContract"
+                                [(ngModel)]="orderManagement.FromContractId" #FromContract="ngModel"
+                                (change)="selectFromContract($event)" [disabled]="isFromContract || isTruckOrderNotUsed || isOrderSentToMAS || isChargeOrderSentToMAS">
+                          <option class='option' *ngFor='let c of FromContractlist' [value]="c.id">
+                            {{c.contractNumber}}-V-{{c.contractVersion}}
+                          </option>
+                        </select>
+                      </div>
+                    </div>
+
+
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label>{{'key_Carrier'| translate}}</label>
+                        <angular2-multiselect fixFilterBug [data]="CarrierData" [(ngModel)]="selectedCarrierItems"
+                                              [settings]="settingsCarrier"
+                                              (onSelect)="onItemCarrierSelect($event)"
+                                              (onDeSelect)="OnItemCarrierDeSelect($event)" name="Carrier" #items="ngModel">
+                        </angular2-multiselect>
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label>{{'key_EquipmentType'| translate}} <sup class="text-danger font-weight-bold sup1">*</sup></label>
+
+
+                        <angular2-multiselect fixFilterBug [data]="EquipmentTypeData" [(ngModel)]="selectedETDItems"
+                                              [settings]="settingsEquip"
+                                              (onSelect)="SelectedEquipment($event)"
+                                              (onDeSelectAll)="OnItemETDeSelect($event)"
+                                              id="EquipmentType" name="EquipmentType" #eTDItems="ngModel" required>
+                        </angular2-multiselect>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="">{{'key_EquipmentNo' | translate}}</label>
+                        <input type="text" name="EquipmentNo" [(ngModel)]="orderManagement.TrailerNumber"
+                               class="form-control" id="EquipmentNo" maxlength="15"
+                               (input)="onEquipNo($event)" [disabled]="isEquipmentNo || isTruckOrderNotUsed || isOrderSentToMAS || isChargeOrderSentToMAS" />
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="">{{'key_SealNO' | translate}}</label>
+                        <input type="text" name="SealNo" [(ngModel)]="orderManagement.TrailerSealNumber"
+                               class="form-control" id="SealNo" maxlength="10"
+                               (input)="onSealNo($event)" [disabled]="isTrailerSealNumber || isTruckOrderNotUsed || isOrderSentToMAS || isChargeOrderSentToMAS" />
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="">{{'key_FreightMode' | translate}}</label>
+                        <select class="form-control" placeholder="Select contract type" [(ngModel)]="orderManagement.FreightModeID" name="Freight" id="Freight" [disabled]="isFreight || isTruckOrderNotUsed || isOrderSentToMAS || isChargeOrderSentToMAS">
+                          <option>select</option>
+                          <option class='option' *ngFor='let FM of FreightModeData' [value]="FM.id">
+                            {{FM.name}}
+                          </option>
+                        </select>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="box-children pl-0 pr-0">
+
+
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label>
+                        {{'key_RequestedDeliveryDate' | translate}} <sup class="text-danger font-weight-bold sup1" [hidden]="isStockTransfer">*</sup>
+                      </label>
+                      <p-calendar appendTo="body" [showIcon]="true" [monthNavigator]="true"
+                                  [yearNavigator]="true" yearRange="2000:2030"
+                                  placeholder="MM-DD-YYYY" #RequestedDeliveryDate="ngModel" (ngModelChange)="onRequestedDeliveryDateChange($event)"
+                                  [(ngModel)]="orderManagement.RequestedDeliveryDate" name="RequestedDeliveryDate" id="RequestedDeliveryDate" [required]="IsRRequired" [disabled]="isRequestedDeliveryDateValidate || isTruckOrderNotUsed || isOrderSentToMAS || isChargeOrderSentToMAS">
+                      </p-calendar>
+                      
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label class="">
+                        {{'key_ScheduleShipDate' | translate}}<sup class="text-danger font-weight-bold sup1" [hidden]="!isStockTransfer">*</sup>
+                      </label>
+                      <p-calendar appendTo="body" [showIcon]="true" [monthNavigator]="true"
+                                  [yearNavigator]="true" yearRange="2000:2030"
+                                  placeholder="MM-DD-YYYY" #ScheduledShipDate="ngModel" (ngModelChange)='onScheduleShipDateChange($event)'
+                                  [(ngModel)]="orderManagement.ScheduledShipDate" name="ScheduledShipDate" id="ScheduledShipDate" [required]="IsSRequired" [disabled]="isScheduleShipDate || isTruckOrderNotUsed || isOrderSentToMAS || isChargeOrderSentToMAS">
+                      </p-calendar>
+
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label class="">
+                        {{'key_MustArriveByDate' | translate}}
+                        <sup class="text-danger font-weight-bold sup1"></sup>
+                      </label>
+                      <p-calendar appendTo="body" [showIcon]="true" [monthNavigator]="true"
+                                  [yearNavigator]="true" yearRange="2000:2030"
+                                  placeholder="MM-DD-YYYY" #MustArriveByDate="ngModel"
+                                  [(ngModel)]="orderManagement.MustArriveByDate" name="MustArriveByDate" id="MustArriveByDate" [disabled]="isMustArriveByDate || isTruckOrderNotUsed || isOrderSentToMAS || isChargeOrderSentToMAS">
+                      </p-calendar>
+
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label> {{'key_ShiptoType' | translate}}<sup class="text-danger font-weight-bold sup1">*</sup></label>
+                      <select class="form-control" placeholder="Select contract type" name="ShipTotype" id="ShipTotype" [(ngModel)]="orderManagement.ShipToTypeId"
+                              #ShipTotype="ngModel" (change)="selectShipToType($event)" [disabled]="IsShipToType || isTruckOrderNotUsed || isOrderSentToMAS || isChargeOrderSentToMAS">
+                        <option value="0">Select</option>
+                        <option class="option" *ngFor="let o of shiptotypelist" [value]="o.id">
+                          {{o.name}}
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label class="">{{'key_Shipto' | translate}}<sup class="text-danger font-weight-bold sup1">*</sup></label>
+
+
+                      <angular2-multiselect fixFilterBug [data]="shiptolist" [(ngModel)]="selectedItemsB" [settings]="settings"
+                                            (onSelect)="selectShipTo($event)" (onDeSelectAll)="removeToLocationSelect($event)"
+                                            name="ShipTo" id="ShipTo" #ShipTo="ngModel">
+                      </angular2-multiselect>
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label>{{'key_ToAddress' | translate}}</label>
+                      <textarea class="mt-1 form-control" name="address" [(ngModel)]="orderManagement.ToAddress" readonly>PO BOX 757 Salinas 93902 CA USA</textarea>
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <!--<div class="form-group">
+                      <label class="font-weight-bold">{{'key_ToContact' | translate}}</label>
+                      <select class="form-control" placeholder="Select contract type" name="ToContact" id="ToContact" #ToContact="ngModel" [(ngModel)]="orderManagement.ShipToLocationContactId">
+                        <option value="0" selected>Select</option>
+                        <option class='option' *ngFor='let c of contactlist' [value]="c.id">
+                          {{c.name}}
+                        </option>
+                      </select>
+                    </div>-->
+                  </div>
+
+                  <div class="col-md-12">
+
+
+                    <div class="form-group">
+                      <label>{{'key_EnduserAddress' | translate}}</label>
+
+
+                      <textarea class="mt-1 form-control" name="AddressName" id="AddressName" #AddressName="ngModel" [(ngModel)]="orderManagement.AddressName" readonly>PO BOX 757 Salinas 93902 CA USA</textarea>
+
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label>{{'key_ToContract' | translate}}</label>
+                      <select class="form-control" placeholder="Select contract type" [(ngModel)]="orderManagement.ToContractId" name="ToContract" id="ToContract" #ToContract="ngModel" (change)="selectToContract($event)" [disabled]="isToContract || isTruckOrderNotUsed || isOrderSentToMAS || isChargeOrderSentToMAS">
+                        <option class='option' *ngFor='let c of ToContractlist' [value]="c.id">
+                          {{c.contractNumber}}-V-{{c.contractVersion}}
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="box-children">
+                  <!--<div class="form-check checkbox pl-0">
+                    <label for="check1" class="mr-2 form-check-label"> {{'key_SuppressEmailNotification' | translate}}</label>
+                    <input id="check1" name="check1" type="checkbox" [(ngModel)]="isChecked">
+                  </div>
+                  <hr />-->
+
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label>
+                          {{'key_PONumber' | translate}}( {{orderManagement.PurchaseOrderNumber.length}} max 15)<sup class="text-danger font-weight-bold sup1">*</sup>
+                        </label>
+                        <input type="text" class="form-control" id="PONumber" name="PONumber"
+                               [(ngModel)]="orderManagement.PurchaseOrderNumber" #PONumber="ngModel"
+                               maxlength="15" (input)="onPONum($event)" required
+                               [disabled]="isPONumber || isTruckOrderNotUsed || isOrderSentToMAS || isChargeOrderSentToMAS">
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label> {{'key_AvailableCredit' | translate}} ($)</label> <!-- [class.txt-credit-red] = "IsNegativeCredit" -->
+                        <div *ngIf="IsAvailableCredit">
+                          <input type="text" class="form-control creditBgPink" name="AvailableCredit" readonly [(ngModel)]="orderManagement.AvailableCredit">
+                        </div>
+                        <div *ngIf="!IsAvailableCredit">
+                          <input type="text" class="form-control" name="AvailableCredit" readonly [(ngModel)]="orderManagement.AvailableCredit">
+                        </div>
+                        <div *ngIf="orderManagement.OverrideCreditHold">
+                          <label>Credit Override Applied.</label>
+                        </div>
+                        <div *ngIf="!orderManagement.OverrideCreditHold">
+                          <label>Over credit limit. ({{AvailableCreditMessage}})</label>
+                        </div>
+
+                      </div>
+                    </div>
+
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label>{{'key_SalesManager' | translate}}</label>
+                        <input type="text" class="form-control" [(ngModel)]="orderManagement.SalesManager" name="salesmanager" id="txtSalesManager" readonly>
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label>{{'key_InvoiceNumber' | translate}}</label>
+                        <input type="text" class="form-control" value="" name="invoicenumber" [(ngModel)]="orderManagement.InvoiceNo" id="txtInvoiceManager" readonly>
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label>{{'key_AllocFreightCharges' | translate}}</label>
+                        <input type="number" class="form-control" name="allocatedFreightCharges" id="allocatedFreightCharges" [(ngModel)]="orderManagement.AllocatedFreightChargeStr" #allocatedFreightCharges="ngModel" readonly>
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label>{{'key_PickupAppointment' | translate}}</label>
+                        <p-calendar appendTo="body" hourFormat="12" [showTime]="true"
+                                    [showIcon]="true" [monthNavigator]="true"
+                                    [yearNavigator]="true" yearRange="2000:2030"
+                                    inputId="timePickUp" placeholder="MM-DD-YYYY HH:MM" [(ngModel)]="orderManagement.PickupApplointment" name="pickupappointmnet" [disabled]="IsAppointment || isTruckOrderNotUsed || isOrderSentToMAS || isChargeOrderSentToMAS">
+                        </p-calendar>
+                        <!--<ejs-datetimepicker [format]='dateFormatWithTime' placeholder='MM-DD-YYYY HH:MM' #pickupappointmnet="ngModel"
+                                            [(ngModel)]="orderManagement.PickupApplointment" name="pickupappointmnet" [disabled]="IsAppointment"> </ejs-datetimepicker>-->
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label>{{'key_DeliveryAppointment' | translate}}</label>
+                        <p-calendar appendTo="body" hourFormat="12" [showTime]="true"
+                                    [showIcon]="true" [monthNavigator]="true"
+                                    [yearNavigator]="true" yearRange="2000:2030"
+                                    inputId="timeDelivery" placeholder="MM-DD-YYYY HH:MM" [(ngModel)]="orderManagement.DeliveryAppointment" name="deliveryappoint" [disabled]="IsAppointment || isTruckOrderNotUsed || isOrderSentToMAS || isChargeOrderSentToMAS">
+                        </p-calendar>
+                        <!--<ejs-datetimepicker [format]='dateFormatWithTime' placeholder='MM-DD-YYYY HH:MM' #deliveryappoint="ngModel"
+                                            [(ngModel)]="orderManagement.DeliveryAppointment" name="deliveryappoint" [disabled]="IsAppointment"> </ejs-datetimepicker>-->
+                      </div>
+                    </div>
+                    <hr />
+                    <div class="col-sm-12">
+                      <h5 class="mt-3">{{'key_FuelChargeParameterValue' | translate}}</h5>
+                      <table class="table table-bordered">
+                        <tr>
+                          <td> <label>{{'key_MilesOverrideforCustomerFuelCharge' | translate}}</label></td>
+                          <!--<td align="right"><span for="">{{ConvertMoneyToDecimalPreferences(orderManagement.fuelChargesMiles)}}</span></td>-->
+                          <td align="right"><span for="">{{orderManagement.fuelChargesMiles}}</span></td>
+                        </tr>
+                        <tr>
+                          <td><label>{{'key_RatePerMile' | translate}} </label></td>
+                          <!-- <td align="right"><span for="">{{ConvertMoneyToDecimalPreferences(orderManagement.fuelChargesRatePerMile)}}</span></td>-->
+                          <td align="right"><span for="">{{orderManagement.fuelChargesRatePerMile}}</span></td>
+
+                        </tr>
+                        <tr>
+                          <td>
+                            <label>{{'key_CustomerFuelCostPassthroughPercent' | translate}} </label>
+                          </td>
+                          <td align="right"><span for="">{{orderManagement.fuelChargesPercentage}}</span></td>
+                        </tr>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <!--End-->
+      </div>
+
+    </div>
+
+  </div>
+</div>
+<!--=================Accordian ==============-->
+
+<div id="accordionTab1" class="accordion mt-3 p-0">
+  <div class="card mb-0">
+    <!--accordion1-->
+    <div class="card-header collapsed" data-toggle="collapse" href="#collapseTwo">
+      <a class="card-title"> {{'key_OrderDetails' | translate}}</a>
+    </div>
+    <div id="collapseTwo" class="card-body order-deails p-0" data-parent="#accordionTab1">
+      <!--<app-add-material></app-add-material>-->
+      <div class="col-md-12 col-sm-12">
+        <div class="row bg-header-table">
+          <div class="col-md-12 col-sm-12 lm">
+            <h4 class="fs pt-2"> {{ 'key_addEditMaterialCharges' | translate }}:</h4>
+          </div>
+          <div class="col-md-12 col-sm-12">
+            <div class="row">
+              <div class="col-md-4 col-sm-12 pl-2">
+                <div class="form-group">
+                  <label>{{'key_Material' | translate}} <span class="text-danger">*</span></label>
+                  <angular2-multiselect fixFilterBug [data]="MaterialData" [(ngModel)]="selectedMaterialItems" [settings]="settingsMaterial"
+                                        (onSelect)="OnSelectedmaterial($event)"
+                                        (onDeSelectAll)="OnItemMaterialDataDeSelect($event)" name="items" #items="ngModel" required>
+
+                    <c-item>
+                      <ng-template let-item="item">
+                        <label style="width: 150px;">{{item.name}}</label>
+                        <!--<img [src]="item.flag" />-->
+                        <label>{{item.capital}}</label>
+                      </ng-template>
+                    </c-item>
+
+                  </angular2-multiselect>
+
+
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-12">
+                <div class="form-group">
+                  <label>{{'key_Quantity' | translate}}</label>
+                  <input type="number" (keypress)="numberOnly($event)" class="form-control" id="Quantity" [(ngModel)]="OQuantity" #Quantity="ngModel" [disabled]="isTruckOrderNotUsed || isOrderSentToMAS || isChargeOrderSentToMAS" />
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-12">
+                <div class="form-group">
+                  <label>{{'key_UOM' | translate}}</label>
+                  <select class="form-control" name="UOM" id="UOM" [(ngModel)]="SelectUOM" #UOM="ngModel" disabled>
+                    <option class='option' *ngFor='let data of UOMData' [value]="data.id">
+                      {{data.name}}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-12 pt-4 pr-0">
+                <button class="btn btn-save pb-1 pt-1"
+                        (click)="modifyMaterialGrid()" [disabled]="IsMaterialEdit || isTruckOrderNotUsed || isOrderSentToMAS || isChargeOrderSentToMAS">
+                  {{(EditFlag ? 'Update' :  'Add')}}
+                </button>
+                <!--data-target="#materialPropertyPopup"
+                data-toggle="modal"-->
+                <span class="ml-2" *ngIf="EditFlag">
+                  <button class="btn btn-save pb-1 pt-1"
+                          (click)="ResetMaterial()" [disabled]="IsMaterialEdit || isTruckOrderNotUsed || isOrderSentToMAS || isChargeOrderSentToMAS">
+                    {{('Reset')}}
+                  </button>
+                </span>
+              </div>
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12">
+
+          <div class="greyBg">
+
+            <div class="scroll">
+              <ng-container *ngIf="true">
+                <mat-table #table id="Addmaterial" [dataSource]="dataSourceAddMaterial" matSort>
+
+                  <ng-container matColumnDef="Material">
+                    <mat-header-cell class="" *matHeaderCellDef mat-sort-header>{{'key_Material' | translate}}</mat-header-cell>
+                    <mat-cell class="" *matCellDef="let element"> {{element.name}} </mat-cell>
+
+                    <!--<mat-footer-cell *matFooterCellDef>{{'key_Total' | translate}}</mat-footer-cell>-->
+
+
+                  </ng-container>
+                  <ng-container matColumnDef="OrderQuantity">
+                    <mat-header-cell class="" *matHeaderCellDef mat-sort-header>{{'key_OrderQuantity' | translate}}</mat-header-cell>
+                    <mat-cell class="" *matCellDef="let element"> {{element.displayQuantity}} </mat-cell>
+                    <!--<mat-footer-cell *matFooterCellDef>101</mat-footer-cell>-->
+                  </ng-container>
+
+                  <ng-container matColumnDef="ShippedQuantity">
+                    <mat-header-cell class="" *matHeaderCellDef mat-sort-header>{{'key_ShippedQuantity' | translate}} </mat-header-cell>
+                    <mat-cell class="" *matCellDef="let element"> {{element.displayShippedQuantity}} </mat-cell>
+                    <!--<mat-footer-cell *matFooterCellDef>00</mat-footer-cell>-->
+                  </ng-container>
+
+                  <ng-container matColumnDef="Action">
+                    <mat-header-cell class="" *matHeaderCellDef mat-sort-header>{{'key_Action' | translate}} </mat-header-cell>
+                    <mat-cell class="" *matCellDef="let element">
+                      <!--<button class="btn">
+                        <i class="fa fa-pencil-square-o" aria-hidden="true" (click)="EditMaterial()"></i>
+                      </button>/-->
+                      <a class="a_hover" ngbTooltip="Edit" [disabled]="IsMaterialEdit || isTruckOrderNotUsed || isOrderSentToMAS || isChargeOrderSentToMAS">
+                        <i class="fa fa-pencil-square-o" aria-hidden="true" (click)="SelectMaterialEdit(element.materialID)"></i>
+                      </a>
+                      <a class="a_hover" ngbTooltip="Delete" [disabled]="IsMaterialEdit || isTruckOrderNotUsed || isOrderSentToMAS || isChargeOrderSentToMAS">
+                        <i class="fa fa-trash-o text-danger" aria-hidden="true" (click)="DeleteMaterial(element.materialID)"></i>
+                      </a>
+                    </mat-cell>
+                    <!--<mat-footer-cell *matFooterCellDef></mat-footer-cell>-->
+                  </ng-container>
+
+                  <mat-header-row *matHeaderRowDef="displayedColumnsAddMaterial"></mat-header-row>
+                  <mat-row *matRowDef="let row; columns: displayedColumnsAddMaterial;"
+                           (click)="selection.toggle(row)">
+                  </mat-row>
+                  <!--<mat-footer-row class="sticky-footer" *matFooterRowDef="displayedColumnsAddMaterial; sticky: true"></mat-footer-row>-->
+                </mat-table>
+              </ng-container>
+              <ng-container *ngIf="false">
+                <div class="pt-2 pb-2 pl-1">{{'key_Norecordsfound' | translate}}</div>
+              </ng-container>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+      <hr class="mt-0 pb-3" />
+      <!--adjust shipping material section-->
+      <div class="col-md-12 col-sm-12">
+        <div class="row bg-header-table">
+          <div class="col-md-12 col-sm-12  lm">
+            <h4 class="fs pt-2"> {{ 'key_AdjustShippingMaterials' | translate }}:</h4>
+          </div>
+          <div class="col-md-12 col-sm-12">
+            <div class="row">
+              <div class="col-md-4 col-sm-12 pl-2">
+                <div class="form-group">
+                  <label>{{'key_Material' | translate}} <span class="text-danger">*</span></label>
+
+                  <angular2-multiselect fixFilterBug [data]="MaterialDataForAdjustShipping"
+                                        [(ngModel)]="selectedAdjustShippingItems"
+                                        [settings]="settingsAdjustShippingMaterial"
+                                        (onSelect)="OnSelectedAdjustmaterial($event)"
+                                        (onDeSelectAll)="OnItemAdjustmaterialSelect($event)" name="items" #items="ngModel" required>
+                  </angular2-multiselect>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-12">
+                <div class="form-group">
+                  <label>{{'key_Quantity' | translate}}</label>
+
+                  <input type="number" (keypress)="numberOnly($event)" name="AdjustQuantity" id="AdjustQuantity" [(ngModel)]="AQuantity" [disabled]="isTruckOrderNotUsed || isOrderSentToMAS || isChargeOrderSentToMAS" #AdjustQuantity="ngModel" class="form-control" />
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-12">
+                <div class="form-group">
+                  <label>{{'key_UOM' | translate}}</label>
+                  <select class="form-control" name="ShippingUOM" id="ShippingUOM" [(ngModel)]="ShippingSelectUOM" #ShippingUOM="ngModel" disabled>
+                    <option class='option' *ngFor='let data of ShippingUOMData' [value]="data.code">
+                      {{data.name}}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-12 pt-4 pr-0">
+                <!--<button class="btn btn-save pb-1 pt-1" (click)="AddAdjustMaterial()" [disabled]="IsPalletEdit">Add</button>-->
+                <button class="btn btn-save pb-1 pt-1"
+                        (click)="modifyAdjustShippingMaterialGrid()" [disabled]="IsPalletEdit || isTruckOrderNotUsed || isOrderSentToMAS || isChargeOrderSentToMAS">
+                  {{(AdjustShippingEditFlag ? 'Update' :  'Add')}}
+                </button>
+                <span class="ml-2" *ngIf="AdjustShippingEditFlag">
+                  <button class="btn btn-save pb-1 pt-1" (click)="ResetAdjustShipingMaterial()" [disabled]="IsPalletEdit || isTruckOrderNotUsed || isOrderSentToMAS || isChargeOrderSentToMAS">{{('Reset')}}</button>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="greyBg">
+
+            <div class="scroll">
+              <ng-container *ngIf="true">
+
+                <mat-table #table [dataSource]="dataSource" matSort>
+
+                  <ng-container matColumnDef="Material">
+                    <mat-header-cell class="" *matHeaderCellDef mat-sort-header>{{'key_Material' | translate}}</mat-header-cell>
+                    <mat-cell class="" *matCellDef="let element"> {{element.name}} </mat-cell>
+                  </ng-container>
+
+                  <ng-container matColumnDef="OrderQuantity">
+                    <mat-header-cell class="" *matHeaderCellDef mat-sort-header>{{'key_OrderQuantity' | translate}}</mat-header-cell>
+                    <mat-cell class="" *matCellDef="let element"> {{element.displayQuantity}} </mat-cell>
+                  </ng-container>
+
+                  <ng-container matColumnDef="ShippedQuantity">
+                    <mat-header-cell class="" *matHeaderCellDef mat-sort-header>{{'key_ShippedQuantity' | translate}}</mat-header-cell>
+                    <mat-cell class="" *matCellDef="let element"> {{element.displayShippedQuantity}} </mat-cell>
+                  </ng-container>
+
+                  <ng-container matColumnDef="Action">
+                    <mat-header-cell class="" *matHeaderCellDef mat-sort-header>{{'key_Action' | translate}}</mat-header-cell>
+                    <mat-cell class="" *matCellDef="let element">
+                      <!--<div *ngIf="element.name != 'WW-PALLET'">-->
+                      <div *ngIf="element.flag!=0">
+                        <a class="a_hover" [disabled]="IsPalletEdit || isTruckOrderNotUsed || isOrderSentToMAS || isChargeOrderSentToMAS" ngbTooltip="Edit">
+                          <i class="fa fa-pencil-square-o" aria-hidden="true" (click)="AdjustEditMaterial(element.materialID)"></i>
+                        </a>
+                        <a class="a_hover" [disabled]="IsPalletEdit || isTruckOrderNotUsed || isOrderSentToMAS || isChargeOrderSentToMAS" ngbTooltip="Delete">
+                          <i class="fa fa-trash-o text-danger" aria-hidden="true" (click)="AdjustDeleteMaterial(element.materialID)"></i>
+                        </a>
+                      </div>
+                    </mat-cell>
+                  </ng-container>
+
+                  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                  <mat-row *matRowDef="let row; columns: displayedColumns;"
+                           (click)="selection.toggle(row)">
+                  </mat-row>
+                </mat-table>
+              </ng-container>
+              <ng-container *ngIf="false">
+                <div class="pt-2 pb-2 pl-1">{{'key_Norecordsfound' | translate}}</div>
+              </ng-container>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <hr class="mt-0 pb-3" />
+      <!--adject shipping material end-->
+      <!--Add adjust-charges-->
+      <!--Adjust Charge Materials section-->
+      <div *ngIf="!isStockTransfer" class="bg-header-table">
+        <div class="col-md-12 col-sm-12 lm mb-0">
+          <h4 class="fs pt-2"> {{ 'key_AdjustCharges' | translate }}:</h4>
+        </div>
+
+        <div class="row">
+
+          <div class="col-lg-12">
+            <div class="greyBg">
+
+              <div class="scroll">
+                <ng-container *ngIf="true">
+                  <mat-table #table [dataSource]="dataSourceAdjust" matSort>
+                    <!-- Position Column -->
+
+                    <ng-container matColumnDef="materialName">
+                      <mat-header-cell class="" *matHeaderCellDef mat-sort-header>{{'key_Material' | translate}}</mat-header-cell>
+                      <mat-cell class="" *matCellDef="let element"> {{element.materialName}} </mat-cell>
+                      <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="chargeName">
+                      <mat-header-cell class="" *matHeaderCellDef mat-sort-header>{{'key_Charge' | translate}}</mat-header-cell>
+                      <mat-cell class="" *matCellDef="let element"> {{element.chargeName}} </mat-cell>
+                      <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="commodityName">
+                      <mat-header-cell class="" *matHeaderCellDef mat-sort-header>{{'key_Commodity' | translate}}</mat-header-cell>
+                      <mat-cell class="" *matCellDef="let element"> {{(element.overrideCommodityID>0  ? element.overrideCommodityName : element.commodityName)}} </mat-cell>
+                      <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="showOnBOL">
+                      <mat-header-cell class="" *matHeaderCellDef mat-sort-header>{{'key_ShowOnBOL' | translate}} </mat-header-cell>
+                      <mat-cell class="" *matCellDef="let element"> {{element.overrideShowOnBOL}} </mat-cell>
+                      <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="chargeUnit">
+                      <mat-header-cell class="" *matHeaderCellDef mat-sort-header>Charge Units</mat-header-cell>
+                      <mat-cell class="" *matCellDef="let element"> {{element.chargeUnit}} </mat-cell>
+                      <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="priceMethod">
+                      <mat-header-cell class="" *matHeaderCellDef mat-sort-header>{{'key_PriceMethod' | translate}}</mat-header-cell>
+                      <mat-cell class="" *matCellDef="let element"> {{(element.overridePriceMethodID>0  ? element.overridePriceMethodName : element.priceMethod)}} </mat-cell>
+                      <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="rateValue">
+                      <mat-header-cell class="" *matHeaderCellDef mat-sort-header>
+                        {{'key_RateValue' | translate}}
+                      </mat-header-cell>
+                      <!--<mat-cell class="" *matCellDef="let element"> {{(element.overrideRateValue > 0 ?element.overrideRateValue : element.rateValue) |  currency}} </mat-cell>-->
+                      <mat-cell class="" *matCellDef="let element"> ${{(element.overrideRateValue > 0 ? ConvertMoneyToDecimalPreferences(element.overrideRateValue) : ConvertMoneyToDecimalPreferences(element.rateValue))}}  </mat-cell>
+                      <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+                    </ng-container>
+                    ea
+                    <ng-container matColumnDef="rateTypeName">
+                      ea
+                      <mat-header-cell class="" *matHeaderCellDef mat-sort-header>{{'key_RateType' | translate}}</mat-header-cell>
+                      <mat-cell class="" *matCellDef="let element"> {{(element.overrideRateTypeID>0  ? element.overrideRateTypeName : element.rateTypeName)}} </mat-cell>
+                      <mat-footer-cell *matFooterCellDef>{{'key_Total' | translate}}</mat-footer-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="amount">
+                      <mat-header-cell class="" *matHeaderCellDef mat-sort-header>{{'key_Amount' | translate}}</mat-header-cell>
+                      <mat-cell class="" *matCellDef="let element"> ${{ConvertMoneyToDecimalPreferences(element.fullAmount)}} </mat-cell>
+                      <mat-footer-cell *matFooterCellDef align="right">${{ConvertMoneyToDecimalPreferences(ShippingCharegsTotalAmount)}}</mat-footer-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="Action">
+                      <mat-header-cell class="" *matHeaderCellDef mat-sort-header>{{'key_Action' | translate}}</mat-header-cell>
+                      <mat-cell class="" *matCellDef="let element">
+                        <a class="a_hover" ngbTooltip="Edit" (click)="editAdjustmentChargesData(element)" [disabled]="IsChargesEdit || isTruckOrderNotUsed || isOrderSentToMAS || isChargeOrderSentToMAS">
+                          <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                        </a>
+                        <a class="a_hover" ngbTooltip="Delete" (click)="DeleteAdjustChargesItem(element)" [disabled]="IsChargesEdit || isTruckOrderNotUsed || isOrderSentToMAS || isChargeOrderSentToMAS"><i class="fa fa-trash-o text-danger" aria-hidden="true"></i></a>
+                      </mat-cell>
+                      <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+                    </ng-container>
+
+
+                    <mat-header-row *matHeaderRowDef="displayedColumnsAdjust"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: displayedColumnsAdjust;"
+                             (click)="selection.toggle(row)">
+                    </mat-row>
+                    <mat-footer-row class="sticky-footer" *matFooterRowDef="displayedColumnsAdjust; sticky: true"></mat-footer-row>
+                  </mat-table>
+                </ng-container>
+                <ng-container *ngIf="false">
+                  <div class="pt-2 pb-2 pl-1">{{ 'key_EmptyData' | translate }}</div>
+                </ng-container>
+
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12 col-sm-12 pt-3 mt-2 pb-3" style="border-top: 1px solid #ddd;">
+          <div class="row">
+
+            <!--<div class="row bg-header-table">-->
+            <!-- <div class="col-md-12 col-sm-12 lm">
+              <h4 class="fs pt-2"> {{ 'key_AdjustCharges' | translate }}:</h4>
+            </div>-->
+            <div class="col-md-12 col-sm-12">
+              <div class="row">
+                <div class="col-md-3 col-sm-12">
+                  <div class="form-group row">
+                    <div class="col-md-12 col-sm-12">
+                      <label>{{'key_Material' | translate}} <span class="text-danger">*</span></label>
+                      <angular2-multiselect fixFilterBug [data]="MaterialDataForAdjustCharges"
+                                            [(ngModel)]="selectedAdjustItems"
+                                            [settings]="settingsAdjustCharges"
+                                            (onSelect)="adjustmentMaterialGridSelect($event)"
+                                            (onDeSelectAll)="AdjustmateriachargelDeSelect($event)"
+                                            name="items" #items="ngModel" required>
+                      </angular2-multiselect>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-3 col-sm-12">
+                  <div class="form-group row">
+                    <div class="col-md-12 col-sm-12">
+                      <label>
+                        {{'key_Charges' | translate}} <span class="text-danger">*</span>
+                      </label>
+                      <angular2-multiselect fixFilterBug [data]="ChargeData"
+                                            [(ngModel)]="selectadjustChargesSectionChargeID"
+                                            [settings]="settingsAdjustChargesSectionCharge"
+                                            (onSelect)="RefershPriceMethodAndComputationMethod($event,'charge')"
+                                            (onDeSelectAll)="ChargeDeSelect($event)" name="items" #items="ngModel" required>
+                      </angular2-multiselect>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-2 col-sm-12">
+                  <div class="form-group row">
+                    <div class="col-md-12 col-sm-12">
+                      <label>Charge Units</label>
+                      <input type="number" name="" class="form-control text-right" [disabled]="isTruckOrderNotUsed || isOrderSentToMAS || isChargeOrderSentToMAS" [(ngModel)]="orderManagement.ChargeUnits" />
+                    </div>
+                  </div>
+                </div>
+
+                <!--<div class="col-md-2 col-sm-12">
+                  <div class="form-group row">
+                    <div class="col-md-12 col-sm-12">
+                      <label>{{'key_Commodity' | translate}}</label>
+                      <select class="form-control" [(ngModel)]="orderManagement.adjustChargesCommodityID" (change)="selectCommodity($event)" name="ordercommodity">
+                        <option value="-1">Select</option>
+                        <ng-container *ngIf="CommodityData != undefined && CommodityData != null && CommodityData.length > 0">
+                          <option *ngFor='let commodity of CommodityData' [value]="commodity.id">{{commodity.name}}</option>
+                        </ng-container>
+                      </select>
+                    </div>
+                  </div>
+                </div>-->
+             
+                <div class="col-md-2 col-sm-12">
+                  <div class="form-group row">
+                    <div class="col-md-12 col-sm-12">
+                      <label>{{'key_RateValue' | translate}}</label>
+                      <input type="number" name="" class="form-control text-right" [disabled]="isTruckOrderNotUsed || isOrderSentToMAS || isChargeOrderSentToMAS" [(ngModel)]="orderManagement.adjustChargesRateValue" (keyup)="setAdjustOverrideRateValue($event)" />
+                    </div>
+                 
+                  </div>
+                </div>
+                <div class="col-md-2 col-sm-12 mt-1 pt-4">
+                  <input id="bol_Check" type="checkbox" value="" class="mr-2" [(ngModel)]="orderManagement.adjustChargesShowOnBOL" [disabled]="isShowOnBOL || isTruckOrderNotUsed || isOrderSentToMAS || isChargeOrderSentToMAS">
+                  <label for="bol_Check" class="form-check-label">{{'key_ShowOnBOL' | translate}}</label>
+                </div>
+                <!-- Second Row -->
+
+
+                <div class="col-md-3 col-sm-12">
+                  <div class="form-group row">
+                    <div class="col-md-12 col-sm-12">
+                      <label>
+                        {{'key_PriceMethod' | translate}}
+                      </label>
+                      <select class="form-control" [disabled]="isTruckOrderNotUsed || isOrderSentToMAS || isChargeOrderSentToMAS" [(ngModel)]="orderManagement.adjustChargesPriceMethodID" (change)="selectPriceMethod($event)">
+                        <option value="-1">Select</option>
+                        <ng-container *ngIf="PriceMethodData != undefined && PriceMethodData != null && PriceMethodData.length > 0">
+                          <option *ngFor='let pricemethod of PriceMethodData' [value]="pricemethod.id">{{pricemethod.description}}</option>
+                        </ng-container>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-3 col-sm-12">
+                  <div class="form-group row">
+                    <div class="col-md-12 col-sm-12">
+                      <label>{{'key_RateType' | translate}}</label>
+                      <select class="form-control" [disabled]="isTruckOrderNotUsed || isOrderSentToMAS || isChargeOrderSentToMAS" [(ngModel)]="orderManagement.adjustChargesRateTypeID" (change)="selectRateType($event)">
+                        <option value="-1">Select</option>
+                        <ng-container *ngIf="RateTypeData != undefined && RateTypeData != null && RateTypeData.length > 0">
+                          <option *ngFor='let ratetype of RateTypeData' [value]="ratetype.id">{{ratetype.name}}</option>
+                        </ng-container>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+
+                <!-- <div class="col-md-2 col-sm-12">
+                  <div class="form-group row">
+                    <div class="col-md-12 col-sm-12">
+                      <label>{{'key_RateValue' | translate}}</label>
+                      <input type="number" name="" class="form-control text-right" [(ngModel)]="orderManagement.adjustChargesRateValue" (keyup)="setAdjustOverrideRateValue($event)" />
+                    </div>
+                  </div>
+                </div>-->
+                <div class="col-md-2 col-sm-12">
+                  <div class="form-group row">
+                    <div class="col-md-12 col-sm-12">
+                      <label>{{'key_Commodity' | translate}}</label>
+                      <select class="form-control" [disabled]="isTruckOrderNotUsed || isOrderSentToMAS || isChargeOrderSentToMAS" [(ngModel)]="orderManagement.adjustChargesCommodityID" (change)="selectCommodity($event)" name="ordercommodity">
+                        <option value="-1">Select</option>
+                        <ng-container *ngIf="CommodityData != undefined && CommodityData != null && CommodityData.length > 0">
+                          <option *ngFor='let commodity of CommodityData' [value]="commodity.id">{{commodity.name}}</option>
+                        </ng-container>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-2 col-sm-12">
+                  <div class="form-group row">
+                    <div class="col-md-12 col-sm-12">
+                      <label>{{'key_Adjustment' | translate}}</label>
+                      <input type="number" name="" [disabled]="isTruckOrderNotUsed || isOrderSentToMAS || isChargeOrderSentToMAS" class="form-control text-right" [(ngModel)]="orderManagement.adjustChargesAmount" (keyup)="setAdjustOverrideAmount($event)" />
+                    </div>
+                  </div>
+                </div>
+
+
+                <div class="col-md-2 col-sm-12 pt-3 mt-2">
+                  <button class="btn btn-save pb-1 pt-1 mr-2" (click)="AddAdjustChargesData()" [disabled]="IsChargesEdit || isTruckOrderNotUsed || isOrderSentToMAS || isChargeOrderSentToMAS">{{AdjustmentgridInEditMode?'Update':'Add'}}</button>
+                  <button class="btn btn-next pb-1 pt-1" (click)="resetAddAjustment()" [disabled]="IsChargesEdit || isTruckOrderNotUsed || isOrderSentToMAS || isChargeOrderSentToMAS">{{'key_Reset' | translate}}</button>
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+
+      </div>
+
+
+
+    </div>
+
+
+
+    <!--accordion2-->
+    <!--<div class="card-header collapsed" data-toggle="collapse" href="#characteristics">
+      <a class="card-title">
+        {{'key_Document' | translate}}
+      </a>
+    </div>
+    <div id="characteristics" class="card-body collapse" data-parent="#accordionTab1">
+      <app-document></app-document>
+    </div>-->
+
+  </div>
+</div>
+<!--<app-user-order-feedback></app-user-order-feedback>-->
+<!--feedback-->
+<div class="col-md-12 col-xl-12 mt-4">
+  <div class="row">
+    <div class="col-sm-12">
+      <h4>{{'key_OrderComments' | translate}}</h4>
+    </div>
+    <div class="col-md-8 col-sm-12">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="Transportation Comment" class="">{{'key_TransportationComment' | translate}} ( {{orderManagement.TransportationComment != undefined  ? orderManagement.TransportationComment.length : 0}} max 2000)</label>
+            <textarea name="TComment" class="form-control" id="TComment" [(ngModel)]="orderManagement.TransportationComment" #TComment="ngModel" [disabled]="isTruckOrderNotUsed || isOrderSentToMAS || isChargeOrderSentToMAS"></textarea>
+          </div>
+        </div>
+        <div class="col-md-6 col-sm-12">
+          <div class="form-group">
+            <label for="Loading Comment" class="">{{'key_LoadingComment' | translate}} ( {{orderManagement.LoadingComment != undefined?orderManagement.LoadingComment.length : 0}} max 2000)</label>
+            <textarea name="Loading" class="form-control" id="Loading" [(ngModel)]="orderManagement.LoadingComment" #Loading="ngModel" [disabled]="isTruckOrderNotUsed || isOrderSentToMAS || isChargeOrderSentToMAS"></textarea>
+          </div>
+        </div>
+        <div class="col-md-12 ">
+          <div class="form-group">
+            <label for="Transportation Comment" class="">
+              {{'key_TransplaceOrderComment' | translate}}( {{orderManagement.TransplaceOrderComment != undefined ?orderManagement.TransplaceOrderComment.length:0}} max 80)
+            </label>
+            <input type="text" name="OCTransportation" class="form-control" id="OCTransportation" [(ngModel)]="orderManagement.TransplaceOrderComment" #OCTransportation="ngModel" maxlength="80" [disabled]="isTruckOrderNotUsed || isOrderSentToMAS || isChargeOrderSentToMAS">
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="form-group">
+            <label for="Loading Comment" class="">
+              {{'key_TransplaceDeliveryComment' | translate}} ( {{orderManagement.TransplaceDeliveryComment != undefined? orderManagement.TransplaceOrderComment.length : 0}} max 80)
+            </label>
+            <input type="text" name="DCTransportation" [disabled]="isTruckOrderNotUsed || isOrderSentToMAS || isChargeOrderSentToMAS" class="form-control" id="DCTransportation" [(ngModel)]="orderManagement.TransplaceDeliveryComment" #DCTransportation="ngModel" maxlength="80">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 col-sm-12">
+      <div class="form-group">
+        <label for="Transportation Comment" class="">
+          {{'key_OrderComment' | translate}} ( {{orderManagement.Comments != undefined?orderManagement.Comments.length : 0}} max 2000)- <small>It is for internal Tosca use only.</small>
+        </label>
+        <textarea name="Order" id="Order" [disabled]="isTruckOrderNotUsed || isOrderSentToMAS || isChargeOrderSentToMAS" [(ngModel)]="orderManagement.Comments" #Order="ngModel" class="form-control h-198"></textarea>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<div class="row justify-content-center my-5">
+
+  <!--<div class="col-xl-2 col-lg-4 col-md-4 col-sm-12">
+    <button class="btn btn-block btn-previous" type="submit">{{ 'key_SaveAndNotify' | translate }}</button>
+  </div>-->
+  <div class="col-xl-2 col-lg-4 col-md-4 col-sm-12">
+    <!--data-target="#compilePopup"
+    data-toggle="modal"-->
+    <button class="btn btn-block btn-save" [disabled]='regularOrderHasReadOnlyAccess || isTruckOrderNotUsed || isOrderSentToMAS || isChargeOrderSentToMAS' (click)="SaveOrder()" type="submit">
+      {{ 'key_Save' | translate }}
+    </button>
+  </div>
+  <div class="col-xl-2 col-lg-4 col-md-4 col-sm-12">
+    <button class="btn btn-block btn-next" [disabled]='regularOrderHasReadOnlyAccess || isTruckOrderNotUsed || isOrderSentToMAS || isChargeOrderSentToMAS' *ngIf="!IsEditButtonShow" (click)="SaveAndNextOrder()">
+      <span class="fw600">{{ 'key_Add' | translate }}</span> <span class="fs-13"> >  {{ 'key_Next' | translate }}</span>
+    </button>
+    <button class="btn btn-block btn-next" [disabled]='regularOrderHasReadOnlyAccess || isEditNextOrder || isTruckOrderNotUsed || isOrderSentToMAS || isChargeOrderSentToMAS' *ngIf="IsEditButtonShow" (click)="EditNextOrder()">
+      <span class="fw600">{{ 'key_Edit' | translate }}</span> <span class="fs-13"> > {{ 'key_Next' | translate }}</span>
+    </button>
+  </div>
+</div>
+
+
+<div class="modal" id="compilePopup">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">
+          {{'key_MaterialMissingProperties' | translate}}
+        </h5>
+        <button type="button" for="confirms" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <h5 class="mb-4 mt-4">
+          Please provide the missing properties of material.
+        </h5>
+        <div class="col-md-11 col-sm-11">
+          <div class="form-group row">
+            <div class="col-sm-12 col-md-2 pr-0 text-left">
+              <label class="pt-1">Equipment Type</label>
+            </div>
+            <div class="col-md-5 col-sm-12">
+              <input type="text" class="form-control" [(ngModel)]="selectedETDName" readonly id="txtETDName" />
+            </div>
+          </div>
+        </div>
+
+        <div class="greyBg">
+
+          <div class="scroll">
+
+            <mat-table #table [dataSource]="MissingMaterialPropertyDataSource" matSort>
+
+
+              <ng-container matColumnDef="materialName">
+                <mat-header-cell class="" *matHeaderCellDef mat-sort-header> {{'key_Materialname' | translate}}</mat-header-cell>
+                <mat-cell class="" *matCellDef="let element"> {{element.materialName}} </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="materialWeight">
+                <mat-header-cell class="" *matHeaderCellDef mat-sort-header>{{'key_MaterialWeight' | translate}}</mat-header-cell>
+                <mat-cell class="" *matCellDef="let element">
+                  <input type="text" id="txt_weight_{{element.materilaID}}" [(ngModel)]="element.materialWeight" class="form-control" />
+                </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="unitInPallet">
+                <mat-header-cell class="" *matHeaderCellDef mat-sort-header>{{'key_PerPallet' | translate}}</mat-header-cell>
+                <mat-cell class="" *matCellDef="let element">
+
+                  <input type="text" id="txt_perPallet_{{element.materilaID}}" [(ngModel)]="element.unitInPallet" class="form-control" />
+                </mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="unitInEquipement">
+                <mat-header-cell class="" *matHeaderCellDef mat-sort-header>{{'key_UnitInEquipment'|translate}}</mat-header-cell>
+                <mat-cell class="" *matCellDef="let element">
+                  <input type="text" id="txt_perEquipment_{{element.materilaID}}" [(ngModel)]="element.unitInEquipement" class="form-control" />
+
+                </mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="palletInEquipement">
+                <mat-header-cell class="" *matHeaderCellDef mat-sort-header>{{'key_PalletInEquipment'|translate}}</mat-header-cell>
+                <mat-cell class="" *matCellDef="let element">
+                  <input type="text" id="txt_perPalletEquipment_{{element.materilaID}}" [(ngModel)]="element.palletInEquipement" class="form-control" />
+
+                </mat-cell>
+              </ng-container>
+
+              <mat-header-row *matHeaderRowDef="missingMaterialProerptyColumn"></mat-header-row>
+              <mat-row *matRowDef="let row; columns: missingMaterialProerptyColumn;">
+              </mat-row>
+            </mat-table>
+          </div>
+
+        </div>
+
+
+        <div class="col-sm-4 text-center pt-1 mx-auto mb-4 mt-3">
+          <button class="mt-4 mr-2 pl-4 pr-4 btn btn-save" (click)="saveallmaterialProperties()">{{'key_Save'|translate}}</button>
+          <button class="mt-4 btn btn-next font-weight-normal">{{'key_Cancel'|translate}}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--<a data-target="#materialPropertyPopup" data-toggle="modal">materialPropertyPopup</a>-->
+
+<div class="modal" id="materialPropertyPopup">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">
+          {{ 'key_MissingProperties' | translate}}
+        </h5>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="col-md-12 mt-4 mb-4">
+          <div class="col-md-11 col-sm-11">
+            <div class="form-group row">
+              <div class="col-sm-12 col-md-5 pr-0 text-right">
+                <label class="pt-1">Equipment Type</label>
+              </div>
+              <div class="col-md-7 col-sm-12">
+                <input type="text" class="form-control" [(ngModel)]="selectedETDName" id="txtEquipmentType" readonly />
+              </div>
+            </div>
+          </div>
+          <div class="col-md-11 col-sm-11">
+            <div class="form-group row">
+              <div class="col-sm-12 col-md-5 pr-0 text-right">
+                <label class="pt-1">Material</label>
+              </div>
+              <div class="col-md-7 col-sm-12">
+                <input type="text" class="form-control" [(ngModel)]="selectedMaterialName" id="txtMaterialName" readonly />
+              </div>
+            </div>
+          </div>
+          <div class="col-md-11 col-sm-11">
+            <div class="form-group row">
+              <div class="col-sm-12 col-md-5 pr-0 text-right">
+                <label class="pt-1">{{'key_MaterialWeight' | translate}}</label>
+              </div>
+              <div class="col-md-7 col-sm-12">
+                <input type="text" class="form-control" [(ngModel)]="editVerifyEquipmentMaterialProperty.materialWeight" id="txtMaterialWeight" />
+              </div>
+            </div>
+          </div>
+          <div class="col-md-11 col-sm-11">
+            <div class="form-group row">
+              <div class="col-sm-12 col-md-5 pr-0 text-right">
+                <label class="pt-1">
+                  {{'key_EAPerPallet' | translate}}
+                </label>
+              </div>
+              <div class="col-md-7 col-sm-12">
+                <input type="text" class="form-control" id="txtEAPerPallet" [(ngModel)]="editVerifyEquipmentMaterialProperty.propertyValueUP" />
+              </div>
+            </div>
+          </div>
+          <div class="col-md-11 col-sm-11">
+            <div class="form-group row">
+              <div class="col-sm-12 col-md-5 pr-0 text-right">
+                <label class="pt-1">{{'key_NoofPalletUnitinEquipment' | translate}}</label>
+              </div>
+              <div class="col-md-7 col-sm-12">
+                <input type="text" class="form-control" id="txtNoOfPalletPerPallet" [(ngModel)]="editVerifyEquipmentMaterialProperty.propertyValuePE" />
+              </div>
+            </div>
+          </div>
+          <div class="col-md-11 col-sm-11">
+            <div class="form-group row">
+              <div class="col-sm-12 col-md-5 pr-0 text-right">
+                <label class="pt-1">{{'key_NOofUnitinEquipment' | translate}}</label>
+              </div>
+              <div class="col-md-7 col-sm-12">
+                <input type="text" class="form-control" id="txtNoOfUnitInEquipment" [(ngModel)]="editVerifyEquipmentMaterialProperty.propertyValueUE" />
+              </div>
+            </div>
+          </div>
+
+          <div class="text-center mt-4 pt-2 mb-3">
+            <input type="button" class="btn btn-save model-btn" value="Save" (click)="SaveMaterialProperties()">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

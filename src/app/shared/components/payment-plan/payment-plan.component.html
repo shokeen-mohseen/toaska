@@ -1,0 +1,98 @@
+
+  <form (ngSubmit)="SaveCreditCardDetails()" [formGroup]="paymentscredentialsForm">
+    <div class="row">
+      <div class="form-group col-sm-6">
+        <label for="ccmonth">{{ 'key_CardType' | translate }}</label>
+        <select class="form-control" id="ccmonth" formControlName="CardType">
+          <option>Master card</option>
+          <option>Visa Card</option>
+        </select>
+        <app-control-messages [control]="f['CardType']"></app-control-messages>
+      </div>
+      <div class="form-group col-sm-6">
+        <label for="ccyear">{{ 'key_Cardholder' | translate }}</label>
+        <input type="text" class="form-control" maxlength="200" formControlName="CardHolderName" />
+        <app-control-messages [control]="f['CardHolderName']"></app-control-messages>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="form-group">
+          <label for="ccnumber">{{ 'key_Cardnumber' | translate }}</label>
+          <input class="form-control" id="ccNumber" type="text" maxlength="16" placeholder="0000 0000 0000 0000" formControlName="CreditCardNumber">
+          <app-control-messages [control]="f['CreditCardNumber']"></app-control-messages>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="form-group col-sm-3">
+        <label for="ccmonth">{{ 'key_Month' | translate }}</label>
+        <select class="form-control" id="ccmonth" formControlName="CreditCardMonth">
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+          <option>6</option>
+          <option>7</option>
+          <option>8</option>
+          <option>9</option>
+          <option>10</option>
+          <option>11</option>
+          <option>12</option>
+        </select>
+        <app-control-messages [control]="f['CreditCardMonth']"></app-control-messages>
+      </div>
+      <div class="form-group col-sm-3">
+        <label for="ccyear">{{ 'key_Year' | translate }}</label>
+        <select class="js-example-tags form-control" id="ccyear" formControlName="CreditCardYear">
+          <option>2020</option>
+          <option>2021</option>
+          <option>2022</option>
+          <option>2023</option>
+          <option>2024</option>
+          <option>2025</option>
+          <option>2026</option>
+          <option>2027</option>
+          <option>2028</option>
+          <option>2029</option>
+          <option>2030</option>
+          <option>2031</option>
+          <option>2032</option>
+        </select>
+        <app-control-messages [control]="f['CreditCardYear']"></app-control-messages>
+      </div>
+      <div class="col-sm-3">
+        <div class="form-group">
+          <label for="cvv">{{ 'key_Cvv' | translate }}</label>
+          <input class="form-control" id="cvv" type="text" placeholder="123" maxlength="3" formControlName="CVV">
+          <app-control-messages [control]="f['CVV']"></app-control-messages>
+        </div>
+      </div>
+
+      <div class="col-sm-3">
+        <input type="submit" id="btnSave" name="btnSave" class="btn btn-save btn-block mt-4" value="Save" [disabled]="paymentscredentialsForm.invalid">
+      </div>
+    </div>
+    <div class="d-flex justify-content-between align-items-center">
+      <div>
+        <span class="fw600 fs-13">{{ 'key_CardMethod' | translate }}</span>
+      </div>
+    </div>
+    <div class="col-form-label">
+      <div class="form-check form-check-inline mr-4">
+        <input class="form-check-input" id="inline-radio1" type="radio" value="true" name="inline-radios" formControlName="IsAutoPay">
+        <label class="form-check-label" for="inline-radio1">
+          {{ 'key_Selectpay' | translate }}
+        </label>
+      </div>
+      <div class="form-check form-check-inline mr-4">
+        <input class="form-check-input" id="inline-radio2" type="radio" value="false" name="inline-radios" formControlName="IsAutoPay">
+        <label class="form-check-label" for="inline-radio2">
+          {{ 'key_Manually' | translate }}
+        </label>
+      </div>
+    </div>
+  </form>
+

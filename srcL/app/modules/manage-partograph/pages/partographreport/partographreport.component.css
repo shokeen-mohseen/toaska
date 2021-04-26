@@ -1,0 +1,9 @@
+.box-children {
+  background-color: #fff;
+  border: 1px solid #f7f7f7;
+  box-shadow: 0 10px 10px -10px #999;
+  border-top: 1px solid pink;
+  margin: 0px;
+  padding: 15px 0px 5px;
+}
+.box-children p{margin-bottom:6px;}

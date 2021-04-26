@@ -1,0 +1,296 @@
+<!--<div class="row">
+  <div class="col-lg-12">    
+    <div class="scroll">
+      <mat-table #table [dataSource]="dataSource" matSort>
+        <ng-container *ngFor="let column of displayedColumns; let i=index;" [matColumnDef]="column">
+          <mat-header-cell *matHeaderCellDef mat-sort-header mwlResizable [enableGhostResize]="true" (resizeEnd)="onResizeEnd($event, column)"
+                           [resizeEdges]="{bottom: false, right: true, top: false, left: true}">
+
+            <div class="form-check-inline" *ngIf="column === selectRow">
+              <label class="form-check-label">
+                <input type="checkbox" class="form-check-input" value="" placement="top" ngbTooltip="Select all" (change)="$event ? masterToggle() : null"
+                       [checked]="selection.hasValue() && isAllSelected()"
+                       [indeterminate]="selection.hasValue() && !isAllSelected()">
+              </label>
+            </div>
+            <div *ngIf="column != selectRow"> {{ displayedColumnsReplace[i] | translate }}</div>
+
+          </mat-header-cell>
+          <mat-cell *matCellDef="let item">-->
+            <!--for-checkbox-->
+            <!--<div class="form-check-inline" *ngIf="column === selectRow">
+              <label class="form-check-label">
+                <input type="checkbox" class="form-check-input" value="" (click)="$event.stopPropagation()"
+                       (change)="$event ? selection.toggle(item) : null"
+                       [checked]="selection.isSelected(item)">
+              </label>
+            </div>
+            {{ item[column] }}
+          </mat-cell>
+        </ng-container>    
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{ 'selected': selection.isSelected(row)}"
+                 (click)="selection.toggle(row)"></mat-row>
+      </mat-table>
+    </div>
+    
+  </div>
+</div>-->
+
+
+<div class="row">
+  <div class="col-lg-12">
+    <div class="scroll resize-table">
+      <mat-table #table [dataSource]="dataSource" matSort>
+        <ng-container matColumnDef="selectRow">
+
+          <mat-header-cell *matHeaderCellDef mat-sort-header mwlResizable [enableGhostResize]="true" (resizeEnd)="onResizeEnd($event, column)"
+                           [resizeEdges]="{bottom: false, right: true, top: false, left: true}">
+            <div class="form-check-inline">
+              <label class="form-check-label">
+                <input type="checkbox" class="form-check-input" value="" data-toggle="tooltip" data-placement="top" title="Select all"
+                       (click)="$event ? masterToggle() : null"
+                       [checked]="selection.hasValue() && isAllSelected()"
+                       (change)="onSelectAll($event.target.checked)"
+                       [indeterminate]="selection.hasValue() && !isAllSelected()">
+              </label>
+            </div>
+
+          </mat-header-cell>
+          <mat-cell class="t-center tw-5" *matCellDef="let row">
+            <div class="form-check-inline">
+              <label class="form-check-label">
+                <input type="checkbox" class="form-check-input" value="" data-toggle="tooltip" data-placement="top"
+                       (click)="$event.stopPropagation()"
+                       (change)="onSelectionChange(row.ID,  $event.target.checked)"
+                       [checked]="selection.isSelected(row)">
+              </label>
+            </div>
+          </mat-cell>
+          <ng-container matColumnDef="Buspartner">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'key_Buspart' | translate }} </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+             
+              {{element.Buspartner}}
+
+            </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="Customer">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'key_Cusloc' | translate }} </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.Customer}} </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="Tolocation">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'key_Fromloc' | translate }} </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.Tolocation}} </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="Locfro">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'key_Tolocation' | translate }} </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.Locfro}} </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="Material">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'key_Meterail' | translate }} </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              <!--<div *ngIf="IsEdit">
+                <select class="form-control" placeholder="Select contract type" id="Material" #Material="ngModel"
+                        name="Status" [(ngModel)]="element.DChargeID">
+                  <option class='option' *ngFor='let charge of ChargetList' [value]="charge.id">
+                    {{charge.itemName}}
+                  </option>
+                </select>
+              </div>-->
+              <div>
+                {{element.Material}}
+                </div>
+            </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="Shipment">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'key_Shipqunt' | translate }} </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              <div *ngIf="IsEdit">
+                <input type="number" class="form-control" [(ngModel)]="element.Shipment" id="Shipment"
+                       maxlength="15" [disabled]="IsShipped" />
+              </div>
+              <div *ngIf="!IsEdit">
+                {{element.Shipment}}
+              </div>
+             
+            </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="Invoiceamount">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'key_Invamount' | translate }} </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              <div *ngIf="IsEdit">
+                <input type="number" class="form-control" [(ngModel)]="element.Invoiceamount" id="Invoiceamount"
+                        maxlength="15" [disabled]="IsInvoiced"  />
+              </div>
+              <div *ngIf="!IsEdit">
+                {{element.Invoiceamount}}
+              </div>
+            </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="Claimamount">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'key_Claimquant' | translate }} </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              <div *ngIf="IsEdit">
+                <input type="number" class="form-control" [(ngModel)]="element.Claimqunatity" id="Claimqunatity"
+                       maxlength="15" (keypress)="QuantityValidation($event)" />
+              </div>
+              <div *ngIf="!IsEdit">
+                {{element.Claimqunatity}}
+              </div>
+              
+            </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="Claimqunatity">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'key_Claimamount' | translate }} </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              <div *ngIf="IsEdit">
+                <input type="number" class="form-control" [(ngModel)]="element.Claimamount" id="Claimamount"
+                       maxlength="15" (keypress)="numberOnly($event)" />
+              </div>
+              <div *ngIf="!IsEdit">
+                {{element.Claimamount}}
+              </div>
+             
+
+            </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="FReamount">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'key_Recamount' | translate }} </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              <div *ngIf="IsEdit">
+                <input type="number" class="form-control" [(ngModel)]="element.FReamount" id="FReamount"
+                       maxlength="15" (keypress)="numberOnly($event)" />
+              </div>
+              <div *ngIf="!IsEdit">
+                {{element.FReamount}}
+              </div>
+              
+
+            </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="Aproved">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'key_Approvedmount' | translate }} </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              <div *ngIf="IsEdit">
+                <input type="number" class="form-control" [(ngModel)]="element.Aproved" id="Aproved"
+                       maxlength="15" (keypress)="numberOnly($event)" />
+              </div>
+              <div *ngIf="!IsEdit">
+                {{element.Aproved}}
+              </div>
+             
+            </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="Invnumber">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'key_Invnumber' | translate }} </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              <div *ngIf="IsEdit">
+                <input type="text" class="form-control" [(ngModel)]="element.Invnumber" id="Invnumber"
+                       maxlength="15" />
+              </div>
+              <div *ngIf="!IsEdit">
+                {{element.Invnumber}}
+              </div>             
+
+            </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="Satatusdate">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'key_StatusDate' | translate }} </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.Satatusdate}} </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="Status">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'key_Statusgrd' | translate }} </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              <div *ngIf="IsEdit">
+                <select class="form-control" placeholder="Select contract type" id="Status" #Status="ngModel"
+                        name="Status" [(ngModel)]="element.DStausID">
+                  <option class='option' *ngFor='let claim of ClaimStatusList' [value]="claim.id">
+                    {{claim.itemName}}
+                  </option>
+
+                </select>
+              </div>
+
+              <div *ngIf="!IsEdit">
+                {{element.Status}}
+                </div>
+
+            </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="Aprovedcomnt">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'key_ApproverComment' | translate }} </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              <div *ngIf="IsEdit">
+                <input type="text" class="form-control" [(ngModel)]="element.Aprovedcomnt" id="Aprovedcomnt"
+                       maxlength="15" />
+              </div>
+              <div *ngIf="!IsEdit">
+                {{element.Aprovedcomnt}}
+              </div>
+             
+
+            </mat-cell>
+          </ng-container>
+        </ng-container>
+        
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <div style="display: flex; justify-content: center; align-items: center; background: white;">
+          <mat-row *matRowDef="let row; columns: displayedColumns;"
+                   [ngClass]="{hovered: row.hovered, highlighted: row.highlighted,
+                 'selected': selection.isSelected(row)}"
+                   (click)="onSelectionChange(row, row.isSelected)"></mat-row>
+        </div>
+      </mat-table>
+    </div>
+  </div>
+</div>
+
+<!--<div class="row mt-3">
+  <div class="col-lg-12">
+    <div class="scroll resize-table">
+
+      <mat-table #table [dataSource]="dataSource" matSort>
+        <ng-container *ngFor="let column of displayedColumns; let i = index;" [matColumnDef]="column">
+          <mat-header-cell *matHeaderCellDef mat-sort-header mwlResizable [enableGhostResize]="true" (resizeEnd)="onResizeEnd($event, column)"
+                           [resizeEdges]="{bottom: false, right: true, top: false, left: true}">
+
+
+            <div class="form-check-inline" *ngIf="column === selectRow">
+              <label class="form-check-label">
+                <input type="checkbox" class="form-check-input" value="" placement="top" ngbTooltip="Select all" (change)="$event ? masterToggle() : null"
+                       [checked]="selection.hasValue() && isAllSelected()"
+                       [indeterminate]="selection.hasValue() && !isAllSelected()">
+              </label>
+            </div>
+            <div *ngIf="column != selectRow"> {{ displayedColumnsReplace[i] | translate }}</div>
+          </mat-header-cell>
+          <mat-cell *matCellDef="let item">-->
+            <!--for-checkbox-->
+            <!--<div class="form-check-inline" *ngIf="column === selectRow">
+              <label class="form-check-label">
+                <input type="checkbox" class="form-check-input" value="" (click)="$event.stopPropagation()"
+                       (change)="$event ? selection.toggle(item) : null"
+                       [checked]="selection.isSelected(item)">
+              </label>
+            </div>
+              {{ item[column] }}
+            
+          </mat-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{ 'selected': selection.isSelected(row)}"
+                 (click)="selection.toggle(row)"></mat-row>
+      </mat-table>
+
+
+    </div>
+   
+
+
+  </div>
+ 
+</div>-->
+

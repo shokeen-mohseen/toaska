@@ -1,0 +1,40 @@
+/*modified by amit agrahari WI -16751 / Changeset 30602 / Date - 16/07/2020*/
+.tab-content .tab-pane {
+  padding: 1rem;
+  _box-shadow: 6px 4px 10px 0px #b5b4b4 !important;
+}
+
+.btntabsactive {
+  background: #fff;
+  padding: 10px;
+  margin: 3px;
+  border-left: 4px solid #fcc;
+  border-radius: 0px;
+  font-weight: 600;
+  box-shadow: 5px 4px 10px 0px #b5b4b4;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+}
+
+.hdr-chrt-hstry {
+  background-color: #d7d5d5;
+  padding: 10px;
+  border-bottom: 2px solid #c8ced3;
+  margin-top: 3px !important;
+}
+
+  .hdr-chrt-hstry strong {
+    font-weight: 500;
+  }
+
+.v-tab a {
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  opacity: 0.8;
+  padding: 13px;
+}
+
+.headerbg a {
+  font-size: 16px;
+  font-weight: 600;
+}

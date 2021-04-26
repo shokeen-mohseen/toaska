@@ -1,0 +1,79 @@
+<app-top-btn-group #btnBar [actionGroupConfig]="actionGroupConfig" (action)="actionHandler($event)"></app-top-btn-group>
+<div class="mb-3 order-container">
+  <div class="form-area">
+    <div class="wrapper">
+      <div class="content-wrapper">
+        <div>
+          <h5>{{'key_FPS' | translate}}</h5>
+        </div>
+
+
+        <mat-tab-group #tabGroupA class="mt-18" animationDuration="0ms" (selectedTabChange)="tabChange($event)">
+          <mat-tab #tab1 *ngIf="tab1">
+            <ng-template mat-tab-label>
+              {{ 'key_FPSummary' | translate }}
+            </ng-template>
+            <div class="tab-content" *ngIf="tab1Data">
+              <div class="row">
+                <div class="moreOptions tab-inline col-md-12">
+                  <ul class="nav nav-tabs d-inline-flex" id="myTab" role="tablist">
+                    <li class="nav-item">
+                      <a class="nav-link active" id="inbound-tab" data-toggle="tab" href="#inbound" role="tab" aria-controls="Inbound" aria-selected="false">{{'key_byMaterial'| translate}}</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link " id="outbound-tab" data-toggle="tab" href="#outbound" role="tab" aria-controls="Outbound" aria-selected="true">{{'key_byOrder'| translate}}</a>
+                    </li>
+                  </ul>
+
+                  <div class="d-inline-flex float-right">
+                    <div class="mr-2">
+
+                      <div class="col-auto d-inline-flex">
+                        <h6 class="col-md-3 pt-2 mt-1 text-right">Time Period:</h6>
+                        <div class="input-group mb-2">
+                          <div class="input-group-prepend">
+                            <div class="input-group-text">From</div>
+                          </div>
+                          <input type="text" class="form-control" placeholder="12/2/2020" readonly>
+                        </div>
+                        <div class="input-group mb-2">
+                          <div class="input-group-prepend">
+                            <div class="input-group-text">To</div>
+                          </div>
+                          <input type="text" class="form-control" placeholder="12/5/2020" readonly>
+                        </div>
+                      </div>
+
+                    </div>
+                    <div class="col-auto d-inline-flex pr-0">
+                      <h6 class="col-md-4 pt-2 mt-1 text-right">Location:</h6>
+                      <div class="input-group mb-2">
+                        <input type="text" class="form-control" placeholder="Location" readonly>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="tab-content pb-3 pt-3" id="myTabContent">
+                    <div class="tab-pane fade show active" id="inbound" role="tabpanel" aria-labelledby="inbound-tab">
+                      <app-by-material></app-by-material>
+                    </div>
+                    <div class="tab-pane fade" id="outbound" role="tabpanel" aria-labelledby="outbound-tab">
+                      <app-by-order></app-by-order>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+
+            </div>
+          </mat-tab>
+
+        </mat-tab-group>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+<app-show-notes></app-show-notes>

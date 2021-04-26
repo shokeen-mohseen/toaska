@@ -1,0 +1,105 @@
+<div>
+  <div class="row">
+    <div class="col-md-6"></div>
+    <div class="col-md-6 text-right">      
+      <span class="fw600">{{ 'key_LastUpdate' | translate }}:</span> {{commodityeditmodel?.updateDateTimeBrowser | date:'MM-dd-yyyy hh:mm:ss'}}
+      <br><span class="fw600">{{ 'key_By' | translate }}</span> {{commodityeditmodel?.updatedBy}}
+    </div>
+  </div>
+  <!--Last Updated Section End//////////////-->
+  <form [formGroup]="commodityEditForm" novalidate>
+    <div class="row">
+
+      <div class="col-md-3 custom-flex-w-15">
+        <div class="card">
+          <div class="card-header">{{ 'key_EditList' | translate }}</div>
+          <div class="card-body p-0">
+            <ul class="list-group" #nextList>
+              <li class="list-group-item list-group-item-action"
+                  *ngFor="let commodityName of commodityToEdit; let i = index"
+                  (click)="selectedCommodityEdit(commodityName,i)"
+                  [ngClass]="{ 'active': commodityName.id == commodityeditmodel.id }">
+                <a>{{commodityName.code}}</a>
+                <button class="close" type="button" *ngIf="commodityName.id!=commodityeditmodel.id"
+                        (click)="removeCommodityFromEditList(commodityName)">
+                  <i class="fa fa-times" aria-hidden="true"></i>
+                </button>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-md-9 custom-flex-w-85">
+        <div class="tab-content">
+          <!--=============== Start profile =================-->
+          <div class="e-profile">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="box-children">
+                  <div class="form-group">
+                    <label for="firstname">{{ 'key_Commoditytype' | translate }} <sup class="text-danger sup1">*</sup></label>
+                    <angular2-multiselect fixFilterBug [data]="itemCommodityTypeList" [(ngModel)]="selectedItemsA" [settings]="settingsA"
+                                          name="itemCommodityTypeList" formControlName="commoditytype" required>
+                    </angular2-multiselect>
+                  </div>
+                  <div class="form-group">
+                    <label for="firstname">{{ 'key_CommodityName' | translate }} <sup class="text-danger sup1">*</sup></label>
+                    <input type="text" name="CommodityEntered" [(ngModel)]="commodityeditmodel.name" formControlName="commodityName" class="form-control" required />
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="box-children">
+                  <div class="form-group">
+                    <label for="firstname">{{ 'key_Segment' | translate }} <sup class="text-danger sup1">*</sup></label>
+                    <angular2-multiselect class="right" fixFilterBug [data]="itemSegmentTypeList" [(ngModel)]="selectedItemsB" [settings]="settingsB"
+                                          name="itemSegmentTypeList" formControlName="segment" required>
+                    </angular2-multiselect>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--=============== End e-profile =================-->
+        </div>
+      </div>
+
+    </div>
+
+    <div class="row justify-content-center my-5">
+
+      <div class="col-xl-2 col-lg-4 col-md-4 col-sm-12">
+        <button class="btn btn-block btn-save" [disabled]="!commodityEditForm.valid" (click)="editSave()" type="submit">{{ 'key_Save' | translate }}</button>
+      </div>
+      <div class="col-xl-2 col-lg-4 col-md-4 col-sm-12">
+        <button class="btn btn-block btn-next" type="button" [disabled]="!commodityEditForm.valid || commodityToEdit.length === 1" (click)="saveAndEditNext()">
+          <span class="fw600">{{ 'key_Edit' | translate }}</span> <span class="fs-13"> > {{ 'key_Next' | translate }}</span>
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,89 @@
+<!---16697 Task Landing Page - Design to show logged in Username and its role.-->
+<!--16182  - filter profile dropdown and increase icon size, align logo | Amit Agrahari | 20-07-2020-->
+  <app-header [navbarBrandRouterLink]="['/dashboard/home']"
+              [fixed]="true"
+              [navbarBrandFull]="{src: 'assets/images/logo.png', width: 180, height: 65, alt: 'Osoftec Logo'}"
+              [navbarBrandMinimized]="{src: 'assets/images/logo.png', width: 180, height: 65, alt: 'Osoftec Logo', class:'aaa'}"
+              [sidebarToggler]="'lg'"
+              [asideMenuToggler]="'lg'"
+              class="shadow">
+
+    <!--for tosca-->
+    <!--<app-header [navbarBrandRouterLink]="['/dashboard/home']"
+              [fixed]="true"
+              [navbarBrandFull]="{src: 'assets/images/tosca-logo.png', width: 180, height: 65, alt: 'Osoftec Logo'}"
+              [navbarBrandMinimized]="{src: 'assets/images/tosca-logo-inner.png', width: 180, height: 65, alt: 'Osoftec Logo', class:'aaa'}"
+              [sidebarToggler]="'lg'"
+              [asideMenuToggler]="'lg'"
+              class="shadow">-->
+    <!--<app-header [navbarBrandRouterLink]="['/dashboard/home']"
+          [fixed]="true"
+          [navbarBrandFull]="{src: 'assets/images/logo.png', width: 180, height: 65, alt: 'Osoftec Logo'}"
+          [navbarBrandMinimized]="{src: 'assets/images/logo.png', width: 30, height: 30, alt: 'Osoftec Logo'}"
+          [sidebarToggler]="'lg'"
+          [asideMenuToggler]="'lg'" class="shadow">-->
+    <!--<ul class="nav navbar-nav d-md-down-none">
+    <li class="nav-item px-3">
+      <a class="nav-link" href="#">Dashboard</a>
+    </li>
+    <li class="nav-item px-3">
+      <a class="nav-link" href="#">Users</a>
+    </li>
+    <li class="nav-item px-3">
+      <a class="nav-link" href="#">Settings</a>
+    </li>
+  </ul>-->
+    <ul class="nav navbar-nav ml-auto header-right">
+
+      <li class="nav-item d-md-down-none selectLang">
+        <select class="form-control" #selectedLang (change)="switchLang(selectedLang.value)">
+          <option *ngFor="let language of translate.getLangs()" [value]="language"
+                  [selected]="language === translate.currentLang">
+            {{ language }}
+          </option>
+        </select>
+      </li>
+      <li class="nav-item d-md-down-none notificationAlert">
+        <a class="nav-link"><i class="icon-bell"></i><span (click)="OpenNotificationPopup()" class="badge badge-pill badge-danger" *ngIf="message$">{{ ( message$ | async) }}</span></a>
+      </li>
+      <li class="nav-item d-md-down-none">
+        <a class="nav-link" (click)="OpenSetupWizardPopup()"><i class="icon-settings"></i><span class="badge badge-pill badge-danger"></span></a>
+      </li>
+      <!--<li class="nav-item d-md-down-none">
+      <a class="nav-link"><i class="icon-list"></i></a>
+    </li>
+    <li class="nav-item d-md-down-none">
+      <a class="nav-link"><i class="icon-location-pin"></i></a>
+    </li>-->
+      <!--Developer Name: Rajesh vishvakarma, Date: 14/08/2020, TFS ID: 17121,
+    Logic Description: Design main home page with sidebar menu
+    -->
+      <li class="nav-item dropdown user-account" dropdown placement="bottom right">
+        <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" dropdownToggle (click)="false">
+          <!--<img src="assets/img/avatars/6.jpg" class="img-avatar" alt="admin@bootstrapmaster.com" />-->
+          <!--Developer Name: Rajesh vishvakarma, Date: 18/08/2020, TFS ID: 17121,
+        Logic Description: Dynamic username call, Id : 17121
+        -->
+          <span class="profile-description">
+            <span class="profile-name font-weight-bold" *ngIf="isUserLogin">{{this.currentUser.firstName+' '+ this.currentUser.lastName+' ('+this.currentUser.role+')'}}</span>
+            <!--<span class="profile-detail">Marketing Manager </span>-->
+          </span>
+
+
+          <!--<span>August 1, 2020 7:55 PM IST</span>-->
+
+
+        </a>
+        <div class="dropdown-menu dropdown-menu-right" *dropdownMenu aria-labelledby="simple-dropdown">
+          <div class="dropdown-header text-center"><strong>Account</strong></div>
+          <a class="dropdown-item nav-item d-md-down-none" *ngIf="isUserLogin">{{this.currentUser.firstName+' '+ this.currentUser.lastName+' ('+this.currentUser.role+')'}}</a>
+
+          <!--<div class="dropdown-header text-center"><strong>Settings</strong></div>-->
+
+          <div class="divider"></div>
+          <a class="dropdown-item" (click)="changePassword()"><i class="fa fa-shield"></i> Change Password</a>
+          <a class="dropdown-item" (click)="logout()"><i class="fa fa-lock"></i> Logout</a>
+        </div>
+      </li>
+    </ul>
+  </app-header>

@@ -1,0 +1,113 @@
+<!---
+Code comment template example -
+Developer Name: satyen singh
+Date: June 6, 2020
+TFS ID: 16547
+Logic Description: Design modal popup for contractions chart..
+<!---Author name Satyen Singh 06/07/2020 start for comment collapse area section-->
+<!--TFS Task Id 16718 Latent Phase - Add all language  attributes ..-->
+<!---Author name Satyen Singh 06/07/2020 start for comment collapse area section-->
+
+<div class="modal-header">
+  <h4 class="modal-title" id="modal-basic-title">
+    {{modalData.modelStagename | translate}} {{modalData.modelName | translate}}
+
+  </h4>
+  <a class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </a>
+</div>
+<div class="modal-body modalbg">
+  <!--add time and user with comment history session-->
+  <div class="row">
+    <div class="col-sm-6 bg-whites pdr prtop">
+      <div class="cardpdrtop card">
+        <div class="row">
+          <div class="col-lg-6 col-xs-6 col-sm-6 col-md-12">
+            <span><i class="fa fa-clock-o fa-3" aria-hidden="true"></i></span>
+            <span class="ml-1" [innerHTML]="modalData.DisplayTime +' '+ modalData.timeZone"> </span>
+          </div>
+          <div class="col-lg-6 col-xs-6 col-sm-6 col-md-12">
+            <span><i class="fa fa-user-circle-o" aria-hidden="true"></i></span>
+            <span class="ml-1">{{userName}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6 bg-whites pdrright prtop">
+      <div class="cardpdrtop card">
+        <div class="row">
+          <div class="col-xs-6">
+            <span class="ml-3"><i class="fa fa-history" aria-hidden="true"></i></span>
+            <span class="ml-1">{{ 'key_Commenthistory' | translate }}</span>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--add time and user with comment history session-->
+
+  <div class="row">
+    <div class="col-sm-6 pdr cardpdr">
+
+      <form (ngSubmit)="passBack()" [formGroup]="UserForm">
+
+        <div class="panelbg card panelheight">
+          <!--new design start here please conver old design pattern to new tiles design-->
+          <div id="tblpopupChart">
+            <label for="company">{{ 'key_ContractionDuration' | translate }}</label>
+            <div class="form  boxtxtlbl cf mt-2 mb-2">
+              <section class="plan cf">
+                <ng-container *ngFor="let item of modalData.frequencyList">
+                  <input formControlName="selectFrequency" type="radio" (change)="FrequencyFilter(item.FId)" id="credit_{{item.FId}}" value="{{item.FId}}">
+                  <label class="credit-label four col" for="credit_{{item.FId}}"> {{item.FName}}</label>
+                </ng-container>
+             </section>
+            </div>
+          <label for="company">{{ 'key_Contraction' | translate }}</label>
+            <div class="form formcircle cf mt-2 mb-2">
+              <section class="plan cf">
+                <ng-container *ngFor="let item of modalData.ftList">
+                  <input formControlName="selectYValue" (change)="ChooseFrequencyValue(item.Id)" type="radio" id="free_{{item.Id}}" value="{{item.Id}}">
+                  <label class="free-label four col" for="free_{{item.Id}}"> {{item.Name}}</label>
+                </ng-container>
+
+              </section>
+            </div>
+
+          </div>
+          <!--end code-->
+
+
+          <div class="form-group">
+            <label for="company">{{ 'key_Commentsarea' | translate }}</label>
+            <textarea [attr.placeholder]="'key_Comments' | translate" class="Comments form-control" formControlName="remarks" rows="3"></textarea>
+          </div>
+          <div class="form-group text-center">
+            <button type="submit" class="btn btn-pill btnsave  btn-raised btnbg"
+                  [disabled]="UserForm.controls['selectYValue' && 'selectFrequency'].invalid">
+              <span [innerHTML]="'key_Save' | translate"></span>
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="col-sm-6 cardpdr">
+      <div class="panelbg card panelheight">
+        <app-recentcomment [posts]="newOutputPost" [chartName]="validationModel.ChartName"></app-recentcomment>
+      </div>
+    </div>
+  </div>
+
+
+  </div>
+
+
+
+
+
+<!--
+  TFS ID 16547
+    End code
+-->

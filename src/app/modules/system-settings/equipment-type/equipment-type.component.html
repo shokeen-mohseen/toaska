@@ -1,0 +1,51 @@
+<app-top-btn-group #btnBar [actionGroupConfig]="actionGroupConfig" (action)="actionHandler($event)" [ParentPageName]="EquipmentTypeList"></app-top-btn-group>
+<div>
+  <div class="form-area">
+    <div class="wrapper">
+      <div class="content-wrapper">
+        <div>
+          <h5>{{ 'key_EquipmentType' | translate }}</h5>
+        </div>
+        <mat-tab-group #tabGroupA class="mt-18" animationDuration="0ms" (selectedTabChange)="tabChange($event)">
+
+          <mat-tab #tab1 *ngIf="tab1">
+            <ng-template mat-tab-label>
+              {{ 'key_EquipmentList' | translate }}
+            </ng-template>
+            <div class="tab-content" *ngIf="tab1Data">
+              <app-equipment-list (selectedEquipmentTypes)="selectedEquipmentTypes($event)" [equipmentsInEdit]="equipmentsInEdit()" (selectedIds)="getSelectedIds($event)"></app-equipment-list>
+            </div>
+          </mat-tab>
+
+          <mat-tab #tab2 *ngIf="tab2">
+            <ng-template mat-tab-label>
+              {{ 'key_Addnew' | translate }}
+              <button class="close" type="button" (click)="closeTab()">
+                <i class="fa fa-times-circle-o" aria-hidden="true"></i>
+              </button>
+            </ng-template>
+            <div class="tab-content" *ngIf="tab2Data">
+              <app-add-edit-equipment [addPage]="addPage" [editPage]="editPage"></app-add-edit-equipment>
+             
+            </div>
+          </mat-tab>
+
+          <mat-tab #tab3 *ngIf="tab3">
+            <ng-template mat-tab-label>
+              {{ 'key_Edit' | translate }}
+              <button class="close" type="button" (click)="closeTab()">
+                <i class="fa fa-times-circle-o" aria-hidden="true"></i>
+              </button>
+            </ng-template>
+            <div class="tab-content" *ngIf="tab3Data">
+              <app-add-edit-equipment (selectedEquipmentTypes)="selectedEquipmentTypes($event)" [equipmentTypesToEdit]="equipmentTypesToEdit()" [addPage]="addPage" [editPage]="editPage"></app-add-edit-equipment>
+            </div>
+          </mat-tab>
+
+        </mat-tab-group>
+
+      </div>
+    </div>
+  </div>
+</div>
+<app-show-notes></app-show-notes>

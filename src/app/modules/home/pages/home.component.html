@@ -1,0 +1,243 @@
+<!--Developer Name: Rajesh vishvakarma, Date: 14/08/2020, TFS ID: 17121, Logic Description: Design main home page with sidebar menu-->
+
+<div class="container-fluid">
+
+  <!-- Page Heading -->
+  <div class="d-sm-flex align-items-center justify-content-between mb-4 pt-5">
+    <h1 class="h3 mb-0 text-gray-800">Partograph Dashboard</h1>
+    <!--<a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>-->
+  </div>
+
+  <!-- Content Row -->
+  <!--<div class="row">
+    <div class="col-xl-3 col-md-6 mb-4">
+      <div class="card border-left-primary shadow h-100 py-2">
+        <div class="card-body">
+          <div class="row no-gutters align-items-center">
+            <div class="col mr-2">
+              <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Earnings (Monthly)</div>
+              <div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
+            </div>
+            <div class="col-auto">
+              <i class="fas fa-calendar fa-2x text-gray-300"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="col-xl-3 col-md-6 mb-4">
+      <div class="card border-left-success shadow h-100 py-2">
+        <div class="card-body">
+          <div class="row no-gutters align-items-center">
+            <div class="col mr-2">
+              <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Earnings (Annual)</div>
+              <div class="h5 mb-0 font-weight-bold text-gray-800">$215,000</div>
+            </div>
+            <div class="col-auto">
+              <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xl-3 col-md-6 mb-4">
+      <div class="card border-left-info shadow h-100 py-2">
+        <div class="card-body">
+          <div class="row no-gutters align-items-center">
+            <div class="col mr-2">
+              <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Tasks</div>
+              <div class="row no-gutters align-items-center">
+                <div class="col-auto">
+                  <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50%</div>
+                </div>
+                <div class="col">
+                  <div class="progress progress-sm mr-2">
+                    <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-auto">
+              <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xl-3 col-md-6 mb-4">
+      <div class="card border-left-warning shadow h-100 py-2">
+        <div class="card-body">
+          <div class="row no-gutters align-items-center">
+            <div class="col mr-2">
+              <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Pending Requests</div>
+              <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+            </div>
+            <div class="col-auto">
+              <i class="fas fa-comments fa-2x text-gray-300"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>-->
+  <!-- Content Row -->
+
+  <div class="row">
+
+    <!-- Area Chart -->
+    <div class="col-xl-6 col-lg-6">
+      <div class="card shadow mb-4">
+        <!-- Card Header - Dropdown -->
+        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+          <h6 class="m-0 font-weight-bold">Partograph Statistics (Monthly Count by Physician) </h6>
+        </div>
+        <!-- Card Body -->
+        <div class="card-body">
+          <div class="box-children">
+            <div class="c-chart-wrapper">
+              <div class="chartjs-size-monitor">
+                <div class="chartjs-size-monitor-expand">
+                  <div class=""></div>
+                </div>
+                <div class="chartjs-size-monitor-shrink"><div class=""></div></div>
+              </div>
+              <div #barChart id="bar-chart"></div>
+              <!--<canvas id="canvas-3" width="744" height="371" class="chartjs-render-monitor" style="display: block; width: 744px; height: 371px;"></canvas>-->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pie Chart -->
+    <div class="col-xl-6 col-lg-6">
+      <div class="card shadow mb-4">
+        <!-- Card Header - Dropdown -->
+        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+          <h6 class="m-0 font-weight-bold">Partograph Statistics (Monthly Count by Type)</h6>
+        </div>
+        <!-- Card Body -->
+        <div class="card-body">
+          <div class="box-children">
+            <div class="c-chart-wrapper">
+              <div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+              <div #barChart1 id="bar-chart1"></div>
+              <!--<canvas id="canvas-4" width="744" height="371" class="chartjs-render-monitor" style="display: block; width: 744px; height: 371px;"></canvas>-->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <div class="row">
+
+
+    <div class="col-lg-6 mb-4">
+      <div class="card shadow mb-4">
+        <div class="card-body p-0">
+          <div class="rTable mt-0">
+            <div class="rTableRow">
+              <div class="rTableHead"><span>Months</span></div>
+              <div class="rTableHead"><span>Partographs</span></div>
+              <div class="rTableHead"><span>John F</span></div>
+              <div class="rTableHead"><span>Joe D</span></div>
+              <div class="rTableHead"><span>Mary K</span></div>
+              <div class="rTableHead"><span>Jiil.P</span></div>
+            </div>
+            <div class="rTableRow">
+              <div class="rTableCell"><label>Jan - 20</label></div>
+              <div class="rTableCell"><label>309</label></div>
+              <div class="rTableCell"><label>77</label></div>
+              <div class="rTableCell"><label>71</label></div>
+              <div class="rTableCell"><label>83</label></div>
+              <div class="rTableCell"><label>78</label></div>
+            </div>
+            <div class="rTableRow">
+              <div class="rTableCell"><label>Fab - 20</label></div>
+              <div class="rTableCell"><label>338</label></div>
+              <div class="rTableCell"><label>77</label></div>
+              <div class="rTableCell"><label>71</label></div>
+              <div class="rTableCell"><label>83</label></div>
+              <div class="rTableCell"><label>107</label></div>
+            </div>
+            <div class="rTableRow">
+              <div class="rTableCell"><label>Mar - 20</label></div>
+              <div class="rTableCell"><label>301</label></div>
+              <div class="rTableCell"><label>77</label></div>
+              <div class="rTableCell"><label>71</label></div>
+              <div class="rTableCell"><label>83</label></div>
+              <div class="rTableCell"><label>107</label></div>
+            </div>
+            <div class="rTableRow">
+              <div class="rTableCell text-left"><span>Total</span></div>
+              <div class="rTableCell"><span>948</span></div>
+              <div class="rTableCell"><span>308</span></div>
+              <div class="rTableCell"><span>284</span></div>
+              <div class="rTableCell"><span>332</span></div>
+              <div class="rTableCell"><span>292</span></div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6 mb-4">
+      <div class="card shadow mb-4">
+        <div class="card-body p-0">
+          <div class="rTable mt-0">
+            <div class="rTableRow">
+              <div class="rTableHead"><span>Months</span></div>
+              <div class="rTableHead"><span>Partographs</span></div>
+              <div class="rTableHead"><span>Normal</span></div>
+              <div class="rTableHead"><span>CSection</span></div>
+              <div class="rTableHead"><span>Internal</span></div>
+              <div class="rTableHead"><span>Referred</span></div>
+            </div>
+            <div class="rTableRow">
+              <div class="rTableCell"><label>Jan - 20</label></div>
+              <div class="rTableCell"><label>309</label></div>
+              <div class="rTableCell"><label>216</label></div>
+              <div class="rTableCell"><label>93</label></div>
+              <div class="rTableCell"><label>284</label></div>
+              <div class="rTableCell"><label>25</label></div>
+            </div>
+            <div class="rTableRow">
+              <div class="rTableCell"><label>Fab - 20</label></div>
+              <div class="rTableCell"><label>338</label></div>
+              <div class="rTableCell"><label>236</label></div>
+              <div class="rTableCell"><label>102</label></div>
+              <div class="rTableCell"><label>310</label></div>
+              <div class="rTableCell"><label>28</label></div>
+            </div>
+            <div class="rTableRow">
+              <div class="rTableCell"><label>Mar - 20</label></div>
+              <div class="rTableCell"><label>301</label></div>
+              <div class="rTableCell"><label>210</label></div>
+              <div class="rTableCell"><label>91</label></div>
+              <div class="rTableCell"><label>276</label></div>
+              <div class="rTableCell"><label>25</label></div>
+            </div>
+            <div class="rTableRow">
+              <div class="rTableCell text-left"><span>Total</span></div>
+              <div class="rTableCell"><span>948</span></div>
+              <div class="rTableCell"><span>662</span></div>
+              <div class="rTableCell"><span>286</span></div>
+              <div class="rTableCell"><span>870</span></div>
+              <div class="rTableCell"><span>78</span></div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- container-fluid -->

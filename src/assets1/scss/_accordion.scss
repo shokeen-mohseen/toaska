@@ -1,0 +1,71 @@
+/*--Developer Name: Prabhash Poddar, Date: 31/08/2020, TFS ID: 17221, Logic Description: change accordion scss file and manage--*/
+.accordion {
+  > .card {
+      overflow: inherit;
+    > .card-header {
+      cursor: pointer;
+      padding: 0.3rem 0.9rem;
+
+      &:after {
+        font-family: 'FontAwesome';
+        content: "\f106";
+        float: right;
+      }
+
+      &.collapsed {
+        &:after {
+          content: "\f107";
+        }
+      }
+
+      a {
+        word-break: break-all;
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+
+.mat-accordion {
+  .mat-expansion-panel {
+    margin-bottom: 10px !important;
+
+    .mat-expansion-panel-header {
+      padding: 0 15px;
+    }
+
+    .mat-expansion-panel-content {
+      .mat-expansion-panel-body {
+        padding: 15px !important;
+        background-color: #f7f3f3;
+        border: 1px solid #dddd;
+
+        .card {
+          border: none;
+          border-radius: 0;
+          background-color: #fff;
+          border-top: 1px solid pink;
+          margin: 0px;
+          -webkit-flex-basis: 0;
+          -ms-flex-preferred-size: 0;
+          flex-basis: 0;
+          -webkit-box-flex: 1;
+          -webkit-flex-grow: 1;
+          -ms-flex-positive: 1;
+          flex-grow: 1;
+
+          .card-header {
+            .card-title {
+              margin-bottom: 0;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.mat-expansion-indicator::after{
+    margin-top: -5px;
+}

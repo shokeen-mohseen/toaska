@@ -1,0 +1,5 @@
+::ng-deep .add .vertical-tab .mat-tab-group .mat-tab-labels .mat-tab-label:nth-child(1):before {
+  content: "Add List";
+ 
+}
+

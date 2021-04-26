@@ -1,0 +1,96 @@
+.tosca-login {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: url(assets/images/toscaLoginBg.jpg) no-repeat top center;
+  background-size: cover;
+  overflow-y:auto;
+
+  .login-screen {
+    background: #fff;
+    width: 100%;
+    max-width: 470px;
+
+    .logo {
+      background: url(assets/images/texture.png);
+      background-size: cover;
+      padding: 15px;
+      text-align: center;
+      border-top: 8px solid #7ed4f7;
+
+      img {
+        width: 100%;
+      }
+    }
+
+    .form-area {
+      padding: 20px;
+
+      .form-group {
+        margin-bottom: 1.2rem;
+      }
+
+      .input-group {
+        button, button:hover {
+          background: transparent;
+          color: #414042;
+          border: none;
+        }
+      }
+
+      button, a {
+
+        &.btn-login {
+          background-color: #7ed4f7;
+          color: #414042;
+          border: 1px solid #7ed4f7;
+
+          &:hover {
+            background-color: #7ed4f7;
+            color: #414042;
+            border: 1px solid #7ed4f7;
+          }
+        }
+
+        &.btn-submit {
+          background-color: #ec710a;
+          color: #fff;
+          border: 1px solid #ec710a;
+
+          &:hover {
+            background-color: #ec710a;
+            color: #fff;
+            border: 1px solid #ec710a;
+          }
+        }
+
+        &:focus {
+          box-shadow: none;
+        }
+      }
+
+      p {
+        a {
+          color: #414042;
+          text-decoration: underline;
+          font-weight: bold;
+
+          &:hover {
+            text-decoration: none;
+            background: transparent;
+            border: none;
+          }
+        }
+      }
+    }
+
+    .input-group > .input-group-prepend > .btn, .input-group > .input-group-prepend > .btn:hover, .input-group > .input-group-prepend > .input-group-text, .input-group > .input-group-append:not(:last-child) > .btn, .input-group > .input-group-append:not(:last-child) > .input-group-text, .input-group > .input-group-append:last-child > .btn:not(:last-child):not(.dropdown-toggle), .input-group > .input-group-append:last-child > .input-group-text:not(:last-child) {
+      border-top-right-radius: 4px;
+      border-bottom-right-radius: 4px;
+      border: 1px solid #e4e7ea;
+      border-left: 0;
+    }
+  }
+}

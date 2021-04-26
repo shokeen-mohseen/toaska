@@ -1,0 +1,7 @@
+.recurrence .form-control {
+  height: 28px !important;
+}
+
+::ng-deep .mat-expansion-panel-body {
+  padding-top: 8px !important;
+}

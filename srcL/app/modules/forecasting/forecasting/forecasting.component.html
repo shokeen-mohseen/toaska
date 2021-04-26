@@ -1,0 +1,92 @@
+<!--TFS ID: 17434,
+  Author: Monu Ram Yadav,
+  Date: 16-09-2020,
+  Des: Design - Forecast main listing page  -->
+
+<app-top-btn-group #btnBar [actionGroupConfig]="actionGroupConfig" (action)="actionHandler($event)" [ParentPageName]="ForecastingList"></app-top-btn-group>
+
+<h5>{{ 'key_Forecast' | translate }}</h5>
+
+<mat-tab-group animationDuration="0ms" #tabGroupA class="mt-18" (selectedTabChange)="tabChange($event)">
+
+  <mat-tab #tab1 *ngIf="tab1">
+    <ng-template mat-tab-label>
+      {{ 'key_ForcastList' | translate }}
+    </ng-template>
+
+    <div class="row">
+      <div class="col-md-6">
+        <h4><strong>{{forecastSelected?.name}}</strong> </h4> 
+        <!--({{forecastSelected?.isActive}})-->
+      </div>
+      <div class="col-md-6 text-right">
+        <span class="fw600"><strong>{{ 'key_LastUpdate' | translate }}:</strong> </span> {{forecastSelected?.updateDateTimeServer | momentDateWithZonePipe}}
+        <br><span class="fw600"><strong>{{ 'key_By' | translate }}:</strong> </span> {{forecastSelected?.updatedBy}}
+      </div>
+    </div>
+
+    <div class="tab-content" *ngIf="tab1Data">
+      <div class="filter-section" *ngIf="filter">
+        <mat-accordion>
+          <mat-expansion-panel (opened)="panelOpenState = true"
+                               (closed)="panelOpenState = false" [expanded]="false">
+            <mat-expansion-panel-header>
+              <mat-panel-description>
+                {{panelOpenState ? '- Hide' : '+ Show'}} {{ 'key_FilterForForecast' | translate }}
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <div class="row">
+
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label> {{ 'key_Forecast' | translate }}</label>
+                  <angular2-multiselect fixFilterBug [data]="forecastList" [(ngModel)]="forecastListSelected" [settings]="forecastSettings">
+                  </angular2-multiselect>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="d-block"> &nbsp; </label>
+                  <button class="btn btn-next font-weight-normal" (click)="applyFilter()"> {{ 'key_ApplyFilter' | translate }}</button>
+                  </div>
+                </div>
+              </div>
+
+
+            <!--<app-filter></app-filter>-->
+          </mat-expansion-panel>
+        </mat-accordion>
+        <!--///end filter for Forecast-->
+      </div>
+      <!--End Filter Section -->
+
+      <app-create-compute-sales-forecast (selectedForecastList)="selectedForecastList($event)"></app-create-compute-sales-forecast>
+    </div>
+  </mat-tab>
+
+  <mat-tab #tab2 *ngIf="tab2">
+    <ng-template mat-tab-label>
+      {{ 'key_AddNewForecast' | translate }}
+      <button class="close" type="button" (click)="closeTab()">
+        <i class="fa fa-times-circle-o" aria-hidden="true"></i>
+      </button>
+    </ng-template>
+    <div class="tab-content" *ngIf="tab2Data">
+      <app-addnew-forecast></app-addnew-forecast>
+    </div>
+  </mat-tab>
+
+  <mat-tab #tab3 *ngIf="tab3">
+    <ng-template mat-tab-label>
+      {{ 'key_EditCharge' | translate }}
+      <button class="close" type="button" (click)="closeTab()">
+        <i class="fa fa-times-circle-o" aria-hidden="true"></i>
+      </button>
+    </ng-template>
+    <div class="tab-content" *ngIf="tab3Data">
+      <!--<app-edit-charge></app-edit-charge>-->
+    </div>
+  </mat-tab>
+</mat-tab-group>
+<app-show-notes></app-show-notes>

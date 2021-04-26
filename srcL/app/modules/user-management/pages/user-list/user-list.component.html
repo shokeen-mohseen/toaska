@@ -1,0 +1,89 @@
+<app-top-btn-group #btnBar [actionGroupConfig]="actionGroupConfig" (action)="actionHandler($event)" [ParentPageName]="UserMangementList"></app-top-btn-group>
+
+  <div>
+    <div class="form-area">
+      <div class="wrapper">
+        <div class="content-wrapper">
+          <div>
+            <h5>{{ 'key_UserManagement' | translate }}</h5>
+          </div>
+          <mat-tab-group #tabGroupA class="mt-18" animationDuration="0ms" (selectedTabChange)="tabChange($event)">
+
+            <mat-tab #tab1 *ngIf="tab1">
+              <ng-template mat-tab-label>
+                {{ 'key_ExistingUsers' | translate }}
+              </ng-template>
+              <div class="tab-content" *ngIf="tab1Data">
+                <app-existing-user [dataSource]="data" [size]="size" (checkBoxClick)="selectCheckBox($event)"></app-existing-user>
+              </div>
+            </mat-tab>
+
+            <mat-tab #tab3 *ngIf="tab2">
+              <ng-template mat-tab-label>
+                {{ 'key_NewUsers' | translate }}
+              </ng-template>
+              <div class="tab-content" *ngIf="tab2Data">
+                <app-new-users [dataSource]="data" [size]="size" (checkBoxClick)="selectCheckBox($event)"
+                               (isEditClick)="getEditClick($event)"></app-new-users>
+              </div>
+            </mat-tab>
+
+            <!--<mat-tab #tab3 *ngIf="tab3">
+              <ng-template mat-tab-label>
+                {{ 'key_LockedUsers' | translate }}
+              </ng-template>
+              <div class="tab-content" *ngIf="tab3Data">
+                <app-locked-users [dataSource]="data" [size]="size" (checkBoxClick)="selectCheckBox($event)"></app-locked-users>
+              </div>
+            </mat-tab>-->
+
+            <mat-tab #tab3 *ngIf="tab4">
+              <ng-template mat-tab-label>
+                {{ 'key_DeclinedUsers' | translate }}
+              </ng-template>
+              <div class="tab-content" *ngIf="tab4Data">
+                <app-declined-users [dataSource]="data" [size]="size" (checkBoxClick)="selectCheckBox($event)"></app-declined-users>
+              </div>
+            </mat-tab>
+
+            <mat-tab #tab2 *ngIf="tab5">
+              <ng-template mat-tab-label>
+                {{ 'key_AddNewUsers' | translate }}
+                <button class="close" type="button" (click)="closeTab()">
+                  <i class="fa fa-times-circle-o" aria-hidden="true"></i>
+                </button>
+              </ng-template>
+              <div class="tab-content" *ngIf="tab5Data">
+
+                <app-add-users #usAdd [userRolesList]="userRolesList" [userContactList]="userContactList"
+                               [userAddressList]="userAddressList"
+                               [userPlanningLocationList]="userPlanningLocationList"></app-add-users>
+              </div>
+            </mat-tab>
+
+            <mat-tab #tab3 *ngIf="tab6">
+              <ng-template mat-tab-label>
+                {{ 'key_EditUsers' | translate }}
+                <button class="close" type="button" (click)="closeTab()">
+                  <i class="fa fa-times-circle-o" aria-hidden="true"></i>
+                </button>
+              </ng-template>
+              <div class="tab-content" *ngIf="tab6Data">
+                <app-edit-users [dataSource]="usersViewModelIdList" [(ngModel]="usersViewModelIdList"
+                                #userEdit [userRolesList]="userRolesList" [userContactList]="userContactList"
+                                [userAddressList]="userAddressList"
+                                (userRoleLength)="getUserRoleLength($event)"
+                                (selectedUseratEdit)="getUserIdfromEdit($event)"
+                                (isEditPage)="getPageName($event)"
+                                [addressName]="addressName" [mobilePhoneCode]="mobilePhoneCode" [currentTab]="currentSelectedTab" [size]="sizeLocation"
+                                [userPlanningLocationList]="userPlanningLocationList"></app-edit-users>
+              </div>
+            </mat-tab>
+
+          </mat-tab-group>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <app-show-notes></app-show-notes>

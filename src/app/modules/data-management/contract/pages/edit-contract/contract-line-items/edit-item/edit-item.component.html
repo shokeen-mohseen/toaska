@@ -1,0 +1,128 @@
+<div class="">
+  <form #editForm="ngForm" (ngSubmit)="editForm.form.valid" novalidate>
+    <div class="">
+     <!-- <app-table-filter (filterOn)="applyFilter($event)"></app-table-filter>-->
+      <!--   <mat-form-field appearance="outline" fxFlex="100">
+       <mat-label>{{ 'key_Filter' | translate }}</mat-label>
+       <input matInput (keyup)="applyFilter($event.target.value)" placeholder="{{ 'key_Filter' | translate }}">
+     </mat-form-field>-->
+
+      <div class="scroll resize-table editLineItems">
+        <mat-table #table [dataSource]="dataSource">
+          <ng-container *ngFor="let column of displayedColumns; let i=index;" [matColumnDef]="column">
+            <mat-header-cell *matHeaderCellDef  [resizeColumn]="true" [index]="i">
+              
+              <div *ngIf="column != selectRow"> {{ displayedColumnsReplace[i] | translate}}</div>
+            </mat-header-cell>
+
+            <mat-cell *matCellDef="let item;let rowIdx = index">              
+                <div class="text-center" *ngIf="column === Material">
+                  <select class="form-control w-input" matInput #Material="ngModel" name="txtMaterial{{rowIdx}}" [(ngModel)]="item.materialID" disabled>
+                    <option *ngFor="let material of MaterialDescription; let i = index" [value]="MaterialDescription[i].id">
+                      {{MaterialDescription[i].description}}
+                    </option>
+                  </select>
+                </div>
+                <div class="" *ngIf="column === Charge">
+                  <select class="form-control w-input" matInput #Charge="ngModel" (change)="setRateType(Charge.value, rowIdx)" name="txtCharge{{rowIdx}}" [(ngModel)]="item.chargeID" disabled>
+                    <option *ngFor="let chargedesc of ChargeDescription; let i = index" [value]="ChargeDescription[i].id">
+                      {{ChargeDescription[i].description}}
+                    </option>
+                  </select>
+                </div>
+                <div class="" *ngIf="column === Rate">
+                  <input type="text" matInput #Rate="ngModel" name="txtRate{{rowIdx}}" [(ngModel)]="item.rate" class="form-control w-input" required />
+                </div>
+                <div class="text-center" *ngIf="column === RateType">
+                  <select class="form-control w-input" matInput #RateType="ngModel" name="txtRateType{{rowIdx}}" [(ngModel)]="item.rateTypeID" required>
+                    <option *ngFor="let ratetyp of RateTypeListArray[rowIdx]; let i = index" [value]="ratetyp.id">
+                      {{ratetyp.description}}
+                    </option>
+                  </select>
+                </div>
+                <div class="text-center" *ngIf="column === UOM">
+                  <select class="form-control w-input" matInput #UOM="ngModel" name="txtUOM{{rowIdx}}" [(ngModel)]="item.uomid" required>
+                    <option *ngFor="let uom of UomList; let i = index" [value]="UomList[i].id">
+                      {{UomList[i].description}}
+                    </option>
+                  </select>
+                </div>
+                <div class="" *ngIf="column === Quantity_per_UOM">
+                  <input type="text" class="form-control w-input" matInput #QuantityperUOM="ngModel" name="txtQuantityperUOM{{rowIdx}}" [(ngModel)]="item.quantity_per_UOM" required />
+                </div>
+                <div class="text-center" *ngIf="column === Commodity">
+                  <select class="form-control w-input" matInput #Commodity="ngModel" name="txtCommodity{{rowIdx}}" [(ngModel)]="item.commodityID">
+                    <option value="">Commodity</option>
+                    <option *ngFor="let commodity of commodityData; let i = index" [value]="commodityData[i].id">
+                      {{commodityData[i].name}}
+                    </option>
+                  </select>                 
+                </div>
+                <div class="text-center" *ngIf="column === Sales_Tax_Price">
+                  <select class="form-control w-input" matInput #SalesTaxPrice="ngModel" name="txtSalesTaxPrice{{rowIdx}}" [(ngModel)]="item.salesTaxClassID">
+                    <option *ngFor="let salestax of salesTaxClass; let i = index" [value]="salesTaxClass[i].id">
+                      {{salesTaxClass[i].name}}
+                    </option>
+                  </select>
+                </div>
+                <div class="text-center" *ngIf="column === MethodType">
+                  <select class="form-control w-input" matInput #MethodType="ngModel" name="txtMethodType{{rowIdx}}" [(ngModel)]="item.priceMethodTypeID" required>
+                    <option *ngFor="let pricemethod of priceMethodData; let i = index" [value]="priceMethodData[i].id">
+                      {{priceMethodData[i].description}}
+                    </option>
+                  </select>
+                </div>
+                <div class="form-check-inline text-center" *ngIf="column === ShowOnBOL">
+                  <mat-checkbox #ShowOnBOL="ngModel" name="txtShowOnBOL{{rowIdx}}" [(ngModel)]="item.showOnBOL"></mat-checkbox>
+                </div>
+                <div class="form-check-inline text-center" *ngIf="column === AutoAdded">
+                  <mat-checkbox #AutoAdded="ngModel" name="txtAutoAdded{{rowIdx}}" [(ngModel)]="item.autoAdded"></mat-checkbox>
+                </div>
+                <div class="form-check-inline text-center" *ngIf="column === AddPallet">
+                  <mat-checkbox #AddPallet="ngModel" name="txtAddPallet{{rowIdx}}" [disabled]="item.IsDisabledAddPallet" [(ngModel)]="item.addPallet"></mat-checkbox>
+                </div>
+                <div class="text-center" *ngIf="column === PriceIncreaseMethod">
+                  <select class="form-control w-input" matInput #PriceIncreaseMethod="ngModel" name="txtPriceIncreaseMethod{{rowIdx}}" [(ngModel)]="item.priceIncreaseMethodTypeID">
+                    <option *ngFor="let pricemethod of priceIncreaseMethodData; let i = index" [value]="priceIncreaseMethodData[i].id">
+                      {{priceIncreaseMethodData[i].description}}
+                    </option>
+                  </select>
+                </div>
+                <div *ngIf="column === EffectiveStart">
+                  <!--<p-calendar [(ngModel)]="item.EffectiveStart" appendTo="body" hourFormat="12" [showTime]="false" [showIcon]="true" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2030" inputId="time" required="true" placeholder="mm-dd-yy"></p-calendar>-->
+                  <ejs-datepicker matInput #EffectiveStart="ngModel" name="txtEffectiveStart{{rowIdx}}" title="{{item.effectiveStart}}"  [(ngModel)]="item.effectiveStart"
+                                  [format]='dateFormat' placeholder='MM-dd-yyyy' ></ejs-datepicker>
+                </div>
+                <div *ngIf="column === EffectiveEnd">
+                  <ejs-datepicker matInput #EffectiveEnd="ngModel" name="txtEffectiveEnd{{rowIdx}}" [(ngModel)]="item.effectiveEnd" title="{{item.effectiveEnd}}"
+                                  [format]='dateFormat' placeholder='MM-dd-yyyy' ></ejs-datepicker>
+                </div>
+                <div class="grid-button pt-2 text-center" ngbTooltip="Add New" *ngIf="column === Add_New">
+                  <a class="a_hover" (click)="addRow(item,rowIdx)"><i class="fa fa-plus" aria-hidden="true"></i></a>
+                </div>
+                <div class="grid-button pt-2 text-center" ngbTooltip="Delete" *ngIf="column === Delete">
+                  <a class="a_hover" [style.pointer-events]="Inactive ?'none':'auto'" (click)="RemoveRow(item)"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                </div>
+                <div *ngIf="column!=Material && column!=Charge && column!=Rate && column!=RateType && column!=UOM && column!=Quantity_per_UOM && column!=Commodity && column!=Sales_Tax_Price && column!=MethodType && column!=ShowOnBOL && column!=AutoAdded && column!=AddPallet && column!=PriceIncreaseMethod && column!=EffectiveStart && column!=EffectiveEnd && column!=Add_New && column!=Delete">{{ item[column] }}</div>
+              
+            </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+
+      </div>
+
+      <!--  <mat-paginator #paginator
+                 [pageSize]="10"
+                 [pageSizeOptions]="[5, 10, 20]">
+  </mat-paginator>-->
+    </div>
+    <div class="col-md-12 text-center mt-3 mb-3"><button class="btn btn-next" [disabled]="(editForm.invalid || Inactive)?true:false" (click)="AddData(editForm)">Save</button></div>
+  </form>
+</div>
+
+
+
+

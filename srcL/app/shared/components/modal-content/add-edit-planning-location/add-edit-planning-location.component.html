@@ -1,0 +1,15 @@
+<!-- Modal Header -->
+<div class="modal-header">
+  <h4 class="modal-title">Add / Edit Planning Location</h4>
+  <button type="button" class="close" data-dismiss="modal" (click)="activeModal.dismiss('Cross click')">&times;</button>
+</div>
+
+<!-- Modal body -->
+<div class="modal-body">
+  <app-add-planning-location
+                          [userId]="userId"
+                          [loginId]="loginId"
+                          [actionType]="actionType"
+                          (addEntry)="addEditUserLocationList($event)"
+                          (deleteEntry)="deleteUserLocationList($event)"></app-add-planning-location>
+</div>

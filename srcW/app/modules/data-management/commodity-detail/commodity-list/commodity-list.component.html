@@ -1,0 +1,73 @@
+<div class="row">
+  <div class="col-lg-12">
+    <div>
+      <mat-form-field appearance="outline" fxFlex="100">
+        <mat-label>{{ 'key_Filter' | translate }}</mat-label>
+        <input matInput (keydown)="applyFilter($event.target.value)" (keyup)="clearFilter($event.target.value)" [(ngModel)]="filterValue" placeholder="Press enter to filter">
+        <!--<input matInput (keyup)="applyFilter($event.target.value)" placeholder="{{ 'key_Filter' | translate }}">-->
+      </mat-form-field>
+    </div>
+    <div class="scroll">
+      <mat-table #table [dataSource]="dataSource" matSort>
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="ID">
+          <mat-header-cell class="t-center tw-5" *matHeaderCellDef>
+            <div class="form-check-inline">
+              <label class="form-check-label">
+                <input type="checkbox" class="form-check-input" value="" placement="top" ngbTooltip="Select all"
+                       [checked]="selection.hasValue() && isAllSelecteds()"
+                       [indeterminate]="selection.hasValue() && !isAllSelecteds()"
+                       (change)="$event ? masterToggle() : null">
+              </label>
+            </div>
+
+          </mat-header-cell>
+          <mat-cell class="t-center tw-5" *matCellDef="let row">
+            <div class="form-check-inline">
+              <label class="form-check-label">
+                <input type="checkbox" class="form-check-input" value="" (click)="$event.stopPropagation()"
+                       (change)="onSelectionChange(row, $event.target.checked)"
+                       [checked]="selection.isSelected(row)">
+              </label>
+            </div>
+          </mat-cell>
+        </ng-container>
+
+
+        <ng-container matColumnDef="commodityTypeName">
+          <mat-header-cell class="tw-33" *matHeaderCellDef mat-sort-header> {{ 'key_Commoditytype' | translate }} </mat-header-cell>
+          <mat-cell class="tw-33" *matCellDef="let element"> {{element.commodityTypeName}} </mat-cell>
+        </ng-container>
+
+
+        <ng-container matColumnDef="name">
+          <mat-header-cell class="tw-33" *matHeaderCellDef mat-sort-header> {{ 'key_CommodityName' | translate }} </mat-header-cell>
+          <mat-cell class="tw-33" *matCellDef="let element"> {{element.name}} </mat-cell>
+        </ng-container>
+
+
+        <ng-container matColumnDef="segmentDescription">
+          <mat-header-cell class="" *matHeaderCellDef mat-sort-header> {{ 'key_SegmentDescription' | translate }} </mat-header-cell>
+          <mat-cell class="" *matCellDef="let element"> {{element.segmentDescription}} </mat-cell>
+        </ng-container>
+
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"
+                 [ngClass]="{hovered: row.hovered, highlighted: row.highlighted,
+                 'selected': selection.isSelected(row)}"
+                 (click)="onSelectionChange(row, row.isSelected)"
+                 (mouseover)="row.hovered = true" (mouseout)="row.hovered = false"></mat-row>
+
+      </mat-table>
+    </div>
+    <div class="col-lg-12 text-center" *ngIf="dataSource.data.length == 0"><p>No records to display.</p></div>
+    <mat-paginator #paginator
+                   [length]="commodity.itemsLength"
+                   [pageSize]="commodity.pageSize"
+                   [pageSizeOptions]="commodity.pageSizeOptions"
+                   (page)="onPaginationEvent($event)">
+    </mat-paginator>
+  </div>
+</div>

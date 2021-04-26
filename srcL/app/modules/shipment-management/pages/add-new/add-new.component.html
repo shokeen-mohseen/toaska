@@ -1,0 +1,1705 @@
+
+<div class="row mb-2">
+  <div class="col-md-7 infoShip">
+
+    <div class="tooltip-col text-center">
+      <i class="fa fa-info-circle help-btns" [ngClass]="(helpbtns)?'text-danger':'text-success'"></i>
+      <div class="tooltiptext" *ngIf="shiprequirementrules.length > 0" data-placement="right" data-toggle="tooltip" data-original-title="Tooltip on right">
+        <ul>
+          <li *ngFor="let rule of shiprequirementrules;" type>{{rule}} </li>
+        </ul>
+      </div>
+    </div>
+    <!--<a class="" (click)="ShowInfo()"><i class="fa fa-info-circle help-btns" [ngClass]="(helpbtns)?'text-danger':'text-success'" aria-hidden="true"></i></a>-->
+    <h4>
+      {{ShipmentDetails.shipmentNumber}} .{{ShipmentDetails.shipmentVersion}} ({{ShipmentDetails.shipmentStatusName}}) - {{ShipmentDetails.conditionName}} - {{ShipmentDetails.tenderStatusName}}
+    </h4>
+  </div>
+  <div class="col-md-5 text-right">
+    <!--<span class="fw600">{{'key_LastUpdated'| translate}}:	</span> {{ShipmentDetails.updateDateTimeServer |date:'MM/dd/yyyy hh:mm a'}}
+    <br><span class="fw600">By </span>{{ShipmentDetails.updatedBy}}-->
+    <strong> Last Updated:</strong> {{ShipmentDetails.UpdateDate | date: 'MM/dd/yyyy HH:mm:ss a' }} By {{ShipmentDetails.UpdatedBy}}<br />
+    <strong> Created By:</strong> {{ShipmentDetails.CreateDate | date: 'MM/dd/yyyy HH:mm:ss a' }} By {{ShipmentDetails.CreatedBy}}
+  </div>
+</div>
+<div class="row mt-3">
+  <div class="col-md-3 custom-flex-w-15">
+    <div class="card">
+      <div class="card-header">{{ 'key_shipment' | translate }}</div><!--edit section-->
+      <div class="card-body p-0">
+        <div class="list-group" #nextList>
+          <div class="list-group-item list-group-item-action active" *ngFor="let shipment of ShipmentsforEdit">
+            <a (click)="GetShipmentforEdit(shipment.shipmentNumber)" href="javascript:void(0)">{{shipment.shipmentNumber}}</a>
+            <button *ngIf="shipment.shipmentNumber!=EditingShipmentVersion" class="close" type="button"
+                    (click)="RemoveShipment(shipment.shipmentNumber)">
+              <i class="fa fa-times" aria-hidden="true"></i>
+            </button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-9 custom-flex-w-85">
+    <div class="tab-content" id="nav-tabContent">
+      <div class="tab-pane pt-0 fade show active" id="editList-1" role="tabpanel">
+        <div class="e-profile mb-4">
+          <div class="row">
+            <div class="col-md-4 col-sm-12">
+              <div class="box-children">
+                <div class="row">
+
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label>
+                        {{'key_ShipmentType'| translate}}
+                      </label>
+                      <input type="text" class="form-control" [value]="ShipmentDetails.shipmentType" name="" readonly>
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <!--  -->
+                      <label for="">
+                        {{'key_Status'| translate}}
+                      </label>
+                      <input type="text" class="form-control" [value]="ShipmentDetails.shipmentStatusName" name="" readonly>
+
+                    </div>
+                  </div>
+
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label>
+                        {{'key_Condition'| translate}}
+                      </label>
+                      <input type="text" class="form-control" [value]="ShipmentDetails.conditionName" name="" readonly>
+                    </div>
+                  </div>
+
+
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="box-children pl-0 pr-0">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label>
+                      {{'key_ShipDate'| translate}}
+                    </label>
+                    <!-- <input type="text" class="form-control" value="08/08/2020" name="" readonly>-->
+                    <input type="text" class="form-control" [value]="ShipmentDetails.shipDate|date:'MM/dd/yyyy'" name="" readonly>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label>
+                      {{'key_Carrier'| translate}}<sup class="sup1 text-danger font-weight-normal">*</sup>
+                    </label>
+                  
+
+                    <input id="carrierName" type="text" class="form-control" [value]="ShipmentDetails.carrierName" name="" readonly required>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            <div class="col-md-4">
+
+              <div class="box-children">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label>{{'key_TenderStatus'| translate}}</label>
+                      <select name="" class="form-control h31" [(ngModel)]="ShipmentDetails.shipmentTenderStatusID" (change)="TenderStatusChange($event)"
+                              [disabled]="TenderStatusDisbled" [ngClass]="(TenderstatusLableShow)?'shipmenttabHide':'shipmenttabShow'"  >
+                        <option [value]="tenderstatus.id" *ngFor="let tenderstatus of TenderStatusforDD">{{tenderstatus.name}}</option>
+                      </select>
+                      <input id="tenderStatusName" type="text" class="form-control" [value]="ShipmentDetails.tenderStatusName"
+                             [ngClass]="(TenderstatusLableShow)?'shipmenttabShow':'shipmenttabHide'"  name="" readonly required>
+                    </div>
+                  </div>
+                  <!--[disabled]="true"-->
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label>{{'key_Equipment'| translate}}<sup class="sup1 text-danger font-weight-normal">*</sup></label>
+
+                      <!--{{EPT.name+" " +EPT.maxPalletQty+" Pallets}}-->
+                      <!--<angular2-multiselect fixFilterBug [data]="EquipmentTypeData" [(ngModel)]="SelectedEquipment"
+                                            [settings]="{text: 'Select Equipment',singleSelection: true, enableSearchFilter: true, badgeShowLimit: 1, labelKey :'name' }"
+                                            name="equipment" id="equipment" #equipment="ngModel">
+                      </angular2-multiselect>-->
+                      <!--required [disabled]="Equipmentvalidate"-->
+                      <input type="text" class="form-control" [value]="ShipmentDetails.equipment" name="" readonly required>
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label>{{'key_Mode'| translate}}<sup class="sup1 text-danger font-weight-normal">*</sup></label>
+                      <!--<angular2-multiselect fixFilterBug [data]="freightModeData" [(ngModel)]="SelectedfreightMode"
+                                            [settings]="{text: 'Select Mode',singleSelection: true, enableSearchFilter: true, badgeShowLimit: 1, labelKey :'name' }"
+                                            name="freightMode" id="freightMode" #freightMode="ngModel">
+                      </angular2-multiselect>-->
+                      <input type="text" class="form-control" [value]="ShipmentDetails.mode" name="" readonly required>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+<!--=================Accordian ==============-->
+
+<section id="finalOrderDetail">
+  <mat-accordion>
+    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" [expanded]="true">
+      <mat-expansion-panel-header>
+        <mat-panel-description>{{'key_ShipmentDetails'| translate}}</mat-panel-description>
+      </mat-expansion-panel-header>
+      <div class="card-body pl-0 pt-0">
+        <div class="col-md-12 pl-0 pr-0">
+          <div class="d-flex flex-nowrap justify-content-between align-items-center">
+            <div class="btn-group btn-group-toggle btn-group-md" data-toggle="buttons">
+              <button id="btnRefresh" class="btn btn-outline-success" type="button" placement="bottom" ngbTooltip="Save"
+                      (click)="SaveShipment()">
+                <i class="fa fa-floppy-o" aria-hidden="true"></i>
+                <span>{{'key_Save'| translate}}</span>
+              </button>
+
+              <!-- <button id="deleteButton" class="btn btn btn-outline-primary" type="button" placement="bottom" ngbTooltip="Divert">
+                 <i class="fa fa-share" aria-hidden="true"></i>
+                 <span>{{'key_Divert'| translate}}</span>
+               </button>-->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="scroll ship-detail">
+            <mat-table #table [dataSource]="ShippingOrders" matSort>
+              <ng-container *ngFor="let column of displayedColumns;  let i=index;" [matColumnDef]="column">
+                <mat-header-cell *matHeaderCellDef mat-sort-header [resizeColumn]="true" [index]="i">
+                  <!--  <div class="form-check-inline" *ngIf="column === selectRow">
+                      <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input" value="" placement="top" ngbTooltip="Select all" (change)="$event ? masterToggle() : null"
+                               [checked]="selection.hasValue() && isAllSelected()"
+                               [indeterminate]="selection.hasValue() && !isAllSelected()" [disabled]="true">
+                      </label>
+                    </div>-->
+                  <div *ngIf="column != selectRow"> {{ displayedColumnsReplace[i] | translate}}</div>
+                </mat-header-cell>
+
+                <mat-cell *matCellDef="let item">
+                  <div class="form-check-inline" *ngIf="column === selectRow">
+                    <label class="form-check-label">
+                      <input type="checkbox" class="form-check-input" value="" (click)="$event.stopPropagation()"
+                             (change)="$event ? selection.toggle(item) : null"
+                             [checked]="selection.isSelected(item)">
+                    </label>
+                  </div>
+
+                  <div *ngIf="column === fromLocationID">
+                    <!--<select name="" class="form-control" style="width:200px;" [(ngModel)]="item.fromLocationID" (change)="OnSelectedfromLocation(item.fromLocationID,item.orderid)">
+                      <option [value]="location.id" *ngFor="let location of LocationsforDD" title="{{location.name}}">{{location.name}}</option>
+                    </select>-->
+                    <p-dropdown #dd appendTo="body"
+                                [options]="OrderLocationsforDDFrom"
+                                [(ngModel)]="item.fromLocationID"
+                                [style]="{'width':'100%'}"
+                                scrollHeight="300px"
+                                filter="true" [showTransitionOptions]="'0ms'" [hideTransitionOptions]="'0ms'"
+                                filterBy="value,label"
+                                resetFilterOnHide="true"
+                                (onChange)="OnSelectedfromLocation(item.fromLocationID,item.orderid)"
+                                (onFocus)="OnFocus()"
+                                (keydown)="test($event)" [disabled]="OrderFromLocationDisbled">
+                    </p-dropdown>
+
+
+                  </div>
+                  <div *ngIf="column === toLocationID">
+                    <!--<select name="" class="form-control" style="width:200px;" [(ngModel)]="item.toLocationID" (change)="OnSelectedtoLocation(item.toLocationID,item.orderid)">
+                    <option [value]="location.id" *ngFor="let location of LocationsforDD" title="{{location.name}}">{{location.name}}</option>
+                      </select>-->
+                    <p-dropdown #dd appendTo="body"
+                                [options]="OrderLocationsforDD"
+                                [(ngModel)]="item.toLocationID"
+                                [style]="{'width':'100%'}"
+                                scrollHeight="300px"
+                                filter="true"
+                                filterBy="value,label"
+                                [autoPosition]="false" [showTransitionOptions]="'0ms'" [hideTransitionOptions]="'0ms'"
+                                resetFilterOnHide="true"
+                                (onChange)="OnSelectedtoLocation(item.toLocationID,item.orderid)"
+                                (onFocus)="OnFocus()"
+                                (keydown)="test($event)" [disabled]="OrderToLocationDisbled">
+                    </p-dropdown>
+
+                  </div>
+
+                  <div *ngIf="column === pickupAppointment" style="width:160px">
+                    <p-calendar [required]="required1" title="{{item.pickupAppointment}}" [(ngModel)]="item.pickupAppointment" appendTo="body" hourFormat="12" [showTime]="true" [showIcon]="true" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2030" inputId="time" placeholder="mm-dd-yy hh:mm" [disabled]="OrderAppointmentDisable"></p-calendar>
+
+                    <!-- <input type="datetime-local" class="form-control" [(ngModel)]="item.pickupAppointment" [disabled]="OrderAppointmentDisable" (click)="AppointmentClick($event)" />-->
+                  </div>
+
+                  <div *ngIf="column === deliveryAppointment" style="width:160px">
+                    <!-- <input type="datetime-local" class="form-control" [(ngModel)]="item.deliveryAppointment" [disabled]="OrderAppointmentDisable" (click)="AppointmentClick($event)" />
+                    -->
+                    <p-calendar [(ngModel)]="item.deliveryAppointment" title="{{item.deliveryAppointment}}" appendTo="body" hourFormat="12" [showTime]="true" [showIcon]="true" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2030" inputId="time" placeholder="mm-dd-yy hh:mm" [disabled]="OrderAppointmentDisable"></p-calendar>
+                  </div>
+
+                  <div *ngIf="column != toLocationID && column != fromLocationID  && column != pickupAppointment && column != deliveryAppointment">{{ item[column] }}</div>
+                </mat-cell>
+              </ng-container>
+              <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+              <mat-row *matRowDef="let row; columns: displayedColumns;"> </mat-row>
+            </mat-table>
+          </div>
+        </div>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+<section id="shipment-comments" class="mt-3">
+  <mat-accordion>
+    <mat-expansion-panel (opened)="panelOpenState111 = true" (closed)="panelOpenState111 = false" [expanded]="true">
+      <mat-expansion-panel-header>
+        <mat-panel-description>{{'key_OrderComments' | translate}}</mat-panel-description>
+      </mat-expansion-panel-header>
+      <div *ngFor="let order of ShippingOrders">
+
+        <div class="col-sm-12">
+          <div class="row">
+            <div class="col-md-5">
+              <p class="row mb-1">{{order.toLocationName}}</p>
+            </div>
+            <div class="col-md-7 pr-0 mb-3 pl-0 d-flex justify-content-end">
+              <div class="form-inline">
+                <label class="mr-3">{{'key_Contract'| translate}} From</label>
+                <input type="text" [(ngModel)]="order.fromBusinessPartnerContract" title="{{order.fromBusinessPartnerContract}}" class="form-control" placeholder="contract" readonly>
+              </div>
+              <div class="form-inline">
+                <label class="mr-3 ml-3">{{'key_Contract'| translate}} To</label>
+                <input type="text" [(ngModel)]="order.toBusinessPartnerContract" tile="{{order.toBusinessPartnerContract}}" class="form-control" placeholder="contract" readonly>
+              </div>
+            </div>
+          </div>
+        </div>
+        <article class="pt-3 pb-3 bg-comment">
+          <div class="col-md-12 col-xl-12">
+            <div class="row">
+              <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                  <label for="Transportation Comment" class="">{{'key_TransportationComment'| translate}} </label>
+                  <textarea name="Transportation" rows="3" cols="50" class="f-12 form-control"
+                            [(ngModel)]="order.transportationComment"
+                            (blur)="validationspanishTransportationComment(order.transportationComment,order.orderid);"
+                            [disabled]="OrderCommentsDisable"></textarea>
+                </div>
+              </div>
+              <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                  <label for="Transportation Comment Spanish" class="">{{'key_TransportationCommentSpanish'| translate}} </label>
+                  <textarea name="Transportation" rows="3" cols="50" class="f-12 form-control"
+                            [(ngModel)]="order.spanishTransportationComment" readonly></textarea>
+                </div>
+              </div>
+              <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                  <label for="Loading Comment" class="">{{'key_LoadingComment'| translate}}</label>
+                  <textarea name="Transportation" rows="3" cols="50" class="f-12 form-control"
+                            [(ngModel)]="order.loadingComment"
+                            (blur)="validationspanishLoadingComment(order.loadingComment,order.orderid);" [disabled]="OrderCommentsDisable"></textarea>
+                </div>
+              </div>
+              <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                  <label for="Transportation Comment Spanish" class="">{{'key_LoadingCommentSpanish'| translate}}</label>
+                  <textarea name="Transportation" rows="3" cols="50" class="f-12 form-control"
+                            [(ngModel)]="order.spanishLoadingComment" readonly></textarea>
+                </div>
+              </div>
+              <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                  <label for="Transportation Comment Spanish" class="">{{'key_orderComments'| translate}}</label>
+                  <textarea name="Transportation" rows="3" cols="50" class="f-12 form-control"
+                            [(ngModel)]="order.orderComment" (blur)="validationordercommentSpanish(order.orderComment,order.orderid);" [disabled]="OrderCommentsDisable"></textarea>
+                </div>
+              </div>
+              <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                  <label for="Transportation Comment Spanish" class="">{{'key_OrderCommentSpanish'| translate}}	</label>
+                  <textarea name="Transportation" rows="3" cols="50" class="f-12 form-control"
+                            [(ngModel)]="order.ordercommentSpanish" readonly></textarea>
+                </div>
+              </div>
+              <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                  <label for="Transportation Comment Spanish" class="">{{'key_TransplaceOrderComment'| translate}}	 <small> {{'key_charactersmax'| translate}}</small></label>
+                  <input type="text" class="f-12 form-control" [(ngModel)]="order.transplaceOrderComment" [disabled]="OrderCommentsDisable" />
+
+                </div>
+              </div>
+              <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                  <label for="Transportation Comment Spanish" class="">{{'key_TransplaceDeliveryComment'| translate}}<small> {{'key_charactersmax'| translate}}</small></label>
+                  <input type="text" cols="50" class="f-12 form-control" [(ngModel)]="order.transplaceDeliveryComment" [disabled]="OrderCommentsDisable" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+        <hr />
+      </div>
+
+    </mat-expansion-panel>
+  </mat-accordion>
+
+</section>
+<div class="clear-fix"></div>
+<section class="moreOptions shipMoreOption mt-4" id="more-option">
+  <ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item" [ngClass]="(Shippingreceivinghide)?'shipmenttabHide':'shipmenttabShow'">
+      <a class="nav-link active" id="Receiving-tab" data-toggle="tab" href="#Receiving" role="tab" aria-controls="Receiving" aria-selected="false">{{'key_ShippingReceiving'| translate}}</a>
+    </li>
+    <li class="nav-item" [ngClass]="(Transportationhide)?'shipmenttabHide':'shipmenttabShow'">
+      <a class="nav-link " id="Transportation-tab" data-toggle="tab" href="#Transportation" role="tab" aria-controls="Transportation" aria-selected="true">{{'key_Transportation'| translate}}</a>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link" id="Document-tab" data-toggle="tab" href="#Document" role="tab" aria-controls="Document" aria-selected="false">{{'key_Document'| translate}}</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="Tracking-tab" data-toggle="tab" href="#Tracking" role="tab" aria-controls="Tracking" aria-selected="false">{{'key_TrackingHistory'| translate}}</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="Tender-tab" data-toggle="tab" href="#Tender" role="tab" aria-controls="Tender" aria-selected="false">{{'key_TenderHistory'| translate}}</a>
+    </li>
+  </ul>
+
+  <div class="tab-content pb-3 pt-3" id="myTabContent">
+    <div class="tab-pane fade show active" id="Receiving" role="tabpanel" aria-labelledby="Receiving-tab" [class.disabled]="Shippingreceivingdisabled ? true: null">
+      <!--shipping/receive-section-start-->
+      <div class="col-md-12 custom-form">
+        <div class="row">
+          <div class="col-md-3 col-sm-12 col-lg-3 col-xl-3 pr-1 d-flex w-100">
+            <div class="card">
+              <div class="card-header">
+                <div class="card-title mb-0">{{'key_EquipSealNo'| translate}}</div>
+              </div>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                    <div class="form-group">
+                      <label> {{'key_EquipNo'| translate}}</label>
+                      <input type="text" value="5320013" class="form-control" [(ngModel)]="ShipmentDetails.trailerNumber" [disabled]="Shippingreceivingdisabled" />
+                    </div>
+                  </div>
+                  <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                    <div class="form-group">
+                      <label>{{'key_SealNo'| translate}}</label>
+                      <input type="text" value="2347724" class="form-control" [(ngModel)]="ShipmentDetails.trailerSealNumber" [disabled]="Shippingreceivingdisabled" />
+                    </div>
+                  </div>
+                  <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                    <div class="form-group">
+                      <label>{{'key_EquipType'| translate}}</label>
+                      <input type="text" value="53 FT DRY VAN" class="form-control" [(ngModel)]="ShipmentDetails.equipment" [disabled]="true" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <div class="col-md-3 col-sm-12 col-lg-3 col-xl-3 pl-1 pr-1 d-flex w-100">
+            <div class="card">
+              <div class="card-header">
+                <div class="card-title mb-0">{{'key_CarrierPickup'| translate}}</div>
+              </div>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                    <div class="form-group">
+                      <label>Select Start</label>
+                      <select name="" class="form-control" [(ngModel)]="CarrierPickupLocationID" (change)="GetStartTimings()" [disabled]="CarrierPickupdisabled">
+                        <option [value]="location.fromLocationID" (change)="GetCarrierPickupcwt($event,'location')" *ngFor="let location of FromlocationforCarrierDD">{{location.fromLocationName}}</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                    <div class="form-group">
+                      <label>{{'key_CarrierInDateTime'| translate}}</label>
+                      <!--<input type="datetime-local" class="form-control" #cpcidt [(ngModel)]="CarrierPickupcidt" (change)="GetCarrierPickupIncwt($event)" [disabled]="Shippingreceivingdisabled" />-->
+                      <p-calendar title="{{CarrierPickupcidt}}" appendTo="body" hourFormat="12" [showTime]="true" [showIcon]="true" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2030" inputId="time" placeholder="mm-dd-yy hh:mm"
+                                  [(ngModel)]="CarrierPickupcidt" (onClose)="GetCarrierPickupIncwt($event)" [disabled]="CarrierPickupdisabled"></p-calendar>
+
+                    </div>
+                  </div>
+                  <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                    <div class="form-group">
+                      <label>{{'key_CarrierOutDateTime'| translate}}<sup class="sup1 text-danger font-weight-bold" [ngClass]="(cpChkOutTime)?'starshow':'starhide'">*</sup></label>
+                      <!--<input id="CarrierPickupcodt" type="datetime-local" class="form-control" [(ngModel)]="CarrierPickupcodt" (change)="GetCarrierPickupOutcwt($event)" [disabled]="Shippingreceivingdisabled" />-->
+                      <p-calendar title="{{CarrierPickupcodt}}" appendTo="body" hourFormat="12" [showTime]="true" [showIcon]="true" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2030" inputId="time" placeholder="mm-dd-yy hh:mm"
+                                  id="CarrierPickupcodt" [required]="cpChkOutTime" [(ngModel)]="CarrierPickupcodt" (onClose)="GetCarrierPickupOutcwt($event)" [disabled]="CarrierPickupdisabled"></p-calendar>
+                    </div>
+                  </div>
+                  <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                    <div class="form-group">
+                      <label>{{'key_CarrierWaitTime'| translate}}</label>
+                      <input type="text" value="00:39" class="form-control" [value]="CarrierPickupduration" [disabled]="true" />
+                    </div>
+                  </div>
+                  <!-- <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                    <div class="form-group ml-3 pl-1">
+                      <input type="checkbox" class="form-check-input check" [(ngModel)]="ShipmentDetails.dropTrailer" />
+                      <label class="form-check-label ml-3 mt-2">{{'key_DropTrailer'| translate}}</label>
+
+                    </div>
+                  </div>-->
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <div class="col-md-3 col-sm-12 col-lg-3 col-xl-3 pl-1 pr-1 d-flex w-100">
+            <div class="card">
+              <div class="card-header">
+                <div class="card-title mb-0">{{ 'key_CarrierStopDelivery' | translate }}</div>
+              </div>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                    <div class="form-group">
+                      <label for="ccmonth">{{ 'key_SelectStop' | translate }}</label>
+                      <select class="form-control" [(ngModel)]="CarrierStopDeliveryLocationID" (change)="GetStopTimings()" [disabled]="StopDeliverydisabled">
+                        <option [value]="location.toLocationID" *ngFor="let location of TolocationforCarrierDD">{{location.toLocationName}}</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                    <div class="form-group">
+                      <label for="ccmonth">{{ 'key_CarrierInDateTime' | translate }}<sup class="sup1 text-danger font-weight-bold" [ngClass]="(csdChkInTime)?'starshow':'starhide'">*</sup></label>
+                      <!--<input id="CarrierStopDeliverycidt" type="datetime-local" class="form-control" [(ngModel)]="CarrierStopDeliverycidt" (change)="GetCarrierStopDeliveryIncwt($event)" [disabled]="Shippingreceivingdisabled" />-->
+                      <p-calendar title="{{CarrierStopDeliverycidt}}" appendTo="body" hourFormat="12" [showTime]="true" [showIcon]="true" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2030" inputId="time" placeholder="mm-dd-yy hh:mm"
+                                  id="CarrierStopDeliverycidt" [required]="csdChkInTime" [(ngModel)]="CarrierStopDeliverycidt" (onClose)="GetCarrierStopDeliveryIncwt($event)" [disabled]="StopDeliverydisabled"></p-calendar>
+                    </div>
+                  </div>
+                  <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                    <div class="form-group">
+                      <label for="ccmonth">{{ 'key_CarrierOutDateTime' | translate }} </label>
+                      <!--<input type="datetime-local" [(ngModel)]="CarrierStopDeliverycodt" class="form-control" (change)="GetCarrierStopDeliveryOutcwt($event)" [disabled]="Shippingreceivingdisabled" />-->
+                      <p-calendar title="{{CarrierStopDeliverycodt}}" appendTo="body" hourFormat="12" [showTime]="true" [showIcon]="true" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2030" inputId="time" placeholder="mm-dd-yy hh:mm"
+                                  [(ngModel)]="CarrierStopDeliverycodt" (onClose)="GetCarrierStopDeliveryOutcwt($event)" [disabled]="StopDeliverydisabled"></p-calendar>
+                    </div>
+                  </div>
+                  <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                    <div class="form-group">
+                      <label for="ccmonth">{{ 'key_CarrierWaitTime' | translate }}</label>
+                      <input type="text" [value]="CarrierStopDeliveryduration" class="form-control" [disabled]="true" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3 col-sm-12 col-lg-3 col-xl-3 pl-1 d-flex w-100">
+            <div class="card">
+              <div class="card-header">
+                <div class="card-title mb-0">{{ 'key_Dispatch' | translate }}</div>
+              </div>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                    <div class="form-group">
+                      <label for="ccmonth">{{ 'key_ApprovedDate' | translate }}</label>
+                      <input type="text" class="form-control" [(ngModel)]="ApprovedDate" [disabled]="true" />
+                    </div>
+                  </div>
+                  <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                    <div class="form-group">
+                      <label for="ccmonth">{{ 'key_ApprovedBy' | translate }}</label>
+                      <input type="text" class="form-control" [(ngModel)]="ApprovedBy" [disabled]="true" />
+                    </div>
+                  </div>
+                  <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                    <div class="form-group" [ngClass]="(OnshipHide)?'shipmenttabHide':'shipmenttabShow'">
+                      <label for="ccmonth">{{ 'key_ToShip' | translate }}</label>
+                      <div class="form-check">
+                        <input type="checkbox" class="form-check-input check" id="compile" [(ngModel)]="ShipmentDetails.compliedWithShippingInstructions"
+                               (change)="DispatchApprove($event)" [disabled]="onShipDisable">
+                        <label class="form-check-label ml-3 mt-2" for="compile"> {{'key_Compliedwithshippinginstructions'| translate}}</label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                    <div class="form-group" [ngClass]="(OnreceiveHide)?'shipmenttabHide':'shipmenttabShow'">
+                      <label for="ccmonth">{{ 'key_ToReceive' | translate }}</label>
+                      <div class="form-check">
+                        <input type="checkbox" class="form-check-input check" id="confirms" [(ngModel)]="toReceive" [disabled]="onReceiveDisable" (change)="ReceiveChange($event)">
+                        <label class="form-check-label ml-3 mt-2" for="confirms"> {{'key_ConfirmedQtyreceived'| translate}}</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-12">
+        <div class="col-md-12 custom-form bg-white mb-3 pt-3">
+          <div class="row ">
+
+            <div class="col-md-3 col-sm-12 col-lg-3 col-xl-3 d-flex w-100 d-flex justify-content-end">
+
+              <div class="row">
+                <div class="col-md-12">
+                  <h5 class="pt-4 mt-4 pb-3">{{'key_OperationsTimeTracking'| translate}}</h5>
+
+                  <div class="form-group ml-3 pl-1">
+                    <input type="checkbox" id="checkI" class="form-check-input check" [(ngModel)]="ShipmentDetails.dropTrailer" (change)="DropTrailerChange()" [disabled]="Shippingreceivingdisabled" />
+                    <label for="checkI" class="form-check-label ml-3 mt-2">{{'key_DropTrailer'| translate}}</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-3 col-sm-12 col-lg-3 col-xl-3 pr-1 d-flex w-100">
+              <div class="card">
+                <div class="card-header">
+                  <div class="card-title mb-0">{{'key_TrailerTimeTracking'| translate}}</div>
+                </div>
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                      <div class="form-group">
+                        <label> {{'key_TrailerCheckinTime'| translate}}</label>
+                        <!--<input id="TrailerCheckInTime" type="datetime-local" [(ngModel)]="TrailerCheckInTime" (change)="GetTrailerTimeTrackingIncwt($event,'in')" class="form-control" [disabled]="Shippingreceivingdisabled" />-->
+                        <p-calendar title="{{TrailerCheckInTime}}" appendTo="body" hourFormat="12" [showTime]="true" [showIcon]="true" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2030" inputId="time" placeholder="mm-dd-yy hh:mm"
+                                    [(ngModel)]="TrailerCheckInTime" (onClose)="GetTrailerTimeTrackingIncwt($event,'in')" [disabled]="Shippingreceivingdisabled"></p-calendar>
+                      </div>
+                    </div>
+
+                    <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                      <div class="form-group">
+                        <label> {{'key_TrailerCheckoutTime'| translate}}</label>
+
+                        <!--<input id="TrailerCheckOutTime" type="datetime-local" [(ngModel)]="TrailerCheckOutTime" (change)="GetTrailerTimeTrackingOutcwt($event,'out')" class="form-control" [disabled]="Shippingreceivingdisabled" />-->
+                        <p-calendar title="{{TrailerCheckOutTime}}" appendTo="body" hourFormat="12" [showTime]="true" [showIcon]="true" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2030" inputId="time" placeholder="mm-dd-yy hh:mm"
+                                    [(ngModel)]="TrailerCheckOutTime" (onClose)="GetTrailerTimeTrackingOutcwt($event,'out')" [disabled]="Shippingreceivingdisabled"></p-calendar>
+
+                      </div>
+                    </div>
+                    <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                      <div class="form-group">
+                        <label> {{'key_TotalTrailerTime'| translate}}</label>
+                        <input type="text" [value]="TrailerTimeTrackingduration" class="form-control" [disabled]="true" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="col-md-3 col-sm-12 col-lg-3 col-xl-3 pr-1 d-flex w-100">
+              <div class="card">
+                <div class="card-header">
+                  <div class="card-title mb-0">{{'key_SortTimeTracking'| translate}}</div>
+                </div>
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                      <div class="form-group">
+                        <label> {{'key_SortStartTime'| translate}}</label>
+                        <!--<input type="datetime-local" class="form-control" [(ngModel)]="SortStartTime" (change)="GetSortTrackingTcwt($event,'start')" [disabled]="Shippingreceivingdisabled" />-->
+                        <p-calendar title="{{SortStartTime}}" appendTo="body" hourFormat="12" [showTime]="true" [showIcon]="true" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2030" inputId="time" placeholder="mm-dd-yy hh:mm"
+                                    [(ngModel)]="SortStartTime" (onClose)="GetSortTrackingTcwt($event,'start')" [disabled]="Shippingreceivingdisabled"></p-calendar>
+
+                      </div>
+                    </div>
+                    <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                      <div class="form-group">
+                        <label> {{'key_SortEndTime'| translate}}</label>
+                        <!--<input type="datetime-local" class="form-control" [(ngModel)]="SortEndTime" (change)="GetSortTrackingTcwt($event,'end')" [disabled]="Shippingreceivingdisabled" />-->
+                        <p-calendar title="{{SortEndTime}}" appendTo="body" hourFormat="12" [showTime]="true" [showIcon]="true" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2030" inputId="time" placeholder="mm-dd-yy hh:mm"
+                                    [(ngModel)]="SortEndTime" (onClose)="GetSortTrackingTcwt($event,'end')" [disabled]="Shippingreceivingdisabled"></p-calendar>
+                      </div>
+                    </div>
+                    <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                      <div class="form-group">
+                        <label> {{'key_TotalSortTime'| translate}}</label>
+                        <input type="text" [value]="SortTimeTrackingduration" class="form-control" [disabled]="true" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--        <div class="col-sm-12 shipT-details operations">
+
+        <div class="row p-2 op-body justify-content-center">
+
+          <div class="col-md-4 p-1">
+            <h5 class="pt-3">{{'key_TrailerTimeTracking'| translate}}</h5>
+            <div class="card col-sm-12 pb-3">
+              <div class="row mb-2 mt-3">
+                <div class="col-md-5 text-right pt-2">
+                  {{'key_TrailerCheckinTime'| translate}}
+                </div>
+                <div class="col-md-7"><input type="datetime-local" [(ngModel)]="TrailerCheckInTime" (change)="GetTrailerTimeTrackingcwt($event,'in')" class="form-control" /></div>
+              </div>
+              <div class="row mb-2">
+                <div class="col-md-5 text-right pt-2"> {{'key_TrailerCheckoutTime'| translate}}</div>
+                <div class="col-md-7"><input type="datetime-local" [(ngModel)]="TrailerCheckOutTime" (change)="GetTrailerTimeTrackingcwt($event,'out')" class="form-control" /></div>
+              </div>
+              <div class="row mb-2">
+                <div class="col-md-5 text-right pt-2">{{'key_TotalTrailerTime'| translate}}</div>
+                <div class="col-md-7"><input type="text" [value]="TrailerTimeTrackingduration" class="form-control" /></div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="col-md-4 p-1">
+            <h5 class="pt-3">{{'key_SortTimeTracking'| translate}}</h5>
+            <div class="card col-sm-12 pb-3">
+              <div class="row mb-2 mt-3">
+                <div class="col-md-5 text-right pt-2">{{'key_SortStartTime'| translate}}</div>
+                <div class="col-md-7"><input type="datetime-local" class="form-control" [(ngModel)]="SortStartTime" (change)="GetSortTrackingTcwt($event,'start')" /></div>
+              </div>
+              <div class="row mb-2">
+                <div class="col-md-5 text-right pt-2">{{'key_SortEndTime'| translate}}</div>
+                <div class="col-md-7"><input type="datetime-local" class="form-control" [(ngModel)]="SortEndTime" (change)="GetSortTrackingTcwt($event,'end')" /></div>
+              </div>
+              <div class="row mb-2">
+                <div class="col-md-5 text-right pt-2">
+                  {{'key_TotalSortTime'| translate}}
+                </div>
+                <div class="col-md-7"><input type="text" [value]="SortTimeTrackingduration" class="form-control" /></div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+
+      </div>-->
+      <div class="card-body pl-0 pt-0">
+        <div class="col-md-12">
+          <div class="d-flex flex-nowrap justify-content-between align-items-center">
+            <div class="btn-group btn-group-toggle btn-group-md" data-toggle="buttons">
+              <button id="btnRefresh" class="btn btn-outline-success" data-toggle="modal"
+                      (click)="openEditShipmentPopup()" type="button" placement="bottom" ngbTooltip="Add" [disabled]="MaterialGridAddEditDisable">
+                <!--data-target="#editshipment"-->
+                <i class="fa fa-plus" aria-hidden="true"></i>
+                <span>{{'key_add' | translate}}/{{'key_Edit' | translate}}</span>
+              </button>
+              <!--<button id="addAddressButton" class="btn btn-outline-primary" type="button" placement="bottom" ngbTooltip="Edit">
+                <i class="fa fa-plus" aria-hidden="true"></i>
+                <span>{{'key_Edit' | translate}}</span>
+              </button>
+              <button id="btnRefresh" class="btn btn-outline-danger" type="button" placement="bottom" ngbTooltip="Delete">
+                <i class="fa fa-trash-o" aria-hidden="true"></i>
+                <span>{{'key_Delete' | translate}}</span>
+              </button>-->
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+      <div class="scroll col-sm-12">
+
+
+        <mat-table #table [dataSource]="dataSource4" id="FinalMaterial" matSort>
+          <ng-container *ngFor="let column of ShipmentReceiptColumns; let i=index;" [matColumnDef]="column">
+            <mat-header-cell *matHeaderCellDef [resizeColumn]="true" [index]="i">
+
+              <!--<div class="form-check-inline" *ngIf="column === selectRow">
+                <label class="form-check-label">
+                  <input type="checkbox" class="form-check-input" value="" placement="top" ngbTooltip="Select all" (change)="$event ? masterToggle() : null">
+                </label>
+              </div>-->
+              <div *ngIf="column != selectRow">{{ ShipmentReceiptColumnsHeaderCheck[i] | translate}}</div>
+            </mat-header-cell>
+
+            <mat-cell *matCellDef="let itemss">
+              <!--<div class="form-check-inline" *ngIf="column === selectRow">
+                <label class="form-check-label">
+                  <input type="checkbox" class="form-check-input" value="" (click)="$event.stopPropagation()"
+                         (change)="$event ? selection3.toggle(itemss) : null"
+                         [checked]="selection3.isSelected(item)">
+                </label>
+              </div>-->
+              <div *ngIf="column === showOnBOL">
+
+                {{itemss.finalshowOnBOL}}
+                <!--{{item[column]==null?"False":item[column]==0?"False":"True"}}-->
+              </div>
+              <div *ngIf="column === quantityDiff">
+
+                {{itemss.finalshippedQuantity-itemss.finalorderQuantity}}
+              </div>
+
+              <div *ngIf="column != showOnBOL && column!=quantityDiff">
+                {{ itemss[column] }}
+              </div>
+            </mat-cell>
+          </ng-container>
+          <mat-header-row *matHeaderRowDef="ShipmentReceiptColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: ShipmentReceiptColumns;">
+          </mat-row>
+        </mat-table>
+      </div>
+    </div>
+
+    <div class="tab-pane fade" id="Transportation" role="tabpanel" aria-labelledby="Transportation-tab">
+      <!--<article class="col-md-12">
+        <div class="row">
+          <div class="col-sm-5 mt-2 font-weight-bold">
+            {{'key_APChargeSummary' | translate}}
+          </div>
+          <div class="col-sm-7">
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="form-group row">
+                  <div class="col-md-7 text-right mt-2">
+                    {{'key_TotalShipment' | translate}}
+                  </div>
+                  <div class="col-sm-5">
+                    <input type="text" name="" class="form-control" value="802.00" />
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group row">
+                  <div class="col-md-7 text-right mt-2">
+                    {{'key_DiffAmount' | translate}}
+                  </div>
+                  <div class="col-sm-5">
+                    <input type="text" name="" class="form-control" value="802.00" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="scroll">
+              <mat-table #table [dataSource]="dataSource11" matSort>
+
+                <ng-container matColumnDef="BusinessPartner">
+                  <mat-header-cell class="" *matHeaderCellDef mat-sort-header> {{'key_BusinessPartner' | translate}}</mat-header-cell>
+                  <mat-cell class="" *matCellDef="let element"> {{element.BusinessPartner}} </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="BillingEntity">
+                  <mat-header-cell class="" *matHeaderCellDef mat-sort-header>{{'key_BillingEntity' | translate}}</mat-header-cell>
+                  <mat-cell class="" *matCellDef="let element"> {{element.BillingEntity}} </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="ChargeType">
+                  <mat-header-cell class="" *matHeaderCellDef mat-sort-header>{{'key_ChargeType' | translate}}</mat-header-cell>
+                  <mat-cell class="" *matCellDef="let element">
+                    {{element.ChargeType}}
+                  </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="ContractAmount">
+                  <mat-header-cell class="" *matHeaderCellDef mat-sort-header>{{'key_ContractAmount' | translate}}</mat-header-cell>
+                  <mat-cell class="" *matCellDef="let element"> {{element.ContractAmount}} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="ModifiedAmount">
+                  <mat-header-cell class="" *matHeaderCellDef mat-sort-header>{{'key_ModifiedAmount' | translate}}</mat-header-cell>
+                  <mat-cell class="" *matCellDef="let element">
+                    {{element.ModifiedAmount}}
+                  </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="UOM">
+                  <mat-header-cell class="" *matHeaderCellDef mat-sort-header>{{'key_UOM' | translate}}</mat-header-cell>
+                  <mat-cell class="" *matCellDef="let element">
+                    {{element.UOM}}
+                  </mat-cell>
+                </ng-container>
+
+
+                <mat-header-row *matHeaderRowDef="displayedColumns11"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns11;"
+                         [ngClass]="{hovered: row.hovered, highlighted: row.highlighted}"
+                         (click)="selection.toggle(row) || row.highlighted = !row.highlighted"
+                         (mouseover)="row.hovered = true" (mouseout)="row.hovered = false">
+                </mat-row>
+              </mat-table>
+            </div>
+            <mat-paginator #paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 20]"> </mat-paginator>
+          </div>
+        </div>
+      </article>
+          <div class="col-lg-12"><hr /></div>
+        -->
+
+      <article class="col-md-12">
+        <div class="row">
+          <div class="col-sm-6 font-weight-bold">
+            {{'key_APCharge' | translate}}
+          </div>
+        </div>
+        <div class="card-body pl-0 pt-0">
+          <div class="">
+            <div class="d-flex flex-nowrap justify-content-between align-items-center">
+              <div class="btn-group btn-group-toggle btn-group-md" data-toggle="buttons">
+                <button id="btnRefresh" class="btn btn-outline-success" data-toggle="modal" data-target="#apChargeModel" type="button"
+                        placement="bottom" ngbTooltip="Add" (click)="OpenApchargesEdit()" [disabled]="Transportationdisabled">
+                  <i class="fa fa-plus" aria-hidden="true"></i>
+                  <span> {{'key_add' | translate}}/{{'key_Edit' | translate}}</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="scroll">
+
+              <mat-table #table [dataSource]="apchargesDataTab" matSort>
+
+                <ng-container matColumnDef="SNo">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> SNo. </mat-header-cell>
+                  <mat-cell *matCellDef="let element" align="right">{{ element.SNo }}</mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="businessPartner">
+                  <mat-header-cell class="" *matHeaderCellDef mat-sort-header> {{'key_BusinessPartner' | translate}}</mat-header-cell>
+                  <mat-cell class="" *matCellDef="let element"> {{element.businessPartnerName}} </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="billingEntity">
+                  <mat-header-cell class="" *matHeaderCellDef mat-sort-header>{{'key_BillingEntity' | translate}}</mat-header-cell>
+                  <mat-cell class="" *matCellDef="let element"> {{element.businessPartnerName}} </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="chargeType">
+                  <mat-header-cell class="" *matHeaderCellDef mat-sort-header>{{'key_ChargeType' | translate}}</mat-header-cell>
+                  <mat-cell class="" *matCellDef="let element">
+                    {{element.chargeTypeName}}
+                  </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="contractAmount">
+                  <mat-header-cell class="" *matHeaderCellDef mat-sort-header>{{'key_ContractAmount' | translate}}</mat-header-cell>
+                  <mat-cell class="" *matCellDef="let element"> {{element.chargeValue | currency}} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="modifiedAmount">
+                  <mat-header-cell class="" *matHeaderCellDef mat-sort-header>{{'key_ModifiedAmount' | translate}}</mat-header-cell>
+                  <mat-cell class="" *matCellDef="let element">
+                    {{element.chargeModifiedValue |  currency}}
+                  </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="uom">
+                  <mat-header-cell class="" *matHeaderCellDef mat-sort-header>{{'key_UOM' | translate}}</mat-header-cell>
+                  <mat-cell class="" *matCellDef="let element">
+                    {{element.chargeUOMName}}
+                  </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="salesTax">
+                  <mat-header-cell class="" *matHeaderCellDef mat-sort-header>{{'key_SalesTax' | translate}}</mat-header-cell>
+                  <mat-cell class="" *matCellDef="let element">
+                    {{element.salesTaxClassName}}
+                  </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="autoAdded">
+                  <mat-header-cell class="" *matHeaderCellDef mat-sort-header>{{'key_AutoAdded' | translate}}</mat-header-cell>
+                  <mat-cell class="" *matCellDef="let element">
+                    {{element.autoAdded}}
+                  </mat-cell>
+                </ng-container>
+
+                <mat-header-row *matHeaderRowDef="apchargesColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: apchargesColumns;">
+                  <!--[ngClass]="{ 'selected': selection1.isSelected(row)}" (click)="selection1.toggle(row)">-->
+                </mat-row>
+              </mat-table>
+            </div>
+            <!--<mat-paginator #paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 20]"> </mat-paginator>-->
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <div class="tab-pane fade" id="Document" role="tabpanel" aria-labelledby="Document-tab">
+      <div class="col-md-12">
+        <app-document></app-document>
+      </div>
+    </div>
+    <div class="tab-pane fade" id="Tracking" role="tabpanel" aria-labelledby="Tracking-tab">
+      <!--<div class="card-body pl-0 pt-0">
+        <div class="col-md-12">
+          <div class="d-flex flex-nowrap justify-content-between align-items-center">
+            <div class="btn-group btn-group-toggle btn-group-md" data-toggle="buttons">
+              <button id="btnRefresh" class="btn btn-outline-success" data-toggle="modal" data-target="#editshipment" type="button" placement="bottom" ngbTooltip="Add"
+                      [disabled]="editShipmentHasReadOnlyAccess">
+                <i class="fa fa-save" aria-hidden="true"></i>
+                <span>{{'key_Save' | translate}}</span>
+              </button>
+
+            </div>
+          </div>
+        </div>
+      </div>-->
+      <div class="col-sm-12">
+        <!-- <angular-editor [(ngModel)]="htmlContent" [config]="editorConfig"  ></angular-editor>-->
+        <div class="well mt-2 mb-2" *ngFor="let item of StatusTrackingData;">
+          <span> {{item.comment}} </span> {{ htmlContent }}
+          <div>Updated By <strong>{{item.updatedby}} at {{item.updatedTime }}</strong></div>
+        </div>
+      </div>
+    </div>
+    <div class="tab-pane fade" id="Tender" role="tabpanel" aria-labelledby="Tender-tab">
+      <!--<div class="card-body pl-0 pt-0">
+        <div class="col-md-12">
+          <div class="d-flex flex-nowrap justify-content-between align-items-center">
+            <div class="btn-group btn-group-toggle btn-group-md" data-toggle="buttons">
+              <button id="btnRefresh" class="btn btn-outline-success" data-toggle="modal" data-target="#editshipment" type="button" placement="bottom" ngbTooltip="Add"
+                      [disabled]="editShipmentHasReadOnlyAccess">
+                <i class="fa fa-save" aria-hidden="true" ></i>
+                <span>{{'key_Save' | translate}}</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>-->
+      <div class="col-sm-12">
+        <!-- <angular-editor [(ngModel)]="htmlContent" [config]="editorConfig"  ></angular-editor>-->
+        <div class="well mt-2 mb-2" *ngFor="let item of TenderStatusTrackingData;">
+          <span><strong>{{item.updatedby}} </strong> updated Tender Status " <strong> {{item.trackingDetail}} "</strong> </span> {{ htmlContent }}
+          <div>{{item.updatedTime }}</div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="row justify-content-center my-5">
+  <div class="col-xl-2 col-lg-4 col-md-4 col-sm-12">
+    <!--<button class="btn btn-block btn-save" type="submit" [disabled]="false" (click)="SaveShipment()">{{ 'key_Save' | translate }}</button>-->
+    <button class="btn btn-block btn-save" type="submit" (click)="SaveShipment()" [disabled]="editShipmentHasReadOnlyAccess">{{ 'key_Save' | translate }}</button>
+    <!--data-toggle="modal" data-target="#missingPropertyModel"-->
+  </div>
+  <div class="col-xl-2 col-lg-4 col-md-4 col-sm-12">
+    <button class="btn btn-block btn-next" (click)="SaveandNextShipment()" [disabled]="editShipmentHasReadOnlyAccess">
+      <span class="fw600">{{ 'key_Edit' | translate }}</span> <span class="fs-13"> > Next </span>
+    </button>
+  </div>
+</div>
+<!--<a data-target="#missingPropertyModel" data-toggle="modal">materialPropertyPopup</a>-->
+<div class="modal" id="missingPropertyModel">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">
+          {{ 'key_MissingProperties' | translate}}
+        </h5>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body mb-4">
+        <div class="scroll">
+          <mat-table #table [dataSource]="dataSourceConfirmModel" matSort id="popupMaterial">
+
+
+
+
+            <ng-container *ngFor="let column of displayedConfirmModel; let i=index;" [matColumnDef]="column">
+              <mat-header-cell *matHeaderCellDef mat-sort-header [resizeColumn]="true" [index]="i">
+
+                {{ displayedConfirmModelNew[i] | translate }}
+              </mat-header-cell>
+              <mat-cell *matCellDef="let item">
+                <div *ngIf="column === Value">
+                  <input type="text" class="form-control" value="" placeholder="Please Enter Value" required />
+                </div>
+                {{ item[column] }}
+              </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedConfirmModel"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedConfirmModel;">
+            </mat-row>
+          </mat-table>
+        </div>
+
+
+        <div class="col-sm-12 text-center mt-4">
+          <button class="btn btn-save">{{'key_Save' | translate}}</button>
+          <button class="ml-2 btn btn-next" data-dismiss="modal">{{'key_cancel' | translate}}</button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div><!--model end-->
+
+
+<div class="modal" id="editshipment">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">
+          {{ 'key_ShipmentReceiveing' | translate}}
+        </h5>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body mb-4">
+
+        <div class=" mt-2 mb-4">
+          <div class="row">
+            <div class="col-md-4 mb-3">
+              <div class="row">
+                <div class="col-md-12 pt-2">
+                  Select Order<sup class="sup1 text-danger font-weight-bold">*</sup>
+                </div>
+                <div class="col-md-12">
+                  <select class="form-control" placeholder="Select Order Type" id="orderType"
+                          [(ngModel)]="OrderTypeId" #orderType="ngModel"
+                          name="orderType" required (change)="selectedOrder($event)">
+                    <option value="0" selected>Select</option>
+                    <option class='option' *ngFor='let order of ShippingOrders' [value]="order.orderid">
+                      {{order.orderNumber}}
+                    </option>
+
+                  </select>
+
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4 mb-3">
+              <div class="row">
+                <div class="col-md-12 pt-2">
+                  Select Material<sup class="sup1 text-danger font-weight-bold">*</sup>
+                </div>
+                <div class="col-md-12">
+                  <angular2-multiselect fixFilterBug [data]="MaterialData" [(ngModel)]="selectedItemsB" [settings]="{text: 'Select', enableSearchFilter: true, badgeShowLimit: 1, labelKey :'name', searchBy: ['name'] }"
+                                        name="Material" id="Material" #Material="ngModel" required>
+                  </angular2-multiselect>
+
+                </div>
+              </div>
+            </div>
+            <!--<div class="col-md-2 mb-3">
+              <div class="row">-->
+            <!--<div class="col-md-12 pt-2">
+              UOM
+            </div>
+            <div class="col-md-12">
+              <angular2-multiselect fixFilterBug class="right" [data]="UOMData" [(ngModel)]="selectedItemsUOM" [settings]="{text: 'Select',singleSelection: true,disabled:true, enableSearchFilter: true, badgeShowLimit: 1, labelKey :'name', searchBy: ['name'] }"
+                                    (onSelect)="selectUOM($event)" name="UOM" id="UOM" #UOM="ngModel" required>
+              </angular2-multiselect>
+            </div>-->
+            <!--</div>
+            </div>-->
+            <div class="col-sm-2 text-left pt-1">
+              <button class="mt-4 btn btn-save popup-btn-width" (click)="AddMaterial($event)">Insert</button>
+            </div>
+          </div>
+          <!--<div class="row">
+            <div class="col-md-4 mb-3">
+              <div class="row">
+                <div class="col-md-12 pt-2">
+                  {{'key_Equipment'| translate}}<sup class="sup1 text-danger font-weight-bold">*</sup>
+                </div>
+                <div class="col-md-12">
+                  <input type="text" class="form-control" [value]="ShipmentDetails.equipment" name="" readonly required>
+                </div>
+              </div>
+            </div>
+          </div>-->
+        </div>
+
+
+
+
+        <div class="scroll">
+          <!-- popup -->
+          <mat-table #table [dataSource]="dataSource3" matSort id="popupMaterial">
+
+
+
+
+            <ng-container *ngFor="let column of AddShipmentReceiptColumns; let i=index;" [matColumnDef]="column">
+              <mat-header-cell *matHeaderCellDef mat-sort-header [resizeColumn]="true" [index]="i">
+
+
+
+                <div class="form-check-inline" *ngIf="column === selectRow">
+                  <label class="form-check-label">
+                    <input type="checkbox" class="form-check-input" value="" placement="top" ngbTooltip="Select all" (change)="$event ? masterToggle() : null"
+                           [checked]="selection3.hasValue() && isAllSelected()"
+                           [indeterminate]="selection3.hasValue() && !isAllSelected()">
+                  </label>
+                </div>
+                <div *ngIf="column != selectRow">{{ ShipmentReceiptColumnsHeader[i] | translate }}</div>
+              </mat-header-cell>
+              <mat-cell *matCellDef="let item">
+                <div class="form-check-inline" *ngIf="column === selectRow">
+                  <label class="form-check-label">
+                    <input type="checkbox" class="form-check-input" value="" (click)="$event.stopPropagation()"
+                           (change)="$event ? selection3.toggle(row) : null"
+                           [checked]="selection3.isSelected(row)">
+                  </label>
+                </div>
+                <div *ngIf="column === shippedQuantity">
+                  <div *ngIf="item.flag !=0">
+                    <input type="number" (keypress)="numberOnly($event)" class="form-control text-right" (ngModelChange)="CalculateQuantity(item.orderNumber,item.id,$event)" name="{{item.id}}" id="{{item.id}}" [(ngModel)]="item.shippedQuantity" />
+                  </div>
+                  <div *ngIf="item.flag ==0">
+                    <label class="form-control p-1 bg-secondary" name="{{item.shippedQuantity}}">
+                      {{item.shippedQuantity}}
+                    </label>
+                  </div>
+                </div>
+                <div *ngIf="column === showOnBOL">
+                  <input type="checkbox" name="check" [(ngModel)]="item.showOnBOL" />
+                  <!-- {{item[column]==null?"False":item[column]==0?"False":"True"}}-->
+                </div>
+                <div *ngIf="column === quantityDiff">
+
+
+
+                  {{item.shippedQuantity-item.orderQuantity}}
+                </div>
+                <div class="text-center" *ngIf="column === action">
+                  <div *ngIf="item.flag !=0">
+                    <a class="a_hover" ngbTooltip="Delete" (click)="DeleteMaterial(item.orderNumber,item.id)">
+                      <i aria-hidden="true" class="fa fa-trash text-danger"></i>
+                    </a>
+                  </div>
+                </div>
+                <!-- <div class="form-check-inline" *ngIf="column === action">
+
+                  <button (click)="DeleteMaterial(item.orderNumber,item.id)">Delete</button>
+                </div>-->
+                <div *ngIf="column != shippedQuantity && column != showOnBOL && column!=quantityDiff">
+                  {{ item[column] }}
+                </div>
+              </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="AddShipmentReceiptColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: AddShipmentReceiptColumns;">
+            </mat-row>
+          </mat-table>
+        </div>
+        <div class="col-sm-12 text-center mt-4"><button class="btn btn-next popup-btn-width" (click)="AddAllMaterial()">{{'key_Add' | translate}}</button></div>
+      </div>
+    </div>
+  </div>
+</div><!--model end-->
+
+<div class="modal" id="apChargeModel">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">
+          {{'key_APCharge' | translate}}
+        </h5>
+        <button type="button" class="close" (click)="CheckAPCModified()">&times;</button>
+      </div>
+      <div class="modal-body mb-4">
+
+        <div class=" mt-2 mb-4">
+          <div class="row">
+            <div class="col-md-3 mb-3">
+              <div class="row">
+                <div class="col-md-12 pt-2">
+                  {{'key_BusinessPartner' | translate}} <span class="text-danger">*</span>
+                </div>
+                <div class="col-md-12">
+
+                  <angular2-multiselect fixFilterBug [data]="ApChargeBPList" [(ngModel)]="apchargeBusinessPartner"
+                                        [settings]="{text: 'Select Business Partner',singleSelection: true, enableSearchFilter: true, badgeShowLimit: 1, labelKey :'name', searchBy: ['name']}"
+                                        name="apcBusinessPartner" id="apcBusinessPartner" #apcBusinessPartner="ngModel" required
+                                        (onSelect)="GetChargeTypes()">
+                  </angular2-multiselect>
+
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12 pt-2">
+                  {{'key_ChargeType' | translate}} <span class="text-danger">*</span>
+                </div>
+                <div class="col-md-12">
+                  <angular2-multiselect fixFilterBug [data]="ChargeTypes" [(ngModel)]="apchargeChargeType"
+                                        [settings]="{text: 'Select Charge Type',singleSelection: true, enableSearchFilter: true, badgeShowLimit: 1, labelKey :'name', searchBy: ['name']}"
+                                        name="apcChargeType" id="apcChargeType" #apcChargeType="ngModel" required
+                                        (onSelect)="GetAPchargesOrderAmount()">
+                  </angular2-multiselect>
+
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-3 mb-3">
+              <div class="row">
+                <div class="col-md-12 pt-2">
+                  {{'key_ContractAmount' | translate}}
+                </div>
+                <div class="col-md-12">
+                  <input type="text" class="form-control" readonly [(ngModel)]="apchargeContractAmount" />
+
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3 mb-3">
+              <div class="row">
+                <div class="col-md-12 pt-2">{{'key_ModifiedAmount' | translate}}</div>
+                <div class="col-md-12">
+                  <input type="text" class="form-control" [(ngModel)]="apchargeModifiedAmount" />
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12 pt-2">{{'key_UOM' | translate}} <span class="text-danger">*</span></div>
+                <div class="col-md-12">
+                  <select class="form-control" required [(ngModel)]="apchargeUOM">
+                    <option [value]="uom.id" *ngFor="let uom of UomforApchargespopup">{{uom.name}}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-2 text-center pt-1">
+              <button *ngIf="!apchargeEditMode" class="mt-4 mr-2 btn btn-save" (click)="AddApcharge()">{{'key_Insert' | translate}}	</button>
+              <button *ngIf="apchargeEditMode" class="mt-4 mr-2 btn btn-save" (click)="EditApcharge()">{{'key_Edit' | translate}}	</button>
+              <button *ngIf="apchargeEditMode" class="mt-4 btn btn-next font-weight-normal" (click)="ClearApcharge()">{{'key_Cancel' | translate}}</button>
+            </div>
+          </div>
+        </div>
+        <div class="scroll">
+          <mat-table #table [dataSource]="apchargesDataEditTab" matSort>
+
+            <ng-container matColumnDef="SNo">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> SNo. </mat-header-cell>
+              <mat-cell *matCellDef="let element">{{ element.SNo }}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="businessPartner">
+              <mat-header-cell class="" *matHeaderCellDef mat-sort-header>{{'key_BusinessPartner' | translate}}</mat-header-cell>
+              <mat-cell class="" *matCellDef="let element"> {{element.businessPartnerName}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="billingEntity">
+              <mat-header-cell class="" *matHeaderCellDef mat-sort-header>{{'key_BillingEntity' | translate}}</mat-header-cell>
+              <mat-cell class="" *matCellDef="let element"> {{element.businessPartnerName}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="chargeType">
+              <mat-header-cell class="" *matHeaderCellDef mat-sort-header>{{'key_ChargeType' | translate}}</mat-header-cell>
+              <mat-cell class="" *matCellDef="let element">
+                {{element.chargeTypeName}}
+              </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="contractAmount">
+              <mat-header-cell class="" *matHeaderCellDef mat-sort-header>{{'key_ContractAmount' | translate}}</mat-header-cell>
+              <mat-cell class="" *matCellDef="let element"> {{element.chargeValue | currency}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="modifiedAmount">
+              <mat-header-cell class="" *matHeaderCellDef mat-sort-header>{{'key_ModifiedAmount' | translate}}</mat-header-cell>
+              <mat-cell class="" *matCellDef="let element">
+                {{element.chargeModifiedValue | currency }}
+              </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="uom">
+              <mat-header-cell class="" *matHeaderCellDef mat-sort-header>{{'key_UOM' | translate}}</mat-header-cell>
+              <mat-cell class="" *matCellDef="let element">
+                {{element.chargeUOMName}}
+              </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="salesTax">
+              <mat-header-cell class="" *matHeaderCellDef mat-sort-header>{{'key_SalesTax' | translate}}</mat-header-cell>
+              <mat-cell class="" *matCellDef="let element">
+                {{element.salesTaxClassName}}
+              </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="autoAdded">
+              <mat-header-cell class="" *matHeaderCellDef mat-sort-header>{{'key_AutoAdded' | translate}}</mat-header-cell>
+              <mat-cell class="" *matCellDef="let element">
+                {{element.autoAdded}}
+              </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="delete" style="padding: 9px;">
+              <mat-header-cell class="" *matHeaderCellDef mat-sort-header>{{'key_Delete' | translate}}</mat-header-cell>
+              <mat-cell class="" *matCellDef="let element">
+                <a class="a_hover" style="margin-right:1px">
+                  <i class="fa fa-pencil-square-o" aria-hidden="true" (click)="SelectForEditApcharges(element)"></i>
+                </a> <a class="a_hover">
+                  <i class="fa fa-trash-o text-danger" aria-hidden="true" (click)="DeleteApCharge(element.SNo,$event)">
+                  </i>
+                </a>
+              </mat-cell>
+            </ng-container>
+            <mat-header-row *matHeaderRowDef="apchargesColumnsEdit"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: apchargesColumnsEdit;" [disabled]>
+            </mat-row>
+          </mat-table>
+        </div>
+        <div class="col-sm-12 text-center mt-4">
+          <button class="btn btn-next mr-2" data-dismiss="modal" (click)="AddFinalApcharge()">{{'key_Add' | translate}}</button>
+          <button *ngIf="!apchargeEditMode" class="btn btn-previous font-weight-normal" (click)="CloseApcharge()">{{'key_Cancel' | translate}}</button>
+        </div>
+
+        <button type="button" style="display:none" class="close" data-dismiss="modal" #apcmclose>&times;</button>
+      </div>
+    </div>
+  </div>
+</div><!--model end-->
+<!--model-for-to-ship-->
+
+<div class="modal" id="compilePopup">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">
+          Shipment
+        </h5>
+        <button style="display:none" type="button" for="confirms" class="close" data-dismiss="modal" #compilecheckclose>&times;</button>
+      </div>
+      <div class="modal-body">
+        <h5 class="mb-4 mt-4">
+          Please review the materials and quantities <strong>CAREFULLY</strong> before shipping the shipment and correct if necessary. To proceed with shipping the shipment click on OK, to correct click on Cancel.
+        </h5>
+        <div class="scroll">
+          <!-- kp -->
+          <mat-table #table [dataSource]="dataSource5" matSort>
+
+            <ng-container *ngFor="let column of ShipmentReceiptColumnsCheck; let i=index;" [matColumnDef]="column">
+              <mat-header-cell *matHeaderCellDef mat-sort-header [resizeColumn]="true" [index]="i">
+
+                <div class="form-check-inline" *ngIf="column === selectRow">
+                  <!--<label class="form-check-label">
+                    <input type="checkbox" class="form-check-input" value="" placement="top" ngbTooltip="Select all" (change)="$event ? masterToggle() : null">
+                  </label>-->
+                </div>
+                <div *ngIf="column != selectRow">{{ ShipmentReceiptColumnsHeaderCheck[i] | translate}}</div>
+              </mat-header-cell>
+
+              <mat-cell *matCellDef="let itemss">
+                <div class="form-check-inline" *ngIf="column === selectRow">
+                  <!--<label class="form-check-label">
+                    <input type="checkbox" class="form-check-input" value="" (click)="$event.stopPropagation()"
+                           (change)="$event ? selection3.toggle(itemss) : null"
+                           [checked]="selection3.isSelected(item)">
+                  </label>-->
+                </div>
+                <div *ngIf="column === showOnBOL">
+                  {{itemss.showOnBOL}}
+                  <!--{{item[column]==null?"False":item[column]==0?"False":"True"}}-->
+                </div>
+                <div *ngIf="column === quantityDiff">
+
+
+
+                  {{itemss.shippedQuantity-itemss.orderQuantity}}
+                </div>
+
+                <div *ngIf="column != showOnBOL && column!=quantityDiff">
+                  {{ itemss[column] }}
+                </div>
+              </mat-cell>
+            </ng-container>
+            <mat-header-row *matHeaderRowDef="ShipmentReceiptColumnsCheck"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: ShipmentReceiptColumnsCheck;">
+            </mat-row>
+
+            <!--<ng-container matColumnDef="selectRow">
+              <mat-header-cell class="t-center tw-5" *matHeaderCellDef>
+                <div class="form-check-inline">
+                  <label class="form-check-label">
+                    <input type="checkbox" class="form-check-input" value="" placement="top" ngbTooltip="Select all" (change)="$event ? masterToggle() : null"
+                           [checked]="selection3.hasValue() && isAllSelected()"
+                           [indeterminate]="selection3.hasValue() && !isAllSelected()">
+                  </label>
+                </div>
+              </mat-header-cell>
+              <mat-cell class="t-center tw-5" *matCellDef="let row">
+                <div class="form-check-inline">
+                  <label class="form-check-label">
+                    <input type="checkbox" class="form-check-input" value="" (click)="$event.stopPropagation()"
+                           (change)="$event ? selection3.toggle(row) : null"
+                           [checked]="selection3.isSelected(row)">
+                  </label>
+                </div>
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="OrderNum">
+              <mat-header-cell class="" *matHeaderCellDef mat-sort-header>{{'key_OrderNo' | translate}}</mat-header-cell>
+              <mat-cell class="" *matCellDef="let element"> {{element.OrderNum}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="Material">
+              <mat-header-cell class="" *matHeaderCellDef mat-sort-header>{{'key_Material' | translate}}</mat-header-cell>
+              <mat-cell class="" *matCellDef="let element"> {{element.Material}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="Commodity">
+              <mat-header-cell class="" *matHeaderCellDef mat-sort-header>{{'key_Commodity' | translate}}</mat-header-cell>
+              <mat-cell class="" *matCellDef="let element">
+                {{element.Commodity}}
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="OrderQuantity">
+              <mat-header-cell class="" *matHeaderCellDef mat-sort-header>{{'key_OrderQuantity' | translate}}</mat-header-cell>
+              <mat-cell class="" *matCellDef="let element"> {{element.OrderQuantity}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="ShippedQuantity">
+              <mat-header-cell class="" *matHeaderCellDef mat-sort-header>{{'key_ShippedQuantity' | translate}}</mat-header-cell>
+              <mat-cell class="" *matCellDef="let element">
+                {{element.ShippedQuantity}}
+              </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="QuantityDiff">
+              <mat-header-cell class="" *matHeaderCellDef mat-sort-header>{{'key_QuantityDiff' | translate}}</mat-header-cell>
+              <mat-cell class="" *matCellDef="let element">
+                {{element.QuantityDiff}}
+              </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="PriceMethod">
+              <mat-header-cell class="" *matHeaderCellDef mat-sort-header>{{'key_PriceMethod' | translate}}</mat-header-cell>
+              <mat-cell class="" *matCellDef="let element">
+                {{element.PriceMethod}}
+              </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="ShowOnBOL">
+              <mat-header-cell class="" *matHeaderCellDef mat-sort-header>{{'key_ShowOnBOL' | translate}}</mat-header-cell>
+              <mat-cell class="" *matCellDef="let element">
+                {{element.ShowOnBOL}}
+              </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="ShipToLocation">
+              <mat-header-cell class="" *matHeaderCellDef mat-sort-header>{{'key_ShipToLocation' | translate}}</mat-header-cell>
+              <mat-cell class="" *matCellDef="let element">
+                {{element.ShipToLocation}}
+              </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns3"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns3;" [ngClass]="{ 'selected': selection.isSelected(row)}"
+                     (click)="selection.toggle(row)">
+            </mat-row>-->
+          </mat-table>
+        </div>
+        <div class="col-sm-2 text-center pt-1 mx-auto mb-4 mt-3">
+          <button class="mt-4 mr-2 pl-4 pr-4 btn btn-save" (click)="CompileCheckOK()">{{'key_Ok' | translate}} </button>
+          <button class="mt-4 btn btn-next font-weight-normal" (click)="CompileCheckCancel()">{{'key_Cancel' | translate}}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!--<div class="modal" id="helpModel" id="requirerulesmdl">-->
+<div class="modal" id="requirerulesmdl">
+  <div class="modal-dialog modal-xs">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">
+          {{'key_Help'| translate}}
+        </h5>
+        <button type="button" for="confirms" class="close" data-dismiss="modal" #compilecheckclose>&times;</button>
+      </div>
+      <div class="modal-body">
+        <ul *ngFor="let rule of shiprequirementrules;" type>
+          <li>{{rule}} </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="materialPropertyPopup">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">
+          {{ 'key_MissingProperties' | translate}}
+        </h5>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="col-md-12 mt-4 mb-4">
+          <div class="col-md-11 col-sm-11">
+            <div class="form-group row">
+              <div class="col-sm-12 col-md-5 pr-0 text-right">
+                <label class="pt-1">{{'key_MaterialWeight' | translate}}</label>
+              </div>
+              <div class="col-md-7 col-sm-12">
+                <input type="text" class="form-control" [(ngModel)]="editVerifyEquipmentMaterialProperty.materialWeight" />
+              </div>
+            </div>
+          </div>
+          <div class="col-md-11 col-sm-11">
+            <div class="form-group row">
+              <div class="col-sm-12 col-md-5 pr-0 text-right">
+                <label class="pt-1">
+                  {{'key_EAPerPallet' | translate}}
+                </label>
+              </div>
+              <div class="col-md-7 col-sm-12">
+                <input type="text" class="form-control" id="" [(ngModel)]="editVerifyEquipmentMaterialProperty.propertyValueUP" />
+              </div>
+            </div>
+          </div>
+          <div class="col-md-11 col-sm-11">
+            <div class="form-group row">
+              <div class="col-sm-12 col-md-5 pr-0 text-right">
+                <label class="pt-1">{{'key_NOofUnitinEquipment' | translate}}</label>
+              </div>
+              <div class="col-md-7 col-sm-12">
+                <input type="text" class="form-control" id="" [(ngModel)]="editVerifyEquipmentMaterialProperty.propertyValueUE" />
+              </div>
+            </div>
+          </div>
+          <div class="col-md-11 col-sm-11">
+            <div class="form-group row">
+              <div class="col-sm-12 col-md-5 pr-0 text-right">
+                <label class="pt-1">{{'key_NoofPalletUnitinEquipment' | translate}}</label>
+              </div>
+              <div class="col-md-7 col-sm-12">
+                <input type="text" class="form-control" id="" [(ngModel)]="editVerifyEquipmentMaterialProperty.propertyValuePE" />
+              </div>
+            </div>
+          </div>
+          <div class="text-center mt-4 pt-2 mb-3">
+            <input type="button" class="btn btn-save model-btn" value="Save" (click)="SaveMaterialProperties()">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!--<a data-target="#tonuPopup" data-toggle="modal">Tonu</a>-->
+<div class="modal" id="tonuPopup">
+  <div class="modal-dialog modal-xs">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">
+          {{'key_Confirmation'| translate}}
+        </h5>
+        <button type="button" for="confirms" class="close" data-dismiss="modal" #compilecheckclose>&times;</button>
+      </div>
+      <div class="modal-body text-center mt-4 mb-4">
+        <h5>{{this.TonuCancelMessage}}</h5>
+        <div class="text-center mt-4">
+          <button class="btn btn-save mr-2" (click)="TonuCancelshipment()">OK </button>
+          <button class="btn btn-next" (click)="closetonupopup()">Don't Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal" id="missingMaterialProerptyPopup">
+  <!--compilePopup-->
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">
+          {{'key_MaterialMissingProperties' | translate}}
+        </h5>
+        <!--<button type="button" for="confirms" class="close" data-dismiss="modal">&times;</button>-->
+        <button type="button" for="confirms" class="close" (click)="CloseMaterialMissingPropertiesPopup()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <h5>
+          Please provide the missing properties of material.
+        </h5>
+        <!--<div class="row">
+          <div class="col-md-4 mb-3">
+            <div class="row">
+              <div class="col-md-12 pt-2">
+                {{'key_Equipment'| translate}}
+              </div>
+              <div class="col-md-12">
+                <input type="text" class="form-control" [value]="ShipmentDetails.equipment" name="" readonly required>
+              </div>
+            </div>
+          </div>
+        </div>-->
+        <div class="row">
+          <div class="col-md-4 mb-3">
+            <div class="row">
+              <!--<div class="col-md-12 pt-2">
+                {{'key_Equipment'| translate}}
+              </div>-->
+              <div class="col-md-12" style="display: inherit;">
+
+
+
+                {{'key_Equipment'| translate}}&nbsp; <input type="text" class="form-control" [value]="ShipmentDetails.equipment" name="" readonly required>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="scroll">
+          <mat-table #table [dataSource]="MissingMaterialPropertyDataSource" matSort>
+            <ng-container matColumnDef="materialName">
+              <mat-header-cell class="" *matHeaderCellDef mat-sort-header> {{'key_Materialname' | translate}}</mat-header-cell>
+              <mat-cell class="" *matCellDef="let element"> {{element.materialName}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="materialWeight">
+              <mat-header-cell class="" *matHeaderCellDef mat-sort-header>{{'key_MaterialWeight' | translate}}</mat-header-cell>
+              <mat-cell class="" *matCellDef="let element">
+                <input type="number" (keypress)="numberOnly($event)" id="txt_weight_{{element.materilaID}}" [(ngModel)]="element.materialWeight" class="form-control" />
+              </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="unitInPallet">
+              <mat-header-cell class="" *matHeaderCellDef mat-sort-header>{{'key_PerPallet' | translate}}</mat-header-cell>
+              <mat-cell class="" *matCellDef="let element">
+
+                <input type="number" (keypress)="numberOnly($event)" id="txt_perPallet_{{element.materilaID}}" [(ngModel)]="element.unitInPallet" class="form-control" />
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="unitInEquipement">
+              <mat-header-cell class="" *matHeaderCellDef mat-sort-header>{{'key_UnitInEquipment'|translate}}</mat-header-cell>
+              <mat-cell class="" *matCellDef="let element">
+                <input type="number" (keypress)="numberOnly($event)" id="txt_perEquipment_{{element.materilaID}}" [(ngModel)]="element.unitInEquipement" class="form-control" />
+
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="palletInEquipement">
+              <mat-header-cell class="" *matHeaderCellDef mat-sort-header>{{'key_PalletInEquipment'|translate}}</mat-header-cell>
+              <mat-cell class="" *matCellDef="let element">
+                <input type="number" (keypress)="numberOnly($event)" id="txt_perPalletEquipment_{{element.materilaID}}" [(ngModel)]="element.palletInEquipement" class="form-control" />
+              </mat-cell>
+            </ng-container>
+            <mat-header-row *matHeaderRowDef="missingMaterialProerptyColumn"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: missingMaterialProerptyColumn;">
+            </mat-row>
+          </mat-table>
+        </div>
+        <div class="col-sm-4 text-center pt-1 mx-auto mb-4 mt-3">
+          <button class="mt-4 mr-2 pl-4 pr-4 btn btn-save" (click)="saveallmaterialPropertiesForShipment()">{{'key_Save'|translate}}</button>
+          <button class="mt-4 btn btn-next font-weight-normal" (click)="CloseMaterialMissingPropertiesPopup()">{{'key_Cancel'|translate}}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

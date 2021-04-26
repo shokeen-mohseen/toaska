@@ -1,0 +1,12 @@
+::ng-deep .mat-expansion-panel-body {
+  background-color: #f9f9f9;
+  border: 1px solid #dddd;
+}
+
+mat-cell,
+mat-footer-cell,
+mat-header-cell {
+  width: 130px;
+  flex: none;
+}
+

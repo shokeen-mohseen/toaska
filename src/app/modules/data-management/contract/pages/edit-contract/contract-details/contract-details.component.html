@@ -1,0 +1,171 @@
+<div class="e-profile">
+  <div class="row">
+    <div class="col-md-4 col-sm-12">
+      <div class="box-children">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label>Contract type <sup class="text-danger font-weight-bold sup1">*</sup></label>
+              <select class="form-control" placeholder="Select contract type" required>
+                <option>BP - Inbound</option>
+                <option>BP - Outbound</option>  
+                <option>Customer-CPU</option>
+                <option>Cutomer Export</option>
+                <option>Customer Regular</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="form-group">
+              <label for="">
+                Effective Start <sup class="text-danger font-weight-bold sup1">*</sup>
+              </label>
+              <input type="date" class="form-control" required/>
+            </div>
+          </div>
+
+          <div class="col-md-12">
+            <div class="form-group">
+              <label>Effective End <sup class="text-danger font-weight-bold sup1">*</sup> </label>
+              <input type="date" class="form-control" required/>
+
+            </div>
+          </div>
+
+          <div class="col-md-12">
+            <div class="form-group">
+              <label>End Alert Days</label>
+              <input type="text" value="60" class="form-control" name="days" />
+            </div>
+          </div>
+          <div class="col-md-12">
+            <hr />
+          </div>
+          <div class="col-md-12">
+            <div class="form-group">
+              <label>Transportation Comment</label>
+              <textarea rows="2" class="form-control" value="Miriam de la Torre or Arturo Macias or Gonzalo Soto   HTP Receiving HOurs 8am to 6pm"></textarea>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="form-group">
+              <label>Loading Comment</label>
+              <textarea rows="2" class="form-control" value="Loading Comment..."></textarea>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="box-children pl-0 pr-0">
+        <div class="col-md-12">
+          <div class="form-group">
+            <label>Contract Name <sup class="text-danger font-weight-bold sup1">*</sup></label>
+            <input class="form-control" value="60370 - Agri Packing - BJ Brothers [Agri-Packing]-" disabled>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="form-group">
+            <label>Customer Ship To Location <sup class="text-danger font-weight-bold sup1">*</sup></label>
+            <select class=" form-control" placeholder="Select contract type" disabled>
+              <option>60239 - A&T Farms [A&T Farms]</option>
+              <option>60237 - Agri Package</option>
+              <option>60239 - A&T Farms [A&T Farms]</option>
+              <option>60239 - A&T Farms [A&T Farms]</option>
+              <option>60239 - A&T Farms [A&T Farms]</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="form-group">
+            <label>Business Partner <sup class="text-danger font-weight-bold sup1">*</sup></label>
+            <select class=" form-control" placeholder="Select Business partner" disabled>
+              <option>Select Business partner</option>
+              <option>partner 2</option>
+              <option>partner 3</option>
+              <option>partner 4</option>
+              <option>partner 5</option>
+            </select>
+          </div>
+        </div>
+
+
+        <hr />
+        <div class="col-md-12">
+          <div class="form-group">
+            <label>Order Comment - It is for internal Tosca use only.</label>
+            <textarea rows="2" class="form-control" value="Loading Comment..."></textarea>
+          </div>
+        </div>
+
+        <div class="col-md-12">
+          <div class="form-group">
+            <label>Contract Comment</label>
+            <textarea rows="2" class="form-control" value="Contract Comment"></textarea>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="box-children">
+          <div class="col-md-12 p-0">
+            <input type="submit" value="Send for Approval" class="btn btn-next mb-3" name="send" />
+          </div>
+
+          <div class="col-md-12">
+            <div class="form-group row">
+              <span for="" class="fw600 mr-3">Status</span>
+              <span for="">{{ 'key_Active' | translate }}</span>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div _ngcontent-bod-c522="" class="row form-group">
+              <div _ngcontent-bod-c522="" class="form-check checkbox">
+              <input id="check1" type="checkbox" value="" checked="" class="form-check-input">
+              <label _ngcontent-bod-c522="" for="check1" class="form-check-label"> Contract Approved</label></div>
+            </div>
+<!--            <div class="form-group row">
+              <span for="" class="fw600 mr-3">Contract Approved</span>
+              <input type="checkbox" name="approval" />
+            </div>-->
+          </div>
+
+          <div class="col-md-12">
+            <div class="form-group row">
+              <label>Contract Approved :  By ADECTEC</label>
+              <label for="8/31/2020 7:05:24 IST" class="form-control">8/31/2020 7:05:24 IST</label>
+            </div>
+          </div>
+          <hr />
+
+          <table class="table table-bordered">
+            <tr>
+              <td> <span for="" class="fw600 mr-3">Fuel Charge Avg. Mile</span></td>
+              <td><span for="">1,258.50</span></td>
+            </tr>
+            <tr>
+              <td><span for="" class="fw600 mr-3">Current Fuel Charge (%)</span></td>
+              <td><span for="">100.00</span></td>
+            </tr>
+            <tr>
+              <td> <span for="" class="fw600 mr-3">Fuel Charge Updated By</span></td>
+              <td><span for=""></span></td>
+            </tr>
+            <tr>
+              <td> <span for="" class="fw600 mr-3">Fuel Charge Updated Datetime</span></td>
+              <td><span for="">25-8-2020</span></td>
+            </tr>
+            <tr>
+              <td> <span for="" class="fw600 mr-3">Previous Fuel Charge (%)</span></td>
+              <td><span for=""></span></td>
+            </tr>
+          </table>
+    </div>
+
+
+  </div>
+</div>
+  </div>

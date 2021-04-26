@@ -1,0 +1,28 @@
+<!--<form #petsForm="ngForm" >-->
+<ng-template ngFor let-orgLevel [ngForOf]="form.orgLevel" let-index="index" let-isLast="last">
+
+  <div class="form-group">
+    <label for="company">{{ orgLevel.name }} <sup class="text-danger sup1">*</sup></label>
+    <div *ngIf="index+1 != rowlist || viewMode">
+      <input class="form-control" [(ngModel)]="orgLevel.orgLevelData" disabled />
+    </div>
+    <div *ngIf="index+1 == rowlist && !viewMode">
+      <angular2-multiselect fixFilterBug [data]="orgLevel.organizationList" [settings]="settingsB" [(ngModel)]="itemOrgList"
+                            (onSelect)="onOrganizationSelected1($event,index)"
+                            (onDeSelect)="OnItemDeSelect($event)"
+                            required>
+      </angular2-multiselect>
+      
+      <!--<select [disabled]="this.disabled" class="form-control" [(ngModel)]="organizationId"
+              id="organization" name="organization" (change)="onOrganizationSelected(organizationId,index)" required>
+        <option value="0">Please Select</option>
+        <option *ngFor="let org of orgLevel.organizationList" [ngValue]="org.id">{{org.name}}</option>
+      </select>-->
+    </div>
+
+
+  </div>
+
+
+</ng-template>
+

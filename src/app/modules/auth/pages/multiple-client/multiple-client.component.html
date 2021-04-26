@@ -1,0 +1,29 @@
+<!-- Modal Header -->
+<div class="modal-header">
+  <h4 class="modal-title">Multiple Client</h4>
+  <button type="button" class="close" data-dismiss="modal" (click)="activeModal.dismiss('Cross click')">&times;</button>
+</div>
+<form [formGroup]="ClientSubscriptionform">
+  <!-- Modal body -->
+  <div class="modal-body">
+    <div class="form-group">
+      <label for="vat">Select Client</label>
+      <select class="form-control" formControlName="ClientsCode" (change)="selectClientsCode($event)" required>
+        <option value="" selected>Select Client</option>
+        <option *ngFor="let clnt of Client; let i = index" [value]="Client[i].Id">
+          {{Client[i].Name}}
+        </option>
+      </select>
+    </div>
+
+    <div id="startScreen" class="chart-btns">
+      <div class="row justify-content-center">
+        <div class="col-xl-3 col-lg-4 col-md-4 col-sm-12">
+          <button class="btn btn-block btn-next" [disabled]="ClientSubscriptionform.invalid" (click)="Next()">Next</button>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+  </form>

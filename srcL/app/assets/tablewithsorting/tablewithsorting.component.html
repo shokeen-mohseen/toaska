@@ -1,0 +1,46 @@
+<!--This page only for designer use/////-->
+<div class="row">
+  <div class="scroll">
+    <mat-table #table [dataSource]="dataSource" matSort>
+
+      <!-- Position Column -->
+      <ng-container matColumnDef="selectRow">
+
+        <mat-header-cell class="t-center tw-5" *matHeaderCellDef>
+          <div class="form-check-inline">
+            <label class="form-check-label">
+              <input type="checkbox" class="form-check-input" value="" data-toggle="tooltip" data-placement="top" title="Select all" (change)="$event ? masterToggle() : null"
+                     [checked]="selection.hasValue() && isAllSelected()"
+                     [indeterminate]="selection.hasValue() && !isAllSelected()">
+            </label>
+          </div>
+
+        </mat-header-cell>
+        <mat-cell class="t-center tw-5" *matCellDef="let row">
+          <div class="form-check-inline">
+            <label class="form-check-label">
+              <input type="checkbox" class="form-check-input" value="" data-toggle="tooltip" data-placement="top" title="Select" (click)="$event.stopPropagation()"
+                     (change)="$event ? selection.toggle(row) : null"
+                     [checked]="selection.isSelected(row)">
+            </label>
+          </div>
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="Description">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Characteristics</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.Description}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="DefaultCommodity">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Characteristics Value </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.DefaultCommodity}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="Active">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> UOM</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.Active}} </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+  </div>
+</div>

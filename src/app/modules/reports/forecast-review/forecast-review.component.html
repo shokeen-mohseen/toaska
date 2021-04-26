@@ -1,0 +1,130 @@
+<!--TFS ID:17504
+  Date: 19-09-2020
+  Aut: Monu Ram Yadav
+  Des: Design Forecast Review Report Screen-->
+
+<!--End Btn Group Section-->
+<app-top-btn-group #btnBar [actionGroupConfig]="actionGroupConfig" (action)="actionHandler($event)"
+                   
+                   [ParentPageName]="PageName"></app-top-btn-group>
+<h5>{{ 'key_ForecastReview' | translate }}</h5>
+
+<mat-tab-group #tabGroupA class="mt-18" animationDuration="0ms">
+
+  <mat-tab>
+    <ng-template mat-tab-label>
+      {{ 'key_ForcastReviewList' | translate }}
+    </ng-template>
+    <div class="tab-content pb-3">
+      <div class="filter-section" >
+        <mat-accordion>
+          <mat-expansion-panel (opened)="panelOpenState = true"
+                               (closed)="panelOpenState = false" [expanded]="true">
+            <mat-expansion-panel-header>
+              <mat-panel-description>
+                {{panelOpenState ? '- Hide' : '+ Show'}}    {{ 'key_ForecastReviewFilter' | translate }}
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+              <div class="row">                
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label> {{ 'key_Forecast' | translate }}</label>
+                    <angular2-multiselect fixFilterBug [data]="forecastList" [(ngModel)]="forecastSelected" [settings]="forecastSettings"
+                                          (onSelect)="onItemSelect($event)"
+                                          (onDeSelect)="OnItemDeSelect($event)"
+                                          (onSelectAll)="onSelectAll($event)"
+                                          (onDeSelectAll)="OnItemDeSelect($event)">
+                    </angular2-multiselect>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="d-block"> &nbsp; </label>
+                    <button class="btn btn-next font-weight-normal" (click)="getPageSetupSize()"> {{ 'key_ApplyFilter' | translate }}</button>
+                  </div>
+                </div>
+              </div>              
+              
+            </div>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </div>
+      <!--End Filter Section-->
+      <div class="row">
+        <div class="col-lg-12">
+          <app-table-filter (filterOn)="applyFilter($event)"></app-table-filter>
+          <div class="scroll resize-table">
+            <mat-table #table [dataSource]="dataSource" matSort (matSortChange)="customSort($event)">
+
+              <ng-container *ngFor="let column of displayedColumns; let i=index;" [matColumnDef]="column">
+                <mat-header-cell *matHeaderCellDef mat-sort-header mwlResizable [enableGhostResize]="true" (resizeEnd)="onResizeEnd($event, column)"
+                                 [resizeEdges]="{bottom: false, right: true, top: false, left: true}">
+                  <div *ngIf="column != selectRow"> {{ displayedColumnsReplace[i] | translate }}</div>
+                </mat-header-cell>
+                <mat-cell *matCellDef="let item">
+                  {{ item[column] }}
+                </mat-cell>
+                <!--<mat-footer-cell *matFooterCellDef>
+                  {{column === 'total' ?  getTotalCost() : ''}}
+                </mat-footer-cell>-->
+                <mat-footer-cell *matFooterCellDef>
+                  <div *ngIf="column === 'DataSegment'">
+                    Column Total:
+                  </div>
+                  <div *ngIf="column != 'DataSegment'">
+                    {{getAggregateValue(column)}}
+                  </div>
+                </mat-footer-cell>
+              </ng-container>
+
+              <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+              <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+              <mat-footer-row class="sticky-footer" *matFooterRowDef="displayedColumns; sticky: true"></mat-footer-row>
+
+            </mat-table>
+          </div>
+          <mat-paginator #paginator
+                         [length]="paginationModel.itemsLength"
+                         [pageSize]="paginationModel.pageSize"
+                         [pageSizeOptions]="paginationModel.pageSizeOptions"
+                         (page)="onPaginationEvent($event)">
+          </mat-paginator>
+
+
+        </div>
+      </div>
+      <!--Row End-->
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="scroll child-Table">
+            <mat-table #table [dataSource]="aggregatedataSource" matSort (matSortChange)="customSort($event)">
+              <ng-container *ngFor="let aggrColumn of aggregateDisplayedColumns; let i=index;" [matColumnDef]="aggrColumn">
+                <!--<mat-header-cell *matHeaderCellDef mat-sort-header mwlResizable [enableGhostResize]="true" (resizeEnd)="onResizeEnd($event, column)"
+                   [resizeEdges]="{bottom: false, right: true, top: false, left: true}">-->
+                <!--<div *ngIf="column != selectRow"> {{ displayedColumnsReplaceB[i] | translate }}</div>-->
+                <!--<div> {{ aggregateDisplayedColumnsReplace[i] | translate }}</div>
+  </mat-header-cell>-->
+                <mat-header-cell *matHeaderCellDef
+                                 mat-sort-header
+                                 mwlResizable
+                                 [enableGhostResize]="true"
+                                 (resizeEnd)="onResizeEnd($event, aggrColumn)"
+                                 [resizeEdges]="{bottom: false, right: true, top: false, left: true}">
+
+                  <div> {{ aggregateDisplayedColumnsReplace[i] | translate }}</div>
+                </mat-header-cell>
+                <mat-cell *matCellDef="let item">
+                  {{ item[aggrColumn] }}
+                </mat-cell>
+              </ng-container>
+              <mat-header-row *matHeaderRowDef="aggregateDisplayedColumns"></mat-header-row>
+              <mat-row *matRowDef="let row; columns: aggregateDisplayedColumns;"></mat-row>
+            </mat-table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-tab>
+</mat-tab-group>
+<app-show-notes></app-show-notes>

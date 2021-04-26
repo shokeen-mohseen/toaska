@@ -1,0 +1,32 @@
+<!--TFS ID:- 17414,
+  Date: 15-09-2020,
+  Author: Monu Ram YAdav,
+  Des:-  Fix Stepper Steps Data in Sub Component for Prepartum Care Section-->
+<div id="stepper12" class="bs-stepper">
+  <div class="bs-stepper-header">
+    <div class="step" data-target="#testExam1">
+      <button class="step-trigger">
+        <span class="bs-stepper-circle">1</span>
+      </button>
+    </div>
+    <div class="line"></div>
+    <div class="step" data-target="#testExam2">
+      <button class="step-trigger">
+        <span class="bs-stepper-circle">2</span>
+      </button>
+    </div>
+  </div>
+  <div class="bs-stepper-content">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="subHeading-red fw600"> {{ 'Key_Examination' | translate }} </div>
+      </div>
+    </div>
+    <div id="testExam1" class="content">
+      <app-examination1></app-examination1>
+    </div>
+    <div id="testExam2" class="content">
+      <app-examination2></app-examination2>
+    </div>
+  </div>
+</div>

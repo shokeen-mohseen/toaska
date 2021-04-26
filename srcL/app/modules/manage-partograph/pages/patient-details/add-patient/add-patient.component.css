@@ -1,0 +1,9 @@
+::ng-deep .add .vertical-tab .mat-tab-group .mat-tab-labels .mat-tab-label:nth-child(1):before {
+  content: "Patient List";
+}
+::ng-deep .mat-tab-group .mat-tab-body-wrapper {
+  overflow: hidden !important
+}
+.activeRow {
+  background: #ffcb60 !important;
+}

@@ -1,0 +1,68 @@
+::ng-deep .app-body {
+  overflow: hidden
+}
+
+::ng-deep .mat-expansion-panel-body {
+  padding-top: 15px !important;
+}
+
+.check {
+  width: 25px;
+  height: 25px;
+}
+
+.op-body {
+  border: 1px solid #ddd;
+  max-width: 100%;
+  background-color: #fff;
+  margin: 0 auto;
+  margin-bottom: 15px;
+}
+/*::ng-deep .mat-expansion-panel-body,*/
+::ng-deep .shipMoreOption .tab-content {
+  background-color: #f7f3f3;
+  border: 1px solid #dddd;
+}
+
+button.btn.btn-global {
+  border: 1px solid;
+}
+
+::ng-deep .angular-editor {
+  background-color: #fff;
+}
+
+.h31 {
+  height: 31px;
+}
+
+.w-input {
+  padding: 0 4px !important;
+  height: 18px !important;
+}
+
+
+mat-cell.mat-cell.mat-column-SNo {
+  text-align: right;
+}
+
+a.disabled {
+  pointer-events: none;
+  cursor: default;
+}
+
+.starshow {
+  display: inline;
+}
+
+.starhide {
+  display: none;
+}
+
+.shipmenttabHide {
+  display: none;
+}
+
+.shipmenttabShow {
+  display: inline;
+}

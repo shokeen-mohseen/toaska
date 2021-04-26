@@ -1,0 +1,123 @@
+<mat-accordion>
+  <mat-expansion-panel (opened)="panelOpenState = true"
+                       (closed)="panelOpenState = false" [expanded]="false">
+    <mat-expansion-panel-header>
+      <mat-panel-description>
+        {{panelOpenState ? '- Hide' : '+ Show'}} {{ 'key_FilterForForecast' | translate }}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <div class="row"> 
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label> {{ 'key_Salesmanager' | translate }}</label>
+          <angular2-multiselect fixFilterBug [data]="itemList"
+                                [(ngModel)]="selectedItems"
+                                [settings]="settings"
+                                (onSelect)="onItemSelect($event)"
+                                (onDeSelect)="OnItemDeSelect($event)"
+                                (onSelectAll)="onSelectAll($event)"
+                                (onDeSelectAll)="onDeSelectAll($event)">
+          </angular2-multiselect>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label> {{ 'key_Organization' | translate }}</label>
+          <angular2-multiselect fixFilterBug [data]="itemList"
+                                [(ngModel)]="selectedItems"
+                                [settings]="settings"
+                                (onSelect)="onItemSelect($event)"
+                                (onDeSelect)="OnItemDeSelect($event)"
+                                (onSelectAll)="onSelectAll($event)"
+                                (onDeSelectAll)="onDeSelectAll($event)">
+          </angular2-multiselect>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label> {{ 'key_Location' | translate }}</label>
+          <angular2-multiselect fixFilterBug [data]="itemList"
+                                [(ngModel)]="selectedItems"
+                                [settings]="settings"
+                                (onSelect)="onItemSelect($event)"
+                                (onDeSelect)="OnItemDeSelect($event)"
+                                (onSelectAll)="onSelectAll($event)"
+                                (onDeSelectAll)="onDeSelectAll($event)">
+          </angular2-multiselect>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label> {{ 'key_Material' | translate }}</label>
+          <angular2-multiselect fixFilterBug [data]="itemList"
+                                [(ngModel)]="selectedItems"
+                                [settings]="settings"
+                                (onSelect)="onItemSelect($event)"
+                                (onDeSelect)="OnItemDeSelect($event)"
+                                (onSelectAll)="onSelectAll($event)"
+                                (onDeSelectAll)="onDeSelectAll($event)">
+          </angular2-multiselect>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label> {{ 'key_GraphType' | translate }}</label>
+          <angular2-multiselect fixFilterBug [data]="itemList"
+                                [(ngModel)]="selectedItems"
+                                [settings]="settings"
+                                (onSelect)="onItemSelect($event)"
+                                (onDeSelect)="OnItemDeSelect($event)"
+                                (onSelectAll)="onSelectAll($event)"
+                                (onDeSelectAll)="onDeSelectAll($event)">
+          </angular2-multiselect>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label class="d-block"> &nbsp; </label>
+          <button class="btn btn-save font-weight-normal mr-2" > {{ 'key_ApplyFilter' | translate }}</button>
+          <button class="btn btn-next font-weight-normal mr-2"> {{ 'key_ResetFilter' | translate }}</button>
+          <button class="btn btn-success font-weight-normal"> {{ 'key_Export' | translate }}</button>
+        </div>
+      </div>
+    </div>
+  </mat-expansion-panel>
+</mat-accordion>
+
+<div class="row">
+<div class="col-sm-12">
+  <img src="{{imageSrc}}" class="img-fluid" />
+</div>
+</div>
+
+
+<div class="row mt-4">
+  <div class="col-lg-12">
+
+    <div class="scroll">
+      <mat-table #table [dataSource]="dataSource" matSort>
+        <ng-container *ngFor="let column of displayedColumns; let i=index;" [matColumnDef]="column">
+          <mat-header-cell *matHeaderCellDef mat-sort-header mwlResizable [enableGhostResize]="true" (resizeEnd)="onResizeEnd($event, column)"
+                           [resizeEdges]="{bottom: false, right: true, top: false, left: true}">
+             {{ displayedColumnsHeader[i] | translate }}
+          </mat-header-cell>
+
+          <mat-cell *matCellDef="let item">
+            {{ item[column] }}
+          </mat-cell>
+        </ng-container>
+
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{ 'selected': selection.isSelected(row)}"
+                 (click)="selection.toggle(row)"></mat-row>
+      </mat-table>
+    </div>
+    <mat-paginator #paginator
+                   [pageSize]="10"
+                   [pageSizeOptions]="[5, 10, 20]">
+    </mat-paginator>
+  </div>
+</div>

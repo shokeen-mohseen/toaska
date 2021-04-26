@@ -1,0 +1,64 @@
+<!--<app-nav></app-nav>-->
+<ion-header class="ion-no-border">
+    <ion-toolbar mode="ios">
+        <ion-buttons slot="start">
+            <ion-button (click)="goBack()" *ngIf="isShowBackBtn">
+                <ion-icon name="arrow-back-outline"></ion-icon>
+              
+            </ion-button>
+            <ion-menu-button autoHide="false" ></ion-menu-button>
+          </ion-buttons>
+        <ion-title>
+            <a routerLinkActive="active" [routerLink]="['/dashboard/home']">
+                <img *ngIf="IsTosca" src="assets/images/toscaOnly.png" width= "42"/>
+                <img *ngIf="!IsTosca" src="assets/images/logo1.png" width= "42"/>
+              </a>
+        </ion-title> 
+        <ion-buttons slot="end" *ngIf="isShowNotificationBtn">
+            <ion-button (click)="presentPopover()">
+                <ion-icon name="megaphone-outline"></ion-icon>
+              <!-- <ion-icon slot="icon-only" ios="ellipsis-horizontal" md="ellipsis-vertical"></ion-icon> -->
+              <ion-badge color="danger">{{counter}}</ion-badge>
+            </ion-button> 
+          </ion-buttons>
+      
+      </ion-toolbar>
+  </ion-header>
+  <ion-content class="ion-padding-start ion-padding-end">
+<!-- <div class="topNav"></div> -->
+<div class="app-body">
+  
+ 
+
+  <!-- <app-sidebarnav></app-sidebarnav> -->
+  <main class="main bg-bodycolor">
+    
+    <!-- Breadcrumb -->
+    <!-- breaking change 'cui-breadcrumb' -->
+    <!-- Breadcrumb Menu-->
+    <!--<cui-breadcrumb>
+
+
+      <li class="breadcrumb-menu d-md-down-none">
+        <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+          <a class="btn" href="#"><i class="icon-speech"></i></a>
+          <a class="btn" [routerLink]="['/dashboard']"><i class="icon-graph"></i> &nbsp;Dashboard</a>
+          <a class="btn" href="#"><i class="icon-settings"></i> &nbsp;{{'Settings' | translate}}</a>
+        </div>
+      </li>
+
+    </cui-breadcrumb>-->
+    <!-- <div class="container-fluid"> -->
+    <div >
+
+
+      <router-outlet></router-outlet>
+    </div><!-- /.container-fluid -->
+  </main>
+  <!--<app-toasts></app-toasts>-->
+  <!-- <app-rightpanel></app-rightpanel>  -->
+</div>
+</ion-content>
+<!--<app-footer>
+ <a href="javascript:;">Lamps</a> &copy; copyright 2020. owered by <a href="javascript:;">OSOFTEC</a>
+</app-footer>-->

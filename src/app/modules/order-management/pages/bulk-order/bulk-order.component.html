@@ -1,0 +1,938 @@
+<div class="e-profile mb-4">
+  <div class="col-sm-12 p-0">
+    <div class="row box-children pl-0 pr-0">
+      <div class="col-md-4 col-sm-12">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label>
+                {{'key_OrderType' | translate}} <sup class="text-danger font-weight-bold sup1">*</sup>
+              </label>
+              <angular2-multiselect fixFilterBug [data]="OrderTypeData" [(ngModel)]="selectedOrderType" [settings]="settings"
+                                    (onSelect)="onItemOrderTypeSelect($event)"
+                                    (onDeSelectAll)="OnItemDeOrderTypeSelect($event)"
+                                    name="orderType" #items="ngModel" required id="orderType" autofocus>
+              </angular2-multiselect>
+
+
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="form-group">
+              <label for="">
+                {{'key_OrderStatus' | translate}} <sup class="text-danger font-weight-bold sup1">*</sup>
+              </label>
+              <angular2-multiselect fixFilterBug [data]="OrderStatuslist" [(ngModel)]="selectedOrderstatusItems" [settings]="Ordersettings"
+                                    (onSelect)="onItemOrderStatusSelect($event)"
+                                    (onDeSelectAll)="OnItemOrderStatusDeSelect($event)"
+                                    name="orderStatus" #items="ngModel" required id="orderStatus" autofocus>
+              </angular2-multiselect>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 col-sm-12">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label>
+                {{'key_ShipFromType' | translate}}
+              </label>
+              <angular2-multiselect fixFilterBug [data]="shipfromtypelist" [(ngModel)]="selectedshipfromtypeItems" [settings]="Ordersettings"
+                                    (onSelect)="onItemshipfromtypeSelect($event)"
+                                    (onDeSelectAll)="OnItemshipfromtypeDeSelect($event)" id="selectedshipfromtype"
+                                    name="selectedshipfromtypeItems" #items="ngModel" autofocus>
+              </angular2-multiselect>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 col-sm-12">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label>
+                {{'key_ShipFrom' | translate}}
+              </label>
+              <angular2-multiselect fixFilterBug class="right" [data]="shipfromlist" [(ngModel)]="selectedshipfromItems" [settings]="Ordersettings"
+                                    (onSelect)="onItemShipFromSelect($event)" id="selectedshipfrom"
+                                    (onDeSelectAll)="OnItemShipFromDeSelect($event)"
+                                    name="selectedshipfromItems" #items="ngModel" autofocus>
+              </angular2-multiselect>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="form-group">
+              <label> {{'key_FromContract' | translate}}</label>
+              <angular2-multiselect fixFilterBug class="right" [data]="FromContractlist" [(ngModel)]="selectedFCTItems" [settings]="Ordersettings"
+                                    (onSelect)="onItemFCTSelect($event)"
+                                    (onDeSelect)="OnItemFCTDeSelect($event)" name="items" #items="ngModel">
+              </angular2-multiselect>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="co-sm-12">
+    <div class="row box-children pl-0 pr-0">
+      <div class="col-md-12 col-sm-12 mb-2" style="display:none;">
+        <div class="custom-control custom-radio col-md-12 pb-2">
+          <input type="radio" class="custom-control-input" id="radio1" name="groupOfDefaultRadios"
+                 (click)="CancelOrderLocations()" [disabled]="iscustomradio">
+          <label class="custom-control-label" for="radio1">{{'key_orderMsg'| translate}}</label>
+        </div>
+        <div class="custom-control custom-radio col-md-12 pb-2">
+          <input type="radio" class="custom-control-input" id="radio2" name="groupOfDefaultRadios"
+                 #big checked (click)="singleOrderLocations()" [disabled]="iscustomradio">
+          <label class="custom-control-label" for="radio2">{{'key_orderforMsg'| translate}}</label>
+        </div>
+      </div>
+      <div class="col-md-6 col-sm-12" *ngIf="big.checked">
+        <div class="form-group">
+          <label>
+            {{'key_ShiptoType'| translate}} <sup class="text-danger font-weight-bold sup1">*</sup>
+          </label>
+          <angular2-multiselect fixFilterBug [data]="shiptotypelist" [(ngModel)]="selectedshiptotypeItems" [settings]="settings"
+                                (onSelect)="onItemShiptotypeSelect($event)"
+                                (onDeSelectAll)="OnItemShiptotypeDeSelect($event)" id="selectedshiptotype"
+                                name="selectedshiptotypeItems" #items="ngModel">
+          </angular2-multiselect>
+        </div>
+      </div>
+      <div class="col-md-6 col-sm-12" *ngIf="big.checked">
+        <div class="form-group">
+          <label>
+            {{'key_ShipTo'| translate}}<sup class="text-danger font-weight-bold sup1">*</sup>
+          </label>
+          <angular2-multiselect fixFilterBug class="right" [data]="shiptolist" [(ngModel)]="selectedshiptoItems" [settings]="settings"
+                                (onSelect)="onItemShipToSelect($event)" (onDeSelectAll)="OnItemShipToDeSelect($event)"
+                                id="selectedshipto" name="selectedshiptoItems" #items="ngModel">
+          </angular2-multiselect>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="co-sm-12">
+    <div class="row box-children pl-0 pr-0">
+      <div class="col-md-6 col-sm-12">
+        <div class="form-group">
+          <label>
+            {{'Key_EquipmentType'| translate}}<sup class="text-danger font-weight-bold sup1">*</sup>
+          </label>
+          <angular2-multiselect fixFilterBug [data]="EquipmentTypeData" [(ngModel)]="selectedETDItems" [settings]="settings"
+                                (onSelect)="onItemETSelect($event)"
+                                (onDeSelectAll)="OnItemETDeSelect($event)" name="eTDItems" #eTDItems="ngModel" required>
+          </angular2-multiselect>
+        </div>
+      </div>
+      <div class="col-md-6 col-sm-12">
+        <div class="form-group">
+          <label>
+            {{'key_ContractNo'| translate}}
+          </label>
+          <angular2-multiselect fixFilterBug class="right" [data]="contactlist" [(ngModel)]="selectedcontacttoItems" [settings]="settings"
+                                (onSelect)="onItemConToSelect($event)"
+                                (onDeSelectAll)="OnItemConToDeSelect($event)" name="items" #items="ngModel">
+          </angular2-multiselect>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="co-sm-12">
+    <div class="row box-children pl-0 pr-0">
+      <div class="col-md-6 col-sm-12">
+        <div class="form-group">
+          <label>
+            {{'key_PONo'| translate}}( {{orderManagement.PurchaseOrderNumber != undefined  ? orderManagement.PurchaseOrderNumber.length : 0}} max 15) <sup class="text-danger font-weight-bold sup1">*</sup>
+          </label>
+          <input type="text" class="form-control" [(ngModel)]="orderManagement.PurchaseOrderNumber"
+                 [value]="orderManagement.PurchaseOrderNumber"
+                 id="PONo" (input)="validation($event)"
+                 name="PONo" maxlength="15" required
+                 [disabled]="iscustomradio" #PurchaseOrderNumber />
+          <div *ngIf="!!orderManagement.PurchaseOrderNumber ? isPONo : false" class="errorMessage text-danger">
+            {{'ValiationMessages.key_PONumber' | translate }} {{orderManagement.PurchaseOrderNumber}}
+          </div>
+
+        </div>
+      </div>
+      <div class="col-md-6 col-sm-12">
+        <div class="form-group">
+          <label>{{'key_Carrier'| translate}}</label>
+          <angular2-multiselect fixFilterBug class="right" [data]="CarrierData" [(ngModel)]="selectedCarrierItems" [settings]="settings"
+                                (onSelect)="onItemCarrierSelect($event)"
+                                (onDeSelect)="OnItemCarrierDeSelect($event)" name="CarrierData" #items="ngModel">
+          </angular2-multiselect>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="co-sm-12">
+    <div class="row box-children pl-0 pr-0">
+      <div class="col-md-6 col-sm-12">
+        <div class="form-group">
+          <label>{{'key_TransplaceOrderComment'| translate}} {{orderManagement.TransplaceOrderComment != undefined  ? orderManagement.TransplaceOrderComment.length : 0}} max 80</label>
+          <textarea class="form-control" placeholder=" Transplace Order Comment (80 characters max)" maxlength="80"
+                    [(ngModel)]="orderManagement.TransplaceOrderComment"></textarea>
+        </div>
+      </div>
+      <div class="col-md-6 col-sm-12">
+        <div class="form-group">
+          <label>{{'key_TransplaceDeliveryComment'| translate}} {{orderManagement.TransplaceDeliveryComment != undefined  ? orderManagement.TransplaceDeliveryComment.length : 0}} max 80</label>
+          <textarea class="form-control" placeholder="Transplace Delivery Comment (80 characters max)" maxlength="80"
+                    [(ngModel)]="orderManagement.TransplaceDeliveryComment"></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="co-sm-12">
+    <div class="row box-children pl-0 pr-0">
+      <div class="col-md-3 col-sm-12">
+        <div class="form-group">
+          <label>
+            {{'key_Material'| translate}}<sup class="text-danger font-weight-bold sup1">*</sup>
+          </label>
+          <angular2-multiselect fixFilterBug [data]="MaterialData" [(ngModel)]="selectedMaterialItems" [settings]="Materialsettings"
+                                (onSelect)="onItemMaterialDataSelect($event)"
+                                (onDeSelectAll)="OnItemMaterialDataDeSelect($event)" name="items" #items="ngModel" required>
+          </angular2-multiselect>
+
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-12">
+        <div class="form-group">
+          <label>
+            {{'key_Pallets'| translate}}<sup class="text-danger font-weight-bold sup1">*</sup>
+          </label>
+          <input type="number" class="form-control" id="Pallets" [(ngModel)]="MPallets" #Pallets="ngModel"
+                 required (ngModelChange)="validationPallets($event);" />
+        </div>
+      </div>
+      <div class="col-md-2 col-sm-12">
+        <div class="form-group">
+          <label>
+            {{'key_truckOrderQty'| translate}}
+          </label>
+          <input type="text" class="form-control" id="Quantity" [(ngModel)]="OQuantity" #Quantity="ngModel" disabled />
+        </div>
+      </div>
+
+      <div class="col-md-4 col-sm-12 mt-4">
+        <!--data-toggle="modal"
+        [attr.data-target]="editOrderMaterila"-->
+        <button type="button" id="AddMaterialButton" class="btn btn-save font-weight-normal"
+                placement="bottom" ngbTooltip="Add Material" [disabled]="isValidationPallets" (click)="AddMaterial()">
+          {{'key_Add_Material'| translate}}
+        </button>
+        <button type="button" class="btn btn-next font-weight-normal ml-2" (click)="CancelMaterial()">Cancel</button>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<div class="row">
+  <div class="col-md-6">
+    <mat-accordion>
+      <mat-expansion-panel (opened)="panelOpenState = true"
+                           (closed)="panelOpenState = false" [expanded]="true">
+        <mat-expansion-panel-header>
+          <mat-panel-description>
+            {{'key_OrderDetails'| translate}}
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div class="card-body pl-0 pt-0 pb-0">
+          <div class="col-md-12 pl-0 pr-0">
+            <div class="d-flex flex-nowrap justify-content-between align-items-center mb-2">
+              <div class="btn-group btn-group-toggle btn-group-md" data-toggle="buttons">
+                <button id="btnRefresh" class="btn btn-outline-success" type="button" placement="bottom" ngbTooltip="Edit"
+                        (click)="EditMaterial()" [disabled]="isEditPallets">
+                  <i class="" aria-hidden="true"></i>
+                  <span>{{'key_Edit'| translate}}</span>
+                </button>
+                <button id="deleteButton" class="btn btn btn-outline-danger" type="button" placement="bottom" ngbTooltip="Delete"
+                        (click)="DeleteMaterial()" [disabled]="isDeletePallets">
+                  <i class="fa fa-trash-o" aria-hidden="true"></i>
+                  <span>
+                    {{'key_Delete'| translate}}
+                  </span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="scroll">
+              <mat-table #table [dataSource]="dataSourceAddMaterial" matSort>
+                <ng-container matColumnDef="materialID">
+                  <mat-header-cell class="t-center tw-5" *matHeaderCellDef style="width:30px">
+                    <div class="form-check-inline">
+                      <label class="form-check-label">
+                        <mat-checkbox [checked]="isAllMaterialSelected" (change)="selectAllMaterial($event); false" class="form-check-input"></mat-checkbox>
+                      </label>
+                    </div>
+                  </mat-header-cell>
+                  <mat-cell class="t-center tw-5" *matCellDef="let row" style="width:30px">
+                    <div class="form-check-inline">
+                      <label class="form-check-label">
+                        <mat-checkbox [checked]="row.IsSeleted" (click)="$event.stopPropagation()" class="form-check-input"
+                                      (change)="selectCheckbox(row)"></mat-checkbox>
+                      </label>
+                    </div>
+                  </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="name">
+                  <mat-header-cell class="" *matHeaderCellDef mat-sort-header>{{'key_Materialname'| translate}}</mat-header-cell>
+                  <mat-cell class="" *matCellDef="let element">
+                    {{element.name}}
+                    <!--<a href="javascript:void(0)" (click)="editPopupMaterial(element)">
+
+                    </a>-->
+                  </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="propertyValue">
+                  <mat-header-cell class="" *matHeaderCellDef mat-sort-header>{{'key_truckOrderQty'| translate}}</mat-header-cell>
+                  <mat-cell class="" *matCellDef="let element" align="right"> {{element.propertyValue}} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="quantity">
+                  <mat-header-cell class="" *matHeaderCellDef mat-sort-header> {{'key_OrderQuantity'| translate}}</mat-header-cell>
+                  <mat-cell class="" *matCellDef="let element" align="right"> {{element.quantity}} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="pallets">
+                  <mat-header-cell class="" *matHeaderCellDef mat-sort-header>{{'key_Pallets'| translate}}</mat-header-cell>
+                  <mat-cell class="" *matCellDef="let element" align="right">
+                    {{element.pallets}}
+                  </mat-cell>
+                </ng-container>
+                <mat-header-row *matHeaderRowDef="displayedColumnsAddMaterial"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumnsAddMaterial;"
+                         [ngClass]="{ 'selected': row.IsSeleted}"
+                         (click)="selectCheckbox(row)">
+                </mat-row>
+              </mat-table>
+            </div>
+          </div>
+          <div class="col-md-10 col-sm-12 mt-3">
+            <div class="form-group row">
+              <label class="col-md-6 text-right pt-2">
+                {{'key_NoOfOrder'| translate}}<sup class="text-danger font-weight-bold sup1">*</sup>
+              </label>
+              <div class="col-md-6 col-sm-12">
+                <input type="number" class="form-control" id="NumerOfOrders" [(ngModel)]="numerOfOrders" name="NumerOfOrders" maxlength="3" required>
+
+              </div>
+            </div>
+          </div>
+          <div class="col-md-2 pl-0 col-sm-12 mt-3">
+            <div *ngIf="!iscalculates" class="btn btn-next font-weight-normal pb-1 pt-1" (click)="calculate()" [class.disabled]="iscalculates">Calculate</div>
+            <div *ngIf="iscalculates" class="btn btn-next font-weight-normal pb-1 pt-1" [class.disabled]="iscalculates">Calculate</div>
+
+          </div>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+
+
+
+  </div>
+  <div class="col-md-6">
+    <mat-accordion>
+      <mat-expansion-panel (opened)="panelOpenState1 = false"
+                           (closed)="panelOpenState1 = true" [expanded]="true">
+        <mat-expansion-panel-header>
+          <mat-panel-description>
+            {{'key_Summary'| translate}}
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="scroll">
+              <table class="table table-striped table-bordered">
+                <thead>
+                  <tr>
+                    <th width="30%" style="text-align:center">{{'key_Materialname'| translate}}</th>
+                    <th width="35%" style="text-align:center">{{'key_totalOrderQty'| translate}}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of orderSummaryList">
+                    <td>{{item.materialName}} </td>
+                    <td align="right">{{item.orderQuantity}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="col-lg-12 text-center" *ngIf="this.orderSummaryList.length == 0"><p>There are no records to display.</p></div>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+  <div class="col-md-12 mt-4">
+    <mat-accordion>
+      <mat-expansion-panel (opened)="panelOpenState = true"
+                           (closed)="panelOpenState = false" [expanded]="true">
+        <mat-expansion-panel-header>
+          <mat-panel-description>{{'key_FinalOrderDetails'| translate}}</mat-panel-description>
+        </mat-expansion-panel-header>
+        <div class="card-body pl-0 pt-0 pb-0">
+          <div class="col-md-12 pl-0 pr-0">
+            <div class="d-flex flex-nowrap justify-content-between align-items-center mb-2">
+              <div class="btn-group btn-group-toggle btn-group-md" data-toggle="buttons">
+                <button id="addAddressButton" class="btn btn-outline-success" data-toggle="modal" [attr.data-target]="'#' + editOrder" type="button"
+                        placement="bottom" ngbTooltip="Edit" [disabled]="isFinalEdit" (click)="EditFinalOrder()">
+                  <i class="" aria-hidden="true"></i>
+                  <span>{{'key_Edit'| translate}}</span>
+                </button>
+                <!--data-target="#editOrder"-->
+
+                <button id="deleteButton" class="btn btn btn-outline-danger" type="button"
+                        placement="bottom" ngbTooltip="Delete" [disabled]="isFinalDelete" (click)="DeleteEditMaterial()">
+                  <i class="fa fa-trash-o" aria-hidden="true"></i>
+                  <span>
+                    {{'key_Delete'| translate}}
+                  </span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="scroll final-order-grid">
+              <mat-table #table [dataSource]="dataSourcefinal" matSort>
+                <ng-container matColumnDef="Index">
+
+                  <mat-header-cell class="t-center tw-5" *matHeaderCellDef>
+                    <div class="form-check-inline">
+                      <label class="form-check-label">
+
+                        <mat-checkbox [checked]="isAllFinalSelected" (change)="selectAllFinal($event); false"
+                                      class="form-check-input"></mat-checkbox>
+                      </label>
+                    </div>
+                  </mat-header-cell>
+                  <mat-cell class="t-center tw-5" *matCellDef="let row">
+                    <div class="form-check-inline">
+                      <label class="form-check-label">
+                        <mat-checkbox [checked]="row.IsfinalSeleted" (click)="$event.stopPropagation()" class="form-check-input"
+                                      (change)="selectFinalCheckbox(row)" [disabled]="row.IsDisable"></mat-checkbox>
+                      </label>
+                    </div>
+                  </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="OrderNum">
+                  <mat-header-cell class="" *matHeaderCellDef mat-sort-header>{{'key_OrderNo'| translate}}</mat-header-cell>
+                  <mat-cell class="" *matCellDef="let element" align="right"> {{element.OrderNum}} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="Organization">
+                  <mat-header-cell class="" *matHeaderCellDef mat-sort-header>{{'key_Organization'| translate}}</mat-header-cell>
+                  <mat-cell class="" *matCellDef="let element"> {{element.Organization}} </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="shipToLocationName">
+                  <mat-header-cell class="" *matHeaderCellDef mat-sort-header>{{'key_Shipto'| translate}}</mat-header-cell>
+                  <mat-cell class="" *matCellDef="let element"> {{element.shipToLocationName}} </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="materialName">
+                  <mat-header-cell class="" *matHeaderCellDef mat-sort-header>{{'key_MaterialDesc'| translate}}</mat-header-cell>
+                  <mat-cell class="" *matCellDef="let element"> {{element.materialName}} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="orderQuantity">
+                  <mat-header-cell class="" *matHeaderCellDef mat-sort-header>{{'key_OrderQty'| translate}}</mat-header-cell>
+                  <mat-cell class="" *matCellDef="let element" align="right"> {{element.orderQuantity}} </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="RequestedDeliveryDate">
+                  <mat-header-cell class="" *matHeaderCellDef mat-sort-header>{{'key_RequestedDeliveryDate'| translate}}</mat-header-cell>
+                  <mat-cell class="" *matCellDef="let element">
+                    <p-calendar appendTo="body" [showIcon]="true" [monthNavigator]="true"
+                                [yearNavigator]="true" yearRange="2000:2030"
+                                inputId="time" placeholder="mm/dd/yyyy" name="RequestedDeliveryDate" id="RequestedDeliveryDate"
+                                [(ngModel)]="element.RequestedDeliveryDate" [disabled]="element.IsDisable"
+                                (ngModelChange)="onRequestedDate(element, $event)">
+                    </p-calendar>
+
+                   
+                  </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="ScheduledShipDate">
+                  <mat-header-cell class="" *matHeaderCellDef mat-sort-header>{{'key_ScheduledShipDate'| translate}}</mat-header-cell>
+                  <mat-cell class="" *matCellDef="let element">
+                   
+                    <p-calendar appendTo="body" [showIcon]="true" [monthNavigator]="true"
+                                [yearNavigator]="true" yearRange="2000:2030"
+                                inputId="time" placeholder="mm/dd/yyyy" name="ScheduledShipDate" id="ScheduledShipDate"
+                                [(ngModel)]="element.ScheduledShipDate" [disabled]="element.IsDisable"
+                                (ngModelChange)="onScheduledShipDate(element)">
+                    </p-calendar>
+                  </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="MustArriveByDate">
+                  <mat-header-cell class="" *matHeaderCellDef mat-sort-header>{{'key_mabd1'| translate}}</mat-header-cell>
+                  <mat-cell class="" *matCellDef="let element">
+                    
+                    <p-calendar appendTo="body" [showIcon]="true" [monthNavigator]="true"
+                                [yearNavigator]="true" yearRange="2000:2030"
+                                inputId="time" placeholder="mm/dd/yyyy" name="MustArriveByDate" id="MustArriveByDate"
+                                [(ngModel)]="element.MustArriveByDate" [disabled]="element.IsDisable"
+                                (ngModelChange)="onMustArriveDate(element)">
+                    </p-calendar>
+                  </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="PONum">
+                  <mat-header-cell class="" *matHeaderCellDef mat-sort-header>{{'key_PONumbers'| translate}} </mat-header-cell>
+                  <mat-cell class="" *matCellDef="let element">
+                    <input type="text" class="form-control" [(ngModel)]="element.PONum" id="PONum"
+                           [disabled]="element.IsDisable" maxlength="15"
+                           (input)="onPONum(element, $event)" />
+
+                  </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="EquipNum">
+                  <mat-header-cell class="" *matHeaderCellDef mat-sort-header>{{'key_EquipmentNumber'| translate}} </mat-header-cell>
+                  <mat-cell class="" *matCellDef="let element">
+                    <input type="text" class="form-control" [(ngModel)]="element.EquipNum" id="EquipNo"
+                           [disabled]="element.IsDisable" maxlength="15"
+                           (input)="onEquipNo(element, $event)" />
+                  </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="TransplaceOrderComment">
+                  <mat-header-cell class="" *matHeaderCellDef mat-sort-header>{{'key_TransplaceOrderComment'| translate}}</mat-header-cell>
+                  <mat-cell class="" *matCellDef="let element">
+                    {{element.TransplaceOrderComment}}
+                  </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="TransplaceDeliveryComment">
+                  <mat-header-cell class="" *matHeaderCellDef mat-sort-header>{{'key_TransplaceDeliveryComment'| translate}}</mat-header-cell>
+                  <mat-cell class="" *matCellDef="let element">
+                    {{element.TransplaceDeliveryComment}}
+                  </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="ContractType">
+                  <mat-header-cell class="" *matHeaderCellDef mat-sort-header>{{'key_ContractType'| translate}}</mat-header-cell>
+                  <mat-cell class="" *matCellDef="let element">
+                    {{element.ContractType}}
+                  </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="ContractNo">
+                  <mat-header-cell class="" *matHeaderCellDef mat-sort-header>{{'key_ContractNo'| translate}}</mat-header-cell>
+                  <mat-cell class="" *matCellDef="let element">
+                    {{element.ContractNo}}
+                  </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="Carrier">
+                  <mat-header-cell class="" *matHeaderCellDef mat-sort-header>{{'key_Carrier'| translate}}</mat-header-cell>
+                  <mat-cell class="" *matCellDef="let element">
+                    {{element.Carrier}}
+                  </mat-cell>
+                </ng-container>
+                <mat-header-row *matHeaderRowDef="displayedColumnsfinal"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumnsfinal;"></mat-row>
+
+              </mat-table>
+            </div>
+           
+
+            <div class="col-md-12 mt-2 ">
+              <div class="row form-group float-right">
+                <div class="form-check checkbox mt-2 mr-3">
+                  <input id="check1" type="checkbox" value="" class="form-check-input"  [checked]="SendNotification" (change)="SendNotification = !SendNotification"/>
+                  <label for="check1" class="form-check-label"> Send Notification</label>
+                </div>
+                <button type="submit" class="btn btn-save font-weight-normal mr-3" [disabled]="regularOrderHasReadOnlyAccess || isSubmit" (click)="saveBulkOrder()">Save Order</button>
+                <button type="button" class="btn btn-next font-weight-normal" (click)="close()">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+
+    <div class="modal" id="editOrder">
+      <div class="modal-dialog modal-md">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" style=" font-size: 16px;">{{'key_OrderNo'| translate}}</h5>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <!-- Modal body -->
+          <div class="modal-body">
+            <div class="row">
+
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label class="mt-2">{{'key_OrderNo'| translate}}</label>
+                  <input type="text" class="form-control" value="{{ediFinalElement.OrderNum}}" disabled readonly>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>{{'key_LocationType'| translate}}<sup class="text-danger">*</sup> </label>
+                  <angular2-multiselect fixFilterBug [data]="shiptotypeEditlist" [(ngModel)]="selectedshiptotypeItems" [settings]="editsetting"
+                                        name="selectedshiptotypeItems" #items="ngModel">
+                  </angular2-multiselect>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>{{'key_Shipto'| translate}}<sup class="text-danger">*</sup> </label>
+                  <angular2-multiselect fixFilterBug [data]="shiptoEditlist" [(ngModel)]="selectedshiptoEditItems" [settings]="editsetting"
+                                        name="selectedshiptoEditItems" #items="ngModel">
+                  </angular2-multiselect>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>{{'key_ContractNo'| translate}}</label>
+                  <angular2-multiselect fixFilterBug [data]="editContactlist" [(ngModel)]="selectededitcontacttoItems" [settings]="editsettings"
+                                        (onSelect)="onItemeditConToSelect($event)"
+                                        (onDeSelectAll)="OnItemeditConToDeSelect($event)" name="items" #items="ngModel">
+                  </angular2-multiselect>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>{{'key_Carrier'| translate}}</label>
+
+                  <angular2-multiselect fixFilterBug [data]="CarrierEditData" [(ngModel)]="selectedEditCarrierItems" [settings]="editsettings"
+                                        (onSelect)="onItemEditCarrierSelect($event)"
+                                        (onDeSelect)="OnItemEditCarrierDeSelect($event)" name="CarrierEditData" #items="ngModel">
+                  </angular2-multiselect>
+                </div>
+              </div>
+
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label>{{'key_TransplaceOrderComment'| translate}}</label>
+                  <textarea class="form-control" placeholder="transplace order" maxlength="80"
+                            [(ngModel)]="ediFinalElement.TransplaceOrderComment" (blur)="onTransplaceOrderComment(ediFinalElement.TransplaceOrderComment)"></textarea>
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label>{{'key_TransplaceDeliveryComment'| translate}}</label>
+                  <textarea class="form-control" placeholder="transplace order" maxlength="80"
+                            [(ngModel)]="ediFinalElement.TransplaceDeliveryComment" (blur)="onTransplaceDeliveryComment(ediFinalElement.TransplaceDeliveryComment)"></textarea>
+                </div>
+              </div>
+
+              <div class="col-lg-12 mt-3">
+                <div class="scroll">
+                  <mat-table #table [dataSource]="dataSourcefinalEdit" matSort>
+
+                    <ng-container matColumnDef="MaterialDescription">
+                      <mat-header-cell class="" *matHeaderCellDef mat-sort-header>{{'key_MaterialDescription'| translate}}</mat-header-cell>
+                      <mat-cell class="" *matCellDef="let element"> {{element.MaterialDescription}} </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="TruckOrderQty">
+                      <mat-header-cell class="" *matHeaderCellDef mat-sort-header>{{'key_OrderQuantity'| translate}}</mat-header-cell>
+                      <mat-cell class="" *matCellDef="let element">
+                        <input type="number" class="form-control" [(ngModel)]="element.TruckOrderQty" id="TruckOrderQty" (blur)="onTruckOrderQty(element)" />
+                      </mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="PalletQty">
+                      <mat-header-cell class="" *matHeaderCellDef mat-sort-header>{{'key_PalletQty'| translate}}</mat-header-cell>
+                      <mat-cell class="" *matCellDef="let element">
+
+                        <input type="number" class="form-control" [(ngModel)]="element.PalletQty" id="PalletQty" disabled />
+                      </mat-cell>
+                    </ng-container>
+
+                    <mat-header-row *matHeaderRowDef="displayedColumnsEdit"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: displayedColumnsEdit;"></mat-row>
+                  </mat-table>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <!-- Modal footer -->
+          <div class="modal-footer col-12 justify-content-center">
+            <div class="d-flex justify-content-center">
+              <button type="button" class="btn btn-save btn-sm" data-dismiss="modal" (click)="SaveUpdatedRecord()">Save</button>
+            </div>
+            <div class="d-flex justify-content-center">
+              <button type="button" class="btn btn-sm btn-next bottom-btn-next" data-dismiss="modal">{{'key_Cancel'| translate}}</button>
+            </div>
+          </div>
+
+
+
+        </div>
+      </div>
+    </div>
+
+
+    <!-- <a data-target="#compilePopup" data-toggle="modal">materialPropertyPopup</a>-->
+
+    <div id="editOrderMaterila" class="modal">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+
+            <h5 class="modal-title" style=" font-size: 16px;">{{'key_MaterialMissingProperties' | translate}}</h5>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body">
+            <div class="col-md-12 mt-4 mb-4">
+
+              <div class="col-md-11 col-sm-11">
+                <div class="form-group row">
+                  <div class="col-sm-12 col-md-5 pr-0 text-right">
+                    <label class="pt-1">{{'Key_EquipmentType' | translate}}</label>
+                  </div>
+                  <div class="col-md-7 col-sm-12">
+                    <input type="text" class="form-control" id="EquipmentTypename1" [(ngModel)]="editVerifyEquipmentMaterialProperty.equipmentTypeName" disabled />
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-11 col-sm-11">
+                <div class="form-group row">
+                  <div class="col-sm-12 col-md-5 pr-0 text-right">
+                    <label class="pt-1">{{'key_Materialname' | translate}}</label>
+                  </div>
+                  <div class="col-md-7 col-sm-12">
+                    <input type="text" class="form-control" id="Materialname" [(ngModel)]="editVerifyEquipmentMaterialProperty.materialName" disabled />
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-11 col-sm-11">
+                <div class="form-group row">
+                  <div class="col-sm-12 col-md-5 pr-0 text-right">
+                    <label class="pt-1">{{'key_MaterialWeight' | translate}}</label>
+                  </div>
+                  <div class="col-md-7 col-sm-12">
+                    <input type="number" class="form-control" id="MaterialWeight"
+                           [(ngModel)]="editVerifyEquipmentMaterialProperty.materialWeight"
+                           (input)="onMaterialWeight($event)" placeholder="Enter number value only" />
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-11 col-sm-11">
+                <div class="form-group row">
+                  <div class="col-sm-12 col-md-5 pr-0 text-right">
+                    <label class="pt-1">
+                      {{'key_EAPerPallet' | translate}}
+                    </label>
+                  </div>
+                  <div class="col-md-7 col-sm-12">
+                    <input type="number" class="form-control" id="EAPerPallet"
+                           [(ngModel)]="editVerifyEquipmentMaterialProperty.propertyValueUP"
+                           (input)="onEAPerPallet($event)" placeholder="Enter number value only" />
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-11 col-sm-11">
+                <div class="form-group row">
+                  <div class="col-sm-12 col-md-5 pr-0 text-right">
+                    <label class="pt-1">{{'key_NoofPalletUnitinEquipment' | translate}}</label>
+                  </div>
+
+                  <div class="col-md-7 col-sm-12">
+                    <input type="number" class="form-control" id="NoofPalletUnitinEquipment"
+                           [(ngModel)]="editVerifyEquipmentMaterialProperty.propertyValuePE"
+                           (input)="onNoofPalletUnitinEquipment($event)" placeholder="Enter number value only" />
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-11 col-sm-11">
+                <div class="form-group row">
+                  <div class="col-sm-12 col-md-5 pr-0 text-right">
+                    <label class="pt-1">{{'key_NOofUnitinEquipment' | translate}}</label>
+                  </div>
+                  <div class="col-md-7 col-sm-12">
+                    <input type="number" class="form-control" id="NOofUnitinEquipment"
+                           [(ngModel)]="editVerifyEquipmentMaterialProperty.propertyValueUE"
+                           (input)="onUnitinEquipment($event)" placeholder="Enter number value only" />
+                  </div>
+                </div>
+              </div>
+              <div class="text-center mt-4 pt-2 mb-3">
+                <button type="button" [disabled]="regularOrderHasReadOnlyAccess || issavepropety" class="btn btn-save font-weight-normal" style=" width: 88px;" data-dismiss="modal" (click)="SavePropertyRecord()">Save</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal" id="compilePopup">
+      <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">
+              {{'key_MaterialMissingProperties' | translate}}
+            </h5>
+            <button type="button" for="confirms" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body">
+            <h5 class="mb-4 mt-4">
+              Please provide the missing properties of material.
+            </h5>
+            <div class="scroll">
+
+              <mat-table #table [dataSource]="MissingMaterialPropertyDataSource" matSort>
+
+
+                <ng-container matColumnDef="materialName">
+                  <mat-header-cell class="" *matHeaderCellDef mat-sort-header>{{'key_Materialname' | translate}}</mat-header-cell>
+                  <mat-cell class="" *matCellDef="let element"> {{element.materialName}} </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="materialWeight">
+                  <mat-header-cell class="" *matHeaderCellDef mat-sort-header>{{'key_MaterialWeight' | translate}}</mat-header-cell>
+                  <mat-cell class="" *matCellDef="let element">
+                    <input type="text" id="txt_weight_{{element.materilaID}}" [(ngModel)]="element.materialWeight" class="form-control" />
+                  </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="unitInPallet">
+                  <mat-header-cell class="" *matHeaderCellDef mat-sort-header>{{'key_PerPallet' | translate}}</mat-header-cell>
+                  <mat-cell class="" *matCellDef="let element">
+
+                    <input type="text" id="txt_perPallet_{{element.materilaID}}" [(ngModel)]="element.unitInPallet" class="form-control" />
+                  </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="unitInEquipement">
+                  <mat-header-cell class="" *matHeaderCellDef mat-sort-header>{{'key_UnitInEquipment'|translate}}</mat-header-cell>
+                  <mat-cell class="" *matCellDef="let element">
+                    <input type="text" id="txt_perEquipment_{{element.materilaID}}" [(ngModel)]="element.unitInEquipement" class="form-control" />
+
+                  </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="palletInEquipement">
+                  <mat-header-cell class="" *matHeaderCellDef mat-sort-header>{{'key_PalletInEquipment'|translate}}</mat-header-cell>
+                  <mat-cell class="" *matCellDef="let element">
+                    <input type="text" id="txt_perPalletEquipment_{{element.materilaID}}" [(ngModel)]="element.palletInEquipement" class="form-control" />
+
+                  </mat-cell>
+                </ng-container>
+
+                <mat-header-row *matHeaderRowDef="missingMaterialProerptyColumn"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: missingMaterialProerptyColumn;">
+                </mat-row>
+              </mat-table>
+            </div>
+
+            <div class="col-sm-4 text-center pt-1 mx-auto mb-4 mt-3">
+              <button class="mt-4 mr-2 pl-4 pr-4 btn btn-save" [disabled]="regularOrderHasReadOnlyAccess" (click)="saveallmaterialProperties()">{{'key_Save'|translate}}</button>
+              <button class="mt-4 btn btn-next font-weight-normal">{{'key_Cancel'|translate}}</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="showOrderMaterila" class="modal">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+
+            <h5 class="modal-title" style=" font-size: 16px;">{{'key_MaterialMissingProperties' | translate}}</h5>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body">
+            <div class="col-md-12 mt-4 mb-4">
+
+              <div class="col-md-11 col-sm-11">
+                <div class="form-group row">
+                  <div class="col-sm-12 col-md-5 pr-0 text-right">
+                    <label class="pt-1">{{'Key_EquipmentType' | translate}}</label>
+                  </div>
+                  <div class="col-md-7 col-sm-12">
+                    <input type="text" class="form-control" id="EquipmentTypename" [(ngModel)]="editVerifyEquipmentMaterialProperty.equipmentTypeName" disabled />
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-11 col-sm-11">
+                <div class="form-group row">
+                  <div class="col-sm-12 col-md-5 pr-0 text-right">
+                    <label class="pt-1">{{'key_Materialname' | translate}}</label>
+                  </div>
+                  <div class="col-md-7 col-sm-12">
+                    <input type="text" class="form-control" id="Materialname1" [(ngModel)]="editVerifyEquipmentMaterialProperty.materialName" disabled />
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-11 col-sm-11">
+                <div class="form-group row">
+                  <div class="col-sm-12 col-md-5 pr-0 text-right">
+                    <label class="pt-1">{{'key_MaterialWeight' | translate}}</label>
+                  </div>
+                  <div class="col-md-7 col-sm-12">
+                    <input type="number" class="form-control" id="MaterialWeight"
+                           [(ngModel)]="editVerifyEquipmentMaterialProperty.materialWeight"
+                           placeholder="Enter number value only" />
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-11 col-sm-11">
+                <div class="form-group row">
+                  <div class="col-sm-12 col-md-5 pr-0 text-right">
+                    <label class="pt-1">
+                      {{'key_EAPerPallet' | translate}}
+                    </label>
+                  </div>
+                  <div class="col-md-7 col-sm-12">
+                    <input type="number" class="form-control" id="EAPerPallet"
+                           [(ngModel)]="editVerifyEquipmentMaterialProperty.propertyValueUP"
+                           placeholder="Enter number value only" />
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-11 col-sm-11">
+                <div class="form-group row">
+                  <div class="col-sm-12 col-md-5 pr-0 text-right">
+                    <label class="pt-1">{{'key_NoofPalletUnitinEquipment' | translate}}</label>
+                  </div>
+
+                  <div class="col-md-7 col-sm-12">
+                    <input type="number" class="form-control" id="NoofPalletUnitinEquipment"
+                           [(ngModel)]="editVerifyEquipmentMaterialProperty.propertyValuePE"
+                           placeholder="Enter number value only" />
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-11 col-sm-11">
+                <div class="form-group row">
+                  <div class="col-sm-12 col-md-5 pr-0 text-right">
+                    <label class="pt-1">{{'key_NOofUnitinEquipment' | translate}}</label>
+                  </div>
+                  <div class="col-md-7 col-sm-12">
+                    <input type="number" class="form-control" id="NOofUnitinEquipment"
+                           [(ngModel)]="editVerifyEquipmentMaterialProperty.propertyValueUE"
+                           placeholder="Enter number value only" />
+                  </div>
+                </div>
+              </div>
+              <div class="text-center mt-4 pt-2 mb-3">
+                <button type="button" [disabled]="issavepropety" class="btn btn-save font-weight-normal" style=" width: 88px;" data-dismiss="modal">Save</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+

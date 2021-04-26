@@ -1,0 +1,174 @@
+<!--TFS id:- 17300, Date:- 08/09/2020, Author: Monu Ram Yadav, Des:- Design Application charges screen-->
+
+<app-top-btn-group #btnBar [actionGroupConfig]="actionGroupConfig" (action)="actionHandler($event)"></app-top-btn-group>
+<h5>{{ 'key_Appcharge' | translate }}</h5>
+
+<mat-tab-group animationDuration="0ms" #tabGroupA class="mt-20 tab-overflow">
+  <mat-tab>
+    <ng-template mat-tab-label>
+      {{ 'key_Appchargelist' | translate }}
+    </ng-template>
+    <div class="tab-content">
+      <div class="tab-pane active" id="existingUsers">
+
+        <div class="row">
+          <div class="col-md-5">
+            <div class="row form-group">
+              <div class="col-md-6 text-right pt-2">{{ 'key_ChargeCategory' | translate }}</div>
+              <div class="col-md-6"><angular2-multiselect [data]="itemList" [(ngModel)]="selectedItems" [settings]="settings"
+                      (onSelect)="onItemSelect($event)"
+                      (onDeSelect)="OnItemDeSelect($event)"
+                      (onSelectAll)="onSelectAll($event)"
+                      (onDeSelectAll)="onDeSelectAll($event)"
+                      (onAddFilterNewItem)="onAddItem($event)">
+</angular2-multiselect></div>
+            </div>
+          </div>
+          <div class="col-md-5">
+            <div class="row form-group">
+              <div class="col-md-4 text-right pt-2">{{ 'key_Charge' | translate }}</div>
+              <div class="col-md-6">
+                <angular2-multiselect [data]="itemList" [(ngModel)]="selectedItems" [settings]="settings"
+                                      (onSelect)="onItemSelect($event)"
+                                      (onDeSelect)="OnItemDeSelect($event)"
+                                      (onSelectAll)="onSelectAll($event)"
+                                      (onDeSelectAll)="onDeSelectAll($event)"
+                                      (onAddFilterNewItem)="onAddItem($event)">
+                </angular2-multiselect>
+              </div>
+              <div class="col-md-2"><input type="button" id="btnSave" name="btnSave" value="Add" class="btn btn-save popup-btn-width btn-w-h"></div>
+            </div>
+          </div>
+        </div>
+
+        <!--Row End-->
+      </div>
+      <div class="row">
+        <div class="col-lg-12">
+          <app-table-filter (filterOn)="applyFilter($event)"></app-table-filter>
+
+          <div class="scroll resize-table">
+            <mat-table #table [dataSource]="dataSource" matSort>
+              <ng-container *ngFor="let column of displayedColumns; let i=index;" [matColumnDef]="column">
+                <mat-header-cell *matHeaderCellDef mat-sort-header mwlResizable [enableGhostResize]="true" (resizeEnd)="onResizeEnd($event, column)"
+                                 [resizeEdges]="{bottom: false, right: true, top: false, left: true}">
+                  <div class="form-check-inline" *ngIf="column === selectRow">
+                    <label class="form-check-label">
+                      <input type="checkbox" class="form-check-input" value="" placement="top" ngbTooltip="Select all" (change)="$event ? masterToggle() : null"
+                             [checked]="selection.hasValue() && isAllSelected()"
+                             [indeterminate]="selection.hasValue() && !isAllSelected()">
+                    </label>
+                  </div>
+                  <div *ngIf="column != selectRow"> {{ displayedColumnsReplace[i] | translate }}</div>
+                </mat-header-cell>
+                <mat-cell *matCellDef="let item">
+                  <!--for-checkbox-->
+                  <div class="form-check-inline" *ngIf="column === selectRow">
+                    <label class="form-check-label">
+                      <input type="checkbox" class="form-check-input" value="" (click)="$event.stopPropagation()"
+                             (change)="$event ? selection.toggle(item) : null"
+                             [checked]="selection.isSelected(item)">
+                    </label>
+                  </div>
+
+                  <div class="w-100" *ngIf="column === Rate">
+                    <input type="text" class="form-control" required />
+                  </div>
+                  <div class="w-100" *ngIf="column === Rate_Type">
+                    <select class="form-control" required>
+                      <option>Per EA</option>
+                    </select>
+                  </div>
+                  <div class="w-100" *ngIf="column === UOM">
+                    <select class="form-control">
+                      <option>Us Doller</option>
+                      <option>PL</option>
+                      <option>Positions</option>
+                      <option>Pound</option>
+                      <option>Yarn</option>
+                    </select>
+                  </div>
+                  <div class="w-100" *ngIf="column === Quantity_per_UOM">
+                    <input type="text" class="form-control" required />
+                  </div>
+                  <div class="w-100" *ngIf="column === Commodity">
+                    <select class="form-control" disabled>
+                      <option>Select</option>
+                    </select>
+                  </div>
+                  <div class="w-100" *ngIf="column === Sales_Tax">
+                    <select class="form-control">
+                      <option>Non-Taxable</option>
+                      <option>Sales Tax</option>
+                    </select>
+                  </div>
+                  <div class="w-100" *ngIf="column === Price_Method_Type">
+                    <select class="form-control" required>
+                      <option>Billable</option>
+                      <option>Non Billable</option>
+                      <option>Non Billable</option>
+                    </select>
+                  </div>
+                  <div class="form-check-inline w-100 py-3 justify-content-around d-flex align-items-center" *ngIf="column === Show_On_BOL">
+                    <mat-checkbox class="example-margin"></mat-checkbox>
+                  </div>
+                  <div class="form-check-inline w-100 py-3 justify-content-around d-flex align-items-center" *ngIf="column === Auto_Added">
+                    <mat-checkbox class="example-margin"></mat-checkbox>
+                  </div>
+                  <div class="form-check-inline w-100 py-3 justify-content-around d-flex align-items-center" *ngIf="column === Add_Pallet">
+                    <mat-checkbox class="example-margin" disabled></mat-checkbox>
+                  </div>
+                  <div class="w-100" *ngIf="column === Price_Increase_Method">
+                    <select class="form-control">
+                      <option>CPI Based</option>
+                      <option>Tosca Based</option>
+                    </select>
+                  </div>
+                  <div class="w-100" *ngIf="column === Effective_Start">
+                    <ejs-datepicker [format]='dateFormat' [enabled]=true placeholder='MM-DD-YYYY'></ejs-datepicker>
+                  </div>
+                  <div class="w-100" *ngIf="column === Effective_End">
+                    <ejs-datepicker [format]='dateFormat' [enabled]=true placeholder='MM-DD-YYYY'></ejs-datepicker>
+                  </div>
+                  <div class="w-100 justify-content-around d-flex align-items-center" *ngIf="column === Delete">
+                    <i class="fa fa-trash text-danger" aria-hidden="true"></i>
+                  </div>
+                  <div class="w-100 justify-content-around d-flex align-items-center" *ngIf="column === Add_New">
+                    <a class="a_hover" (click)="addRow()"><i class="fa fa-plus-circle" aria-hidden="true"></i></a>
+                  </div>
+                  {{ item[column] }}
+                </mat-cell>
+              </ng-container>
+
+              <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+              <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+            </mat-table>
+          </div>
+          <mat-paginator #paginator
+                         [pageSize]="10"
+                         [pageSizeOptions]="[5, 10, 20]">
+          </mat-paginator>
+        </div>
+      </div>
+
+    </div>
+  </mat-tab>
+</mat-tab-group>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--custom-tab end-->
+
+<app-show-notes></app-show-notes>

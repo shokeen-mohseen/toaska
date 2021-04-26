@@ -1,0 +1,66 @@
+<form #preferredMaterial="ngForm" (ngSubmit)="addPreferredMaterial()">
+  <div class="modal-header">
+    <h4 class="modal-title">{{'key_Addeditmap' | translate}}</h4>
+    <button type="button" class="close" data-dismiss="modal" (click)="activeModal.dismiss('Cross click')">&times;</button>
+  </div>
+
+  <!-- Modal body -->
+  <div class="modal-body">
+
+    <div class="form-group">
+      <label for="firstname">{{ 'key_Materialname' | translate }} <span class="text-danger">*</span></label>
+      <angular2-multiselect fixFilterBug [data]="MaterialData" [(ngModel)]="selectedItemsA" [settings]="settingsA"
+                            (onSelect)="onMaterialSelect($event)"
+                            (onDeSelect)="OnItemDeSelectMaterial($event)"
+                            (onSelectAll)="onSelectAll($event)"
+                            (onDeSelectAll)="OnItemDeSelectMaterial($event)"
+                            (onAddFilterNewItem)="onAddItemA($event)" name="materialList" required >
+      </angular2-multiselect>
+      <div *ngIf="!!!materialId && isMaterialId === 1" class="errorMessage text-danger">{{'ValiationMessages.key_Required' | translate }}</div>
+    </div>
+    <div class="form-group">
+      <label for="firstname">{{ 'key_Quantity' | translate }} <span class="text-danger">*</span></label>
+      <!--<input type="text" class="form-control" />-->
+      <input [(ngModel)]="preferredMaterialViewModel.quantity" id="quantity" name="Quantity" type="text" class="form-control" required="" maxlength="6"
+             (ngModelChange)="validation('quantity');">
+      <div *ngIf="isQuantity === 1" class="errorMessage text-danger">{{'ValiationMessages.key_Required' | translate }}</div>
+      <div *ngIf="!!preferredMaterialViewModel.quantity && isQuantity === 0 && isValidInput === 1" class="errorMessage text-danger col-sm-12 col-md-12">
+        {{'ValiationMessages.key_ValidInput' | translate }}
+      </div>
+      <!--<ng-select2 [data]="exampleData" [options]="options"> </ng-select2>-->
+    </div>
+    <div class="form-group">
+      <label for="firstname">{{ 'key_UOM' | translate }}</label>
+      <!--<angular2-multiselect fixFilterBug [data]="UOMData" [(ngModel)]="selectedItemsB" [settings]="settingsB"
+                        (onSelect)="onUOMSelect($event)"
+                        (onDeSelect)="OnItemDeSelectUOM($event)"
+                        (onSelectAll)="onSelectAll($event)"
+                        (onDeSelectAll)="OnItemDeSelectUOM($event)"
+                        (onAddFilterNewItem)="onAddItemA($event)" name="uomList" >
+  </angular2-multiselect>-->
+      <!--<select [(ngModel)]="uomId"
+          class="js-example-tags form-control"
+          id="searchUOM" name="uomList" (change)="onUOMSelect(uomId);" [value]="30">
+    <option></option>
+    <option *ngFor="let search of UOMData" [ngValue]="search.id">{{search.itemName}}</option>
+  </select>-->
+      <select class="form-control" name="UOM" id="UOM" [(ngModel)]="SelectUOM" #UOM="ngModel" disabled>
+        <option class='option' *ngFor='let data of UOMData' [value]="data.id">
+          {{data.name}}
+        </option>
+      </select>
+      <!--<div *ngIf="!!!uomId && isUOMId === 1" class="errorMessage text-danger col-sm-12 col-md-12">{{'ValiationMessages.key_Required' | translate }}</div>-->
+    </div>
+
+  </div>
+  <div class="col-lg-12 text-center mt-4 mb-4">
+    <button type="submit" id="btnSave" name="btnSave" class="btn btn-save mr-2 popup-btn-width" [disabled]="isValidated === 0">{{ 'key_Save' | translate }}</button>
+    <!--<input type="submit" id="btnSave" name="btnSave"
+           class="btn btn-save mr-2 popup-btn-width"
+           value="{{ 'key_Save' | translate }}" [disabled]="isValidated === 0">-->
+    <!--<input type="submit" id="btnSave" name="btnSave" [disabled]="isValidated === 0"
+           class="btn btn-save mr-2 popup-btn-width disabled" value="{{ 'key_Save' | translate }}">-->
+
+  </div>
+
+</form>

@@ -1,0 +1,68 @@
+<!--TFS ID:-17373,
+    Date:11-09-2020,
+    Author: Monu Ram Yadav,
+  Des:- Make new Covid Status Global box and replace status box with condition text and shift this from partograph monitoring to global.-->
+
+<!--<div class="container-fluid">
+  <div class="searchBar">
+    <div class="input-group">
+      <input type="text" class="form-control" placeholder="{{ 'key_searchhere' | translate }}">
+      <div class="input-group-prepend append-searchbar">
+        <span class="btn"><i class="fa fa-search" aria-hidden="true"></i></span>
+      </div>
+    </div>
+  </div>
+</div>-->
+
+<div class="container-fluid forms-progress-bar text-center">
+  <div class="row">
+    <div class="col-lg-1 col-md-1 col-sm-12"></div>
+    <div class="col-lg-1 col-md-1 col-sm-12">
+      <div class="status-box green-bgColor text-white" [disabled]="(IsEnableTab$ | async)"  (click)="covidStatus(1)" *ngIf="statuscovidn">
+        <div class="fs-12">{{ 'key_Covidstatus' | translate }}</div>
+        <span>N</span>
+        <small>{{ 'key_Negative' | translate }}</small>
+      </div>
+      <div class="status-box red-bgColor text-white" [disabled]="(IsEnableTab$ | async)"  (click)="covidStatus(2)" *ngIf="statuscovidp">
+        <div class="fs-12">{{ 'key_Covid' | translate }}</div>
+          <span>P</span>
+          <small>{{ 'key_Positive' | translate }}</small>
+        </div>
+      <div class="status-box lightBlue-bgColor text-black" [disabled]="(IsEnableTab$ | async)"  (click)="covidStatus(3)" *ngIf="statuscovidu">
+        <div class="fs-12">{{ 'key_Covid' | translate }}</div>
+          <span>U</span>
+          <small>{{ 'key_Unknown' | translate }}</small>
+        </div>
+      <div class="status-box yellow-bgColor text-black" [disabled]="(IsEnableTab$ | async)"  (click)="covidStatus(4)" *ngIf="statuscovidt">
+        <div class="fs-12">{{ 'key_Covid' | translate }}</div>
+          <span>T</span>
+          <small>{{ 'key_Testing' | translate }}</small>
+        </div>
+    </div>
+    <div class="col-lg-8 col-md-8 col-sm-12">
+      <span *ngFor="let item of partographStepperlist;let i = index">
+        <a [ngStyle]="{'pointer-events': (IsEnableTab$ | async) ? 'none': 'auto'}" class="circle-desc" [class.circle-desc-active]="stepperName == item" [routerLink]="[pageurlList[i]]">{{ item | translate }} </a>
+        <span class="circles" [routerLink]="[pageurlList[i]]" [class.active]="stepperName == item"></span>
+        <span class="bar" *ngIf="(i != partographStepperlist.length-1)"></span>
+      </span>
+    </div>
+    <div class="col-lg-1 col-md-1 col-sm-12">
+      <div class="status-box yellow-bgColor text-black" [disabled]="(IsEnableTab$ | async)"  *ngIf="statusm" (click)="selectStatus(2)">
+        <div class="fs-12">{{ 'key_Condition' | translate }}</div>
+          <span>M</span>
+          <small>{{ 'key_Medium' | translate }}</small>
+        </div>
+      <div class="status-box green-bgColor text-white" [disabled]="(IsEnableTab$ | async)"   (click)="selectStatus(1)" *ngIf="statusn">
+        <div class="fs-12">{{ 'key_Condition' | translate }}</div>
+          <span>N</span>
+          <small>{{ 'key_Normal' | translate }}</small>
+        </div>
+      <div class="status-box red-bgColor text-white" [disabled]="(IsEnableTab$ | async)"  (click)="selectStatus(3)" *ngIf="statusc">
+        <div class="fs-12">{{ 'key_Condition' | translate }}</div>
+          <span>C</span>
+          <small>{{ 'key_Critical' | translate }}</small>
+        </div>
+    </div>
+    <div class="col-lg-1 col-md-1 col-sm-12"></div>
+  </div>
+</div>

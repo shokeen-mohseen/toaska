@@ -1,0 +1,10 @@
+.reportContainer {
+  margin-top: 20px;
+  overflow: auto;
+  padding: 20px;
+}
+
+table {
+  border-top: 0;
+  border-left: 0;
+}

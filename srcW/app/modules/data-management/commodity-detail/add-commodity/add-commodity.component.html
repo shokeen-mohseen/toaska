@@ -1,0 +1,113 @@
+<div>
+  <!--<div class="row">
+    <div class="col-md-6"></div>
+    <div class="col-md-6 text-right">
+      <span class="fw600">Last Updated:	</span> 8/13/2020 8:35:24 IST
+      <br><span class="fw600">By</span> Jay Coleman (lampsdemo@osoftec.com)
+    </div>
+  </div>-->
+  <!--Last Updated Section End//////////////-->
+  <form [formGroup]="commodityAddForm" novalidate>
+    <div class="row">
+      <div class="col-md-3 custom-flex-w-15">
+        <div class="card">
+          <div class="card-header">{{ 'key_AddedList' | translate }}</div>
+          <div class="card-body p-0">
+            <ul class="list-group" #nextList>
+              <li class="list-group-item list-group-item-action"
+                  *ngFor="let commodityName of DataSourceEdit; let i = index"
+                  (click)="selectedCommodityEdit(commodityName,i)"
+                  [ngClass]="{ 'active': commodityName.id == commodityCheckmodel.id || commodityCheckmodel.id==undefined }">
+                <a>{{commodityName?.description}}</a>
+                <button class="close" type="button" *ngIf="commodityName.id!=commodityCheckmodel.id"
+                        (click)="removeCommodityFromEditList(commodityName)">
+                  <i class="fa fa-times" aria-hidden="true"></i>
+                </button>
+              </li>
+            </ul>
+          </div>
+          <!--<div class="card-body p-0">
+          <ul class="list-group" #nextList>-->
+          <!--<li class="list-group-item list-group-item-action active">Added Name</li>-->
+          <!--<a class="list-group-item list-group-item-action"
+                 *ngFor="let commodityName of DataSourceEdit; let i = index;" (click)="selectedCommodity(i)">{{commodityName.code}}</a>
+            </ul>
+          </div>-->
+        </div>
+      </div>
+      <div class="col-md-9 custom-flex-w-85">
+        <div class="tab-content">
+          <!--=============== Start profile =================-->
+          <div class="e-profile">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="box-children">
+                  <div class="form-group">
+                    <label for="firstname">{{ 'key_Commoditytype' | translate }} <sup class="text-danger sup1">*</sup></label>
+                    <angular2-multiselect [data]="itemCommodityTypeList" [(ngModel)]="selectedItemsA" [settings]="settingsA"
+                                          (onSelect)="onItemCommoditySelect($event)"
+                                          (onDeSelect)="OnItemDeSelect($event)"
+                                          (onSelectAll)="onSelectAll($event)"
+                                          (onDeSelectAll)="onDeSelectAll($event)"
+                                          (onAddFilterNewItem)="onAddItemA($event)" name="itemA" formControlName="commoditytype">
+                    </angular2-multiselect>
+                  </div>
+                  <div class="form-group">
+                    <label for="firstname">{{ 'key_CommodityName' | translate }} <sup class="text-danger sup1">*</sup></label>
+                    <input type="text" placeholder="Commodity Name" [(ngModel)]="commodityeditmodel.name" formControlName="commodityName" class="form-control"/>
+                    <!--<input type="hidden" ng-model="commodityeditmodel.id" value="{{commodityeditmodel.id}}" />-->
+                    
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="box-children">
+                  <div class="form-group">
+                    <label for="firstname">{{ 'key_Segment' | translate }} <sup class="text-danger sup1">*</sup></label>
+                    <angular2-multiselect [data]="itemSegmentTypeList" [(ngModel)]="selectedItemsB" [settings]="settingsB"
+                                          (onSelect)="onItemSegmentSelect($event)"
+                                          (onDeSelect)="OnItemDeSelect($event)"
+                                          (onSelectAll)="onSelectAll($event)"
+                                          (onDeSelectAll)="onDeSelectAll($event)"
+                                          (onAddFilterNewItem)="onAddItemA($event)" name="itemB" formControlName="segment">
+                    </angular2-multiselect>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <!--=============== End e-profile =================-->
+        </div>
+      </div>
+    </div>
+
+    <div class="row justify-content-center my-5">
+
+      <div class="col-xl-2 col-lg-4 col-md-4 col-sm-12">
+        <button class="btn btn-block btn-save" [disabled]="!commodityAddForm.valid" (click)="saveCommodity()" type="submit">{{ 'key_Save' | translate }}</button>
+      </div>
+      <div class="col-xl-2 col-lg-4 col-md-4 col-sm-12">
+        <button class="btn btn-block btn-next" type="button" [disabled]="!commodityAddForm.valid" (click)="saveNextCommodity()">
+          <span class="fw600">{{ 'key_Add' | translate }}</span> <span class="fs-13"> > {{ 'key_Next' | translate }}</span>
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

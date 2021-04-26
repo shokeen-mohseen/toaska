@@ -1,0 +1,51 @@
+<!-- Task 17060: Patient examination page Mockup - Angular Implementation (Responsive & Cross Browser Compatibility)
+  Author:- Monu Ram Yadav
+  Date :- 08/08/2020 -->
+<!--Task 17057: Add popup window on every Plus Sign Button
+  Author:- Monu Ram Yadav
+  Date:- 10-08-2020-->
+<!--Task 17089: Show Notes on click open - window with notes,
+  Author:- Monu Ram Yadav
+  Date:- 10-08-2020-->
+<!--TFS ID:- 17414,
+  Date: 15-09-2020,
+  Author: Monu Ram YAdav,
+  Des:-  Fix Stepper Steps Data in Sub Component for Prepartum Care Section-->
+<div id="stepper11" class="bs-stepper">
+  <div class="bs-stepper-header">
+    <div class="step" data-target="#test11">
+      <button class="step-trigger">
+        <span class="bs-stepper-circle">1</span>
+      </button>
+    </div>
+    <div class="line"></div>
+    <div class="step" data-target="#test22">
+      <button class="step-trigger">
+        <span class="bs-stepper-circle">2</span>
+      </button>
+    </div>
+    <div class="line"></div>
+    <div class="step" data-target="#test33">
+      <button class="step-trigger">
+        <span class="bs-stepper-circle">3</span>
+      </button>
+    </div>
+  </div>
+  <div class="bs-stepper-content">
+
+    <div id="test11" class="content formlabel-mb">
+      <app-general-physical-examination></app-general-physical-examination>
+    </div>
+    <!--Test 11 End-->
+
+    <div id="test22" class="content formlabel-mb">
+      <app-systemic></app-systemic>
+    </div>
+    <!--Test 22 End-->
+
+    <div id="test33" class="content">
+      <app-investigation-advised></app-investigation-advised>
+    </div>
+    <!--Test 33 End-->
+  </div>
+</div>

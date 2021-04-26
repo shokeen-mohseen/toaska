@@ -1,0 +1,717 @@
+<!--Filters-->
+<mat-accordion>
+  <mat-expansion-panel (opened)="panelOpenState = true"
+                       (closed)="panelOpenState = false" [expanded]="false">
+    <mat-expansion-panel-header>
+      <mat-panel-description>
+        {{panelOpenState ? '- Hide' : '+ Show'}}   {{ 'key_OrderFilter' | translate }}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <form #addOrderForm="ngForm" novalidate>
+
+
+      <div class="row custom-form">
+        <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 d-flex w-100">
+          <div class="card">
+            <div class="card-header mb-2">
+              <div class="card-title">{{ 'key_OrderFilter' | translate }} </div>
+            </div>
+            <div class="card-body p-0">
+              <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                <div class="form-group">
+                  <label for="nf-password">{{ 'key_OrderNo' | translate }}</label>
+                  <input class="form-control" id="nfOrdernumber" placeholder="Type Order no." type="text" [(ngModel)]="orderWorkbenchFilterModal.OrderNo" name="nf-number" autocomplete="current-password">
+                </div>
+              </div>
+              <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+
+                <div class="form-group">
+                  <label for="ccmonth">{{ 'key_Ordertype' | translate }}</label>
+
+                  <angular2-multiselect fixFilterBug [data]="OrderTypeData" [(ngModel)]="orderWorkbenchFilterModal.selectedOrderTypeItems"
+                                        [settings]="{singleSelection: false,text: 'Select', enableSearchFilter: true, addNewItemOnFilter: false, badgeShowLimit: 1, disabled: false, labelKey: 'name', searchBy: ['name'] }"
+                                        name="OrderType"
+                                        (onSelectAll)="OnOrderTypeSelectAll($event)"
+                                        (onSelect)="OnOrderTypeSelect($event)"
+                                        (onDeSelect)="OnOrderTypeDeSelect($event)">
+                  </angular2-multiselect>
+                  <!--<angular2-multiselect fixFilterBug [data]="OrderTypeData" [(ngModel)]="orderWorkbenchFilterModal.selectedOrderTypeItems"
+                                        [settings]="{singleSelection: false,text: 'Select', enableSearchFilter: true, addNewItemOnFilter: false, badgeShowLimit: 1, disabled: false, labelKey: 'name', searchBy: ['name'] }"
+                                        name="OrderType" #items="ngModel"
+                                        (onSelect)="OnOrderTypeSelect($event)"
+                                        (onDeSelect)="OnOrderTypeDeSelect($event)">
+                  </angular2-multiselect>-->
+
+                </div>
+              </div>
+              <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                <div class="form-group">
+                  <label for="ccmonth">{{ 'key_Status' | translate }}</label>
+
+                  <angular2-multiselect fixFilterBug [data]="OrderStatusData" [(ngModel)]="orderWorkbenchFilterModal.selectedOrderStatusItems"
+                                        [settings]="{singleSelection: false,text: 'Select', enableSearchFilter: true, addNewItemOnFilter: false, badgeShowLimit: 1, disabled: false, labelKey: 'name', searchBy: ['name'] }"
+                                        name="OrderStatus"
+                                        (onSelect)="OnOrderStatusSelect($event)"
+                                        (onDeSelect)="OnOrderStatusDeSelect($event)">
+                  </angular2-multiselect>
+                </div>
+              </div>
+              <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                <div class="form-group">
+                  <label for="ccmonth">{{ 'key_Showversion' | translate }}</label>
+
+                  <angular2-multiselect fixFilterBug [data]="AllVersionDataList" [(ngModel)]="orderWorkbenchFilterModal.selectedAllVersionItems"
+                                        [settings]="{singleSelection: false,text: 'Select', enableSearchFilter: true, addNewItemOnFilter: false, badgeShowLimit: 1, disabled: false, labelKey: 'name', searchBy: ['name'] }"
+                                        name="AllVersionData" #items="ngModel"
+                                        (onSelect)="OnVersionSelect($event)"
+                                        (onDeSelect)="OnVersionDeSelect($event)">
+                  </angular2-multiselect>
+                </div>
+              </div>
+              <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                <div class="form-group">
+                  <label for="ccmonth">{{ 'key_OrderCondition' | translate }}</label>
+
+                  <angular2-multiselect fixFilterBug [data]="OrderConditionDataList" [(ngModel)]="orderWorkbenchFilterModal.selectedOrderConditionItems"
+                                        [settings]="{singleSelection: false,text: 'Select', enableSearchFilter: true, addNewItemOnFilter: false, badgeShowLimit: 1, disabled: false, labelKey: 'name', searchBy: ['name'] }"
+                                        name="OrderCondition" #items="ngModel"
+                                        (onSelect)="OnOrderConditionSelect($event)"
+                                        (onDeSelect)="OnOrderConditionDeSelect($event)">
+                  </angular2-multiselect>
+                </div>
+              </div>
+              <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                <div class="form-group">
+                  <label for="ccmonth">{{ 'key_InvoiceNumber' | translate }}</label>
+                  <angular2-multiselect fixFilterBug [data]="InvoiceNoList" [(ngModel)]="orderWorkbenchFilterModal.selectedInvoiceNoItems"
+                                        [settings]="{singleSelection: false,text: 'Select', enableSearchFilter: true, addNewItemOnFilter: false, badgeShowLimit: 1, disabled: false, labelKey: 'name', searchBy: ['name'] }"
+                                        name="InvoiceNo" #items="ngModel"
+                                        (onSelect)="OnInvoiceNoSelect($event)"
+                                        (onDeSelect)="OnInvoiceNoDeSelect($event)">
+                  </angular2-multiselect>
+
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label for="ccmonth">{{ 'key_OrderAmount' | translate }}</label>
+                  <div class="input-group input-group-sm">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">Max Value </span>
+                    </div>
+                    <input class="form-control" id="OrderAmount" type="number" [(ngModel)]="orderWorkbenchFilterModal.MaxOrderAmount" name="OrderAmount" placeholder="Max Value" autocomplete="current-password">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">Min Value </span>
+                    </div>
+                    <input class="form-control" id="nfMinnumber" type="number" [(ngModel)]="orderWorkbenchFilterModal.MinOrderAmount" name="nf-number" placeholder="Min Value" autocomplete="current-password">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 d-flex w-100">
+          <div class="card">
+            <div class="card-header mb-2">
+              <div class="card-title">{{ 'key_OrderDateFilter' | translate }}</div>
+            </div>
+            <div class="card-body p-0">
+              <div class="row" style="padding: 2px 14px;">
+                <div class="col-md-6 col-sm-6 col-lg-6 col-xl-6 pr-1">
+                  <div class="form-group">
+                    <label for="ccmonth">{{ 'key_Shiptype' | translate }}</label>
+                    <angular2-multiselect fixFilterBug [data]="ShipFromTypeList" [(ngModel)]="orderWorkbenchFilterModal.selectedShipFromTypeItems"
+                                          [settings]="{singleSelection: false,text: 'Select', enableSearchFilter: true, addNewItemOnFilter: false, badgeShowLimit: 1, disabled: false, labelKey: 'name', searchBy: ['name'] }"
+                                          name="ShipFromType"
+                                          (onSelect)="OnShipFromTypeSelect($event)"
+                                          (onDeSelect)="OnShipFromTypeDeSelect($event)"
+                                          (onSelectAll)="OnShipFromTypeSelectAll($event,'')"
+                                          (onDeSelectAll)="OnShipFromTypeDeSelectAll($event)">
+                    </angular2-multiselect>
+
+                  </div>
+                </div>
+                <!-- <div class="col-md-6 col-sm-6 col-lg-6 col-xl-6">
+                  <div class="form-group">
+                    <label for="ccmonth">{{ 'key_Shiptypeloc' | translate }}</label>
+                    <angular2-multiselect fixFilterBug [data]="ShipToTypeList" [(ngModel)]="orderWorkbenchFilterModal.selectedShipToTypeItems"
+                                          [settings]="{singleSelection: false,text: 'Select', enableSearchFilter: true, addNewItemOnFilter: false, badgeShowLimit: 1, disabled: false, labelKey: 'name', searchBy: ['name'] }"
+                                          name="ShipToType" #items="ngModel"
+                                          (onSelect)="OnShipToTypeSelect($event)"
+                                          (onDeSelect)="OnShipToTypeDeSelect($event)"
+                                          (onSelectAll)="OnShipToTypeSelectAll($event)"
+                                          (onDeSelectAll)="OnShipToTypeDeSelectAll($event)">
+                    </angular2-multiselect>
+                  </div>
+                </div>-->
+                <div class="col-md-6 col-sm-6 col-lg-6 col-xl-6 pl-1">
+                  <div class="form-group">
+                    <label for="nf-password">{{ 'key_Shiploc' | translate }}</label>
+                    <angular2-multiselect fixFilterBug [data]="ShipFromList" [(ngModel)]="orderWorkbenchFilterModal.selectedShipFromItems"
+                                          [settings]="{singleSelection: false,text: 'Select', enableSearchFilter: true, addNewItemOnFilter: false, badgeShowLimit: 1, disabled: false, labelKey: 'name', searchBy: ['name'] }"
+                                          (onSelect)="OnShipFromSelect($event)"
+                                          (onDeSelect)="OnShipFromDeSelect($event)"
+                                          name="ShipFrom" #items="ngModel">
+                    </angular2-multiselect>
+                  </div>
+                </div>
+              </div>
+              <div class="row" style="padding: 2px 14px;">
+                <div class="col-md-6 col-sm-6 col-lg-6 col-xl-6 pr-1">
+                  <div class="form-group">
+                    <label for="ccmonth">{{ 'key_Shiptypeloc' | translate }}</label>
+                    <angular2-multiselect fixFilterBug [data]="ShipToTypeList" [(ngModel)]="orderWorkbenchFilterModal.selectedShipToTypeItems"
+                                          [settings]="{singleSelection: false,text: 'Select', enableSearchFilter: true, addNewItemOnFilter: false, badgeShowLimit: 1, disabled: false, labelKey: 'name', searchBy: ['name'] }"
+                                          name="ShipToType" #items="ngModel"
+                                          (onSelect)="OnShipToTypeSelect($event)"
+                                          (onDeSelect)="OnShipToTypeDeSelect($event)"
+                                          (onSelectAll)="OnShipToTypeSelectAll($event)"
+                                          (onDeSelectAll)="OnShipToTypeDeSelectAll($event)">
+                    </angular2-multiselect>
+                  </div>
+                </div>
+
+                <!--<div class="col-md-6 col-sm-6 col-lg-6 col-xl-6">
+                  <div class="form-group">
+                    <label for="nf-password">{{ 'key_Shiploc' | translate }}</label>
+                    <angular2-multiselect fixFilterBug [data]="ShipFromList" [(ngModel)]="orderWorkbenchFilterModal.selectedShipFromItems"
+                                          [settings]="{singleSelection: false,text: 'Select', enableSearchFilter: true, addNewItemOnFilter: false, badgeShowLimit: 1, disabled: false, labelKey: 'name', searchBy: ['name'] }"
+                                          (onSelect)="OnShipFromSelect($event)"
+                                          (onDeSelect)="OnShipFromDeSelect($event)"
+                                          name="ShipFrom" #items="ngModel">
+                    </angular2-multiselect>
+                  </div>
+                </div>-->
+                <div class="col-md-6 col-sm-6 col-lg-6 col-xl-6 pl-1">
+                  <div class="form-group">
+                    <label for="ccmonth">{{ 'key_Shipto' | translate }}</label>
+                    <angular2-multiselect fixFilterBug [data]="ShipToList" [(ngModel)]="orderWorkbenchFilterModal.selectedShipToItems"
+                                          [settings]="{singleSelection: false,text: 'Select', enableSearchFilter: true, addNewItemOnFilter: false, badgeShowLimit: 1, disabled: false, labelKey: 'name' , searchBy: ['name']}"
+                                          (onSelect)="OnShipToSelect($event)"
+                                          (onDeSelect)="OnShipToDeSelect($event)"
+                                          name="ShipTo" #items="ngModel">
+                    </angular2-multiselect>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                <div class="form-group">
+                  <label for="ccmonth">{{ 'key_ShipmentNo' | translate }}</label>
+                  <input class="form-control" id="nfshipNo" [(ngModel)]="orderWorkbenchFilterModal.ShipmentNo" name="nf-ship" placeholder="Type shipment no.">
+                </div>
+              </div>
+              <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                <div class="form-group">
+                  <label for="ccmonth">{{ 'key_PONo' | translate }}</label>
+                  <input class="form-control" id="nfPoNumber" [(ngModel)]="orderWorkbenchFilterModal.PONo" name="nf-ship" placeholder="Type PO no.">
+                </div>
+              </div>
+              <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                <div class="form-group">
+                  <label for="ccmonth">{{ 'key_Material' | translate }}</label>
+                  <angular2-multiselect fixFilterBug [data]="MaterialData" [(ngModel)]="orderWorkbenchFilterModal.selectedMaterialItems"
+                                        [settings]="{singleSelection: false,text: 'Select', enableSearchFilter: true, addNewItemOnFilter: false, badgeShowLimit: 1, disabled: false, labelKey: 'name', searchBy: ['name'] }"
+                                        (onSelect)="OnMaterialSelect($event)"
+                                        (onDeSelect)="OnMaterialDeSelect($event)" name="Material" #items="ngModel">
+                  </angular2-multiselect>
+
+                </div>
+              </div>
+              <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                <div class="form-group">
+                  <label for="ccmonth">{{ 'key_Carrier' | translate }}</label>
+                  <angular2-multiselect fixFilterBug [data]="CarrierData" [(ngModel)]="orderWorkbenchFilterModal.selectedCarrierItems"
+                                        [settings]="{singleSelection: false,text: 'Select', enableSearchFilter: true, addNewItemOnFilter: false, badgeShowLimit: 1, disabled: false, labelKey: 'name', searchBy: ['name']  }"
+                                        (onSelect)="OnCarrierSelect($event)"
+                                        (onDeSelect)="OnCarrierDeSelect($event)" name="Carrier" #items="ngModel">
+                  </angular2-multiselect>
+                </div>
+              </div>
+              <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                <!--<div class="form-group">
+                  <label for="ccmonth" class="mr-3 mt-2">{{'key_ShipWith' | translate}}</label>
+                  <div class="form-check form-check-inline mt-1">
+                    <input type="radio" class="form-check-input" id="all" name="radion11">
+                    <label class="form-check-label mb-0" for="all">All</label>
+                  </div>
+                  <div class="form-check form-check-inline mt-1">
+                    <input type="radio" class="form-check-input" [(ngModel)]="orderWorkbenchFilterModal.isShipWith" [value]="true" id="yes" name="radion11">
+                    <label class="form-check-label mb-0" for="yes">Yes</label>
+                  </div>
+                  <div class="form-check form-check-inline mt-1">
+                    <input type="radio" class="form-check-input" [(ngModel)]="orderWorkbenchFilterModal.isShipWith" [value]="false" id="no" name="radion11">
+                    <label class="form-check-label mb-0" for="no">No</label>
+                  </div>
+
+                </div>-->
+                <div class="form-group">
+                  <label for="ccmonth" class="mr-3 mt-2">{{'key_ShipWith' | translate}}</label>
+                  <div class="form-check form-check-inline mt-1">
+                    <input type="radio" class="form-check-input" value="all" [(ngModel)]="orderWorkbenchFilterModal.ShipWithOption" id="all" name="radion11">
+                    <label class="form-check-label mb-0" for="all">All</label>
+                  </div>
+                  <div class="form-check form-check-inline mt-1">
+                    <input type="radio" class="form-check-input" value="yes" [(ngModel)]="orderWorkbenchFilterModal.ShipWithOption" id="yes" name="radion11">
+                    <label class="form-check-label mb-0" for="yes">Yes</label>
+                  </div>
+                  <div class="form-check form-check-inline mt-1">
+                    <input type="radio" class="form-check-input" value="no" [(ngModel)]="orderWorkbenchFilterModal.ShipWithOption" id="no" name="radion11">
+                    <label class="form-check-label mb-0" for="no">No</label>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 d-flex w-100">
+          <div class="card">
+            <div class="card-header mb-2">
+              <div class="card-title">{{ 'key_OrderDateFilters' | translate }}</div>
+            </div>
+
+            <div class="card-body p-0">
+              <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                <div class="form-group">
+                  <label for="ccmonth">{{ 'key_SSSdate' | translate }}</label>
+                  <ejs-daterangepicker [format]='dateFormat' [(ngModel)]="orderWorkbenchFilterModal.ScheduledShipDateN" (change)='onScheduledShipDateChange($event)' separator='to' placeholder='MM-DD-YYYY to MM-DD-YYYY' id="ScheduledShipDate" class="form-control"></ejs-daterangepicker>
+                </div>
+              </div>
+              <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                <div class="form-group">
+                  <label for="ccmonth">{{ 'key_RequestedDeliveryDate' | translate }}</label>
+                  <ejs-daterangepicker [format]='dateFormat' [(ngModel)]="orderWorkbenchFilterModal.ReqDeliveryDateN" (change)='onReqDeliveryDateChange($event)' separator='to' placeholder='MM-DD-YYYY to MM-DD-YYYY' id="ReqDeliveryDate" class="form-control"></ejs-daterangepicker>
+                </div>
+              </div>
+              <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                <div class="form-group">
+                  <label for="ccmonth">{{ 'key_mabd' | translate }}</label>
+                  <ejs-daterangepicker [format]='dateFormat' [(ngModel)]="orderWorkbenchFilterModal.MustArriveByDateN" (change)='onMustArriveByDateChange($event)' separator='to' placeholder='MM-DD-YYYY to MM-DD-YYYY' id="MustArrivedDate" class="form-control"></ejs-daterangepicker>
+                </div>
+              </div>
+              <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                <div class="form-group">
+                  <label for="ccmonth">{{ 'key_Source' | translate }}</label>
+                  <!--<input class="form-control" id="nf-ship" [(ngModel)]="orderWorkbenchFilterModal.SourceN" name="nf-ship" placeholder="">-->
+                  <angular2-multiselect fixFilterBug class="right" [data]="SourceData" [(ngModel)]="orderWorkbenchFilterModal.selectedSourceItems"
+                                        [settings]="{singleSelection: false,text: 'Select', enableSearchFilter: true, addNewItemOnFilter: false, badgeShowLimit: 1, disabled: false, labelKey: 'name', searchBy: ['name']}"
+                                        name="SourceData" #items="ngModel"
+                                        (onSelect)="OnSourceSelect($event)"
+                                        (onDeSelect)="OnSourceDeSelect($event)">
+                  </angular2-multiselect>
+                </div>
+              </div>
+              <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                <div class="form-group">
+                  <label for="ccmonth">{{ 'key_SalesManager' | translate }}</label>
+
+                  <angular2-multiselect fixFilterBug class="right" [data]="SalesManagersData" [(ngModel)]="orderWorkbenchFilterModal.selectedSalesManagersItems"
+                                        [settings]="{singleSelection: false,text: 'Select', enableSearchFilter: true, addNewItemOnFilter: false, badgeShowLimit: 1, disabled: false, labelKey: 'name', searchBy: ['name'] }"
+                                        name="SalesManagers" #items="ngModel"
+                                        (onSelect)="OnSalesManagersSelect($event)"
+                                        (onDeSelect)="OnSalesManagersDeSelect($event)">
+                  </angular2-multiselect>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+      <div class="row">
+        <div class="col-sm-9 col-lg-9 text-right mt-4 mb-3 pr-0">
+          <div class="row">
+            <div class="col-md-1 pr-0 text-center">
+              <!--<button type="button" class="btn btn-save pt-1 pb-1 font-weight-normal" (click)="ApplyGlobalFilter()" value="Apply Filter">Apply Filter</button>-->
+            </div>
+            <div class="col-md-2 pr-0 mt-1 pl-0">
+              Apply Custom Filter
+            </div>
+            <div class="col-md-5">
+              <select class="form-control" placeholder="Select" id="CustomFilterId"
+                      [(ngModel)]="CustomFilterId" #orderType="ngModel"
+                      name="CustomFilterId" (change)="ApplyCustomFilterChange($event)" [value]='0'>
+                <option value="0" selected>Select</option>
+                <option class='option' *ngFor='let order of CustomFilterItemList' [value]="order.Id">
+                  {{order.FilterName}}
+                </option>
+              </select>
+              <!--<angular2-multiselect fixFilterBug [data]="CustomFilterItemList" [(ngModel)]="selectedItems"
+                                    [settings]="{singleSelection: false,text: 'Select', enableSearchFilter: true, addNewItemOnFilter: false, badgeShowLimit: 1, disabled: false, labelKey: 'FilterName', searchBy: ['FilterName'] }"
+                                    (onSelect)="onItemSelect($event)"
+                                    (onDeSelect)="OnItemDeSelect($event)"
+                                    (onSelectAll)="onSelectAll($event)"
+                                    (onDeSelectAll)="onDeSelectAll($event)"
+                                    (onAddFilterNewItem)="onAddItem($event)" name="skill2" #skill2="ngModel">
+              </angular2-multiselect>-->
+            </div>
+            <div class="col-md-4 text-left pl-0">
+
+              <button type="button" class="btn btn-save pt-1 pb-1 font-weight-normal" (click)="ApplyGlobalFilter()" value="Apply Filter">Apply Filter</button>
+              <button type="button" class="btn btn-next pt-1 pb-1 ml-2 font-weight-normal" (click)="ResetGlobalFilter()">Reset Filter</button>
+              <!--<button class="btn btn-save font-weight-normal" data-toggle="modal" data-target="#customfilter">Apply Custom Filter</button>-->
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-3 col-lg-3 text-center mt-4 mb-3 pr-3">
+          <!--<button type="button" class="btn btn-save font-weight-normal pt-1 pb-1 " data-toggle="modal" data-target="#manageFilter">Manage Custom Filters</button>-->
+          <button type="button" class="btn btn-save font-weight-normal pt-1 pb-1 " data-toggle="modal" (click)="OpenManageCustomFilter()">Manage Custom Filters</button>
+        </div>
+      </div>
+      <!-----------modal------------------->
+      <div class="modal" id="customfilter">
+        <div class="modal-dialog modal-md">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">
+                <i aria-hidden="true" class="fa fa fa-sliders fa-3x"></i> {{ 'key_ChangeFilter' | translate }}
+              </h5>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+              <p class="text-center">
+                Customize your search by adding or removing filters. A saved search will retain the custom filters.
+              </p>
+              <div class="card-body brd filterpopscroll">
+                <div class="bg">
+                  <div>
+                    <div class="">
+                      <input id="myCheckbox" type="checkbox">
+                      <label for="myCheckbox" class="ml-2">{{ 'key_SelectFromExiting' | translate }} {{ 'key_OrderNo' | translate }}.</label>
+                      <span></span>
+                    </div>
+                    <div class="">
+                      <input id="myCheckbox2" type="checkbox">
+                      <label for="myCheckbox2" class="ml-2">{{ 'key_SelectFromExiting' | translate }} {{ 'key_ShowAllVersions' | translate }}</label>
+                      <span></span>
+                    </div>
+                    <div class="">
+                      <input id="myCheckbox3" type="checkbox">
+                      <label for="myCheckbox3" class="ml-2">{{ 'key_SelectFromExiting' | translate }} {{ 'key_ShipFromLocationType' | translate }}</label>
+                      <span></span>
+                    </div>
+                    <div class="">
+                      <input id="myCheckbox4" type="checkbox">
+                      <label for="myCheckbox4" class="ml-2">{{ 'key_SelectFromExiting' | translate }} {{ 'key_ScheduleShipDate' | translate }}</label>
+                      <span></span>
+                    </div>
+                    <div class="">
+                      <input id="myCheckbox5" type="checkbox">
+                      <label for="myCheckbox5" class="ml-2">{{ 'key_SelectFromExiting' | translate }} {{ 'key_OrderCondition' | translate }} </label>
+                      <span></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="text-center">
+                <input type="button" id="btnNext" class="btn btn-next font-weight-normal  mr-3" value="Update">
+              </div>
+            </div>
+
+            <!-- Modal footer -->
+
+          </div>
+        </div>
+      </div>
+
+      <!--manage-filter-->
+      <div class="modal" id="manageFilter">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">
+                {{'key_SaveCurrentFilterAs' | translate}}
+              </h5>
+              <button type="button" class="close" (click)="CloseManageFilter()">&times;</button>
+            </div>
+            <div class="modal-body">
+              <div class="row mt-3 mb-3">
+                <div class="col-md-2 pr-0 mt-2">
+                  {{'key_NewFilterName' | translate}}
+                </div>
+                <div class="col-md-6">
+                  <input type="text" name="filter" class="form-control" [(ngModel)]="FilterName" />
+                </div>
+                <div class="col-md-3 mt-1">
+                  <div class="form-check checkbox">
+                    <input id="check1" type="checkbox" class="form-check-input" [checked]="DefaultFilter" (change)="DefaultFilter = !DefaultFilter">
+                    <label for="check1" class="form-check-label">
+                      {{'key_SetAsDefault' | translate}}
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div class="text-center mt-4 mb-3">
+                <button type="button" id="btnNextNewFilter" class="btn btn-next font-weight-normal  mr-3"
+                        [disabled]='orderWorkbenchHasReadOnlyAccess'
+                        (click)="CreateNewFilter()" value="Create New Filter">
+                  Create New Filter
+                </button>
+              </div>
+              <hr />
+              <h5> {{'key_ResetDefault' | translate}}</h5>
+              <div class="card-body filterpopscroll">
+
+                <div class="bg">
+                  <div class="row">
+
+                    <div class="d-flex flex-nowrap justify-content-between align-items-center mb-2">
+                      <div class="btn-group btn-group-toggle btn-group-md" data-toggle="buttons">
+                        <button class="btn btn-outline-primary" type="button" *ngIf="IsEditDelete"
+                                [disabled]='orderWorkbenchHasReadOnlyAccess'
+                                (click)="buttonAction('edit')" placement="bottom" ngbTooltip="{{'key_Edit' | translate}}">
+                          <i class="fa fa-pencil" aria-hidden="true"></i>
+                          <span>
+                            {{'key_Edit' | translate}}
+                          </span>
+                        </button>
+                        <button id="deleteButton" class="btn btn btn-outline-danger" *ngIf="IsEditDelete"
+                                [disabled]='orderWorkbenchHasReadOnlyAccess'
+                                (click)="buttonAction('delete')" type="button" placement="bottom" ngbTooltip="{{'key_Delete' | translate}}">
+                          <i class="fa fa-trash-o" aria-hidden="true"></i>
+                          <span>
+                            {{'key_Delete' | translate}}
+                          </span>
+                        </button>
+                        <button class="btn btn btn-outline-success" type="button" *ngIf="IsSaveCancel"
+                                [disabled]='orderWorkbenchHasReadOnlyAccess'
+                                (click)="buttonAction('save')" placement="bottom" ngbTooltip="{{'key_Save' | translate}}">
+                          <i class="fa fa-floppy-o" aria-hidden="true"></i>
+                          <span>
+                            {{'key_Save' | translate}}
+                          </span>
+                        </button>
+                        <button class="btn btn btn-outline-danger" type="button" *ngIf="IsSaveCancel"
+                                [disabled]='orderWorkbenchHasReadOnlyAccess'
+                                (click)="buttonAction('cancel')" placement="bottom" ngbTooltip="{{'key_Cancel' | translate}}">
+                          <i class="fa fa-times" aria-hidden="true"></i>
+                          <span>
+                            {{'key_Cancel' | translate}}
+                          </span>
+                        </button>
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="row">
+                        <div class="scroll resize-table">
+                          <mat-table #table [dataSource]="ManageFilterdS" matSort>
+                            <ng-container matColumnDef="selectRow">
+                              <mat-header-cell class="t-center tw-5" *matHeaderCellDef>
+                              </mat-header-cell>
+                              <mat-cell *matCellDef="let row">
+                                <div class="form-check-inline">
+                                  <label class="form-check-label">
+                                    <input type="checkbox" class="form-check-input" value="" data-toggle="tooltip" data-placement="top"
+                                           (click)="$event.stopPropagation()"
+                                           (change)="onSelectionChangeCustomFilter(row,  $event.target.checked)"
+                                           [checked]="selection.isSelected(row)">
+                                  </label>
+                                </div>
+                              </mat-cell>
+                            </ng-container>
+
+                            <ng-container matColumnDef="FilterName" style="width: 70% !important;">
+                              <mat-header-cell style="width:70% !important;" class="" *matHeaderCellDef mat-sort-header>Filter Name</mat-header-cell>
+                              <mat-cell *matCellDef="let element" style="width: 70% !important;">
+                                <div class="dd-field" *ngIf="isEditMode && element.isEdited">
+                                  <input type="text" class="form-control" value="{{ element.FilterName }}" (blur)="onBlurFilterName($event.target.value)" [(ngModel)]="FilterNameEdit" />
+                                </div>
+                                <div *ngIf="!element.isEdited">
+                                  {{ element.FilterName }}
+                                </div>
+                              </mat-cell>
+                            </ng-container>
+                            <ng-container matColumnDef="DefaultFilter" style="width: 20% !important;">
+                              <mat-header-cell style="width: 20% !important;" *matHeaderCellDef mat-sort-header>Default Filter</mat-header-cell>
+                              <mat-cell *matCellDef="let element" style="width: 20% !important;">
+                                <div class="dd-field" *ngIf="isEditMode && element.isEdited">
+                                  <input style="margin-left: 10px;" id="check1" type="checkbox" class="form-check-input" [checked]="DefaultFilterEdit" (change)="DefaultFilterEdit = !DefaultFilterEdit">
+                                </div>
+                                <div *ngIf="!element.isEdited">
+                                  {{ element.DefaultFilter }}
+                                </div>
+                              </mat-cell>
+                            </ng-container>
+
+                            <mat-header-row *matHeaderRowDef="ManageFilterdisplayedColumns"></mat-header-row>
+                            <mat-row *matRowDef="let row; columns: ManageFilterdisplayedColumns;"
+                                     [ngClass]="{hovered: row.hovered, highlighted: row.highlighted}"
+                                     (mouseover)="row.hovered = true" (mouseout)="row.hovered = false">
+                            </mat-row>
+                          </mat-table>
+                        </div>
+                        <div class="col-lg-12 text-center" *ngIf="ManageFilterdS.data.length == 0"><p>No records to display.</p></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </mat-expansion-panel>
+</mat-accordion>
+<!--end filter-->
+
+<section class="moreOptions mt-4" id="more-option">
+  <ul class="nav nav-tabs" role="tablist">
+    <li class="nav-item" (click)="tabClick('outbound')" *ngIf="isCustomer">
+      <!-- [disabled]="isCustomerdisabled"-->
+      <a class="nav-link" id="outbound-tab" data-toggle="tab" href="#outbound" role="tab"
+         aria-controls="Outbound" aria-selected="false"
+         [ngClass]="{ 'active':activeTab==='outbound'}">{{'key_customerr'| translate}}</a>
+
+    </li>
+    <li class="nav-item" (click)="tabClick('inbound')" *ngIf="isStockCollection">
+      <a class="nav-link" id="inbound-tab" data-toggle="tab" href="#inbound"
+         role="tab" aria-controls="Inbound" aria-selected="true"
+         [ngClass]="{ 'active':activeTab==='inbound'}">{{'key_stockcollection'| translate}}</a>
+      <!--(click)="result('inbound')"-->
+    </li>
+  </ul>
+  <div class="tab-content pb-3 pt-3" id="myTabContent">
+    <app-table-filter (filterOn)="applyFilter($event)"></app-table-filter>
+    <div class="tab-pane fade" id="outbound" role="tabpanel"
+         *ngIf="isCustomer" [ngClass]="{ 'active show':activeTab==='outbound'}">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="scroll resize-table">
+
+            <mat-table #table [dataSource]="dataSource" matSort (matSortChange)="customSort($event)">
+              <ng-container *ngFor="let column of displayedColumns; let i=index;" [matColumnDef]="column">
+                <mat-header-cell *matHeaderCellDef mat-sort-header mwlResizable [enableGhostResize]="true" (resizeEnd)="onResizeEnd($event, column)"
+                                 [resizeEdges]="{bottom: false, right: true, top: false, left: true}">
+                  <div class="form-check-inline" *ngIf="column === selectRow">
+                    <label class="form-check-label">
+                      <input type="checkbox" class="form-check-input" value="" placement="top" ngbTooltip="Select all"
+                             (change)="$event ? masterToggle() : null"
+                             [checked]="selection.hasValue() && isAllSelected()"
+                             [indeterminate]="selection.hasValue() && !isAllSelected()">
+                    </label>
+                  </div>
+                  <div *ngIf="column != selectRow">  {{ displayedColumnsReplace[i] | translate}}</div>
+                </mat-header-cell>
+                <mat-cell *matCellDef="let item">
+                  <div class="form-check-inline" *ngIf="column === selectRow">
+                    <label class="form-check-label">
+                      <input type="checkbox" class="form-check-input" value=""
+                             (click)="$event.stopPropagation()"
+                             (change)="selectedvalue(item, $event.target.checked)"
+                             [checked]="selection.isSelected(item)">
+                    </label>  <!--(change)="selectedvalue(item, $event, $event.target.checked)"-->
+                     
+                  </div>
+                  
+                    <!--{{ item[column] }}-->
+                  <div *ngIf="column === ShipmentNumber">
+                    <a href="javascript:void(0)" (click)="editShipment('edit',item)">
+
+                      {{item[column]}}
+                    </a>
+                  </div>
+                  <div *ngIf="column != 'ShipmentNumber'" title="{{ item[column] }}"> {{ item[column] }}</div>
+                </mat-cell>
+              </ng-container>
+
+              <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+              <mat-row *matRowDef="let row; columns: displayedColumns;"
+                       [ngClass]="{ 'selected': selection.isSelected(row)}"
+                       (click)="selectedvalue(row, $event.target.checked) && selection.toggle(row)">
+                <!-- (click)="selectedvalue(row, $event.target.checked)"
+                [ngClass]="{hovered: row.hovered, highlighted: selection.isSelected(row)}"
+                (mouseover)="row.hovered = true" (mouseout)="row.hovered = false"-->
+                <!--row, $event, $event.target.checked-->
+              </mat-row>
+
+            </mat-table>
+            <div class="col-lg-12 text-center" *ngIf="dataSource.data.length == 0"><p>No records to display.</p></div>
+          </div>
+
+          <mat-paginator #paginator
+                         [length]="paginationModel.itemsLength"
+                         [pageSize]="paginationModel.pageSize"
+                         [pageSizeOptions]="paginationModel.pageSizeOptions"
+                         (page)="onPaginationEvent($event)">
+          </mat-paginator>
+
+        </div>
+      </div>
+    </div>
+    <div class="tab-pane fade" id="inbound"
+         role="tabpanel" *ngIf="isStockCollection"
+         [ngClass]="{ 'active show':activeTab==='inbound'}">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="scroll resize-table">
+            <mat-table #table [dataSource]="dataSourceIB" matSort (matSortChange)="customSort1($event)">
+              <ng-container *ngFor="let column of displayedColumns1; let i=index;" [matColumnDef]="column">
+                <mat-header-cell *matHeaderCellDef mat-sort-header mwlResizable [enableGhostResize]="true" (resizeEnd)="onResizeEnd($event, column)"
+                                 [resizeEdges]="{bottom: false, right: true, top: false, left: true}">
+                  <div class="form-check-inline" *ngIf="column === selectRow">
+                    <label class="form-check-label">
+                      <input type="checkbox" class="form-check-input" value="" placement="top" ngbTooltip="Select all"
+                             (change)="$event ? masterToggle1() : null"
+                             [checked]="selection1.hasValue() && isAllSelected1()"
+                             [indeterminate]="selection1.hasValue() && !isAllSelected1()">
+                    </label>
+                  </div>
+                  <div *ngIf="column != selectRow">  {{ displayedColumnsReplaceIB[i] | translate}}</div>
+                </mat-header-cell>
+                <mat-cell *matCellDef="let item">
+                  <!--for-checkbox-->
+                  <div class="form-check-inline" *ngIf="column === selectRow">
+                    <label class="form-check-label">
+                      <input type="checkbox" class="form-check-input" value="" (click)="$event.stopPropagation()"
+                             (change)="selectedvalueIB(item, $event.target.checked)"
+                             [checked]="selection1.isSelected(item)">
+                     
+
+                    </label>
+                    
+                  </div>
+                 
+                    <!--{{ item[column] }}-->
+                  <div *ngIf="column === ShipmentNumber">
+                    <a href="javascript:void(0)" (click)="editShipment('edit',item)">
+
+                      {{item[column]}}
+                    </a>
+                  </div>
+                  <div *ngIf="column != 'ShipmentNumber'" title="{{ item[column] }}"> {{ item[column] }}</div>
+                </mat-cell>
+              </ng-container>
+
+              <mat-header-row *matHeaderRowDef="displayedColumns1"></mat-header-row>
+              <!--<mat-row *matRowDef="let row; columns: displayedColumns1;">
+              </mat-row>-->
+              <mat-row *matRowDef="let row; columns: displayedColumns1;"
+                       [ngClass]="{ 'selected': selection1.isSelected(row)}"
+                       (click)="selectedvalueIB(row, $event.target.checked) && selection1.toggle(row)">
+
+                <!--(click)="selectedvalueIB(row, $event.target.checked)" [ngClass]="{hovered: row.hovered, highlighted1: selection1.isSelected(row)}"
+                (mouseover)="row.hovered = true" (mouseout)="row.hovered = false">-->
+              </mat-row>
+
+            </mat-table>
+            <div class="col-lg-12 text-center" *ngIf="dataSourceIB.data.length == 0"><p>No records to display.</p></div>
+          </div>
+          <!--<mat-paginator #paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 20]">
+          </mat-paginator>-->
+
+          <mat-paginator #paginator
+                         [length]="paginationModel.itemsLength"
+                         [pageSize]="paginationModel.pageSize"
+                         [pageSizeOptions]="paginationModel.pageSizeOptions"
+                         (page)="onPaginationEvent1($event)">
+          </mat-paginator>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<app-show-notes></app-show-notes>

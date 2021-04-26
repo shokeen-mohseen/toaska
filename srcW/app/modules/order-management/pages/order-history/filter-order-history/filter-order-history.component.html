@@ -1,0 +1,253 @@
+<!--Filters-->
+<mat-accordion>
+  <mat-expansion-panel (opened)="panelOpenState = true"
+                       (closed)="panelOpenState = false" [expanded]="false">
+    <mat-expansion-panel-header>
+      <mat-panel-description>
+        {{panelOpenState ? '- Hide' : '+ Show'}}   {{ 'key_Orderhislisfilter' | translate }}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <form #addOrderForm="ngForm" novalidate>
+      <div class="row custom-form">
+        <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 d-flex w-100">
+          <div class="card">
+            <div class="card-header mb-2">
+              <a class="card-title">{{ 'key_OrderFilter' | translate }} </a>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                  <div class="form-group">
+                    <label for="nf-password">{{ 'key_OrderNo' | translate }}</label>
+                    <input class="form-control" id="OrderNo" type="number" name="OrderNo" autocomplete="current-password">
+                  </div>
+                </div>
+                <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                  <div class="form-group">
+                    <label for="ccmonth">{{ 'key_Ordertype' | translate }}</label>
+                    <angular2-multiselect [data]="itemListCheck" [(ngModel)]="selectedItemsCheck" [settings]="settingsCheck"
+                                          (onSelect)="onItemSelect($event)"
+                                          (onDeSelect)="OnItemDeSelect($event)"
+                                          (onSelectAll)="onSelectAll($event)"
+                                          (onDeSelectAll)="onDeSelectAll($event)"
+                                          (onAddFilterNewItem)="onAddItemCheck($event)" name="skill3" #skill3="ngModel">
+                    </angular2-multiselect>
+                  </div>
+                </div>
+                <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                  <div class="form-group">
+                    <label for="ccmonth">{{ 'key_Status' | translate }}</label>
+                    <angular2-multiselect [data]="itemListCheck" [(ngModel)]="selectedItemsCheck" [settings]="settingsCheck"
+                                          (onSelect)="onItemSelect($event)"
+                                          (onDeSelect)="OnItemDeSelect($event)"
+                                          (onSelectAll)="onSelectAll($event)"
+                                          (onDeSelectAll)="onDeSelectAll($event)"
+                                          (onAddFilterNewItem)="onAddItemCheck($event)" name="skill4" #skill4="ngModel">
+                    </angular2-multiselect>
+                  </div>
+                </div>
+                <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                  <div class="form-group">
+                    <label for="ccmonth">{{ 'key_Showversion' | translate }}</label>
+                    <angular2-multiselect [data]="itemListCheck" [(ngModel)]="selectedItemsCheck" [settings]="settingsCheck"
+                                          (onSelect)="onItemSelect($event)"
+                                          (onDeSelect)="OnItemDeSelect($event)"
+                                          (onSelectAll)="onSelectAll($event)"
+                                          (onDeSelectAll)="onDeSelectAll($event)"
+                                          (onAddFilterNewItem)="onAddItemCheck($event)" name="skill5" #skill5="ngModel">
+                    </angular2-multiselect>
+                  </div>
+                </div>
+                <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                  <div class="form-group">
+                    <label for="ccmonth">{{ 'key_OrderCondition' | translate }}</label>
+                    <angular2-multiselect [data]="itemList" [(ngModel)]="selectedItems" [settings]="settings"
+                                          (onSelect)="onItemSelect($event)"
+                                          (onDeSelect)="OnItemDeSelect($event)"
+                                          (onSelectAll)="onSelectAll($event)"
+                                          (onDeSelectAll)="onDeSelectAll($event)"
+                                          (onAddFilterNewItem)="onAddItem($event)" name="skill4" #skill4="ngModel">
+                    </angular2-multiselect>
+                  </div>
+                </div>
+                <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                  <div class="form-group">
+                    <label for="ccmonth">{{ 'key_InvoiceNumber' | translate }}</label>
+                    <angular2-multiselect [data]="itemListCheck" [(ngModel)]="selectedItemsCheck" [settings]="settingsCheck"
+                                          (onSelect)="onItemSelect($event)"
+                                          (onDeSelect)="OnItemDeSelect($event)"
+                                          (onSelectAll)="onSelectAll($event)"
+                                          (onDeSelectAll)="onDeSelectAll($event)"
+                                          (onAddFilterNewItem)="onAddItemCheck($event)" name="skill3" #skill3="ngModel">
+                    </angular2-multiselect>
+                  </div>
+                </div>
+
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="ccmonth">{{ 'key_OrderAmount' | translate }}</label>
+                    <div class="input-group input-group-sm">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">Max Value </span>
+                      </div>
+                      <input class="form-control" id="OrderAmount" type="number" name="OrderAmount" placeholder="Max Value" autocomplete="current-password">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">Min Value </span>
+                      </div>
+                      <input class="form-control" id="nf-number" type="number" name="nf-number" placeholder="Min Value" autocomplete="current-password">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 d-flex w-100">
+          <div class="card">
+            <div class="card-header mb-2">
+              <a class="card-title">{{ 'key_OrderDateFilter' | translate }}</a>
+            </div>
+            <div class="card-body">             
+                <div class="row">
+                  <div class="col-md-6 col-sm-6 col-lg-6 col-xl-6">
+                    <div class="form-group">
+                      <label for="nf-password">{{ 'key_Shiploc' | translate }}</label>
+                      <angular2-multiselect [data]="itemList" [(ngModel)]="selectedItems" [settings]="settings"
+                                            (onSelect)="onItemSelect($event)"
+                                            (onDeSelect)="OnItemDeSelect($event)"
+                                            (onSelectAll)="onSelectAll($event)"
+                                            (onDeSelectAll)="onDeSelectAll($event)"
+                                            (onAddFilterNewItem)="onAddItem($event)" name="skill6" #skill6="ngModel">
+                      </angular2-multiselect>
+                    </div>
+                  </div>
+                  <div class="col-md-6 col-sm-6 col-lg-6 col-xl-6">
+                    <div class="form-group">
+                      <label for="ccmonth">{{ 'key_Shipto' | translate }}</label>
+                      <angular2-multiselect [data]="itemList" [(ngModel)]="selectedItems" [settings]="settings"
+                                            (onSelect)="onItemSelect($event)"
+                                            (onDeSelect)="OnItemDeSelect($event)"
+                                            (onSelectAll)="onSelectAll($event)"
+                                            (onDeSelectAll)="onDeSelectAll($event)"
+                                            (onAddFilterNewItem)="onAddItem($event)" name="skill7" #skill7="ngModel">
+                      </angular2-multiselect>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6 col-sm-6 col-lg-6 col-xl-6">
+                    <div class="form-group">
+                      <label for="ccmonth">{{ 'key_Shiptype' | translate }}</label>
+                      <angular2-multiselect [data]="itemList" [(ngModel)]="selectedItems" [settings]="settings"
+                                            (onSelect)="onItemSelect($event)"
+                                            (onDeSelect)="OnItemDeSelect($event)"
+                                            (onSelectAll)="onSelectAll($event)"
+                                            (onDeSelectAll)="onDeSelectAll($event)"
+                                            (onAddFilterNewItem)="onAddItem($event)" name="skill8" #skill8="ngModel">
+                      </angular2-multiselect>
+
+                    </div>
+                  </div>
+                  <div class="col-md-6 col-sm-6 col-lg-6 col-xl-6">
+                    <div class="form-group">
+                      <label for="ccmonth">{{ 'key_Shiptypeloc' | translate }}</label>
+                      <angular2-multiselect [data]="itemList" [(ngModel)]="selectedItems" [settings]="settings"
+                                            (onSelect)="onItemSelect($event)"
+                                            (onDeSelect)="OnItemDeSelect($event)"
+                                            (onSelectAll)="onSelectAll($event)"
+                                            (onDeSelectAll)="onDeSelectAll($event)"
+                                            (onAddFilterNewItem)="onAddItem($event)" name="skill9" #skill9="ngModel">
+                      </angular2-multiselect>
+                    </div>
+                  </div>
+                </div>
+                  <div class="form-group">
+                    <label for="ccmonth">{{ 'key_ShipmentNo' | translate }}</label>
+                    <input class="form-control" id="ShipmentNo" type="number" name="ShipmentNo" placeholder="Type your shipment no.">
+                  </div>               
+                  <div class="form-group">
+                    <label for="ccmonth">{{ 'key_PONo' | translate }}</label>
+                    <input class="form-control" id="PONo" type="number" name="PONo" placeholder="Type yopur PO no.">
+                  </div>
+                
+                  <div class="form-group">
+                    <label for="ccmonth">{{ 'key_Material' | translate }}</label>
+                    <angular2-multiselect [data]="itemList" [(ngModel)]="selectedItems" [settings]="settings"
+                                          (onSelect)="onItemSelect($event)"
+                                          (onDeSelect)="OnItemDeSelect($event)"
+                                          (onSelectAll)="onSelectAll($event)"
+                                          (onDeSelectAll)="onDeSelectAll($event)"
+                                          (onAddFilterNewItem)="onAddItem($event)" name="skill10" #skill10="ngModel">
+                    </angular2-multiselect>
+                  </div>
+                  <div class="form-group">
+                    <label for="ccmonth">{{ 'key_Carrier' | translate }}</label>
+                    <angular2-multiselect [data]="itemList" [(ngModel)]="selectedItems" [settings]="settings"
+                                          (onSelect)="onItemSelect($event)"
+                                          (onDeSelect)="OnItemDeSelect($event)"
+                                          (onSelectAll)="onSelectAll($event)"
+                                          (onDeSelectAll)="onDeSelectAll($event)"
+                                          (onAddFilterNewItem)="onAddItem($event)" name="skill11" #skill11="ngModel">
+                    </angular2-multiselect>
+                  </div>              
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 d-flex w-100">
+          <div class="card">
+            <div class="card-header mb-2">
+              <a class="card-title">{{ 'key_OrderDateFilters' | translate }}</a>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                  <div class="form-group">
+                    <label for="ccmonth">{{ 'key_ScheduledShipDate' | translate }}</label>
+                    <ejs-daterangepicker [format]='dateFormat' separator='to' placeholder='MM-DD-YYYY to MM-DD-YYYY' id="ScheduledShipDate"></ejs-daterangepicker>
+                  </div>
+                </div>
+                <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                  <div class="form-group">
+                    <label for="ccmonth">{{ 'key_RequestedDeliveryDate' | translate }}</label>
+                    <ejs-daterangepicker [format]='dateFormat' separator='to' placeholder='MM-DD-YYYY to MM-DD-YYYY' id="RequestedDeliveryDate"></ejs-daterangepicker>
+                  </div>
+                </div>              
+                <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                  <div class="form-group">
+                    <label for="ccmonth">{{ 'key_Source' | translate }}</label>
+                    <input class="form-control" id="nf-ship" type="number" name="nf-ship" placeholder="">
+                  </div>
+                </div>
+                <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                  <div class="form-group">
+                    <label for="ccmonth">{{ 'key_SalesManager' | translate }}</label>
+                    <angular2-multiselect [data]="itemList" [(ngModel)]="selectedItems" [settings]="settings"
+                                          (onSelect)="onItemSelect($event)"
+                                          (onDeSelect)="OnItemDeSelect($event)"
+                                          (onSelectAll)="onSelectAll($event)"
+                                          (onDeSelectAll)="onDeSelectAll($event)"
+                                          (onAddFilterNewItem)="onAddItem($event)" name="skill12" #skill12="ngModel">
+                    </angular2-multiselect>
+                  </div>
+                </div>
+              </div>
+          </div>
+          </div>
+
+
+
+        </div>
+        <div class="col-sm-12 col-lg-12 row justify-content-center mt-4 mb-3">
+          <div class=""><input type="button" class="btn btn-save mr-2 font-weight-normal" value="Apply Filter"></div>
+          <div class=""> <input type="button" class="btn btn-next mr-2 font-weight-normal" value="Reset Filter"></div>
+        </div>
+      </div>
+      <!-----------modal------------------->
+      <!--manage-filter-->
+
+    </form>
+  </mat-expansion-panel>
+</mat-accordion>
+<!--end filter-->

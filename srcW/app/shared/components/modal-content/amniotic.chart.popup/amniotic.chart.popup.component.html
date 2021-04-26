@@ -1,0 +1,99 @@
+<div class="modal-header">
+  <h4 class="modal-title" id="modal-basic-title">
+    {{modalData.modelStagename | translate}} {{modalData.modelName | translate}}
+  </h4>
+  <a class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </a>
+</div>
+<div class="modal-body modalbg">
+  <div class="row">
+    <div class="col-sm-6 bg-whites pdr">
+      <div class="card cardpdrtop">
+        <div class="row">
+          <div class="col-lg-6 col-xs-6 col-sm-6 col-md-12">
+            <span><i class="fa fa-clock-o fa-3" aria-hidden="true"></i></span>
+            <span class="ml-1" [innerHTML]="modalData.DisplayTime +' '+ modalData.timeZone"> </span>
+          </div>
+          <div class="col-lg-6 col-xs-6 col-sm-6 col-md-12">
+            <span><i class="fa fa-user-circle-o" aria-hidden="true"></i></span>
+            <span class="ml-1">{{userName}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6 bg-whites pdrright">
+      <div class="cardpdrtop card">
+        <div class="row">
+          <div class="col-xs-6">
+            <span class="ml-3"><i class="fa fa-history" aria-hidden="true"></i></span>
+            <span class="ml-1">{{ 'key_Commenthistory' | translate }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row ">
+    <div class="col-sm-6 pdr">
+      <div class="panelbg card commentheight">
+        <form (ngSubmit)="passBack()" [formGroup]="UserAmnioticMouldingForm">
+          <div class="form-group" style="display:none;">
+            <label class="mb-4">{{ 'key_Amniotic' | translate }}</label>
+          </div>
+          <label>{{ 'partographChart.Key_AmnioticChart' | translate }}</label>
+          <div class="clearfix"></div>
+          <!--new design start here please conver old design pattern to new tiles design-->
+          <div class="boxtxt form cf mt-2 mb-2">
+            <section class="plan cf">
+
+              <!-- TFSID 16636,Rizwan khan, 28 July 2020, Implement reactive form functionality and uses dynamic control -->
+
+              <ng-container *ngFor="let item of modalData.amninioticList">
+                <input formControlName="selectValue" type="radio" id="credit_{{item.Amid}}" value="{{item.Amid}}">
+                <label class="credit-label four col" for="credit_{{item.Amid}}"> {{item.AmName}}</label>
+              </ng-container>
+            </section>
+          </div>
+          <!--end code-->
+          <div class="clearfix"></div>
+          <div class="form-group">
+            <label for="company">{{ 'key_Commentsarea' | translate }}</label>
+            <textarea [attr.placeholder]="'key_Comments' | translate" class="Comments form-control" formControlName="remarks" rows="3"></textarea>
+          </div>
+          <div class="form-group text-center">
+            <button type="submit" class="btn btn-pill btnsave  btn-raised btnbg"
+                   [disabled]="UserAmnioticMouldingForm.controls['selectValue'].invalid">
+              <span [innerHTML]="'key_Save' | translate"></span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="col-sm-6 pdrright">
+      <div class="panelbg card commentheight">
+        <app-recentcomment [posts]="newOutputPost" [chartName]="validationModel.ChartName"></app-recentcomment>
+      </div>
+    </div>
+  </div>
+  <!--<form>
+     <div class="form-group row">
+       <div class="col-sm-6">
+         <label for="company">{{ 'key_InputBy' | translate }}</label>
+         <input type="text" formControlName="inputBy" class="inputby form-control" />
+         <app-control-messages [control]="f['inputBy']"></app-control-messages>
+       </div>
+
+       <div class="col-sm-6">
+         <label for="company">{{ 'key_Time' | translate }}</label>
+         <input type="text" formControlName="currentTime" class="time form-control" />
+         <app-control-messages [control]="f['currentTime']"></app-control-messages>
+       </div>
+     </div>
+     </form>-->
+</div>
+<!--TFS Task Id 16546 Design similar modal popup for fetal heart, aminiotic fluid and moulding graphs.-->
+<!--TFS Task Id 16718 Latent Phase - Add all language  attributes ..-->
+<!---Author name Satyen Singh 06/07/2020 start for comment collapse area section-->
+<!--TFS Task Id 16546 Design similar modal popup for fetal heart, aminiotic fluid and moulding graphs.-->
+<!---Author name Satyen Singh 06/07/2020 start for comment collapse area section-->
+<!--<input type="button" (click)="passBack()" class="btn btn-primary  float-right btn-raised mb-5" [value]="'key_Save' | translate">-->

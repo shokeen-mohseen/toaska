@@ -1,0 +1,482 @@
+import { Component, OnInit, ViewChild, AfterViewInit, ChangeDetectorRef } from '@angular/core';
+import { Router } from '@angular/router';
+import { MatTabGroup } from '@angular/material/tabs';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { AddnewForecastComponent } from '../addnew-forecast/addnew-forecast.component';
+import { FlexComponent } from '../flex/flex.component';
+import { AdjustFinalForecastComponent } from '../adjust-final-forecast/adjust-final-forecast.component';
+import { ForecastMappingComponent } from '../forecast-mapping/forecast-mapping.component';
+import { AddNewRowComponent } from '../add-new-row/add-new-row.component';
+import { DupicateForecastComponent } from '../dupicate-forecast/dupicate-forecast.component';
+import { ManageMarketForecastImportComponent } from '../manage-market-forecast-import/manage-market-forecast-import.component';
+import { ManageLocationMaterialMappingComponent } from '../manage-location-material-mapping/manage-location-material-mapping.component';
+import { projectkey } from 'environments/projectkey';
+import { TopBtnGroupComponent } from '@app/shared/components/top-btn-group/top-btn-group.component';
+import { getGlobalRibbonActions } from '@app/shared/components/top-btn-group/page-actions-map';
+import { ViewForecastAsComponent } from '../view-forecast-as/view-forecast-as.component';
+import { Forecast } from '../../../core/models/Forecast.model';
+import { ForecastService } from '../../../core/services/forecast.service';
+import { CreateComputeSalesForecastComponent } from '../create-compute-sales-forecast/create-compute-sales-forecast.component';
+import { ToastrService } from 'ngx-toastr';
+import { async } from 'rxjs/internal/scheduler/async';
+import { ForecastUpdateComponent } from '../forecast-update/forecast-update.component';
+import { AuthService } from '../../../core';
+import { MessageService } from '../../../core/services/message.service';
+import { UploadForecastComponent } from '../upload-forecast/upload-forecast.component';
+import { GlobalConstants } from '@app/core/models/GlobalConstants ';
+import { confirmationpopup } from '../../../shared/components/confirmation-popup/confirmation-popup.component';
+declare var $: any;
+@Component({
+  selector: 'app-forecasting',
+  templateUrl: './forecasting.component.html',
+  styleUrls: ['./forecasting.component.css']
+})
+export class ForecastingComponent implements OnInit, AfterViewInit {
+  @ViewChild('btnBar') btnBar: TopBtnGroupComponent;
+  // @ViewChild(AdjustFinalForecastComponent) adjustFinalForecastComponent: AdjustFinalForecastComponent;
+  actionGroupConfig;
+  ForecastingList: string = "ForecastExport";
+  modalRef: NgbModalRef;
+  itemListB = [];
+  selectedItemsB = [];
+  count = 6;
+  forecastListSelected = [];
+  forecastList = [];
+  forecastSettings = {};
+  tab1: boolean = true;
+  tab2: boolean = false;
+  tab3: boolean = false;
+  tab1Data: boolean = true;
+  tab2Data: boolean = false;
+  tab3Data: boolean = false;
+  filter: boolean = false;
+  IsTosca: boolean;
+  @ViewChild('tabGroupA') tabGroup: MatTabGroup;
+  @ViewChild(CreateComputeSalesForecastComponent, { static: false }) createComputeSalesForecastComponent: CreateComputeSalesForecastComponent;
+  forecastSelected: Forecast;
+  forecastDetailsSelected = [];
+  userMessages: any = [];
+  forecastListData = [];
+  updateinprogess: boolean = false;
+  mainPage: boolean = true;
+  graphPage: boolean = false;
+  DeleteForecastMessage: string = "";
+  DeleteForecastpopup: string = "";
+  UpdateMessage: string = "";
+  constructor(private router: Router
+    , public modalService: NgbModal
+    , public forecastService: ForecastService
+    , public messageService: MessageService
+    , private changeDetector: ChangeDetectorRef
+    , private toastrService: ToastrService
+    , private authService: AuthService) { }
+
+  ngOnInit(): void {
+
+    if (projectkey.projectname == "tosca") {
+      this.IsTosca = true;
+    }
+    else {
+      this.IsTosca = false;
+    }
+    this.actionGroupConfig = getGlobalRibbonActions();
+
+    //this.forecastSettings = {
+    //  singleSelection: true,
+    //  text: "Select",
+    //  enableSearchFilter: true, 
+    //  searchBy: ['name'],
+    //  labelKey: ['name']
+    //};
+    this.forecastSettings = {
+      text: "Select",
+      singleSelection: true, 
+      classes: "materialBold", 
+      labelKey: "name", 
+      enableSearchFilter: true, 
+      searchBy: ['name']
+    };
+
+    this.getForecastList();
+
+    this.getMessages();
+    this.buttonPermission();
+  }
+  ngAfterViewInit() {
+    this.btnBar.hideAction('add');
+    this.btnBar.hideAction('edit');
+    this.btnBar.hideAction('delete');
+    this.btnBar.showAction('addForecast');
+    this.btnBar.showAction('addRow');
+    this.btnBar.showAction('deleteSelectedForecast');
+    this.btnBar.showAction('duplicateForecast');
+    this.btnBar.showAction('deleteSelectedRow');
+    this.btnBar.hideAction('calculate');
+    this.btnBar.showAction('flex');
+    this.btnBar.showAction('AdjustFinalForecast');
+    this.btnBar.showAction('updateForecast');
+    this.btnBar.showAction('publish');
+    this.btnBar.showAction('lock');
+    this.btnBar.showAction('unlock');
+    this.btnBar.hideAction('mapping');
+    this.btnBar.showAction('filter');
+    this.btnBar.showAction('graph');
+    this.btnBar.showAction('importforecast');
+    //this.btnBar.showAction('viewForecastAs');
+    this.btnBar.hideAction('active');
+    this.btnBar.hideAction('inactive');
+    this.btnBar.hideAction('view');
+    this.btnBar.hideTab('key_View');
+    this.btnBar.hideAction('importLocationmaterial');
+    this.changeDetector.detectChanges();
+  }
+  onAddItem(data: string) {
+  }
+
+  tabChange($event) {
+    if ($event.index === 0) {
+      this.tab1Data = true;
+    }
+    else if ($event.index === 1) {
+      this.tab2Data = true;
+    }
+    else if ($event.index === 2) {
+      this.tab3Data = true;
+    }
+  }
+
+  actionHandler(type) {
+    if (type === "createsNewForecast") {
+      this.modalRef = this.modalService.open(AddnewForecastComponent, { size: 'lg', backdrop: 'static' });
+      this.modalRef.result.then(async (result) => {
+        if (result === 'success') {
+          await this.getSelectedForecast();
+          // Refresh Data in table grid
+          this.createComputeSalesForecastComponent.setUpForecastSelected(this.forecastSelected);
+        }
+      }, (reason) => {
+      });
+    }
+    else if (type === "uploadForecast") {
+      this.modalRef = this.modalService.open(UploadForecastComponent, { size: 'lg', backdrop: 'static' });
+      this.modalRef.componentInstance.forecastComponentInstance = this.createComputeSalesForecastComponent;
+
+    }
+    else if (type === "filter") {
+      this.filter = !this.filter;
+    }
+    else if (type === "flex") {
+      if (this.forecastService.ForecastingforEdit.length > 0) {
+        this.modalRef = this.modalService.open(FlexComponent, { size: 'xl', backdrop: 'static' });
+        this.modalRef.componentInstance.forecastComponentInstance = this.createComputeSalesForecastComponent;
+      }
+      else
+        this.toastrService.info(this.getMessage("SelectOneForecast"));
+    }
+    else if (type === "duplicateForecast") {
+      this.modalRef = this.modalService.open(DupicateForecastComponent, { size: 'md', backdrop: 'static' });
+      this.modalRef.componentInstance.SelectedForecastID = this.createComputeSalesForecastComponent.forecastSelected.id;
+      this.modalRef.componentInstance.forecastComponentInstance = this.createComputeSalesForecastComponent;
+    }
+    else if (type === "mapping") {
+      this.modalRef = this.modalService.open(ForecastMappingComponent, { size: 'xl', backdrop: 'static' });
+    }
+    else if (type === "addRow") {
+
+      this.modalRef = this.modalService.open(AddNewRowComponent, { size: 'xl', backdrop: 'static' });
+      this.modalRef.componentInstance.SelectedForecastID = this.createComputeSalesForecastComponent.forecastSelected.id;
+      this.modalRef.componentInstance.forecastComponentInstance = this.createComputeSalesForecastComponent;
+
+    }
+    else if (type === "ManageMarketForecastImport") {
+      this.modalRef = this.modalService.open(ManageMarketForecastImportComponent, { size: 'xl', backdrop: 'static' });
+      this.modalRef.componentInstance.forecastSelected = this.forecastSelected;
+
+    }
+    else if (type === "importLocationmaterial") {
+      this.modalRef = this.modalService.open(ManageLocationMaterialMappingComponent, { size: 'lg', backdrop: 'static' });
+    }
+    else if (type === "graph") {
+      this.mainPage = false;
+      this.graphPage = true;
+    }
+    else if (type === "AdjustFinalForecast") {
+      if (this.forecastService.ForecastingforEdit.length > 0) {
+        this.modalRef = this.modalService.open(AdjustFinalForecastComponent, { size: 'xl', backdrop: 'static' });
+        this.modalRef.componentInstance.forecastComponentInstance = this.createComputeSalesForecastComponent;
+      }
+      else
+        this.toastrService.info(this.getMessage("SelectOneForecast"));
+      // this.toastrService.info("Please select at least one Forecast.");
+
+      //this.adjustFinalForecastComponent.bindDetails(this.forecastDetailsSelected);
+
+    }
+    else if (type === "viewForecastAs") {
+      this.modalRef = this.modalService.open(ViewForecastAsComponent, { size: 'xl', backdrop: 'static' });
+    }
+    else if (type === "updateForecast") {
+      this.modalRef = this.modalService.open(ForecastUpdateComponent, { size: 'md', backdrop: 'static' });
+      this.modalRef.componentInstance.SelectedForecastID = this.createComputeSalesForecastComponent.forecastSelected.id;
+      this.modalRef.componentInstance.passEntry.subscribe(() => {
+        this.updateinprogess = true;
+        this.getForecastList();}); 
+    }
+    else if (type === "deleteSelectedRow") {
+      this.deleteSelectedRows();
+    }
+    else if (type === "deleteSelectedForecast") {
+      this.deleteSelectedForecast();
+      this.getForecastList();
+    }
+    else if (type === "lock") {
+      this.createComputeSalesForecastComponent.LockUnLock(true);
+    }
+    else if (type === "unlock") {
+      this.createComputeSalesForecastComponent.LockUnLock(false);
+    }
+    else if (type === "publish") {
+      this.modalRef = this.modalService.open(confirmationpopup, { size: 'lg', backdrop: 'static' });
+      this.modalRef.componentInstance.msg = this.getMessage("ForecastPublishedConfirmation");
+      this.modalRef.componentInstance.isOK = false;
+      this.modalRef.componentInstance.isYesNO = true;
+
+      this.modalRef.result.then((result) => {
+        this.createComputeSalesForecastComponent.Publish(true);
+        this.getForecastList();
+      }, (reason) => {
+          this.getForecastList();
+      });
+
+    }
+
+
+  }
+
+  closeTab(action) {
+    this.tab1 = true;
+    this.tab2 = false;
+    this.tab3 = false;
+    this.tab1Data = true;
+    this.tab2Data = false;
+    this.tab3Data = false;
+  }
+  closeTab1(action) {
+    this.mainPage = true;
+    this.graphPage = false;
+  }
+
+  async getSelectedForecast() {
+    await this.forecastService.getLastUpdatedForecast().toPromise()
+      .then(result => {
+        if (result.data) {
+          this.forecastSelected = result.data;
+          this.forecastService.forecastSelected = this.forecastSelected;
+          this.createComputeSalesForecastComponent.EnableDisebleButtons(this.forecastSelected.isLocked ? 'True' : 'False', this.forecastSelected.isPublished ? 'True' : 'False');
+
+        }
+      })
+      .catch(() => this.toastrService.error(this.getMessage("RecordSaveFailed")));
+  }
+
+  getForecastList() {
+    this.forecastService.getForecastList(new Forecast()).subscribe(
+      result => {
+        if (result.data) {        
+          this.forecastList = result.data.map(r => ({ id: r.id, name: r.name + ' (' + r.calendarType + ')', isPublished: r.isPublished }));
+          this.forecastListSelected = this.forecastList.filter(x => x.id == this.forecastSelected.id);
+          this.forecastList.sort((x, y) => x.name.localeCompare(y.name));
+        }
+      }
+    );
+  }
+
+  getMessages() {
+    this.messageService.getMessagesByModuleCode("CSFOR", parseInt(localStorage.clientId)).subscribe(
+      result => {
+        if (result.data) {
+          this.userMessages = result.data;
+        }
+      }
+    );
+  }
+
+
+  getMessage(messageCode: string) {
+    if (this.userMessages) {
+      return this.userMessages.find(x => x.code == messageCode)?.message1;
+
+    }
+    return '';
+  }
+
+
+  applyFilter() {
+    if (this.forecastListSelected && this.forecastListSelected[0]) {
+      this.forecastSelected = this.forecastListSelected[0];
+      this.forecastService.forecastSelected = this.forecastSelected;
+      this.createComputeSalesForecastComponent.setUpForecastSelected(this.forecastSelected);
+    }
+  }
+  selectedForecastList(list) { 
+    if (list == null) {
+     // this.getSelectedForecast();
+     // this.updateinprogess = false;
+    }
+    else
+      this.forecastDetailsSelected = list;
+  }
+
+  deleteSelectedRows() {
+    this.DeleteForecastMessage = "Do you want to Delete Selected Rows?";
+    this.DeleteForecastpopup = "Rows";
+    $("#deletePopup").modal('show');
+
+  }
+  deleteSelectedForecast() {
+    this.DeleteForecastMessage = "Do you want to Delete Forecast?";
+    this.DeleteForecastpopup = "Forecast";
+    $("#deletePopup").modal('show');
+  }
+  deleteForecast_Details() {
+    if (this.DeleteForecastpopup == "Rows") {
+      this.closetonupopup();
+      this.deleteSelectedRowsYes();
+    }
+    else {
+      this.closetonupopup();
+      this.deleteSelectedForecastYes();
+    }
+  }
+
+  closetonupopup() {
+    $("#deletePopup").modal('hide');
+  }
+
+  deleteSelectedRowsYes() {
+    if (this.forecastDetailsSelected != null && this.forecastDetailsSelected.length > 0) {
+      var requestObj = {
+        ForecastDetaildeletedIds: this.forecastDetailsSelected.map(({ ForecastID, LocationID, MaterialId }) =>
+        { return { ForecastID: parseInt(ForecastID), LocationID: parseInt(LocationID), MaterialId:parseInt(MaterialId) } }),
+        DeletedBy: this.authService.currentUserValue.LoginId
+      }
+      this.forecastService.deleteForecastDetails(requestObj).subscribe(
+        result => {
+
+          if (result.data) {
+            if (result.data) {
+              this.toastrService.success(this.getMessage("RecordsAreDeletedSuccessfully"));
+              this.createComputeSalesForecastComponent.setUpForecastSelected(this.forecastSelected);
+            } else {
+              this.toastrService.error(this.getMessage("RecordsDeletionFailed"));
+            }
+          }
+        }
+      );
+    } else {
+      this.toastrService.warning(this.getMessage("SelectRecordsToBeDeleted"));
+    }
+  }
+
+  async deleteSelectedForecastYes() {
+    if (this.forecastSelected != null) {
+      this.forecastService.deleteForecast(this.forecastSelected).subscribe(
+        async result => {
+          if (result.message == GlobalConstants.Success || result.Message == GlobalConstants.Success) {
+            this.toastrService.info(result.data[0].message);
+            await this.getSelectedForecast();
+            this.createComputeSalesForecastComponent.setUpForecastSelected(null);
+            return;
+          }
+          else {
+            this.toastrService.error(this.getMessage("ForecastDeletionFailed"));
+          }
+        }
+      );
+    }
+  }
+
+  buttonPermission() {
+    var ModuleNavigation = this.router.url;
+    var ClientId = this.authService.currentUserValue.ClientId;
+    var projectKey = projectkey.projectname;
+    var UserId = this.authService.currentUserValue.UserId;
+    this.authService.getModuleRolePermission(ModuleNavigation, ClientId, projectKey, UserId)
+      .subscribe(res => {
+        if (res.Message == "Success") {
+          var data = res.Data;
+          // assumption here is if we do not have anything set for this screen
+          // or we have Read and Modify access then enable all, else diable all
+          if (data != null || data != undefined) {
+            if (data.length != 0) {
+              if (data[0].PermissionType == "Read and Modify") {
+                this.btnBar.enableAction('add');
+                this.btnBar.enableAction('addRow');
+                this.btnBar.enableAction('deleteSelectedForecast');
+                this.btnBar.enableAction('duplicateForecast');
+                this.btnBar.enableAction('deleteSelectedRow');
+                this.btnBar.enableAction('AdjustFinalForecast');
+                this.btnBar.enableAction('updateForecast');
+                this.btnBar.enableAction('publish');
+                this.btnBar.enableAction('lock');
+                this.btnBar.enableAction('unlock');
+              }
+              else {
+                this.btnBar.disableAction('add');
+                this.btnBar.disableAction('addRow');
+                this.btnBar.disableAction('deleteSelectedForecast');
+                this.btnBar.disableAction('duplicateForecast');
+                this.btnBar.disableAction('deleteSelectedRow');
+                this.btnBar.disableAction('AdjustFinalForecast');
+                this.btnBar.disableAction('updateForecast');
+                this.btnBar.disableAction('publish');
+                this.btnBar.disableAction('lock');
+                this.btnBar.disableAction('unlock');
+
+              }
+            }
+            else {
+              this.router.navigate(['/unauthorized']);
+            }
+          }
+          else {
+            this.router.navigate(['/unauthorized']);
+          }
+
+          this.getSelectedForecast();
+        }
+      });
+
+  }
+
+ 
+  onSearch(evt: any) {
+   
+    // if (!!evt) {
+    //   this.forecastListData = [];
+       
+    //   this.forecastListData = this.forecastList.filter(function (d) {
+    //    return d.name.toLowerCase().includes(evt.toLowerCase().trim());
+    //  });
+    //}
+    //else {
+    //   this.forecastListData = [];
+    //   this.forecastList.forEach(val => this.forecastListData.push(Object.assign({}, val)));
+    //}
+
+    for (var i = 0; i < this.forecastList.length; i++) {
+      if (this.forecastList[i].isPublished == true) {
+        var elems = document.querySelectorAll(".materialBold .pure-checkbox");
+        elems[i].className += " active1"; 
+      }
+      else {
+        //var elems = document.querySelectorAll(".materialBold .pure-checkbox");
+        //elems[i].classList.remove('active1'); 
+      }
+
+    }
+  }
+
+   
+
+}

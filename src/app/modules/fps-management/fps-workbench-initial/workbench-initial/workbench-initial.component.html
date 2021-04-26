@@ -1,0 +1,184 @@
+<div class="e-profile">
+  <div class="row">
+    <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 d-flex w-100">
+      <div class="box-children w-100">
+        <div class="row">
+
+          <div class="col-md-3 col-sm-6">
+            <div class="form-group">
+              <label for="">{{ 'key_Location' | translate }}</label>
+              <angular2-multiselect [data]="contractTypeList"  [(ngModel)]="selectedItemsB" [settings]="settingsB"
+                                    (onSelect)="onItemSelect($event)"
+                                    (onDeSelect)="OnItemDeSelect($event)"
+                                    (onSelectAll)="onSelectAll($event)"
+                                    (onDeSelectAll)="onDeSelectAll($event)"
+                                    (onAddFilterNewItem)="onAddItemB($event)">
+              </angular2-multiselect>
+            </div>
+          </div>
+          <div class="col-md-2 col-sm-6 col-lg-2 col-xl-2">
+            <div class="form-group">
+              <label for="ccmonth">{{ 'key_EquipmentClass' | translate }}</label>
+              <angular2-multiselect [data]="customerShipList" [(ngModel)]="selectedItemsB" [settings]="settingsB"
+                                    (onSelect)="onItemSelect($event)"
+                                    (onDeSelect)="OnItemDeSelect($event)"
+                                    (onSelectAll)="onSelectAll($event)"
+                                    (onDeSelectAll)="onDeSelectAll($event)"
+                                    (onAddFilterNewItem)="onAddItemB($event)">
+              </angular2-multiselect>
+            </div>
+          </div>
+          <div class="col-md-2 col-sm-6 col-lg-2 col-xl-2">
+            <div class="form-group">
+              <label for="ccmonth">{{ 'Key_EquipmentType' | translate }}</label>
+              <angular2-multiselect [data]="CustomerShipLocation" [(ngModel)]="selectedItemsB" [settings]="settingsB"
+                                    (onSelect)="onItemSelect($event)"
+                                    (onDeSelect)="OnItemDeSelect($event)"
+                                    (onSelectAll)="onSelectAll($event)"
+                                    (onDeSelectAll)="onDeSelectAll($event)"
+                                    (onAddFilterNewItem)="onAddItemB($event)" name="eq">
+              </angular2-multiselect>
+            </div>
+          </div>
+          <div class="col-md-3 col-sm-6">
+            <div class="form-group">
+              <label for="ccmonth">{{ 'key_Action' | translate }}</label>
+              <angular2-multiselect [data]="busonessPartnerList" [(ngModel)]="selectedItemsB" [settings]="settingsB"
+                                    (onSelect)="onItemSelect($event)"
+                                    (onDeSelect)="OnItemDeSelect($event)"
+                                    (onSelectAll)="onSelectAll($event)"
+                                    (onDeSelectAll)="onDeSelectAll($event)"
+                                    (onAddFilterNewItem)="onAddItemB($event)" name="business">
+              </angular2-multiselect>
+            </div>
+          </div>
+          <div class="col-md-2 col-sm-6">
+            <div class="form-group">
+              <label for="ccmonth">{{ 'key_UOM' | translate }}</label>
+              <angular2-multiselect [data]="chargeRateUOM" [(ngModel)]="selectedItemsB" [settings]="settingsB"
+                                    (onSelect)="onItemSelect($event)"
+                                    (onDeSelect)="OnItemDeSelect($event)"
+                                    (onSelectAll)="onSelectAll($event)"
+                                    (onDeSelectAll)="onDeSelectAll($event)"
+                                    (onAddFilterNewItem)="onAddItemB($event)" name="uom">
+              </angular2-multiselect>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="row mt-3">
+  <div class="card-body pl-0 pt-0 pb-1">
+    <div class="col-md-12">
+      <div class="d-flex flex-nowrap justify-content-between align-items-center">
+        <div class="btn-group  btn-group-md">
+           <button class="btn btn-outline-primary" type="button">
+             <i class="fa fa-check-square-o" aria-hidden="true"></i>
+             <span> {{'key_validateSelectionJobs'| translate}}</span>
+           </button>
+          <button class="btn btn-outline-primary" type="button">
+            <i class="fa fa-upload" aria-hidden="true"></i>
+            <span> {{'key_ScheduleSelectedJob'| translate}}</span>
+          </button>
+          <button class="btn btn-outline-primary" type="button">
+            <i class="fa fa-trash-o" aria-hidden="true"></i>
+            <span> {{'key_DeleteAllScheduledJobs'| translate}}</span>
+          </button>
+          <button class="btn btn-outline-primary" type="button">
+            <i class="fa fa-unlock-alt" aria-hidden="true"></i>
+            <span> {{'key_UnlockAllJobs'| translate}}</span>
+          </button>
+          <button class="btn btn-outline-primary" data-target="#compilePopup" data-toggle="modal" type="button">
+            <i class="fa fa-book" aria-hidden="true"></i>
+            <span> {{'key_SetValues'| translate}}</span>
+          </button>
+          <button class="btn btn-outline-primary" type="button">
+            <i class="fa fa-trash-o" aria-hidden="true"></i>
+            <span> {{'key_Clear'| translate}}</span>
+          </button>
+          <button class="btn btn-outline-primary" type="button">
+            <i class="fa fa-refresh" aria-hidden="true"></i>
+            <span> {{'key_Refresh'| translate}}</span>
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+<div class="scroll">
+  <mat-table #table [dataSource]="dataSource" matSort>
+
+    <ng-container *ngFor="let column of displayedColumns; let i=index;" [matColumnDef]="column">
+      <mat-header-cell *matHeaderCellDef mat-sort-header mwlResizable [enableGhostResize]="true" (resizeEnd)="onResizeEnd($event, column)"
+                       [resizeEdges]="{bottom: false, right: true, top: false, left: true}">
+
+        <div class="form-check-inline" *ngIf="column === selectRow">
+          <label class="form-check-label">
+            <input type="checkbox" class="form-check-input" value="" placement="top" ngbTooltip="Select all" (change)="$event ? masterToggle() : null"
+                   [checked]="selection.hasValue() && isAllSelected()"
+                   [indeterminate]="selection.hasValue() && !isAllSelected()">
+          </label>
+        </div>
+        <div *ngIf="column != selectRow">  {{ displayedColumnsReplace[i] | translate}}</div>
+      </mat-header-cell>
+
+      <mat-cell *matCellDef="let item">
+        <div class="form-check-inline" *ngIf="column === selectRow">
+          <label class="form-check-label">
+            <input type="checkbox" class="form-check-input" value="" (click)="$event.stopPropagation()"
+                   (change)="$event ? selection.toggle(item) : null"
+                   [checked]="selection.isSelected(item)">
+          </label>
+        </div>
+        <div class="form-check-inline w-100 py-3 justify-content-around d-flex ng-star-inserted" *ngIf="column === select"> <a class="a_hover" title="Print Label"> <i class="fa fa-print" aria-hidden="true" (click)="openPrintLevel()"></i></a> </div>
+        {{ item[column] }}
+      </mat-cell>
+    </ng-container>
+
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{ 'selected': selection.isSelected(row)}"
+             (click)="selection.toggle(row)">
+    </mat-row>
+  </mat-table>
+</div>
+<!--<mat-paginator #paginator
+               [pageSize]="10"
+               [pageSizeOptions]="[5, 10, 20]">
+</mat-paginator>-->
+
+
+<div class="modal" id="compilePopup">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">
+          Set Initial Values
+        </h5>
+        <button type="button" for="confirms" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label>{{'key_Amount'|translate}}</label>
+          <input type="text" class="form-control" name="" />
+        </div>
+        <div class="form-group">
+          <label>{{'key_StartDatetime'|translate}}</label>
+          <ejs-datetimepicker [format]='dateFormat1' [value]='date' placeholder='MM-DD-YYYY HH:MM AM'></ejs-datetimepicker>
+        </div>
+        <div class="form-group">
+          <label>{{'key_EndDatetime'|translate}}</label>
+          <ejs-datetimepicker [format]='dateFormat1' [value]='date' placeholder='MM-DD-YYYY HH:MM AM'></ejs-datetimepicker>
+        </div>
+
+        <button class="mt-2 btn btn-save">Apply Value</button>
+      </div>
+
+    </div>
+  </div>
+</div>

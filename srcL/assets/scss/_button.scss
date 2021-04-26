@@ -1,0 +1,223 @@
+$btn-width: 150px; // button width
+
+.btn-bs-file {
+  position: relative;
+}
+
+.btn-bs-file input[type="file"] {
+  position: absolute;
+  top: -9999999;
+  filter: alpha(opacity=0);
+  opacity: 0;
+  width: 0;
+  height: 0;
+  outline: none;
+  cursor: inherit;
+}
+.file-upload {
+  background-color: #808080;
+  color:#fff;
+}
+
+.chart-btns .btn-save {
+  background-color: $saveBtn-bgcolor;
+  color: $text-color;
+  font-weight: 600;
+}
+
+.btn-save {
+  background-color: #f1eeeb;
+  color: $text-color;
+  font-weight: 600;
+  /*width: $btn-width;*/
+}
+
+
+
+.chart-btns .btn-previous {
+  background-color: #D9E3DA;
+  color: $text-color;
+  font-weight: 600;
+}
+
+.btn-previous {
+  background-color: #D9E3DA;
+  color: $text-color;
+  font-weight: 600;
+}
+
+.btnbg {
+  background-color: $saveBtn-bgcolor;
+  color: $text-color !important;
+  width: 40%;
+  font-weight: 600;
+}
+
+.btnview {
+  background-image: linear-gradient(to right, #Fcc, #fdf9c8); /* Standard syntax (must be last) */
+}
+.btnclose {
+  margin-right: -14px;
+  width: 8%;
+}
+
+.btnview:hover {
+  background-position: right center;
+}
+
+.btntabsactive {
+  background: $header-color;
+  padding: 10px;
+  margin: 3px;
+  border-left: 6px solid #fcc;
+  border-radius: 0px;
+}
+
+.btntab {
+  background: #d7d5d5;
+  padding: 10px;
+  margin: 3px;
+  border-radius: 0px;
+}
+
+.plusBtn {
+  background-color: #f1eeeb;
+  color: #737373;
+  border: 0px solid #d4c8be;
+  padding: 12px;
+  height: 35px;
+  line-height: 0;
+}
+
+.plusBtn2 {
+  background-color: #e6e6e6;
+  color: #737373;
+  border: 0px solid #d4c8be;
+  padding: 0px 9px;
+  height: 28px;
+  line-height: 0;
+}
+
+.next-btnbg {
+  background-color: $btn-next;
+}
+
+.popup-btn-width {
+  width: 125px;
+}
+.popup-btn-width2 {
+  width: 130px;
+}
+.popup-btn-height {
+  height: 30px;
+  line-height: 12px;
+
+}
+
+.btnbrd {
+  border: 1px solid #939394;
+  background: $btn-next;
+}
+
+.btnbrdsave {
+  border: 1px solid #939394;
+  background: #f1eeeb;
+}
+
+.next-btn {
+  background-color: #f1eeeb;
+  border: 1px solid #c8ced3;
+  padding: 5px 20px;
+  border-radius: 50px;
+  box-shadow: 0 7px 6px -6px rgba(0,0,0,0.50);
+}
+
+.skip-btn {
+  background-color: #ecf0ff;
+  border: 1px solid #d0d9fb;
+  padding: 5px 20px;
+  border-radius: 50px;
+  box-shadow: 0 7px 6px -6px rgba(0,0,0,0.50);
+}
+
+.btn-pinkNext {
+  background-color: #ffc7c7;
+  border: 2px solid #ffbbbb;
+  border-radius: 4px;
+  width: 150px;
+  height: 40px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+/*.show-notesBtn {
+  background-color: #f1eeeb;
+  transform: rotate(-90deg);
+  border-left: 1px solid #c8ced3;
+  border-top: 1px solid #c8ced3;
+  border-bottom: 0;
+  border-right: 1px solid #c8ced3;
+  padding: 4px;
+  color: $text-color;
+  border-radius: 4px 4px 0px 0px;
+  position: absolute;
+  top: 75px;
+  right: 254px;
+  width: 120px;
+  text-align: center;
+}
+
+.shwbtn-hover:hover {
+  cursor: pointer;
+}*/
+
+.btn-save {
+  background-color: #cecac6;
+  color: $text-color;
+  font-weight: 600;
+}
+
+.btn-next {
+  background-color: $btn-next;
+  color: $text-color;
+  font-weight: 600;
+}
+.btn-global {
+  background-color: $btn-global;
+  color: $text-color;
+  font-weight: normal;
+}
+.add-new-email-btn {
+  background: #000;
+  padding: 4px 9px; border:none;
+  background-color: $text-color;
+  color: $header-color;
+}
+
+.btn-previous {
+  background-color: #D9E3DA;
+  color: $text-color;
+  font-weight: 600;
+}
+
+.filter-btn {
+  background-color: #fbdede;
+  border: 1px solid #f6c3c3;
+  height: 32px;
+  border-radius: 4px;
+  width: 151px;
+}
+
+.filter-btnreset {
+  background-color: #ff4444;
+  border: 1px solid #ee1c1c;
+  height: 32px;
+  border-radius: 4px;
+  width: 151px;
+  color: $header-color;
+}
+
+
+
+
+

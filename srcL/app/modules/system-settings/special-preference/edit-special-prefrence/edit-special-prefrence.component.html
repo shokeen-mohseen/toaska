@@ -1,0 +1,33 @@
+<form #NgForm (ngSubmit)="Update(NgForm)">
+  <div class="modal-header">
+    <h4 class="modal-title">Edit</h4>
+    <button type="button" class="close" data-dismiss="modal" (click)="activeModal.dismiss('Cross click')">&times;</button>
+  </div>
+
+  <!-- Modal body -->
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="form-group">
+          <label> {{ 'key_AppPreferenceValueModified' | translate }} <span class="text-danger">*</span> </label>
+          <input type="text" hidden class="form-control" name="txtUserPreferenceId" id="txtUserPreferenceId" [(ngModel)]="txtUserPreferenceId" required />
+          <input type="text" *ngIf="!PreferenceType.webControlTypeID" class="form-control" name="txtUserPreference" id="txtUserPreference" [(ngModel)]="txtUserPreference" required />
+          <angular2-multiselect fixFilterBug [data]="itemListA" [(ngModel)]="selectedItemsA" [settings]="ddSettings"
+                                *ngIf="PreferenceType.webControlTypeID" name="itemone" required >
+          </angular2-multiselect>
+        </div>
+      </div>
+    </div>
+
+
+
+
+    <div class="row justify-content-center my-3">
+      <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 text-center">
+        <button class="btn popup-btn-width btn-save" type="submit" [disabled]="Inactive">{{ 'key_Update' | translate }}</button>
+      </div>
+    </div>
+
+
+  </div>
+</form>

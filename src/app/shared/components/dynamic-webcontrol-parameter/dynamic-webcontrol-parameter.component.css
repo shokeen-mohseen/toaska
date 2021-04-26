@@ -1,0 +1,23 @@
+.wselectwidth {
+  width: 182px;
+}
+.accordion > .card > .card-header.collapsed:after {
+  content: "\f107";
+  position: relative;
+  top: 10px;
+  right: 4px;
+}
+/*.accordion .card-header:after {
+  font-family: 'FontAwesome';
+  content: "\f068";
+  
+}
+
+.accordion .card-header.collapsed:after {*/
+  /* symbol for "collapsed" panels */
+  /*content: "\f067"; 
+}*/
+
+/*.tt {
+  content: "\f067";
+}*/

@@ -1,0 +1,176 @@
+
+<div class="row">
+  <div class="col-lg-12">
+
+    <div class="mt-2 row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label>{{'key_MaterialDescription' | translate}}</label>
+          <angular2-multiselect fixFilterBug [data]="MaterialDescription" [(ngModel)]="selectedMaterial" [settings]="settingsMaterial"
+                                (onSelect)="onItemSelect($event)"
+                                (onDeSelect)="OnItemDeSelect($event)"
+                                (onSelectAll)="onSelectAll($event)"
+                                (onDeSelectAll)="onDeSelectAll($event)"
+                                (onAddFilterNewItem)="onAddItemA($event)" name="mat-desc">
+          </angular2-multiselect>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label>{{'key_ChargeDescription'|translate}}</label>
+          <angular2-multiselect fixFilterBug [data]="ChargeDescription" [(ngModel)]="selectedCharge" [settings]="settingsCharge"
+                                (click)="onChargeBind()"
+                                (onSelect)="onItemSelect($event)"
+                                (onDeSelect)="OnItemDeSelect($event)"
+                                (onSelectAll)="onSelectAll($event)"
+                                (onDeSelectAll)="onDeSelectAll($event)"
+                                (onAddFilterNewItem)="onAddItemA($event)" name="chargeDesc">
+          </angular2-multiselect>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <button class="btn btn-next btn-w-h ml-2 mt-4" [disabled]="selectedCharge.length==0 || Inactive" (click)="PopulateData()">{{'key_Apply'|translate}}</button>
+      </div>
+
+    </div><!--justify-content-center col-md-12-->
+    <!--for new one grid-->
+    <hr />
+    <div>
+      <h5>New one</h5>
+    </div>
+    <form #addForm="ngForm">
+      <div class="scroll resize-table newOne">
+        <mat-table #table [dataSource]="dataSource">
+          <ng-container *ngFor="let column of displayedColumns; let i=index;" [matColumnDef]="column">
+            <mat-header-cell *matHeaderCellDef  [resizeColumn]="true" [index]="i">             
+              <div> {{ displayedColumnsReplace[i] | translate}}</div>
+            </mat-header-cell>
+
+            <mat-cell *matCellDef="let item; let rowIdx = index">
+              
+              <div class="text-center" *ngIf="column === Rate">
+                <input type="text" matInput #Rate="ngModel" (keypress)="numberOnly($event,rowIdx)" name="txtRate{{rowIdx}}" [(ngModel)]="item.Rate" class="form-control w-input" required />
+              </div>
+              <div class="text-center" *ngIf="column === RateType">
+                <select class="form-control w-input" matInput #RateType="ngModel" name="txtRateType{{rowIdx}}" [(ngModel)]="item.RateType" required>
+                  <option *ngFor="let ratetyp of RateTypeListArray[rowIdx]; let i = index" [value]="ratetyp.id">
+                    {{ratetyp.description}}
+                  </option>
+                </select>
+              </div>
+              <div class="text-center" *ngIf="column === UOM">
+                <select class="form-control w-input" matInput #UOM="ngModel" name="txtUOM{{rowIdx}}" [(ngModel)]="item.UOM">
+                  <option *ngFor="let uom of UomList; let i = index" [value]="uom.id">
+                    {{uom.description}}
+                  </option>
+                </select>
+              </div>
+              <div class="text-center" *ngIf="column === Quantity_per_UOM">
+                <input type="text" class="form-control w-input" (keypress)="numberOnly($event)" matInput #QuantityperUOM="ngModel" name="txtQuantityperUOM{{rowIdx}}" [(ngModel)]="item.Quantity_per_UOM" required />
+              </div>
+              <div class="text-center" *ngIf="column === Commodity">
+                <select class="form-control w-input" matInput #Commodity="ngModel" name="txtCommodity{{rowIdx}}" [(ngModel)]="item.Commodity">
+                  <option value="">Commodity</option>
+                  <option *ngFor="let commodity of commodityData; let i = index" [value]="commodity.id">
+                    {{commodity.name}}
+                  </option>
+                </select>
+              </div>
+              <div class="text-center" *ngIf="column === Sales_Tax_Price">
+                <select class="form-control w-input" matInput #SalesTaxPrice="ngModel" name="txtSalesTaxPrice{{rowIdx}}" [(ngModel)]="item.Sales_Tax_Price" >
+                  <option *ngFor="let salestax of salesTaxClass; let i = index" [value]="salestax.id">
+                    {{salestax.name}}
+                  </option>
+                </select>
+              </div>
+              <div class="text-center" *ngIf="column === MethodType">
+                <select class="form-control w-input" matInput #MethodType="ngModel" name="txtMethodType{{rowIdx}}" [(ngModel)]="item.MethodType" required>
+                  <option *ngFor="let pricemethod of priceMethodData; let i = index" [value]="pricemethod.id">
+                    {{pricemethod.description}}
+                  </option>
+                </select>
+              </div>
+              <div class="form-check-inline text-center" *ngIf="column === ShowOnBOL">
+                <mat-checkbox #ShowOnBOL="ngModel" name="txtShowOnBOL{{rowIdx}}" [(ngModel)]="item.ShowOnBOL"></mat-checkbox>
+              </div>
+              <div class="form-check-inline text-center" *ngIf="column === AutoAdded">
+                <mat-checkbox #AutoAdded="ngModel" name="txtAutoAdded{{rowIdx}}" [(ngModel)]="item.AutoAdded"></mat-checkbox>
+              </div>
+              <div class="form-check-inline text-center" *ngIf="column === AddPallet">
+                <mat-checkbox #AddPallet="ngModel" name="txtAddPallet{{rowIdx}}" [disabled]="item.IsDisabledAddPallet" [(ngModel)]="item.AddPallet"></mat-checkbox>
+              </div>
+              <div class="text-center" *ngIf="column === PriceIncreaseMethod">
+                <select class="form-control w-input" matInput #PriceIncreaseMethod="ngModel" name="txtPriceIncreaseMethod{{rowIdx}}" [(ngModel)]="item.PriceIncreaseMethod">
+                  <option *ngFor="let pricemethod of priceIncreaseMethodData; let i = index" [value]="priceIncreaseMethodData[i].id">
+                    {{priceIncreaseMethodData[i].description}}
+                  </option>
+                </select>
+              </div>
+              <div *ngIf="column === EffectiveStart" style="width:140px;">
+                <ejs-datepicker matInput #EffectiveStart="ngModel" title="{{item.EffectiveStart}}" name="txtEffectiveStart{{rowIdx}}" [(ngModel)]="item.EffectiveStart" [format]='dateFormat' placeholder='MM-dd-yyyy' class="form-control" required></ejs-datepicker>
+              </div>
+              <div *ngIf="column === EffectiveEnd" style="width:140px;">
+                <ejs-datepicker matInput #EffectiveEnd="ngModel" title="{{item.EffectiveEnd}}" name="txtEffectiveEnd{{rowIdx}}" [(ngModel)]="item.EffectiveEnd" [format]='dateFormat' placeholder='MM-dd-yyyy' class="form-control" required></ejs-datepicker>
+              </div>
+              <div class="grid-button pt-2 text-center" ngbTooltip="Add New"  *ngIf="column === Add_New">
+                <a class="a_hover" (click)="addRow(item,rowIdx)"><i class="fa fa-plus" aria-hidden="true"></i></a>
+              </div>
+              <div class="grid-button pt-2 text-center" ngbTooltip="Delete"  *ngIf="column === Delete">
+                <a class="a_hover" (click)="RemoveRow(item)"><i class="fa fa-trash" aria-hidden="true"></i></a>
+              </div>
+
+              <div *ngIf="column!=Rate && column!=RateType && column!=UOM && column!=Quantity_per_UOM && column!=Commodity && column!=Sales_Tax_Price && column!=MethodType && column!=ShowOnBOL && column!=AutoAdded && column!=AddPallet && column!=PriceIncreaseMethod && column!=EffectiveStart && column!=EffectiveEnd">{{ item[column] }}</div>
+            </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+      </div>
+
+
+
+      <div class="col-md-12 mb-3 mt-3 text-center">
+        <button class="btn btn-next" [disabled]="((!addForm.form.valid) || Inactive)?true:false" (click)="AddData(addForm)">Add</button>
+      </div>
+    </form>
+    <!--For existing grid-->
+    <div>
+      <h5>Existing</h5>
+      <app-table-filter (filterOn)="applyFilter($event)"></app-table-filter>
+       <!--<mat-form-field appearance="outline" fxFlex="100">
+     <mat-label>{{ 'key_Filter' | translate }}</mat-label>
+     <input matInput (keyup)="applyFilter($event.target.value)" placeholder="{{ 'key_Filter' | translate }}">
+   </mat-form-field>-->
+    </div>
+    <div class="scroll resize-table existing">
+      <mat-table #table [dataSource]="dataSource1">
+
+        <ng-container *ngFor="let column of displayedColumns1; let i=index;" [matColumnDef]="column">
+          <mat-header-cell *matHeaderCellDef [resizeColumn]="true" [index]="i">
+           
+            <div> {{ displayedColumnsReplace1[i] | translate}}</div>
+          </mat-header-cell>
+
+          <mat-cell *matCellDef="let item">
+            <ng-container *ngIf="column === 'showOnBOL' || column === 'autoAdded' || column === 'addPallet'">
+              {{ item[column] == 1 || item[column] == '1'  ? 'Yes': 'No' }}
+            </ng-container>
+            <ng-container *ngIf="!(column === 'showOnBOL' || column === 'autoAdded' || column === 'addPallet')">
+              {{ item[column] }}
+            </ng-container>            
+          </mat-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="displayedColumns1"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns1;"></mat-row>
+      </mat-table>
+    </div>
+    <!--<mat-paginator #paginator
+                 [pageSize]="10"
+                 [pageSizeOptions]="[5, 10, 20]">
+  </mat-paginator>-->
+  </div>
+</div>
+
+
+

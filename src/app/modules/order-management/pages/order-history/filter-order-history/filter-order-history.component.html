@@ -1,0 +1,316 @@
+<!--Filters-->
+<mat-accordion>
+  <mat-expansion-panel (opened)="panelOpenState = true"
+                       (closed)="panelOpenState = false" [expanded]="false">
+    <mat-expansion-panel-header>
+      <mat-panel-description>
+        {{panelOpenState ? '- Hide' : '+ Show'}}   {{ 'key_Orderhislisfilter' | translate }}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <form #addOrderForm="ngForm" novalidate>
+      <div class="row custom-form">
+        <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 d-flex w-100">
+          <div class="card">
+            <div class="card-header mb-2">
+              <a class="card-title">{{ 'key_OrderFilter' | translate }} </a>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                  <div class="form-group">
+                    <label for="nf-password">{{ 'key_OrderNo' | translate }}</label>
+                    <input class="form-control" id="OrderNo" type="text" [(ngModel)]="orderHistoryFilterModal.OrderNo" name="OrderNo" placeholder="Type order no." autocomplete="current-password">
+                  </div>
+                </div>
+                <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                  <div class="form-group">
+                    <label for="ccmonth">{{ 'key_Ordertype' | translate }}</label>
+                    <!--<angular2-multiselect fixFilterBug [data]="itemListCheck" [(ngModel)]="selectedItemsCheck" [settings]="settingsCheck"
+                                          (onSelect)="onItemSelect($event)"
+                                          (onDeSelect)="OnItemDeSelect($event)"
+                                          (onSelectAll)="onSelectAll($event)"
+                                          (onDeSelectAll)="onDeSelectAll($event)"
+                                          (onAddFilterNewItem)="onAddItemCheck($event)" name="skill3" #skill3="ngModel">
+                    </angular2-multiselect>-->
+                    <angular2-multiselect fixFilterBug [data]="OrderTypeData" [(ngModel)]="orderHistoryFilterModal.selectedOrderTypeItems"
+                                          [settings]="{singleSelection: false,text: 'Select', enableSearchFilter: true, addNewItemOnFilter: false, badgeShowLimit: 1, disabled: false, labelKey: 'name', searchBy: ['name'] }"
+                                          name="OrderType" #items="ngModel"
+                                          (onSelect)="OnOrderTypeSelect($event)"
+                                          (onDeSelect)="OnOrderTypeDeSelect($event)">
+                    </angular2-multiselect>
+                  </div>
+                </div>
+                <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                  <div class="form-group">
+                    <label for="ccmonth">{{ 'key_Status' | translate }}</label>
+                    <angular2-multiselect fixFilterBug [data]="OrderStatusData" [(ngModel)]="orderHistoryFilterModal.selectedOrderStatusItems"
+                                          [settings]="{singleSelection: false,text: 'Select', enableSearchFilter: true, addNewItemOnFilter: false, badgeShowLimit: 1, disabled: false, labelKey: 'name', searchBy: ['name'] }"
+                                          name="OrderStatus" #items="ngModel"
+                                          (onSelect)="OnOrderStatusDeSelect($event)"
+                                          (onDeSelect)="OnOrderStatusDeSelect($event)">
+                    </angular2-multiselect>
+                  </div>
+                </div>
+                <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                  <div class="form-group">
+                    <label for="ccmonth">{{ 'key_Showversion' | translate }}</label>
+                    <angular2-multiselect fixFilterBug [data]="AllVersionDataList" [(ngModel)]="orderHistoryFilterModal.selectedAllVersionItems"
+                                          [settings]="{singleSelection: false,text: 'Select', enableSearchFilter: true, addNewItemOnFilter: false, badgeShowLimit: 1, disabled: false, labelKey: 'name', searchBy: ['name'] }"
+                                          name="AllVersionData" #items="ngModel"
+                                          (onSelect)="OnVersionSelect($event)"
+                                          (onDeSelect)="OnVersionDeSelect($event)">
+                    </angular2-multiselect>
+                  </div>
+                </div>
+                <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                  <div class="form-group">
+                    <label for="ccmonth">{{ 'key_OrderCondition' | translate }}</label>
+                    <angular2-multiselect fixFilterBug [data]="OrderConditionDataList" [(ngModel)]="orderHistoryFilterModal.selectedOrderConditionItems"
+                                          [settings]="{singleSelection: false,text: 'Select', enableSearchFilter: true, addNewItemOnFilter: false, badgeShowLimit: 1, disabled: false, labelKey: 'name', searchBy: ['name'] }"
+                                          name="OrderCondition" #items="ngModel"
+                                          (onSelect)="OnOrderConditionSelect($event)"
+                                          (onDeSelect)="OnOrderConditionDeSelect($event)">
+                    </angular2-multiselect>
+                  </div>
+                </div>
+                <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                  <div class="form-group">
+                    <label for="ccmonth">{{ 'key_InvoiceNumber' | translate }}</label>
+                    <angular2-multiselect fixFilterBug [data]="InvoiceNoList" [(ngModel)]="orderHistoryFilterModal.selectedInvoiceNoItems"
+                                          [settings]="{singleSelection: false,text: 'Select', enableSearchFilter: true, addNewItemOnFilter: false, badgeShowLimit: 1, disabled: false, labelKey: 'name', searchBy: ['name'] }"
+                                          name="InvoiceNo" #items="ngModel"
+                                          (onSelect)="OnInvoiceNoSelect($event)"
+                                          (onDeSelect)="OnInvoiceNoDeSelect($event)">
+                    </angular2-multiselect>
+                  </div>
+                </div>
+
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="ccmonth">{{ 'key_OrderAmount' | translate }}</label>
+                    <div class="input-group input-group-sm">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">Max Value </span>
+                      </div>
+                      <input class="form-control" id="OrderAmount" type="number" [(ngModel)]="orderHistoryFilterModal.MaxOrderAmount" name="OrderAmount" placeholder="Max Value" autocomplete="current-password">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">Min Value </span>
+                      </div>
+                      <input class="form-control" id="nf-number" type="number" [(ngModel)]="orderHistoryFilterModal.MinOrderAmount" name="nf-number" placeholder="Min Value" autocomplete="current-password">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 d-flex w-100">
+          <div class="card">
+            <div class="card-header mb-2">
+              <a class="card-title">{{ 'key_OrderDateFilter' | translate }}</a>
+            </div>
+            <div class="card-body p-0">
+              <div class="row" style="padding: 2px 14px;">
+                <div class="col-md-6 col-sm-6 col-lg-6 col-xl-6 pr-1">
+                  <div class="form-group">
+                    <label for="ccmonth">{{ 'key_Shiptype' | translate }}</label>
+                    <angular2-multiselect fixFilterBug [data]="ShipFromTypeList" [(ngModel)]="orderHistoryFilterModal.selectedShipFromTypeItems"
+                                          [settings]="{singleSelection: false,text: 'Select', enableSearchFilter: true, addNewItemOnFilter: false, badgeShowLimit: 1, disabled: false, labelKey: 'name', searchBy: ['name'] }"
+                                          name="ShipFromType" #items="ngModel"
+                                          (onSelect)="OnShipFromTypeSelect($event)"
+                                          (onDeSelect)="OnShipFromTypeDeSelect($event)"
+                                          (onSelectAll)="OnShipFromTypeSelectAll($event,'')"
+                                          (onDeSelectAll)="OnShipFromTypeDeSelectAll($event)">
+                    </angular2-multiselect>
+
+                  </div>
+                </div>
+                <!-- <div class="col-md-6 col-sm-6 col-lg-6 col-xl-6">
+     <div class="form-group">
+       <label for="ccmonth">{{ 'key_Shiptypeloc' | translate }}</label>
+       <angular2-multiselect fixFilterBug [data]="ShipToTypeList" [(ngModel)]="orderHistoryFilterModal.selectedShipToTypeItems"
+                             [settings]="{singleSelection: false,text: 'Select', enableSearchFilter: true, addNewItemOnFilter: false, badgeShowLimit: 1, disabled: false, labelKey: 'name', searchBy: ['name'] }"
+                             name="ShipToType" #items="ngModel"
+                             (onSelect)="OnShipToTypeSelect($event)"
+                             (onDeSelect)="OnShipToTypeDeSelect($event)"
+                             (onSelectAll)="OnShipToTypeSelectAll($event)"
+                             (onDeSelectAll)="OnShipToTypeDeSelectAll($event)">
+       </angular2-multiselect>
+     </div>
+   </div>-->
+                <div class="col-md-6 col-sm-6 col-lg-6 col-xl-6 pl-1">
+                  <div class="form-group">
+                    <label for="nf-password">{{ 'key_Shiploc' | translate }}</label>
+                    <angular2-multiselect fixFilterBug [data]="ShipFromList" [(ngModel)]="orderHistoryFilterModal.selectedShipFromItems"
+                                          [settings]="{singleSelection: false,text: 'Select', enableSearchFilter: true, addNewItemOnFilter: false, badgeShowLimit: 1, disabled: false, labelKey: 'name', searchBy: ['name'] }"
+                                          (onSelect)="OnShipFromSelect($event)"
+                                          (onDeSelect)="OnShipFromDeSelect($event)"
+                                          name="ShipFrom" #items="ngModel">
+                    </angular2-multiselect>
+                  </div>
+                </div>
+              </div>
+              <div class="row" style="padding: 2px 14px;">
+                <div class="col-md-6 col-sm-6 col-lg-6 col-xl-6 pr-1">
+                  <div class="form-group">
+                    <label for="ccmonth">{{ 'key_Shiptypeloc' | translate }}</label>
+                    <angular2-multiselect fixFilterBug [data]="ShipToTypeList" [(ngModel)]="orderHistoryFilterModal.selectedShipToTypeItems"
+                                          [settings]="{singleSelection: false,text: 'Select', enableSearchFilter: true, addNewItemOnFilter: false, badgeShowLimit: 1, disabled: false, labelKey: 'name', searchBy: ['name'] }"
+                                          name="ShipToType" #items="ngModel"
+                                          (onSelect)="OnShipToTypeSelect($event)"
+                                          (onDeSelect)="OnShipToTypeDeSelect($event)"
+                                          (onSelectAll)="OnShipToTypeSelectAll($event)"
+                                          (onDeSelectAll)="OnShipToTypeDeSelectAll($event)">
+                    </angular2-multiselect>
+                  </div>
+                </div>
+                <!--<div class="col-md-6 col-sm-6 col-lg-6 col-xl-6">
+                  <div class="form-group">
+                    <label for="nf-password">{{ 'key_Shiploc' | translate }}</label>
+                    <angular2-multiselect fixFilterBug [data]="ShipFromList" [(ngModel)]="orderHistoryFilterModal.selectedShipFromItems"
+                                          [settings]="{singleSelection: false,text: 'Select', enableSearchFilter: true, addNewItemOnFilter: false, badgeShowLimit: 1, disabled: false, labelKey: 'name', searchBy: ['name'] }"
+                                          (onSelect)="OnShipFromSelect($event)"
+                                          (onDeSelect)="OnShipFromDeSelect($event)"
+                                          name="ShipFrom" #items="ngModel">
+                    </angular2-multiselect>
+                  </div>
+                </div>-->
+                <div class="col-md-6 col-sm-6 col-lg-6 col-xl-6 pl-1">
+                  <div class="form-group">
+                    <label for="ccmonth">{{ 'key_Shipto' | translate }}</label>
+                    <angular2-multiselect fixFilterBug [data]="ShipToList" [(ngModel)]="orderHistoryFilterModal.selectedShipToItems"
+                                          [settings]="{singleSelection: false,text: 'Select', enableSearchFilter: true, addNewItemOnFilter: false, badgeShowLimit: 1, disabled: false, labelKey: 'name' , searchBy: ['name']}"
+                                          (onSelect)="OnShipToSelect($event)"
+                                          (onDeSelect)="OnShipToDeSelect($event)"
+                                          name="ShipTo" #items="ngModel">
+                    </angular2-multiselect>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                <div class="form-group">
+                  <label for="ccmonth">{{ 'key_ShipmentNo' | translate }}</label>
+                  <input class="form-control" id="ShipmentNo" type="text" [(ngModel)]="orderHistoryFilterModal.ShipmentNo" name="ShipmentNo" placeholder="Type shipment no.">
+                </div>
+              </div>
+              <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                <div class="form-group">
+                  <label for="ccmonth">{{ 'key_PONo' | translate }}</label>
+                  <input class="form-control" id="PONo" [(ngModel)]="orderHistoryFilterModal.PONo" type="text" name="PONo" placeholder="Type PO no.">
+                </div>
+              </div>
+              <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                <div class="form-group">
+                  <label for="ccmonth">{{ 'key_Material' | translate }}</label>
+                  <angular2-multiselect fixFilterBug [data]="MaterialData" [(ngModel)]="orderHistoryFilterModal.selectedMaterialItems"
+                                        [settings]="{singleSelection: false,text: 'Select', enableSearchFilter: true, addNewItemOnFilter: false, badgeShowLimit: 1, disabled: false, labelKey: 'name', searchBy: ['name'] }"
+                                        (onSelect)="OnMaterialSelect($event)"
+                                        (onDeSelect)="OnMaterialDeSelect($event)" name="Material" #items="ngModel">
+                  </angular2-multiselect>
+                </div>
+                </div>
+              <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+  <div class="form-group">
+    <label for="ccmonth">{{ 'key_Carrier' | translate }}</label>
+    <angular2-multiselect fixFilterBug [data]="CarrierData" [(ngModel)]="orderHistoryFilterModal.selectedCarrierItems"
+                          [settings]="{singleSelection: false,text: 'Select', enableSearchFilter: true, addNewItemOnFilter: false, badgeShowLimit: 1, disabled: false, labelKey: 'name', searchBy: ['name']  }"
+                          (onSelect)="OnCarrierSelect($event)"
+                          (onDeSelect)="OnCarrierDeSelect($event)" name="Carrier" #items="ngModel">
+    </angular2-multiselect>
+  </div>
+  </div>
+
+              <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                <div class="form-group">
+                  <label for="ccmonth" class="mr-3 mt-2">{{'key_ShipWith' | translate}}</label>
+                  <div class="form-check form-check-inline mt-1">
+                    <input type="radio" class="form-check-input" id="all" name="radion11">
+                    <label class="form-check-label mb-0" for="all">All</label>
+                  </div>
+                  <div class="form-check form-check-inline mt-1">
+                    <input type="radio" class="form-check-input" id="yes" name="radion11">
+                    <label class="form-check-label mb-0" for="yes">Yes</label>
+                  </div>
+                  <div class="form-check form-check-inline mt-1">
+                    <input type="radio" class="form-check-input" id="no" name="radion11">
+                    <label class="form-check-label mb-0" for="no">No</label>
+                  </div>
+
+                </div>
+                </div>
+
+
+
+              </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 d-flex w-100">
+          <div class="card">
+            <div class="card-header mb-2">
+              <a class="card-title">{{ 'key_OrderDateFilters' | translate }}</a>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                  <div class="form-group">
+                    <label for="ccmonth">{{ 'key_ScheduledShipDate' | translate }}</label>
+                    <ejs-daterangepicker [format]='dateFormat' [(ngModel)]="orderHistoryFilterModal.ScheduledShipDateN" (change)='onScheduledShipDateChange($event)' separator='to' placeholder='MM-DD-YYYY to MM-DD-YYYY' id="ScheduledShipDate"></ejs-daterangepicker>
+                  </div>
+                </div>
+                <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                  <div class="form-group">
+                    <label for="ccmonth">{{ 'key_RequestedDeliveryDate' | translate }}</label>
+                    <ejs-daterangepicker [format]='dateFormat' [(ngModel)]="orderHistoryFilterModal.ReqDeliveryDateN" (change)='onReqDeliveryDateChange($event)' separator='to' placeholder='MM-DD-YYYY to MM-DD-YYYY' id="RequestedDeliveryDate"></ejs-daterangepicker>
+                  </div>
+                </div>
+                <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                  <div class="form-group">
+                    <label for="ccmonth">{{ 'key_mabd' | translate }}</label>
+                    <ejs-daterangepicker [format]='dateFormat' [(ngModel)]="orderHistoryFilterModal.MustArriveByDateN" (change)='onMustArriveByDateChange($event)' separator='to' placeholder='MM-DD-YYYY to MM-DD-YYYY' id="ReqDeliveryDate" class="form-control"></ejs-daterangepicker>
+                  </div>
+                </div>
+                <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                  <div class="form-group">
+                    <label for="ccmonth">{{ 'key_Source' | translate }}</label>
+                    <angular2-multiselect fixFilterBug class="right" [data]="SourceData" [(ngModel)]="orderHistoryFilterModal.selectedSourceItems"
+                                          [settings]="{singleSelection: false,text: 'Select', enableSearchFilter: true, addNewItemOnFilter: false, badgeShowLimit: 1, disabled: false, labelKey: 'name', searchBy: ['name']}"
+                                          name="SourceData" #items="ngModel"
+                                          (onSelect)="OnSourceSelect($event)"
+                                          (onDeSelect)="OnSourceDeSelect($event)">
+                    </angular2-multiselect>
+                  </div>
+                </div>
+                <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                  <div class="form-group">
+                    <label for="ccmonth">{{ 'key_SalesManager' | translate }}</label>
+                    <angular2-multiselect fixFilterBug class="right" [data]="SalesManagersData" [(ngModel)]="orderHistoryFilterModal.selectedSalesManagersItems"
+                                          [settings]="{singleSelection: false,text: 'Select', enableSearchFilter: true, addNewItemOnFilter: false, badgeShowLimit: 1, disabled: false, labelKey: 'name', searchBy: ['name'] }"
+                                          name="SalesManagers" #items="ngModel"
+                                          (onSelect)="OnSalesManagersSelect($event)"
+                                          (onDeSelect)="OnSalesManagersDeSelect($event)">
+                    </angular2-multiselect>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+        </div>
+        <div class="col-sm-12 col-lg-12 row justify-content-center mt-4 mb-3">
+          <div class=""><button type="button" (click)="ApplyGlobalFilter()" class="btn btn-save mr-2 font-weight-normal">{{'key_ApplyFilter' | translate}}</button></div>
+          <div class=""> <button type="button" (click)="ResetGlobalFilter()" class="btn btn-next mr-2 font-weight-normal">{{'key_ResetFilter' | translate}}</button></div>
+        </div>
+      </div>
+      <!-----------modal------------------->
+      <!--manage-filter-->
+
+    </form>
+  </mat-expansion-panel>
+</mat-accordion>
+<!--end filter-->
+

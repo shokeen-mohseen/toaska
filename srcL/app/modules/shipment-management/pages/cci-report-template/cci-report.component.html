@@ -1,0 +1,368 @@
+<div class="container" style="padding-left: 30px; padding-right: 30px; padding-bottom: 10px;">
+
+  <div class="row justify-content-center mt-2">
+    <div class="col-xl-2 col-lg-4 col-md-4 col-sm-12">
+      <button type="button" (click)="downloadPdf()" class="btn btn-block btn-save">Download</button>
+    </div>
+    <div class="col-xl-2 col-lg-4 col-md-4 col-sm-12">
+      <button type="button" (click)="closeWindow()" class="btn btn-block btn-secondary">Close</button>
+    </div>
+  </div>
+  <!--</form>-->
+  <div id="viewCCIReport" class="row justify-content-center reportContainer">
+    <div *ngFor="let report of cciReport; let i = index">
+
+      <table style="width: 100%;">
+        <tr>
+          <td align="left" style="font-size:21px; width:40%; color:#294eb9;">Canadian Commercial Invoice</td>
+          <td align="center"><img src="assets/images/canada-icon.png" /></td>
+          <td align="right">Page {{i + 1}} of {{cciReport.length}}</td>
+        </tr>
+      </table>
+        <table style="width: 100%;">
+          <tr>
+            <td>
+
+              <table style="width:100%; border:1px solid black;" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td style="border-right:1px solid black; vertical-align:top; width:50%;" cellpadding="0" cellspacing="0">
+                    <table style="width:100%;  padding:5px;">
+                      <tr>
+                        <td style="font-weight:bold;">1. Vendor (Name and Address)</td>
+                      </tr>
+                      <tr>
+                        <td> Name: &nbsp;&nbsp;&nbsp;&nbsp; {{report.fromLocationName}}</td>
+                      </tr>
+                      <tr>
+                        <td> Address: &nbsp;&nbsp;&nbsp;&nbsp; {{report.fromLocationAddress}}</td>
+                      </tr>
+                      <tr>
+                        <td> City/State/Zip: &nbsp;&nbsp;&nbsp;&nbsp; {{report.fromLocationCityStateZip}}</td>
+                      </tr>
+                      <tr>
+                        <td>  EIN# &nbsp;&nbsp;&nbsp;&nbsp; {{report.vendorEinNumber}}</td>
+                      </tr>
+
+                    </table>
+                  </td>
+                  <td style="width:50%; vertical-align:top;">
+                    <table style="width:100%;" cellpadding="0" cellspacing="0">
+                      <tr>
+                        <td style="font-weight:bold; padding-left:5px;">2. Date of Direct Shipment to Canada</td>
+                      </tr>
+                      <tr>
+                        <td style="padding-left:5px; border-bottom:1px solid black;">
+                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{report.shipDate | date: 'MM/dd/yyyy'}}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td style="font-weight:bold; padding-left:5px; vertical-align:top;">3.Other References (P.O. Pat 3 May 30)</td>
+                      </tr>
+                      <tr>
+                        <td style="padding-left:5px; ">
+                          <table>
+                            <tr>
+                              <td>BOL {{report.shipmentNumber}}.{{report.shipmentVersion}}</td>
+                            </tr>
+                            <tr>
+                              <td>Cust. Ref. Number {{report.customerReference}}</td>
+                            </tr>
+                          </table>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="border-right:1px solid black; vertical-align:top; border-top:1px solid black; width:50%;" cellpadding="0" cellspacing="0">
+                    <table style="width:100%;  padding:5px;">
+                      <tr>
+                        <td style="font-weight:bold;">4. Consignee (Name & Address)</td>
+                      </tr>
+                      <tr>
+                        <td> Name: &nbsp;&nbsp;&nbsp;&nbsp; {{report.toLocationName}}</td>
+                      </tr>
+                      <tr>
+                        <td> Address: &nbsp;&nbsp;&nbsp;&nbsp; {{report.toLocationAddress}}</td>
+                      </tr>
+                      <tr>
+                        <td> City/State/Zip: &nbsp;&nbsp;&nbsp;&nbsp; {{report.toLocationCityStateZip}}</td>
+                      </tr>
+                    </table>
+                  </td>
+                  <td style="border-top:1px solid black; vertical-align:top; width:50%;" cellpadding="0" cellspacing="0">
+                    <table style="width:100%;  padding:5px;">
+                      <tr>
+                        <td style="font-weight:bold;">5.Purchaser's Name & Address (if other than Consignee)</td>
+                      </tr>
+                      <tr>
+                        <td> Name: &nbsp;&nbsp;&nbsp;&nbsp; {{report.purchaserName}}</td>
+                      </tr>
+                      <tr>
+                        <td> Address: &nbsp;&nbsp;&nbsp;&nbsp; {{report.purchaserAddress}} </td>
+                      </tr>
+                      <tr>
+                        <td> City/State/Zip: &nbsp;&nbsp;&nbsp;&nbsp; {{report.purchaserCityStateZip}}</td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="border-right:1px solid black; vertical-align:top; border-top:1px solid black; width:50%;" cellpadding="0" cellspacing="0">
+                    <table style="width:100%;  padding:5px;">
+                      <tr>
+                        <td style="font-weight:bold;">8. Transportation: Give Mode & Place of Direct Shipments of Goods to Canada</td>
+                      </tr>
+                      <tr>
+                        <td> TL, {{report.transportation}}</td>
+                      </tr>
+
+                    </table>
+                  </td>
+                  <td style="border-top:1px solid black; vertical-align:top; width:50%;" cellpadding="0" cellspacing="0">
+                    <table style="width:100%;  padding:5px;">
+                      <tr>
+                        <td style="font-weight:bold;">6. Country of Transhipment &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; CAN</td>
+                      </tr>
+                      <tr>
+                        <td style="font-weight:bold;">7. Country of Origin of Goods</td>
+                      </tr>
+                      <tr>
+                        <td> If Shipment includes goods of different origins, enter origins against items in 12</td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="border-right:1px solid black; vertical-align:top; border-top:1px solid black; width:50%;" cellpadding="0" cellspacing="0">
+                    <table style="width:100%;  padding:5px;">
+                      <tr>
+                        <td style="font-weight:bold;">For Customs Clearance Notify:</td>
+                      </tr>
+                      <tr>
+                        <td> Name:</td>
+                      </tr>
+                      <tr>
+                        <td> Work phone:</td>
+                      </tr>
+                      <tr>
+                        <td> Fax:</td>
+                      </tr>
+                      <tr>
+                        <td>  Work E-mail:</td>
+                      </tr>
+
+                    </table>
+                  </td>
+                  <td style="border-top:1px solid black; vertical-align:top; width:50%;" cellpadding="0" cellspacing="0">
+                    <table style="width:100%;  padding:5px;">
+                      <tr>
+                        <td style="font-weight:bold;">9. Condition of Sale & Terms of Payment <br>(i.e., Sale, Consignment of Shipment, Leased Goods, etc.)</td>
+                      </tr>
+                      <tr>
+                        <td>Leased Containers</td>
+                      </tr>
+                      <tr>
+                        <td style="font-weight:bold;"> 10.  Currency of settlement &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; USD</td>
+                      </tr>
+                      <tr>
+                        <td> &nbsp;</td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+              <br>
+              <table style="width:100%;" cellpadding="10" cellspacing="0">
+                <tr style="background-color:#1c3a70; border:1px solid black;">
+                  <th style="text-align:center; color:white; border-right:1px solid white;">11. No. of pkgs.</th>
+                  <th style="text-align:center; color:white; border-right:1px solid white;">
+                    12. Specifications of Commodities: (Kind of packages, Marks and <br>
+                    Numbers, General description and characteristics ie: Grade, Quality)
+                  </th>
+                  <th style="text-align:center; color:white; border-right:1px solid white;">13. Quantity (State Unit)</th>
+                  <th style="text-align:center; color:white; border-right:1px solid white;">14. Unit Price</th>
+                  <th style="text-align:center; color:white; border-right:1px solid black;">15. Total</th>
+                </tr>
+                <tr *ngFor="let item of report.shippmentCciOrderDetails" style="border:1px solid black;">
+                  <td align="right" style="border-right:1px solid black;">{{item.numberOfPackages | number}}</td>
+                  <td style="border-right:1px solid black;">{{item.specificationOfCommodity}}</td>
+                  <td align="right" style="border-right:1px solid black;">{{item.numberOfPackages | number}}</td>
+                  <td align="right" style="border-right:1px solid black;">${{item.unitPrice}}</td>
+                  <td align="right" style="border-right:1px solid black;">${{item.total | number}}</td>
+                </tr>
+                <tr>
+                  <th style="text-align:right; border: 0;">{{report.totalPackages | number}} </th>
+                  <th style="border: 0;"><span style="float: left;">Total Packages</span> <span style="float:right;">Total Quantity</span></th>
+                  <th style="text-align:right; border: 0;">{{report.totalQuantity | number}}</th>
+                  <th colspan="2" style="border: 0; text-align:right;">$ {{report.totalTotal | number}}</th>
+                </tr>
+              </table>
+              <table style="width:100%; height:100%; border:1px solid black;" cellpadding="0" cellspacing="0">
+                <tr style="width:100%; height:100%;">
+                  <td style="width:50%; border-right:1px solid black; vertical-align:top;">
+                    <table>
+                      <tr>
+                        <td style="font-weight:bold;">18. If any of fields 1 to 17 are included on an attached commercial invoice</td>
+                      </tr>
+                      <tr>
+                        <td>Check this box [ &nbsp;&nbsp;&nbsp; ] Note: For Continuation use sheet 2</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          Commercial invoice No. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                          {{report.shipmentNumber}}.{{report.shipmentVersion}}
+                        </td>
+                      </tr>
+                    </table>
+
+                  </td>
+                  <td style="width:30%; height:100%; vertical-align: top; border-right:2px solid black;">
+                    <table style="width:100%; height:100%; " cellpadding="0" cellspacing="0">
+                      <tr>
+                        <td style="vertical-align: top;">
+                          <table style="width: 100%; height:100%; " cellpadding="0" cellspacing="0">
+                            <tr style="height:30%;">
+                              <td colspan="2" style="font-weight:bold; padding-bottom:5px; border-bottom:2px solid black;">16. Total Weight (Net/Gross)</td>
+                            </tr>
+                            <tr style="height:70%;">
+                              <td style="font-size:18px; font-weight:bold; text-align:center; border-right:2px solid black;">
+                                {{report.netWeight | number}}
+                              </td>
+                              <td style="font-size:18px; text-align:center; font-weight:bold;">
+                                {{report.grossWeight | number}}
+                              </td>
+                            </tr>
+                          </table>
+                        </td>
+
+                      </tr>
+                    </table>
+                  </td>
+
+                  <td style="width:20%; font-size:24px; font-weight:bold; text-align:center;">$ {{report.totalTotal | number}}</td>
+                </tr>
+              </table>
+
+              <table style="width:100%; border:1px solid black;">
+                <tr>
+                  <td style="border-right:1px solid black; vertical-align:top; width:50%;" cellpadding="0" cellspacing="0">
+                    <table style="width:100%;  padding:5px;">
+                      <tr>
+                        <td style="font-weight:bold;">19. Exporters Name & Address (If other than Vendor)</td>
+                      </tr>
+                      <tr>
+                        <td> Name: &nbsp;&nbsp;&nbsp;&nbsp; Tosca Ltd For Operating Location</td>
+                      </tr>
+                      <tr>
+                        <td> Address: &nbsp;&nbsp;&nbsp;&nbsp; 1032 Bay Beach Rd </td>
+                      </tr>
+                      <tr>
+                        <td> City/State/Zip: &nbsp;&nbsp;&nbsp;&nbsp; Green Bay, WI, 54302, USA</td>
+                      </tr>
+
+                    </table>
+                  </td>
+                  <td style="width:50%; vertical-align:top;" cellpadding="0" cellspacing="0">
+                    <table style="width:100%;  padding:5px;">
+                      <tr>
+                        <td style="font-weight:bold;">20. Originator (Name & Address)</td>
+                      </tr>
+                      <tr>
+                        <td> Name: &nbsp;&nbsp;&nbsp;&nbsp; Tosca Ltd For Operating Location</td>
+                      </tr>
+                      <tr>
+                        <td> Address: &nbsp;&nbsp;&nbsp;&nbsp; 1032 Bay Beach Rd </td>
+                      </tr>
+                      <tr>
+                        <td> City/State/Zip: &nbsp;&nbsp;&nbsp;&nbsp; Green Bay, WI, 54302, USA</td>
+                      </tr>
+
+                    </table>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="border-right:1px solid black; border-top:1px solid black; width:50%;" cellpadding="0" cellspacing="0">
+                    <table style="width:100%;  padding:5px;">
+                      <tr>
+                        <td style="font-weight:bold;">21. Departmental Ruling (if applicable)</td>
+                      </tr>
+
+                    </table>
+                  </td>
+                  <td style="width:50%;" cellpadding="0" cellspacing="0">
+                    <table style="width:100%;  padding:5px; border-top:1px solid black;">
+                      <tr>
+                        <td style="font-weight:bold;">22. If fields 23 to 25 are not applicable, check this &nbsp;&nbsp;&nbsp; <span style="width:30px; float:right; height:20px; border:2px solid black; border-radius:5px;"></span></td>
+                      </tr>
+
+                    </table>
+                  </td>
+                </tr>
+              </table>
+
+              <table style="width:100%;">
+                <tr>
+                  <td style="width:33%; vertical-align: top; border-left:1px solid black; border-top:1px solid black; border-bottom:1px solid black;">
+                    <table>
+                      <tr>
+                        <td style="font-weight:bold;">23. If included in field 17, indicate amount:</td>
+                      </tr>
+                      <tr>
+                        <td>(i) Transportation charges, expenses and insurance from the place of direct shipment to Canada</td>
+                      </tr>
+                      <tr>
+                        <td>(ii) Costs for construction, erection and assembly</td>
+                      </tr>
+                      <tr>
+                        <td>(iii) Export Packing</td>
+                      </tr>
+
+                    </table>
+                  </td>
+                  <td style="width:33%; vertical-align: top; border-left:1px solid black; border-top:1px solid black; border-bottom:1px solid black;">
+                    <table>
+                      <tr>
+                        <td style="font-weight:bold;">24. If not included in field 17 indicate amount</td>
+                      </tr>
+                      <tr>
+                        <td>(i) Transportation charges, expenses and insurance from the place of direct shipment to Canada</td>
+                      </tr>
+                      <tr>
+                        <td>(ii) Amounts for commissions other than buying commissions</td>
+                      </tr>
+                      <tr>
+                        <td>(iii) Export Packing</td>
+                      </tr>
+
+                    </table>
+                  </td>
+                  <td style="width:33%; vertical-align: top; border:1px solid black;">
+                    <table>
+                      <tr>
+                        <td style="font-weight:bold;">25. Check (if applicable)<br><br></td>
+                      </tr>
+                      <tr>
+                        <td>(i) Royalty payments or subsequent proceeds are paid or payable by the purchaser [&nbsp;&nbsp;&nbsp; ]</td>
+                      </tr>
+                      <tr>
+                        <td>(ii) The purchaser has supplied goos or services for use in the production of these goods [ ]</td>
+                      </tr>
+                      <tr>
+                        <td>&nbsp;</td>
+                      </tr>
+
+
+                    </table>
+                  </td>
+                </tr>
+              </table>
+
+
+
+          </tr>
+        </table>
+
+    </div>
+  </div>
+</div>

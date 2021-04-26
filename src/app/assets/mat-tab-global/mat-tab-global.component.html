@@ -1,0 +1,83 @@
+<app-top-btn-group #btnBar [actionGroupConfig]="actionGroupConfig" (action)="actionHandler($event)"></app-top-btn-group>
+<div style="margin-bottom:30px;">
+  <div class="form-area">
+    <div class="wrapper">
+      <div class="content-wrapper">
+        <mat-tab-group #tabGroupA animationDuration="0ms" (selectedTabChange)="tabChange($event)">
+
+          <mat-tab #tab1 *ngIf="tab1">
+            <ng-template mat-tab-label>
+              {{ 'key_ExistingUsers' | translate }}
+            </ng-template>
+            <div class="tab-content" *ngIf="tab1Data">
+              Data goes here
+            </div>
+          </mat-tab>
+
+          <mat-tab #tab3 *ngIf="tab2">
+            <ng-template mat-tab-label>
+              {{ 'key_NewUsers' | translate }}
+            </ng-template>
+            <div class="tab-content" *ngIf="tab2Data">
+              Data goes here
+            </div>
+          </mat-tab>
+
+          <mat-tab #tab3A *ngIf="tab2A">
+            <ng-template mat-tab-label>
+              {{ 'key_NewUsers' | translate }}
+            </ng-template>
+            <div class="tab-content" *ngIf="tab2DataA">
+              Data goes here
+            </div>
+          </mat-tab>
+
+          <mat-tab #tab3 *ngIf="tab3">
+            <ng-template mat-tab-label>
+              {{ 'key_LockedUsers' | translate }}
+            </ng-template>
+            <div class="tab-content" *ngIf="tab3Data">
+              Data goes here
+            </div>
+          </mat-tab>
+
+          <mat-tab #tab3 *ngIf="tab4">
+            <ng-template mat-tab-label>
+              {{ 'key_DeclinedUsers' | translate }}
+            </ng-template>
+            <div class="tab-content" *ngIf="tab4Data">
+              Data goes here
+            </div>
+          </mat-tab>
+
+          <mat-tab #tab2 *ngIf="tab5">
+            <ng-template mat-tab-label>
+              {{ 'key_AddNewUsers' | translate }}
+              <button class="close" type="button" (click)="closeTab()">
+                <i class="fa fa-times-circle-o" aria-hidden="true"></i>
+              </button>
+            </ng-template>
+            <div class="tab-content" *ngIf="tab5Data">
+              Data goes here
+            </div>
+          </mat-tab>
+
+          <mat-tab #tab3 *ngIf="tab6">
+            <ng-template mat-tab-label>
+              {{ 'key_EditUsers' | translate }}
+              <button class="close" type="button" (click)="closeTab()">
+                <i class="fa fa-times-circle-o" aria-hidden="true"></i>
+              </button>
+            </ng-template>
+            <div class="tab-content" *ngIf="tab6Data">
+              Data goes here
+            </div>
+          </mat-tab>
+
+        </mat-tab-group>
+
+      </div>
+    </div>
+  </div>
+</div>
+<app-show-notes></app-show-notes>

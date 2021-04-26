@@ -1,0 +1,43 @@
+<!---Author name- satyen singh-->
+<!--Filters-->
+<mat-accordion>
+  <mat-expansion-panel (opened)="panelOpenState = true"
+                       (closed)="panelOpenState = false" [expanded]="false">
+    <mat-expansion-panel-header>
+      <mat-panel-description>
+        {{panelOpenState ? '- Hide' : '+ Show'}}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <form #addOrderForm="ngForm" novalidate>
+      <div class="row custom-form">
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="ccmonth">{{ 'key_Equipmentclass' | translate }}</label>
+            <angular2-multiselect [data]="itemListA" [(ngModel)]="selectedItemsA" [settings]="settingsA"
+                                  (onSelect)="onItemSelect($event)"
+                                  (onDeSelect)="OnItemDeSelect($event)"
+                                  (onSelectAll)="onSelectAll($event)"
+                                  (onDeSelectAll)="onDeSelectAll($event)"
+                                  (onAddFilterNewItem)="onAddItemA($event)" name="equipmentclass">
+            </angular2-multiselect>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="ccmonth">{{ 'Key_EquipmentType' | translate }}</label>
+            <angular2-multiselect [data]="itemListA" [(ngModel)]="selectedItemsA" [settings]="settingsA"
+                                  (onSelect)="onItemSelect($event)"
+                                  (onDeSelect)="OnItemDeSelect($event)"
+                                  (onSelectAll)="onSelectAll($event)"
+                                  (onDeSelectAll)="onDeSelectAll($event)"
+                                  (onAddFilterNewItem)="onAddItemA($event)" name="equipmenttype">
+            </angular2-multiselect>
+          </div>
+        </div>
+      </div>
+      <!-----------modal------------------->
+      <!--manage-filter-->
+    </form>
+  </mat-expansion-panel>
+</mat-accordion>
+<!--end filter-->

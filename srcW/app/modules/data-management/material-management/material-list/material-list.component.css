@@ -1,0 +1,55 @@
+mat-cell,
+mat-footer-cell,
+mat-header-cell {
+  width: 200px;
+  flex: none;
+}
+
+
+
+.mat-table {
+  width: 100%;
+  overflow: auto;
+}
+
+
+
+mwlResizable {
+  box-sizing: border-box;
+}
+
+
+
+.mat-sort-header-button {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+
+
+.mat-cell {
+  white-space: nowrap;
+  overflow: hidden !important;
+  text-overflow: ellipsis;
+  display: block;
+}
+
+
+
+.mat-column-selectRow {
+  width: 30px !important;
+}
+
+
+
+.mat-header-row, .mat-row, .mat-footer-row {
+  display: flex;
+}
+
+
+
+.mat-header-cell, .mat-cell, .mat-footer-cell {
+  display: block;
+}

@@ -1,0 +1,7 @@
+::ng-deep .mat-expansion-panel-body {
+  background-color: #f7f3f3;
+  border: 1px solid #dddd;
+}
+::ng-deep .partograph .box-children, ::ng-deep .tosca .box-children {
+  width: 100%;
+}

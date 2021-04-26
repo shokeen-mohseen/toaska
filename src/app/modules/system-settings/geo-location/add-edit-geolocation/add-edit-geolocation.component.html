@@ -1,0 +1,116 @@
+
+<form (ngSubmit)="SaveGeoLocationData()"  [formGroup]="geoform">
+  <div class="row" *ngIf="editPage">
+    <div class="col-md-6"></div>
+    <!--<div class="col-md-6 text-right">
+      <span class="fw600">Last Updated:	</span> 8/13/2020 8:35:24 IST
+      <br><span class="fw600">By</span> Jay Coleman (lampsdemo@osoftec.com)
+    </div>-->
+  </div>
+  <!--Last Updated Section End//////////////-->
+
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="tab-content">
+        <!--=============== Start profile =================-->
+        <div class="e-profile">
+          <div class="row justify-content-center">
+            <div class="col-md-6">
+              <div class="box-children">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label for="firstname">{{ 'key_Country' | translate }}  <span class="text-danger">*</span> </label>
+                      <div class="input-group">
+                        <angular2-multiselect class="form-control" fixFilterBug [data]="countryList" formControlName="CountryData" [settings]="settings"
+                                              (onSelect)="GeolocationChange($event,'STATE','COUNTRY')"
+                                              (onDeSelect)="OnItemDeSelect($event,'COUNTRY')"
+                                              (onSelectAll)="onSelectAll($event)"
+                                              (onDeSelectAll)="OnItemDeSelect($event,'COUNTRY')"
+                                              (onAddFilterNewItem)="onAddItem($event,'COUNTRY')" required>
+                        </angular2-multiselect>
+
+                        <div class="input-group-append">
+                          <input type="text" class="form-control code" (change)="onAddCountryCode($event)" placeholder="Country Code" formControlName="CountryCode" maxlength="10">
+                        </div>
+                      </div>
+                      <app-control-messages [control]="f['CountryData']"></app-control-messages>
+                    </div>
+                  </div>
+
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label for="firstname">{{ 'key_State' | translate }} <span class="text-danger">*</span></label>
+                      <div class="input-group">
+                        <angular2-multiselect class="form-control" fixFilterBug [data]="stateList" formControlName="StateData" [settings]="settings"
+                                              (onSelect)="GeolocationChange($event,'CITY','STATE')"
+                                              (onDeSelect)="OnItemDeSelect($event,'STATE')"
+                                              (onSelectAll)="onSelectAll($event)"
+                                              (onDeSelectAll)="OnItemDeSelect($event,'STATE')"
+                                              (onAddFilterNewItem)="onAddItem($event, 'STATE')" required>
+                        </angular2-multiselect>
+                        <div class="input-group-append">
+                          <input type="text" class="form-control code" maxlength="2" (change)="onAddStateCode($event)" placeholder="State Code" formControlName="StateCode">
+                        </div>
+                      </div>
+                      <app-control-messages [control]="f['StateData']"></app-control-messages>
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label for="firstname">{{ 'key_City' | translate }} <span class="text-danger">*</span></label>
+
+                      <angular2-multiselect fixFilterBug [data]="cityList" formControlName="CityData" [settings]="settings"
+                                            (onSelect)="GeolocationChange($event,'ZIP','CITY')"
+                                            (onDeSelect)="OnItemDeSelect($event,'CITY')"
+                                            (onSelectAll)="onSelectAll($event)"
+                                            (onDeSelectAll)="OnItemDeSelect($event,'CITY')"
+                                            (onAddFilterNewItem)="onAddItem($event,'CITY')" required>
+                      </angular2-multiselect>
+
+                      <app-control-messages [control]="f['CityData']"></app-control-messages>
+
+                    </div>
+                  </div>
+
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label for="firstname">{{ 'key_Zipcode' | translate }} <span class="text-danger">*</span> </label>
+
+                      <angular2-multiselect [data]="zipList" fixFilterBug formControlName="ZipData" [settings]="settings"
+                                            (onSelect)="GeolocationChange($event,'ZIP1','ZIP')"
+                                            (onDeSelect)="OnItemDeSelect($event,'ZIP1')"
+                                            (onSelectAll)="onSelectAll($event)"
+                                            (onDeSelectAll)="OnItemDeSelect($event,'ZIP1')"
+                                            (onAddFilterNewItem)="onAddItem($event,'ZIP')" required>
+                      </angular2-multiselect>
+                      <app-control-messages [control]="f['ZipData']"></app-control-messages>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+           
+          </div>
+          <!--=============== End e-profile =================-->
+
+
+        </div>
+        <!--=============== End e-profile =================-->
+      </div>
+    </div>
+
+  </div>
+
+  <div class="row justify-content-center my-5">
+
+    <button type="submit" class="btn btn-save mr-2 popup-btn-width"
+            [disabled]="geoform.invalid ">
+      <span [innerHTML]="'key_Save' | translate"></span>
+    </button>
+    
+  </div>
+
+</form>

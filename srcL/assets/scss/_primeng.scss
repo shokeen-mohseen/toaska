@@ -1,0 +1,99 @@
+/*--Developer Name: rajesh vishvakarma, Date: 12/01/2021,  Logic Description: use all prime ng css--*/
+
+/*--Developer Name: Prabhash Poddar, Date: 12/01/2021,  Logic Description: use all prime ng css--*/
+.p-calendar, .p-dropdown {
+  width: 100%;
+  height: 31px;
+
+  .p-inputtext {
+    border-radius: 2px;
+    padding: 4px;
+    border: 1px solid #7ed4f7;
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #5c6873;
+
+    &::placeholder {
+      font-weight: 400;
+    }
+  }
+
+  .p-button.p-button-icon-only {
+    padding: 0px;
+    background: #fff;
+    border: 1px solid #7ed4f7;
+    border-left: 0;
+    color: #5c6873;
+    -webkit-border-top-right-radius: 2px;
+    -webkit-border-bottom-right-radius: 2px;
+    -moz-border-radius-topright: 2px;
+    -moz-border-radius-bottomright: 2px;
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
+  }
+}
+
+.p-dropdown {
+  border-radius: 2px;
+  border: 1px solid #7ed4f7;
+
+  .p-inputtext {
+    border: 0;
+  }
+}
+.p-dropdown-panel {
+  font-size: 0.875rem;
+  width: 350px;
+
+  .p-dropdown-header {
+    padding: 10px;
+  }
+
+  .p-dropdown-items {
+    padding: 0;
+
+    .p-dropdown-item {
+      padding: 4px 10px;
+      border-bottom: 1px solid #f1f1f1;
+    }
+  }
+
+  .p-inputtext {
+    padding: 4px;
+  }
+}
+
+.p-datepicker {
+  min-width: inherit !important;
+  width: auto;
+  /*max-width: 100%;*/
+
+  .p-datepicker-calendar {
+    border: 0;
+
+    td {
+      padding: 0;
+
+      &.p-datepicker-today > span.p-highlight {
+        color: #495057;
+        background: #7ed4f7;
+      }
+    }
+  }
+
+  .p-timepicker {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .p-timepicker > div {
+    padding: 0 0.2rem;
+  }
+
+  .p-timepicker span {
+    font-size: 1rem;
+    font-weight: 700;
+  }
+}
+

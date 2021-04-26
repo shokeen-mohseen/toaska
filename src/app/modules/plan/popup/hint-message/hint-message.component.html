@@ -1,0 +1,34 @@
+
+
+<!-- Modal Header -->
+<div class="modal-header">
+  <h4 class="modal-title">
+    {{ 'Key_SubscriptionPackageType' | translate }} 
+ 
+  </h4>
+  <button type="button" class="close" data-dismiss="modal" (click)="activeModal.dismiss('Cross click')">&times;</button>
+</div>
+
+<!-- Modal body -->
+<div class="modal-body">
+  <div class="">
+    <div class="row">
+      <div class="col-sm-12 col-md-12 col-lg-10">
+        <div class="form-inline row">
+          
+          <div class="">
+            <ul *ngFor="let item of subscriptionPackageTypeList">
+              <li>
+                {{ item.Description }}
+              </li>
+            </ul>
+            <div *ngIf="subscriptionPackageTypeList.length==0">
+              No hint messages!
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+   </div>
+</div>
+

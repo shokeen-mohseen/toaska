@@ -1,0 +1,136 @@
+<!--TFS ID: 17461,
+  Author: Monu Ram Yadav,
+  Date: 17-09-2020,
+  Des:  Design flex popup for forecast -->
+<!-- Modal Header -->
+<div class="modal-header">
+  <h5 class="modal-title">{{ 'key_Flexper' | translate }}</h5>
+  <!--<button type="button" class="close" data-dismiss="modal" (click)="activeModal.dismiss('Cross click')">&times;</button>-->
+  <button type="button" class="close" data-dismiss="modal" (click)="ClosePopup()">&times;</button>
+</div>
+
+<!-- Modal body -->
+<div class="modal-body">
+  <div class="form-inline row justify-content-center">
+    <div class="col-sm-12 col-md-2">
+      <label>{{ 'key_Valueper' | translate }}</label>
+    </div>
+    <div class="col-sm-12 col-md-4">
+      <input type="number" class="form-control w-100 mb-0" [(ngModel)]="ApplyToAllInput" placeholder="-XXX or XXX">
+    </div>
+    <div class="col-sm-12 col-md-3">
+      <button type="submit" class="btn btn-block btn-save popup-btn-width" (click)="FlexApplyToAll()">{{ 'key_Applyall' | translate }}</button>
+    </div>
+  </div>
+  <div class="row mt-3">
+    <div class="col-md-5 flex-sidebar">
+      <div class="card">
+        <div class="card-header">
+          <div class="input-group">
+            <div class="form-control">Location</div>
+            <div class="form-control">Material</div>
+          </div>
+          <button class="close" type="button">
+            <i class="fa fa-times" aria-hidden="true"></i>
+          </button>
+        </div>
+        <div class="card-body p-0">
+          <ul class="list-group" *ngFor="let forecast of forecastService.ForecastingforEdit; let i=index;">
+            <li class="list-group-item list-group-item-action active" [ngClass]="[forecast.ActiveId === ActiveIdDefault ? 'active' : '']">
+              <a href="javascript:void(0);" (click)="BindFlexDetails(forecast,i)">
+                <div class="input-group">
+                  <div class="form-control" container="body" placement="top" ngbTooltip="{{forecast.ShipToLocation}}">{{forecast.ShipToLocation}}</div>
+                  <div class="form-control" container="body" placement="top" ngbTooltip="{{forecast.MaterialDescription}}">{{forecast.MaterialDescription}}</div>
+                </div>
+              </a>
+              <button *ngIf="forecast.ActiveId != ActiveIdDefault" class="close" type="button">
+                <i class="fa fa-times" aria-hidden="true"></i>
+              </button>
+              <!--<button class="close" type="button">
+                <i class="fa fa-times" aria-hidden="true"></i>
+              </button>-->
+            </li>
+            <!--<li class="list-group-item list-group-item-action">
+              <a href="javascript:void(0);">
+                <div class="input-group">
+                  <div class="form-control" container="body" placement="top" ngbTooltip="Location Value">Location Value</div>
+                  <div class="form-control" container="body" placement="top" ngbTooltip="Material Value Location Value Location Value">Material Value Location Value Location Value</div>
+                </div>
+              </a>
+              <button class="close" type="button">
+                <i class="fa fa-times" aria-hidden="true"></i>
+              </button>
+            </li>
+            <li class="list-group-item list-group-item-action">
+              <a href="javascript:void(0);">
+                <div class="input-group">
+                  <div class="form-control" container="body" placement="top" ngbTooltip="Location Value">Location Value</div>
+                  <div class="form-control" container="body" placement="top" ngbTooltip="Material Value">Material Value</div>
+                </div>
+              </a>
+              <button class="close" type="button">
+                <i class="fa fa-times" aria-hidden="true"></i>
+              </button>
+            </li>-->
+          </ul>
+
+        </div>
+
+      </div>
+    </div>
+    <div class="col-md-7">
+      <div class="scroll">
+        <mat-table #table [dataSource]="FlexForecastDS" matSort>
+          <ng-container *ngFor="let column of displayedColumns;  let i=index;" [matColumnDef]="column">
+            <mat-header-cell *matHeaderCellDef mat-sort-header [resizeColumn]="true" [index]="i">
+              <div *ngIf="column != selectRow"> {{ displayedColumnsReplace[i] | translate }}</div>
+            </mat-header-cell>
+
+            <mat-cell *matCellDef="let item; let j = index">
+
+              <!--<div *ngIf="column === DSFirstClm"> {{ item[column]  }}</div>-->
+
+              <div *ngIf="column === DSFirstClm">
+
+
+
+                {{filteredColumnList[j] }}
+              </div>
+              <div *ngIf="column != DSFirstClm">
+                <input type="number" class="form-control w-100" placeholder="-XXX or XXX" [(ngModel)]="item[column]" />
+              
+              </div>
+
+
+
+              <!--{{ item }}-->
+              <!--<div *ngIf="column != LocationCode && column != Location && column != Material">
+                <input type="text" class="form-control w-100" [(ngModel)]="item[column]" />
+              </div>-->
+            </mat-cell>
+          </ng-container>
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"> </mat-row>
+        </mat-table>
+
+        <!--<mat-table #table [dataSource]="dataSource" matSort>
+          <ng-container matColumnDef="cpc">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'key_Claendorcode' | translate }}</mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.cpc}} </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="Value">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'key_Valueper' | translate }} </mat-header-cell>
+            <mat-cell *matCellDef="let element"><input type="number" class="form-control" /> </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>-->
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-12 text-center mt-4">
+    <button class="btn btn-save mr-2 popup-btn-width" (click)="SaveFlex()">{{ 'key_Save' | translate }}</button>
+    <button class="btn btn-next popup-btn-width" [disabled]="IsSaveNextDisable" (click)="SaveNextFlex()">{{ 'key_Next' | translate }}</button>
+  </div>
+</div>

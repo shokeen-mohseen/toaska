@@ -1,0 +1,21 @@
+<!-- Modal Header -->
+<div class="modal-header">
+  <h5 class="modal-title">{{ 'key_AddComment' | translate }}</h5>
+  <button type="button" class="close" data-dismiss="modal" (click)="activeModal.dismiss('Cross click')">&times;</button>
+</div>
+
+<!-- Modal body -->
+<div class="modal-body">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="form-group>">
+        <textarea class="form-control"></textarea>
+      </div>
+    </div>
+  </div>
+  <div class="row justify-content-center my-3">
+    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
+      <button class="btn btn-block btn-save" type="submit">{{ 'key_Save' | translate }}</button>
+    </div>
+  </div>
+</div>

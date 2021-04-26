@@ -1,0 +1,17 @@
+.c-app {
+  color: #3c4b64;
+  background-color: #ebedef;
+  --color: #3c4b64;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  min-height: 87vh;
+}
+
+  .c-app .display-3 .fa {
+    font-size: 68px;
+  }
+app-top-btn-group {
+  margin-bottom: 9px !important;
+}

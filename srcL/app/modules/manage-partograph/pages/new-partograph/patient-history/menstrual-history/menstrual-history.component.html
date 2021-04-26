@@ -1,0 +1,117 @@
+<!--TFS ID:- 17414,
+  Date: 15-09-2020,
+  Author: Monu Ram YAdav,
+  Des:-  Fix Stepper Steps Data in Sub Component for Prepartum Care Section-->
+<div class="menstrual-history">
+  <!---Heading start row-->
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="subHeading-red fw600">
+        {{ 'Key_MenstrualHistory' | translate }}
+      </div>
+    </div>
+  </div>
+  <!---Heading end row-->
+  <!--row start-->
+  <div class="row">
+    <div class="col-lg-4 col-md-4 col-sm-12">
+      <div class="form-group">
+        <label for="">{{ 'Key_ageofMenarche' | translate }}</label>
+        <input class="form-control" type="number" name="">
+      </div>
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-12">
+      <div class="form-group">
+        <label for="">{{ 'key_LactationalAmenorrhoea' | translate }}</label>
+        <div class="input-group">
+          <input type="number" class="form-control" name="">
+          <div class="input-group-append append-custombg2">
+            <span class="form-control">{{ 'key_Days' | translate }}</span>
+          </div>
+          <input type="number" class="form-control" name="">
+          <div class="input-group-append append-custombg">
+            <span class="form-control">{{ 'key_Night' | translate }}</span>
+          </div>
+        </div>
+        <textarea class="form-control mt-2" rows="1" placeholder="{{ 'key_AddCommentHere' | translate }}"></textarea>
+      </div>
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-12">
+      <div class="form-group">
+        <label for="">{{ 'Key_Edd' | translate }}</label>
+        <input class="form-control" type="date" name="">
+      </div>
+    </div>
+  </div>
+  <!--row end-->
+  <!--row start-->
+  <div class="row">
+    <div class="col-lg-8 col-md-8 col-sm-12">
+      <div class="form-group">
+        <label for="" class="fw600">{{ 'Key_RegularCycles' | translate }}</label>
+        <div class="clearfix"></div>
+        <div class="form-check-inline">
+          <label class="form-check-label">
+            <input type="radio" class="form-check-input" name="optradio">{{ 'Key_Frequent' | translate }}
+          </label>
+        </div>
+        <div class="form-check-inline">
+          <label class="form-check-label">
+            <input type="radio" class="form-check-input" name="optradio">{{ 'Key_Infrequent' | translate }}
+          </label>
+        </div>
+        <textarea class="form-control mt-2" rows="1" placeholder="{{ 'key_AddCommentHere' | translate }}"></textarea>
+      </div>
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-12">
+      <div class="form-group">
+        <label for="" class="fw600">{{ 'Key_LMP' | translate }}</label>
+        <div class="clearfix"></div>
+        <div class="form-check-inline">
+          <label class="form-check-label">
+            <input type="radio" class="form-check-input" name="optradio1">{{ 'Key_Known' | translate }}
+          </label>
+        </div>
+        <div class="form-check-inline">
+          <label class="form-check-label">
+            <input type="radio" class="form-check-input" name="optradio1">{{ 'Key_Unknown' | translate }}
+          </label>
+        </div>
+        <textarea class="form-control mt-2" rows="1" placeholder="{{ 'key_AddCommentHere' | translate }}"></textarea>
+      </div>
+    </div>
+  </div>
+  <!--row end-->
+  <!--row start-->
+  <div class="row">
+    <div class="col-lg-4 col-md-7 col-sm-12">
+      <div class=" form-group">
+        <label for="">{{ 'Key_GestatonalAge' | translate }}</label>
+        <div class="input-group">
+          <input type="number" class="form-control" name="">
+          <div class="input-group-append append-custombg2">
+            <select class="form-control">
+              <option>Weeks</option>
+              <option>Days</option>
+              <option>Months</option>
+            </select>
+          </div>
+          <input type="number" class="form-control" name="">
+          <div class="input-group-append append-custombg">
+            <select class="form-control">
+              <option>Days</option>
+              <option>Weeks</option>
+              <option>Months</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--row end-->
+  <!--Row start for other-->
+  <div class="row">
+    <input type="button" class="btn btn-secondary ml-3 btnbrd" (click)="AddMoreComplication()" value="{{ 'key_AddNewParameter' | translate }}" />
+  </div>
+  <!--Row end for other-->
+</div>

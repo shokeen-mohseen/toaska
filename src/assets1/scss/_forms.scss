@@ -1,0 +1,396 @@
+.e-control {
+  &.form-control {
+    padding: 1px 4px !important;
+    height: auto;
+
+    .e-input-group:not(.e-float-icon-left), .e-input-group.e-success:not(.e-float-icon-left), .e-input-group.e-warning:not(.e-float-icon-left), .e-input-group.e-error:not(.e-float-icon-left), .e-input-group.e-control-wrapper:not(.e-float-icon-left), .e-input-group.e-control-wrapper.e-success:not(.e-float-icon-left), .e-input-group.e-control-wrapper.e-warning:not(.e-float-icon-left), .e-input-group.e-control-wrapper.e-error:not(.e-float-icon-left) {
+      border: 0;
+    }
+
+    .e-input-group:not(.e-float-icon-left):not(.e-float-input)::before, .e-input-group:not(.e-float-icon-left):not(.e-float-input)::after, .e-input-group.e-float-icon-left:not(.e-float-input) .e-input-in-wrap::before, .e-input-group.e-float-icon-left:not(.e-float-input) .e-input-in-wrap::after, .e-input-group.e-control-wrapper:not(.e-float-icon-left):not(.e-float-input)::before, .e-input-group.e-control-wrapper:not(.e-float-icon-left):not(.e-float-input)::after, .e-input-group.e-control-wrapper.e-float-icon-left:not(.e-float-input) .e-input-in-wrap::before, .e-input-group.e-control-wrapper.e-float-icon-left:not(.e-float-input) .e-input-in-wrap::after {
+      background: none;
+      border: 0;
+    }
+
+    .e-input-group:not(.e-success):not(.e-warning):not(.e-error):not(.e-float-icon-left), .e-input-group.e-float-icon-left:not(.e-success):not(.e-warning):not(.e-error) .e-input-in-wrap, .e-input-group.e-control-wrapper:not(.e-success):not(.e-warning):not(.e-error):not(.e-float-icon-left), .e-input-group.e-control-wrapper.e-float-icon-left:not(.e-success):not(.e-warning):not(.e-error) .e-input-in-wrap, .e-float-input.e-float-icon-left:not(.e-success):not(.e-warning):not(.e-error) .e-input-in-wrap, .e-float-input.e-control-wrapper.e-float-icon-left:not(.e-success):not(.e-warning):not(.e-error) .e-input-in-wrap {
+      border: 0;
+    }
+
+    .e-input-group-icon.e-range-icon, *.e-control-wrapper .e-input-group-icon.e-range-icon, .e-datetime-wrapper .e-input-group-icon.e-date-icon, .e-datetime-wrapper .e-input-group-icon.e-time-icon, .e-input-group-icon.e-date-icon, *.e-control-wrapper .e-input-group-icon.e-date-icon {
+      margin: 0;
+    }
+
+    .e-datetime-wrapper .e-input-group-icon.e-date-icon, .e-datetime-wrapper .e-input-group-icon.e-time-icon {
+      margin: 0 0 0 6px;
+    }
+
+    .e-input-group, .e-input-group.e-control-wrapper {
+      margin-bottom: 0;
+    }
+
+    input .e-input, .e-input-group input.e-input, .e-input-group.e-control-wrapper input.e-input, textarea.e-input, .e-input-group textarea.e-input, .e-input-group.e-control-wrapper textarea.e-input {
+      padding: 0;
+    }
+
+    .e-input-group .e-clear-icon, .e-input-group.e-control-wrapper .e-clear-icon {
+      padding: 0;
+    }
+  }
+
+  .e-input-group:not(.e-success):not(.e-warning):not(.e-error), .e-input-group.e-control-wrapper:not(.e-success):not(.e-warning):not(.e-error) {
+    border-radius: 2px;
+    border-color: #7ed4f7;
+  }
+
+  .e-input-group input.e-input, .e-input-group.e-control-wrapper input.e-input, .e-input-group textarea.e-input, .e-input-group.e-control-wrapper textarea.e-input {
+    padding: 4px;
+    height: auto;
+  }
+
+  .e-input-group-icon.e-range-icon, *.e-control-wrapper .e-input-group-icon.e-range-icon {
+    border-bottom-right-radius: 2px;
+    border-top-right-radius: 2px;
+    min-height: 26px;
+    border-color: #7ed4f7;
+  }
+
+  .e-input-group-icon.e-date-icon, *.e-control-wrapper .e-input-group-icon.e-date-icon {
+    border-bottom-right-radius: 2px;
+    border-top-right-radius: 2px;
+    min-height: 26px;
+    border-color: #7ed4f7;
+  }
+
+  .e-input-group .e-input-group-icon, .e-input-group.e-control-wrapper .e-input-group-icon {
+    border-bottom-right-radius: 2px;
+    border-top-right-radius: 2px;
+    min-height: 26px;
+    border-color: #7ed4f7;
+  }
+}
+
+input.e-input, .e-input-group input.e-input, .e-input-group input, .e-input-group.e-control-wrapper input.e-input, .e-input-group.e-control-wrapper input, .e-float-input input.e-input, .e-float-input input, .e-float-input.e-control-wrapper input.e-input, .e-float-input.e-control-wrapper input, .e-input-group input.e-input:focus, .e-input-group.e-control-wrapper input.e-input:focus, .e-float-input.e-control-wrapper input:focus, .e-float-input input:focus, .e-input-group.e-input-focus input.e-input, .e-input-group.e-control-wrapper.e-input-focus input.e-input, .e-float-input.e-control-wrapper.e-input-focus input, .e-float-input.e-input-focus input {
+  padding: 0 4px;
+  height: 26px;
+  border-color: #7ed4f7;
+  border-radius: 2px;
+}
+
+angular2-multiselect {
+
+  .selected-list {
+
+    .countplaceholder {
+      background: #fff;
+      padding-left: 5px;
+    }
+
+    .c-list {
+      display: flex !important;
+      overflow: hidden !important;
+      text-overflow: ellipsis !important;
+      white-space: nowrap !important;
+
+      .ng-star-inserted {
+        display: unset !important;
+        overflow: initial !important;
+      }
+
+      .c-token {
+        background: none !important;
+        padding: 4px 22px 4px 0px !important;
+
+        span {
+          color: #000 !important;
+        }
+
+        .c-remove {
+          svg {
+            fill: #000;
+          }
+        }
+
+        &[hidden] {
+          display: none !important;
+        }
+      }
+    }
+
+    .c-btn {
+      padding: 0rem 4px !important;
+      border-radius: 2px !important;
+      min-height: calc(1.27em + 0.75rem + 2px) !important;
+      border-color: #7ed4f7;
+      line-height: 1.24;
+      padding-right: 46px !important;
+
+      .ng-star-inserted {
+        &:nth-child(1) {
+          display: inline-flex;
+          overflow: hidden;
+
+          .ng-star-inserted {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            width: auto;
+          }
+        }
+      }
+    }
+
+    .c-angle-down {
+      height: 16px;
+    }
+
+    .c-angle-up {
+      @extend .c-angle-down;
+    }
+  }
+
+  .dropdown-list {
+    .list-area {
+      ul {
+        li {
+          display: flex;
+          padding: 4px 10px;
+          border-bottom: 1px solid #f1f1f1;
+
+          &:first-child {
+            padding-top: 4px;
+          }
+
+          &:last-child {
+            border-bottom: 0;
+          }
+
+          label {
+            display: inline;
+            /*overflow: hidden;
+            text-overflow: ellipsis;*/
+            white-space: nowrap;
+            padding-right: 15px;
+          }
+        }
+      }
+
+      .list-message {
+        padding: 6px;
+        white-space: nowrap;
+        font-size: 13px;
+      }
+    }
+  }
+
+  .cuppa-dropdown {
+    .dropdown-list {
+      display: inline-table;
+      width: 100%;
+      /*min-width: 450px;*/
+      .arrow-down, .arrow-up {
+        z-index: 1;
+      }
+
+      .list-area {
+        width: 100%;
+        position: relative;
+        overflow: hidden;
+
+        .selfScroll {
+          height: auto !important;
+          min-height: 2px;
+
+          .total-padding {
+            /*height: auto !important;*/
+          }
+
+          .scrollable-content {
+            /*position:relative;
+              transform:none !important;*/
+          }
+        }
+
+        &.single-select-mode {
+          .select-all {
+            display: none;
+          }
+        }
+      }
+
+      &.dropdown-list-top {
+
+        .list-area {
+          display: flex;
+          flex-direction: column-reverse;
+
+          .select-all, .list-filter {
+            border-bottom: 0;
+            border-top: 1px solid #ccc;
+          }
+        }
+      }
+    }
+  }
+
+  &.right {
+    .cuppa-dropdown {
+      .dropdown-list {
+        right: 0;
+
+        .arrow-down, .arrow-up {
+          right: 15px;
+        }
+      }
+    }
+  }
+}
+
+.table, .mat-table {
+  angular2-multiselect {
+    .cuppa-dropdown {
+      .dropdown-list {
+        top: 44px;
+        padding-top: 0;
+
+        .arrow-up {
+          top: -14px;
+          width: auto;
+        }
+
+        .arrow-2, .arrow-down {
+          width: auto;
+        }
+
+        &.dropdown-list-top {
+          top: unset;
+        }
+
+        .list-area {
+          div + div + div {
+            max-height: 160px !important;
+          }
+        }
+      }
+    }
+  }
+
+  td, .mat-cell, .mat-header-cell, .mat-footer-cell {
+    &:last-child {
+      .cuppa-dropdown {
+        .dropdown-list {
+          right: 0;
+
+          .arrow-down, .arrow-up {
+            right: 15px;
+          }
+        }
+      }
+    }
+  }
+}
+
+
+  ng-select2 {
+    &.form-control {
+      .select2 {
+        line-height: 1.2px;
+      }
+
+      .select2-container .select2-selection--multiple {
+        min-height: 28px;
+      }
+
+      .select2-container--default .select2-selection--multiple .select2-selection__choice {
+        line-height: normal;
+        margin-top: 2px;
+      }
+
+      .select2-container--default .select2-selection--multiple .select2-selection__rendered {
+        padding: 0;
+      }
+
+      .select2-container--default .select2-selection--multiple {
+        border: 0;
+      }
+    }
+  }
+
+
+  .c-btn.disabled {
+    background-color: #e4e7ea !important;
+  }
+
+.form-inline {
+  angular2-multiselect {
+    .cuppa-dropdown {
+      .dropdown-list {
+        .list-area {
+          .pure-checkbox {
+            label {
+              display: inline-block;
+            }
+          }
+
+          .filter-select-all {
+            .nodata-label {
+                justify-content: center;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.input-group {
+  angular2-multiselect {
+    &.form-control {
+      padding: 0 !important;
+      border: 0 !important;
+      border-radius: 0 !important;
+    }
+  }
+
+  .input-group-append{
+      .form-control {
+          padding:3px !important;
+      }
+      .code {
+          width: 120px;
+      }
+  }
+}
+
+.text-center, .text-right {
+  angular2-multiselect {
+    .cuppa-dropdown {
+        text-align: left;
+    }
+  }
+}
+
+.custom-file {
+  height: calc(1.2em + 0.75rem + 2px);
+
+  .custom-file-input {
+    height: calc(1.2em + 0.75rem + 2px);
+  }
+
+  .custom-file-label {
+    border-color: #7ed4f7;
+    border-radius: 2px;
+    height: calc(1.2em + 0.75rem + 2px);
+    padding: 0.25rem 0.75rem;
+
+    &:after {
+      border-radius: 0 2px 2px 0;
+      height: calc(1.2em + 0.75rem);
+      padding: 0.25rem 0.75rem;
+    }
+  }
+
+  label {
+    margin-bottom: 0 !important;
+  }
+}
+

@@ -1,0 +1,203 @@
+
+<div class="modal-header">
+  <h4 class="modal-title">Add/Edit Freight Lane</h4>
+  <button type="button" class="close" data-dismiss="modal" (click)="activeModal.dismiss('Cross click')">&times;</button>
+</div>
+
+<!-- Modal body -->
+<div class="modal-body">
+  <div class="form-group row mb-0">
+    <label class="col-md-3 col-form-label" for="select1">{{ 'key_Fromcountry' | translate }} <sup class="text-danger sup1">*</sup></label>
+    <div class="col-md-9">
+      <angular2-multiselect [data]="itemListA" [(ngModel)]="selectedItemsA" [settings]="settingsA"
+                            (onSelect)="onItemSelect($event)"
+                            (onDeSelect)="OnItemDeSelect($event)"
+                            (onSelectAll)="onSelectAll($event)"
+                            (onDeSelectAll)="onDeSelectAll($event)"
+                            (onAddFilterNewItem)="onAddItemA($event)" required>
+      </angular2-multiselect>
+    </div>
+  </div>
+  <div class="form-group row mb-0">
+    <label class="col-md-3 col-form-label" for="select1">{{ 'key_Fromstate' | translate }} <sup class="text-danger sup1">*</sup></label>
+    <div class="col-md-9">
+      <angular2-multiselect [data]="itemListA" [(ngModel)]="selectedItemsA" [settings]="settingsA"
+                            (onSelect)="onItemSelect($event)"
+                            (onDeSelect)="OnItemDeSelect($event)"
+                            (onSelectAll)="onSelectAll($event)"
+                            (onDeSelectAll)="onDeSelectAll($event)"
+                            (onAddFilterNewItem)="onAddItemA($event)" required>
+      </angular2-multiselect>
+    </div>
+  </div>
+  <div class="form-group row mb-0">
+    <label class="col-md-3 col-form-label" for="select1">{{ 'key_Fromcity' | translate }} <sup class="text-danger sup1">*</sup></label>
+    <div class="col-md-9">
+      <angular2-multiselect [data]="itemListB" [(ngModel)]="selectedItemsB" [settings]="settingsB"
+                            (onSelect)="onItemSelect($event)"
+                            (onDeSelect)="OnItemDeSelect($event)"
+                            (onSelectAll)="onSelectAll($event)"
+                            (onDeSelectAll)="onDeSelectAll($event)"
+                            (onAddFilterNewItem)="onAddItemA($event)" required>
+      </angular2-multiselect>
+    </div>
+  </div>
+  <div class="form-group row mb-0">
+    <label class="col-md-3 col-form-label" for="select1">{{ 'key_Fromzip' | translate }} <sup class="text-danger sup1">*</sup></label>
+    <div class="col-md-9">
+      <angular2-multiselect [data]="itemListA" [(ngModel)]="selectedItemsA" [settings]="settingsA"
+                            (onSelect)="onItemSelect($event)"
+                            (onDeSelect)="OnItemDeSelect($event)"
+                            (onSelectAll)="onSelectAll($event)"
+                            (onDeSelectAll)="onDeSelectAll($event)"
+                            (onAddFilterNewItem)="onAddItemA($event)" required>
+      </angular2-multiselect>
+    </div>
+  </div>
+  <div class="form-group row mb-0">
+    <label class="col-md-3 col-form-label" for="select1">{{ 'key_Tocountry' | translate }} <sup class="text-danger sup1">*</sup></label>
+    <div class="col-md-9">
+      <angular2-multiselect [data]="itemListB" [(ngModel)]="selectedItemsB" [settings]="settingsB"
+                            (onSelect)="onItemSelect($event)"
+                            (onDeSelect)="OnItemDeSelect($event)"
+                            (onSelectAll)="onSelectAll($event)"
+                            (onDeSelectAll)="onDeSelectAll($event)"
+                            (onAddFilterNewItem)="onAddItemA($event)" required>
+      </angular2-multiselect>
+    </div>
+  </div>
+
+  <div class="form-group row mb-0">
+    <label class="col-md-3 col-form-label" for="select1">{{ 'key_Tostate' | translate }} <sup class="text-danger sup1">*</sup></label>
+    <div class="col-md-9">
+      <angular2-multiselect [data]="itemListA" [(ngModel)]="selectedItemsA" [settings]="settingsA"
+                            (onSelect)="onItemSelect($event)"
+                            (onDeSelect)="OnItemDeSelect($event)"
+                            (onSelectAll)="onSelectAll($event)"
+                            (onDeSelectAll)="onDeSelectAll($event)"
+                            (onAddFilterNewItem)="onAddItemA($event)" required>
+      </angular2-multiselect>
+    </div>
+  </div>
+  <div class="form-group row mb-0">
+    <label class="col-md-3 col-form-label" for="select1">{{ 'key_Tocity' | translate }} <sup class="text-danger sup1">*</sup></label>
+    <div class="col-md-9">
+      <angular2-multiselect [data]="itemListA" [(ngModel)]="selectedItemsA" [settings]="settingsA"
+                            (onSelect)="onItemSelect($event)"
+                            (onDeSelect)="OnItemDeSelect($event)"
+                            (onSelectAll)="onSelectAll($event)"
+                            (onDeSelectAll)="onDeSelectAll($event)"
+                            (onAddFilterNewItem)="onAddItemA($event)" required>
+      </angular2-multiselect>
+    </div>
+  </div>
+  <div class="form-group row mb-0">
+    <label class="col-md-3 col-form-label" for="select1">{{ 'key_Tozip' | translate }} <sup class="text-danger sup1">*</sup></label>
+    <div class="col-md-9">
+      <angular2-multiselect [data]="itemListA" [(ngModel)]="selectedItemsA" [settings]="settingsA"
+                            (onSelect)="onItemSelect($event)"
+                            (onDeSelect)="OnItemDeSelect($event)"
+                            (onSelectAll)="onSelectAll($event)"
+                            (onDeSelectAll)="onDeSelectAll($event)"
+                            (onAddFilterNewItem)="onAddItemA($event)" required>
+      </angular2-multiselect>
+    </div>
+  </div>
+  <div class="form-group row mb-0">
+    <label class="col-md-3 col-form-label" for="select1">{{ 'key_Businesspartnerloc' | translate }} <sup class="text-danger sup1"></sup></label>
+    <div class="col-md-9">
+      <angular2-multiselect [data]="itemListA" [(ngModel)]="selectedItemsA" [settings]="settingsA"
+                            (onSelect)="onItemSelect($event)"
+                            (onDeSelect)="OnItemDeSelect($event)"
+                            (onSelectAll)="onSelectAll($event)"
+                            (onDeSelectAll)="onDeSelectAll($event)"
+                            (onAddFilterNewItem)="onAddItemA($event)" required>
+      </angular2-multiselect>
+    </div>
+  </div>
+  <div class="form-group row mb-0">
+    <label class="col-md-3 col-form-label" for="select1">{{ 'key_FreightMode' | translate }} <sup class="text-danger sup1">*</sup></label>
+    <div class="col-md-9">
+      <angular2-multiselect [data]="itemListA" [(ngModel)]="selectedItemsA" [settings]="settingsA"
+                            (onSelect)="onItemSelect($event)"
+                            (onDeSelect)="OnItemDeSelect($event)"
+                            (onSelectAll)="onSelectAll($event)"
+                            (onDeSelectAll)="onDeSelectAll($event)"
+                            (onAddFilterNewItem)="onAddItemA($event)" required>
+      </angular2-multiselect>
+    </div>
+  </div>
+
+  <div class="form-group row mb-0">
+    <label class="col-md-3 col-form-label" for="select1">{{ 'key_Equipment' | translate }} <sup class="text-danger sup1">*</sup></label>
+    <div class="col-md-9">
+      <angular2-multiselect [data]="itemListA" [(ngModel)]="selectedItemsA" [settings]="settingsA"
+                            (onSelect)="onItemSelect($event)"
+                            (onDeSelect)="OnItemDeSelect($event)"
+                            (onSelectAll)="onSelectAll($event)"
+                            (onDeSelectAll)="onDeSelectAll($event)"
+                            (onAddFilterNewItem)="onAddItemA($event)" required>
+      </angular2-multiselect>
+    </div>
+  </div>
+  <div class="form-group row mb-0">
+    <label class="col-md-3 col-form-label" for="select1">{{ 'key_Rateperload' | translate }} <sup class="text-danger sup1">*</sup></label>
+    <div class="col-md-9">
+      <input type="text" class="form-control" required />
+    </div>
+  </div>
+  <div class="form-group row mb-0">
+    <label class="col-md-3 col-form-label" for="select1">{{ 'key_Rateperuom' | translate }} <sup class="text-danger sup1">*</sup></label>
+    <div class="col-md-9">
+      <angular2-multiselect [data]="itemListA" [(ngModel)]="selectedItemsA" [settings]="settingsA"
+                            (onSelect)="onItemSelect($event)"
+                            (onDeSelect)="OnItemDeSelect($event)"
+                            (onSelectAll)="onSelectAll($event)"
+                            (onDeSelectAll)="onDeSelectAll($event)"
+                            (onAddFilterNewItem)="onAddItemA($event)" required>
+      </angular2-multiselect>
+    </div>
+  </div>
+  <div class="form-group row mb-0">
+    <label class="col-md-3 col-form-label" for="Equipment">{{ 'key_Distance' | translate }} <sup class="text-danger sup1">*</sup> </label>
+
+    <div class="col-md-6">
+      <input type="text" class="form-control" required />
+    </div>
+    <input type="button" id="distance" name="btnSave" class="btn btn-next col-md-2  popup-btn-width btn-w-h" value="{{'key_Getdistance' | translate}}">
+  </div>
+
+  <div class="form-group row mb-0">
+    <label class="col-md-3 col-form-label" for="select1">{{ 'key_Distanceuom' | translate }} <sup class="text-danger sup1">*</sup></label>
+    <div class="col-md-9">
+      <angular2-multiselect [data]="itemListA" [(ngModel)]="selectedItemsA" [settings]="settingsA"
+                            (onSelect)="onItemSelect($event)"
+                            (onDeSelect)="OnItemDeSelect($event)"
+                            (onSelectAll)="onSelectAll($event)"
+                            (onDeSelectAll)="onDeSelectAll($event)"
+                            (onAddFilterNewItem)="onAddItemA($event)" required>
+      </angular2-multiselect>
+    </div>
+  </div>
+  <div class="form-group row mb-0">
+    <label class="col-md-3 col-form-label" for="select1">{{ 'key_Traveltimedays' | translate }} <sup class="text-danger sup1">*</sup></label>
+    <div class="col-md-9">
+      <angular2-multiselect [data]="itemListA" [(ngModel)]="selectedItemsA" [settings]="settingsA"
+                            (onSelect)="onItemSelect($event)"
+                            (onDeSelect)="OnItemDeSelect($event)"
+                            (onSelectAll)="onSelectAll($event)"
+                            (onDeSelectAll)="onDeSelectAll($event)"
+                            (onAddFilterNewItem)="onAddItemA($event)" required>
+      </angular2-multiselect>
+    </div>
+  </div>
+  <!--<div class="form-group">
+    <label for="firstname">Map Default Pallet Type </label>
+    <ng-select2 [data]="exampleData" [options]="options"> </ng-select2>
+  </div>-->
+
+  <div class="col-lg-12 text-center mt-4 mb-4">
+    <input type="button" id="btnSave" name="btnSave" class="btn btn-save mr-2 popup-btn-width" value="Save">
+  </div>
+</div>
+

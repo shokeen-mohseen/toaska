@@ -1,0 +1,6 @@
+mat-cell,
+mat-footer-cell,
+mat-header-cell {
+  width: 190px;
+  flex: none;
+}

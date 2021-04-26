@@ -1,0 +1,63 @@
+.mat-row {
+  height: auto;
+}
+
+.mat-table .mat-header-row .mat-header-cell {
+  font-weight: 800;
+  padding: 8px 8px 8px 26px;
+}
+
+.mat-cell {
+  padding: 8px 8px 8px 26px;
+}
+
+.mat-radio-button ~ .mat-radio-button {
+  margin-left: 16px;
+}
+
+.mat-radio-group {
+  display: flex;
+  width: 30%;
+  justify-content: space-between;
+}
+
+.mat-column-weight {
+  border-right: 1px solid grey;
+  align-self: stretch;
+  text-align: center;
+}
+
+
+.mat-radio-button {
+  display: inline-block;
+  -webkit-tap-highlight-color: transparent;
+  outline: 0;
+  width: 40%;
+}
+
+::ng-deep label {
+  margin-bottom: 0px;
+}
+
+.info-siubscription {
+  position: absolute;
+  right: 10px;
+  top: 6px;
+}
+
+table.table td {
+  font-weight: 300 !important;
+  vertical-align: middle;
+  font-size: 15px;
+}
+.table-striped tbody tr:nth-of-type(even) {
+  background-color: #fff;
+}
+table.table th {
+  font-weight: 600 !important;
+  padding: 7px 5px;
+  font-size: 14px;
+}
+@media (max-width:1366px){
+  .w-tbl{width:25%;}
+}

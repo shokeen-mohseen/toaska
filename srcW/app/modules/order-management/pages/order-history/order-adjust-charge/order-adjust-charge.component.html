@@ -1,0 +1,81 @@
+<div class="col-md-12 col-sm-12">
+  <div class="row">
+    <div class="col-md-12 col-sm-12">
+      <h5 class="fs"> {{ 'key_AdjustCharges' | translate }}:</h5>
+    </div>
+    <div class="col-md-12 col-sm-12">
+      <div class="row">
+        <div class="col-md-3 col-sm-12">
+          <div class="form-group">
+            <label class=" col-form-label" for="select3">{{'key_Material' | translate}}</label>            
+              <select class="form-control form-control-sm" id="select3" name="select3" disabled>
+                <option selected>Please Material</option>               
+              </select>            
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-12">
+          <div class="form-group">
+            <label class=" col-form-label" for="select3"> {{'key_Charges' | translate}}</label>
+            <select class="form-control form-control-sm" id="select3" name="select3" disabled>
+              <option value="0">Please Charge</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-12">
+          <div class="form-group">
+            <label class=" col-form-label" for="select3">{{'key_Commodity' | translate}}</label>
+            <select class="form-control form-control-sm" id="select3" name="select3" disabled>
+              <option value="0">Please Commodity</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="col-md-3 col-sm-12">
+          <div class="form-group">
+            <label class=" col-form-label" for="select3">{{'key_Quantity' | translate}}</label>
+            <input type="text" name="" class="form-control" value="0" readonly />
+          </div>
+        </div>
+
+        <!-- Second Row -->
+        <div class="col-md-3 col-sm-12">
+          <div class="form-group">
+            <label class=" col-form-label" for="select3">{{'key_RateType' | translate}}</label>
+            <select class="form-control form-control-sm" id="select3" name="select3" disabled >
+              <option value="0">Select Rate type</option>
+            </select>
+          </div>         
+        </div>
+
+        <div class="col-md-3 col-sm-12">
+          <div class="form-group">
+            <label class=" col-form-label" for="select3"> {{'key_PriceMethod' | translate}}</label>
+            <select class="form-control form-control-sm" id="select3" name="select3" disabled>
+              <option selected> Select Price Method</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-2 col-sm-12">
+          <div class="form-group">
+            <label class=" col-form-label" for="select3"> {{'key_RateValue' | translate}}</label>
+            <input type="text" name="" class="form-control" value="0" readonly />
+          </div>
+        </div>
+        <div class="col-md-2 col-sm-12">
+          <div class="form-group">
+            <label class=" col-form-label" for="select3">{{'key_Adjustment' | translate}}</label>
+            <input type="text" name="" class="form-control" value="0" readonly />
+          </div>
+        </div>
+        <div class="col-md-2 col-sm-12 text-right pt-3 mt-4">
+          <input id="bol_Check" type="checkbox" value="" class="form-check-input" disabled>
+          <label for="bol_Check" class="form-check-label text-mute" style="font-size:12px;">{{'key_ShowOnBOL' | translate}}</label>
+        </div>
+      </div>
+    </div>
+    <!--<div class="col-md-12 col-sm-12 text-center pt-3 pb-3">
+      <button class="btn btn-save pb-1 pt-1 mr-2">{{'key_Add' | translate}}</button>
+      <button class="btn btn-next pb-1 pt-1">{{'key_Reset' | translate}}</button>
+    </div>-->
+  </div>
+</div>

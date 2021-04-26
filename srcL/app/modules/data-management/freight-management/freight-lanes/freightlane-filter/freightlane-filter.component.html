@@ -1,0 +1,163 @@
+<form #ngForm="ngForm" novalidate>
+
+  <mat-accordion>
+    <mat-expansion-panel (opened)="panelOpenState = true"
+                         (closed)="panelOpenState = false" [expanded]="true">
+      <mat-expansion-panel-header>
+        <mat-panel-description>
+          {{panelOpenState ? '- Hide' : '+ Show'}} Freight lanes Filter
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <div class="row">
+        <div class="col-md-3 col-sm-12 col-lg-3 col-xl-3">
+          <div class="form-group">
+            <label for="Fromcountry">{{ 'key_Fromcountry' | translate }}</label>
+            <angular2-multiselect fixFilterBug [data]="FcountryList" [(ngModel)]="FCountryData" [settings]="settingsA"
+                                  (onSelect)="FreightLaneChange($event,'STATE','COUNTRY')"
+                                  (onDeSelect)="OnItemDeSelect($event)"
+                                  (onSelectAll)="onSelectAll($event)"
+                                  (onDeSelectAll)="onDeSelectAll($event)"
+                                  (onAddFilterNewItem)="onAddItemA($event)" name="FcountryList">
+            </angular2-multiselect>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-12 col-lg-3 col-xl-3">
+          <div class="form-group">
+            <label for="Fromstate">{{ 'key_Fromstate' | translate }}</label>
+            <angular2-multiselect fixFilterBug [data]="FstateList" [(ngModel)]="FStateData" [settings]="settingsA"
+                                  (onSelect)="FreightLaneChange($event,'CITY','STATE')"
+                                  (onDeSelect)="OnItemDeSelect($event)"
+                                  (onSelectAll)="onSelectAll($event)"
+                                  (onDeSelectAll)="onDeSelectAll($event)"
+                                  (onAddFilterNewItem)="onAddItemA($event)" name="FstateList">
+            </angular2-multiselect>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-12 col-lg-3 col-xl-3">
+          <div class="form-group">
+            <label for="Fromcity">{{ 'key_Fromcity' | translate }}</label>
+            <angular2-multiselect fixFilterBug [data]="FcityList" [(ngModel)]="FCityData" [settings]="settingsA"
+                                  (onSelect)="FreightLaneChange($event,'ZIP','CITY')"
+                                  (onDeSelect)="OnItemDeSelect($event)"
+                                  (onSelectAll)="onSelectAll($event)"
+                                  (onDeSelectAll)="onDeSelectAll($event)"
+                                  (onAddFilterNewItem)="onAddItemA($event)" name="FcityList">
+            </angular2-multiselect>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-12 col-lg-3 col-xl-3">
+          <div class="form-group">
+            <label for="Fromzip">{{ 'key_Fromzip' | translate }}</label>
+            <angular2-multiselect class="right" fixFilterBug [data]="FzipList" [(ngModel)]="FZipData" [settings]="settingsA"
+                                  (onSelect)="onItemSelect($event)"
+                                  (onDeSelect)="OnItemDeSelect($event)"
+                                  (onSelectAll)="onSelectAll($event)"
+                                  (onDeSelectAll)="onDeSelectAll($event)"
+                                  (onAddFilterNewItem)="onAddItemA($event)" name="FzipList">
+            </angular2-multiselect>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-3 col-sm-12 col-lg-3 col-xl-3">
+          <div class="form-group">
+            <label for="Tocountry">{{ 'key_Tocountry' | translate }}</label>
+            <angular2-multiselect fixFilterBug [data]="TcountryList" [(ngModel)]="TCountryData" [settings]="settingsA"
+                                  (onSelect)="FreightLaneChange($event,'STATE','COUNTRY')"
+                                  (onDeSelect)="OnItemDeSelect($event)"
+                                  (onSelectAll)="onSelectAll($event)"
+                                  (onDeSelectAll)="onDeSelectAll($event)"
+                                  (onAddFilterNewItem)="onAddItemA($event)" name="TcountryList">
+            </angular2-multiselect>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-12 col-lg-3 col-xl-3">
+          <div class="form-group">
+            <label for="Tostate">{{ 'key_Tostate' | translate }}</label>
+            <angular2-multiselect fixFilterBug [data]="TstateList" [(ngModel)]="TStateData" [settings]="settingsA"
+                                  (onSelect)="FreightLaneChange($event,'CITY','STATE')"
+                                  (onDeSelect)="OnItemDeSelect($event)"
+                                  (onSelectAll)="onSelectAll($event)"
+                                  (onDeSelectAll)="onDeSelectAll($event)"
+                                  (onAddFilterNewItem)="onAddItemA($event)" name="TstateList">
+            </angular2-multiselect>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-12 col-lg-3 col-xl-3">
+          <div class="form-group">
+            <label for="Tocity">{{ 'key_Tocity' | translate }}</label>
+            <angular2-multiselect fixFilterBug [data]="TcityList" [(ngModel)]="TCityData" [settings]="settingsA"
+                                  (onSelect)="FreightLaneChange($event,'ZIP','CITY')"
+                                  (onDeSelect)="OnItemDeSelect($event)"
+                                  (onSelectAll)="onSelectAll($event)"
+                                  (onDeSelectAll)="onDeSelectAll($event)"
+                                  (onAddFilterNewItem)="onAddItemA($event)" name="TcityList">
+            </angular2-multiselect>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-12 col-lg-3 col-xl-3">
+          <div class="form-group">
+            <label for="Tozip">{{ 'key_Tozip' | translate }}</label>
+            <angular2-multiselect fixFilterBug class="right" [data]="TzipList" [(ngModel)]="TZipData" [settings]="settingsA"
+                                  (onSelect)="onItemSelect($event)"
+                                  (onDeSelect)="OnItemDeSelect($event)"
+                                  (onSelectAll)="onSelectAll($event)"
+                                  (onDeSelectAll)="onDeSelectAll($event)"
+                                  (onAddFilterNewItem)="onAddItemA($event)" name ="TzipList">
+            </angular2-multiselect>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3 col-sm-12 col-lg-3 col-xl-3">
+          <div class="form-group">
+            <label for="FreightMode">{{ 'key_FreightMode' | translate }}</label>
+            <angular2-multiselect fixFilterBug [data]="FreightModeList" [(ngModel)]="FreightModeData" [settings]="{singleSelection: true, text: 'Select', enableSearchFilter: true, labelKey :'name', searchBy: ['name'] }"
+                                  (onSelect)="onItemSelect($event)"
+                                  (onDeSelect)="OnItemDeSelect($event)"
+                                  (onSelectAll)="onSelectAll($event)"
+                                  (onDeSelectAll)="onDeSelectAll($event)"
+                                  (onAddFilterNewItem)="onAddItemA($event)" name="FreightModeList">
+            </angular2-multiselect>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-12 col-lg-3 col-xl-3">
+          <div class="form-group">
+            <label for="BusinessPartner">{{ 'key_Carrier' | translate }}</label>
+            <angular2-multiselect fixFilterBug [data]="CarrierList" [(ngModel)]="CarrierData" [settings]="{singleSelection: true, text: 'Select', enableSearchFilter: true, labelKey :'name', searchBy: ['name'] }"
+                                  (onSelect)="onItemSelect($event)"
+                                  (onDeSelect)="OnItemDeSelect($event)"
+                                  (onSelectAll)="onSelectAll($event)"
+                                  (onDeSelectAll)="onDeSelectAll($event)"
+                                  (onAddFilterNewItem)="onAddItemA($event)" name="CarrierList">
+            </angular2-multiselect>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-12 col-lg-3 col-xl-3">
+          <div class="form-group">
+            <label for="Equipment">{{ 'key_Equipment' | translate }}</label>
+            <angular2-multiselect fixFilterBug [data]="EquipmentList" [(ngModel)]="EquipmentData" [settings]="{singleSelection: true, text: 'Select', enableSearchFilter: true, labelKey :'name', searchBy: ['name'] }"
+                                  (onSelect)="onItemSelect($event)"
+                                  (onDeSelect)="OnItemDeSelect($event)"
+                                  (onSelectAll)="onSelectAll($event)"
+                                  (onDeSelectAll)="onDeSelectAll($event)"
+                                  (onAddFilterNewItem)="onAddItemA($event)" name="EquipmentList">
+            </angular2-multiselect>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-12 col-lg-3 col-xl-3">
+          <div class="mt-4">
+            <button class="btn btn-save font-weight-normal btn-w-h" (click)="btnApplyFilter(ngForm)">{{'key_ApplyFilter' | translate}}</button>
+            <button class="btn btn-next ml-3 font-weight-normal btn-w-h" (click)="btnResetFilter(ngForm)">{{'key_ResetFilter' | translate}}</button>
+          </div>
+        </div>
+
+      </div>
+
+
+      <!--<app-filter></app-filter>-->
+    </mat-expansion-panel>
+  </mat-accordion>
+</form>

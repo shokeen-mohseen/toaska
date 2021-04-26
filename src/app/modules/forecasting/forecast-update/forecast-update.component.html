@@ -1,0 +1,24 @@
+<!-- Modal Header -->
+<div class="modal-header">
+  <h5 class="modal-title">{{ 'key_UpdateForecast' | translate }}</h5>
+  <button type="button" class="close" data-dismiss="modal" (click)="activeModal.dismiss('Cross click')">&times;</button>
+</div>
+
+<!-- Modal body -->
+<div class="modal-body">
+  <div class="row">
+    <div class="col-lg-12">
+      <div>
+        <p class="text-center py-3">Are you sure you want to update Forecast?</p>
+      </div>
+    </div>
+  </div>
+  <div class="row justify-content-center my-3">
+    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
+      <button class="btn btn-block btn-save" type="submit" (click)="UpdateForecast()">{{ 'key_Update' | translate }}</button>
+    </div>
+    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
+      <button class="btn btn-block btn-next" type="submit" (click)="activeModal.dismiss('Cross click')">{{ 'key_Cancel' | translate }}</button>
+    </div>
+  </div>
+</div>

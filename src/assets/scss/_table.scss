@@ -1,0 +1,1995 @@
+/*--Developer Name: Prabhash Poddar, Date: 22/08/2020, TFS ID: 17145, Logic Description: work on table scss file and manage--*/
+@mixin table() {
+  overflow: inherit;
+  -webkit-overflow-scrolling: touch;
+  width: 100%;
+  // developer : rajesh, description : use row hover background
+  border-top: 1px solid $table-border;
+  border-left: 1px solid $table-border;
+}
+
+@mixin row() {
+  background: $table-header-bgColor;
+}
+
+@mixin th() {
+  font-weight: 600 !important;
+  color: $th-color !important;
+  background: $table-header-bgColor;
+  padding: 3px 5px;
+  border-bottom: 1px solid $table-border;
+  border-right: 1px solid $table-border;
+  font-size: 13px;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  //word-break: break-all;
+  @extend .t-center;
+
+  &.mat-column-selectRow, &.mat-column-userContactId, &.mat-column-userAddressId, &.mat-column-userRolesListId, &.mat-column-userLocationListId {
+    width: 30px;
+  }
+}
+
+@mixin td() {
+  vertical-align: middle;
+  line-height: normal;
+  font-size: 12px;
+  padding: 3px 5px;
+  //this is comment by rajesh
+  /* word-break: break-word;
+      white-space: nowrap;*/
+  border-bottom: 1px solid $table-border;
+  border-right: 1px solid $table-border;
+  overflow: inherit;
+  font-weight: 300 !important;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  //word-break: break-all;
+}
+
+@mixin foot-row() {
+  background-color: $tfoot-color !important;
+}
+
+@mixin foot-cell() {
+  color: $white !important;
+  font-weight: bold !important;
+}
+
+@mixin alternat-color() {
+  &:nth-child(even) {
+    background-color: $white;
+  }
+
+  &:nth-child(odd) {
+    background-color: $white;
+  }
+
+  &.selected, &.highlighted, &.activeRow {
+    background: $labelBox-bgcolor !important;
+  }
+
+  &.inactive, &.Inactive, &:disabled, &.snactive {
+    background: $rowInactive-bgcolor !important;
+  }
+}
+
+@mixin common() {
+
+  .mat-raised-button {
+    min-width: 47px;
+    padding: 0 10px;
+    line-height: 28px;
+
+    .mat-button-wrapper {
+      line-height: 28px;
+
+      .mat-icon {
+        font-size: 22px;
+      }
+
+      .mat-line {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  .mat-checkbox {
+    .mat-checkbox-layout {
+      margin-bottom: 0;
+
+      .mat-checkbox-frame {
+        border-width: 1px;
+        background: $white;
+      }
+    }
+  }
+
+  .mat-checkbox-checked:not(.mat-checkbox-disabled).mat-accent .mat-ripple-element, .mat-checkbox:active:not(.mat-checkbox-disabled).mat-accent .mat-ripple-element {
+    background: $checbox-checked-color;
+  }
+
+  .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background, .mat-checkbox-checked.mat-accent .mat-checkbox-background {
+    background-color: $checbox-checked-color;
+  }
+
+  .form-check-inline, .form-check-inline .form-check-input {
+    margin: 0;
+    vertical-align: middle;
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+  }
+
+  .form-control {
+    margin-bottom: 0;
+  }
+
+  button {
+    &.badge {
+      border: 0;
+      outline: 0;
+      color: $red;
+      background: transparent;
+
+      .fa {
+        font-size: 18px;
+      }
+    }
+  }
+}
+
+@mixin min-height-40() {
+  min-height: 40px;
+}
+
+@mixin min-height-25() {
+  min-height: 25px;
+}
+
+@mixin flex() {
+  display: -webkit-box; /* OLD - iOS 6-, Safari 3.1-6 */
+  display: -moz-box; /* OLD - Firefox 19- (buggy but mostly works) */
+  display: -ms-flexbox; /* TWEENER - IE 10 */
+  display: -webkit-flex; /* NEW - Chrome */
+  display: flex; /* NEW, Spec - Opera 12.1, Firefox 20+ */
+}
+
+@mixin inline-flex() {
+  display: -webkit-inline-flex !important;
+  display: -ms-inline-flexbox !important;
+  display: inline-flex !important;
+}
+
+/*--grid filter code here--*/
+.main-filter {
+  .input {
+    display: flex;
+    flex-wrap: wrap;
+    background: white;
+    border: 1px solid rgba(0,0,0,.1);
+    padding: 3px 5px;
+    position: relative;
+    z-index: 2;
+    padding: 4px;
+    border-radius: 2px;
+    border: 1px solid #7ed4f7;
+  }
+
+  .pill {
+    background: #EC710A;
+    color: white;
+    margin-right: 3px;
+    margin-top: 1px;
+    margin-bottom: 1px;
+    padding: 2px 4px;
+
+   /* &:nth-child(1) {
+      display: none;
+    }*/
+  }
+
+  span {
+    cursor: pointer;
+  }
+
+  input {
+    flex: 1;
+    border: none;
+
+    &:focus {
+      outline: unset;
+    }
+  }
+  .dropdown {
+    list-style: none;
+    border: 1px solid rgba(0,0,0,.1);
+    padding: 10px;
+    margin: -4px 0 0;
+    box-shadow: 0 0 4px rgba(0, 0, 0, .2);
+  }
+}
+/*--grid filtercode end--*/
+
+table {
+  @include table();
+
+  &.dataTable, &.table {
+    .no-sort {
+      pointer-events: inherit !important;
+    }
+
+    thead {
+      tr {
+        @include row();
+
+        th {
+          @include th();
+          border-bottom-width: 1px;
+          text-align: center;
+        }
+      }
+    }
+
+    tbody {
+      tr {
+        @include alternat-color();
+
+        td {
+          @include td();
+        }
+      }
+    }
+
+    th, td {
+      @include common();
+    }
+
+    td {
+      .select2-container {
+        .select2-selection--single {
+          height: 26px !important;
+        }
+      }
+
+      .select2-container--default {
+        .select2-selection--single {
+          .select2-selection__rendered {
+            line-height: 26px;
+          }
+
+          .select2-selection__arrow {
+            height: 26px;
+          }
+        }
+      }
+    }
+
+    tfoot {
+      tr {
+        @include foot-row();
+
+        td {
+          @include foot-cell();
+        }
+      }
+    }
+  }
+}
+
+.mat-table {
+
+  @include table();
+  display: table;
+  table-layout: fixed;
+  empty-cells: show;
+
+  .mat-header-row {
+    @include row();
+
+    .mat-header-cell {
+      @include th();
+      overflow: hidden;
+    }
+  }
+
+  .mat-row, .mat-footer-row {
+    .mat-cell, .mat-footer-cell {
+      @include td();
+      overflow: hidden;
+    }
+  }
+
+  .mat-header-row, .mat-row, .mat-footer-row {
+    @include min-height-25();
+    display: table-row;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    &:after {
+      display: none;
+    }
+
+    &.boldRow, &.BoldRow {
+      .mat-cell {
+        font-weight: 600 !important;
+      }
+    }
+  }
+
+  .mat-header-cell, .mat-cell, .mat-footer-cell {
+    display: table-cell;
+    @include common();
+  }
+
+  mat-header-cell, mat-cell, mat-footer-cell {
+    width: 100%;
+  }
+
+  .mat-row {
+    @include alternat-color();
+    /*.mat-cell {
+      min-width: 0;
+    }*/
+  }
+
+  .mat-footer-row {
+    @include foot-row();
+
+    .mat-footer-cell {
+      @include foot-cell();
+    }
+  }
+
+  .t-center {
+    text-align: center !important;
+
+    .mat-sort-header-container {
+      justify-content: center;
+      position: relative;
+      padding: 0 10px;
+
+      .mat-sort-header-arrow {
+        position: absolute;
+        right: 0;
+      }
+    }
+  }
+
+  .t-left {
+    text-align: left !important;
+  }
+
+  .t-right {
+    text-align: right !important;
+
+    .mat-sort-header-container {
+      -ms-flex-direction: row-reverse !important;
+      flex-direction: row-reverse !important;
+    }
+
+    .mat-sort-header-arrow {
+      margin: 0 6px 0 0;
+    }
+  }
+
+  tr {
+    &.mat-header-row, &.mat-row, &.mat-footer-row {
+      @include min-height-25();
+      height: auto;
+    }
+  }
+
+  .mat-column-selectRow {
+    .mat-sort-header-container {
+      .mat-sort-header-arrow {
+        display: none;
+      }
+    }
+  }
+
+  @for $i from 1 through 100 {
+    .tw-#{$i} {
+      width: #{$i}#{'%'};
+    }
+  }
+
+  .photo {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1px solid #cccccc;
+    overflow: hidden;
+  }
+}
+
+.BoldrowText {
+    font-weight: 600 !important;
+}
+
+// for resize table style develop: rajesh
+
+.tosca .grid-container .mat-table {
+  border-right: 1px solid #9ab6ce;
+}
+
+.tosca .grid-container .mat-table .mat-cell:last-child {
+  border-right: none !important;
+  border-bottom: none !important;
+}
+
+.tosca .grid-container mat-table.mat-table .mat-cell {
+  border-bottom: none !important;
+}
+.tosca .grid-container .mat-table .mat-header-cell:last-child {
+  border-right: none !important;
+}
+
+.input-group {
+  > timepicker {
+    &.form-control {
+      padding: 0;
+
+      table {
+        border: 0;
+
+        tr {
+          display: flex;
+
+          td {
+
+            &.form-group {
+              padding: 0;
+              margin-bottom: 0;
+
+              .form-control {
+                border-top: 0;
+                border-bottom: 0;
+                border-radius: 0;
+                width: 100%;
+              }
+              &:first-child{
+                  .form-control {
+                      border-left: 0;
+                  }
+              }
+            }
+
+            .btn {
+              padding: 2px 4px;
+              border-radius: 0;
+              border: 1px solid #7ed4f7;
+              border-top: 0;
+              border-right: 0;
+              border-bottom: 0;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+app-credit-user-list {
+  app-all-user-list {
+    .mat-table {
+      .mat-row {
+        .mat-cell {
+          &:nth-child(n+4) {
+            text-align: right;
+
+            div {
+              width: 100%;
+            }
+          }
+
+          &.mat-column-creditlimitFromMAS {
+            text-align: right;
+          }
+        }
+      }
+    }
+  }
+
+  app-order-details {
+    .mat-table {
+      .mat-row {
+        .mat-cell {
+          &:nth-child(n+6) {
+            text-align: right;
+
+            div {
+              width: 100%;
+            }
+          }
+
+          &:nth-child(n+9), &.mat-column-orderDate, &.mat-column-orderNumber, &.mat-column-deliveryDate {
+            text-align: center;
+          }
+        }
+      }
+    }
+  }
+
+  app-invoice-report {
+    .mat-table {
+      .mat-row {
+        .mat-cell {
+          &:nth-child(2), &.mat-column-invoiceNumber, &.mat-column-invoiceDate, &.mat-column-dueDate {
+            text-align: center;
+          }
+
+          &:nth-child(3) {
+            text-align: center;
+          }
+
+          &:nth-child(n+8), &.mat-column-billOfLading, &.mat-column-orderNo {
+            text-align: right;
+
+            div {
+              width: 100%;
+            }
+          }
+        }
+      }
+
+      .mat-footer-row {
+        .mat-footer-cell {
+          &:nth-child(n+7) {
+            text-align: right;
+
+            div {
+              width: 100%;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+app-current-on-hand-inventory {
+  app-current-inventory-list {
+    .mat-table {
+      .mat-row {
+        .mat-cell {
+          &:nth-child(5) {
+            text-align: right;
+
+            div {
+              width: 100%;
+            }
+          }
+
+          &:nth-child(6) {
+            text-align: center;
+          }
+
+          &:nth-child(n+7), &.mat-column-UOM {
+            text-align: center;
+          }
+        }
+      }
+
+      .mat-footer-row {
+        .mat-footer-cell {
+          &:nth-child(n+4) {
+            text-align: right;
+
+            div {
+              width: 100%;
+            }
+          }
+
+          /*&:nth-child(6) {
+            text-align: left;
+          }*/
+
+          &:nth-child(n+7) {
+            text-align: center;
+          }
+        }
+      }
+    }
+  }
+}
+
+.mat-table {
+  .mat-row {
+    .mat-cell {
+      &.mat-column-selectRow, &.mat-column-Id, &.mat-column-Index, &.mat-column-isShipWith, &.mat-column-showOnBOL {
+        text-align: center;
+
+        div {
+          width: auto !important;
+          min-width: 16px;
+        }
+      }
+
+      &.mat-column-isActive, &.mat-column-setupDone, &.mat-column-autoAdded,
+      &.mat-column-addPallet, &.mat-column-methodType, &.mat-column-uom,
+      &.mat-column-effectiveStartStr, &.mat-column-effectiveEndStr {
+        text-align: center;
+      }
+
+      &.mat-column-MaxPalletQty, &.mat-column-LeastFillPalletQty,
+      &.mat-column-rate, &.mat-column-quantity_per_UOM {
+        text-align: right;
+      }
+    }
+  }
+}
+
+app-contact-panel, app-address-panel, app-business-characteristics-panel, app-map-equipment-type, app-map-pallet-type,
+app-map-preferred-materials, app-characteristics-add-edit-panel {
+  .table {
+    tr {
+      td {
+        &:first-child {
+          text-align: center;
+        }
+      }
+    }
+  }
+}
+app-business-characteristics-panel, app-map-preferred-materials, app-characteristics-add-edit-panel {
+  tr {
+    td {
+      &:last-child {
+        text-align: center;
+      }
+    }
+  }
+}
+
+app-customer-characteristics-panel {
+  .table {
+    tr {
+      td {
+        &:first-child {
+          text-align: center;
+        }
+      }
+    }
+    tr {
+      td {
+        &:last-child {
+          text-align: center;
+        }
+      }
+    }
+  }
+}
+app-operating-characteristics-panel {
+  .table {
+    tr {
+      td {
+        &:first-child {
+          text-align: center;
+        }
+      }
+    }
+
+    tr {
+      td {
+        &:last-child {
+          text-align: center;
+        }
+      }
+    }
+  }
+}
+
+  .tbldesign {
+    tr {
+      td {
+        &:first-child {
+          text-align: center;
+        }
+      }
+    }
+    
+  }
+.lasttbldesign {
+  tr {
+    td {
+      &:last-child {
+        text-align: center;
+      }
+    }
+  }
+}
+app-equipment-type {
+  .mat-table {
+    .mat-row {
+      .mat-cell {
+        &.mat-column-selectRow, &.mat-column-UOM {
+          text-align: center;
+
+          div {
+            width: auto !important;
+            min-width: 16px;
+          }
+        }
+
+        &.mat-column-MaxPalletQty, &.mat-column-LeastFillPalletQty, &.mat-column-maxPalletQty, &.mat-column-leastFillPalletQty, &.mat-column-CharacteristicsValue {
+          text-align: right;
+        }
+
+        div {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+
+app-claim-list {
+  .mat-table {
+    .mat-row {
+      .mat-cell {
+        &.mat-column-InvoicedAmount, &.mat-column-ClaimAmount, &.mat-column-ApprovedAmount, &.mat-column-InvoiceNumber {
+          text-align: right;
+        }
+
+        &.mat-column-ClaimFor {
+          text-align: left;
+        }
+      }
+    }
+
+    .mat-column-ClaimStatus, .mat-column-Claimdate,
+    .mat-column-ApprovedBy, .mat-column-InvoiceNumber {
+      width: 75px;
+    }
+  }
+}
+
+app-edit-freightlane {
+  .mat-table {
+    .mat-row {
+      .mat-cell {
+        &.mat-column-ratePerUom {
+          text-align: center;
+        }
+      }
+    }
+  }
+}
+app-user-list {
+  app-existing-user {
+    .mat-table {
+      .mat-row {
+        .mat-cell {
+          &.mat-column-Status {
+            text-align: center;
+          }
+
+          &.mat-column-CodeMobilePhone {
+            text-align: right;
+          }
+
+          div {
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+
+  app-new-users {
+    .mat-table {
+      .mat-row {
+        .mat-cell {
+          &.mat-column-CodeMobilePhone {
+            text-align: right;
+          }
+
+          div {
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+
+  app-locked-users {
+    .mat-table {
+      .mat-row {
+        .mat-cell {
+          &.mat-column-CodeMobilePhone {
+            text-align: right;
+          }
+
+          div {
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+
+
+
+  app-declined-users {
+    .mat-table {
+      .mat-row {
+        .mat-cell {
+          &.mat-column-CodeMobilePhone {
+            text-align: right;
+          }
+
+          div {
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+}
+
+
+app-order-workbench .scroll {
+  .mat-table {
+    mat-cell {
+      &.mat-column-ShipmentQuantity, &.mat-column-OrderQuantity,
+      &.mat-column-PurchaseOrderNumber, &.mat-column-OrderAmount {
+        text-align: right;
+      }
+
+      &.mat-column-ScheduledShipDate, &.mat-column-RequestedDeliveryDate,
+      &.mat-column-MustArriveByDate, &.mat-column-ActualDeliveryDate {
+        text-align: center;
+      }
+
+      &.mat-column-BOL {text-align: center}
+    }
+
+    mat-cell, mat-footer-cell, mat-header-cell {width: 75px;}
+    .mat-column-selectRow {width: 30px}
+    .mat-column-BOL, .mat-column-PurchaseOrderNumber {width: 52px;}
+    .mat-column-OrderQuantity, .mat-column-SalesManager, .mat-column-ShipmentQuantity, .mat-column-OrderNumber, .mat-column-CustomerPriority, .mat-column-ShipmentNumber {
+      width: 62px;
+    }
+  }
+}
+
+app-contract-list .scroll {
+  .mat-table {
+    mat-cell {
+      &.mat-column-Version,
+      &.mat-column-End_Alert_Days {
+        text-align: right;
+      }
+
+      &.mat-column-Effective_Start,
+      &.mat-column-Effective_End, &.mat-column-EarliestPriceEnd,
+      &.mat-column-Approved_Datetime, &.mat-column-Evergreen {
+        text-align: center;
+      }
+
+    }
+  }
+}
+
+app-edit-contract #add .scroll, app-edit-contract #view .scroll {
+  .mat-table {
+    mat-cell {
+      &.mat-column-Rate,
+      &.mat-column-Quantity_per_UOM {
+        text-align: right;
+      }
+
+      &.mat-column-EffectiveStart,
+      &.mat-column-EffectiveEnd,
+      &.mat-column-Updated_Date,
+      &.mat-column-ShowOnBOL, &.mat-column-AutoAdded, &.mat-column-AddPallet {
+        text-align: center;
+      }
+    }
+  }
+}
+
+app-regular-order .scroll, app-order-detail .scroll {
+  .mat-table {
+    mat-cell {
+      &.mat-column-OrderQuantity,
+      &.mat-column-ShippedQuantity,
+      &.mat-column-rateValue,
+      &.mat-column-amount,
+      &.mat-column-chargeUnit,
+      &.mat-column-displayQuantity,
+      &.mat-column-displayShippedQuantity {
+        text-align: right;
+      }
+
+      mat-footer-cell.mat-column-amount {
+        text-align: right;
+      }
+    }
+  }
+}
+
+app-workbench .moreOptions .scroll {
+  .mat-table {
+    mat-cell {
+      &.mat-column-shipDate,
+      &.mat-column-requestedDeliveryDate,
+      &.mat-column-mustArriveByDate,
+      &.mat-column-pickupAppointment,
+      &.mat-column-deliveryAppointment,
+      &.mat-column-actualDeliveryDate {
+        text-align: center;
+      }
+
+      &.mat-column-orderQuantity,
+      &.mat-column-planToShipQuantity,
+      &.mat-column-totalShipmentQuantity {
+        text-align: right;
+      }
+    }
+
+    mat-cell, mat-footer-cell, mat-header-cell {
+      width: 85px;
+    }
+
+    .mat-column-isShipWith {
+      width: 50px
+    }
+
+    .mat-column-orderQuantity, .mat-column-orderNumber, .mat-column-totalShipmentQuantity {
+      width: 65px
+    }
+
+    .mat-column-selectRow {
+      width: 30px;
+    }
+  }
+}
+
+app-businesspartner-list, app-carrierpartnerlist {
+  .mat-table {
+    mat-cell {
+      &.mat-column-masInventoryWarehouse {
+        text-align:right;
+      }
+
+      &.mat-column-setupDoneDateTime,
+      &.mat-column-updateDateTimeBrowser {
+        text-align: center;
+      }
+    }
+  }
+}
+app-define-characteristics {
+  .mat-table {
+    .mat-row {
+      .mat-cell {
+        &.mat-column-Active {
+          text-align: center;
+        }
+      }
+    }
+  }
+}
+.ship-detail {
+  .mat-table {
+
+    .mat-row {
+      .mat-cell {
+        &.mat-column-reqDeliveryDate, &.mat-column-mustArriveByDate, &.mat-column-actualDeliveryDate,
+        &.mat-column-travelTime {
+          text-align: center;
+        }
+      }
+
+      .mat-column-route {
+        text-align: right;
+      }
+    }
+    mat-header-cell {
+    vertical-align: middle;
+}
+    .mat-column-route{width:55px}
+    .mat-column-orderNumber{width:80px}
+    .mat-column-reqDeliveryDate,.mat-column-actualDeliveryDate{width:85px}
+     .mat-column-mustArriveByDate{width:103px}
+    .mat-column-pickupAppointment, .mat-column-deliveryAppointment {width: 170px;}
+    }
+}
+#Receiving, #editshipment {
+  .mat-table {
+    .mat-row {
+      .mat-cell {
+        &.mat-column-quantityDiff, &.mat-column-orderQuantity,
+        &.mat-column-shippedQuantity, &.mat-column-finalorderQuantity,
+        &.mat-column-finalshippedQuantity, &.mat-column-finalquantityDiff {
+          text-align: right;
+        }
+        &.mat-column-finalshowOnBOL{
+            text-align:center;
+        }
+        div {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+
+
+
+
+
+app-claim {
+  .mat-table {
+    .mat-row {
+      .mat-cell {
+        &.mat-column-Claimstatus, &.mat-column-Claimdate, &.mat-column-Approvedby {
+          text-align: center;
+        }
+
+        &.mat-column-Invamount, &.mat-column-Claimamount, &.mat-column-Approvedmount, &.mat-column-Invnumber {
+          text-align: right;
+        }
+
+        div {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+
+/*Forecasting grid*/
+app-create-compute-sales-forecast {
+  .mat-table {
+    .mat-row {
+      .mat-cell {
+
+        &.mat-column-MasCustomerCode, &.mat-column-MasLocationAddressCode, &:nth-child(n+3) {
+          text-align: right;
+        }
+
+        &.mat-column-SalesManagername, &.mat-column-GroupName, &.mat-column-BillingEntityName, &.mat-column-ShipToLocation, &.mat-column-MaterialDescription, &.mat-column-CommodityName, &.mat-column-DataSegment {
+          text-align: left;
+        }
+      }
+    }
+  }
+
+  mat-footer-cell {
+    &:nth-child(n+11) {
+      text-align: right;
+    }
+  }
+}
+
+/*Forecast-review*/
+app-forecast-review {
+  .mat-table {
+    .mat-row {
+      .mat-cell {
+        &.mat-column-bec, &.mat-column-total {
+          text-align: right;
+        }
+
+        &.mat-column-Status {
+          text-align: center;
+        } 
+      }
+    }
+  }
+
+  .child-Table {
+    .mat-table {
+      .mat-row {
+        .mat-cell {
+          &:nth-child(n+3) {
+            text-align: right;
+          }
+        }
+      }
+    }
+  }
+
+
+  mat-footer-cell.mat-column-total {
+    text-align: right;
+  }
+}
+/*Forecast-compare*/
+app-forecast-compare {
+  .mat-table {
+    .mat-row {
+      .mat-cell {
+        &.mat-column-total {
+          text-align:right;
+        }
+        &.mat-column-Status{
+            text-align:center;
+        }
+      }
+    }
+  }
+
+  .child-Table {
+    .mat-table {
+      .mat-row {
+        .mat-cell {
+          &:nth-child(n+3) {
+            text-align: right;
+          }
+        }
+      }
+    }
+  }
+
+  mat-footer-cell.mat-column-total {
+    text-align: right;
+  }
+}
+
+
+
+app-geo-location {
+  .mat-table {
+    .mat-row {
+      .mat-cell {
+        &.mat-column-zipCode {
+          text-align:right;
+        }
+      }
+    }
+  }
+}
+
+/*operating location*/
+app-operating-location {
+  .mat-table {
+    .mat-row {
+      .mat-cell {
+        &.mat-column-setupCompletedDateTime, &.mat-column-setupComplete {
+          text-align: center;
+        }
+      }
+    }
+  }
+}
+
+
+/*Fuel surcharge index*/
+app-fuel-list {
+  .mat-table {
+    .mat-row {
+      .mat-cell {
+        &.mat-column-effectiveStartDate, &.mat-column-effectiveEndDate, &.mat-column-fuelPriceUom, &.mat-column-chargeRateUom {
+          text-align: center;
+        }
+
+        &.mat-column-fromFuelPrice, &.mat-column-toFuelPrice, &.mat-column-chargeRatePerMile {
+          text-align: right;
+        }
+
+        div {
+          width: 100%;
+        }
+      }
+    }
+
+    .mat-column-fromFuelPrice, .mat-column-toFuelPrice, .mat-column-chargeRateUom, .mat-column-fuelPriceUom, .mat-column-chargeRatePerMile {
+      width: 100px
+    }
+  }
+}
+
+/*Forecasting Manage Market Forecast*/
+app-manage-market-forecast-import {
+  .mat-table {
+    .mat-row {
+      .mat-cell {
+        &.mat-column-idt {
+          text-align: center;
+        }
+
+        div {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+app-freight-lanes-list {
+  .mat-table {
+    .mat-row {
+      .mat-cell {
+        &.mat-column-fromZipcode, &.mat-column-toZipcode, &.mat-column-distance, &.mat-column-travelTime, &.mat-column-ratePerLoad, &.mat-column-travelTimeInDays {
+          text-align: right;
+        }
+      }
+    }
+
+    mat-header-cell, mat-cell {
+      width: 100px
+    }
+  }
+}
+.datetbldesign {
+  tr {
+    td:nth-child(3) { /* I don't think they are 0 based */
+      text-align: right;
+    }
+  }
+}
+
+
+  app-organization-level {
+    .mat-table {
+      .mat-row {
+        .mat-cell {
+          &.mat-column-setupdatetime {
+            text-align: center;
+          }
+        }
+      }
+    }
+  }
+
+app-customer-list {
+  .mat-table {
+    .mat-row {
+      .mat-cell {
+        &.mat-column-customerCode, &.mat-column-masInventoryWarehouse {
+          text-align: right;
+        }
+
+        &.mat-column-setupDoneDateTime {
+          text-align: center;
+        }
+      }
+    }
+
+    .mat-column-customerCode {
+      width: 150px;
+    }
+  }
+}
+  /*Forecast Flex*/
+  app-flex {
+    .mat-table {
+      .mat-row {
+        .mat-cell {
+          &.mat-column-cpc {
+            text-align: right;
+          }
+        }
+      }
+    }
+  }
+  /*Download reports*/
+  app-download-reports {
+    .mat-table {
+      .mat-row {
+        .mat-cell {
+          &.mat-column-datetime, &.mat-column-status {
+            text-align: center;
+          }
+        }
+      }
+    }
+  }
+
+  app-ship-with-order, app-recurrence {
+    .mat-table {
+      .mat-row {
+        .mat-cell {
+          &.mat-column-DeliverbyDate {
+            text-align: center;
+          }
+
+          &.mat-column-OrderQuantity, &.mat-column-OrderNumber {
+            text-align: right;
+          }
+        }
+      }
+    }
+  }
+
+  app-document {
+    .mat-table {
+      .mat-row {
+        .mat-cell {
+          &.mat-column-Updated_Date {
+            text-align: center;
+          }
+        }
+      }
+    }
+  }
+
+app-charge-list {
+  .mat-table {
+    .mat-row {
+      .mat-cell {
+        &.mat-column-Satatusdate, &.mat-column-status {
+          text-align: center;
+        }
+
+        &.mat-column-Invnumber, &.mat-column-Aproved, &.mat-column-FReamount, &.mat-column-FReamount, &.mat-column-Claimqunatity, &.mat-column-Invoiceamount,
+        &.mat-column-Shipment {
+          text-align: right;
+        }
+      }
+    }
+
+    mat-cell, mat-header {
+      width: 100px
+    }
+    .mat-column-Status {
+      text-align: center;
+    }
+  }
+}
+
+  app-map-computation-method {
+    .mat-table {
+      .mat-row {
+        .mat-cell {
+          &.mat-column-MappedComputationMethods {
+            .dd-field {
+              max-width: 350px;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  app-special-preference {
+    app-preference-list {
+      .mat-table {
+        .mat-header-row, .mat-row, .mat-footer-row {
+          display: flex;
+          -ms-flex-align: stretch !important;
+          align-items: stretch !important;
+
+          .mat-header-cell, .mat-cell, .mat-footer-cell {
+            display: flex;
+
+            &.mat-column-groupHeader {
+              background: $rowInactive-bgcolor !important;
+            }
+
+            &.mat-column-selectRow {
+              flex: 0 0 8%;
+            }
+
+            &.mat-column-AppPreferenceDescription {
+              flex: 0 0 42%;
+            }
+
+            &.mat-column-AppPreferenceValueDefault {
+              flex: 0 0 20%;
+            }
+
+            &.mat-column-AppPreferenceValueModified {
+              flex: 0 0 20%;
+            }
+
+            &.mat-column-Help {
+              flex: 0 0 10%;
+            }
+          }
+
+          .mat-header-cell {
+            justify-content: center;
+          }
+
+          .mat-cell, .mat-footer-cell {
+            &.mat-column-selectRow, &:nth-child(5) {
+              @extend .mat-header-cell;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  app-issue {
+    .mat-table {
+      .mat-header-row, .mat-row, .mat-footer-row {
+
+        .mat-header-cell, .mat-cell, .mat-footer-cell {
+
+          &.mat-column-Module {
+            width: 10%;
+            text-align: center;
+          }
+
+          &.mat-column-Submodule {
+            width: 10%;
+            text-align: center;
+          }
+
+          &.mat-column-Description {
+            width: 42%;
+          }
+
+          &.mat-column-Createdby {
+            width: 10%;
+            text-align: center;
+          }
+
+          &.mat-column-Createdteddate {
+            width: 10%;
+            text-align: center;
+          }
+
+          &.mat-column-Comment {
+            width: 10%;
+            text-align: center;
+          }
+        }
+
+        .mat-header-cell {
+          justify-content: center;
+        }
+      }
+    }
+  }
+
+  app-freight-list {
+    .mat-table {
+      .mat-row {
+        .mat-cell {
+          &:nth-child(n+5) {
+            text-align: right;
+          }
+        }
+      }
+    }
+  }
+
+  app-order-history {
+    .mat-table {
+      .mat-row {
+        .mat-cell {
+          &.mat-column-Orderno, &.mat-column-Quantity, &.mat-column-Pono, &.mat-column-Invoicenumber, &.mat-column-Shipmentno, &.mat-column-Orderamt {
+            text-align: right;
+          }
+
+          &.mat-column-Schduleship, &.mat-column-Requestdeliverydate, &.mat-column-Mustarrive, &.mat-column-Actualdeli, &.mat-column-Source {
+            text-align: center;
+          }
+        }
+      }
+    }
+  }
+
+  app-shipment-history {
+    .mat-table {
+      .mat-row {
+        .mat-cell {
+          &.mat-column-ShipmentNo, &.mat-column-Quantity, &.mat-column-OrderNo {
+            text-align: right;
+          }
+
+          &.mat-column-ShipDate, &.mat-column-ReqDeliveryDate, &.mat-column-MustArriveByDate, &.mat-column-PickupAppointment, &.mat-column-DeliveryAppointment,
+          &.mat-column-ActDeliveryDate {
+            text-align: center;
+          }
+        }
+      }
+    }
+  }
+
+  app-planned-order-report {
+    .mat-table {
+      .mat-row {
+        .mat-cell {
+          &.mat-column-orderNo, &.mat-column-orderQuantity, &.mat-column-ptsq, &.mat-column-shippedquality, &.mat-column-bl {
+            text-align: right;
+          }
+
+          &.mat-column-orderDate, &.mat-column-ship, &.mat-column-reqDeliveryDate, &.mat-column-mustArriveDate {
+            text-align: center;
+          }
+        }
+      }
+    }
+  }
+
+  app-mat-daily-viewdetail {
+    .mat-table {
+      .mat-row {
+        .mat-cell {
+          &.mat-column-Orderno {
+            text-align: right;
+          }
+
+          &.mat-column-date {
+            text-align: center;
+          }
+        }
+      }
+    }
+  }
+
+  app-contract-defining-characteristics {
+    .mat-table {
+      .mat-row {
+        .mat-cell {
+
+          &.mat-column-UOM {
+            text-align: center;
+          }
+        }
+      }
+    }
+  }
+
+  app-material-daily-list {
+    .mat-table {
+      .mat-row {
+        .mat-cell {
+          &.mat-column-Reservation, &.mat-column-Unusedfor, &.mat-column-Unusedreservation, &.mat-column-Reservationavl,
+          &.mat-column-Inventory, &.mat-column-Activityquntity, &.mat-column-Assignqunt, &.mat-column-Ending {
+            text-align: right;
+          }
+
+          &.mat-column-date {
+            text-align: center;
+          }
+        }
+      }
+    }
+  }
+
+  app-define-equipment-material {
+    .mat-table {
+      .mat-row {
+        .mat-cell {
+          &.mat-column-Active {
+            text-align: right;
+          }
+
+          &.mat-column-uom {
+            text-align: center;
+          }
+        }
+      }
+    }
+  }
+
+  app-origin-of-goods {
+    .mat-table {
+      .mat-row {
+        .mat-cell {
+          &.mat-column-materialPercentage {
+            text-align: right;
+          }
+        }
+      }
+    }
+  }
+
+  app-shipment-nafta-report {
+    .mat-table {
+      .mat-row {
+        .mat-cell {
+          &.mat-column-telephoneNumberVoice, &.mat-column-telephoneNumberFacsimile {
+            text-align: right;
+          }
+
+          &.mat-column-fromCalendarYear, &.mat-column-toCalendarYear {
+            text-align: center;
+          }
+        }
+      }
+    }
+  }
+
+  #Transportation, #apChargeModel {
+    .mat-table {
+      .mat-row {
+        .mat-cell {
+          &.mat-column-contractAmount, &.mat-column-modifiedAmount {
+            text-align: right;
+          }
+        }
+      }
+    }
+  }
+
+
+  app-material-list {
+    .mat-table {
+      .mat-row {
+        .mat-cell {
+          &.mat-column-telephoneNumberVoice, &.mat-column-telephoneNumberFacsimile {
+            text-align: right;
+          }
+
+          &.mat-column-setupCompleteDateTime, &.mat-column-status, &.mat-column-isReserveStr, &.mat-column-setupCompleteDateTime {
+            text-align: center;
+          }
+        }
+      }
+    }
+  }
+
+  app-fuel-price {
+    .mat-table {
+      .mat-row {
+        .mat-cell {
+          &.mat-column-rate, &.mat-column-chargeRatePerMile {
+            text-align: right;
+          }
+
+          &.mat-column-fuelPriceDateTime, &.mat-column-uom {
+            text-align: center;
+          }
+        }
+      }
+    }
+  }
+
+
+  app-alert-history {
+    .mat-table {
+      .mat-row {
+        .mat-cell {
+          &.mat-column-dateDispatched {
+            text-align: center;
+          }
+        }
+      }
+    }
+  }
+
+app-alert-list {
+  .mat-table {
+    .mat-row {
+      .mat-cell {
+        &.mat-column-Active {
+          text-align: center;
+        }
+      }
+    }
+
+    .mat-column-Active{width:80px;}
+  }
+}
+
+  app-current-on-hand-inventory {
+    app-current-inventory-list {
+      .mat-table {
+        .mat-row {
+          .mat-cell {
+            &.mat-column-materialName {
+              text-align: left;
+            }
+
+            &.mat-column-quantity {
+              text-align: right;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  app-download-reports {
+    .mat-table {
+      .mat-row {
+        .mat-cell {
+          &.mat-column-no, &.mat-column-setupFilter {
+            text-align: center;
+          }
+
+          &.mat-column-no {
+            width: 30px;
+          }
+        }
+      }
+    }
+  }
+
+  app-material-group {
+    .mat-table {
+      .mat-row {
+        .mat-cell {
+
+          &.mat-column-detail {
+            text-align: center;
+          }
+        }
+      }
+    }
+  }
+
+  app-material-hierarchy {
+    .mat-table {
+      .mat-row {
+        .mat-cell {
+
+          &.mat-column-detail {
+            text-align: center;
+          }
+        }
+      }
+    }
+  }
+
+  app-view-import-status {
+    .mat-table {
+      .mat-row {
+        .mat-cell {
+
+          &.mat-column-RateEffBeginDate, &.mat-column-RateEffEndDate {
+            text-align: center;
+          }
+
+          &.mat-column-RateUOM, &.mat-column-DistanceUOM {
+            text-align: right
+          }
+        }
+      }
+
+      mat-header-cell, mat-cell {
+        width: 70px;
+        padding-left: 5px;
+        padding-right: 5px;
+      }
+    }
+  }
+
+
+.existing {
+  .mat-table mat-header-cell,
+  .mat-table mat-cell,
+  .mat-table mat-footer-cell {
+    width: 77px;
+
+    &.mat-column-Add_New, &.mat-column-Delete {
+      width: 50px;
+      .grid-button {
+        margin: 0 auto;
+      }
+    }
+  }
+}
+.newOne {
+  .mat-table mat-header-cell,
+  .mat-table mat-cell,
+  .mat-table mat-footer-cell {
+    width: 100px;
+
+    &.mat-column-Add_New, &.mat-column-Delete, &.mat-column-ShowOnBOL,
+    &.mat-column-AutoAdded, &.mat-column-AddPallet {
+      width: 50px;
+
+      .grid-button {
+        margin: 0 auto;
+      }
+    }
+
+    &.mat-column-Quantity_per_UOM {width:60px}
+  }
+}
+.editLineItems{
+    mat-cell, mat-footer-cell, mat-header-cell {width: 120px;}
+    .mat-column-ShowOnBOL, .mat-column-AutoAdded, .mat-column-AddPallet,
+    .mat-column-Add_New, .mat-column-Delete {
+      width: 48px;
+      text-align: center;
+    }
+    .mat-column-EffectiveStart, .mat-column-EffectiveEnd {
+      width: 120px;
+    }
+}
+
+.newOne, .existing {
+  .mat-table {
+    .mat-column-EffectiveStart, .newOne .mat-column-EffectiveEnd,
+    .mat-column-EffectiveEnd, .existing .mat-column-EffectiveEnd {
+      width: 150px;
+    }
+  }
+}
+.newOne .e-control.form-control {
+  width: 100% !important;
+}
+app-customer-list, app-businesspartner-list, app-carrierpartnerlist {
+  .resize-table {
+    mat-cell, mat-footer-cell, mat-header-cell {
+      width: 160px;
+    }
+  }
+}
+app-customer-list .resize-table {
+  .mat-column-isActive, .mat-column-setupDone, .mat-column-masInventoryWarehouse {
+    width: 70px;
+  }
+}
+
+app-businesspartner-list, app-carrierpartnerlist {
+    .resize-table {
+  .mat-column-setupDone, .mat-column-isActive { width: 70px; }
+  .mat-column-masInventoryWarehouse, .mat-column-updatedBy,.mat-column-scacValue { width:90px;}
+}
+}
+app-operating-location {
+  .resize-table {
+    .mat-column-masInventoryWarehouse, .mat-column-isActive, .mat-column-setupComplete {
+      width: 70px
+    }
+  }
+}
+
+.contract-list {
+  .mat-table {
+    min-width: 1800px;
+
+    mat-cell, mat-footer-cell, mat-header-cell {
+      &:nth-child(1) {
+        width: 1%;
+      }
+
+      &:nth-child(2) {
+        width: 7%;
+      }
+
+      &:nth-child(3) {
+        width: 10%;
+      }
+
+      &:nth-child(4) {
+        width: 5%;
+      }
+
+      &:nth-child(5) {
+        width: 12%;
+      }
+
+      &:nth-child(6) {
+        width: 7%;
+      }
+
+      &:nth-child(7) {
+        width: 8%;
+      }
+
+      &:nth-child(8) {
+        width: 5%;
+      }
+
+      &:nth-child(9) {
+        width: 5%;
+      }
+
+      &:nth-child(10) {
+        width: 5%;
+      }
+
+      &:nth-child(11) {
+        width: 5%;
+      }
+
+      &:nth-child(12) {
+        width: 5%;
+      }
+
+      &:nth-child(13) {
+        width: 5%;
+      }
+
+      &:nth-child(14) {
+        width: 5%;
+      }
+
+      &:nth-child(15) {
+        width: 5%;
+        text-align: center;
+      }
+
+      &:nth-child(16) {
+        width: 5%;
+        text-align: center;
+      }
+
+      &:nth-child(17) {
+        width: 5%;
+      }
+    }
+  }
+ 
+}
+.view-line {
+  mat-cell, mat-footer-cell, mat-header-cell {
+    width: 78px;
+  }
+}
+app-claim-list{
+    .resize-table {
+        mat-cell, mat-footer-cell, mat-header-cell {
+           width: 125px;
+          }
+        }
+      }
+
+
+app-order-history-list {
+  .mat-table {
+    .mat-row {
+      .mat-cell {
+        &.mat-column-OrderQuantity, &.mat-column-ShipmentQuantity,
+        &.mat-column-OrderAmount, &.mat-column-InvoiceNumber {
+          text-align: right;
+        }
+
+        &.mat-column-ScheduledShipDate, &.mat-column-RequestedDeliveryDate,
+        &.mat-column-MustArriveByDate, &.mat-column-ActualDeliveryDate,
+        &.mat-column-PurchaseOrderNumber, &.mat-column-BOL {
+          text-align: center;
+        }
+      }
+    }
+
+    mat-header-cell, mat-cell {
+      width: 80px
+    }
+
+    .mat-column-OrderQuantity, .mat-column-ShipmentQuantity,
+    .mat-column-BOL, .mat-column-PurchaseOrderNumber, .mat-column-InvoiceNumber,
+    .mat-column-SalesManager, .mat-column-Source {
+      width: 62px
+    }
+  }
+}
+
+  @media(min-width:1600px) {
+    app-claim-list .resize-table mat-cell, app-claim-list .resize-table mat-footer-cell,
+    app-claim-list .resize-table mat-header-cell {
+      width: 165px;
+    }
+  }
+
+  app-claim-list .mat-table {
+    .mat-column-ApprovedAmount,
+    .mat-column-ClaimAmount,
+    .mat-column-InvoicedAmount {
+      width: 70px
+    }
+  }
+  /*--for new resize table--*/
+  .mat-table {
+    &.resizing {
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      cursor: col-resize;
+    }
+
+    .mat-header-cell {
+      position: relative;
+
+      &:not(:last-child) {
+        .resize-holder {
+          cursor: col-resize;
+          width: 20px;
+          height: 100%;
+          position: absolute;
+          right: -10px;
+          top: 0;
+          z-index: 1;
+        }
+      }
+    }
+  }
+app-adjust-final-forecast, app-add-new-row {
+  .mat-table {
+    table-layout: inherit;
+    empty-cells: inherit;
+  }
+}

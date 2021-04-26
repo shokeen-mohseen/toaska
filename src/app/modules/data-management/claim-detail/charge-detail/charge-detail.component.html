@@ -1,0 +1,173 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="d-flex flex-nowrap justify-content-between align-items-center mb-2">
+
+
+    <!--  <div class="btn-group btn-group-toggle" data-toggle="buttons" >
+
+        <label id="addAddressButton" class="btn btn-outline-primary" (click)="openaddCharge()" placement="bottom" ngbTooltip=" {{ 'key_Add' | translate }}" [disabled]="ISActive || hasClaimSaveUpdate">
+          <input type="radio" name="options" id="option1" autocomplete="off">
+          <i class="fa fa-plus" aria-hidden="true"></i>
+          <span>{{ 'key_Add' | translate }}</span>
+        </label>
+
+        <label id="addAddressButton" class="btn btn-outline-primary" (click)="Edit()" placement="bottom" ngbTooltip=" {{ 'key_Edit' | translate }}" [disabled]="ISActive || hasClaimSaveUpdate">
+          <input type="radio" name="options" id="option2" autocomplete="off">
+          <i class="fa fa-pencil" aria-hidden="true"></i>
+          <span>
+            {{ 'key_Edit' | translate }}
+          </span>
+        </label>
+     
+        <label id="addAddressButton" (click)="Save()" class="btn btn-outline-primary"  placement="bottom" ngbTooltip="Save" [disabled]="ISActive || hasClaimSaveUpdate">
+          <input type="radio" name="options" id="option3" autocomplete="off">
+          <i class="fa fa-floppy-o" aria-hidden="true"></i>
+          <span>
+            Save
+          </span>
+        </label>
+
+        <label id="deleteButton" class="btn btn-outline-danger" (click)="Delete()" placement="bottom" ngbTooltip="Delete" [disabled]="ISActive || hasClaimSaveUpdate">
+          <input type="radio" name="options" id="option4" autocomplete="off">
+          <i class="fa fa-trash-o" aria-hidden="true"></i>
+          <span>
+            {{ 'key_Delete' | translate }}
+          </span>
+        </label>
+      </div>-->
+
+      <div class="btn-group btn-group-toggle" data-toggle="buttons">
+        <button id="addAddressButton" (click)="openaddCharge()" class="btn btn-outline-primary active" type="button" placement="bottom" ngbTooltip=" {{ 'key_Add' | translate }}" [disabled]="ISActive || hasClaimSaveUpdate">
+          <i class="fa fa-plus" aria-hidden="true"></i>
+          <span>
+            {{ 'key_Add' | translate }}
+          </span>
+        </button>
+        <button id="addAddressButton" (click)="Edit()" class="btn btn-outline-primary" type="button" placement="bottom" ngbTooltip=" {{ 'key_Edit' | translate }}" [disabled]="ISActive || hasClaimSaveUpdate">
+          <i class="fa fa-pencil" aria-hidden="true"></i>
+          <span>
+            {{ 'key_Edit' | translate }}
+          </span>
+        </button>
+        <button id="addAddressButton" (click)="Save()" class="btn btn-outline-primary" type="button" placement="bottom" ngbTooltip="Save" [disabled]="ISActive || hasClaimSaveUpdate">
+          <i class="fa fa-floppy-o" aria-hidden="true"></i>
+          <span>
+            Save
+          </span>
+        </button>
+        <button id="deleteButton" (click)="Delete()" class="btn btn-outline-danger" type="button" placement="bottom" ngbTooltip="Delete" [disabled]="ISActive || hasClaimSaveUpdate">
+          <i class="fa fa-trash-o" aria-hidden="true"></i>
+          <span>
+            {{ 'key_Delete' | translate }}
+          </span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+  <div class="col-md-12">
+    <app-charge-list></app-charge-list>
+  </div>
+</div>
+
+
+
+
+<div class="modal" id="EditChargeDetail">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">
+          Add / Edit Charge Detail
+        </h5>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label>{{ 'key_MateriaList' | translate }} <sup class="text-danger sup1">*</sup></label>
+              <angular2-multiselect fixFilterBug [data]="ChargetList" [(ngModel)]="ChargeSelectedList" [settings]="settingsB"
+                                    (onSelect)="ChargeOnItemSelect($event)"
+                                    (onDeSelectAll)="ChargeOnDeSelectAll($event)"
+                                    required>
+              </angular2-multiselect>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>{{ 'Key_InvoicedAmount' | translate }} </label>
+              <input type="text" class="form-control" name="InvoicedAmount" id="InvoicedAmount" [(ngModel)]="AddClaimModel.InvoicedAmount" (keypress)="numberOnly($event)" #InvoicedAmount="ngModel" [disabled]="IsInvoiced" />
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>{{ 'key_ShippedQuantity' | translate }}</label>
+              <input type="text" class="form-control" name="ShippedQuantity" id="ShippedQuantity" [(ngModel)]="AddClaimModel.ShippedQuantity" (keypress)="numberOnly($event)" #ShippedQuantity="ngModel" [disabled]="IsShipped" />
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>{{ 'key_Amountc' | translate }} </label>
+              <input type="number" class="form-control" name="ClaimAmount" id="ClaimAmount" [(ngModel)]="AddClaimModel.ClaimAmount" (keypress)="numberOnly($event)" #ClaimAmount="ngModel" />
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>{{ 'key_Quantity' | translate }}  </label>
+              <input type="number" class="form-control" name="ClaimedQuantity" id="ClaimedQuantity" [(ngModel)]="AddClaimModel.ClaimedQuantity" (keypress)="QuantityValidation($event)" #ClaimedQuantity="ngModel" />
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>{{ 'key_Recamount' | translate }}</label>
+              <input type="number" class="form-control" name="RecommendedAmount" id="RecommendedAmount" [(ngModel)]="AddClaimModel.RecommendedAmount" (keypress)="numberOnly($event)" #RecommendedAmount="ngModel" />
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>{{ 'key_Invnumber' | translate }}</label>
+              <input type="text" class="form-control" name="InvoiceNumber" id="InvoiceNumber" [(ngModel)]="AddClaimModel.InvoiceNumber" #InvoiceNumber="ngModel" />
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>{{ 'key_Approvedmount' | translate }}</label>
+              <input type="number" class="form-control" name="ApprovedAmount" id="ApprovedAmount" [(ngModel)]="AddClaimModel.ApprovedAmount" (keypress)="numberOnly($event)" #ApprovedAmount="ngModel" />
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>{{ 'key_Statusgrd' | translate }} <sup class="text-danger sup1">*</sup></label>
+              <angular2-multiselect fixFilterBug [data]="ClaimStatusList" [(ngModel)]="ClaimStatusSelected" [settings]="settingsA"
+                                    (onSelect)="StatusOnItemSelect($event)"
+                                    (onDeSelectAll)="StatusOnDeSelectAll($event)"
+                                    required>
+              </angular2-multiselect>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="form-group">
+              <label>{{ 'key_ApproverComment' | translate }}</label>
+              <textarea rows="2" class="form-control" name="ApproverComment" id="ApproverComment" [(ngModel)]="AddClaimModel.ApproverComment" #ApproverComment="ngModel"></textarea>
+            </div>
+          </div>
+          <div class="col-lg-12 text-center mt-4 mb-4">
+            <button id="btnSave" name="btnSave" (click)="SaveClaimDetailsData()" class="btn btn-save mr-2 popup-btn-width">Save</button>
+          </div>
+        </div>
+
+          </div>
+        </div>
+  </div>
+</div>
+

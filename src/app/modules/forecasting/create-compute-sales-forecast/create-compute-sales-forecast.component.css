@@ -1,0 +1,13 @@
+mat-cell,
+mat-footer-cell,
+mat-header-cell {
+  width: 120px;
+}
+
+.mat-column-Total, .mat-column-2021-W-2,
+.mat-column-2021-W-3, .mat-column-2021-W-4, .mat-column-2021-W-5, .mat-column-Status,
+.mat-column-SalesManagername
+{
+  width: 60px;
+}
+.mat-column-CommodityName{width:75px;}

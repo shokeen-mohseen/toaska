@@ -1,0 +1,30 @@
+<!--TFS ID: 17275, Author: Prabhash Poddar, Date: 04-09-2020, Des: Design This Screen-->
+<!-- Modal Header -->
+
+<!--Right now not needed we shall do it in next realease-->
+
+<div class="modal-header">
+  <h4 class="modal-title">{{ 'key_EquipmentMaterialCharacteristics' | translate }}</h4>
+  <button type="button" class="close" data-dismiss="modal" (click)="activeModal.dismiss('Cross click')">&times;</button>
+</div>
+
+<!-- Modal body -->
+<div class="modal-body">  
+
+  <div class="row">
+    <div class="col-lg-12">
+      <label class="btn btn-outline-success btn-bs-file" placement="bottom" ngbTooltip="{{ 'key_Import' | translate }}">
+        <i class="fa fa-upload" aria-hidden="true"></i>&nbsp;
+        <span>{{ 'key_Import' | translate }}</span>
+        <input type="file" />
+      </label>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-lg-12 text-center mt-4">
+      <input type="button" id="btnSave" name="btnSave" class="btn btn-save" value="Import from Excel">
+    </div>
+  </div>
+
+</div>

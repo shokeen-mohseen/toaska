@@ -1,0 +1,250 @@
+/*--Developer Name: Prabhash Poddar, Date: 28/08/2020, TFS ID: 17210, Logic Description: change mat table scss file and manage--*/
+.mat-form-field {
+  width: 100%;
+
+  &.mat-form-field-appearance-outline {
+    .mat-form-field-outline-start, .mat-form-field-outline-gap, .mat-form-field-outline-end {
+      border-color: #7ed4f7 !important;
+    }
+
+    .mat-form-field-outline-start {
+      border-radius: 2px 0 0 2px !important;
+    }
+
+    .mat-form-field-outline-end {
+      border-radius: 0 2px 2px 0 !important;
+    }
+
+    .mat-form-field-infix {
+      padding: 0.38em 0 !important;
+      top: -0.2em !important;
+
+      .mat-select {
+        &.mat-select-empty {
+          padding: 0;
+        }
+      }
+    }
+  }
+
+  .mat-form-field-flex {
+    > .mat-form-field-infix {
+      padding: 0.38em 0 !important;
+      top: -0.2em !important;
+    }
+  }
+
+  ngx-mat-file-input {
+    width: 100%;
+  }
+
+  .upload {
+    cursor: pointer;
+  }
+}
+
+.mat-form-field-appearance-outline {
+
+  .mat-form-field-wrapper {
+    margin: .4em 0 !important;
+    padding-bottom:0.6em;
+  }
+
+  .mat-form-field-prefix {
+    top: -0.2em !important;
+    margin-right: 4px;
+
+    .mat-datepicker-toggle {
+      position: relative;
+      top: 0.3em;
+    }
+
+    .mat-icon {
+      font-size: 150%;
+      line-height: normal;
+      top: 0.16em;
+      position: relative;
+    }
+
+    .mat-icon-button {
+      width: 1.5em !important;
+      height: 1.5em !important;
+    }
+  }
+
+  .mat-form-field-suffix {
+    top: -0.2em !important;
+
+    .mat-datepicker-toggle {
+      position: relative;
+      top: 0.3em;
+    }
+
+    .mat-icon {
+      font-size: 150%;
+      line-height: normal;
+      top: 0.16em;
+      position: relative;
+    }
+
+    .mat-icon-button {
+      width: 1.5em !important;
+      height: 1.5em !important;
+    }
+  }
+
+  input {
+    &::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+  }
+
+  input[type=number] {
+    -moz-appearance: textfield;
+  }
+}
+
+.mat-form-field-label-wrapper {
+  top: -1.2em !important;
+}
+
+.mat-form-field-appearance-outline.mat-form-field-can-float.mat-form-field-should-float {
+  .mat-form-field-label {
+    -webkit-transform: translateY(-1.1em) scale(.75) !important;
+    transform: translateY(-1.19em) scale(.75) !important;
+  }
+}
+
+.mat-primary .mat-pseudo-checkbox-checked, .mat-primary .mat-pseudo-checkbox-indeterminate {
+  background: #0079FE;
+}
+
+.mat-checkbox-indeterminate.mat-primary .mat-checkbox-background, .mat-checkbox-checked.mat-primary .mat-checkbox-background {
+  background-color: #0079FE;
+}
+
+.mat-select-panel {
+    max-width: 500px !important;
+
+  .mat-option {
+    border-bottom: 1px solid #f1f1f1;
+    line-height: 2.5em;
+    height: 2.5em;
+
+    &:last-child {
+      border-bottom: 0;
+    }
+
+    &.mat-selected {
+      background: #e9f4ff;
+    }
+
+    .mat-pseudo-checkbox, .mat-checkbox-frame {
+      border: 1px solid #0079FE;
+      border-radius: 3px;
+
+      &.mat-pseudo-checkbox-checked {
+        &::after {
+          top: 3.5px;
+          left: 1.5px;
+        }
+      }
+    }
+
+    .mat-option-text {
+      color: #000;
+
+      .mat-select-search-clear {
+        top: -3px !important;
+      }
+    }
+
+    .mat-checkbox {
+      label {
+        margin-bottom: 0;
+      }
+    }
+
+    .mat-select-search-no-entries-found {
+      text-align: center;
+      color: #000;
+    }
+  }
+}
+
+.mat-paginator {
+    .mat-paginator-container {
+        min-height: 42px;
+    }
+  .mat-form-field .mat-form-field-flex > .mat-form-field-infix {
+    padding-top: 0 !important;
+  }
+
+  .mat-form-field-appearance-legacy .mat-form-field-wrapper {
+    padding-bottom: 0;
+  }
+
+  .mat-paginator-page-size-select {
+    margin-top: 0;
+  }
+}
+
+.form-control {
+  .mat-form-field {
+
+    .mat-form-field-wrapper {
+      padding-bottom: 0;
+    }
+
+    .mat-form-field-flex {
+      > .mat-form-field-infix {
+        top: 0 !important;
+      }
+    }
+
+    .mat-form-field-label-wrapper {
+      top: -4px !important;
+      padding-top: 0 !important;
+    }
+
+    &.mat-focused, &.mat-form-field-should-float {
+      .mat-form-field-label-wrapper {
+        top: -4px !important;
+        padding-top: 0 !important;
+      }
+    }
+
+    &.mat-form-field-appearance-legacy {
+      .mat-form-field-label {
+        top: 0.7em;
+      }
+    }
+
+    .mat-form-field-infix {
+      border-top: 0 !important;
+    }
+
+    .mat-chip-list {
+      .mat-chip-list-wrapper {
+        .mat-standard-chip {
+          border-radius: 2px;
+          min-height: 22px;
+          background-color: #ebf5ff;
+
+          &.mat-chip-with-trailing-icon {
+            padding-top: 1px;
+            padding-bottom: 0px;
+            padding-right: 4px;
+            padding-left: 8px;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,31 @@
+
+<div class="modal-header">
+  <h4 class="modal-title"> {{ 'key_SpecialPreference' | translate }} </h4>
+  <button type="button" class="close" data-dismiss="modal" (click)="activeModal.dismiss('Cross click')">&times;</button>
+</div>
+
+<!-- Modal body -->
+<div class="modal-body">
+
+  <!--<div class="form-group">
+    <p>
+      {{ 'key_SpecialPreferenceDesc' | translate }}
+    </p>
+
+  </div>-->
+
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="form-group>">
+        <textarea class="form-control" rows="6" [(ngModel)]="txtPreferenceComment" readonly></textarea>
+      </div>
+    </div>
+  </div>
+
+</div>
+<!--<div class="row justify-content-center my-3">
+  <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 text-center">
+    <button class="btn popup-btn-width btn-save" type="submit" [disabled]="true">{{ 'key_Save' | translate }}</button>
+  </div>
+</div>-->
+

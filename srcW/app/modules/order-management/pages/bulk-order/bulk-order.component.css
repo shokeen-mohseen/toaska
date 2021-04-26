@@ -1,0 +1,44 @@
+::ng-deep .mat-expansion-panel-body {
+  padding: 0 15px 15px;
+}
+
+
+/*--for final grid calender and grid--*/
+
+::ng-deep .final-order-grid .mat-form-field-appearance-fill .mat-form-field-flex {
+  background: none !important;
+}
+::ng-deep .final-order-grid .mat-form-field-appearance-fill .mat-form-field-flex input {
+  /*background-color: rgba(0,0,0,.04);*/
+  border: none !important
+}
+::ng-deep .final-order-grid button.mat-icon-button.mat-button-base {
+  background-color: #ddd;
+  border-radius: 0;
+}
+::ng-deep .final-order-grid .mat-form-field .mat-form-field-flex > .mat-form-field-infix {
+  top: -0.4em !important;
+}
+::ng-deep .final-order-grid .mat-form-field-infix {
+  width: 86px;
+  height: 30px !important;
+  margin-top: 0px !important;
+  border: 1px solid #7ed4f7;
+
+}
+::ng-deep .final-order-grid  .mat-form-field-wrapper {
+  padding-bottom: 0.34375em;
+}
+::ng-deep .mat-calendar-content {
+  padding: 0 !important;
+}
+::ng-deep .final-order-grid .form-control:disabled,
+::ng-deep .final-order-grid .form-control[readonly] {
+  background: none !important
+}
+::ng-deep .final-order-grid .mat-form-field-infix .form-control:disabled,
+::ng-deep .final-order-grid .mat-form-field-infix .form-control[readonly] {
+  background-color: rgba(0,0,0,.04) !important;
+  height: 30px;
+  margin-top: -6px;
+}

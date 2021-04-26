@@ -1,0 +1,251 @@
+
+  <form (ngSubmit)="SaveRegistration()" [formGroup]="regForm">
+    <div class="row">
+      <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
+        <div class="form-group">
+          <label for="middlename">{{ 'key_DateofBirth' | translate }}</label>
+          <input class="form-control" formControlName="DOB" type="date" (change)="CalulateAge($event)">
+          <app-control-messages [control]="f['DOB']" ></app-control-messages>
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-2 col-lg-2 col-xl-2">
+        <div class="form-group">
+          <label for="middlename">{{ 'key_age' | translate }}</label>
+          <input class="form-control" type="number" formControlName="Age" readonly="readonly">
+          <app-control-messages [control]="f['Age']" ></app-control-messages>
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3">
+        <div class="form-group">
+          <label for="middlename">{{ 'key_DateandTimeofAdmission' | translate }}</label>
+          <input class="form-control" value="DateAdmission" type="datetime-local" formControlName="DateAdmission">
+          <app-control-messages [control]="f['DateAdmission']"></app-control-messages>
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3">
+        <div class="form-group">
+          <label for="unit">{{ 'key_Visitno' | translate }} </label>
+          <input id="firstname" type="text" placeholder="" class="form-control" formControlName="VisitNo">
+          <app-control-messages [control]="f['VisitNo']"></app-control-messages>
+        </div>
+      </div>
+
+      <div class="col-md-3 col-md-3 col-lg-3 col-xl-3">
+        <div class="form-group">
+          <label for="firstname">{{ 'key_Unitno' | translate }} </label>
+
+          <select class="custom-select" formControlName="Unitno" (change)="changeUnitNo($event)">
+            <option value="0">Select Unit</option>
+            <option *ngFor="let unit of hospitalUnitNoList" value="{{unit.id}}">{{unit.text}}</option>
+          </select>
+          <!--<ng-select2 [data]="hospitalUnitNoList" [options]="options" formControlName="Unitno"></ng-select2>-->
+        </div>
+      </div>
+      <div class="col-md-3 col-md-3 col-lg-3 col-xl-3">
+        <div class="form-group">
+          <label for="firstname">{{ 'key_Unithead' | translate }} </label>
+          <select class="custom-select" formControlName="Unithead" (change)="chnageUnitHead($event)">
+            <option value="0">Select Unit Head</option>
+            <option *ngFor="let unit of unitHeadList" value="{{unit.id}}">{{unit.text}}</option>
+          </select>
+          <!--<ng-select2 [data]="unitHeadList" [options]="options" formControlName="Unithead"></ng-select2>-->
+        </div>
+      </div>
+
+      <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+        <div class="fw600">{{ 'key_AdmissionMode' | translate }}</div>
+
+        <div class="mt-1">
+          <select class="custom-select" formControlName="BookedRegisteredEmergency">
+            <option value="">Select Mode</option>
+            <option *ngFor="let addmissionMode of bookingList" value="{{addmissionMode.Value}}">{{addmissionMode.Name}}</option>
+          </select>
+          <!--<div class="form-check form-check-inline mr-5" *ngFor="let addmissionMode of bookingList">
+    <input class="form-check-input" id="inline-checkbox1_{{addmissionMode.Value}}"
+           type="radio" formControlName="BookedRegisteredEmergency" value="{{addmissionMode.Value}}">
+    <label class="form-check-label" for="inline-checkbox1_{{addmissionMode.Name}}">{{addmissionMode.Name}} </label>
+  </div>-->
+
+        </div>
+
+
+        <!--<div class="col-form-label label-custom">
+        <div class="form-check form-check-inline mr-5">
+          <input class="form-check-input" id="inline-checkbox1" type="radio" name="test" formControlName="Booked">
+          <label class="form-check-label" for="inline-checkbox1">{{ 'key_Booked' | translate }} </label>
+        </div>
+        <div class="form-check form-check-inline mr-5">
+          <input class="form-check-input" id="inline-checkbox2" type="radio" name="test" formControlName="Registered">
+          <label class="form-check-label" for="inline-checkbox2">{{ 'key_Registered' | translate }} </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" id="inline-checkbox2" type="radio" name="test" formControlName="Emergencys">
+          <label class="form-check-label" for="inline-checkbox2">{{ 'key_Emergencys' | translate }} </label>
+        </div>
+      </div>-->
+      </div>
+
+      <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3">
+        <div class="form-group">
+          <label for="unit">{{ 'key_Mrdno' | translate }} </label>
+          <input id="firstname" type="text" formControlName="MrdNo" placeholder="" class="form-control">
+          <app-control-messages [control]="f['MrdNo']"></app-control-messages>
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3">
+        <div class="form-group">
+          <label for="firstname">{{ 'key_CRNo' | translate }}</label>
+          <input id="firstname" type="text" placeholder="" formControlName="CRNo" class="form-control">
+          <app-control-messages [control]="f['CRNo']"></app-control-messages>
+        </div>
+      </div>
+
+    </div>
+    <!--Row End-->
+    <div class="row mt-2">
+      <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+        <div class="fs-18 fw600 mt-2 mb-2">{{ 'key_Litrecy' | translate }}</div>
+        <div class="row">
+          <div class="col-sm-12 col-md-3 col-lg-6 col-xl-6">
+            <div class="form-group">
+              <label for="unit">{{ 'key_wife' | translate }} </label>
+              <select class="custom-select" formControlName="WifeLiteracy" (change)="changeWifeLiteracy($event)">
+                <option value="0">Select Literacy</option>
+                <option *ngFor="let edu of literacyList" value="{{edu.id}}">{{edu.name}}</option>
+              </select>
+              <app-control-messages [control]="f['WifeLiteracy']"></app-control-messages>
+              <!--<ng-select2 [data]="literacyList" [options]="options" formControlName="WifeLiteracy"></ng-select2>-->
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-6 col-lg-3 col-xl-6">
+            <div class="form-group">
+              <label for="unit">{{ 'key_Husband' | translate }} </label>
+              <select class="custom-select" formControlName="HusbandLiteracy" (change)="changeHusbandLiteracy($event)">
+                <option value="0">Select Literacy</option>
+                <option *ngFor="let edu of literacyList" value="{{edu.id}}">{{edu.name}}</option>
+              </select>
+              <app-control-messages [control]="f['HusbandLiteracy']"></app-control-messages>
+              <!--<ng-select2 [data]="literacyList" [options]="options" formControlName="HusbandLiteracy"></ng-select2>-->
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+          <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+            <div class="fs-18 fw600 row mt-4">{{ 'key_Socioeconomic' | translate }}</div>
+            <div class="row mt-3">
+              <select class="custom-select" formControlName="SocioEconomic">
+                <option value="">Select SocioEconomic</option>
+                <option *ngFor="let data of sociaEconomicList" value="{{data.Name}}">{{data.Name}}</option>
+              </select>
+
+              <!--<div class="col-sm-12 col-md-4" *ngFor="let data of sociaEconomicList">
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="radio" formControlName="SocioEconomic" value="{{data.Value}}">
+      <label class="form-check-label" for="inline-checkbox1_{{data.Name}}">{{data.Name}} </label>
+    </div>
+  </div>-->
+              <!--<div class="col-sm-12 col-md-4">
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="radio" name="check1" formControlName="UpperMiddle" value="{{data.Value}}">
+      <label class="form-check-label" for="inline-checkbox1_{{data.Name}}">{{data.Name}} </label>
+    </div>
+  </div>-->
+              <!--<div class="col-sm-12 col-md-4">
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="radio" name="check1" formControlName="LowerMiddle">
+      <label class="form-check-label" for="inline-checkbox2">{{ 'key_LowerMiddle' | translate }} </label>
+    </div>
+  </div>-->
+            </div>
+            <!--<div class="row">
+            <div class="col-sm-12 col-md-4"></div>
+            <div class="col-sm-12 col-md-4">
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="check1" formControlName="UpperLower">
+                <label class="form-check-label" for="inline-checkbox2">{{ 'key_UpperLower' | translate }} </label>
+              </div>
+            </div>
+            <div class="col-sm-12 col-md-4">
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="check1" formControlName="Lower">
+                <label class="form-check-label" for="inline-checkbox2">{{ 'key_Lower' | translate }} </label>
+              </div>
+            </div>
+          </div>-->
+
+          </div>
+      </div>
+    </div>
+    <!--Row End-->
+    <div class="row mt-3">
+      <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+        <div class="fs-18 fw600">{{ 'key_VisitType' | translate }}</div>
+        <div class="col-form-label">
+          <div class="form-check form-check-inline mr-5" *ngFor="let data of referredList">
+            <input class="form-check-input" type="radio" formControlName="SelfRefVisit" (click)="ifreferred(data.i)" value="{{data.Value}}">
+            <label class="mb-0" for="inline-checkbox1_{{data.Name}}">{{data.Name}} </label>
+          </div>
+          <!--<div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" formControlName="SelfRefVisit" name="check11" (click)="ifreferred(2)">
+          <label class="form-check-label">{{ 'key_Referred' | translate }} </label>
+        </div>-->
+        </div>
+      </div>
+      <!----------------if reffred---------------------------->
+
+      <div class="refrred-content row" *ngIf="referred">
+        <div class="col-sm-12 col-md-5 col-lg-5 col-xl-5">
+          <div class="form-group">
+            <label for="firstname">{{ 'key_Referredfrom' | translate }} </label>
+            <div class="d-flex">
+              <!--<ng-select2 [data]="exampleData" [options]="options"></ng-select2>-->
+              <div class="input-group-append append-custombg ml-1">
+                <button class="plusBtn" (click)="openContact()"><i class="fa fa-plus" aria-hidden="true"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--<div class="col-sm-12 col-md-2 col-lg-2 col-xl-2">
+        <label for="ccmonth">{{ 'key_Priorinformation' | translate }}  </label>
+        <div class="col-form-label">
+          <div class="form-check form-check-inline mr-3">
+            <input class="form-check-input" type="radio" name="check1">
+            <label class="form-check-label" for="inline-checkbox1">{{ 'key_Yes' | translate }} </label>
+          </div>
+          <div class="form-check form-check-inline mr-3">
+            <input class="form-check-input" type="radio" name="check1">
+            <label class="form-check-label" for="inline-checkbox2">{{ 'key_No' | translate }} </label>
+          </div>
+        </div>
+      </div>-->
+
+        <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3">
+          <div class="form-group">
+            <label for="dateReferral">{{ 'key_dateReferral' | translate }} </label>
+            <input id="dateReferral" type="date" placeholder="" class="form-control" formControlName="DateReferral" />
+          </div>
+        </div><div class="col-sm-12 col-md-3 col-lg-3 col-xl-3">
+                <div class="form-group">
+                  <label for="ReasonReferral">{{ 'key_ReasonReferral' | translate }} </label>
+                  <!--<ng-select2 [data]="exampleData2" [options]="options" formControlName="ReasonReferral" ></ng-select2>-->
+
+                  <textarea id="txtareaReasonRefferal" formControlName="ReasonReferral" class="form-control"></textarea>
+                  <app-control-messages [control]="f['ReasonReferral']"></app-control-messages>
+                </div>
+        </div>
+
+        <!---------------end -if reffred---------------------------->
+      </div>
+    </div>
+    <!--<button type="submit" class="btn btn-save mr-2 popup-btn-width"
+          [disabled]="regForm.invalid">
+    <span [innerHTML]="'key_Save' | translate"></span>
+  </button>-->
+    <app-dynamic-webcontrol-parameter [stageModule]="stageCode" formControlName="dynamicWebControl" ></app-dynamic-webcontrol-parameter>
+  </form>
+
+    <!--<div class="row mt-2">-->
+    
+    <!-- <input type="button" class="btn btn-secondary ml-3 btnbrd" (click)="AddMoreComplication()" value="{{ 'key_AddNewParameter' | translate }}" />-->
+    <!--</div>-->

@@ -1,0 +1,93 @@
+<!--Filters-->
+<mat-accordion>
+  <mat-expansion-panel (opened)="panelOpenState = true"
+                       (closed)="panelOpenState = false" [expanded]="true">
+    <mat-expansion-panel-header>
+      <mat-panel-description>
+        {{panelOpenState ? '- Hide' : '+ Show'}}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <div class="row">
+      <div class="col-sm-3">
+        <div class="form-group">
+          <label>{{'key_Location' | translate}}</label>
+          <angular2-multiselect [data]="itemListA" [(ngModel)]="selectedItemsA" [settings]="settingsA"
+                                (onSelect)="onItemSelect($event)"
+                                (onDeSelect)="OnItemDeSelect($event)"
+                                (onSelectAll)="onSelectAll($event)"
+                                (onDeSelectAll)="onDeSelectAll($event)"
+                                (onAddFilterNewItem)="onAddItemA($event)">
+          </angular2-multiselect>
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <div class="form-group">
+          <label>{{'key_Material' | translate}}</label>
+          <angular2-multiselect [data]="itemListA" [(ngModel)]="selectedItemsA" [settings]="settingsA"
+                                (onSelect)="onItemSelect($event)"
+                                (onDeSelect)="OnItemDeSelect($event)"
+                                (onSelectAll)="onSelectAll($event)"
+                                (onDeSelectAll)="onDeSelectAll($event)"
+                                (onAddFilterNewItem)="onAddItemA($event)">
+          </angular2-multiselect>
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <div class="form-group">
+          <label>{{'key_Currenthand' | translate}}</label>
+          <input type="text" class="form-control" disabled />
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <div class="form-group">
+          <label>{{'key_Activitytype' | translate}}</label>
+          <angular2-multiselect [data]="itemListB" [(ngModel)]="selectedItemsB" [settings]="settingsB"
+                                (onSelect)="onItemSelect($event)"
+                                (onDeSelect)="OnItemDeSelect($event)"
+                                (onSelectAll)="onSelectAll($event)"
+                                (onDeSelectAll)="onDeSelectAll($event)"
+                                (onAddFilterNewItem)="onAddItemB($event)">
+          </angular2-multiselect>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-3">
+        <div class="form-group">
+          <label>{{'key_Period' | translate}}</label>
+          <angular2-multiselect [data]="itemListA" [(ngModel)]="selectedItemsA" [settings]="settingsA"
+                                (onSelect)="onItemSelect($event)"
+                                (onDeSelect)="OnItemDeSelect($event)"
+                                (onSelectAll)="onSelectAll($event)"
+                                (onDeSelectAll)="onDeSelectAll($event)"
+                                (onAddFilterNewItem)="onAddItemA($event)">
+          </angular2-multiselect>
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <div class="form-group">
+          <label>{{'key_Totalord' | translate}}</label>
+          <input type="text" class="form-control" disabled />
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <div class="form-group">
+          <label>{{'key_Totalcommitted' | translate}}</label>
+          <input type="text" class="form-control" disabled />
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <div class="form-group">
+          <label>{{'key_OrderNo' | translate}}</label>
+          <input type="text" class="form-control" disabled />
+        </div>
+      </div>
+    </div>
+    <!--<div class="col-sm-12 col-lg-12 row justify-content-center mt-4 mb-3">
+      <div class=""><input type="button" class="btn btn-save mr-2 font-weight-normal" value="Apply Filter"></div>
+      <div class=""> <input type="button" class="btn btn-next mr-2 font-weight-normal" value="Reset Filter"></div>
+    </div>-->
+    <!--<app-filter></app-filter>-->
+  </mat-expansion-panel>
+</mat-accordion>
+<!--end filter-->

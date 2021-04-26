@@ -1,0 +1,202 @@
+
+<form (ngSubmit)="SaveAddressData()" [formGroup]="Addressform">
+
+  <div class="address-form px-3">
+    <div class="row">
+      <div class="col-sm-12 col-md-12 col-lg-10">
+        <div class="form-inline row">
+          <div class="col-sm-12 col-md-3 pr-0">
+            <label for="ExistingAddressData">{{ 'key_Selectexisting' | translate }}</label>
+          </div>
+          <div class="col-sm-12 col-md-8">
+
+            <angular2-multiselect id="ExistingAddressData" fixFilterBug [data]="searchAddresslist" formControlName="ExistingAddressData" [settings]="settings"
+                                  (onSelect)="onSearchContactSelected($event)"
+                                  (onDeSelect)="OnItemDeSelect($event,'EXISTINGADDRESS')"
+                                  (onDeSelectAll)="onDeSelectAll('EXISTINGADDRESS')">
+            </angular2-multiselect>
+            <app-control-messages [control]="f['ExistingAddressData']"></app-control-messages>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--Row End-->
+    <div class="row">
+      <div class="col-sm-12 col-md-12 col-lg-10">
+        <div class="form-inline row">
+          <div class="col-sm-12 col-md-3 pr-0">
+            <label for="AddressTypeData">{{ 'key_AddressType' | translate }} <span class="text-danger ml-1">*</span></label>
+          </div>
+          <div class="col-sm-12 col-md-8">
+
+
+
+            <angular2-multiselect id="AddressTypeData" fixFilterBug [data]="addressTypelist" formControlName="AddressTypeData" [settings]="settings" required>
+                                  
+                                  
+            </angular2-multiselect>
+            <!--<select class="form-control" id="addesstype" formControlName="AddressTypeData" required="">
+    <option></option>
+    <option *ngFor="let web of addressTypelist" [ngValue]="web.id">{{web.name}}</option>
+  </select>-->
+            <app-control-messages [control]="f['AddressTypeData']"></app-control-messages>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <!--Row End-->
+    <div class="row">
+      <div class="col-sm-12 col-md-12 col-lg-10">
+        <div class="form-inline row">
+          <div class="col-sm-12 col-md-3 pr-0">
+            <label for="searchaddress">{{ 'key_StreetAddressone' | translate }} <span class="text-danger ml-1">*</span></label>
+          </div>
+          <div class="col-sm-12 col-md-8">
+            <textarea class="form-control" id="streetName1" formControlName="streetName1" rows="1" placeholder="" required></textarea>
+            <app-control-messages [control]="f['streetName1']"></app-control-messages>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--Row End-->
+    <div class="row">
+      <div class="col-sm-12 col-md-12 col-lg-10">
+        <div class="form-inline row">
+          <div class="col-sm-12 col-md-3 pr-0">
+            <label for="searchaddress">{{ 'key_StreetAddresstwo' | translate }}</label>
+          </div>
+          <div class="col-sm-12 col-md-8">
+            <textarea class="form-control" id="streetName2" formControlName="streetName2" rows="1" placeholder=""></textarea>
+            <app-control-messages [control]="f['streetName2']"></app-control-messages>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--Row End-->
+    <div class="row">
+      <div class="col-sm-12 col-md-12 col-lg-10">
+        <div class="form-inline row">
+          <div class="col-sm-12 col-md-3 pr-0">
+            <label for="searchaddress">{{ 'key_StreetAddressthree' | translate }}</label>
+          </div>
+          <div class="col-sm-12 col-md-8">
+            <textarea class="form-control" id="streetName3" formControlName="streetName3" rows="1" placeholder=""></textarea>
+
+            <app-control-messages [control]="f['streetName3']"></app-control-messages>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--Row End-->
+    <div class="row">
+      <div class="col-sm-12 col-md-12 col-lg-10">
+        <div class="form-inline row">
+          <div class="col-sm-12 col-md-3 pr-0">
+            <label for="CountryData">{{ 'key_Country' | translate }} <span class="text-danger ml-1">*</span></label>
+          </div>
+          <div class="col-sm-12 col-md-8">
+
+            <angular2-multiselect id="CountryData" fixFilterBug [data]="countryList" formControlName="CountryData" [settings]="settings"
+                                  (onSelect)="GeolocationChange($event,'STATE')"
+                                  (onDeSelect)="OnItemDeSelect($event,'COUNTRY')"
+                                  (onSelectAll)="onSelectAll($event)"
+                                  (onDeSelectAll)="OnItemDeSelect($event,'COUNTRY')"
+                                  (onAddFilterNewItem)="onAddItem($event,'COUNTRY')" required>
+            </angular2-multiselect>
+
+            <app-control-messages [control]="f['CountryData']"></app-control-messages>
+           
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+    <!--Row End-->
+    <div class="row">
+      <div class="col-sm-12 col-md-12 col-lg-10">
+        <div class="form-inline row">
+          <div class="col-sm-12 col-md-3 pr-0">
+            <label for="StateData">{{ 'key_State' | translate }} <span class="text-danger ml-1">*</span></label>
+          </div>
+          <div class="col-sm-12 col-md-8">
+
+            <angular2-multiselect id="StateData" fixFilterBug [data]="stateList" formControlName="StateData" [settings]="settings"
+                                  (onSelect)="GeolocationChange($event,'CITY')"
+                                  (onDeSelect)="OnItemDeSelect($event,'STATE')"
+                                  (onSelectAll)="onSelectAll($event)"
+                                  (onDeSelectAll)="OnItemDeSelect($event,'STATE')"
+                                  (onAddFilterNewItem)="onAddItem($event, 'STATE')" required>
+            </angular2-multiselect>
+
+            <app-control-messages [control]="f['StateData']"></app-control-messages>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--Row End-->
+    <div class="row">
+      <div class="col-sm-12 col-md-12 col-lg-10">
+        <div class="form-inline row">
+          <div class="col-sm-12 col-md-3 pr-0">
+            <label for="CityData">{{ 'key_City' | translate }} <span class="text-danger ml-1">*</span></label>
+          </div>
+          <div class="col-sm-12 col-md-8">
+
+            <angular2-multiselect id="CityData" fixFilterBug [data]="cityList" formControlName="CityData" [settings]="settings"
+                                  (onSelect)="GeolocationChange($event,'ZIP')"
+                                  (onDeSelect)="OnItemDeSelect($event,'CITY')"
+                                  (onSelectAll)="onSelectAll($event)"
+                                  (onDeSelectAll)="OnItemDeSelect($event,'CITY')"
+                                  (onAddFilterNewItem)="onAddItem($event,'CITY')" required>
+            </angular2-multiselect>
+
+            <app-control-messages [control]="f['CityData']"></app-control-messages>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!--Row End-->
+    <div class="row">
+      <div class="col-sm-12 col-md-12 col-lg-10">
+        <div class="form-inline row">
+          <div class="col-sm-12 col-md-3 pr-0">
+            <label for="ZipData">{{ 'key_Postalcode' | translate }} <span class="text-danger ml-1">*</span></label>
+          </div>
+          <div class="col-sm-12 col-md-8">
+
+            <angular2-multiselect id="ZipData" fixFilterBug [data]="zipList" formControlName="ZipData" [settings]="settings"
+                                  (onSelect)="GeolocationChange($event,'ZIP1')"
+                                  (onDeSelect)="OnItemDeSelect($event,'ZIP1')"
+                                  (onSelectAll)="onSelectAll($event)"
+                                  (onDeSelectAll)="OnItemDeSelect($event,'ZIP1')"
+                                  (onAddFilterNewItem)="onAddItem($event,'ZIP')" required>
+            </angular2-multiselect>
+            <app-control-messages [control]="f['ZipData']"></app-control-messages>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+  <!--bg-white End-->
+
+  <div class="row pt-3">
+    <div class="col-lg-12 text-center">
+
+      <button type="submit" class="btn btn-save mr-2 popup-btn-width"
+              [disabled]="Addressform.invalid">
+        <span [innerHTML]="'key_Save' | translate"></span>
+      </button>
+    </div>
+  </div>
+</form>
+
+

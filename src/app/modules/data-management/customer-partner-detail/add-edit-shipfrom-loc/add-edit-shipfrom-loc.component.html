@@ -1,0 +1,59 @@
+<!--Author Name Satyen Singh 11-03-2020--->
+<!-- Modal Header -->
+<form (ngSubmit)="SaveMilesData()" #milesForm="ngForm">
+  <div class="modal-header">
+    <h4 class="modal-title">{{'key_Addeditship' | translate}}</h4>
+    <button type="button" class="close" data-dismiss="modal" (click)="activeModal.dismiss('Cross click')">&times;</button>
+  </div>
+
+  <!-- Modal body -->
+  <div class="modal-body">
+    <div class="form-group">
+      <label>{{'key_LocationFunction' | translate}} <span class="text-danger ml-1">*</span></label>
+      <angular2-multiselect fixFilterBug [data]="locationFunctionData" [(ngModel)]="selectedItemsA" [settings]="settingsA"
+                            (onSelect)="onLocationFunctionSelect($event)"
+                            (onDeSelect)="OnItemDeSelectFunction($event)"
+                            (onSelectAll)="onSelectAll($event)"
+                            (onDeSelectAll)="OnItemDeSelectFunction($event)"
+                            (onAddFilterNewItem)="onAddItemA($event)" name="nameLocationFunction" required>
+      </angular2-multiselect>
+      <!--<div *ngIf="!!!locationFunctionId && isLocationFunctionId === 1" class="errorMessage text-danger col-sm-12 col-md-12">{{'ValiationMessages.key_Required' | translate }}</div>-->
+    </div>
+    
+    <div class="form-group">
+      
+      <label>{{'key_Location' | translate}} <span class="text-danger ml-1">*</span></label>
+      <angular2-multiselect fixFilterBug [data]="locationData" [(ngModel)]="selectedItemsB" [settings]="settingsA"
+                            (onSelect)="onLocationSelect($event)"
+                            (onDeSelect)="OnItemDeSelect($event)"
+                            (onSelectAll)="onSelectAll($event)"
+                            (onDeSelectAll)="onDeSelectAll($event)"
+                            (onAddFilterNewItem)="onAddItemA($event)" name="nameLocation" required>
+      </angular2-multiselect>
+    </div>
+    <div class="row">
+      <div class="form-group col-sm-9">
+        <label for="miles">{{'key_Modifiedmiles' | translate}}<span class="text-danger ml-1">*</span></label>
+        <input class="form-control" id="modifiedMiles" name="ModifiedMiles" type="text" [(ngModel)]="shipFromMileMappingViewModel.modifiedMiles"
+               (ngModelChange)="validation('modifiedMiles');" required>
+
+        <!--<div *ngIf="!!shipFromMileMappingViewModel.modifiedMiles && isMiles === 0 && isValidInput === 1" class="errorMessage text-danger col-sm-12 col-md-12">
+          {{'ValiationMessages.key_ValidInput' | translate }}
+        </div>-->
+      </div>
+      <div class="form-group col-sm-3 mt-4">
+        <button type="button" id="btndis" name="btndis" (click)="GetDistance()" class="btn btn-primary mr-2 popup-btn-width">{{'key_Getdistance' | translate}}</button>
+      </div>
+    </div>
+
+
+    <div class="row pt-3">
+      <div class="col-lg-12 text-center">
+        <button type="submit" id="btnSave" name="btnSave" class="btn btn-save mr-2 popup-btn-width" [disabled]="isValidated === 0">Save</button>
+        <!--<input type="submit" id="btnSave" name="btnSave" class="btn btn-save mr-2 popup-btn-width" value="Save" [disabled]="isValidated === 0">-->
+
+        <!--<input type="button" id="btnSave" name="btnSave" class="btn btnbrd popup-btn-width" value="Add New">-->
+      </div>
+    </div>
+  </div>
+  </form>

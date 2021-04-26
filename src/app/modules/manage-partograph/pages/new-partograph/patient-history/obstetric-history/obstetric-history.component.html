@@ -1,0 +1,165 @@
+<!--TFS ID:- 17414,
+  Date: 15-09-2020,
+  Author: Monu Ram YAdav,
+  Des:-  Fix Stepper Steps Data in Sub Component for Prepartum Care Section-->
+<div class="obstetric-history">
+  <!---Heading start row-->
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="subHeading-red fw600">
+        {{ 'Key_ObstetricHistory' | translate }}
+      </div>
+    </div>
+  </div>
+  <!---Heading end row-->
+  <!--Row Start-->
+  <div class="row mt-2">
+    <div class="col-sm-12">
+      <div class="form-group">
+        <label for="" class="fw600 mr-3">{{ 'Key_MaritalStatus' | translate }} :</label>
+        <div class="form-check-inline">
+          <label class="form-check-label">
+            <input type="radio" class="form-check-input" name="optradio">{{ 'Key_Married' | translate }}
+          </label>
+        </div>
+        <div class="form-check-inline">
+          <label class="form-check-label">
+            <input type="radio" class="form-check-input" name="optradio">{{ 'Key_Unmarried' | translate }}
+          </label>
+        </div>
+        <div class="form-check-inline">
+          <label class="form-check-label">
+            <input type="radio" class="form-check-input" name="optradio">{{ 'Key_Separated' | translate }}
+          </label>
+        </div>
+        <div class="form-check-inline">
+          <label class="form-check-label">
+            <input type="radio" class="form-check-input" name="optradio">{{ 'Key_Widow' | translate }}
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--Row End-->
+  <!--Table row start-->
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="scroll resize-table">
+        <mat-table #table [dataSource]="dataSource" matSort>
+          <ng-container *ngFor="let column of displayedColumns; let i=index;" [matColumnDef]="column">
+            <mat-header-cell *matHeaderCellDef mat-sort-header mwlResizable [enableGhostResize]="true" (resizeEnd)="onResizeEnd($event, column)"
+                             [resizeEdges]="{bottom: false, right: true, top: false, left: true}">
+
+              <div *ngIf="column != selectRow"> {{  displayedColumnsReplace[i] | translate }}</div>
+            </mat-header-cell>
+            <mat-cell *matCellDef="let item">
+              <div class="form-check-inline w-100 py-3" *ngIf="column === SrNo">
+                <input type="text" class="form-control mb-0" />
+              </div>
+              <div class="form-check-inline w-100 py-3" *ngIf="column === TimePeriod">
+                <input type="text" class="form-control mb-0" />
+              </div>
+              <div class="form-check-inline w-100 py-3" *ngIf="column === Mode">
+                <input type="text" class="form-control mb-0" />
+              </div>
+              <div class="form-check-inline w-100 py-3" *ngIf="column === Outcome">
+                <input type="text" class="form-control mb-0" />
+              </div>
+              <div class="form-check-inline w-100 py-3" *ngIf="column === Place">
+                <input type="text" class="form-control mb-0" />
+              </div>
+              <div class="form-check-inline w-100 py-3" *ngIf="column === BtWt">
+                <input type="text" class="form-control mb-0" />
+              </div>
+              <div class="form-check-inline w-100 py-3" *ngIf="column === Immunization">
+                <input type="text" class="form-control mb-0" />
+              </div>
+              <div class="form-check-inline w-100 py-3" *ngIf="column === Complications">
+                <input type="text" class="form-control mb-0" />
+              </div>
+              <div class="form-check-inline w-100 py-3 justify-content-around d-flex" *ngIf="column === Delete">
+                <a class="a_hover"><i class="fa fa-trash" aria-hidden="true"></i></a>
+              </div>
+              <div class="form-check-inline w-100 py-3 justify-content-around d-flex" *ngIf="column === Add_New">
+                <a class="a_hover" (click)="addRow()"><i class="fa fa-plus" aria-hidden="true"></i></a>
+              </div>
+
+              {{ item[column] }}
+            </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+      </div>
+      <!--<mat-paginator #paginator
+                     [pageSize]="10"
+                     [pageSizeOptions]="[5, 10, 20]">
+      </mat-paginator>-->
+    </div>
+  </div>
+  <!--Table row end-->
+  <div class="fs-16 fw600 mt-4"><u>{{ 'Key_ChecklistofObstetric' | translate }}</u></div>
+  <!--Row Start-->
+  <div class="row mt-2">
+    <div class="col-sm-12">
+      <div class="form-check-inline mr-4 mb-2">
+        <label class="form-check-label">
+          <input type="checkbox" class="form-check-input" value="">{{ 'Key_HDPPreeclampsia' | translate }}
+        </label>
+      </div>
+      <div class="form-check-inline mr-4 mb-2">
+        <label class="form-check-label">
+          <input type="checkbox" class="form-check-input" value="">{{ 'Key_Eclampsia' | translate }}
+        </label>
+      </div>
+      <div class="form-check-inline mr-4 mb-2">
+        <label class="form-check-label">
+          <input type="checkbox" class="form-check-input" value="">{{ 'Key_APH' | translate }}
+        </label>
+      </div>
+      <div class="form-check-inline mr-4 mb-2">
+        <label class="form-check-label">
+          <input type="checkbox" class="form-check-input" value="">{{ 'Key_PPH' | translate }}
+        </label>
+      </div>
+      <div class="form-check-inline mr-4 mb-2">
+        <label class="form-check-label">
+          <input type="checkbox" class="form-check-input" value="">{{ 'Key_ObstructedLabour' | translate }}
+        </label>
+      </div>
+      <div class="form-check-inline mr-4 mb-2">
+        <label class="form-check-label">
+          <input type="checkbox" class="form-check-input" value="">{{ 'Key_AbortionStillBirth' | translate }}
+        </label>
+      </div>
+      <div class="form-check-inline mr-4 mb-2">
+        <label class="form-check-label">
+          <input type="checkbox" class="form-check-input" value="">{{ 'Key_CongenitalAnomaly' | translate }}
+        </label>
+      </div>
+      <div class="form-check-inline mr-4 mb-2">
+        <label class="form-check-label">
+          <input type="checkbox" class="form-check-input" value="">{{ 'Key_Anaemia' | translate }}
+        </label>
+      </div>
+      <div class="form-check-inline mr-4 mb-2">
+        <label class="form-check-label">
+          <input type="checkbox" class="form-check-input" value="">{{ 'Key_Others' | translate }}
+        </label>
+      </div>
+    </div>
+  </div>
+  <!--Row End-->
+  <div class="row mt-2">
+    <div class="col-sm-12">
+      <div class="form-group"><textarea class="form-control" rows="3" placeholder="{{ 'key_AddCommentHere' | translate }}"></textarea></div>
+    </div>
+  </div>
+  <!--Row start for other-->
+  <div class="row">
+    <input type="button" class="btn btn-secondary ml-3 btnbrd" (click)="AddMoreComplication()" value="{{ 'key_AddNewParameter' | translate }}" />
+  </div>
+  <!--Row end for other-->
+
+</div>

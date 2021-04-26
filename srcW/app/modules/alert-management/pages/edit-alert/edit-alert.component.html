@@ -1,0 +1,462 @@
+<form [formGroup]="alertForm" (ngSubmit)="SaveUserAlertData()">
+
+  <div class="row mb-2">
+    <div class="col-md-7"></div>
+    <div class="col-md-5 text-right">
+      <span class="fw600">{{'key_LastUpdated' | translate}}:	</span> {{LastUpdate}}
+      <!--<br><span class="fw600">By</span> Jay Coleman (lampsdemo@osoftec.com)-->
+    </div>
+  </div>
+
+  <mat-accordion>
+    <div class="alert-header pl-2">{{'key_GeneralInformation'| translate}}</div>
+    <mat-expansion-panel class="mt-0" (opened)="panelOpenState = true" (closed)="panelOpenState = false" [expanded]="true">
+
+      <div class="row">
+        <div class="form-group col-md-4">
+          <label>
+            {{'key_Name' | translate}}
+            <sup class="text-danger font-weight-bold sup1">*</sup>
+          </label>
+          <input type="text" formControlName="Name" class="form-control" />
+          <app-control-messages [control]="f['Name']"></app-control-messages>
+        </div>
+        <div class="form-group col-md-4">
+          <label>{{'key_Description' | translate}}<sup class="text-danger font-weight-bold sup1">*</sup></label>
+          <input type="text" formControlName="Description" class="form-control" />
+          <app-control-messages [control]="f['Description']"></app-control-messages>
+        </div>
+      </div>
+      <hr />
+      <div class="row">
+        <div class="form-group col-md-4">
+          <label>{{'key_AlertType' | translate}}<sup class="text-danger font-weight-bold sup1">*</sup></label>
+          <angular2-multiselect [data]="systemEvents" name="SystemEventsDropDown" id="SystemEventsDropDown"
+                                [settings]="{singleSelection: true, text: 'Select Alert Type', enableSearchFilter: true, badgeShowLimit: 1, labelKey :'name'  }"
+                                formControlName="SystemEventsID" #SystemEventsDropDown>
+          </angular2-multiselect>
+          <!-- [(ngModel)]="selectedItemsMulti" -->
+          <!--<select formControlName="SystemEventsID" class="form-control" (change)="changeSystemEvents(SystemEventsDropDown.value)" #SystemEventsDropDown>
+            <ng-container *ngIf="systemEvents.length == 0">
+              <option disabled value="">Alert for load file issue </option>
+            </ng-container>
+            <ng-container *ngIf="systemEvents.length > 0">
+              <option value="">Select Alert</option>
+              <option *ngFor="let systemevent of systemEvents" [value]="systemevent.id">{{systemevent.name}}</option>
+            </ng-container>
+          </select>-->
+        </div>
+        <div class="col-md-12 mb-3">
+          <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+          {{'key_AlertTypeMessage' | translate}}
+        </div>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+  <mat-accordion>
+    <div class="alert-header mt-2 pl-3">{{'key_Recipients'| translate}}</div>
+    <mat-expansion-panel class="mt-0" (opened)="panelOpenState = true" (closed)="panelOpenState = false" [expanded]="true">
+
+      <div class="">
+        <div class="col-md-12 p-0">
+          <input type="checkbox" name="Respect Location Mapping" id="mapping" formControlName="RespectLocationMapping" />
+          <label for="mapping" class=" ml-2">{{'key_RespectLocationMapping' | translate}}</label>
+        </div>
+        <div class="form-group col-12 mt-3 p-0">
+          <div class="row">
+
+            <div class="col-12">
+              <div class="dropdown no-arrow">
+                <div role="button" type="button" class="btn btn-save font-weight-normal mr-1" data-toggle="modal" data-target="#myModal">
+                  <i class="fa fa-plus-circle" aria-hidden="true"></i> {{'key_AddEmailSMS' | translate}}
+                </div>
+                <div role="button" type="button" class="btn btn-save font-weight-normal mr-1" data-toggle="modal" data-target="#internalUser">
+                  <i class="fa fa-plus-circle" aria-hidden="true"></i>  {{'key_AddInternalUser' | translate}}
+                </div>
+                <div role="button" type="button" class="btn btn-save font-weight-normal" data-toggle="modal" data-target="#externalUser">
+                  <i class="fa fa-plus-circle" aria-hidden="true"></i> {{'key_AddExternalContact' | translate}}
+                </div>
+              </div>
+              <table class="table table-bordered">
+                <tr>
+                  <th>{{'key_SendTo' | translate}}</th>
+                  <th>{{'key_CC' | translate}}</th>
+                  <th>{{'key_BCC' | translate}}</th>
+                  <th>{{'key_EmailTo' | translate}}</th>
+                  <th>{{'key_Phone' | translate}}</th>
+                  <th>{{'key_Type' | translate}}</th>
+                </tr>
+                <tr>
+                  <td>{{'key_EmailAddress' | translate}}</td>
+                  <td>{{userAlertRecipients.EmailCC}}</td>
+                  <td>{{userAlertRecipients.EmailBCC}}</td>
+                  <td>{{userAlertRecipients.EmailTo}}</td>
+                  <td>{{userAlertRecipients.MobileEmailTo}}</td>
+                  <td>{{'key_Email' | translate}}</td>
+                </tr>
+                <tr>
+                  <td>{{'key_InternalUsers' | translate}}</td>
+                  <td></td>
+                  <td></td>
+                  <td>{{selectedRoles}}</td>
+                  <td></td>
+                  <td>{{'key_Email' | translate}}</td>
+                </tr>
+                <tr>
+                  <td>{{'key_ExternalUsers' | translate}}</td>
+                  <td></td>
+                  <td></td>
+                  <td>{{selectedExternalContact}}</td>
+                  <td></td>
+                  <td>{{'key_Email' | translate}}</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+  <mat-accordion>
+    <div class="alert-header mt-2 pl-3">{{'key_Document'| translate}}</div>
+    <mat-expansion-panel class="mt-0" (opened)="panelOpenState = true" (closed)="panelOpenState = false" [expanded]="true">
+      <div class="">
+
+        <div class="form-group col-12 mt-3 p-0">
+          <div class="row">
+
+            <div class="col-12">
+              <div class="dropdown no-arrow">
+                <button role="button" class="btn btn-save font-weight-normal" data-toggle="modal" data-target="#document-model" type="button">
+                  <i class="fa fa-plus-circle" aria-hidden="true"></i>  {{'key_AttachDocuments' | translate}}
+                </button>
+
+              </div>
+
+              <table class="table table-bordered">
+                <tr>
+                  <th>{{'key_DocumentType' | translate}}</th>
+                  <th>{{'key_Action' | translate}}</th>
+                </tr>
+                <tr *ngFor="let docs of selectedDocuments">
+                  <td>{{docs.name}}</td>
+                  <td>
+                    <button class="btn  text-white btn-danger" type="button" (click)="removeDocument(docs.id)">
+                      <i aria-hidden="true" class="fa fa-trash-o"></i> {{'key_Delete' | translate}}
+                    </button>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+  <mat-accordion>
+    <div class="alert-header mt-2 pl-3">{{'key_Message'| translate}}</div>
+    <mat-expansion-panel class="mt-0" (opened)="panelOpenState = true" (closed)="panelOpenState = false" [expanded]="true">
+
+      <div class="row pl-3 pr-3">
+        <div class="col-6 pl-0">
+          <div class="row">
+            <div class="col-12">
+              <div class="row form-group ">
+                <div class="col-md-12 ">
+                  <label>{{'key_Subject' | translate}} <sup class="text-danger">*</sup></label>
+
+                  <div class="form-group">
+                    <input type="text" formControlName="EmailSubject" class="form-control" placeholder="Subject" />
+                    <app-control-messages [control]="f['EmailSubject']"></app-control-messages>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12">
+              <div class="row form-group ">
+                <div class="col-md-12">
+                  <label>{{'key_Body' | translate}} <sup class="text-danger">*</sup></label>
+
+                  <div class="editor-header">
+                    <button id="" type="button" (click)="showEditor(true)">{{'key_Design' | translate}}</button> <button type="button" (click)="showEditor(false)">See Preview</button>
+                  </div>
+                  <div [hidden]="!hide"><angular-editor [config]="config" formControlName="EmailBody"></angular-editor></div> <!--[(ngModel)]="htmlContent"-->
+                  <div class="html" [hidden]="hide">
+                    <h5 class="html-header">{{'key_Output' | translate}}</h5>
+                    <div [innerHTML]="HTMLContent"></div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div><!--col-6-->
+
+        <div class="col-6 pl-2  pr-0">
+          <div class="">
+            <div class="editor-header" style=" width: 100%;min-height: 440px;">
+              <button class="float-right" type="button" (click)="savealertparametervalue()">{{'key_SaveDefaultValue' | translate}}</button>
+
+              <table class="table table-bordered" formArrayName="UserAlertTemplate">
+                <tr>
+                  <th>{{'key_Parameters' | translate}}</th>
+                  <th>{{'key_Parameters' | translate}}{{'key_Description' | translate}}</th>
+                  <th>{{'key_ExampleValues' | translate}}</th>
+                </tr>
+                <ng-container *ngIf="alertForm.get('UserAlertTemplate')['controls'].length>0">
+                  <tr *ngFor="let alertsParamets of alertForm.get('UserAlertTemplate')['controls'];let i = index;" [formGroupName]="i">
+                    <td>{{alertsParamets.get('Code').value}}</td>
+                    <td>{{alertsParamets.get('Description').value}}</td>
+                    <td><input type="text" formControlName="DefaultValue" /></td>
+                  </tr>
+                </ng-container>
+                <tr *ngIf="alertForm.get('UserAlertTemplate')['controls'].length==0">
+                  <td colspan="10" class="alert-warning">{{'key_Norecordsfound' | translate}}</td>
+
+
+                </tr>
+
+
+              </table>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+
+  <div class="row justify-content-center my-5">
+    <div class="col-xl-2 col-lg-4 col-md-4 col-sm-12">
+      <button class="btn btn-block btn-save" type="submit">{{ 'key_Save' | translate }}</button>
+    </div>
+    <!--<div class="col-xl-2 col-lg-4 col-md-4 col-sm-12">
+      <button class="btn btn-block btn-next">
+        <span class="fw600">{{ 'key_Edit' | translate }}</span> <span class="fs-13"> > {{'key_Next'| translate}}</span>
+      </button>
+    </div>-->
+  </div>
+</form>
+
+<!--Model Section here-->
+<!--myModal Modal start -->
+<div class="modal" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" style=" font-size: 16px;">
+          <i aria-hidden="true" class="fa fa-exclamation-circle"></i>
+          {{'key_exclamation' | translate}}
+        </h5>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <p class="text-center"> <small>{{'key_multiEmail' | translate}}</small></p>
+        <div class="form-group col-12 mt-3">
+          <div class="row">
+            <div class="col-2 pl-0 pr-0 text-right">
+              <label class="font-weight-bold">{{'key_PhoneNo'| translate}}</label>
+            </div>
+            <div class="col-9">
+              <input type="text" [(ngModel)]="userAlertRecipients.MobileEmailTo" class="form-control">
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group col-12 mt-3">
+          <div class="row">
+            <div class="col-2 pl-0 pr-0 text-right">
+              <label class="font-weight-bold">{{'key_email' | translate}}</label>
+            </div>
+            <div class="col-9">
+              <input type="text" [(ngModel)]="userAlertRecipients.EmailTo" class="form-control">
+            </div>
+          </div>
+        </div>
+        <div class="form-group col-12 mt-3">
+          <div class="row">
+            <div class="col-2 pl-0 pr-0 text-right">
+              <label class="font-weight-bold">{{'key_CC' | translate}}</label>
+            </div>
+            <div class="col-9">
+              <input type="text" [(ngModel)]="userAlertRecipients.EmailCC" class="form-control">
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group col-12 mt-3">
+          <div class="row">
+            <div class="col-2 pl-0 pr-0 text-right">
+              <label class="font-weight-bold">{{'key_BCC' | translate}}</label>
+            </div>
+            <div class="col-9">
+              <input type="text" [(ngModel)]="userAlertRecipients.EmailBCC" class="form-control">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer col-12 justify-content-center">
+        <div class="d-flex justify-content-center">
+          <button type="button" class="btn btn-save" style=" width: 88px;" data-dismiss="modal">Ok</button>
+        </div>
+        <div class="d-flex justify-content-center">
+          <button type="button" class="btn btn-block btn-next bottom-btn-next" data-dismiss="modal">Cancel</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div><!--model end-->
+<!--model for internal user-->
+<!--myModal Modal start -->
+<div class="modal" id="internalUser">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" style=" font-size: 16px;">
+          <i aria-hidden="true" class="fa fa-exclamation-circle"></i>
+          Add a contact to be notified when this alert is triggered.
+
+        </h5>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <!-- Modal body -->
+      <div class="modal-body">
+        <div class="form-group col-12 mt-3">
+          <div class="row">
+            <div class="col-12">
+              <label>{{'key_Role' | translate}}<sup class="text-danger">*</sup></label>
+              <angular2-multiselect [data]="internalUserList" [(ngModel)]="internalUserMulti"
+                                     [settings]="{singleSelection: false, text: 'Internal Users', enableSearchFilter: true, badgeShowLimit: 1, labelKey :'Name', primaryKey:'Id'  }"
+                                     name="internalUserMultiData" id="internalUserMultiData" #internalUserMultiData="ngModel">
+               </angular2-multiselect>
+
+              <!--<mat-form-field appearance="fill" style="width:100%;">
+                <label>Role Type</label>
+                <mat-select [formControl]="internalUser" multiple>
+                  <mat-option *ngFor="let internalUser of internalUserList" [value]="internalUser">
+                    {{internalUser.Name}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>-->
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Modal footer -->
+      <div class="modal-footer col-12 justify-content-center">
+        <div class="d-flex justify-content-center">
+          <button type="button" class="btn btn-block btn-save" (click)="checkInternalUser()" data-dismiss="modal">Ok</button>
+        </div>
+        <div class="d-flex justify-content-center">
+          <button type="button" class="btn btn-block btn-next bottom-btn-next" data-dismiss="modal">Cancel</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div><!--model end-->
+<!--model-for-external user-->
+<div class="modal" id="externalUser">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" style=" font-size: 16px;">
+          <i aria-hidden="true" class="fa fa-exclamation-circle"></i>
+          {{'key_exclamation' | translate}}
+        </h5>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <!-- Modal body -->
+      <div class="modal-body">
+        <div class="form-group col-12 mt-3">
+          <div class="row">
+            <div class="col-12">
+              <label> {{'key_ContactType' | translate}} <sup class="text-danger">*</sup></label>
+              <angular2-multiselect [data]="externalUserList" [(ngModel)]="externalUserMulti"
+                                    [settings]="{singleSelection: false, text: 'Contract Type', enableSearchFilter: true, badgeShowLimit: 1, labelKey :'name' }"
+                                    name="externalUserMultiData" id="externalUserMultiData" #externalUserMultiData="ngModel">
+              </angular2-multiselect>
+
+              <!--<mat-form-field appearance="fill" style="width:100%;">
+                <label>Contact Type</label>
+                <mat-select [formControl]="externalUser" multiple>
+                  <mat-option *ngFor="let externalUser of externalUserList" [value]="externalUser">
+                    {{externalUser.name}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>-->
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Modal footer -->
+      <div class="modal-footer col-12 justify-content-center">
+        <div class="d-flex justify-content-center">
+          <button type="button" class="btn btn-save" style=" width: 88px;" data-dismiss="modal" (click)="checkExternalUserContact()">Ok</button>
+        </div>
+        <div class="d-flex justify-content-center">
+          <button type="button" class="btn btn-block btn-next bottom-btn-next" data-dismiss="modal">Cancel</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div><!--model end-->
+<!--model for upload document-->
+<!-- Modal start -->
+<div class="modal" id="document-model">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">
+          {{'key_AttachDocuments' | translate}}
+        </h5>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group col-12 mt-3">
+          <div class="row">
+            <div class="col-12">
+              <label>{{'key_DocumentType' | translate}}</label>
+               <angular2-multiselect [data]="toppingList" [(ngModel)]="documentMulti"
+                                      [settings]="{singleSelection: false, text: 'Select Document Type', enableSearchFilter: true, badgeShowLimit: 1, labelKey :'name' }"
+                                      #toppingListData>
+                </angular2-multiselect>
+              <!--<mat-form-field appearance="fill" style="width:100%;">
+                <label>Document Type</label>
+                <mat-select [formControl]="toppings" multiple>
+                  <mat-option *ngFor="let topping of toppingList" [value]="topping">{{topping.name}}</mat-option>
+                </mat-select>
+              </mat-form-field>-->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer col-12 justify-content-center">
+        <div class="d-flex justify-content-center">
+          <button type="button" class="btn btn-save" style=" width: 88px;" data-dismiss="modal" (click)="checkDocuments()">Ok</button>
+        </div>
+        <div class="d-flex justify-content-center">
+          <button type="button" class="btn btn-block btn-next bottom-btn-next" data-dismiss="modal">Cancel</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+

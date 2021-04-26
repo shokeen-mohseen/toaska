@@ -1,0 +1,77 @@
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="d-flex flex-nowrap justify-content-between align-items-center mb-3">
+        <!--<div></div>-->
+        <div>
+          <div class="btn-group btn-group-toggle btn-group-md">
+            <button id="addAddressButton" [disabled]="!this.isEditRights"  (click)="openPopup('addAddressButton')" class="btn btn-outline-primary" type="button" placement="bottom" ngbTooltip="{{'key_Add' | translate}}">
+              <i class="fa fa-plus" aria-hidden="true"></i>
+              <span>
+                {{ 'key_Add' | translate }}
+              </span>
+            </button>
+            <button id="editAddressButton" [disabled]="editbuttonEnableDisable" (click)="openPopup('editAddressButton')" class="btn btn-outline-primary" type="button" placement="bottom" ngbTooltip="Edit">
+              <i class="fa fa-pencil" aria-hidden="true"></i>
+              <span>
+                {{ 'key_Edit' | translate }}
+              </span>
+            </button>
+            <button id="deleteButton" [disabled]="buttonEnableDisable" class="btn btn btn-outline-danger" type="button" (click)="openPopup('deleteAddressButton')" placement="bottom" ngbTooltip="Delete">
+              <i class="fa fa-trash-o" aria-hidden="true"></i>
+              <span>
+                {{ 'key_Delete' | translate }}
+              </span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12">
+      <table class="table table-striped table-bordered">
+        <thead>
+          <tr>
+            <th class="no-sort" width="30px">
+              <div class="form-check-inline">
+                <label class="form-check-label">
+                  <input (click)="selectAddressAll($event)" type="checkbox" class="form-check-input" value=""
+                         data-toggle="tooltip" data-placement="top" title="Select all">
+                </label>
+              </div>
+            </th>
+            <th>{{ 'key_AddressType' | translate }} </th>
+            <th>{{ 'key_Address' | translate }}   </th>
+           
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of locationAddressList" (click)="selectAddressCheckbox(item)" [ngClass]="[item.isAddressSelected === true ? 'activeRow' : '']">
+            <td>
+              <div class="form-check-inline">
+                <label class="form-check-label">
+                  <!--<input type="checkbox" class="form-check-input" value="">-->
+                  <mat-checkbox [checked]="item.isAddressSelected" (click)="$event.stopPropagation()" class="form-check-input"
+                                (change)="selectAddressCheckbox(item)"></mat-checkbox>
+                </label>
+              </div>
+            </td>
+            <td> <span [ngClass]="{'BoldrowText': item.updatedBy == 'Interface'}">
+                {{item.addressTypeName}}
+              </span>
+              </td>
+            <td>
+              <span [ngClass]="{'BoldrowText': item.updatedBy == 'Interface'}">
+                {{item.name}}
+                {{item.countryName}}, {{item.stateName}}, {{item.cityName}}
+                {{item.zipCode}}
+                </span>
+            </td>
+           
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+<!--===============================-->

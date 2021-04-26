@@ -1,0 +1,31 @@
+.order-deails .form-group h5 {
+  font-size: 12px; padding-top: 8px;  margin-bottom: 0;
+}
+.order-deails h4 { font-size: 16px;}
+
+
+#inbound .resize-table mat-cell,
+#inbound .resize-table mat-footer-cell,
+#inbound .resize-table mat-header-cell {
+  width: 80px; padding-left:5px; padding-right:5px;
+}
+#outbound .resize-table mat-cell,
+#outbound .resize-table mat-footer-cell,
+#outbound .resize-table mat-header-cell {
+  width: 80px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+@media(min-width:1600px) {
+  #inbound .resize-table mat-cell,
+  #inbound .resize-table mat-footer-cell,
+  #inbound .resize-table mat-header-cell {
+    width:110px;
+  }
+  #outbound .resize-table mat-cell,
+  #outbound .resize-table mat-footer-cell,
+  #outbound .resize-table mat-header-cell {
+    width: 110px;
+  }
+}

@@ -1,0 +1,220 @@
+<!--TFS ID:- 17617
+  Date: 28/09/2020
+  Aut: Monu Ram Yadav
+  Des:- Create and compute sales Forecast> Need to add popup for import option.-->
+<!-- Modal Header -->
+<div class="modal-header">
+  <h5 class="modal-title">{{ 'key_ManageForecast' | translate }}</h5>
+  <button type="button" class="close" data-dismiss="modal" (click)="close()">&times;</button>
+</div>
+
+<!-- Modal body -->
+<div class="modal-body">
+  <div class="form-inline mt-2">
+    <div class="col-md-4"><label class="justify-content-end"> {{ 'key_ParentForecast' | translate }}</label></div>
+    <div class="col-md-4"><input type="text" class="form-control w-100" placeholder="{{forecastSelected?.name}}" disabled /></div>
+  </div>
+  <div class="card mt-2">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="d-flex flex-nowrap justify-content-between align-items-center mb-2">
+
+            <div class="btn-group btn-group-toggle btn-group-md" data-toggle="buttons">
+              <button id="deleteButton" class="btn btn btn-outline-danger"
+                      type="button"
+                      placement="bottom"
+                      ngbTooltip="Delete"
+                      (click)="deleteForecast()">
+                <i class="fa fa-trash-o" aria-hidden="true"></i>
+                <span>
+                  {{ 'key_Delete' | translate }}
+                </span>
+              </button>
+              <button id="btnRefresh" class="btn btn-outline-primary" (click)="refresh()" type="button" placement="bottom" ngbTooltip="Refresh">
+                <i class="fa fa-refresh" aria-hidden="true"></i>
+                <span>
+                  {{ 'key_Refresh' | translate }}
+                </span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="scroll max-tableoverflow resize-table" style="max-height: 150px">
+            <mat-table #table [dataSource]="dataSource" matSort>
+
+              <ng-container *ngFor="let column of displayedColumns; let i=index;" [matColumnDef]="column">
+                <mat-header-cell *matHeaderCellDef mat-sort-header mwlResizable
+                                 [enableGhostResize]="true"
+                                 (resizeEnd)="onResizeEnd($event, column)"
+                                 [resizeEdges]="{bottom: false, right: true, top: false, left: true}">
+
+
+
+                  <div class="form-check-inline" *ngIf="column === selectRow">
+                    <label class="form-check-label">
+                      <input type="checkbox" class="form-check-input" value=""
+                             placement="top" ngbTooltip="Select all"
+                             (change)="$event ? masterToggle() : null"
+                             [checked]="selection.hasValue() && isAllSelected()"
+                             [indeterminate]="selection.hasValue() && !isAllSelected()">
+                    </label>
+                  </div>
+                  <div *ngIf="column != selectRow"> {{ displayedColumnsReplace[i] | translate }}</div>
+                </mat-header-cell>
+                <mat-cell *matCellDef="let item">
+                  <!--for-checkbox-->
+                  <div class="form-check-inline" *ngIf="column === selectRow">
+                    <label class="form-check-label">
+                      <input type="checkbox" class="form-check-input" value="" (click)="$event.stopPropagation()"
+                             (change)="$event ? selection.toggle(item) : null"
+                             [checked]="selection.isSelected(item)">
+                    </label>
+                  </div>
+                  <div class="form-check-inline" *ngIf="column === 'importedDateTime'">
+                    {{ item[column]  | momentDateWithZonePipe}}
+                  </div>
+                  <div class="form-check-inline" *ngIf="column != 'importedDateTime'">
+                    {{ item[column] }}
+                  </div>
+                </mat-cell>
+              </ng-container>
+
+              <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+              <mat-row *matRowDef="let row; columns: displayedColumns;"
+                       [ngClass]="{hovered: row.hovered, highlighted: row.highlighted}"
+                       (click)="selection.toggle(row) || row.highlighted = !row.highlighted"
+                       (mouseover)="row.hovered = true" (mouseout)="row.hovered = false">
+              </mat-row>
+            </mat-table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--Card End-->
+
+  <mat-tab-group animationDuration="0ms" (selectedTabChange)="tabChange($event)">
+
+    <mat-tab #tab1>
+      <ng-template mat-tab-label>
+        {{ 'key_ImportFromExcel' | translate }}
+      </ng-template>
+      <div class="tab-content pb-3">
+        <div class="form-inline mt-2">
+          <div class="col-md-4">
+            <label class="justify-content-end">
+              {{ 'key_ForecastName' | translate }}
+              <span class="text-danger">*</span>
+            </label>
+          </div>
+          <div class="col-md-5">
+            <input type="text" class="form-control w-100" [(ngModel)]="forecastName" (keypress)="blockSpecialChar($event)" required />
+          </div>
+        </div>
+        <div class="form-inline mt-2">
+          <div class="col-md-4">
+            <label class="justify-content-end">
+              {{ 'key_ForecastDescription' | translate }}
+              <span class="text-danger">*</span>
+            </label>
+          </div>
+          <div class="col-md-5">
+            <input type="text" maxlength="255" class="form-control w-100" [(ngModel)]="forecastDesc" required />
+          </div>
+        </div>
+
+        <div class="d-flex mt-2">
+          <div class="col-md-4 text-right pt-1"></div>
+          <div class="col-md-8">
+            <div class="form-check-inline">
+              <label class="form-check-label d-inline-flex align-items-center">
+                <input type="radio" class="form-check-input" name="optradio" [(ngModel)]="actionTaken" value="add" checked>
+                <span class="pl-1"> {{ 'key_Addtheamount' | translate }}</span>
+              </label>
+            </div>
+
+            <div class="form-check-inline ml-3">
+              <label class="form-check-label d-inline-flex align-items-center">
+                <input type="radio" class="form-check-input" name="optradio" [(ngModel)]="actionTaken" value="overwrite">
+                <span class="pl-1"> {{ 'key_Overwritetheamount' | translate }}</span>
+
+              </label>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="fw600 text-center mt-3"> {{ 'key_sefomftu' | translate }}<span class="text-danger">*</span>:</div>
+        <div class="form-inline mt-3">
+          <div class="col-md-4"></div>
+          <div class="col-md-5">
+              <div class="custom-file">
+                <input id="inputGroupFile01" type="file" (change)="onFileSelect($event)" class="custom-file-input">
+                <label class="custom-file-label justify-content-start" for="inputGroupFile01">{{labelName}}</label>
+              </div>
+          </div>
+        </div>
+        <div class="form-inline mt-2">
+          <div class="col-md-4">
+            <label class="justify-content-end">
+              {{ 'key_Selectsheetname' | translate }}
+              <span class="text-danger">*</span>
+            </label>
+          </div>
+          <div class="col-md-5">
+            <angular2-multiselect fixFilterBug [data]="itemListA" [(ngModel)]="selectedItemsA" [settings]="settingsA"
+                                  (onSelect)="onItemSelect($event)"
+                                  (onDeSelect)="OnItemDeSelect($event)"
+                                  (onSelectAll)="onSelectAll($event)"
+                                  (onDeSelectAll)="onDeSelectAll($event)"
+                                  (onAddFilterNewItem)="onAddItemA($event)">
+            </angular2-multiselect>
+          </div>
+        </div>
+      </div>
+    </mat-tab>
+
+    <mat-tab #tab2>
+      <ng-template mat-tab-label>
+        {{ 'key_ifef' | translate }}
+      </ng-template>
+      <div class="tab-content tab-overflow mb-3">
+        <div class="d-flex mt-2">
+          <div class="col-md-4 text-right pt-1"><label> {{ 'key_Forecast' | translate }}</label></div>
+          <div class="col-md-5">
+            <angular2-multiselect fixFilterBug [data]="childForecastList" [(ngModel)]="selectedChildForecast"
+                                  [settings]="settingsChildForecast">
+            </angular2-multiselect>
+          </div>
+        </div>
+        <div class="d-flex mt-2">
+          <div class="col-md-4 text-right pt-1"></div>
+          <div class="col-md-8">
+            <div class="form-check-inline">
+              <label class="form-check-label d-inline-flex align-items-center">
+                <input type="radio" class="form-check-input" name="optradio1" [(ngModel)]="actionTakenOnExisting" value="add">
+                <span> {{ 'key_Addtheamount' | translate }}</span>
+              </label>
+            </div>
+
+            <div class="form-check-inline ml-3">
+              <label class="form-check-label d-inline-flex align-items-center">
+                <input type="radio" class="form-check-input" name="optradio1" [(ngModel)]="actionTakenOnExisting" value="overwrite">
+                <span> {{ 'key_Overwritetheamount' | translate }}</span>
+              </label>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+  <div class="col-md-12 mt-3 text-center">
+    <button class="btn btn-save mr-2 popup-btn-width" (click)="importForecast()">{{ 'key_Import' | translate }}</button>
+    <button class="btn btn-next" (click)="exportTemplate()">{{ 'key_etfi' | translate }}</button>
+  </div>
+</div>
+

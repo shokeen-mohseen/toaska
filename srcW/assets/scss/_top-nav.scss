@@ -1,0 +1,24 @@
+.topNav {
+  border-top: 8px solid #7ed4f7;
+  border-bottom: 1px solid #66CCFF;
+  height: 90px;
+  position: fixed;
+  background: #fff;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 998;
+}
+app-top-btn-group {
+  position: sticky;
+  z-index: 999;
+  display: block;
+  top: 8px;
+  margin-bottom: 18px;
+
+  .d-flex {
+    .mat-tab-group {
+      min-height: 74px;
+    }
+  }
+}

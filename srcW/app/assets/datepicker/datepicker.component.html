@@ -1,0 +1,24 @@
+<app-top-btn-group #btnBar [actionGroupConfig]="actionGroupConfig" (action)="actionHandler($event)"></app-top-btn-group>
+<div class="row">
+<div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+  <div class="form-group">
+    <label for="ccmonth">Date Range Picker</label>
+    <ejs-daterangepicker [format]='dateFormat' separator='to' placeholder='MM-DD-YYYY to MM-DD-YYYY' id="shipDate"></ejs-daterangepicker>
+  </div>
+</div>
+
+<div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+  <div class="form-group">
+    <label for="ccmonth">Date & Time Picker</label>
+    <ejs-datetimepicker [step]='interval' [format]='dateFormat1' [value]='date' placeholder='MM-DD-YYYY HH:MM AM'></ejs-datetimepicker>
+  </div>
+</div>
+
+<div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+  <div class="form-group">
+    <label for="ccmonth">Date Picker</label>
+    <ejs-datepicker [format]='dateFormat' [enabled]=false placeholder='MM-DD-YYYY'></ejs-datepicker>
+  </div>
+</div>
+
+</div>

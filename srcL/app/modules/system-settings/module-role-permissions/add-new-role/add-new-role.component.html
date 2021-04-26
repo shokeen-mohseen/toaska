@@ -1,0 +1,98 @@
+
+<div class="modal-header">
+  <h4 class="modal-title">{{'key_AddNewRole' | translate}}</h4>
+  <button type="button" class="close" data-dismiss="modal" (click)="activeModal.dismiss('Cross click')">&times;</button>
+</div>
+
+<!-- Modal body -->
+<div class="modal-body">
+  <div class="d-flex flex-nowrap justify-content-between align-items-center mt-1">
+    <div>
+      <div class="btn-group btn-group-toggle btn-group-md" data-toggle="buttons">
+        <button (click)="openPopup('add')" class="btn btn-outline-primary" type="button" placement="bottom" ngbTooltip="{{ 'key_Add' | translate }}">
+          <i class="fa fa-plus" aria-hidden="true"></i>
+          <span>
+            {{ 'key_Add' | translate }}
+          </span>
+        </button>
+        <button (click)="openPopup('edit')" class="btn btn-outline-primary" type="button" placement="bottom" ngbTooltip="{{ 'key_Edit' | translate }}">
+          <i class="fa fa-pencil" aria-hidden="true"></i>
+          <span>
+            {{ 'key_Edit' | translate }}
+          </span>
+        </button>
+        <button (click)="openPopup('delete')" class="btn btn btn-outline-danger" type="button" placement="bottom" ngbTooltip="{{ 'key_Delete' | translate }}">
+          <i class="fa fa-trash-o" aria-hidden="true"></i>
+          <span>
+            {{ 'key_Delete' | translate }}
+          </span>
+        </button>
+        <!--<button class="btn btn-outline-success" type="button" placement="bottom" ngbTooltip="{{ 'key_Refresh' | translate }}">
+          <i class="fa fa-refresh" aria-hidden="true"></i>
+          <span>
+            {{ 'key_Refresh' | translate }}
+          </span>
+        </button>-->
+      </div>
+    </div>
+  </div>
+  <!--=======working area===========--->
+
+
+  <div class="row mt-3">
+    <div class="col-lg-12">
+      <app-table-filter (filterOn)="applyFilter($event)"></app-table-filter>
+      <div class="scroll">
+        <mat-table #table [dataSource]="dataSource" matSort (matSortChange)="customSort($event)">
+
+          <ng-container *ngFor="let column of displayedColumns, let i=index;" [matColumnDef]="column">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>
+
+              <div class="form-check-inline" *ngIf="column === selectRow">
+                <label class="form-check-label">
+                  <input type="checkbox" class="form-check-input" value="" placement="top" ngbTooltip="Select all" container="body" (change)="$event ? masterToggle() : null"
+                         [checked]="selection.hasValue() && isAllSelected()"
+                         [indeterminate]="selection.hasValue() && !isAllSelected()">
+                </label>
+              </div>
+
+              <div *ngIf="column != selectRow"> {{ displayedColumnsReplace[i] | translate }}</div>
+            </mat-header-cell>
+            <mat-cell *matCellDef="let item">
+              <!--for-checkbox-->
+              <div class="form-check-inline" *ngIf="column === selectRow">
+                <label class="form-check-label">
+                  <input type="checkbox" class="form-check-input" value="" (click)="$event.stopPropagation()"
+                         (change)="onSelectionChange(item, $event.target.checked)"
+                         [checked]="selection.isSelected(item)">
+                </label>
+              </div>
+
+
+              <div>
+                <span>
+                  {{ item[column] }}
+                </span>
+              </div>
+            </mat-cell>
+          </ng-container>
+
+
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{ 'selected': selection.isSelected(row) }"
+                   (click)="selection.toggle(row)"></mat-row>
+        </mat-table>
+
+      </div>
+      <mat-paginator #paginator
+                     [pageSize]="10"
+                     [pageSizeOptions]="[5, 10, 20]">
+      </mat-paginator>
+    </div>
+  </div>
+
+  <!--=======working area===========--->
+</div>
+<div class="col-lg-12 text-center mt-4 mb-4">
+  <button type="button" id="btnSave" name="btnSave" class="btn btn-save popup-btn-width"> {{ 'key_Ok' | translate }} </button>
+</div>

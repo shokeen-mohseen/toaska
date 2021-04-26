@@ -1,0 +1,35 @@
+<!--TFS ID:- 17414,
+  Date: 15-09-2020,
+  Author: Monu Ram YAdav,
+  Des:-  Fix Stepper Steps Data in Sub Component for Prepartum Care Section-->
+<div class="subHeading-red fw600">{{ 'Key_InvestigationAdvised' | translate }}</div>
+<div class="row mt-3">
+  <div class="col-md-5">
+    <div class="form-group mt-2">
+      <label>{{ 'Key_Urgent' | translate }}</label>
+      <textarea class="form-control" rows="3" placeholder="{{ 'Key_DescribeUrgentIssues' | translate }}"></textarea>
+    </div>
+    <div class="form-group mt-4">
+      <label>{{ 'Key_Rotine' | translate }}</label>
+      <textarea class="form-control" rows="3" placeholder="{{ 'Key_DescribeRoutineIssues' | translate }}"></textarea>
+    </div>
+  </div>
+  <div class="col-md-2"></div>
+  <div class="col-md-5">
+    <div class="form-group mt-2">
+      <label>{{ 'Key_UrgentTreatmentPlan' | translate }}</label>
+      <textarea class="form-control" rows="3" placeholder="{{ 'Key_DescribeUrgentTreatmentPlan' | translate }}"></textarea>
+    </div>
+    <div class="form-group mt-4">
+      <label>{{ 'Key_RoutineTreatmentPlan' | translate }}</label>
+      <textarea class="form-control" rows="3" placeholder="{{ 'Key_DescribeUrgentTreatmentPlan' | translate }}"></textarea>
+    </div>
+  </div>
+
+</div>
+<!--Row End-->
+<!--Row start for other-->
+<div class="row mt-2">
+  <input type="button" class="btn btn-secondary ml-3 btnbrd" (click)="AddMoreComplication()" value="{{ 'key_AddNewParameter' | translate }}" />
+</div>
+<!--Row end for other-->

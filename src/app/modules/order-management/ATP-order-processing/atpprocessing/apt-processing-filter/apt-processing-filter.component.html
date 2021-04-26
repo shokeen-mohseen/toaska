@@ -1,0 +1,133 @@
+<!--Filters-->
+<mat-accordion>
+  <mat-expansion-panel (opened)="panelOpenState = true"
+                       (closed)="panelOpenState = false" [expanded]="false">
+    <mat-expansion-panel-header>
+      <mat-panel-description>
+        {{panelOpenState ? '- Hide' : '+ Show'}} {{ 'key_Atpprocessing' | translate }}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="box-children mb-2">
+          <div class="form-group">
+            <label for="customername">{{'key_Location' |translate}}</label>
+            <angular2-multiselect [data]="itemListA" [(ngModel)]="selectedItemsA" [settings]="settingsA"
+                                  (onSelect)="onItemSelect($event)"
+                                  (onDeSelect)="OnItemDeSelect($event)"
+                                  (onSelectAll)="onSelectAll($event)"
+                                  (onDeSelectAll)="onDeSelectAll($event)"
+                                  (onAddFilterNewItem)="onAddItemA($event)">
+            </angular2-multiselect>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="box-children mb-2">
+          <div class="row">
+            <div class="form-group col-sm-12 text-right">
+              <label>{{'key_Lastchange' | translate}}</label>              
+            </div>
+            <div class="form-group col-sm-4">
+              <label></label>             
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="box-children">
+          <!--<div class="d-flex flex-nowrap justify-content-between align-items-center">
+            <h5>{{ 'key_OrderDetails' | translate }}</h5>
+          </div>-->
+          <div class="form-group">
+            <label>{{ 'key_OrderNo' | translate }}</label>
+            <div class="input-group">
+              <angular2-multiselect [data]="itemListA" [(ngModel)]="selectedItemsA" [settings]="settingsA"
+                                    (onSelect)="onItemSelect($event)"
+                                    (onDeSelect)="OnItemDeSelect($event)"
+                                    (onSelectAll)="onSelectAll($event)"
+                                    (onDeSelectAll)="onDeSelectAll($event)"
+                                    (onAddFilterNewItem)="onAddItemA($event)" class="col-lg-11 p-0">
+              </angular2-multiselect>
+              <div class="input-group-append ml-1">
+                <span class="input-group-text" placement="left" ngbTooltip="Orders witch are assign to shipment do not show in this dropdown">
+                  <i class="fa fa-exclamation" aria-hidden="true"></i>
+                </span>
+
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-sm-8">
+              <label for="city">{{'key_ReqDeliveryDate' | translate}}</label>
+              <ejs-datepicker [format]='dateFormat' separator='to' placeholder='MM-DD-YYYY' id="ReqDeliveryDate"></ejs-datepicker>
+            </div>
+            <div class="form-group col-sm-4">
+              <button class="mt-4 btn btn-block btn-outline-secondary active" type="button" aria-pressed="true">{{'key_Updatereq' | translate}}</button>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-sm-8">
+              <label for="city">{{'key_Receivedate' | translate}}</label>
+              <ejs-datepicker [format]='dateFormat' separator='to' placeholder='MM-DD-YYYY' id="Receivedate" class="e-disabled" disabled></ejs-datepicker>
+            </div>
+            <div class="form-group col-sm-4">
+              <label for="city">{{'key_MustArriveByDate' | translate}}</label>
+              <ejs-datepicker [format]='dateFormat' separator='to' placeholder='MM-DD-YYYY' id="MustArriveByDate" class="e-disabled"></ejs-datepicker>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-sm-8">
+              <label for="city">{{'key_ScheduledShipDate' | translate}}</label>
+              <ejs-datepicker [format]='dateFormat' separator='to' placeholder='MM-DD-YYYY' id="ScheduledShipDate"></ejs-datepicker>
+            </div>
+            <div class="form-group col-sm-4">
+              <button class="mt-4 btn btn-block btn-outline-primary active" type="button" aria-pressed="true">{{'key_Updateship' | translate}}</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="box-children">
+          <!--<div class="d-flex flex-nowrap justify-content-between align-items-center">
+            <h5>{{'key_Currentassign' | translate}}</h5>
+          </div>-->
+          <div class="form-group">
+            <label for="customername">{{'key_Customername' |translate}}</label>
+            <input class="form-control" type="text" value="Southern Valley Fruit & Veg DOMESTI" disabled>
+          </div>
+          <div class="row">
+            <div class="form-group col-sm-6">
+              <label for="city">{{'key_Country' |translate}}</label>
+              <input class="form-control" type="text" value="USA" disabled>
+            </div>
+            <div class="form-group col-sm-6">
+              <label for="city">{{'key_State' |translate}}</label>
+              <input class="form-control" type="text" value="GA" disabled>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-sm-6">
+              <label for="city">{{'key_City' |translate}}</label>
+              <input class="form-control" type="text" value="Norman Park" disabled>
+            </div>
+            <div class="form-group col-sm-6">
+              <label for="city">{{'key_Zipcode' |translate}}</label>
+              <input class="form-control" type="text" value="31771" disabled>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="customername">{{'key_Carrier' |translate}}</label>
+            <input class="form-control" type="text" value="BDDC - BIRDDOG LOGISTICS, INC - TL - $251.65 - Days 0" disabled>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--<div class="col-sm-12 col-lg-12 row justify-content-center mt-4 mb-3">
+      <div class=""><input type="button" class="btn btn-save mr-2 font-weight-normal" value="Apply Filter"></div>
+      <div class=""> <input type="button" class="btn btn-next mr-2 font-weight-normal" value="Reset Filter"></div>
+    </div>-->
+    <!--<app-filter></app-filter>-->
+  </mat-expansion-panel>
+</mat-accordion>
+<!--end filter-->

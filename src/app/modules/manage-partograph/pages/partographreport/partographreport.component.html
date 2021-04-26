@@ -1,0 +1,2514 @@
+
+  <div class="my-4">
+    <div class="d-flex flex-nowrap justify-content-between align-items-center mt-3 mb-4">
+      <h4 class="mb-3 mt-3 ml-3"></h4>
+      <div>
+        <div class="btn-group btn-group-toggle btn-group-md" data-toggle="buttons">
+          <a class="btn btn-outline-primary" routerLinkActive="active" [routerLink]="['/manage-partograph']" placement="bottom" ngbTooltip="Back">
+            <i class="fa fa-arrow-left" aria-hidden="true"></i>
+            <span>
+              {{ 'key_Back' | translate }}
+            </span>
+          </a>
+          <button id="exportButton" class="btn btn btn-outline-success" type="button" placement="bottom" ngbTooltip="Export to PDF">
+            <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+            <span>
+              {{ 'key_ExporttoPDF' | translate }}
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div id="print">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th colspan="4">
+              <h1 class="text-center">{{ 'key_PartographReport' | translate }}</h1>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="pt-3" style="vertical-align:middle;">
+              <div><strong>{{ 'key_CovidStatus' | translate }}: - </strong>Positive</div>
+              <div><strong>{{ 'key_PatientCondition' | translate }}: - </strong>Medium</div>
+            </td>
+            <td class="pt-3" style="vertical-align:middle; text-align:center;">
+              <div>{{ 'key_Registrationno' | translate }}</div>
+              <div>
+                <h2>IS21542</h2>
+              </div>
+            </td>
+            <td class="pt-3" style="vertical-align:middle;">
+              <div><strong>{{ 'key_PatientName' | translate }}: - </strong>Mr. John Smith</div>
+              <div><strong>{{ 'key_HospitalName' | translate }}: - </strong>Fortis Hospital</div>
+            </td>
+            <td class="pt-3" style="vertical-align:middle; text-align:right;">
+              <div>{{ 'key_PartographNo' | translate }} 12345</div>
+              <div>{{ 'key_PrintDate' | translate }} 8 Aug 2020</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <table class="table table-bordered">
+        <tr>
+          <td valign="middle" align="left" style="vertical-align:middle;">
+            <div><strong>{{ 'key_Primaryphysician' | translate }}</strong></div>
+            <div><strong>{{ 'key_Name' | translate }}: - </strong>Dr. Ak Dugal</div>
+            <div><strong>{{ 'key_Phone' | translate }}: - </strong>+47 33 78 901</div>
+            <div><strong>{{ 'key_email' | translate }}: - </strong>A@domainname.com</div>
+          </td>
+          <td valign="middle" align="left" style="vertical-align:middle;">
+            <div><strong>{{ 'key_Secondaryphysician' | translate }}</strong></div>
+            <div><strong>{{ 'key_Name' | translate }}: - </strong>Dr. Ak Dugal</div>
+            <div><strong>{{ 'key_Phone' | translate }}: - </strong>+47 33 78 901</div>
+            <div><strong>{{ 'key_email' | translate }}: - </strong>A@domainname.com</div>
+          </td>
+        </tr>
+      </table>
+
+      <div class="patient-registration">
+        <h2>1. {{ 'key_PatientInformation' | translate }}</h2>
+        <table class="table table-bordered">
+          <tbody>
+            <tr>
+              <td width="30%">
+                <strong>{{ 'key_Phone' | translate }}</strong>
+              </td>
+              <td width="70%">+47 333 11 222</td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'key_Address' | translate }}</strong>
+              </td>
+              <td>
+                123 Main Street Atlanta, GA 30097 Garland, Tx, USA Tosca, LTD
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'key_DateofBirth' | translate }}</strong>
+              </td>
+              <td>
+                1 Sep 1988
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'key_age' | translate }}</strong>
+              </td>
+              <td>
+                34
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'key_DateandTimeofAdmission' | translate }}</strong>
+              </td>
+              <td>
+                2 Aug 2020, 4:30am
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'key_Visitno' | translate }}</strong>
+              </td>
+              <td>
+                844
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'key_HospitalName' | translate }}</strong>
+              </td>
+              <td>
+                Fortis
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'key_Hospitalnumber' | translate }}</strong>
+              </td>
+              <td>
+                +47 333 11 222
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'key_Unitno' | translate }}</strong>
+              </td>
+              <td>
+                1
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'key_Unithead' | translate }}</strong>
+              </td>
+              <td>
+                1
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'key_AdmissionMode' | translate }}</strong>
+              </td>
+              <td>
+                Emergency
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'key_Mrdno' | translate }}</strong>
+              </td>
+              <td>
+                xyz
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'key_CRNo' | translate }}</strong>
+              </td>
+              <td>
+                xyz
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'key_Litrecy' | translate }}</strong>
+              </td>
+              <td>
+                Wife - 10th Pass
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'key_Socioeconomic' | translate }}</strong>
+              </td>
+              <td>
+                Upper
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'key_VisitType' | translate }}</strong>
+              </td>
+              <td>
+                Self Visit
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="prepartum-care">
+        <h2>2. {{ 'key_PrepartumCare' | translate }}</h2>
+        <h3>2.1 {{ 'key_Obstetricformula' | translate }}</h3>
+        <table class="table table-bordered">
+          <tbody>
+            <tr>
+              <td width="30%">
+                <strong>{{ 'key_Gravida' | translate }}</strong>
+              </td>
+              <td width="70%">xyz</td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'key_Para' | translate }}</strong>
+              </td>
+              <td>xyz</td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'key_NumberofLivingChildren' | translate }}</strong>
+              </td>
+              <td>2</td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'key_NumberofAbortions' | translate }}</strong>
+              </td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'key_Rupturedmembranes' | translate }}</strong>
+              </td>
+              <td>No</td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'key_Uterinecontraction' | translate }}</strong>
+              </td>
+              <td>2 Aug 2020, 4:30am</td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'key_Birthingpartner' | translate }}</strong>
+              </td>
+              <td>1</td>
+            </tr>
+            <tr>
+              <td>
+                <strong>
+                  {{ 'key_Respectfulmaternity' | translate }}
+                </strong>
+              </td>
+              <td>Yes</td>
+            </tr>
+          </tbody>
+        </table>
+        <h2 class="text-center">{{ 'key_Alternatebirthingposition' | translate }}</h2>
+        <div class="text-center mb-5">
+          <img src="assets/images/all-four.png" />
+          <div>All Four</div>
+        </div>
+
+        <h3>2.2 {{ 'key_History' | translate }}</h3>
+        <h4>2.2.1 {{ 'key_Presentillness' | translate }}</h4>
+        <table class="table table-bordered">
+          <tbody>
+            <tr>
+              <td width="30%">
+                <strong>{{ 'key_amenorrhoeasincenew' | translate }}</strong>
+              </td>
+              <td width="70%">1 Month</td>
+            </tr>
+          </tbody>
+        </table>
+        <h5>2.2.1.1 {{ 'key_Complaintsof' | translate }}</h5>
+        <table class="table table-bordered">
+          <tbody>
+            <tr>
+              <td width="30%">
+                <strong>{{ 'key_Labourpains' | translate }}</strong>
+              </td>
+              <td width="70%">1 Hours</td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'key_Bleeding' | translate }}</strong>
+              </td>
+              <td>1 Hours</td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'key_Headache' | translate }}</strong>
+              </td>
+              <td>1 Hours</td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'key_fetalmovements' | translate }}</strong>
+              </td>
+              <td>1 Hours</td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'key_Leaking' | translate }}</strong>
+              </td>
+              <td>1 Hours</td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'key_Convulsions' | translate }}</strong>
+              </td>
+              <td>1 Hours</td>
+            </tr>
+            <tr>
+              <td>
+                <strong>
+                  {{ 'key_Vomiting' | translate }}
+                </strong>
+              </td>
+              <td>1 Hours</td>
+            </tr>
+            <tr>
+              <td>
+                <strong>
+                  {{ 'key_Urinary' | translate }}
+                </strong>
+              </td>
+              <td>1 Hours</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h4>2.2.2 {{ 'Key_MenstrualHistory' | translate }}</h4>
+        <table class="table table-bordered">
+          <tbody>
+            <tr>
+              <td width="30%">
+                <strong>{{ 'Key_ageofMenarche' | translate }}</strong>
+              </td>
+              <td width="70%">xyz</td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'key_LactationalAmenorrhoea' | translate }}</strong>
+              </td>
+              <td>
+                <div>2 Days, 1 Nights</div>
+                <div>Comment goes here</div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'Key_Edd' | translate }}</strong>
+              </td>
+              <td>
+                8 Aug, 2020
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'Key_RegularCycles' | translate }}</strong>
+              </td>
+              <td>
+                <div>Frequent</div>
+                <div>Comment goes here</div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'Key_LMP' | translate }}</strong>
+              </td>
+              <td>
+                <div>Known</div>
+                <div>Comment goes here</div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'Key_GestatonalAge' | translate }}</strong>
+              </td>
+              <td>
+                2 Weeks, 4 Days
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h4>2.2.3 {{ 'Key_ContraceptionHistory' | translate }}</h4>
+        <table class="table table-bordered">
+          <tbody>
+            <tr>
+              <td width="30%">
+                <strong>{{ 'Key_Method' | translate }}</strong>
+              </td>
+              <td width="70%">12345</td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'Key_Durationofuse' | translate }}</strong>
+              </td>
+              <td>
+                xyz
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'Key_LeftusageSince' | translate }}</strong>
+              </td>
+              <td>
+                8 Aug, 2020
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h4>2.2.4 {{ 'Key_ObstetricHistory' | translate }}</h4>
+        <table class="table table-bordered mb-1">
+          <tbody>
+            <tr>
+              <td width="30%">
+                <strong>{{ 'Key_MaritalStatus' | translate }}</strong>
+              </td>
+              <td width="70%">Married</td>
+            </tr>
+          </tbody>
+        </table>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>{{ 'Key_SrNo' | translate }}</th>
+              <th>{{ 'Key_TimePeriod' | translate }}</th>
+              <th>{{ 'Key_Mode' | translate }}</th>
+              <th>{{ 'Key_Outcome' | translate }}</th>
+              <th>{{ 'Key_Place' | translate }}</th>
+              <th>{{ 'Key_BtWt' | translate }}</th>
+              <th>{{ 'Key_Immunization' | translate }}</th>
+              <th>{{ 'Key_Complications' | translate }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+        <table class="table table-bordered">
+          <tbody>
+            <tr>
+              <td width="30%">
+                <strong>{{ 'Key_ChecklistofObstetric' | translate }}</strong>
+              </td>
+              <td width="70%">HDP / Preeclampsia, Eclampsia, APH, PPH, Obstructed Labour, Abortion/Still Birth, Congenital Anomaly, Anaemia, Others</td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                Comments goes here
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h4>2.2.5 {{ 'Key_PersonalHistory' | translate }}</h4>
+        <table class="table table-bordered mb-1">
+          <tbody>
+            <tr>
+              <td width="30%">
+                <strong>{{ 'Key_Diet' | translate }}</strong>
+              </td>
+              <td width="70%"></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'Key_Appetite' | translate }}</strong>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'Key_Bowel' | translate }}</strong>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'Key_Bladder' | translate }}</strong>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'Key_Addiction' | translate }}</strong>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'Key_Others' | translate }}</strong>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                Comments goes here
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <table class="table table-bordered">
+          <tbody>
+            <tr>
+              <td width="30%">
+                <strong>{{ 'Key_HoexposuretoMedication' | translate }}</strong>
+              </td>
+              <td width="70%">Medication, Infection, Radiation</td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                Comments goes here
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h4>2.2.6 {{ 'Key_PastHistory' | translate }}</h4>
+        <table class="table table-bordered">
+          <tbody>
+            <tr>
+              <td width="30%">
+                <strong>{{ 'Key_Pasthistoryofinfertility' | translate }}</strong>
+              </td>
+              <td width="70%">
+                <div>Yes</div>
+                <div>Kind of treatment description goes here</div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'Key_PasthistoryofAllergiesDrug' | translate }}</strong>
+              </td>
+              <td>
+                <div>Yes</div>
+                <div>Kind of treatment description goes here</div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'Key_PasthistoryofBloodTransfusion' | translate }}</strong>
+              </td>
+              <td>
+                <div>Yes</div>
+                <div>Kind of treatment description goes here</div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'Key_PastSurgicalHistory' | translate }}</strong>
+              </td>
+              <td>
+                <div>Yes</div>
+                <div>Kind of treatment description goes here</div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'key_PastMedicalHistory' | translate }}</strong>
+              </td>
+              <td>
+                Febrile illness, Tuberculosis, Radiation, Hypertension
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                Comments goes here
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h4>2.2.7 {{ 'Key_FamilyHistory' | translate }}</h4>
+        <table class="table table-bordered">
+          <tbody>
+            <tr>
+              <td width="30%">
+                <strong>{{ 'Key_AnyFamilyHistoryof' | translate }}</strong>
+              </td>
+              <td width="70%">
+                Hypertension, Asthma, Diabetes, Others
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'Key_PastTreatmentHistory' | translate }}</strong>
+              </td>
+              <td>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>2.3 {{ 'key_Investigation' | translate }}</h3>
+        <h4>2.3.1 {{ 'Key_GPE' | translate }}</h4>
+        <table class="table table-bordered">
+          <tbody>
+            <tr>
+              <td width="30%">
+                <strong>{{ 'Key_Height' | translate }}</strong>
+              </td>
+              <td width="70%"></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'Key_Weight' | translate }}</strong>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'Key_Build' | translate }}</strong>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'Key_Lcterus' | translate }}</strong>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'Key_Cyanosis' | translate }}</strong>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'Key_Edema' | translate }}</strong>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'Key_Lymphadenopathy' | translate }}</strong>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'Key_Pallor' | translate }}</strong>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'Key_Temp' | translate }}</strong>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'Key_Pulseexam' | translate }}</strong>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'Key_bp' | translate }}</strong>
+              </td>
+              <td>
+                <div><strong>Systolic: -</strong></div>
+                <div><strong>Diastolic: -</strong></div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'Key_rr' | translate }}</strong>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'Key_Breasts' | translate }}</strong>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                Comments goes here
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <h4>2.3.2 (a) {{ 'Key_Systemic' | translate }}</h4>
+        <table class="table table-bordered">
+          <tbody>
+            <tr>
+              <td width="30%">
+                <strong>{{ 'Key_CVS' | translate }}</strong>
+              </td>
+              <td width="70%"></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'Key_RS' | translate }}</strong>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td colspan="2">Comments goes here</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h4>2.3.2 (b) {{ 'Key_Abdominal' | translate }}</h4>
+        <table class="table table-bordered">
+          <tbody>
+            <tr>
+              <td width="30%">
+                <strong>{{ 'Key_FundalHeight' | translate }}</strong>
+              </td>
+              <td width="70%"></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'Key_LiePresentationPosition' | translate }}</strong>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'Key_BabySize' | translate }}</strong>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'Key_fhs' | translate }}</strong>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'Key_Ifinalabour' | translate }}</strong>
+              </td>
+              <td>2 Aug 2020, 4:30am</td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'Key_UterineActivity' | translate }}</strong>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'Key_FetalMovement' | translate }}</strong>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'Key_AmountofLiquor' | translate }}</strong>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'Key_PSExam' | translate }}</strong>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'Key_PVExam' | translate }}</strong>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'Key_PROVISIONALDIAGNOSIS' | translate }}</strong>
+              </td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h4>2.3.3 {{ 'Key_InvestigationAdvised' | translate }}</h4>
+        <table class="table table-bordered">
+          <tbody>
+            <tr>
+              <td width="30%">
+                <strong>{{ 'Key_Urgent' | translate }}</strong>
+              </td>
+              <td width="70%"></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'Key_UrgentTreatmentPlan' | translate }}</strong>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'Key_Rotine' | translate }}</strong>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'Key_RoutineTreatmentPlan' | translate }}</strong>
+              </td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>2.4 {{ 'Key_Examination' | translate }}</h3>
+        <h4>2.4.1 {{ 'Key_Examination' | translate }}</h4>
+        <table class="table table-bordered">
+          <tbody>
+            <tr>
+              <td width="30%">
+                <strong>{{ 'key_hbDate' | translate }}</strong>
+              </td>
+              <td width="70%"></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'key_tlc' | translate }}</strong>
+              </td>
+              <td>xyz</td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'key_dlc' | translate }}</strong>
+              </td>
+              <td>
+                <div><strong>{{ 'key_pcv' | translate }}: -</strong></div>
+                <div><strong>{{ 'key_mcv' | translate }}: -</strong></div>
+                <div><strong>{{ 'key_pow' | translate }}: -</strong></div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'key_esr' | translate }}</strong>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'key_PalletCountDate' | translate }}</strong>
+              </td>
+              <td>
+                <div><strong>{{ 'key_Date' | translate }}: -</strong></div>
+                <div><strong>{{ 'key_bt' | translate }}: -</strong></div>
+                <div><strong>{{ 'key_ct' | translate }}: -</strong></div>
+                <div><strong>{{ 'key_crt' | translate }}: -</strong></div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'key_ABORh' | translate }}</strong>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'key_Sickling' | translate }}</strong>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'key_Electrophoresis' | translate }}</strong>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'key_UrineAlbumin' | translate }}</strong>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'key_Sugar' | translate }}</strong>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'key_Microscopic' | translate }}</strong>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'key_UrineCS' | translate }}</strong>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'key_VaginalSwab' | translate }}</strong>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'key_CervicalSwab' | translate }}</strong>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'key_CervicalCytology' | translate }}</strong>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'key_XRayChest' | translate }}</strong>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'key_ecg' | translate }}</strong>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'key_AnyOther' | translate }}</strong>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td colspan="2">Comments goes here</td>
+            </tr>
+          </tbody>
+        </table>
+        <h4>2.4.2 {{ 'Key_Examination' | translate }}</h4>
+        <table class="table table-bordered">
+          <tbody>
+            <tr>
+              <td width="30%">
+                <strong>{{ 'key_vdrl' | translate }}</strong>
+              </td>
+              <td width="70%"></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'key_BloodUrea' | translate }}</strong>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'key_SerumCreatinine' | translate }}</strong>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'key_ElectrolytesNa' | translate }}</strong>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'key_k' | translate }}</strong>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>
+                  {{ 'key_BloodSugarF' | translate }}
+                </strong>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>
+                  {{ 'key_PPS' | translate }}
+                </strong>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>
+                  {{ 'key_Ps' | translate }}
+                </strong>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>
+                  {{ 'key_Others' | translate }}
+                </strong>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>
+                  {{ 'key_GTT' | translate }}
+                </strong>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>
+                  {{ 'key_LFT' | translate }}
+                </strong>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>
+                  {{ 'key_HP' | translate }}
+                </strong>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>
+                  {{ 'key_Fundus' | translate }}
+                </strong>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>
+                  {{ 'key_usg' | translate }}
+                </strong>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>
+                  {{ 'key_TVS' | translate }}
+                </strong>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                Comments goes here
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>2.5 {{ 'key_Treatment' | translate }}</h3>
+        <h4>2.5.1 {{ 'key_CriticalPatientMonitoring' | translate }}</h4>
+        <table class="table table-bordered">
+          <tbody>
+            <tr>
+              <td width="30%">
+                <strong>{{ 'key_crnumber' | translate }}</strong>
+              </td>
+              <td width="70%"></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>
+                  {{ 'key_MedicalRecordNumber' | translate }}
+                </strong>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>
+                  {{ 'key_DateofAdminssionIn' | translate }}
+                </strong>
+              </td>
+              <td>
+                2 Agu, 2020 in HDU
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <strong>
+                  {{ 'key_Diagnosis' | translate }}
+                </strong>
+              </td>
+              <td>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <strong>
+                  {{ 'key_Unit' | translate }}
+                </strong>
+              </td>
+              <td>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>{{ 'key_Date' | translate }}</th>
+              <th>{{ 'key_Time' | translate }}</th>
+              <th>{{ 'Key_Temp' | translate }}</th>
+              <th>{{ 'key_pr' | translate }}</th>
+              <th>{{ 'key_bp' | translate }}</th>
+              <th>{{ 'key_pr' | translate }}</th>
+              <th>{{ 'key_SPO2' | translate }}</th>
+              <th>{{ 'key_AbdominalGirth' | translate }}</th>
+              <th>{{ 'key_PerAbdominalExam' | translate }}</th>
+              <th>{{ 'key_LocalExamination' | translate }}</th>
+              <th>{{ 'key_UrinaryOutput' | translate }}</th>
+              <th>{{ 'key_Drain' | translate }}</th>
+              <th>{{ 'key_KneeReflex' | translate }}</th>
+              <th>{{ 'key_RyleTube' | translate }}</th>
+              <th>{{ 'key_Remark' | translate }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+        <table class="table table-bordered">
+          <tbody>
+            <tr>
+              <td>Comments goes here</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h4>2.5.2 {{ 'key_MedicationChart' | translate }}</h4>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>{{ 'Key_SrNo' | translate }}</th>
+              <th>{{ 'key_ndmi' | translate }}</th>
+              <th>{{ 'key_Dose' | translate }}</th>
+              <th>{{ 'key_Route' | translate }}</th>
+              <th>{{ 'key_DateTime' | translate }}</th>
+              <th>{{ 'key_DateTime' | translate }}</th>
+              <th>{{ 'key_DateTime' | translate }}</th>
+              <th>{{ 'key_DateTime' | translate }}</th>
+              <th>{{ 'key_DateTime' | translate }}</th>
+              <th>{{ 'key_DateTime' | translate }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+        <table class="table table-bordered">
+          <tbody>
+            <tr>
+              <td>Comments goes here</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h4>
+          2.5.3 {{ 'key_ncap' | translate }}
+        </h4>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>{{ 'Key_SrNo' | translate }}</th>
+              <th>{{ 'key_ncap' | translate }}</th>
+              <th>{{ 'key_DateTime' | translate }}</th>
+              <th>{{ 'key_DateTime' | translate }}</th>
+              <th>{{ 'key_DateTime' | translate }}</th>
+              <th>{{ 'key_DateTime' | translate }}</th>
+              <th>{{ 'key_DateTime' | translate }}</th>
+              <th>{{ 'key_DateTime' | translate }}</th>
+              <th>{{ 'key_DateTime' | translate }}</th>
+              <th>{{ 'key_DateTime' | translate }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+        <table class="table table-bordered">
+          <tbody>
+            <tr>
+              <td>Comments goes here</td>
+            </tr>
+          </tbody>
+        </table>
+
+      </div>
+
+      <div class="partograph-monitoring">
+        <h2>3. {{ 'key_PartographMonitoring' | translate }}</h2>
+        <h3>3.1 {{ 'key_LatentPhase' | translate }}</h3>
+        <div class="mb-3">
+          <img src="assets/images/chart1.jpg" />
+        </div>
+        <h4>3.1.1 {{ 'key_Charthistory' | translate }}</h4>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th width="20%"></th>
+              <th width="10%">{{ 'key_Value' | translate }}</th>
+              <th width="50%">{{ 'key_Commentsarea' | translate }}</th>
+              <th width="10%">{{ 'key_InputBy' | translate }}</th>
+              <th width="10%">{{ 'key_datetime' | translate }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <strong>{{ 'Key_FetalHeart' | translate }}</strong>
+              </td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'partographChart.Key_AmnioticChart' | translate }}</strong>
+              </td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'partographChart.Key_MouldingChart' | translate }}</strong>
+              </td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'partographChart.Key_MouldingChart' | translate }}</strong>
+              </td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'partographChart.Key_DescentChart' | translate }}</strong>
+              </td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'partographChart.Key_ContractionChart' | translate }}</strong>
+              </td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'partographChart.Key_OxytocinChart' | translate }}</strong>
+              </td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'partographChart.Key_DropsChart' | translate }}</strong>
+              </td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'partographChart.key_DrugChart' | translate }}</strong>
+              </td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'partographChart.Key_PulseChart' | translate }}</strong>
+              </td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'key_bp' | translate }}</strong>
+              </td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'partographChart.Key_TempratureChart' | translate }}</strong>
+              </td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'partographChart.key_ProtienChart' | translate }}</strong>
+              </td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'partographChart.key_AcetoneChart' | translate }}</strong>
+              </td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'partographChart.key_VolumeChart' | translate }}</strong>
+              </td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>3.2 {{ 'key_ActivePhase' | translate }}</h3>
+        <div class="mb-3">
+          <img src="assets/images/chart2.jpg" />
+        </div>
+        <h4>3.2.1 {{ 'key_Charthistory' | translate }}</h4>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th width="20%"></th>
+              <th width="10%">{{ 'key_Value' | translate }}</th>
+              <th width="50%">{{ 'key_Commentsarea' | translate }}</th>
+              <th width="10%">{{ 'key_InputBy' | translate }}</th>
+              <th width="10%">{{ 'key_datetime' | translate }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <strong>{{ 'Key_FetalHeart' | translate }}</strong>
+              </td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'partographChart.Key_AmnioticChart' | translate }}</strong>
+              </td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'partographChart.Key_MouldingChart' | translate }}</strong>
+              </td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'partographChart.Key_MouldingChart' | translate }}</strong>
+              </td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'partographChart.Key_DescentChart' | translate }}</strong>
+              </td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'partographChart.Key_ContractionChart' | translate }}</strong>
+              </td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'partographChart.Key_OxytocinChart' | translate }}</strong>
+              </td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'partographChart.Key_DropsChart' | translate }}</strong>
+              </td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'partographChart.key_DrugChart' | translate }}</strong>
+              </td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'partographChart.Key_PulseChart' | translate }}</strong>
+              </td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'key_bp' | translate }}</strong>
+              </td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'partographChart.Key_TempratureChart' | translate }}</strong>
+              </td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'partographChart.key_ProtienChart' | translate }}</strong>
+              </td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'partographChart.key_AcetoneChart' | translate }}</strong>
+              </td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'partographChart.key_VolumeChart' | translate }}</strong>
+              </td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>3.3 {{ 'key_SecondStageLabour' | translate }}</h3>
+        <div class="mb-3">
+          <img src="assets/images/chart3.jpg" />
+        </div>
+        <h4>3.3.1 {{ 'key_Charthistory' | translate }}</h4>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th width="20%"></th>
+              <th width="10%">{{ 'key_Value' | translate }}</th>
+              <th width="50%">{{ 'key_Commentsarea' | translate }}</th>
+              <th width="10%">{{ 'key_InputBy' | translate }}</th>
+              <th width="10%">{{ 'key_datetime' | translate }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <strong>{{ 'Key_FetalHeart' | translate }}</strong>
+              </td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'partographChart.Key_AmnioticChart' | translate }}</strong>
+              </td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'partographChart.Key_MouldingChart' | translate }}</strong>
+              </td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'partographChart.Key_MouldingChart' | translate }}</strong>
+              </td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'partographChart.Key_DescentChart' | translate }}</strong>
+              </td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'partographChart.Key_ContractionChart' | translate }}</strong>
+              </td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'partographChart.Key_OxytocinChart' | translate }}</strong>
+              </td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'partographChart.Key_DropsChart' | translate }}</strong>
+              </td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'partographChart.key_DrugChart' | translate }}</strong>
+              </td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'partographChart.Key_PulseChart' | translate }}</strong>
+              </td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'key_bp' | translate }}</strong>
+              </td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'partographChart.Key_TempratureChart' | translate }}</strong>
+              </td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'partographChart.key_ProtienChart' | translate }}</strong>
+              </td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'partographChart.key_AcetoneChart' | translate }}</strong>
+              </td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'partographChart.key_VolumeChart' | translate }}</strong>
+              </td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>3.4 {{ 'key_3rdStageLabour' | translate }}</h3>
+        <div class="mb-3">
+          <img src="assets/images/chart4.jpg" />
+        </div>
+        <h4>3.4.1 {{ 'key_Observation' | translate }}</h4>
+        <table class="table table-bordered">
+          <tbody>
+            <tr>
+              <td width="30%">
+                <strong>{{ 'key_RetainedPlacenta' | translate }}</strong>
+              </td>
+              <td width="70%">
+                <div>Yes</div>
+                <div>Comment goes here</div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'key_UterineInversion' | translate }}</strong>
+              </td>
+              <td>
+                <div>Yes</div>
+                <div>Comment goes here</div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'key_ThirdStageBleeding' | translate }}</strong>
+              </td>
+              <td>
+                <div>Yes</div>
+                <div>Comment goes here</div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <h4>3.4.2 {{ 'key_Charthistory' | translate }}</h4>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th width="20%"></th>
+              <th width="10%">{{ 'key_Value' | translate }}</th>
+              <th width="50%">{{ 'key_Commentsarea' | translate }}</th>
+              <th width="10%">{{ 'key_InputBy' | translate }}</th>
+              <th width="10%">{{ 'key_datetime' | translate }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <strong>{{ 'Key_FetalHeart' | translate }}</strong>
+              </td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'partographChart.Key_AmnioticChart' | translate }}</strong>
+              </td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'partographChart.Key_MouldingChart' | translate }}</strong>
+              </td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'partographChart.Key_MouldingChart' | translate }}</strong>
+              </td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'partographChart.Key_DescentChart' | translate }}</strong>
+              </td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'partographChart.Key_ContractionChart' | translate }}</strong>
+              </td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'partographChart.Key_OxytocinChart' | translate }}</strong>
+              </td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'partographChart.Key_DropsChart' | translate }}</strong>
+              </td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'partographChart.key_DrugChart' | translate }}</strong>
+              </td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'partographChart.Key_PulseChart' | translate }}</strong>
+              </td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'key_bp' | translate }}</strong>
+              </td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'partographChart.Key_TempratureChart' | translate }}</strong>
+              </td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'partographChart.key_ProtienChart' | translate }}</strong>
+              </td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'partographChart.key_AcetoneChart' | translate }}</strong>
+              </td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'partographChart.key_VolumeChart' | translate }}</strong>
+              </td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+
+
+        <h3>3.5 {{ 'key_FourthStage' | translate }}</h3>
+        <div class="mb-3">
+          <img src="assets/images/chart5.jpg" />
+        </div>
+        <h4>3.5.1 {{ 'key_Observation' | translate }}</h4>
+        <table class="table table-bordered">
+          <tbody>
+            <tr>
+              <td width="30%">
+                <strong>{{ 'key_pph' | translate }}</strong>
+              </td>
+              <td width="70%">
+                <div>Yes</div>
+                <div>Comment goes here</div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'Key_Eclampsia' | translate }}</strong>
+              </td>
+              <td>
+                <div>Yes</div>
+                <div>Comment goes here</div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'key_PostPartumCollapse' | translate }}</strong>
+              </td>
+              <td>
+                <div>Yes</div>
+                <div>Comment goes here</div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <h4>3.5.2 {{ 'key_Charthistory' | translate }}</h4>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th width="20%"></th>
+              <th width="10%">{{ 'key_Value' | translate }}</th>
+              <th width="50%">{{ 'key_Commentsarea' | translate }}</th>
+              <th width="10%">{{ 'key_InputBy' | translate }}</th>
+              <th width="10%">{{ 'key_datetime' | translate }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <strong>{{ 'Key_FetalHeart' | translate }}</strong>
+              </td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'partographChart.Key_AmnioticChart' | translate }}</strong>
+              </td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'partographChart.Key_MouldingChart' | translate }}</strong>
+              </td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'partographChart.Key_MouldingChart' | translate }}</strong>
+              </td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'partographChart.Key_DescentChart' | translate }}</strong>
+              </td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'partographChart.Key_ContractionChart' | translate }}</strong>
+              </td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'partographChart.Key_OxytocinChart' | translate }}</strong>
+              </td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'partographChart.Key_DropsChart' | translate }}</strong>
+              </td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'partographChart.key_DrugChart' | translate }}</strong>
+              </td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'partographChart.Key_PulseChart' | translate }}</strong>
+              </td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'key_bp' | translate }}</strong>
+              </td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'partographChart.Key_TempratureChart' | translate }}</strong>
+              </td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'partographChart.key_ProtienChart' | translate }}</strong>
+              </td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'partographChart.key_AcetoneChart' | translate }}</strong>
+              </td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'partographChart.key_VolumeChart' | translate }}</strong>
+              </td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="postpartum-care">
+        <h2>4. {{ 'key_PostpartumCare' | translate }}</h2>
+        <h3>4.1 {{ 'key_DeliveryReport' | translate }}</h3>
+        <table class="table table-bordered">
+          <tbody>
+            <tr>
+              <td width="30%">
+                <strong>{{ 'key_Diagnosis' | translate }}</strong>
+              </td>
+              <td width="70%"></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'key_Outcomeofdelivery' | translate }}</strong>
+              </td>
+              <td>Abortion</td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'key_DateandtimeofDelivery' | translate }}</strong>
+              </td>
+              <td>2 Aug 2020, 4:30am</td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'key_GestationAge' | translate }}</strong>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'key_DeliveryConductedName' | translate }}</strong>
+              </td>
+              <td>test one</td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'key_DateandtimeofAbortion' | translate }}</strong>
+              </td>
+              <td>2 Aug 2020, 4:30am</td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'key_GestationAbortion' | translate }}</strong>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'key_DeliveryConductedDesignation' | translate }}</strong>
+              </td>
+              <td>test one</td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'key_TypeofDelivery' | translate }}</strong>
+              </td>
+              <td>
+                <div>Assisted (specify)</div>
+                <div>Comments goes here</div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <strong>
+                  {{ 'key_ComplicationsDelivery' | translate }}
+                </strong>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>
+                  {{ 'key_AnyMedicalGiven' | translate }}
+                </strong>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>
+                  {{ 'key_IndicationIntervention' | translate }}
+                </strong>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>
+                  {{ 'key_DateAndTimeNatalWard' | translate }}
+                </strong>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>
+                  {{ 'key_ConditionNatalWard' | translate }}
+                </strong>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>
+                  {{ 'key_ReferredBaby' | translate }}
+                </strong>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>
+                  {{ 'key_MaternalNeonatal' | translate }}
+                </strong>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>
+                  {{ 'key_Causeofdeathandtime' | translate }}
+                </strong>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>
+                  {{ 'key_IntrapartumRemarks' | translate }}
+                </strong>
+              </td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>4.2 {{ 'key_BabyReport' | translate }}</h3>
+        <table class="table table-bordered">
+          <tbody>
+            <tr>
+              <td width="30%">
+                <strong>{{ 'key_Diagnosis' | translate }}</strong>
+              </td>
+              <td width="70%"></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'key_Didthebabycry' | translate }}</strong>
+              </td>
+              <td>Yes</td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'key_Breastfeedinginitiated' | translate }}</strong>
+              </td>
+              <td>Yes</td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'key_breastfeeding' | translate }}</strong>
+              </td>
+              <td>2 Aug 2020, 4:30am</td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'key_Birthdose' | translate }}</strong>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'key_TemperatureMaintained' | translate }}</strong>
+              </td>
+              <td>Yes</td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'key_babyresuscitation' | translate }}</strong>
+              </td>
+              <td>Yes</td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'key_WeightInGms' | translate }}</strong>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'key_BCG' | translate }}</strong>
+              </td>
+              <td>Yes</td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'key_OPV' | translate }}</strong>
+              </td>
+              <td>Yes</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>4.3 {{ 'Key_Medication' | translate }}</h3>
+        <table class="table table-bordered">
+          <tbody>
+            <tr>
+              <td width="30%">
+                <strong>{{ 'key_Vitamin' | translate }}</strong>
+              </td>
+              <td width="70%">Yes</td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'key_AnycongenitalAnomaly' | translate }}</strong>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'key_Hepatitis' | translate }}</strong>
+              </td>
+              <td>Yes</td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'key_Anyothercomplication' | translate }}</strong>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                Overall Coments goes here
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>4.4 {{ 'key_PostpartumCareReport' | translate }}</h3>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th width="40%"></th>
+              <th width="30%" colspan="2" class="text-center">{{ 'key_Day1Date' | translate }}</th>
+              <th width="30%" colspan="2" class="text-center">{{ 'key_Day2Date' | translate }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td></td>
+              <td class="text-center">{{ 'key_Morning' | translate }}</td>
+              <td class="text-center">{{ 'key_Evening' | translate }}</td>
+              <td class="text-center">{{ 'key_Morning' | translate }}</td>
+              <td class="text-center">{{ 'key_Evening' | translate }}</td>
+            </tr>
+            <tr>
+              <td>{{ 'key_AnyComplaints' | translate }}</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>{{ 'key_pr' | translate }}</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>{{ 'key_bp' | translate }}</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>{{ 'partographChart.Key_TempratureChart' | translate }}</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>{{ 'Key_Pallor' | translate }}</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>{{ 'key_BreastEngorged' | translate }}</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>{{ 'key_NipplesCrackedNormal' | translate }}</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>{{ 'key_UterusTenderness' | translate }}</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>{{ 'key_BleedingPV' | translate }}</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>{{ 'key_LochiaHealthy' | translate }}</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>{{ 'key_EpisiotomyTear' | translate }}</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>{{ 'key_FamilyPlanningCounselling' | translate }}</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>{{ 'key_BreastMilkExpression' | translate }}</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>{{ 'key_Complicationsifany' | translate }}</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>{{ 'key_Referralifrequired' | translate }}</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>{{ 'key_Treatmentgiven' | translate }}</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>{{ 'key_SignatureattendingNurse' | translate }}</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>{{ 'key_Signaturetreatingdoctor' | translate }}</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+
+          </tbody>
+        </table>
+
+        <table class="table table-bordered">
+          <tbody>
+            <tr>
+              <td>Comments goes here</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>4.5 {{ 'key_DischargeReport' | translate }}</h3>
+        <table class="table table-bordered">
+          <tbody>
+            <tr>
+              <td width="30%">
+                <strong>{{ 'key_Dateandtimeofdischarge' | translate }}</strong>
+              </td>
+              <td width="70%"></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'key_Dischargedby' | translate }}</strong>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
+                <strong>{{ 'key_DischargeInstructions' | translate }}</strong>
+              </td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+
+
+      </div>
+
+
+    </div>
+  </div>

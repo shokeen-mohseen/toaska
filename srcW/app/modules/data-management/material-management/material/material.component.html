@@ -1,0 +1,45 @@
+<!--TFS ID: 17222, Author: Monu Ram Yadav, Date: 31-08-2020, Des: Design Material Screens-->
+<app-top-btn-group #btnBar [actionGroupConfig]="actionGroupConfig" (action)="actionHandler($event)"></app-top-btn-group>
+<!--Button Action Section End/////////-->
+<div>
+  <h5>{{ 'key_Material' | translate }}</h5>
+</div>
+<mat-tab-group #tabGroupA class="mt-18" animationDuration="0ms" (selectedTabChange)="tabChange($event)">
+
+  <mat-tab #tab1 *ngIf="tab1">
+    <ng-template mat-tab-label>
+      {{ 'key_MaterialList' | translate }}
+    </ng-template>
+    <div class="tab-content" *ngIf="tab1Data">
+      <app-material-list (selectedMaterials)="selectedMaterials($event)" [materialsToSelect]="materialsToSelect()"></app-material-list>
+    </div>
+  </mat-tab>
+
+  <mat-tab #tab2 *ngIf="tab2">
+    <ng-template mat-tab-label>
+      {{ 'key_NewMaterial' | translate }}
+      <button class="close" type="button" (click)="closeTab()">
+        <i class="fa fa-times-circle-o" aria-hidden="true"></i>
+      </button>
+    </ng-template>
+    <div class="tab-content" *ngIf="tab2Data">
+      <app-add-material></app-add-material>
+    </div>
+  </mat-tab>
+
+  <mat-tab #tab3 *ngIf="tab3">
+    <ng-template mat-tab-label>
+      {{ 'key_Edit' | translate }}
+      <button class="close" type="button" (click)="closeTab()">
+        <i class="fa fa-times-circle-o" aria-hidden="true"></i>
+      </button>
+    </ng-template>
+    <div class="tab-content" *ngIf="tab3Data">
+      <app-edit-material (selectedMaterials)="selectedMaterials($event)" [materialsToEdit]="materialsToEdit()"></app-edit-material>
+    </div>
+  </mat-tab>
+</mat-tab-group>
+
+
+
+<app-show-notes></app-show-notes>

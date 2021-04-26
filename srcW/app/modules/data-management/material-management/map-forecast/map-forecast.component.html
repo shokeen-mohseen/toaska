@@ -1,0 +1,86 @@
+<!--TFS ID: 17222, Author: Monu Ram Yadav, Date: 01-09-2020, Des: Design Material Screens-->
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="d-flex flex-nowrap justify-content-between align-items-center mb-2">
+
+      <div *ngIf="addDeleteBtn" class="btn-group btn-group-toggle btn-group-md" data-toggle="buttons">
+        <button id="addAddressButton" class="btn btn-outline-primary" (click)="clickToAddNewMapRow()" type="button" placement="bottom" ngbTooltip="{{'key_Add' | translate}}">
+          <i class="fa fa-plus" aria-hidden="true"></i>
+          <span>
+           {{'key_Add' | translate}}
+          </span>
+        </button>
+        <button id="deleteButton" class="btn btn btn-outline-danger" (click)="removeLocationToMaterial()" type="button" placement="bottom" ngbTooltip="{{'key_Delete' | translate}}">
+          <i class="fa fa-trash-o" aria-hidden="true"></i>
+          <span>
+            {{'key_Delete' | translate}}
+          </span>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="mapAddnewRow" class="form-inline row justify-content-center col-md-12">
+    <!--<div class="col-md-2"><label class="justify-content-end">{{'key_AddRows' | translate}}</label></div>-->
+    <div class="col-md-4">      
+      <angular2-multiselect [data]="mapForeCastList" [(ngModel)]="mapForeCastItem" [settings]="settings"
+                            (onSelect)="onItemSelect($event)"
+                            (onDeSelect)="onItemSelect($event)"
+                            (onSelectAll)="onItemSelect($event)"
+                            (onDeSelectAll)="onItemSelect($event)"
+                            name="mapForeCastList">
+      </angular2-multiselect>
+    </div>
+    <div class="col-md-2">
+      <div class="d-flex">
+        <input type="button" id="btnSave" name="btnSave" (click)="saveMapForecast()" class="btn btn-save mr-2 popup-btn-width" value="Save">
+        <input type="button" id="btnCancel" name="btnCancel" (click)="cancel()" class="btn btn-previous popup-btn-width" value="Cancel">
+      </div>
+    </div>
+  </div>
+  
+  <div class="col-md-12 mt-2">
+    <div class="scroll">
+      <mat-table #table [dataSource]="dataSource" matSort>
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="selectRow">
+          <mat-header-cell class="t-center tw-5" *matHeaderCellDef>
+            <div class="form-check-inline">
+              <label class="form-check-label">
+                <input type="checkbox" class="form-check-input" value="" data-toggle="tooltip" data-placement="top" title="Select all" (change)="$event ? masterToggle() : null"
+                       [checked]="selection.hasValue() && isAllSelected()"
+                       [indeterminate]="selection.hasValue() && !isAllSelected()">
+              </label>
+            </div>
+          </mat-header-cell>
+          <mat-cell class="t-center tw-5" *matCellDef="let row">
+            <div class="form-check-inline">
+              <label class="form-check-label">
+                <input type="checkbox" class="form-check-input" value="" data-toggle="tooltip" data-placement="top" title="Select" (click)="$event.stopPropagation()"
+                       (change)="$event ? selection.toggle(row) : null"
+                       [checked]="selection.isSelected(row)">
+              </label>
+            </div>
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="MASCustomerAddressCode">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>MAS Customer Address Code</mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.propertyValue}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="Name">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.locationName}} </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"
+                 [ngClass]="{hovered: row.hovered, highlighted: row.highlighted,
+                 'selected': selection.isSelected(row)}"
+                 (mouseover)="row.hovered = true" (mouseout)="row.hovered = false"></mat-row>
+      </mat-table>
+    </div>
+    <div class="col-lg-12 text-center" *ngIf="dataSource.data.length == 0"><p>No records to display.</p></div>
+  </div>
+</div>
+

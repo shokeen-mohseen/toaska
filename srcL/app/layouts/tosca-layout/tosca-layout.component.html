@@ -1,0 +1,36 @@
+<!--<app-nav></app-nav>-->
+<div class="topNav"></div>
+<div class="app-body">
+
+
+
+  <app-sidebarnav></app-sidebarnav>
+  <main class="main bg-bodycolor">
+    <!-- Breadcrumb -->
+    <!-- breaking change 'cui-breadcrumb' -->
+    <!-- Breadcrumb Menu-->
+    <!--<cui-breadcrumb>
+
+
+      <li class="breadcrumb-menu d-md-down-none">
+        <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+          <a class="btn" href="#"><i class="icon-speech"></i></a>
+          <a class="btn" [routerLink]="['/dashboard']"><i class="icon-graph"></i> &nbsp;Dashboard</a>
+          <a class="btn" href="#"><i class="icon-settings"></i> &nbsp;{{'Settings' | translate}}</a>
+        </div>
+      </li>
+
+    </cui-breadcrumb>-->
+    <div class="container-fluid">
+
+
+      <router-outlet></router-outlet>
+    </div><!-- /.container-fluid -->
+  </main>
+  <!--<app-toasts></app-toasts>-->
+  <app-rightpanel></app-rightpanel>
+</div>
+
+<!--<app-footer>
+ <a href="javascript:;">Lamps</a> &copy; copyright 2020. owered by <a href="javascript:;">OSOFTEC</a>
+</app-footer>-->

@@ -1,0 +1,15 @@
+<!-- Modal Header -->
+<div class="modal-header">
+  <h4 class="modal-title">Add / Edit Address Details</h4>
+  <button type="button" class="close" data-dismiss="modal" (click)="activeModal.dismiss('Cross click')">&times;</button>
+</div>
+
+<!-- Modal body -->
+<div class="modal-body">
+  <app-addressfields [modalData1]="mode" [isEditRights]="isEditRights" [contactActionType]="contactActionType"
+                     [getAddresById]="getAddresById"
+                     (addEntry)="addEditUserAddress($event)"
+                     (editEntry)="addEditUserAddress($event)"
+                     [addressIds]="addressIds"
+                     [isEdit]="isEdit"></app-addressfields>
+</div>

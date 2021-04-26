@@ -1,0 +1,182 @@
+<!--<form #petsForm="ngForm">
+
+  <div class="accordion" id="accordionExample">
+    <ng-template ngFor let-Complication [ngForOf]="form.Complications" let-index="index" let-isLast="last">
+
+      <div class="card cardpointer" id="headingOne">
+        <div class="card-header collapsed d-flex justify-content-between">
+          <div class="row w-100">
+
+            <div class="col-sm-10">
+              <a data-toggle="collapse" [attr.data-target]="'#Collapse'+ (index+1)">
+                {{Complication.headName}}
+              </a>
+            </div>
+            <div class="col-sm-2">
+              <ng-container [ngSwitch]="Complication.webControlType">
+                <div *ngSwitchCase="'rdb'">
+                  <div class=" radiosize">
+                    <div class="form-check form-check-inline mr-4 inputbox" *ngFor="let item of Complication.webcontorlTypePossibleValues; let i = index">
+                      <input class="form-check-input" type="radio" name="option_{{index}}"
+                             [value]="item.controlLevelValue" [(ngModel)]="Complication.parameterValue"
+                             [checked]="Complication.parameterValue == item.controlLevelValue ? true :(Complication.parameterValue == '' ? true  : true)">
+                      <label class="form-check-label" for="inline-checkbox1">{{item.controlLevelValue}}</label>
+                    </div>
+                  </div>
+                </div>
+                <div *ngSwitchCase="'ddl'">
+                  <div class=" radiosize">
+                    <div class="form-check form-check-inline mr-4 inputbox">
+                      <select [(ngModel)]="Complication.parameterValue" (change)="onChangeItem($event,Complication)" class="form-control wselectwidth">
+                        <option *ngFor="let item of Complication.webcontorlTypePossibleValues" [attr.value]="item.controlLevelValue"
+                                [attr.selected]="item.controlLevelValue == Complication.parameterValue ? true : null">
+                          {{item.controlLevelValue}}
+                        </option>
+
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div *ngSwitchCase="'txt'">
+                  <div class="">
+                    <div class="form-check form-check-inline inputbox" style="margin-right: -0.5rem !important">
+                      <input pattern=" {{Complication.regexExp}}" (change)="textBoxEvent($event,Complication)" class="form-control" type="text" name="name-{{index}}" [(ngModel)]="Complication.parameterValue">
+                      <label class="form-check-label ml-3 mb-2" for="inline-checkbox1">{{Complication.controlName}}</label>
+                    </div>
+                  </div>
+                </div>
+              </ng-container>
+            </div>
+          </div>
+
+
+        </div>
+
+        <div [id]="'Collapse'+ (index+1)" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+          <div class="card-body cardbodybg">
+            <div class="form-group">
+              <textarea class="form-control" (keypress)="onMaxlength(Complication,512)" rows="3" name="remark-{{index}}"
+                        maxlength="512"
+                        [(ngModel)]="Complication.parameterValueComment"></textarea>
+            </div>
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="sharemargin float-right">
+                  <div class="d-flex flex-row fs-12">
+                    <div class="like p-2 cursor"><label>{{Complication.createDateTimeServer | date:'medium' }}    By: {{Complication.createdBy}}</label></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </ng-template>
+  </div>
+  <div class="d-flex justify-content-end">
+
+    <input type="button" class="btn btn-secondary ml-3 btnbrd" (click)="AddMoreComplication()" value="{{ 'key_AddNewParameter' | translate }}" />
+  </div>
+
+
+</form>-->
+  <div [formGroup]="regForm">
+   
+      <div class="accordion" id="accordionExample" *ngIf="regForm" formArrayName="dynamicParameterFormArray">
+        <ng-container *ngIf="regForm.controls.dynamicParameterFormArray.controls.length>0">
+          <ng-container *ngFor="let itemArray of f.dynamicParameterFormArray['controls']; let i=index"   >
+
+           
+            <div class="card cardpointer" id="headingOne" [formGroupName]="i" >
+              <div class="card-header collapsed d-flex justify-content-between p-0">
+                <div class="row w-100">
+
+                  <div class="col-sm-9 py-2 px-4" data-toggle="collapse" [attr.data-target]="'#Collapse'+ (i+1)">
+                    <a>
+                      {{itemArray.get('headName').value}} 
+                    </a>
+                  </div>
+                  <div class="col-sm-3 py-2 px-4"> 
+                    <ng-container [ngSwitch]="itemArray.get('webControlType').value">
+                      <div *ngSwitchCase="'rdb'">
+                        <div class=" radiosize">
+                          <div class="form-check form-check-inline mr-4 inputbox" *ngFor="let item of itemArray.get('webcontorlTypePossibleValues').value; let i = index">
+                            <input class="form-check-input" type="radio" [value]="item.controlLevelValue"
+                                   formControlName="parameterValue"
+                                   [checked]="itemArray.get('parameterValue').value == item.controlLevelValue ? true :(itemArray.get('parameterValue').value == '' ? true  : true)">
+                            <label class="form-check-label" for="inline-checkbox1">{{item.controlLevelValue}}</label>
+                          </div>
+                          <app-control-messages [control]="itemArray.get('parameterValue')"></app-control-messages>
+                        </div>
+                      </div>
+                      <div *ngSwitchCase="'ddl'">
+                        <div class=" radiosize">
+                          <div class="form-check form-check-inline mr-4 inputbox">
+                            <select formControlName="parameterValue" (change)="onChangeItem($event,itemArray)" class="form-control wselectwidth">
+                              <option *ngFor="let item of itemArray.get('webcontorlTypePossibleValues').value" [attr.value]="item.controlLevelValue"
+                                      [attr.selected]="item.controlLevelValue == itemArray.get('parameterValue').value ? true : null">
+                                {{item.controlLevelValue}}
+                              </option>
+
+                            </select>
+                            <app-control-messages [control]="itemArray.get('parameterValue')"></app-control-messages>
+                          </div>
+                        </div>
+                      </div>
+                      <div *ngSwitchCase="'txt'">
+                        <div class="">
+                          <div class="form-check form-check-inline inputbox" style="margin-right: -0.5rem !important">
+                            <input (change)="textBoxEvent($event,itemArray)" class="form-control" type="text" formControlName="parameterValue">
+                            <p *ngIf="!itemArray.get('parameterValue').valid && (itemArray.get('parameterValue').dirty ||itemArray.get('parameterValue').touched)">
+                              <app-control-messages [control]="itemArray.get('parameterValue')"></app-control-messages>
+
+                            </p>
+                           
+                            <label class="form-check-label ml-3 mb-2" for="inline-checkbox1">{{itemArray.get('controlName').value}}</label>
+                          </div>
+                        </div>
+                      </div>
+                    </ng-container>
+                  </div>
+                </div>
+
+
+              </div>
+
+              <div [id]="'Collapse'+ (i+1)" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                <div class="card-body cardbodybg">
+                  <div class="form-group">
+                    <textarea class="form-control" (keypress)="onMaxlength(itemArray,512)" rows="3"
+                              maxlength="512"
+                              formControlName="parameterValueComment"></textarea>
+                    <app-control-messages [control]="itemArray.get('parameterValueComment')"></app-control-messages>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <div class="sharemargin float-right">
+                        <div class="d-flex flex-row fs-12">
+                          <div class="like p-2 cursor"><label>{{itemArray.get('createDateTimeServer').value | date:'medium' }}    By: {{itemArray.get('createdBy').value}}</label></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </ng-container>
+        </ng-container>
+      </div>
+
+   
+  </div>
+  
+
+  <div class="d-flex justify-content-end">
+    <!--<button type="submit" class="btn btn-save mr-2 popup-btn-width"
+            [disabled]="regForm.invalid">
+      <span [innerHTML]="'key_Save' | translate"></span>
+    </button>-->
+    <input type="button" class="btn btn-secondary ml-3 btnbrd" (click)="AddMoreComplication()" value="{{ 'key_AddNewParameter' | translate }}" />
+  </div>

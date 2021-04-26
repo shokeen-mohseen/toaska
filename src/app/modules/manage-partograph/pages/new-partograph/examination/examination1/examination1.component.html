@@ -1,0 +1,231 @@
+<!--TFS ID:- 17414,
+  Date: 15-09-2020,
+  Author: Monu Ram YAdav,
+  Des:-  Fix Stepper Steps Data in Sub Component for Prepartum Care Section-->
+<!--Row Start-->
+<div class="row mt-3 examination-label">
+  <div class="col-sm-12 col-md-6">
+    <div class="form-inline row form-group">
+      <div class="col-sm-12 col-md-4">
+        <label>{{ 'key_hbDate' | translate }}</label>
+      </div>
+      <div class="col-sm-12 col-md-8">
+        <div class="row">
+          <div class="col-md-5"><input type="text" class="form-control w-100"></div>
+          <div class="col-md-7 pl-0"><input type="datetime-local" class="form-control w-100"></div>
+        </div>
+      </div>
+    </div>
+    <div class="form-inline row form-group">
+      <div class="col-sm-12 col-md-4">
+        <label>{{ 'key_tlc' | translate }}</label>
+      </div>
+      <div class="col-sm-12 col-md-8">
+        <input type="text" class="form-control w-100">
+      </div>
+    </div>
+    <div class="form-inline row form-group">
+      <div class="col-sm-12 col-md-4">
+        <label>{{ 'key_dlc' | translate }}</label>
+      </div>
+      <div class="col-sm-12 col-md-8">
+        <div class="row">
+          <div class="col-sm-12 col-md-4"><label class="justify-content-center fs-11">{{ 'key_pcv' | translate }}</label></div>
+          <div class="col-sm-12 col-md-4"><label class="justify-content-center fs-11">{{ 'key_mcv' | translate }}</label></div>
+          <div class="col-sm-12 col-md-4"><label class="justify-content-center fs-11">{{ 'key_pow' | translate }}</label></div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12 col-md-4">
+            <input type="text" class="form-control w-100">
+          </div>
+          <div class="col-sm-12 col-md-4">
+            <input type="text" class="form-control w-100">
+          </div>
+          <div class="col-sm-12 col-md-4">
+            <input type="text" class="form-control w-100">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-inline row form-group">
+      <div class="col-sm-12 col-md-4">
+        <label>{{ 'key_esr' | translate }}</label>
+      </div>
+      <div class="col-sm-12 col-md-8">
+        <input type="text" class="form-control w-100">
+      </div>
+    </div>
+    <div class="form-inline row form-group">
+      <div class="col-sm-12 col-md-4">
+        <label>{{ 'key_PalletCount' | translate }}</label>
+      </div>
+      <div class="col-sm-12 col-md-8">
+        <input type="number" class="form-control w-100">
+      </div>
+    </div>
+    <div class="form-inline row form-group">
+      <div class="col-sm-12 col-md-4">
+        <label>{{ 'key_PalletCountDate' | translate }}</label>
+      </div>
+      <div class="col-sm-12 col-md-8">
+        <input type="datetime-local" class="form-control w-100">
+      </div>
+    </div>
+    <div class="form-inline row form-group">
+      <div class="col-sm-12 col-md-4">
+      </div>
+      <div class="col-sm-12 col-md-8">
+        <div class="row">
+          <div class="col-sm-12 col-md-4"><label class="justify-content-center">{{ 'key_bt' | translate }}</label></div>
+          <div class="col-sm-12 col-md-4"><label class="justify-content-center">{{ 'key_ct' | translate }}</label></div>
+          <div class="col-sm-12 col-md-4"><label class="justify-content-center">{{ 'key_crt' | translate }}</label></div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12 col-md-4">
+            <input type="text" class="form-control w-100">
+          </div>
+          <div class="col-sm-12 col-md-4">
+            <input type="text" class="form-control w-100">
+          </div>
+          <div class="col-sm-12 col-md-4">
+            <input type="text" class="form-control w-100">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-inline row form-group">
+      <div class="col-sm-12 col-md-4">
+        <label>{{ 'key_ABORh' | translate }}</label>
+      </div>
+      <div class="col-sm-12 col-md-8">
+        <div class="row">
+          <div class="col-sm-12 col-md-8">
+            <input type="text" class="form-control w-100" placeholder="{{ 'key_bloodGroup' | translate }}">
+          </div>
+          <div class="col-sm-12 col-md-4">
+            <input type="text" class="form-control w-100" placeholder="RH">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-inline row form-group">
+      <div class="col-sm-12 col-md-4">
+        <label>{{ 'key_Sickling' | translate }}</label>
+      </div>
+      <div class="col-sm-12 col-md-8">
+        <input type="text" class="form-control w-100">
+      </div>
+    </div>
+    <div class="form-inline row form-group">
+      <div class="col-sm-12 col-md-4">
+        <label>{{ 'key_Electrophoresis' | translate }}</label>
+      </div>
+      <div class="col-sm-12 col-md-8">
+        <input type="text" class="form-control w-100">
+      </div>
+    </div>
+  </div>
+  <!--Col-md-6 End-->
+  <div class="col-sm-12 col-md-6">
+    <div class="form-inline row form-group">
+      <div class="col-sm-12 col-md-4">
+        <label>{{ 'key_UrineAlbumin' | translate }}</label>
+      </div>
+      <div class="col-sm-12 col-md-8">
+        <input type="text" class="form-control w-100">
+      </div>
+    </div>
+    <div class="form-inline row form-group">
+      <div class="col-sm-12 col-md-4">
+        <label>{{ 'key_Sugar' | translate }}</label>
+      </div>
+      <div class="col-sm-12 col-md-8">
+        <input type="text" class="form-control w-100">
+      </div>
+    </div>
+    <div class="form-inline row form-group">
+      <div class="col-sm-12 col-md-4">
+        <label>{{ 'key_Microscopic' | translate }}</label>
+      </div>
+      <div class="col-sm-12 col-md-8">
+        <input type="text" class="form-control w-100">
+      </div>
+    </div>
+
+    <div class="form-inline row form-group">
+      <div class="col-sm-12 col-md-4">
+        <label>{{ 'key_UrineCS' | translate }}</label>
+      </div>
+      <div class="col-sm-12 col-md-8">
+        <input type="text" class="form-control w-100">
+      </div>
+    </div>
+    <div class="form-inline row form-group">
+      <div class="col-sm-12 col-md-4">
+        <label>{{ 'key_VaginalSwab' | translate }}</label>
+      </div>
+      <div class="col-sm-12 col-md-8">
+        <input type="text" class="form-control w-100">
+      </div>
+    </div>
+    <div class="form-inline row form-group">
+      <div class="col-sm-12 col-md-4">
+        <label>{{ 'key_CervicalSwab' | translate }}</label>
+      </div>
+      <div class="col-sm-12 col-md-8">
+        <input type="text" class="form-control w-100">
+      </div>
+    </div>
+    <div class="form-inline row form-group">
+      <div class="col-sm-12 col-md-4">
+        <label>{{ 'key_CervicalCytology' | translate }}</label>
+      </div>
+      <div class="col-sm-12 col-md-8">
+        <input type="text" class="form-control w-100">
+      </div>
+    </div>
+    <div class="form-inline row form-group">
+      <div class="col-sm-12 col-md-4">
+        <label>{{ 'key_XRayChest' | translate }}</label>
+      </div>
+      <div class="col-sm-12 col-md-8">
+        <input type="text" class="form-control w-100">
+      </div>
+    </div>
+    <div class="form-inline row form-group">
+      <div class="col-sm-12 col-md-4">
+        <label>{{ 'key_ecg' | translate }}</label>
+      </div>
+      <div class="col-sm-12 col-md-8">
+        <input type="text" class="form-control w-100">
+      </div>
+    </div>
+    <div class="form-inline row form-group">
+      <div class="col-sm-12 col-md-4">
+        <label>{{ 'key_AnyOther' | translate }}</label>
+      </div>
+      <div class="col-sm-12 col-md-8">
+        <input type="text" class="form-control w-100">
+      </div>
+    </div>
+
+
+  </div>
+  <!--Col-md-6 End-->
+</div>
+<!--Row End-->
+<div class="row mt-3 justify-content-center">
+  <div class="col-sm-12">
+    <div class="form-group">
+      <textarea class="form-control" rows="3" placeholder="{{ 'key_AddCommentHere' | translate }}"></textarea>
+    </div>
+  </div>
+</div>
+
+<app-dynamic-webcontrol-parameter [stageModule]="stageCode"></app-dynamic-webcontrol-parameter>
+
+<!--Row start for other-->
+<!--<div class="row">
+  <input type="button" class="btn btn-secondary ml-3 btnbrd" (click)="AddMoreComplication()" value="{{ 'key_AddNewParameter' | translate }}" />
+</div>-->
+<!--Row end for other-->

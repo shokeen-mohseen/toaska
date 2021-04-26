@@ -1,0 +1,136 @@
+<style>
+  div#proformainvoiceView1 {
+    box-shadow: 0px 1px 3px 1px #ddd;
+  }
+</style>
+
+<div class="container" style="padding-left: 30px; padding-right: 30px; padding-bottom: 10px;">
+
+  <div class="row justify-content-center mt-2">
+    <div class="col-xl-2 col-lg-4 col-md-4 col-sm-12">
+      <button type="button" (click)="downloadPdf()" class="btn btn-block btn-save">Download</button>
+    </div>
+    <div class="col-xl-2 col-lg-4 col-md-4 col-sm-12">
+      <button type="button" (click)="closeWindow()" class="btn btn-block btn-secondary">Close</button>
+    </div>
+  </div>
+  <div id="proformainvoiceView" class="row justify-content-center reportContainer">
+    <div id="proformainvoiceView1" class="row justify-content-center reportContainer pageBreakElement" *ngFor="let invoice of proformaInvoice_data" style="display:block; width:100%; clear:both; height:1035px">
+
+      <!--<div *ngFor="let invoice of proformaInvoice">-->
+    
+        <table style="width: 100%; padding:25px; clear:both">
+          <tr>
+            <td align="left" style="width:50%;">
+
+              {{proformaaddress[0].orgBilltoname}}<br>
+              {{proformaaddress[0].orgBilltostreetname1}}<br>
+              {{proformaaddress[0].orgBilltoCityName}}, {{proformaaddress[0].orgBilltoStateCode}}, {{proformaaddress[0]. billtozipcode}},  {{proformaaddress[0].orgBilltoCountryCode}}
+            </td>
+            <td align="right" style="width:50%;">
+              <span style="font-size: 35px;">{{invoice.title}}</span>
+              <ngx-barcode [bc-value]="proformaInvoice[0].shipmentNumber" [bc-display-value]="true" [bc-height]="35"
+                           [bc-margin-top]="0" [bc-margin-bottom]="0" [bc-margin-left]="0" [bc-margin-right]="0"></ngx-barcode>
+            </td>
+          </tr>
+        </table>
+        <table>
+          <tr>
+            <td>
+              <table style="width: 100%; padding:25px;">
+                <tr>
+                  <td style="width:50%; border:1px solid black; padding:5px;">
+                    <span style="font-weight:bold;">Bill To:</span><br>
+                    {{invoice.billtoname}}<br>
+                    {{invoice.billtoCityName}}, {{invoice.billtoStateCode}}, {{invoice.billtozipcode}}, {{invoice.billtoCountryCode}}<br>
+                    {{invoice.billtostreetname1 }}
+                  </td>
+                  <td style="width:50%; border:1px solid black; padding:5px;">
+                    <span style="font-weight:bold;">Ship To:</span><br>
+                    {{invoice.shiptoname}}<br>
+                    {{invoice.shiptostreetname1}} <br>
+                    {{invoice.shiptoCityName}}, {{invoice.shiptoStateCode}}, {{invoice.shiptozipcode}}, {{invoice.shiptoCountryCode}}<br>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="2" style="padding-top:10px;">
+                    <table style="width: 100%;" cellpadding="0" cellspacing="0">
+                      <tr style="background-color: #1c3a70; text-align:center; color: white;" border="10">
+                        <th style="padding: 5px; border-left:2px solid black; border-top:2px solid black;">Invoice Date</th>
+                        <th style="padding: 5px; border-left:2px solid white; border-top:2px solid black;">Invoice #</th>
+                        <th style="padding: 5px; border-left:2px solid white; border-top:2px solid black;">PO#</th>
+                        <th style="padding: 5px; border-left:2px solid white; border-top:2px solid black;">Sales Rep</th>
+                        <th style="padding: 5px; border-left:2px solid white; border-top:2px solid black; border-bottom:2px solid black;">BOL</th>
+                        <th style="padding: 5px; border-left:2px solid white; border-top:2px solid black; border-right:2px solid black;">Terms</th>
+                      </tr>
+                      <tr style="border-bottom:2px solid black;">
+                        <td style="padding: 5px; border-left:2px solid black; border-top:2px solid black; border-bottom:2px solid black;"> {{invoice.shipdate|date:'MM/dd/yyyy'}}</td>
+                        <td style="padding: 5px; border-left:2px solid black; border-top:2px solid black; border-bottom:2px solid black;"> {{invoice.shipmentNumber}}</td>
+                        <td style="padding: 5px; border-left:2px solid black; border-top:2px solid black; border-bottom:2px solid black;"> {{invoice.pOnumber}}</td>
+                        <td style="padding: 5px; border-left:2px solid black; border-top:2px solid black; border-bottom:2px solid black;"> {{invoice.salesRep}}</td>
+                        <td style="padding: 5px; border-left:2px solid black; border-top:2px solid black; border-bottom:2px solid black;"> {{invoice.shipmentNumber}}</td>
+                        <td style="padding: 5px; border-left:2px solid black; border-top:2px solid black; border-right:2px solid black; border-bottom:2px solid black;"></td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="2" style="padding-top:20px;">
+                    <table style="width: 100%;" cellpadding="0" cellspacing="0">
+                      <tr style="background-color: #1c3a70; text-align:center; color: white;" border="10">
+                        <th style="padding: 5px; border-left:2px solid black; border-top:2px solid black;">Quantity</th>
+                        <th style="padding: 5px; border-left:2px solid white; border-top:2px solid black;">Description</th>
+                        <th style="padding: 5px; border-left:2px solid white; border-top:2px solid black;">Unit Price</th>
+                        <th style="padding: 5px; border-left:2px solid white; border-top:2px solid black; border-right:2px solid black;">Total</th>
+                      </tr>
+                      <tr style="border-bottom:2px solid black;" *ngFor="let matdet of invoice.orderdetails">
+                        <td style="padding: 5px; border-left:2px solid black; border-bottom:2px solid black;" align="right"> {{matdet.quantity}}</td>
+                        <td style="padding: 5px; border-left:2px solid black; border-bottom:2px solid black;">{{matdet.materialName}}</td>
+                        <td style="padding: 5px; border-left:2px solid black; border-bottom:2px solid black;" align="right">{{matdet.unitprice}}</td>
+                        <td style="padding: 5px; border-left:2px solid black; border-right:2px solid black; border-bottom:2px solid black;" align="right">{{matdet.totprice}}</td>
+                      </tr>
+
+                      <tr>
+                        <td colspan="3" style="padding: 5px;" align="right">Sub-Total</td>
+                        <td style="padding: 5px; border-left:2px solid black; border-right:2px solid black; border-bottom:2px solid black;" align="right">${{invoice.subtotal}}</td>
+                      </tr>
+                      <tr>
+                        <td colspan="3" style="padding: 5px;" align="right">Sales Tax</td>
+                        <td style="padding: 5px; border-left:2px solid black; border-right:2px solid black; border-bottom:2px solid black;" align="right">${{invoice.salestax}}</td>
+                      </tr>
+                      <tr>
+                        <td colspan="3" style="padding: 5px; font-weight:bold;" align="right">Balance Due</td>
+                        <td style="padding: 5px; border-left:2px solid black; border-right:2px solid black; border-bottom:2px solid black;" align="right">${{invoice.balancedue}}</td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+        <table style="width: 100%; padding:25px;">
+          <tr>
+            <td colspan="2" style="padding-top:30px;">
+              <table style="width:100%; background-color:#ababab;" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td style="width:50%; border:1px solid black; padding:5px;">
+                    <span style="font-weight:bold;">Please Mail Checks to:</span><br>
+                    {{proformaaddress[0].orgPaymentname}}<br>
+                    {{proformaaddress[0].orgPaymentstreetname1}} <br>
+                    {{proformaaddress[0].orgPaymentCityName}}, {{proformaaddress[0].orgPaymentStateCode}}, {{proformaaddress[0].orgPaymentzipcode}}, {{proformaaddress[0].orgPaymentCountryCode}}
+                  </td>
+                  <td style="width:50%; border:1px solid black; border-left:0; padding:5px;">
+                    <span style="font-weight:bold;">Phone:</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(920) 617-4000<br>
+                    <span style="font-weight:bold;">Fax:</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(920) 465-9198<br>
+                    <span style="font-weight:bold;">Website:</span> &nbsp;&nbsp;www.tosaltd.com
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+    </div>
+  </div>
+</div>
+

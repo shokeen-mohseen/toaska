@@ -1,0 +1,77 @@
+<!-- Modal Header -->
+<div class="modal-header">
+  <h5 class="modal-title">{{ 'key_UploadForecast' | translate }}</h5>
+  <button type="button" class="close" data-dismiss="modal" (click)="close()">&times;</button>
+</div>
+
+<!-- Modal body -->
+<div class="modal-body">
+  <div class="row">
+    <!--<div class="col-md-12">
+    <div class="d-flex flex-nowrap justify-content-between align-items-center mb-2">
+      <div class="btn-group btn-group-toggle btn-group-md" data-toggle="buttons">
+        <button id="deleteButton" class="btn btn btn-outline-danger"
+                type="button"
+                placement="bottom"
+                ngbTooltip="Delete"
+                (click)="deleteForecast()">
+          <i class="fa fa-trash-o" aria-hidden="true"></i>
+          <span>
+            {{ 'key_Delete' | translate }}
+          </span>
+        </button>
+        <button id="btnRefresh" class="btn btn-outline-primary" type="button" placement="bottom" ngbTooltip="Refresh">
+          <i class="fa fa-refresh" aria-hidden="true"></i>
+          <span>
+            {{ 'key_Refresh' | translate }}
+          </span>
+        </button>
+      </div>
+    </div>
+  </div>-->
+    <div class="col-md-12">
+      <div class="form-group">
+        <label> {{ 'key_ForecastName' | translate }}<span class="text-danger">*</span> </label>
+        <input type="text" class="form-control" [(ngModel)]="forecastName"  (keypress)="blockSpecialChar($event)" required>
+      </div>
+    </div>
+
+    <div class="col-md-12">
+      <div class="form-group">
+        <label> {{ 'key_ForecastDescription' | translate }}<span class="text-danger">*</span> </label>
+        <textarea class="form-control" maxlength="255" rows="2" [(ngModel)]="forecastDesc" required></textarea>
+      </div>
+    </div>
+
+    <div class="col-md-12">
+      <div class="form-group">
+        <label> {{ 'key_Selectforecastexcel' | translate }}<span class="text-danger">*</span></label>
+        <div class="custom-file">
+          <input id="inputGroupFile01" type="file" (change)="onFileSelect($event)" class="custom-file-input">
+          <label class="custom-file-label justify-content-start" for="inputGroupFile01">{{labelName}}</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-12">
+      <div class="form-group">
+        <label> {{ 'key_Selectsheetname' | translate }}<span class="text-danger">*</span></label>
+        <angular2-multiselect fixFilterBug [data]="itemListA" [(ngModel)]="selectedItemsA" [settings]="settingsA"
+                              (onSelect)="onItemSelect($event)"
+                              (onDeSelect)="OnItemDeSelect($event)"
+                              (onSelectAll)="onSelectAll($event)"
+                              (onDeSelectAll)="onDeSelectAll($event)"
+                              (onAddFilterNewItem)="onAddItemA($event)">
+        </angular2-multiselect>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="row">
+    <div class="col-md-12 mt-3 text-center">
+      <button class="btn btn-save mr-2" (click)="importForecast()">{{ 'key_UploadForecast' | translate }}</button>
+    </div>
+  </div>
+    
+  </div>

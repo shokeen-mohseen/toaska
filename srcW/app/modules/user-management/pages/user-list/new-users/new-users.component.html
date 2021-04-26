@@ -1,0 +1,74 @@
+<div class="row">
+  <div class="col-lg-12">
+    <div>
+      <app-table-filter (filterOn)="applyFilter($event)"></app-table-filter>
+    </div>
+    <div class="scroll">
+
+      <mat-table #table [dataSource]="dataSource" matSort>
+        <!-- Position Column -->
+        <ng-container matColumnDef="Id">
+          <mat-header-cell class="t-center tw-5" *matHeaderCellDef>
+            <div class="form-check-inline">
+              <label class="form-check-label">
+                <mat-checkbox [checked]="isAllSelected" (change)="selectAll($event); false" class="form-check-input"></mat-checkbox>
+
+              </label>
+            </div>
+
+          </mat-header-cell>
+          <mat-cell class="t-center tw-5" *matCellDef="let row">
+            <div class="form-check-inline">
+              <label class="form-check-label">
+                <!--<mat-checkbox [checked]="row.IsSeleted" (change)="selectCheckbox($event, row); false" class="form-check-input"></mat-checkbox>-->
+                <mat-checkbox [checked]="row.IsSeleted" (click)="$event.stopPropagation()" class="form-check-input"
+                              (change)="selectCheckbox(row)"></mat-checkbox>
+              </label>
+            </div>
+          </mat-cell>
+        </ng-container>
+
+
+        <ng-container matColumnDef="LoginId">
+          <mat-header-cell class="tw-25" *matHeaderCellDef mat-sort-header> {{ 'key_LoginID' | translate }} </mat-header-cell>
+          <mat-cell class="tw-25" *matCellDef="let element"> {{element.LoginId}} </mat-cell>
+        </ng-container>
+
+
+        <ng-container matColumnDef="UserName">
+          <mat-header-cell class="tw-20" *matHeaderCellDef mat-sort-header> {{ 'key_Name' | translate }} </mat-header-cell>
+          <mat-cell class="tw-20" *matCellDef="let element"> {{element.UserName}} </mat-cell>
+        </ng-container>
+
+
+        <ng-container matColumnDef="CodeMobilePhone">
+          <mat-header-cell class="tw-15" *matHeaderCellDef mat-sort-header> {{ 'key_Phone' | translate }} </mat-header-cell>
+          <mat-cell class="tw-15" *matCellDef="let element"> {{element.CodeMobilePhone}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="OrganizationName">
+          <mat-header-cell class="tw-15" *matHeaderCellDef mat-sort-header> {{ 'key_Organization' | translate }} </mat-header-cell>
+          <mat-cell class="tw-15" *matCellDef="let element"> {{element.OrganizationName}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="RoleName">
+          <mat-header-cell class="tw-10" *matHeaderCellDef mat-sort-header> {{ 'key_Roles' | translate }} </mat-header-cell>
+          <mat-cell class="tw-10" *matCellDef="let element"> {{element.RoleName}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="LocationName">
+          <mat-header-cell class="tw-10" *matHeaderCellDef mat-sort-header> {{ 'key_Location' | translate }} </mat-header-cell>
+          <mat-cell class="tw-10" *matCellDef="let element"> {{element.LocationName}} </mat-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{ 'selected': row.IsSeleted}"
+                 (click)="selectCheckbox(row)"></mat-row>
+      </mat-table>
+
+
+
+    </div>
+    <mat-paginator [length]="size" [pageSize]="10"
+                   [pageSizeOptions]="[5, 10, 20]"></mat-paginator>
+  </div>
+</div>

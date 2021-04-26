@@ -1,0 +1,26 @@
+<form (ngSubmit)="addDefaultPallet()">
+  <div class="modal-header">
+    <h4 class="modal-title">Add Map Default Pallet Type</h4>
+    <button type="button" class="close" data-dismiss="modal" (click)="activeModal.dismiss('Cross click')">&times;</button>
+  </div>
+
+  <!-- Modal body -->
+  <div class="modal-body">
+    <div class="form-group">
+      <label for="firstname">{{ 'key_Mapdefaultpallettype' | translate }} </label>
+      <angular2-multiselect [data]="PalletData" [(ngModel)]="selectedItemsA" [settings]="settingsA"
+                            (onSelect)="onPalletSelect($event)"
+                            (onDeSelect)="OnItemDeSelect($event)"
+                            (onSelectAll)="onSelectAll($event)"
+                            (onDeSelectAll)="OnItemDeSelect($event)"
+                            (onAddFilterNewItem)="onAddItemA($event)"  name="palletList">
+      </angular2-multiselect>
+    </div>
+  </div>
+  <div class="col-lg-12 text-center mt-4 mb-4">
+    <input type="submit" id="btnSave" name="btnSave"
+           class="btn btn-save mr-2 popup-btn-width" value="{{ 'key_Save' | translate }}" [disabled]="isValidated === 0">
+
+  </div>
+
+</form>

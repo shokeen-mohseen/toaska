@@ -1,0 +1,404 @@
+<!--TFS ID: 17394,
+  Author: Monu Ram Yadav,
+  Date: 14-09-2020,
+  Des: Design Application Setting Screen-->
+<app-top-btn-group #btnBar [actionGroupConfig]="actionGroupConfig" (action)="actionHandler($event)"></app-top-btn-group>
+<h5>{{ 'key_Applisetting' | translate }}</h5>
+<!--<div class="d-flex flex-nowrap justify-content-between align-items-center mt-3 mb-4">
+  <h4 class="ml-3">{{ 'key_Applisetting' | translate }}</h4>
+</div>-->
+<!--button group end-->
+<div class="app-Bgsection">
+  <div class="application-header">{{ 'key_Smptsetting' | translate }}</div>
+  <div class="center-form">
+    <div class="row mt-1">
+      <div class="col-sm-12 col-md-12 col-lg-10">
+        <div class="form-inline row">
+          <div class="col-sm-12 col-md-4 pr-0">
+            <label>{{ 'key_Smpthost' | translate }}</label>
+          </div>
+          <div class="col-sm-12 col-md-7">
+            <input type="text" class="form-control w-100 mb-0" placeholder="smtp.1and1.com">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-1">
+      <div class="col-sm-12 col-md-12 col-lg-10">
+        <div class="form-inline row">
+          <div class="col-sm-12 col-md-4 pr-0">
+            <label>{{ 'key_Frmemail' | translate }}</label>
+          </div>
+          <div class="col-sm-12 col-md-7">
+            <input type="email" class="form-control w-100 mb-0" placeholder="toscalamps@adectec.com">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-1">
+      <div class="col-sm-12 col-md-12 col-lg-10">
+        <div class="form-inline row">
+          <div class="col-sm-12 col-md-4 pr-0">
+            <label>{{ 'key_Passwordpwrd' | translate }}</label>
+          </div>
+          <div class="col-sm-12 col-md-7">
+            <input type="password" class="form-control w-100 mb-0">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-1">
+      <div class="col-sm-12 col-md-12 col-lg-10">
+        <div class="form-inline row">
+          <div class="col-sm-12 col-md-4 pr-0">
+          </div>
+          <div class="col-sm-12 col-md-7">
+            <div class="d-flex">
+              <button class="btn btn-next button-width">{{ 'key_Updatever' | translate }}</button>
+              <button class="btn btn-next ml-2 button-width">{{ 'key_Update' | translate }}</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="application-header mt-1">{{ 'key_Carrierftp' | translate }}</div>
+    <div class="row mt-1">
+      <div class="col-sm-12 col-md-12 col-lg-10">
+        <div class="form-inline row">
+          <div class="col-sm-12 col-md-4 pr-0">
+            <label>{{ 'key_Carriername' | translate }}</label>
+          </div>
+          <div class="col-sm-12 col-md-7">
+            <angular2-multiselect [data]="itemList" [(ngModel)]="selectedItems" [settings]="settings"
+                                  (onSelect)="onItemSelect($event)"
+                                  (onDeSelect)="OnItemDeSelect($event)"
+                                  (onSelectAll)="onSelectAll($event)"
+                                  (onDeSelectAll)="onDeSelectAll($event)"
+                                  (onAddFilterNewItem)="onAddItem($event)">
+            </angular2-multiselect>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-1">
+      <div class="col-sm-12 col-md-12 col-lg-10">
+        <div class="form-inline row">
+          <div class="col-sm-12 col-md-4 pr-0">
+          </div>
+          <div class="col-sm-12 col-md-7">
+            <div class="d-flex">
+              <label class="radio-inline"><input type="radio" name="optradio"> &nbsp;{{ 'key_Ftp' | translate }}</label>
+              <label class="radio-inline ml-3"><input type="radio" name="optradio"> &nbsp;{{ 'Network' | translate }}</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-1">
+      <div class="col-sm-12 col-md-12 col-lg-10">
+        <div class="form-inline row">
+          <div class="col-sm-12 col-md-4 pr-0">
+            <label>{{ 'key_Ftpserver' | translate }}</label>
+          </div>
+          <div class="col-sm-12 col-md-7">
+            <input type="text" class="form-control w-100 mb-0">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-1">
+      <div class="col-sm-12 col-md-12 col-lg-10">
+        <div class="form-inline row">
+          <div class="col-sm-12 col-md-4 pr-0">
+            <label>{{ 'key_Ftpserverport' | translate }}</label>
+          </div>
+          <div class="col-sm-12 col-md-7">
+            <input type="text" class="form-control w-100 mb-0">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-1">
+      <div class="col-sm-12 col-md-12 col-lg-10">
+        <div class="form-inline row">
+          <div class="col-sm-12 col-md-4 pr-0">
+            <label>{{ 'key_Ftpserveruser' | translate }}</label>
+          </div>
+          <div class="col-sm-12 col-md-7">
+            <input type="text" class="form-control w-100 mb-0">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-1">
+      <div class="col-sm-12 col-md-12 col-lg-10">
+        <div class="form-inline row">
+          <div class="col-sm-12 col-md-4 pr-0">
+            <label>{{ 'key_Ftppassword' | translate }}</label>
+          </div>
+          <div class="col-sm-12 col-md-7">
+            <input type="password" class="form-control w-100 mb-0">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-1">
+      <div class="col-sm-12 col-md-12 col-lg-10">
+        <div class="form-inline row">
+          <div class="col-sm-12 col-md-4 pr-0">
+            <label>{{ 'key_Ftpserverfile' | translate }}</label>
+          </div>
+          <div class="col-sm-12 col-md-7">
+            <input type="password" class="form-control w-100 mb-0">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-1">
+      <div class="col-sm-12 col-md-12 col-lg-10">
+        <div class="form-inline row">
+          <div class="col-sm-12 col-md-4 pr-0">
+            <label>{{ 'key_Carrieredi' | translate }}</label>
+          </div>
+          <div class="col-sm-12 col-md-7">
+            <angular2-multiselect [data]="itemList" [(ngModel)]="selectedItems" [settings]="settings"
+                                  (onSelect)="onItemSelect($event)"
+                                  (onDeSelect)="OnItemDeSelect($event)"
+                                  (onSelectAll)="onSelectAll($event)"
+                                  (onDeSelectAll)="onDeSelectAll($event)"
+                                  (onAddFilterNewItem)="onAddItem($event)">
+            </angular2-multiselect>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-1">
+      <div class="col-sm-12 col-md-12 col-lg-10">
+        <div class="form-inline row">
+          <div class="col-sm-12 col-md-4 pr-0">
+            <label>{{ 'key_Isunder' | translate }}</label>
+          </div>
+          <div class="col-sm-12 col-md-7">
+            <angular2-multiselect [data]="itemList" [(ngModel)]="selectedItems" [settings]="settings"
+                                  (onSelect)="onItemSelect($event)"
+                                  (onDeSelect)="OnItemDeSelect($event)"
+                                  (onSelectAll)="onSelectAll($event)"
+                                  (onDeSelectAll)="onDeSelectAll($event)"
+                                  (onAddFilterNewItem)="onAddItem($event)">
+            </angular2-multiselect>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-1">
+      <div class="col-sm-12 col-md-12 col-lg-10">
+        <div class="form-inline row">
+          <div class="col-sm-12 col-md-4 pr-0">
+            <label>{{ 'key_Defaultemail' | translate }}</label>
+          </div>
+          <div class="col-sm-12 col-md-7">
+            <input type="text" class="form-control w-100 mb-0">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-1">
+      <div class="col-sm-12 col-md-12 col-lg-10">
+        <div class="form-inline row">
+          <div class="col-sm-12 col-md-4 pr-0">
+            <label>{{ 'key_Networkdir' | translate }}</label>
+          </div>
+          <div class="col-sm-12 col-md-7">
+            <input type="text" class="form-control w-100 mb-0">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-1">
+      <div class="col-sm-12 col-md-12 col-lg-10">
+        <div class="form-inline row">
+          <div class="col-sm-12 col-md-4 pr-0">
+          </div>
+          <div class="col-sm-12 col-md-7">
+            <div class="d-flex">
+              <button class="btn btn-next button-width">{{ 'key_Save' | translate }}</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="application-header mt-1">{{ 'key_Btfftp' | translate }}</div>
+    <div class="row mt-1">
+      <div class="col-sm-12 col-md-12 col-lg-10">
+        <div class="form-inline row">
+          <div class="col-sm-12 col-md-4 pr-0">
+            <label>{{ 'key_Ftpserver' | translate }}</label>
+          </div>
+          <div class="col-sm-12 col-md-7">
+            <input type="text" class="form-control w-100 mb-0" placeholder="ftp://d-b2bftp.breakthroughfutures.com">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-1">
+      <div class="col-sm-12 col-md-12 col-lg-10">
+        <div class="form-inline row">
+          <div class="col-sm-12 col-md-4 pr-0">
+            <label>{{ 'key_Ftpuser' | translate }}</label>
+          </div>
+          <div class="col-sm-12 col-md-7">
+            <input type="text" class="form-control w-100 mb-0" placeholder="tosca">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-1">
+      <div class="col-sm-12 col-md-12 col-lg-10">
+        <div class="form-inline row">
+          <div class="col-sm-12 col-md-4 pr-0">
+            <label>{{ 'key_Ftppwd' | translate }}</label>
+          </div>
+          <div class="col-sm-12 col-md-7">
+            <input type="text" class="form-control w-100 mb-0" placeholder="2uyefecu">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-1">
+      <div class="col-sm-12 col-md-12 col-lg-10">
+        <div class="form-inline row">
+          <div class="col-sm-12 col-md-4 pr-0">
+            <label>{{ 'key_Desdir' | translate }}</label>
+          </div>
+          <div class="col-sm-12 col-md-7">
+            <input type="text" class="form-control w-100 mb-0" placeholder="incoming">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-1">
+      <div class="col-sm-12 col-md-12 col-lg-10">
+        <div class="form-inline row">
+          <div class="col-sm-12 col-md-4 pr-0">
+            <label>{{ 'key_Recdir' | translate }}</label>
+          </div>
+          <div class="col-sm-12 col-md-7">
+            <input type="text" class="form-control w-100 mb-0" placeholder="outgoing">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mt-1">
+      <div class="col-sm-12 col-md-12 col-lg-10">
+        <div class="form-inline row">
+          <div class="col-sm-12 col-md-4 pr-0">
+            <label>{{ 'key_Frsttime' | translate }}</label>
+          </div>
+          <div class="col-sm-12 col-md-7">
+            <div class="row">
+              <div class="col-md-6 form-inline row">
+                <div class="col-md-7 pr-0">
+                  <input type="text" class="form-control w-100 mb-0" placeholder="19">
+                </div>
+                <div class="col-md-5 pr-0">
+                  {{ 'key_Hrs' | translate }}
+                </div>
+              </div>
+              <div class="col-md-6 form-inline row">
+                <div class="col-md-7 pr-0">
+                  <input type="text" class="form-control w-100 mb-0" placeholder="08">
+                </div>
+                <div class="col-md-5">
+                  {{ 'key_Minutes' | translate }}
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-1">
+      <div class="col-sm-12 col-md-12 col-lg-10">
+        <div class="form-inline row">
+          <div class="col-sm-12 col-md-4 pr-0">
+            <label>{{ 'key_Seconduploadtime' | translate }}</label>
+          </div>
+          <div class="col-sm-12 col-md-7">
+            <div class="row">
+              <div class="col-md-6 form-inline row">
+                <div class="col-md-7 pr-0">
+                  <input type="text" class="form-control w-100 mb-0" placeholder="18">
+                </div>
+                <div class="col-md-5 pr-0">
+                  {{ 'key_Hrs' | translate }}
+                </div>
+              </div>
+              <div class="col-md-6 form-inline row">
+                <div class="col-md-7 pr-0">
+                  <input type="text" class="form-control w-100 mb-0" placeholder="55">
+                </div>
+                <div class="col-md-5">
+                  {{ 'key_Minutes' | translate }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-1">
+      <div class="col-sm-12 col-md-12 col-lg-10">
+        <div class="form-inline row">
+          <div class="col-sm-12 col-md-4 pr-0">
+          </div>
+          <div class="col-sm-12 col-md-7">
+            <div class="d-flex">
+              <button class="btn btn-next button-width">{{ 'key_Save' | translate }}</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="application-header mt-1">{{ 'key_Alrtdoc' | translate }}</div>
+    <div class="row mt-1">
+      <div class="col-sm-12 col-md-12 col-lg-10">
+        <div class="form-inline row">
+          <div class="col-sm-12 col-md-4 pr-0">
+            <label>{{ 'key_Servername' | translate }}</label>
+          </div>
+          <div class="col-sm-12 col-md-7">
+            <input type="text" class="form-control w-100 mb-0" placeholder="10.1.10.48">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-1">
+      <div class="col-sm-12 col-md-12 col-lg-10">
+        <div class="form-inline row">
+          <div class="col-sm-12 col-md-4 pr-0">
+            <label>{{ 'key_Documentdirectory' | translate }}</label>
+          </div>
+          <div class="col-sm-12 col-md-7">
+            <input type="text" class="form-control w-100 mb-0" placeholder="SharedAlertMail_Testing">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-1">
+      <div class="col-sm-12 col-md-12 col-lg-10">
+        <div class="form-inline row">
+          <div class="col-sm-12 col-md-4 pr-0">
+          </div>
+          <div class="col-sm-12 col-md-7">
+            <div class="d-flex">
+              <button class="btn btn-next button-width">{{ 'key_Save' | translate }}</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

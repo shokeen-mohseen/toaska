@@ -1,0 +1,108 @@
+
+<div>
+  <!--<div class="row">
+    <div class="col-md-6"></div>
+    <div class="col-md-6 text-right">
+      <span class="fw600">Last Updated:	</span> 8/13/2020 8:35:24 IST
+      <br><span class="fw600">By</span> Jay Coleman (lampsdemo@osoftec.com)
+    </div>
+  </div>-->
+  <!--Last Updated Section End//////////////-->
+ 
+    <div class="row">
+      <div class="col-md-100 custom-flex-w-100">
+        <div class="card">
+          <div class="card-header">{{ 'key_AddedList' | translate }}</div>
+          <div class="card-body p-0">
+            <ul class="list-group">
+              <li class="list-group-item list-group-item-action active">Added Name</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12 custom-flex-w-100">
+        <div class="tab-content">
+          <!--=============== Start profile =================-->
+          <div class="e-profile">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="box-children pt-3">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label>{{ 'key_Organizationtype' | translate }} <sup class="text-danger">*</sup></label>
+                        <angular2-multiselect [data]="itemListB" [(ngModel)]="selectedItemsB" [settings]="settingsB"
+                                              (onSelect)="onItemSelect($event)"
+                                              (onDeSelect)="OnItemDeSelect($event)"
+                                              (onSelectAll)="onSelectAll($event)"
+                                              (onDeSelectAll)="onDeSelectAll($event)"
+                                              (onAddFilterNewItem)="onAddItemA($event)">
+                        </angular2-multiselect>
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label>{{ 'key_Orgfunction' | translate }} <sup class="text-danger">*</sup></label>
+                        <angular2-multiselect [data]="itemListB" [(ngModel)]="selectedItemsB" [settings]="settingsB"
+                                              (onSelect)="onItemSelect($event)"
+                                              (onDeSelect)="OnItemDeSelect($event)"
+                                              (onSelectAll)="onSelectAll($event)"
+                                              (onDeSelectAll)="onDeSelectAll($event)"
+                                              (onAddFilterNewItem)="onAddItemA($event)">
+                        </angular2-multiselect>
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label>{{ 'key_Organizationdescription' | translate }} <sup class="text-danger">*</sup></label>
+                        <input type="text" class="form-control" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="box-children">
+                  <div class="card-body-">
+                    <div class="form-group">
+                      <span for="status" class="fw600 mr-3">{{ 'key_Status' | translate }} <sup class="text-danger">*</sup></span>
+                      <span for="active">{{ 'key_Active' | translate }}</span>
+                    </div>
+                    <div class="form-group">
+                      <div class="form-check checkbox">
+                        <input class="form-check-input" id="check1" type="checkbox" value="">
+                        <label class="form-check-label" for="check1">{{ 'key_SetupCompleted' | translate }}</label>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <span class="fw600 mr-3 " for="lastname"> {{ 'key_SetupDatetime' | translate }} </span>
+                      <span for="lastname"> 8/31/2020 7:05:24 IST </span>
+                    </div>
+                    <div class="form-group">
+                      <span class="fw600 mr-3 " for="lastname"> {{ 'key_SetupCompletedby' | translate }} </span>
+                      <span for="lastname"> John</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--=============== End e-profile =================-->
+        </div>
+      </div>    
+    </div>
+
+    <div class="row justify-content-center my-5">
+     
+      <div class="col-xl-2 col-lg-4 col-md-4 col-sm-12">
+        <button class="btn btn-block btn-save" type="submit">{{ 'key_Save' | translate }}</button>
+      </div>
+      <div class="col-xl-2 col-lg-4 col-md-4 col-sm-12">
+        <button class="btn btn-block btn-next">
+          <span class="fw600">{{ 'key_Add' | translate }}</span> <span class="fs-13"> > {{ 'key_Next' | translate }}</span>
+        </button>
+      </div>
+    </div>
+</div>
+

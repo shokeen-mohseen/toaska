@@ -1,0 +1,68 @@
+<div class="row mb-2">
+  <div class="col-md-7">
+    <div class="form-group">
+      <span class="fw600 mr-3 " for="lastname">  Import Progress Status: </span>
+      <span for="lastname"> Completed (727/111/838) (Succeeded/Failed/Total records) </span>
+    </div>   
+  </div>
+  <div class="col-md-5 text-right">
+    <span class="fw600">Last Updated:	</span> 8/13/2020 8:35:24 IST
+    <br><span class="fw600">By</span> Jay Coleman (lampsdemo@osoftec.com)
+  </div>
+</div>
+
+
+<!--Filters-->
+<app-freightlane-filter></app-freightlane-filter>
+<!--end filter-->
+<div class="row mt-4">
+  <div class="col-lg-12">
+    <!--<div>
+    <mat-form-field appearance="outline" fxFlex="100">
+      <mat-label>{{ 'key_Filter' | translate }}</mat-label>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="{{ 'key_Filter' | translate }}">
+    </mat-form-field>
+  </div>-->
+    <app-table-filter (filterOn)="applyFilter($event)"></app-table-filter>
+    <div class="scroll">
+      <mat-table #table [dataSource]="dataSource" matSort>
+
+
+        <ng-container *ngFor="let column of displayedColumns; let i=index;" [matColumnDef]="column">
+          <mat-header-cell *matHeaderCellDef mat-sort-header mwlResizable [enableGhostResize]="true" (resizeEnd)="onResizeEnd($event, column)"
+                           [resizeEdges]="{bottom: false, right: true, top: false, left: true}">
+
+            <div class="form-check-inline" *ngIf="column === selectRow">
+              <label class="form-check-label">
+                <input type="checkbox" class="form-check-input" value="" placement="top" ngbTooltip="Select all" (change)="$event ? masterToggle() : null"
+                       [checked]="selection.hasValue() && isAllSelected()"
+                       [indeterminate]="selection.hasValue() && !isAllSelected()">
+              </label>
+            </div>
+            <div *ngIf="column != selectRow"> {{ displayedColumnsReplace[i] | translate }}</div>
+          </mat-header-cell>
+          <mat-cell *matCellDef="let item">
+            <!--for-checkbox-->
+            <div class="form-check-inline" *ngIf="column === selectRow">
+              <label class="form-check-label">
+                <input type="checkbox" class="form-check-input" value="" (click)="$event.stopPropagation()"
+                       (change)="$event ? selection.toggle(item) : null"
+                       [checked]="selection.isSelected(item)">
+              </label>
+            </div>
+            {{ item[column] }}
+          </mat-cell>
+        </ng-container>
+
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row matRipple id="row-{{index}}" *matRowDef="let row; columns: displayedColumns; let index = index;" [ngClass]="{ 'selected': selection.isSelected(row)}"
+                 (click)="selection.toggle(row)"></mat-row>
+      </mat-table>
+    </div>
+    <mat-paginator #paginator
+                   [pageSize]="10"
+                   [pageSizeOptions]="[5, 10, 20]">
+    </mat-paginator>
+  </div>
+</div>

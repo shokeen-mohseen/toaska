@@ -1,0 +1,158 @@
+  <!--TFS Task Id 16687 Latent Phase - Cervix & Descent of head - When the plot crosses the alert line, a popup with Input fields, Oxytocin(checkbox), PGE1,(textbox) PGE2,(textbox)....-->
+<!--TFS Task Id 16718 Latent Phase - Add all language  attributes ..-->
+<!---Author name Satyen Singh 06/07/2020 start for comment collapse area section-->
+<!--TFS Task Id 16687 Latent Phase - Cervix & Descent of head - When the plot crosses the alert line, a popup with Input fields, Oxytocin(checkbox), PGE1,(textbox) PGE2,(textbox)...-->
+<!---Author name Satyen Singh 06/07/2020 start for comment collapse area section-->
+<div class="modal-header">
+  <h4 class="modal-title" id="modal-basic-title">
+    {{modalData.modelStagename | translate}}
+
+  </h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body modalbg">
+  <div class="nav-tabs-boxed">
+
+    <ul *ngIf="IsDisplayAll" class="nav nav-tabs tabwidth" role="tablist">
+      <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#home-1" role="tab" aria-controls="home" aria-selected="true" [innerHTML]="'partographChart.Key_CervixChart' | translate"></a></li>
+      <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#profile-1" role="tab" aria-controls="profile" aria-selected="false" id="modal-basic-title" [innerHTML]="'partographChart.Key_DescentChart' | translate"></a></li>
+
+    </ul>
+
+
+    <ul *ngIf="IsDisplay" class="nav nav-tabs tabwidth" role="tablist">
+      <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#profile-1" role="tab" aria-controls="profile" aria-selected="false" id="modal-basic-title" [innerHTML]="'partographChart.Key_DescentChart' | translate"></a></li>
+
+    </ul>
+
+    <div class="tab-content">
+      <div [ngClass]="{'tab-pane': IsDisplayAll==false, 'tab-pane active': IsDisplayAll==true}"
+            id="home-1" role="tabpanel" *ngIf="IsDisplayU">
+        <div class="row">
+          <div class="col-sm-6 bg-whites pdr">
+            <div class="cardpdrtop card">
+              <div class="row">
+                <div class="col-lg-6 col-xs-6 col-sm-6 col-md-12">
+                  <span><i class="fa fa-clock-o fa-3" aria-hidden="true"></i></span>
+                  <span class="ml-1" [innerHTML]="modalData.descentModal.DisplayTime +' '+ modalData.descentModal.timeZone"> </span>
+                </div>
+                <div class="col-lg-6 col-xs-6 col-sm-6 col-md-12">
+                  <span><i class="fa fa-user-circle-o" aria-hidden="true"></i></span>
+                  <span class="ml-1">{{userName}}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 bg-whites pdrright">
+            <div class="cardpdrtop card">
+              <div class="row">
+                <div class="col-xs-6">
+                  <span class="ml-3"><i class="fa fa-history" aria-hidden="true"></i></span>
+                  <span class="ml-1">{{ 'key_Commenthistory' | translate }}</span>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-6 pdr">
+            <form (ngSubmit)="passBackCervixSave()" [formGroup]="UserCervixForm">
+              <div class="panelbg card commentheight" id="tblCervixpopupChart">
+                <div class="form-group">
+                  <label for="company" class=" font-600">{{ 'key_CervixDiameter' | translate }}</label>
+                  <input type="text" (change)="IsValid(UserCervixForm)" formControlName="yAxisPosition" class="HeartRate form-control" />
+                  <app-control-messages [control]="f['yAxisPosition']"></app-control-messages>
+                </div>
+                <div class="form-group">
+                  <label for="company">{{ 'key_Commentsarea' | translate }}</label>
+                  <textarea [attr.placeholder]="'key_Comments' | translate" class="Comments form-control" formControlName="remarks" rows="3"></textarea>
+                </div>
+                <!--<div class="form-group text-center">
+                <input type="button" (click)="passBackData('CR')" class="btn  btn-pill btnsave  btn-raised btnbg" [value]="'key_Save' | translate">
+              </div>-->
+                <div class="form-group text-center">
+                  <button type="submit" class="btn btn-pill btnsave  btn-raised btnbg"
+                          [disabled]="UserCervixForm.invalid">
+                    <span [innerHTML]="'key_Save' | translate"></span>
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="col-sm-6 pdrright">
+            <div class="panelbg card commentheight">
+              <app-recentcomment [posts]="cervixList"></app-recentcomment>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--TFS Task Id 16687 Latent Phase - Cervix & Descent of head - When the plot crosses the alert line, a popup with Input fields, Oxytocin(checkbox), PGE1,(textbox) PGE2,(textbox)...-->
+      <!---Author name Satyen Singh 06/07/2020 start for comment collapse area section-->
+      <!--TFS Task Id 16687 Latent Phase - Cervix & Descent of head - When the plot crosses the alert line, a popup with Input fields, Oxytocin(checkbox), PGE1,(textbox) PGE2,(textbox)...-->
+      <!---Author name Satyen Singh 06/07/2020 start for comment collapse area section-->
+      <div [ngClass]="{'tab-pane active': IsDisplay==true, 'tab-pane': IsDisplay==false}" id="profile-1" role="tabpanel">
+        <div class="row">
+          <div class="col-sm-6 bg-whites pdr">
+            <div class="cardpdrtop card">
+              <div class="row">
+                <div class="col-lg-6 col-xs-6 col-sm-6 col-md-12">
+                  <span><i class="fa fa-clock-o fa-3" aria-hidden="true"></i></span>
+                  <span class="ml-1" [innerHTML]="modalData.descentModal.DisplayTime +' '+ modalData.descentModal.timeZone"> </span>
+                </div>
+                <div class="col-lg-6 col-xs-6 col-sm-6 col-md-12">
+                  <span><i class="fa fa-user-circle-o" aria-hidden="true"></i></span>
+                  <span class="ml-1">{{userName}}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 bg-whites pdrright">
+            <div class="cardpdrtop card">
+              <div class="row">
+                <div class="col-xs-6">
+                  <span class="ml-3"><i class="fa fa-history" aria-hidden="true"></i></span>
+                  <span class="ml-1">{{ 'key_Commenthistory' | translate }}</span>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6 pdr">
+            <form (ngSubmit)="passBackDescentSave()" [formGroup]="UserDescentForm">
+              <div class="panelbg card commentheight bgdecent" id="tblDescentpopupChart">
+
+                <div class="form-group">
+                  <label for="company" class=" font-600">{{ 'key_Descent' | translate }}</label>
+                  <input type="text" formControlName="yAxisPosition1" class="HeartRate form-control" />
+                  <app-control-messages [control]="f1['yAxisPosition1']"></app-control-messages>
+                </div>
+                <div class="form-group">
+                  <label for="company">{{ 'key_Commentsarea' | translate }}</label>
+                  <textarea [attr.placeholder]="'key_Comments' | translate" class="Comments form-control" formControlName="remarks" rows="3"></textarea>
+                </div>
+                <div class="form-group text-center">
+                  <button type="submit" class="btn btn-pill btnsave  btn-raised btnbg"
+                          [disabled]="UserDescentForm.invalid">
+                    <span [innerHTML]="'key_Save' | translate"></span>
+                  </button>
+                </div>
+
+              </div>
+            </form>
+          </div>
+          <div class="col-sm-6 pdrright">
+            <div class="panelbg card commentheight bgdecent">
+              <app-recentcomment [posts]="decentList"></app-recentcomment>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>

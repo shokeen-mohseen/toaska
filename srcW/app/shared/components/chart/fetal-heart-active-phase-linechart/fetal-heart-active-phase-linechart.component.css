@@ -1,0 +1,194 @@
+@media only screen and (max-width: 320px) {
+  body {
+    font-size: 20%
+  }
+}
+
+/*extra small devices*/
+@media only screen and (max-width: 600px) {
+  body {
+    font-size: 40%
+  }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+  body {
+    font-size: 60%
+  }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+  body {
+    font-size: 80%
+  }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+  body {
+    font-size: 100%
+  }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1400px) {
+  body {
+    font-size: 120%
+  }
+}
+
+.svg-container {
+  display: inline-block;
+  position: relative;
+  width: 100%;
+  padding-bottom: 100%; /* aspect ratio */
+  vertical-align: top;
+  overflow: hidden;
+}
+.svg-content-responsive {
+  display: inline-block;
+  position: absolute;
+  top: 10px;
+  left: 0;
+}
+
+.alertMessage {
+  background-color: lightsalmon;
+  padding: 2px 32px;
+  font-size: 0.8rem;
+  transition: 0.5s;
+  font-weight: bold;
+  border-left: 1px solid #ca1313;
+  float: right;
+  color:white;
+}
+
+
+.alertMessage1 {
+  background-color: yellowgreen;
+  padding: 2px 32px;
+  font-size: 0.8rem;
+  transition: 0.5s;
+  font-weight: bold;
+  border-left: 1px solid #ca1313;
+  float: right;
+  color: white;
+}
+
+.alertMessage2 {
+  background-color: lightpink;
+  padding: 2px 32px;
+  font-size: 0.8rem;
+  transition: 0.5s;
+  font-weight: bold;
+  border-left: 1px solid #ca1313;
+  float: right;
+  color: white;
+}
+
+.alertMessage3 {
+  background-color: red;
+  padding: 2px 32px;
+  font-size: 0.8rem;
+  transition: 0.5s;
+  font-weight: bold;
+  border-left: 1px solid #ca1313;
+  float: right;
+  color: white;
+}
+
+div.tooltip {
+  position: absolute;
+  text-align: center;
+  width: 60px;
+  height: 28px;
+  padding: 2px;
+  font: 12px sans-serif;
+  background: lightsteelblue;
+  border: 0px;
+  border-radius: 8px;
+  pointer-events: none;
+}
+
+.chart-tooltip {
+  position: absolute;
+  color: black;
+  text-align: center;
+  width: 60px;
+  height: 12px;
+  padding: 8px;
+  margin-top: -20px;
+  font: 10px sans-serif;
+  background: #ddd;
+  pointer-events: none;
+}
+
+
+body {
+  font: 10px "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.x.axis path {
+  display: none;
+}
+
+.line {
+  fill: none;
+  stroke: steelblue;
+  stroke-width: 1.5px;
+}
+
+.overlay {
+  fill: none;
+  pointer-events: all;
+}
+
+.focus circle {
+  fill: steelblue;
+}
+
+.focus text {
+  font-size: 14px;
+}
+
+.tooltip1 {
+  fill: none;
+  stroke: #000;
+  border: 1px solid
+
+}
+
+.tooltip-date, .tooltip-likes {
+  font-weight: bold;
+  border: 1px solid
+}
+
+ /*line:nth-child(even)  {
+  stroke: #f97d7d !important;
+}
+
+.currentColor:nth-child(even) {
+  stroke: #f97d7d !important;
+}*/
+
+.mychart{
+  stroke: #f97d7d;
+  background-color:rebeccapurple;
+}
+
+/*.mychart:nth-child(odd) {
+  stroke: yellowgreen;
+  background-color: greenyellow;
+}*/
+/*.tick line:nth-child(odd) {
+  stroke: red !important;
+}*/

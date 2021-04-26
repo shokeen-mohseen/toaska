@@ -1,0 +1,142 @@
+<form #ngForm="ngForm" >
+  <div>
+    <!--<div class="row">
+      <div class="col-md-6"></div>
+      <div class="col-md-6 text-right">
+        <span class="fw600">Last Updated:	</span> 8/13/2020 8:35:24 IST
+        <br><span class="fw600">By</span> Jay Coleman (lampsdemo@osoftec.com)
+      </div>
+    </div>-->
+    <!--Last Updated Section End//////////////-->
+
+    <div class="row">
+      <div class="col-md-3 custom-flex-w-15">
+        <div class="card">
+          <div class="card-header">{{ 'key_AddedList' | translate }}</div>
+          <div class="card-body p-0">
+            <div class="list-group">
+              <!--<ul class="list-group" #nextList></ul>-->
+              <!--<li class="list-group-item list-group-item-action active">Added Name</li>-->
+              <a class="list-group-item list-group-item-action"
+                 [class.active]="index === i"
+                 *ngFor="let fuelSurCharge of dataSource ; let i = index ;"
+                 (click)="selectedFuelSurCharge(i)">{{fuelSurCharge.fuelPriceType}}</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-9 custom-flex-w-85">
+        <div class="tab-content">
+          <!--=============== Start profile =================-->
+          <div class="e-profile">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="box-children">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="firstname">{{'key_FuelPriceType' | translate}} <sup class="text-danger sup1">*</sup> </label>
+                        <angular2-multiselect [data]="fuelPriceTypeList" [(ngModel)]="fuelPriceTypeItem" [settings]="{singleSelection: true, text: 'Select Fuel Price Type', enableSearchFilter: true, badgeShowLimit: 1, labelKey :'name' }"
+                                              (onSelect)="onItemSelect($event)"
+                                              (onDeSelect)="OnItemDeSelect($event)"
+                                              (onSelectAll)="onSelectAll($event)"
+                                              (onDeSelectAll)="onDeSelectAll($event)"
+                                              (onAddFilterNewItem)="onAddItem($event)" name="fuelPrice" required>
+                        </angular2-multiselect>
+                      </div>
+                    </div>
+
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label>{{'key_FromFuelPrice' | translate}} <sup class="text-danger sup1">*</sup></label>
+                        <input type="text" class="form-control" [(ngModel)]="fuelCharge.fromFuelPrice" name="fromFuelPrice" required />
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label>{{'key_ToFuelPrice' | translate}} <sup class="text-danger sup1">*</sup></label>
+                        <input type="text" class="form-control" [(ngModel)]="fuelCharge.toFuelPrice" name="toFuelPrice" required />
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label>{{'key_FuelPriceUOM' | translate}} <sup class="text-danger sup1">*</sup></label>
+                        <angular2-multiselect [data]="fuelPriceUOMList" [(ngModel)]="fuelPriceUOMItem" [settings]="{singleSelection: true, text: 'Select Fuel Price UOM', enableSearchFilter: true, badgeShowLimit: 1, labelKey :'name' }"
+                                              (onSelect)="onItemSelect($event)"
+                                              (onDeSelect)="OnItemDeSelect($event)"
+                                              (onSelectAll)="onSelectAll($event)"
+                                              (onDeSelectAll)="onDeSelectAll($event)"
+                                              (onAddFilterNewItem)="onAddItem($event)" name="listA" required>
+                        </angular2-multiselect>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="box-children">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="firstname">{{'key_PerMileCharge' | translate}}<sup class="text-danger sup1">*</sup> </label>
+                        <input type="text" class="form-control" [(ngModel)]="fuelCharge.chargeRatePerMile" name="perMileCharge"  required />
+                      </div>
+                    </div>
+
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label>{{'key_ChargeRateUOM' | translate}} <sup class="text-danger sup1">*</sup></label>
+                        <angular2-multiselect [data]="chargeRateUOMList" [(ngModel)]="chargeRateUOMItem" [settings]="{singleSelection: true, text: 'Select Charge Rate UOM', enableSearchFilter: true, badgeShowLimit: 1, labelKey :'name' }"
+                                              (onSelect)="onItemSelect($event)"
+                                              (onDeSelect)="OnItemDeSelect($event)"
+                                              (onSelectAll)="onSelectAll($event)"
+                                              (onDeSelectAll)="onDeSelectAll($event)"
+                                              (onAddFilterNewItem)="onAddItem($event)" name="listA" required>
+                        </angular2-multiselect>
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label>{{'key_EffectiveStart' | translate}} <sup class="text-danger sup1">*</sup></label>
+                        <input type="date" name="effectiveStartDate" [ngModel]="fuelCharge.effectiveStartDate | date:'yyyy-MM-dd'" (ngModelChange)="fuelCharge.effectiveStartDate = $event" class="form-control" required />
+                       </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label>{{'key_EffectiveEnd' | translate}} <sup class="text-danger sup1">*</sup></label>
+                        <input type="date" name="effectiveEndDate" [ngModel]="fuelCharge.effectiveEndDate | date:'yyyy-MM-dd'" (ngModelChange)="fuelCharge.effectiveEndDate = $event" class="form-control" required />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--=============== End e-profile =================-->
+
+
+          </div>
+          <!--=============== End e-profile =================-->
+        </div>
+      </div>
+    </div>
+    <div class="row justify-content-center my-5">
+      <div class="col-xl-2 col-lg-4 col-md-4 col-sm-12">
+        <button class="btn btn-block btn-save" type="submit"  (click)="Save(ngForm)" [disabled]="ngForm.invalid">{{ 'key_Save' | translate }}</button>
+      </div>
+      <div class="col-xl-2 col-lg-4 col-md-4 col-sm-12">
+        <button class="btn btn-block btn-next"  (click)="AddNext(ngForm)" [disabled]="ngForm.invalid">
+          <span class="fw600">{{ 'key_Add' | translate }}</span> <span class="fs-13"> > {{ 'key_Next' | translate }}</span>
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+  </form>
+
+
+
+
+
+

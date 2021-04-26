@@ -1,0 +1,90 @@
+<div>
+  <div class="shownotes-box" [ngClass]="status ? 'shownotesin' : 'shownotesout'">
+    <div class="position-relative">
+      <div (click)="openNotes()" class="shwbtn-hover">
+        <span class="notes-count important" [ngClass]="{'more': urgentCount > 99}" placement="left" ngbTooltip="Urgent">
+          <span>{{urgentCount}}</span>
+        </span>
+        <div class="show-notesBtn">
+          <span [ngClass]="{'textBold': urgentCount > 0 || normalCount > 0}" class="fw600">{{ 'key_ShowNotes' | translate }}</span>
+        </div>
+        <span class="notes-count normal" [ngClass]="{'more': normalCount > 99}" placement="left" ngbTooltip="New">
+          <span>{{normalCount}}</span>
+        </span>
+        <span class="notes-count total-count" [ngClass]="{'more': totalCount > 99}" placement="left" ngbTooltip="Total Notes">
+          <span>{{totalCount}}</span>
+        </span>
+      </div>
+
+      <!---===========Start tosca notes==================-->
+      <div class="card-header" style="height:34px;">
+        <div class="d-flex justify-content-between">
+          <div></div>
+          <div *ngIf="(Inactive == true) && (notesModellist.length > 0)">
+            <button type="button" class="btn btn-outline-primary btn-sm" (click)="DeleteAllComment(notesModel.applicationModuleId)" placement="top" ngbTooltip="Delete All">
+              <i class="fa fa-trash-o" aria-hidden="true"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="showNotes-content" id="showNotes">
+        <div [ngClass]="{'unread': !note.isRead}" class="notes-content" *ngFor="let note of notesModellist; let i = index">
+          <div class="fw600 d-flex justify-content-between mb-1">
+            <div class="user">
+              <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+            </div>
+            <div class="user-details">
+              <div> {{note.fullName}} </div>
+              <div>{{note.updateDateTimeBrowser | momentDateWithZonePipe}}</div>
+            </div>
+            <div class="ml-auto actioButton text-right">
+              <div>
+                <button type="button" *ngIf="(note.createdBy === loginid) && !note.isEditableMode" class="btn btn-outline-primary btn-sm" placement="top" ngbTooltip="Edit" (click)="edit(note.id)">
+                  <i class="fa fa-pencil" aria-hidden="true"></i>
+                </button>
+                <button type="button" class="btn btn-outline-primary btn-sm" placement="top" *ngIf="note.isEditableMode" ngbTooltip="Cancel" (click)="edit()">
+                  <i class="fa fa-times" aria-hidden="true"></i>
+                </button>
+                <button type="button" *ngIf="(note.createdBy === loginid) || (Inactive == true)" class="btn btn-outline-primary btn-sm" placement="top" ngbTooltip="Delete" (click)="DeleteComment(note.id)">
+                  <i class="fa fa-trash-o" aria-hidden="true"></i>
+                </button>
+              </div>
+              <span class="d-flex align-items-center" *ngIf="!note.isRead">
+                <span class="user-details">Mark as Read</span>
+                <input type="checkbox"
+                       #markReadCheckBox
+                       id="saveUrgentCheckBox"
+                       [checked]="note.isRead"
+                       (change)="onReadChanged(markReadCheckBox.checked,note)"
+                       class="ml-1 mr-2" value="" placement="top" ngbTooltip="Mark as Read" />
+              </span>
+            </div>
+          </div>
+          <!--<div class="message-con" *ngIf="!note.isEditableMode" [ngClass]="{'urgent': note.isUrgent}">
+            <div class="fw600 d-flex justify-content-between">
+              <span class="d-flex align-items-center"><span class="urgentBtn">Urgent ! <i class="fa fa-bell-o" aria-hidden="true"></i></span></span>
+            </div>
+            <div class="fs-13"><span>{{note.description}} </span></div>
+          </div>-->
+          <div class="message-con" *ngIf="!note.isEditableMode" [ngClass]="{'urgent': note.isUrgent && !note.isRead}">
+            <div class="fw600 d-flex justify-content-between" *ngIf="!note.isRead && note.isUrgent">
+              <span class="d-flex align-items-center"><span class="urgentBtn">Urgent ! <i class="fa fa-bell-o" aria-hidden="true"></i></span></span>
+            </div>
+            <div class="fs-13"><span>{{note.description}} </span></div>
+          </div>
+          <app-comments (showRefreshedNote)="getShowNotesList()" [update]="update" [note]="note" *ngIf="note.isEditableMode"></app-comments>
+        </div>
+
+
+      </div>
+      <!---===========end tosca notes==================-->
+      <!---chat box-->
+      <app-comments (getShowNotesList)="getShowNotesList()"></app-comments>
+
+    </div>
+  </div>
+
+</div>
+
+

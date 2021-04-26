@@ -1,0 +1,25 @@
+
+.resize-table mat-cell,
+.resize-table mat-footer-cell,
+.resize-table mat-header-cell {
+  width: 100px;
+}
+.mat-column-ShowOnBOL,
+.mat-column-AutoAdded,
+.mat-column-AddPallet,
+.mat-column-Add_New,
+.mat-column-Delete {
+  width: 45px !important;
+}
+
+.mat-column-EffectiveStart, .mat-column-EffectiveEnd {
+  width: 120px !important;
+}
+
+::ng-deep .mat-column-ShowOnBOL .mat-sort-header-arrow,
+::ng-deep .mat-column-AutoAdded .mat-sort-header-arrow,
+::ng-deep .mat-column-AddPallet .mat-sort-header-arrow,
+::ng-deep .mat-column-Add_New .mat-sort-header-arrow,
+::ng-deep .mat-column-Delete .mat-sort-header-arrow {
+  display: none !important;
+}

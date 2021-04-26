@@ -1,0 +1,87 @@
+<app-top-btn-group #btnBar [actionGroupConfig]="actionGroupConfig" (action)="actionHandler($event)" [ParentPageName]="FuelPriceList"></app-top-btn-group>
+
+<div class="mb-3">
+  <div class="form-area">
+    <div class="wrapper">
+      <div class="content-wrapper">
+        <div>
+          <h5>Fuel Price</h5>
+        </div>
+        <mat-tab-group #tabGroupA class="mt-18" animationDuration="0ms" (selectedTabChange)="tabChange($event)">
+          <mat-tab #tab1 *ngIf="tab1">
+            <ng-template mat-tab-label>
+              <!--{{ 'key_FreightList' | translate }}--> Fuel Price List
+            </ng-template>
+            <div class="tab-content" *ngIf="tab1Data">
+              <div class="row">
+                <div class="col-lg-12">
+                  <!--<div>
+                    <mat-form-field appearance="outline" fxFlex="100">
+                      <mat-label>{{ 'key_Filter' | translate }}</mat-label>
+                      <input matInput (keyup.enter)="applyFilter($event.target.value)"
+                             (keyup)="clearFilter($event.target.value)"
+                             [(ngModel)]="filterValue" placeholder="Press enter to filter">
+                    </mat-form-field>
+                  </div>-->
+                  <app-table-filter (filterOn)="applyFilter($event)"></app-table-filter>
+                  <div class="scroll">
+                    <mat-table #table [dataSource]="dataSource" matSort (matSortChange)="customSort($event)">
+
+                      <ng-container *ngFor="let column of displayedColumns; let i=index;" [matColumnDef]="column" >
+                        <mat-header-cell *matHeaderCellDef mat-sort-header mwlResizable [enableGhostResize]="true" (resizeEnd)="onResizeEnd($event, column)"
+                                         [resizeEdges]="{bottom: false, right: true, top: false, left: true}">
+
+                          <div class="form-check-inline" *ngIf="column === selectRow">
+                            <label class="form-check-label">
+                              <input type="checkbox" class="form-check-input" value="" placement="top" ngbTooltip="Select all">
+                              <!--[checked]="selection.hasValue() && isAllSelected()" (change)="$event ? masterToggle() : null" -->
+                              <!--[indeterminate]="selection.hasValue() && !isAllSelected()" [disabled]="true"-->
+                            </label>
+                          </div>
+                          <div *ngIf="column != selectRow"> {{ displayedColumnsReplace[i] | translate }}</div>
+                        </mat-header-cell>
+                        <mat-cell *matCellDef="let item; let rowIdx = index;" >
+                          <!--for-checkbox-->
+                          <div class="form-check-inline" *ngIf="column === selectRow">
+                            <label class="form-check-label">
+                              <input type="checkbox" class="form-check-input" value="" (click)="$event.stopPropagation()"
+                                     [disabled]="!item.isFirstEnabled"
+                                     (change)="onSelectionChange(item, $event.target.checked)"
+                                     [checked]="selection.isSelected(item)">
+                            </label>
+                          </div>
+                          <div *ngIf="column === 'fuelPriceDateTime'" >
+                            {{item.fuelPriceDateTimePicker | date: 'MM/dd/yyyy'  }}
+                          </div>
+                          <div *ngIf="column != 'fuelPriceDateTime'">
+                            {{ item[column] }}
+                          </div>
+                        </mat-cell>
+                      </ng-container>
+
+                      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                      <mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{ 'selected': selection.isSelected(row),'inactive': !row.isFirstEnabled}"
+                               (click)="onSelectionChange(row, row.isSelected)"></mat-row>
+                    </mat-table>
+                  </div>
+                  <mat-paginator #paginator
+                                 [length]="paginationModel.itemsLength"
+                                 [pageSize]="paginationModel.pageSize"
+                                 [pageSizeOptions]="paginationModel.pageSizeOptions"
+                                 (page)="onPaginationEvent($event)">
+                  </mat-paginator>
+                </div>
+              </div>
+            </div>
+          </mat-tab>
+        </mat-tab-group>
+
+      </div>
+    </div>
+  </div>
+</div>
+<app-show-notes></app-show-notes>
+
+
+
+

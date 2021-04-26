@@ -1,0 +1,10 @@
+mat-cell,
+mat-footer-cell,
+mat-header-cell {
+  width: 180px;
+}
+.disabled-contenct {
+  pointer-events: none;
+  opacity: 0.4;
+}
+

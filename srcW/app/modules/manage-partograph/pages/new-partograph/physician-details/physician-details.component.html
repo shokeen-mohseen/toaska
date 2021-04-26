@@ -1,0 +1,92 @@
+<div class="row">
+  <div class="col-md-5">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group searchbg-grey">
+          <label class="fw600">{{ 'key_SearchPhysician' | translate }}</label>
+          <select class="js-example-tags form-control">
+            <option></option>
+            <option>John Cina</option>
+            <option>Tony Stark</option>
+            <option>Brad Pitt</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="d-flex justify-content-between align-items-center mt-4">
+          <div>
+            <span class="fw600 fs-13">{{ 'key_PrimaryPhysicianInformationRequired' | translate }}</span>
+          </div>
+          <div>
+            <span><button class="plusBtn2 mr-1" (click)="openContact()"><i class="fa fa-plus" aria-hidden="true"></i></button></span>
+            <span><button class="plusBtn2" (click)="openContact()"><i class="fa fa-pencil" aria-hidden="true"></i></button></span>
+          </div>
+        </div>
+
+        <div class="w-100">
+          <div class="bg-grey mt-1 py-1 text-center">
+            <span class="ml-2">{{ 'key_FullName' | translate }}</span>
+            <span>,</span>
+            <span class="ml-2">{{ 'key_Phone' | translate }}</span>
+            <span>,</span>
+            <span class="ml-2">{{ 'key_email' | translate }}</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+  </div>
+  <!--col-md-6 end-->
+  <div class="col-md-2"></div>
+
+  <div class="col-md-5">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group searchbg-grey">
+          <label class="fw600">{{ 'key_SearchPhysician' | translate }}</label>
+          <select class="js-example-tags form-control">
+            <option></option>
+            <option>John Cina</option>
+            <option>Tony Stark</option>
+            <option>Brad Pitt</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="d-flex justify-content-between align-items-center mt-4">
+          <div>
+            <span class="fw600 fs-13"> {{ 'key_SecondaryPhysicianInformationOptional' | translate }}</span>
+          </div>
+          <div>
+            <span><button class="plusBtn2 mr-1" (click)="openContact()"><i class="fa fa-plus" aria-hidden="true"></i></button></span>
+            <span><button class="plusBtn2" (click)="openContact()"><i class="fa fa-pencil" aria-hidden="true"></i></button></span>
+          </div>
+        </div>
+
+        <div class="w-100">
+          <div class="bg-grey mt-1 py-1 text-center">
+            <span class="ml-2">{{ 'key_FullName' | translate }}</span>
+            <span>,</span>
+            <span class="ml-2">{{ 'key_Phone' | translate }}</span>
+            <span>,</span>
+            <span class="ml-2">{{ 'key_email' | translate }}</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+  </div>
+  <!--Col-md-6 End-->
+</div>
+<!--Row end-->
+<div class="row mt-3">
+  <input type="button" class="btn btn-secondary ml-3 btnbrd" (click)="AddMoreComplication()" value="{{ 'key_AddNewParameter' | translate }}" />
+</div>

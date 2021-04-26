@@ -1,0 +1,9 @@
+mat-cell,
+mat-footer-cell,
+mat-header-cell {
+  width: 125px;
+  flex: none;
+}
+.mat-column-isActive, .mat-column-setupDone {
+  width: 55px;
+}

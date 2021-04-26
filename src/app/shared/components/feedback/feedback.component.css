@@ -1,0 +1,67 @@
+/*feedback css start here*/
+.custom-radio-button div {
+  display: inline-block;
+}
+
+.custom-radio-button input[type="radio"] {
+  display: none;
+}
+p {
+  margin: revert;
+}
+  .custom-radio-button input[type="radio"] + label {
+    color: #333;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    padding-left: 7px;
+  }
+
+    .custom-radio-button input[type="radio"] + label span {
+      display: inline-block;
+      width: 40px;
+      height: 40px;
+      margin: -1px 4px 0 0;
+      vertical-align: middle;
+      cursor: pointer;
+      border-radius: 50%;
+      border: 2px solid #ffffff;
+      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.33);
+      background-repeat: no-repeat;
+      background-position: center;
+      text-align: center;
+      line-height: 44px;
+    }
+
+      .custom-radio-button input[type="radio"] + label span img {
+        opacity: 0;
+        transition: all 0.3s ease;
+      }
+
+  .custom-radio-button input[type="radio"]#color-red + label span {
+    background-color: #c55a11;
+  }
+
+  .custom-radio-button input[type="radio"]#color-blue + label span {
+    background-color: #f8cbad;
+  }
+
+  .custom-radio-button input[type="radio"]#color-orange + label span {
+    background-color: #fff2cc;
+  }
+
+  .custom-radio-button input[type="radio"]#color-pink + label span {
+    background-color: #c5e0b4;
+  }
+
+  .custom-radio-button input[type="radio"]#color-pinks + label span {
+    background-color: #70ad47;
+  }
+
+  .custom-radio-button input[type="radio"]:checked + label span {
+    opacity: 1;
+    background: url("https://www.positronx.io/wp-content/uploads/2019/06/tick-icon-4657-01.png") center center no-repeat;
+    width: 40px;
+    height: 40px;
+    display: inline-block;
+  }
+/*feedback css end here*/

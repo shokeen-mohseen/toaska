@@ -1,0 +1,142 @@
+<!--TFS ID: 17435,
+  Author: Monu Ram Yadav,
+  Date: 16-09-2020,
+  Des: Design add new forecast screen -->
+<!-- Modal Header -->
+<div>
+  <div class="modal-header">
+    <h5 class="modal-title">{{ 'key_CreateNewForecast' | translate }}</h5>
+    <button type="button" class="close" data-dismiss="modal" (click)="activeModal.dismiss('Cross click')">&times;</button>
+  </div>
+
+  <!-- Modal body -->
+  <div class="modal-body">
+    <div class="custom-tab row">
+      <div class="col-lg-12">
+        <div class="tab-pane">
+          
+            <div class="row mt-3">
+              <div class="col-md-12">
+                <div class="e-profile">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-inline row">
+                        <div class="col-sm-12 col-md-4 pr-0">
+                          <label class="d-block text-right mr-3">{{ 'key_Name' | translate }}<span class="text-danger">*</span></label>
+                        </div>
+                        <div class="col-sm-12 col-md-7">
+                          <input type="text" class="form-control w-100 mb-0"
+                                 [(ngModel)]="name" (keypress)="blockSpecialChar($event)"
+                                 required>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-inline row">
+                        <div class="col-sm-12 col-md-4 pr-0">
+                          <label> {{ 'key_Description' | translate }}<span class="text-danger">*</span></label>
+                        </div>
+                        <div class="col-sm-12 col-md-7">
+                          <input type="text" class="form-control" [(ngModel)]="description" maxlength="255" required>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row mt-3">
+                    <div class="col-md-6">
+                      <div class="box-children bg-grey">
+                        <h4 class="text-red"> {{ 'key_ForecastPeriod' | translate }}</h4>
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="form-group">
+                              <label for="firstname"> {{ 'key_CalenderType' | translate }}</label>
+                              <angular2-multiselect fixFilterBug [data]="calendarTypeList"
+                                                    [(ngModel)]="selectedCalendarType"
+                                                    [settings]="settingsCalendarType"
+                                                    (onSelect)="onItemSelectCal($event)"
+                                                    (onDeSelect)="OnItemDeSelectCal($event)"
+                                                    (onDeSelectAll)="onDeSelectAllCal($event)"
+                                                    name="calendarType">
+                              </angular2-multiselect>
+                            </div>
+                          </div>
+
+                          <div class="col-md-12">
+                            <div class="form-group">
+                              <label> {{ 'key_StartPeriod' | translate }}<span class="text-danger">*</span></label>
+                              <!--<ejs-datepicker [format]='dateFormat'
+                  placeholder='Select Start Period'
+                  [(ngModel)]="startPeriod" required></ejs-datepicker>-->
+                              <p-calendar class="col-sm-12 ml-0 pl-0" [showIcon]="true"  [monthNavigator]="true"
+                                          [yearNavigator]="true"
+                                          dateFormat='mm-dd-yy'
+                                          placeholder='Select Start Period'
+                                          [(ngModel)]="startPeriod"
+                                          yearRange="2000:2035" name="Toshipdatecalendar" required></p-calendar>
+                            </div>
+                          </div>
+                          <div class="col-md-12">
+                            <div class="form-group">
+                              <label> {{ 'key_EndPeriod' | translate }}<span class="text-danger">*</span></label>
+                              <p-calendar class="col-sm-12 ml-0 pl-0" [showIcon]="true"
+                                          dateFormat='mm-dd-yy'
+                                          placeholder='Select End Period'
+                                          [(ngModel)]="endPeriod"
+                                          [monthNavigator]="true" [yearNavigator]="true"
+                                          yearRange="2000:2030" name="Toshipdatecalendar" required></p-calendar>
+                            </div>
+                          </div>
+
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="box-children bg-grey">
+                        <h4 class="text-red"> {{ 'key_Salesmanager' | translate }}</h4>
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="form-group">
+                              <label>{{ 'key_Salesmanager' | translate }}<span class="text-danger">*</span></label>
+                              <!--<angular2-multiselect fixFilterBug
+                        [data]="salesManagerList"
+                        [(ngModel)]="selectedSalesManager"
+                        [settings]="settingsSalesManager"
+                        name="salesManager" required>
+  </angular2-multiselect>-->
+                              <angular2-multiselect [data]="salesManagerList" [(ngModel)]="selectedSalesManager"
+                                                    [settings]="settingsSalesManager"
+                                                    (onSelect)="onItemSelect($event)"
+                                                    (onDeSelect)="OnItemDeSelect($event)"
+                                                    (onSelectAll)="onSelectAll($event)"
+                                                    (onDeSelectAll)="onDeSelectAll($event)" required></angular2-multiselect>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <form (ngSubmit)="createForecast()">
+                  <div class="row justify-content-center my-5">
+                    <div class="col-xl-3 col-lg-4 col-md-4 col-sm-12">
+                    </div>
+                    <div class="col-xl-3 col-lg-4 col-md-4 col-sm-12 text-center">
+                      <button type="submit" class="btn btn-save popup-btn-width">{{ 'key_Submit' | translate }}</button>
+                    </div>
+                    <div class="col-xl-3 col-lg-4 col-md-4 col-sm-12">
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <!--right panel tab Section End//////-->
+            </div>
+            <!--Row End//////-->
+        </div>
+        <!--tab-pane stepper-child-content-wrap end/////-->
+      </div>
+    </div>
+
+  </div>
+</div>

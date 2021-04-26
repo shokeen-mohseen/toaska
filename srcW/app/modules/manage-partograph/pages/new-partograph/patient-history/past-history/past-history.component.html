@@ -1,0 +1,150 @@
+<!--TFS ID:- 17414,
+  Date: 15-09-2020,
+  Author: Monu Ram YAdav,
+  Des:-  Fix Stepper Steps Data in Sub Component for Prepartum Care Section-->
+<div class="past-history">
+  <!---Heading start row-->
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="subHeading-red fw600">
+        {{ 'Key_PastHistory' | translate }}
+      </div>
+    </div>
+  </div>
+  <!---Heading end row-->
+  <!--row start-->
+  <div class="row mt-3">
+    <div class="col-lg-6 col-md-6 col-sm-12">
+      <div class="form-group">
+        <label for="" class="fw600">{{ 'Key_Pasthistoryofinfertility' | translate }}</label>
+        <div class="clearfix"></div>
+        <div class="form-check-inline mr-4">
+          <label class="form-check-label">
+            <input type="radio" class="form-check-input" name="optradio">{{ 'key_Yes' | translate }}
+          </label>
+        </div>
+        <div class="form-check-inline">
+          <label class="form-check-label">
+            <input type="radio" class="form-check-input" name="optradio">{{ 'key_No' | translate }}
+          </label>
+        </div>
+        <textarea class="form-control mt-2" rows="1" placeholder="List Treatments"></textarea>
+      </div>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-12">
+      <div class="form-group">
+        <label for="" class="fw600">{{ 'Key_PasthistoryofAllergiesDrug' | translate }}</label>
+        <div class="clearfix"></div>
+        <div class="form-check-inline mr-4">
+          <label class="form-check-label">
+            <input type="radio" class="form-check-input" name="optradio1">{{ 'key_Yes' | translate }}
+          </label>
+        </div>
+        <div class="form-check-inline">
+          <label class="form-check-label">
+            <input type="radio" class="form-check-input" name="optradio1">{{ 'key_No' | translate }}
+          </label>
+        </div>
+        <textarea class="form-control mt-2" rows="1" placeholder="List reactions"></textarea>
+      </div>
+    </div>
+  </div>
+  <!--row end-->
+  <!--row start-->
+  <div class="row">
+    <div class="col-lg-6 col-md-6 col-sm-12">
+      <div class="form-group">
+        <label for="" class="fw600">{{ 'Key_PasthistoryofBloodTransfusion' | translate }}</label>
+        <div class="clearfix"></div>
+        <div class="form-check-inline mr-4">
+          <label class="form-check-label">
+            <input type="radio" class="form-check-input" name="optradio3">{{ 'key_Yes' | translate }}
+          </label>
+        </div>
+        <div class="form-check-inline">
+          <label class="form-check-label">
+            <input type="radio" class="form-check-input" name="optradio3">{{ 'key_No' | translate }}
+          </label>
+        </div>
+        <textarea class="form-control mt-2" rows="1" placeholder="List History"></textarea>
+      </div>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-12">
+      <div class="form-group">
+        <label for="" class="fw600">{{ 'Key_PastSurgicalHistory' | translate }}</label>
+        <div class="clearfix"></div>
+        <div class="form-check-inline mr-4">
+          <label class="form-check-label">
+            <input type="radio" class="form-check-input" name="optradio4">{{ 'key_Yes' | translate }}
+          </label>
+        </div>
+        <div class="form-check-inline">
+          <label class="form-check-label">
+            <input type="radio" class="form-check-input" name="optradio4">{{ 'key_No' | translate }}
+          </label>
+        </div>
+        <textarea class="form-control mt-2" rows="1" placeholder="List History"></textarea>
+      </div>
+    </div>
+  </div>
+  <!--row end-->
+  <div class="fs-16 fw600 mt-3"><u>{{ 'Key_PastMedicalHistory' | translate }}</u></div>
+  <div class="row mt-2">
+    <div class="col-sm-12">
+      <div class="form-check-inline mr-4 mb-2">
+        <label class="form-check-label">
+          <input type="checkbox" class="form-check-input" value="">{{ 'Key_Febrileillness' | translate }}
+        </label>
+      </div>
+      <div class="form-check-inline mr-4 mb-2">
+        <label class="form-check-label">
+          <input type="checkbox" class="form-check-input" value="">{{ 'Key_Tuberculosis' | translate }}
+        </label>
+      </div>
+      <div class="form-check-inline mr-4 mb-2">
+        <label class="form-check-label">
+          <input type="checkbox" class="form-check-input" value="">{{ 'Key_Rediation' | translate }}
+        </label>
+      </div>
+      <div class="form-check-inline mr-4 mb-2">
+        <label class="form-check-label">
+          <input type="checkbox" class="form-check-input" value="">{{ 'Key_Hypertension' | translate }}
+        </label>
+      </div>
+      <div class="form-check-inline mr-4 mb-2">
+        <label class="form-check-label">
+          <input type="checkbox" class="form-check-input" value="">{{ 'Key_Asthma' | translate }}
+        </label>
+      </div>
+      <div class="form-check-inline mr-4 mb-2">
+        <label class="form-check-label">
+          <input type="checkbox" class="form-check-input" value="">{{ 'Key_HeartDisease' | translate }}
+        </label>
+      </div>
+      <div class="form-check-inline mr-4 mb-2">
+        <label class="form-check-label">
+          <input type="checkbox" class="form-check-input" value="">{{ 'Key_Diabetes' | translate }}
+        </label>
+      </div>
+      <div class="form-check-inline mr-4 mb-2">
+        <label class="form-check-label">
+          <input type="checkbox" class="form-check-input" value="">{{ 'Key_Others' | translate }}
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-2">
+    <div class="col-sm-12">
+      <div class="form-group">
+        <textarea class="form-control" rows="3" placeholder="{{ 'key_AddCommentHere' | translate }}"></textarea>
+      </div>
+    </div>
+  </div>
+  <!--Row start for other-->
+  <div class="row">
+    <input type="button" class="btn btn-secondary ml-3 btnbrd" (click)="AddMoreComplication()" value="{{ 'key_AddNewParameter' | translate }}" />
+  </div>
+  <!--Row end for other-->
+
+</div>

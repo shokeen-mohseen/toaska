@@ -1,0 +1,42 @@
+<!--Button Action Section End/////////-->
+  <app-top-btn-group #btnBar [actionGroupConfig]="actionGroupConfig" (action)="actionHandler($event)"></app-top-btn-group>
+  <h5>{{ 'key_Charge' | translate }}</h5>
+
+<mat-tab-group #tabGroupA class="mt-18" animationDuration="0ms" (selectedTabChange)="tabChange($event)">
+
+  <mat-tab #tab1 *ngIf="isChargeViewTab">
+    <ng-template mat-tab-label>
+      {{ 'key_ChargeList' | translate }}
+    </ng-template>
+    <div class="tab-content" *ngIf="isChargeViewData">
+      <app-charge-list (selectedCharges)="selectedCharges($event)" [chargesToSelect]="chargesToSelect()"></app-charge-list>
+    </div>
+  </mat-tab>
+
+  <mat-tab #tab2 *ngIf="isAddTab">
+    <ng-template mat-tab-label>
+      {{ 'key_AddNewCharge' | translate }}
+      <button class="close" type="button" (click)="closeTab()">
+        <i class="fa fa-times-circle-o" aria-hidden="true"></i>
+      </button>
+    </ng-template>
+    <div class="tab-content" *ngIf="isAddTabData">
+      <app-addnew-charge></app-addnew-charge>
+    </div>
+  </mat-tab>
+
+  <mat-tab #tab3 *ngIf="isEditTab">
+    <ng-template mat-tab-label>
+      {{ 'key_Edit' | translate }}
+      <button class="close" type="button" (click)="closeTab()">
+        <i class="fa fa-times-circle-o" aria-hidden="true"></i>
+      </button>
+    </ng-template>
+    <div class="tab-content" *ngIf="isEditData">
+      <app-edit-charge (selectedCharges)="selectedCharges($event)" [chargesToEdit]="chargesToEdit()"></app-edit-charge>
+    </div>
+  </mat-tab>
+</mat-tab-group>
+
+
+<app-show-notes></app-show-notes>

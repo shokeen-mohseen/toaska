@@ -1,0 +1,120 @@
+<!--Auother:MOnu Ram Yadav, TFS:-17181, Des:- Patient Registration Number text chnaged red to black-->
+<div class="row">
+  <p class="text-center w-100 font-italic fs-18 fw600 text-red">{{ 'key_Selectthepatient' | translate }}...</p>
+</div>
+<div class="row">
+  <div class="col-md-5">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group searchbg-grey">
+          <label class="fw600">{{ 'key_SearchPatientbyName' | translate }}</label>
+          <angular2-multiselect [data]="itemPatientName" [(ngModel)]="selectedItems" [settings]="settings"
+                                (onSelect)="onSearchPatientByName($event)"
+
+                               >
+          </angular2-multiselect>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-2"></div>
+
+  <div class="col-md-5">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group searchbg-grey">
+          <label class="fw600">{{ 'key_SearchPatientbyRegistrationNumber' | translate }}</label>
+          <angular2-multiselect [data]="itemPatientReg" [(ngModel)]="selectedItems2" [settings]="settings"
+                                (onSelect)="onSearchPatientByReg($event)">
+          </angular2-multiselect>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--Row End-->
+<form [formGroup]="p1form">
+
+  <div class="row">
+    <div class="col-md-5">
+      <div class="form-group">
+        <label class="fw600">{{ 'key_PatientRegistrationNumber' | translate }}</label>
+        <input class="form-control" formControlName="RegistrationNo" type="text" placeholder="{{ 'key_EnterRegistrationNumber' | translate }}">
+        <app-control-messages [control]="f['RegistrationNo']"></app-control-messages>
+      </div>
+    </div>
+    <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
+      <div class="form-group">
+
+        <!--[(ngModel)]="itemhospitalLocationSelectedList"-->
+
+        <label>{{ 'key_Hospitalname' | translate }}  </label>
+        <angular2-multiselect [data]="itemhospitalLocationList"
+                              formControlName="LocationData"
+                              [settings]="settings"
+                              (onSelect)="onItemSelect($event)"
+                              (onDeSelect)="OnItemDeSelect($event)"
+                              (onSelectAll)="onSelectAll($event)"
+                              (onDeSelectAll)="onDeSelectAll($event)"
+                              (onAddFilterNewItem)="onAddItem($event)">
+        </angular2-multiselect>
+
+        <!--<app-control-messages [control]="f['LocationData']"></app-control-messages>-->
+
+      </div>
+    </div>
+    <div class="col-md-12 col-md-3 col-lg-3 col-xl-3">
+      <div class="form-group">
+        <label for="middlename">{{ 'key_Hospitalnumber' | translate }} </label>
+        <angular2-multiselect [data]="itemhospitalLocationSelectedCodeList" formControlName="LocationSelectedCode" [settings]="settings">
+        </angular2-multiselect>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-3">
+    <div class="col-sm-12 col-md-4 col-lg-4">
+      <div class="form-group">
+        <label for="addesstype">{{ 'key_Firstname' | translate }}</label>
+        <div class="input-group">
+          <div class="input-group-prepend append-custombg3">
+            <select class="form-control" formControlName="Prefix">
+              <option [value]="item.id" *ngFor="let item of itemPrefixList">{{item.name}}</option>
+            </select>
+          </div>
+          <input type="text" formControlName="FirstName" class="form-control">
+          <app-control-messages [control]="f['FirstName']"></app-control-messages>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-12 col-md-4 col-lg-4">
+      <div class="form-group">
+        <label for="addesstype">{{ 'key_Middlename' | translate }}</label>
+        <input id="middlename" type="text" placeholder="" formControlName="MiddleName" class="form-control">
+        <app-control-messages [control]="f['MiddleName']"></app-control-messages>
+      </div>
+    </div>
+    <div class="col-sm-12 col-md-4 col-lg-4">
+      <div class="form-group">
+        <label for="addesstype">{{ 'key_Lastname' | translate }}</label>
+        <div class="input-group">
+          <input type="text" formControlName="LastName" class="form-control">
+          <app-control-messages [control]="f['LastName']"></app-control-messages>
+          <div class="input-group-prepend append-custombg">
+
+            <select class="form-control" formControlName="Suffix">
+              <option [value]="item.id" *ngFor="let item of itemSuffixList">{{item.name}}</option>
+            </select>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--Row End-->
+  <!--<button type="submit" class="btn btn-save"
+          [disabled]="p1form.invalid">
+    <span [innerHTML]="'key_Save' | translate"></span>
+  </button>-->
+</form>

@@ -1,0 +1,643 @@
+<!---16617 Chat Component - Design Chat component.-->
+<!---16655 Chat Component - Design Chat component.-->
+<!--developer : rajesh, description : remove chart right side bar from our application, assign : by ram sir : date : 08-09-2020-->
+<!--<app-aside [fixed]="true" [display]="false" [ngClass]="'test'">
+  <i id="formButton">{{ 'key_Participants' | translate }} </i>
+  <form id="form1">
+    <p>{{ 'key_add' | translate }}</p>
+
+
+    <input type="text" name="lastName" placeholder="enter name, email or tag" class="form-control">
+    <br>
+    <button type="button" id="submit" class="btn btn-primary">{{ 'key_add' | translate }}</button>
+    <button type="button" id="cancel" class="btn">{{ 'key_cancel' | translate }}</button>
+  </form>
+  <tabset>
+    <tab>
+      <ng-template tabHeading> {{ 'key_recent' | translate }}--><!--<i class="fa fa-folder-open" id="formButton"></i>--><!--</ng-template>
+      <div class="btn btn-square btn-block btn-info text-center font-weight-bold  small">New chat</div>
+
+      <div class="list-group-item list-group-item-accent-warning list-group-item-divider">
+        <div class="avatar float-left">
+          <img class="img-avatar" src="assets/img/avatars/4.jpg" alt="admin@bootstrapmaster.com">
+        </div>
+        <div class="p-40">
+          New Chat-->
+          <!--<strong>Lucas</strong>-->
+        <!--</div>
+        <div class="dropdown dropdownone">
+          <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v" style="font-size:18px;"></i></a>
+          <ul class="dropdown-menu">
+
+            <li><a href="#">Discard</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="list-group-item list-group-item-accent-warning list-group-item-divider">
+        <div class="avatar float-left">
+          <img class="img-avatar" src="assets/img/avatars/4.jpg" alt="admin@bootstrapmaster.com">
+        </div>
+        <div class="p-40">
+          <p> Aditya Gupta</p>-->
+          <!--<strong>Lucas</strong>-->
+        <!--</div>
+        <div class="dropdown dropdownone">
+          <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v" style="font-size:18px;"></i></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Popup out chat</a></li>
+            <li><a href="#">Mark as onread</a></li>
+            <li><a href="#">Pin</a></li>
+            <li><a href="#">Add to favorite contact</a></li>
+            <li><a href="#">Mute</a></li>
+            <li><a href="#">Hide</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="list-group-item list-group-item-accent-warning list-group-item-divider">
+        <div class="avatar float-left">
+          <img class="img-avatar" src="assets/img/avatars/4.jpg" alt="admin@bootstrapmaster.com">
+        </div>
+        <div class="p-40">
+          <p> Rizwan</p>-->
+          <!--<strong>Lucas</strong>-->
+        <!--</div>
+        <div class="dropdown dropdownone">
+          <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v" style="font-size:18px;"></i></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Popup out chat</a></li>
+            <li><a href="#">Mark as onread</a></li>
+            <li><a href="#">Pin</a></li>
+            <li><a href="#">Add to favorite contact</a></li>
+            <li><a href="#">Mute</a></li>
+            <li><a href="#">Hide</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="list-group-item list-group-item-accent-primary list-group-item-divider">
+        <div>
+          Aditya,Rizwan,Gaurav,+4
+        </div>
+        <div class="dropdown dropdownone">
+          <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v" style="font-size:18px;"></i></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Popup out chat</a></li>
+            <li><a href="#">Mark as onread</a></li>
+            <li><a href="#">Pin</a></li>
+            <li><a href="#">Add to favorite contact</a></li>
+            <li><a href="#">Mute</a></li>
+            <li><a href="#">Hide</a></li>
+          </ul>
+        </div>-->
+        <!--<small class="text-muted mr-3">
+          <i class="icon-calendar"></i>  4 - 6pm
+        </small>-->
+        <!--<small class="text-muted">
+          <i class="icon-home"></i>  creativeLabs HQ
+        </small>-->
+        <!--<div class="avatars-stack mt-2">
+          <div class="avatar avatar-xs">
+            <img class="img-avatar" src="assets/img/avatars/2.jpg" alt="aditya@osoftec.com">
+          </div>
+          <div class="avatar avatar-xs">
+            <img class="img-avatar" src="assets/img/avatars/3.jpg" alt="rizwan@osoftec.com">
+          </div>
+          <div class="avatar avatar-xs">
+            <img class="img-avatar" src="assets/img/avatars/4.jpg" alt="gaurav@osoftec.com">
+          </div>
+          <div class="avatar avatar-xs">
+            <img class="img-avatar" src="assets/img/avatars/5.jpg" alt="amit@osoftec.com">
+          </div>
+          <div class="avatar avatar-xs">
+            <img class="img-avatar" src="assets/img/avatars/6.jpg" alt="vikas@osoftec.com">
+          </div>
+
+        </div>
+      </div>
+    </tab>
+
+    <tab>
+      <ng-template tabHeading> {{ 'key_chat' | translate }}</ng-template>-->
+      <!--<div class="p-3">
+        <div class="message">
+          <div class="py-3 pb-5 mr-3 float-left">
+            <div class="avatar">
+              <img src="assets/img/avatars/7.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
+              <span class="avatar-status badge-success"></span>
+            </div>
+          </div>
+          <div>
+            <small class="text-muted">Lukasz Holeczek</small>
+            <small class="text-muted float-right mt-1">1:52 PM</small>
+          </div>
+          <div class="text-truncate font-weight-bold">Lorem ipsum dolor sit amet</div>
+          <small class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt...</small>
+        </div>
+        <hr>
+        <div class="message">
+          <div class="py-3 pb-5 mr-3 float-left">
+            <div class="avatar">
+              <img src="assets/img/avatars/7.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
+              <span class="avatar-status badge-success"></span>
+            </div>
+          </div>
+          <div>
+            <small class="text-muted">Lukasz Holeczek</small>
+            <small class="text-muted float-right mt-1">1:52 PM</small>
+          </div>
+          <div class="text-truncate font-weight-bold">Lorem ipsum dolor sit amet</div>
+          <small class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt...</small>
+        </div>
+        <hr>
+        <div class="message">
+          <div class="py-3 pb-5 mr-3 float-left">
+            <div class="avatar">
+              <img src="assets/img/avatars/7.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
+              <span class="avatar-status badge-success"></span>
+            </div>
+          </div>
+          <div>
+            <small class="text-muted">Lukasz Holeczek</small>
+            <small class="text-muted float-right mt-1">1:52 PM</small>
+          </div>
+          <div class="text-truncate font-weight-bold">Lorem ipsum dolor sit amet</div>
+          <small class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt...</small>
+        </div>
+        <hr>
+        <div class="message">
+          <div class="py-3 pb-5 mr-3 float-left">
+            <div class="avatar">
+              <img src="assets/img/avatars/7.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
+              <span class="avatar-status badge-success"></span>
+            </div>
+          </div>
+          <div>
+            <small class="text-muted">Lukasz Holeczek</small>
+            <small class="text-muted float-right mt-1">1:52 PM</small>
+          </div>
+          <div class="text-truncate font-weight-bold">Lorem ipsum dolor sit amet</div>
+          <small class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt...</small>
+        </div>
+        <hr>
+        <div class="message">
+          <div class="py-3 pb-5 mr-3 float-left">
+            <div class="avatar">
+              <img src="assets/img/avatars/7.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
+              <span class="avatar-status badge-success"></span>
+            </div>
+          </div>
+          <div>
+            <small class="text-muted">Lukasz Holeczek</small>
+            <small class="text-muted float-right mt-1">1:52 PM</small>
+          </div>
+          <div class="text-truncate font-weight-bold">Lorem ipsum dolor sit amet</div>
+          <small class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt...</small>
+        </div>
+      </div>-->
+
+      <!--<div class="container-fluid h-100">
+        <div class="row justify-content-center h-100">
+          <div class="col-md-8- col-xl-6- chat">
+            <div class="card">
+              <div class="card-header msg_head">
+                <div class="d-flex bd-highlight">
+                  <div class="img_cont">
+                    <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" class="rounded-circle user_img">
+                    <span class="online_icon"></span>
+                  </div>
+                  <div class="user_info">
+                    <span>satyen</span>
+                    <p>1767 Messages</p>
+                  </div>-->
+                  <!--<div class="video_cam">
+                    <span><i class="fa fa-video"></i></span>
+                    <span><i class="fa fa-phone"></i></span>
+                  </div>-->
+                <!--</div>
+                <span id="action_menu_btn"><i class="fa fa-ellipsis-v"></i></span>
+                <div class="action_menu">
+                  <ul>
+                    <li><i class="fa fa-share"></i> Share</li>
+                    <li><i class="fa fa-trash"></i> Delete</li>
+                    <li><i class="fa fa-file"></i> View profile</li>
+                    <li><i class="fa fa-users"></i> Export</li>
+                    <li><i class="fa fa-plus"></i> Add to group</li>
+                    <li><i class="fa fa-ban"></i> Block</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="card-body msg_card_body chatheight">
+                <div class="d-flex justify-content-start mb-4">-->
+                  <!--<div class="img_cont_msg">
+                    <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" class="rounded-circle user_img_msg">
+                  </div>-->
+                  <!--<div class="msg_cotainer">
+                    Hi, how are you samim?
+                    <span class="msg_time">
+                      S. Khanna, 6/24/20 7:30:00 PM
+                    </span>
+                  </div>
+                </div>
+                <div class="d-flex justify-content-end mb-4">
+                  <div class="msg_cotainer_send">
+                    Hi Khalid i am good tnx how about you?
+                    <span class="msg_time_send">
+                      S. Khanna, 6/24/20 7:30:00 PM
+                    </span>
+                  </div>-->
+                  <!--<div class="img_cont_msg">                    
+                  </div>-->
+                <!--</div>
+                <div class="d-flex justify-content-start mb-4">-->
+                  <!--<div class="img_cont_msg">
+                    <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" class="rounded-circle user_img_msg">
+                  </div>-->
+                  <!--<div class="msg_cotainer">
+                    I am good too, thank you for your chat template
+                    <span class="msg_time">
+                      S. Khanna, 6/24/20 7:30:00 PM
+                    </span>
+                  </div>
+                </div>
+                <div class="d-flex justify-content-end mb-4">
+                  <div class="msg_cotainer_send">
+                    You are welcome
+                    <span class="msg_time_send">
+                      S. Khanna, 6/24/20 7:30:00 PM
+                    </span>
+                  </div>-->
+                  <!--<div class="img_cont_msg">
+                   
+                  </div>-->
+                <!--</div>
+                <div class="d-flex justify-content-start mb-4">-->
+                  <!--<div class="img_cont_msg">
+                    <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" class="rounded-circle user_img_msg">
+                  </div>-->
+                  <!--<div class="msg_cotainer">
+                    I am looking for your next templates
+                    <span class="msg_time">9:07 AM, Today</span>
+                  </div>
+                </div>
+                <div class="d-flex justify-content-end mb-4">
+                  <div class="msg_cotainer_send">
+                    Ok, thank you have a good day
+                    <span class="msg_time_send">9:10 AM, Today</span>
+                  </div>-->
+                  <!--<div class="img_cont_msg">
+                    
+                  </div>-->
+                <!--</div>
+                <div class="d-flex justify-content-start mb-4">-->
+                  <!--<div class="img_cont_msg">
+                    <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" class="rounded-circle user_img_msg">
+                  </div>-->
+                  <!--<div class="msg_cotainer">
+                    Bye, see you
+                    <span class="msg_time">9:12 AM, Today</span>
+                  </div>
+                </div>
+              </div>
+              <div class="card-footer">
+                <div class="input-group">
+                  <div class="input-group-append">
+                    <span class="input-group-text attach_btn"><i class="fa fa-paperclip"></i></span>
+                  </div>
+                  <textarea name="" class="form-control type_msg" placeholder="Type your message..."></textarea>
+                  <div class="input-group-append">
+                    <span class="input-group-text send_btn"><i class="fa fa-location-arrow"></i></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </tab>
+    <tab>
+      <ng-template tabHeading> {{ 'key_file' | translate }}--><!--<i class="fa fa-folder-open"></i>--><!--</ng-template>
+
+      <div class="list-group list-group-accent">
+        <div class="list-group-item list-group-item-accent-secondary bg-light text-center font-weight-bold text-muted text-uppercase small">Today</div>
+        <div class="list-group-item list-group-item-accent-warning list-group-item-divider">
+          <div class="avatar float-left">
+            <i class="fa fa-file-powerpoint-o"></i>
+          </div>
+          <div>
+            arcPartographflow.ppt-->
+            <!--<strong>Lucas</strong>-->
+          <!--</div>
+          <small class="text-muted mr-3">
+            <i class="icon-calendar"></i> 25/6
+          </small>
+          <small class="text-muted">-->
+            <!--<i class="icon-location-pin"></i>-->  <!--Aditya Gupta
+          </small>
+        </div>
+        <div class="list-group-item list-group-item-accent-warning list-group-item-divider">
+          <div class="avatar float-left">
+            <i class="fa fa-file-word-o"></i>
+          </div>
+          <div>
+            arcPartographflow.doc-->
+            <!--<strong>Lucas</strong>-->
+          <!--</div>
+          <small class="text-muted mr-3">
+            <i class="icon-calendar"></i> 20/6
+          </small>
+          <small class="text-muted">-->
+            <!--<i class="icon-location-pin"></i>-->  <!--Satyen Singh
+          </small>
+        </div>
+
+
+        <div class="list-group-item list-group-item-accent-warning list-group-item-divider">
+          <div class="avatar float-left">
+            <i class="fa fa-file-pdf-o"></i>
+          </div>
+          <div>
+            arcPartographflow.pdf-->
+            <!--<strong>Lucas</strong>-->
+          <!--</div>
+          <small class="text-muted mr-3">
+            <i class="icon-calendar"></i> 18/6
+          </small>
+          <small class="text-muted">-->
+            <!--<i class="icon-location-pin"></i>-->  <!--Satyen Singh
+          </small>
+        </div>
+
+
+        <div class="list-group-item list-group-item-accent-warning list-group-item-divider">
+          <div class="avatar float-left">
+            <i class="fa fa-file-image-o"></i>
+          </div>
+          <div>
+            arcPartographflow.png-->
+            <!--<strong>Lucas</strong>-->
+          <!--</div>
+          <small class="text-muted mr-3">
+            <i class="icon-calendar"></i> 12/6
+          </small>
+          <small class="text-muted">-->
+            <!--<i class="icon-location-pin"></i>-->  <!--Aditya Gupta
+          </small>
+        </div>
+
+
+      </div>-->
+      <!--<div class="list-group-item list-group-item-accent-info">
+          <div class="avatar float-right">
+            <img class="img-avatar" src="assets/img/avatars/4.jpg" alt="admin@bootstrapmaster.com">
+          </div>
+          <div>
+            Skype with
+            <strong>Megan</strong>
+          </div>
+          <small class="text-muted mr-3">
+            <i class="icon-calendar"></i>  4 - 5pm
+          </small>
+          <small class="text-muted">
+            <i class="icon-social-skype"></i>  On-line
+          </small>
+        </div>
+        <div class="list-group-item list-group-item-accent-secondary bg-light text-center font-weight-bold text-muted text-uppercase small">Tomorrow</div>
+        <div class="list-group-item list-group-item-accent-danger list-group-item-divider">
+          <div>
+            New UI Project -
+            <strong>deadline</strong>
+          </div>
+          <small class="text-muted mr-3">
+            <i class="icon-calendar"></i>  10 - 11pm
+          </small>
+          <small class="text-muted">
+            <i class="icon-home"></i>  creativeLabs HQ
+          </small>
+          <div class="avatars-stack mt-2">
+            <div class="avatar avatar-xs">
+              <img class="img-avatar" src="assets/img/avatars/2.jpg" alt="admin@bootstrapmaster.com">
+            </div>
+            <div class="avatar avatar-xs">
+              <img class="img-avatar" src="assets/img/avatars/3.jpg" alt="admin@bootstrapmaster.com">
+            </div>
+            <div class="avatar avatar-xs">
+              <img class="img-avatar" src="assets/img/avatars/4.jpg" alt="admin@bootstrapmaster.com">
+            </div>
+            <div class="avatar avatar-xs">
+              <img class="img-avatar" src="assets/img/avatars/5.jpg" alt="admin@bootstrapmaster.com">
+            </div>
+            <div class="avatar avatar-xs">
+              <img class="img-avatar" src="assets/img/avatars/6.jpg" alt="admin@bootstrapmaster.com">
+            </div>
+          </div>
+        </div>
+        <div class="list-group-item list-group-item-accent-success list-group-item-divider">
+          <div>
+            <strong>#10 Startups.Garden</strong> Meetup
+          </div>
+          <small class="text-muted mr-3">
+            <i class="icon-calendar"></i>  1 - 3pm
+          </small>
+          <small class="text-muted">
+            <i class="icon-location-pin"></i>  Palo Alto, CA
+          </small>
+        </div>
+        <div class="list-group-item list-group-item-accent-primary list-group-item-divider">
+          <div>
+            <strong>Team meeting</strong>
+          </div>
+          <small class="text-muted mr-3">
+            <i class="icon-calendar"></i>  4 - 6pm
+          </small>
+          <small class="text-muted">
+            <i class="icon-home"></i>  creativeLabs HQ
+          </small>
+          <div class="avatars-stack mt-2">
+            <div class="avatar avatar-xs">
+              <img class="img-avatar" src="assets/img/avatars/2.jpg" alt="admin@bootstrapmaster.com">
+            </div>
+            <div class="avatar avatar-xs">
+              <img class="img-avatar" src="assets/img/avatars/3.jpg" alt="admin@bootstrapmaster.com">
+            </div>
+            <div class="avatar avatar-xs">
+              <img class="img-avatar" src="assets/img/avatars/4.jpg" alt="admin@bootstrapmaster.com">
+            </div>
+            <div class="avatar avatar-xs">
+              <img class="img-avatar" src="assets/img/avatars/5.jpg" alt="admin@bootstrapmaster.com">
+            </div>
+            <div class="avatar avatar-xs">
+              <img class="img-avatar" src="assets/img/avatars/6.jpg" alt="admin@bootstrapmaster.com">
+            </div>
+            <div class="avatar avatar-xs">
+              <img class="img-avatar" src="assets/img/avatars/7.jpg" alt="admin@bootstrapmaster.com">
+            </div>
+            <div class="avatar avatar-xs">
+              <img class="img-avatar" src="assets/img/avatars/8.jpg" alt="admin@bootstrapmaster.com">
+            </div>
+          </div>
+        </div>
+      </div>-->
+           
+    <!--</tab>
+
+
+    <tab>
+      <ng-template tabHeading> {{ 'key_people' | translate }} </ng-template>
+
+      <div class="list-group-item list-group-item-accent-warning list-group-item-divider">
+        <div class="avatar float-left">
+          <img class="img-avatar" src="assets/img/avatars/4.jpg" alt="admin@bootstrapmaster.com">
+        </div>
+        <div class="p-40">
+          <p> Aditya Gupta</p>-->
+          <!--<strong>Lucas</strong>-->
+        <!--</div>
+        <div class="dropdown dropdownone">
+          <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v" style="font-size:18px;"></i></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Popup out chat</a></li>
+            <li><a href="#">Mark as onread</a></li>
+            <li><a href="#">Pin</a></li>
+            <li><a href="#">Add to favorite contact</a></li>
+            <li><a href="#">Mute</a></li>
+            <li><a href="#">Hide</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="list-group-item list-group-item-accent-warning list-group-item-divider">
+        <div class="avatar float-left">
+          <img class="img-avatar" src="assets/img/avatars/4.jpg" alt="admin@bootstrapmaster.com">
+        </div>
+        <div class="p-40">
+          <p> Gaurav Bartwal</p>-->
+          <!--<strong>Lucas</strong>-->
+        <!--</div>
+        <div class="dropdown dropdownone">
+          <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v" style="font-size:18px;"></i></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Popup out chat</a></li>
+            <li><a href="#">Mark as onread</a></li>
+            <li><a href="#">Pin</a></li>
+            <li><a href="#">Add to favorite contact</a></li>
+            <li><a href="#">Mute</a></li>
+            <li><a href="#">Hide</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="list-group-item list-group-item-accent-warning list-group-item-divider">
+        <div class="avatar float-left">
+          <img class="img-avatar" src="assets/img/avatars/4.jpg" alt="admin@bootstrapmaster.com">
+        </div>
+        <div class="p-40">
+          <p> Rizwan</p>-->
+          <!--<strong>Lucas</strong>-->
+        <!--</div>
+        <div class="dropdown dropdownone">
+          <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v" style="font-size:18px;"></i></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Popup out chat</a></li>
+            <li><a href="#">Mark as onread</a></li>
+            <li><a href="#">Pin</a></li>
+            <li><a href="#">Add to favorite contact</a></li>
+            <li><a href="#">Mute</a></li>
+            <li><a href="#">Hide</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="list-group-item list-group-item-accent-warning list-group-item-divider">
+        <div class="avatar float-left">
+          <img class="img-avatar" src="assets/img/avatars/4.jpg" alt="admin@bootstrapmaster.com">
+        </div>
+        <div class="p-40">
+          <p> Devendra Sharma</p>-->
+          <!--<strong>Lucas</strong>-->
+        <!--</div>
+        <div class="dropdown dropdownone">
+          <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v" style="font-size:18px;"></i></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Popup out chat</a></li>
+            <li><a href="#">Mark as onread</a></li>
+            <li><a href="#">Pin</a></li>
+            <li><a href="#">Add to favorite contact</a></li>
+            <li><a href="#">Mute</a></li>
+            <li><a href="#">Hide</a></li>
+          </ul>
+        </div>
+      </div>-->
+      <!--<div class="p-3">
+        <h6>Settings</h6>
+        <div class="aside-options">
+          <div class="clearfix mt-4">
+            <small><b>Option 1</b></small>
+            <label class="switch switch-label switch-pill switch-success switch-sm float-right">
+              <input type="checkbox" class="switch-input" checked>
+              <span class="switch-slider" data-checked="On" data-unchecked="Off"></span>
+            </label>
+          </div>
+          <div>
+            <small class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</small>
+          </div>
+        </div>
+        <div class="aside-options">
+          <div class="clearfix mt-3">
+            <small><b>Option 2</b></small>
+            <label class="switch switch-label switch-pill switch-success switch-sm float-right">
+              <input type="checkbox" class="switch-input">
+              <span class="switch-slider" data-checked="On" data-unchecked="Off"></span>
+            </label>
+          </div>
+          <div>
+            <small class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</small>
+          </div>
+        </div>
+        <div class="aside-options">
+          <div class="clearfix mt-3">
+            <small><b>Option 3</b></small>
+            <label class="switch switch-label switch-pill switch-success switch-sm float-right">
+              <input type="checkbox" class="switch-input">
+              <span class="switch-slider" data-checked="On" data-unchecked="Off"></span>
+              <span class="switch-handle"></span>
+            </label>
+          </div>
+        </div>
+        <div class="aside-options">
+          <div class="clearfix mt-3">
+            <small><b>Option 4</b></small>
+            <label class="switch switch-label switch-pill switch-success switch-sm float-right">
+              <input type="checkbox" class="switch-input" checked>
+              <span class="switch-slider" data-checked="On" data-unchecked="Off"></span>
+            </label>
+          </div>
+        </div>
+        <hr>
+        <h6>System Utilization</h6>
+        <div class="text-uppercase mb-1 mt-4"><small><b>CPU Usage</b></small></div>
+        <div class="progress progress-xs">
+          <div class="progress-bar bg-info" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+        <small class="text-muted">348 Processes. 1/4 Cores.</small>
+        <div class="text-uppercase mb-1 mt-2"><small><b>Memory Usage</b></small></div>
+        <div class="progress progress-xs">
+          <div class="progress-bar bg-warning" role="progressbar" style="width: 70%" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+        <small class="text-muted">11444GB/16384MB</small>
+        <div class="text-uppercase mb-1 mt-2"><small><b>SSD 1 Usage</b></small></div>
+        <div class="progress progress-xs">
+          <div class="progress-bar bg-danger" role="progressbar" style="width: 95%" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+        <small class="text-muted">243GB/256GB</small>
+        <div class="text-uppercase mb-1 mt-2"><small><b>SSD 2 Usage</b></small></div>
+        <div class="progress progress-xs">
+          <div class="progress-bar bg-success" role="progressbar" style="width: 10%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+        <small class="text-muted">25GB/256GB</small>
+      </div>-->
+    <!--</tab>
+  </tabset>
+
+
+
+
+</app-aside>-->

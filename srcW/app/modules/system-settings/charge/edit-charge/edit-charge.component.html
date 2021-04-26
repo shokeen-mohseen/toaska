@@ -1,0 +1,148 @@
+<!--TFS ID: 17265, Author: Monu Ram Yadav, Date: 03-09-2020, Des: Design Charges screen taking reference from tosca project-->
+
+<!--Button Action Section End/////////-->
+<div class="custom-tab row">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="tab-pane">
+        <div class="row">
+          <div class="col-md-6"></div>
+          <div class="col-md-6 text-right">
+            <span class="fw600">{{ 'key_LastUpdate' | translate }}:</span> {{selectedChargeToEdit?.updateDateTimeBrowser | date:'MM-dd-yyyy hh:mm:ss'}}
+            <br><span class="fw600">{{ 'key_By' | translate }}</span> {{selectedChargeToEdit?.updatedBy}}
+          </div>
+        </div>
+        <!--Last Updated Section End//////////////-->
+
+        <div class="row mt-3">
+          <div class="col-md-3 custom-flex-w-15">
+            <div class="card">
+              <div class="card-header">{{ 'key_EditList' | translate }}</div>
+              <div class="card-body p-0">
+                <ul class="list-group" #nextList>
+                  <li class="list-group-item list-group-item-action"
+                      *ngFor="let charge of chargesToEdit; let i = index"
+                      (click)="selectedCharge(charge)"
+                      [ngClass]="{ 'active': charge?.id == selectedChargeToEdit?.id }">
+                    <a>{{charge.description}}</a>
+                    <button class="close" *ngIf="charge?.id!=selectedChargeToEdit?.id" type="button"
+                            (click)="removeChargeFromEditList(charge)">
+                      <i class="fa fa-times" aria-hidden="true"></i>
+                    </button>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <!--Left panel tab menu End//////-->
+          <div class="col-md-9 custom-flex-w-85">
+            <div class="tab-content">
+              <!--=============== Start profile =================-->
+              <div class="e-profile">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="box-children">
+                      <div class="row">
+                        <div class="col-md-12">
+                          <div class="form-group">
+                            <label for="firstname">
+                              {{ 'key_ChargeDescription' | translate }} <span class="text-danger">*</span>
+                            </label>
+                            <input type="text" class="form-control" value="" disabled placeholder="{{selectedChargeToEdit?.description}}">
+
+                          </div>
+                        </div>
+
+                        <div class="col-md-12">
+                          <div class="form-group">
+                            <label>{{ 'key_ChargeCategory' | translate }} <span class="text-danger">*</span></label>
+                            <angular2-multiselect [data]="chargeCategoryList" [(ngModel)]="chargeCategorySelected" [settings]="settings"
+                                                  (onSelect)="onDropdownSelect($event)"
+                                                  name="chargeCategoryList">
+                            </angular2-multiselect>
+                          </div>
+                        </div>
+                        <div class="col-md-12">
+                          <div class="form-group">
+                            <label>{{ 'key_ChargeType' | translate }} <span class="text-danger">*</span></label>
+                            <angular2-multiselect [data]="chargeTypeList" [(ngModel)]="chargeTypeSelected" [settings]="settings"
+                                                  (onSelect)="onDropdownSelect($event)"
+                                                  name="chargeTypeList">
+                            </angular2-multiselect>
+                          </div>
+                        </div>
+                        <div class="col-md-12">
+                          <div class="form-group">
+                            <label>{{ 'key_DefaultComputationMethod' | translate }} <span class="text-danger">*</span></label>
+                            <angular2-multiselect [data]="chargeDefaultComputationMethodList" [(ngModel)]="chargeDefaultComputationMethodSelected" [settings]="settings"
+                                                  (onSelect)="onDropdownSelect($event)"
+                                                  name="chargeDefaultComputationMethodList">
+                            </angular2-multiselect>
+                          </div>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <div class="box-children">
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <span class="fw600 mr-3 " for="lastname"> {{ 'key_Status' | translate }} </span>
+                          <span for="lastname"> {{ 'key_Active' | translate }} </span>
+
+                        </div>
+                      </div>
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <span class="fw600 mr-3 " for="lastname"> {{ 'key_ApplyContractFor' | translate }} </span>
+                        </div>
+                      </div>
+                      <div class="col-md-12">
+                        <label class="radio-inline">
+                          <input type="radio" name="optradio" [checked]="selectedChargeToEdit?.domesticOnly"
+                                 (click)="domesticSelected()"> {{ 'key_DomesticOnly' | translate }}
+                        </label>
+                        <label class="radio-inline ml-3">
+                          <input type="radio" name="optradio" [checked]="selectedChargeToEdit?.exportOnly"
+                                 (click)="exportSelected()"> {{ 'key_ExportOnly' | translate }}
+                        </label>
+                        <label class="radio-inline ml-3">
+                          <input type="radio" name="optradio" [checked]="selectedChargeToEdit?.domesticExportBoth"
+                                 (click)="bothSelected()"> {{ 'key_Both' | translate }}
+                        </label>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+                <!--=============== End e-profile =================-->
+
+
+              </div>
+            </div>
+            <!--Tab Content End////////////-->
+          </div>
+        </div>
+        <!--Row End//////-->
+        <form (ngSubmit)="save()">
+          <div class="row justify-content-center my-5">
+            <div class="col-xl-2 col-lg-4 col-md-4 col-sm-12">
+              <button class="btn btn-block btn-save" type="submit">{{ 'key_Save' | translate }}</button>
+            </div>
+            <div class="col-xl-2 col-lg-4 col-md-4 col-sm-12">
+              <button class="btn btn-block btn-next" (click)="saveAndEditNext()" type="button">
+                <span class="fw600">{{ 'key_Edit' | translate }}</span> <span class="fs-13"> > {{'key_Next' | translate}}</span>
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <!--right panel tab Section End//////-->
+
+    </div>
+  </div>
+</div>
+    <!--tab-pane stepper-child-content-wrap end/////-->
+    <app-show-notes></app-show-notes>

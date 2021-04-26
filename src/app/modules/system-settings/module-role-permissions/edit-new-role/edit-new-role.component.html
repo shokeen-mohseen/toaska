@@ -1,0 +1,39 @@
+<form (ngSubmit)="onSubmit()">
+  <div class="modal-header">
+    <h4 class="modal-title">{{'key_Add' | translate}} / {{'key_Edit' | translate}}</h4>
+    <button type="button" class="close" data-dismiss="modal" (click)="activeModal.dismiss('Cross click')">&times;</button>
+  </div>
+
+  <!-- Modal body -->
+  <div class="modal-body">
+
+    <div class="row mt-3">
+      <div class="col-lg-12">
+        <div class="form-group">
+          <label> {{ 'key_RoleCode' | translate }} <span class="text-danger">*</span> </label>
+          <input type="text" class="form-control" required [(ngModel)]="addNewRoleViewModel.Code" name="Code" />
+          <div *ngIf="isCode === 1" class="errorMessage text-danger">Please enter role code.</div>
+         
+        </div>
+      </div>
+      <div class="col-lg-12">
+        <div class="form-group">
+          <label> {{ 'key_RoleName' | translate }} <span class="text-danger">*</span> </label>
+          <input type="text" class="form-control" required [(ngModel)]="addNewRoleViewModel.Name" name="Name" />
+          <div *ngIf="isName === 1" class="errorMessage text-danger">Please enter role name.</div>
+        </div>
+      </div>
+      <div class="col-lg-12">
+        <div class="form-group">
+          <label> {{ 'key_Description' | translate }} </label>
+          <textarea class="form-control" [(ngModel)]="addNewRoleViewModel.Description" name="Description"></textarea>
+        </div>
+      </div>
+    </div>
+    <div class="row justify-content-center my-3">
+      <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
+        <button class="btn btn-block btn-save" type="submit">{{ 'key_Save' | translate }}</button>
+      </div>
+    </div>
+  </div>
+</form>

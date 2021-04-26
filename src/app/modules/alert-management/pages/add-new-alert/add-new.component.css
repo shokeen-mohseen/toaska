@@ -1,0 +1,15 @@
+::ng-deep .mat-expansion-panel-body {
+  background-color: #f9f9f9;
+}
+::ng-deep .alert-block h6 {
+  font-size: 15px;
+  font-weight: 400;
+  margin-bottom: 0;
+}
+.table tr th {
+  font-weight: bold;
+}
+.alert-header {
+  font-size: 15px;
+  font-weight: bold;
+}

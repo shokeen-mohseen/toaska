@@ -1,0 +1,123 @@
+<div>
+  <!--<div class="row">
+    <div class="col-md-6"></div>
+    <div class="col-md-6 text-right">
+      <span class="fw600">Last Updated:	</span> 8/13/2020 8:35:24 IST
+      <br><span class="fw600">By</span> Jay Coleman (lampsdemo@osoftec.com)
+    </div>
+  </div>-->
+  <!--Last Updated Section End//////////////-->
+  <form #ngForm="ngForm" novalidate (ngSubmit) = "OnClickSubmit(ngForm)">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="tab-content">
+          <!--=============== Start profile =================-->
+          <div class="e-profile">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="box-children">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label> {{ 'key_Material' | translate }} <span class="text-danger">*</span> </label>
+                        <angular2-multiselect fixFilterBug [data]="itemListA" [(ngModel)]="selectedItemsA" [settings]="settings" (onSelect)="onItemSelectA($event)"
+                                              (onDeSelect)="OnItemDeSelect($event)"
+                                              (onSelectAll)="onSelectAll($event)"
+                                              (onDeSelectAll)="onDeSelectAll($event)"
+                                              (onAddFilterNewItem)="onAddItem($event)" name="listA" required>
+                        </angular2-multiselect>
+                      </div>
+                      <div class="form-group">
+                        <label> {{ 'key_Country' | translate }} <span class="text-danger">*</span> </label>
+                        <angular2-multiselect fixFilterBug [data]="itemListB" [(ngModel)]="selectedItemsB" [settings]="settings"  (onSelect)="onItemSelectB($event)"
+                                              (onDeSelect)="OnItemDeSelect($event)"
+                                              (onSelectAll)="onSelectAll($event)"
+                                              (onDeSelectAll)="onDeSelectAll($event)" name="listA" required>
+                        </angular2-multiselect>
+                      </div>
+                      <div class="form-group">
+                        <label> {{ 'key_Manufacturer' | translate }} <span class="text-danger">*</span> </label>
+                        <angular2-multiselect fixFilterBug [data]="itemListC" [(ngModel)]="selectedItemsC" [settings]="settings" (onSelect)="onItemSelectC($event)"
+                                              (onDeSelect)="OnItemDeSelect($event)"
+                                              (onSelectAll)="onSelectAll($event)"
+                                              (onDeSelectAll)="onDeSelectAll($event)"
+                                               name="listC" required>
+                        </angular2-multiselect>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="box-children">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label> {{ 'key_MaterialPercentage' | translate }} (%) <span class="text-danger">*</span> </label>
+                        <input type="text" class="form-control" [(ngModel)]="OriginOfGoods.materialPercentage"  maxlength="5" name="MatPercentage" value="" required (ngModelChange)="validation($event);" >
+                        <div *ngIf="!!OriginOfGoods.materialPercentage ? isPONo : false" class="errorMessage text-danger">
+                          {{'key_MaterialPercentagevalid' | translate }}
+                        </div>
+                      </div>
+                      <!--<div *ngIf="ngForm.controls['MatPercentage'].invalid && (ngForm.controls['MatPercentage'].dirty || ngForm.controls['MatPercentage'].touched)" >
+                        <mat-error *ngIf="ngForm.controls.MatPercentage.errors.pattern && !ngForm.controls.MatPercentage.errors.required">
+                          Please Enter Valid Percentage.
+                        </mat-error>
+                      </div>-->
+                      <div class="form-group">
+                        <label> {{ 'key_Comment' | translate }} </label>
+                        <textarea class="form-control" rows="4" [(ngModel)]="Comments" name="Comment" value=""></textarea>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!--<div class="col-md-4">
+                <div class="box-children">
+                  <div class="row">-->
+                    <!--<div class="col-md-12">
+                      <div class="form-group">
+                        <span class="fw600 mr-3 " for="lastname"> {{ 'key_Status' | translate }} </span>
+                        <span for="lastname"> {{ 'key_Active' | translate }} </span>
+
+                      </div>
+                    </div>-->
+                    <!--<div class="col-md-12">
+                      <div class="form-group">
+                        <div class="form-check checkbox">
+                          <input class="form-check-input" id="check1" type="checkbox" value="" checked>
+                          <label class="form-check-label" for="check1"> {{ 'key_SetupCompleted' | translate }} </label>
+                        </div>
+                      </div>
+                    </div>-->
+                    <!--<div class="col-md-12">
+                      <div class="form-group">
+                        <span class="fw600 mr-3 " for="lastname"> {{ 'key_SetupDatetime' | translate }} </span>
+                        <span for="lastname"> 8/31/2020 7:05:24 IST </span>
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <span class="fw600 mr-3 " for="lastname"> {{ 'key_SetupCompletedby' | translate }} </span>
+                        <span for="lastname"> John</span>
+                      </div>
+                    </div>-->
+                  <!--</div>
+                </div>
+              </div>-->
+            </div>
+          </div>
+          <!--=============== End e-profile =================-->
+        </div>
+      </div>
+    </div>
+
+    <div class="row justify-content-center my-5">
+      <div class="col-xl-2 col-lg-4 col-md-4 col-sm-12">
+        <button class="btn btn-block btn-save" type="submit"   [disabled]="!ngForm.form.valid" >{{ 'key_Save' | translate }}</button>
+      </div>      
+    </div>
+
+    </form>
+
+</div>

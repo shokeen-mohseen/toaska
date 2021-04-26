@@ -1,0 +1,53 @@
+@media(min-width:1451px) and (max-width:1650px) {
+   .editLineItems, .newOne {
+    mat-cell,
+    mat-footer-cell,
+    mat-header-cell {
+      width: 75px;
+    }
+  }
+
+  .editLineItems {
+    .mat-column-Quantity_per_UOM, .mat-column-Rate {
+      width: 58px;
+    }
+
+    .mat-column-UOM {
+      width: 95px;
+    }
+  }
+
+  .sidebar-minimized {
+    .editLineItems {
+      .mat-column-Quantity_per_UOM, .mat-column-Rate {
+        width: 125px;
+      }
+
+      .mat-column-UOM {
+        width: 95px;
+      }
+    }
+  }
+
+  app-customer-list .resize-table {
+    mat-cell, mat-footer-cell, mat-header-cell {
+      width: 150px;
+    }
+  }
+
+  app-customer-list, app-businesspartner-list, app-carrierpartnerlist {
+    .resize-table {
+      mat-cell, mat-footer-cell, mat-header-cell {
+        width: 130px;
+      }
+    }
+  }
+
+  .contract-list {
+    mat-cell, mat-footer-cell, mat-header-cell {
+      width: 69px;
+    }
+  }
+
+  }
+/*--media-end-(min-width:1451px) and (max-width:1650px)--*/

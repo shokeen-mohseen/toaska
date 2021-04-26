@@ -1,0 +1,29 @@
+<!-- Developer : Rajesh , TFSID 17127 Dynamic menu set text and create a new component according to approval navigation.
+  // date 18-8-2020-->
+<app-sidebar #appSidebar class="primary-color pt-4" [fixed]="true" [display]="'lg'" (minimizedChange)="toggleMinimize($event)">
+  <div class="sidebar-header-inside">
+    <div class="side-title">Navigation</div>
+    <div class="home-blocks">
+      <span class="col-md-5 pull-left  pl-0"><a routerLink="/dashboard/home"><img src="assets/images/toscaHome.png" alt="" />
+        <strong class="ml-2 mt-2 position-absolute">{{'key_Home' | translate}}</strong>
+        </a></span>
+      <span class="col-md-5 pull-right pr-0"><a routerLink="#" (click)="logout()"><img src="assets/images/logout_btn.png" alt="" />
+        <strong class="ml-2 mt-2 position-absolute">{{'key_Logout' | translate}}</strong></a></span>
+    </div>
+  </div>
+  <app-sidebar-nav [navItems]="navItem" [perfectScrollbar] [disabled]="appSidebar.minimized"></app-sidebar-nav>
+  <app-sidebar-minimizer></app-sidebar-minimizer>
+</app-sidebar>
+
+
+<!--<app-sidebar #appSidebar class="primary-color pt-4" [fixed]="true" [display]="'lg'" [minimized]="sidebarMinimized" (minimizedChange)="toggleMinimize($event)">
+  <div class="sidebar-header-inside">
+    <div class="side-title">Navigation</div>
+    <div class="home-blocks">
+      <span><a routerLink="/dashboard/home"><img src="assets/images/MainMenu_Home6.png" alt="" /> Home</a></span>
+      <span class="pull-right"><a routerLink="#" (click)="logout()"><img src="assets/images/logout_2.png" alt="" /> LogOut</a></span>
+    </div>
+  </div>
+  <app-sidebar-nav [navItems]="navItem" [perfectScrollbar] [disabled]="appSidebar.minimized"></app-sidebar-nav>
+  <app-sidebar-minimizer></app-sidebar-minimizer>
+</app-sidebar>-->

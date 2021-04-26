@@ -1,0 +1,152 @@
+<app-top-btn-group #btnBar [actionGroupConfig]="actionGroupConfig" (action)="actionHandler($event)"></app-top-btn-group>
+<div class="container">
+  <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 px-12">
+    <div class="card-body">
+      <div class="box-children">
+        <!--<h3 class="mb-4">
+          {{ 'key_PaymentMethods' | translate }}
+        </h3>-->
+        <div class="col-form-label">
+
+          <div class="form-check form-check-inline mr-4">
+            <input class="form-check-input" id="inline-radio2" type="radio" value="option2" name="inline-radios">
+            <label class="form-check-label" for="inline-radio2">
+              {{ 'key_Credicard' | translate }}
+            </label>
+          </div>
+        </div>
+        <div class="cc">
+          <div class="row">
+            <div class="col-sm-6 col-md-6">
+              <div class="card">
+                <div class="card-header">Add a Credit / Debit Card</div>
+                <div class="card-body">
+                  <app-payment-plan (CreditCardSave)="refreshcardlist($event)"></app-payment-plan>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6 col-md-6">
+              <div class="card">
+                <div class="card-header">{{ 'key_PaymentMethods' | translate }}</div>
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="d-flex justify-content-between align-items-center">
+                        <!--<div>
+                          <span class="fw600 fs-13">{{ 'key_CardMethod' | translate }}</span>
+                        </div>-->
+                      </div>
+                      <div class="bg-grey mt-1 py-1 p-2 text-center" *ngFor="let cc of creditcards; index as i;">                        
+                        <table style="margin:auto" class="table tabletbl">
+                          <tr>
+                            <td> <span>{{ cc.CardType}}</span></td>
+                            <td> <span>xxxx xxxx  xxxx {{ cc.CreditCardNo}}</span></td>
+                            <td> <span class=" text-danger" (click)="RemoveCard(cc.Id)"><i class="fa fa-trash-o" aria-hidden="true"></i></span></td>
+                          </tr>
+                        </table>
+                      </div>                      
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="w-100 card-body pt-0 pb-0">
+              <h5 class="fw600">Payment Information</h5>
+              <table class="table table-striped table-bordered tblth">
+                <thead>
+                  <tr>
+                    <th class="no-sort fw600">
+                     Plan
+                    </th>
+                    <th class="no-sort fw600">
+                      Storage Plan
+                    </th>
+                    <th class="no-sort fw600">
+                      Currency Code
+                    </th>
+                    <th class="fw600">Amount</th>
+                    <th class="fw600">Pay</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>India (INR)</td>
+                    <td>Storage for 5 Years</td>
+                    <td>{{Currency}} </td>
+                    <td>{{Amount}}</td>
+                    <td>{{isPaymentDone?'Yes':'No'}}</td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="form-group row col-sm-3 float-right">
+                <button type="button" id="btnSave" name="btnSave" (click)="PaymentSubmit()"  class="btn btn-next btn-block">{{ 'key_Payment' | translate }} </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="card-body pt-0">
+              <h4>
+                {{ 'key_BillingHistory' | translate }}
+              </h4>
+              <div class="w-100">
+                <table class="table table-striped table-bordered tblth">
+                  <thead>
+                    <tr>
+                      <th width="15%" class="no-sort text-center fw600">
+                        Month
+                      </th>
+                      <th width="30%" class="fw600">Invoice</th>
+                      <th width="30%" class="fw600">Amount</th>
+                      <th width="30%" class="fw600">Date Paid</th>
+                      <th width="5%" class="text-center fw600">Download</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="text-center">January </td>
+                      <td>DDFFBHN21021541</td>
+                      <td>10 Emirati Dirham</td>
+                      <td>18-01-2020</td>
+                      <td class="text-center">
+                        <button placement="top" ngbtooltip="Delete" class="badge badge-danger-outline badge-pill" ng-reflect-placement="top" ng-reflect-ngb-tooltip="Delete">
+                          <i aria-hidden="true" class="fa fa-file-pdf-o"></i>
+                        </button><!--container-->
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="text-center">Fabruary </td>
+                      <td>DDFFBHN210752154</td>
+                      <td>10 Emirati Dirham</td>
+                      <td>10-02-2020</td>
+                      <td class="text-center">
+                        <button placement="top" ngbtooltip="Delete" class="badge badge-danger-outline badge-pill" ng-reflect-placement="top" ng-reflect-ngb-tooltip="Delete">
+                          <i aria-hidden="true" class="fa fa-file-pdf-o"></i>
+                        </button><!--container-->
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="text-center">March </td>
+                      <td>DDFFBHN218521</td>
+                      <td>10 Emirati Dirham</td>
+                      <td>12-03-2020</td>
+                      <td class="text-center">
+                        <button placement="top" ngbtooltip="Delete" class="badge badge-danger-outline badge-pill" ng-reflect-placement="top" ng-reflect-ngb-tooltip="Delete">
+                          <i aria-hidden="true" class="fa fa-file-pdf-o"></i>
+                        </button><!--container-->
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,259 @@
+/*--Developer Name: Prabhash Poddar, Date: 01Sep2020, TFS ID: 17221, Logic Description: work on scroll scss file and manage--*/
+@mixin sticky() {
+  position: sticky;
+  position: -webkit-sticky;
+  position: -moz-sticky;
+  position: -ms-sticky;
+  position: -o-sticky;
+}
+.scroll {
+  overflow: auto;
+  width: 100%;
+
+  .mat-table {
+    border-top: 0;
+    border-left: 0;
+
+    .mat-header-row {
+
+      .mat-header-cell {
+        @include sticky();
+        top: 0px;
+        z-index: 101;
+        min-height: 0px;
+        background: $table-header-bgColor;
+        border-top: 1px solid $table-border;
+
+        &.mat-column-selectRow, &.mat-column-Id {
+          left: 0px;
+          z-index: 102;
+        }
+
+        &:nth-child(1) {
+          border-left: 1px solid $table-border;
+        }
+      }
+    }
+
+    .mat-row {
+      .mat-cell {
+        &.mat-column-selectRow, &.mat-column-Id {
+          @include sticky();
+          left: 0px;
+          z-index: 100;
+          background: $white;
+        }
+
+        &:nth-child(1) {
+          border-left: 1px solid $table-border;
+        }
+      }
+
+      &.selected, &.highlighted, &.activeRow {
+        .mat-cell {
+          &.mat-column-selectRow, &.mat-column-Id {
+            background: $labelBox-bgcolor !important;
+          }
+        }
+      }
+
+      &.inactive, &.Inactive, &:disabled, &.snactive {
+        .mat-cell {
+          &.mat-column-selectRow, &.mat-column-Id {
+            background: $rowInactive-bgcolor !important;
+          }
+        }
+      }
+    }
+
+    .mat-footer-row {
+      .mat-footer-cell {
+        @include sticky();
+        bottom: 0;
+        z-index: 101;
+        background-color: $tfoot-color !important;
+      }
+    }
+  }
+
+  
+}
+.mat-table {
+  .mat-row.selected {
+    &.inactive {
+      background: $labelBox-bgcolor !important;
+
+      .mat-cell.mat-column-selectRow, .mat-cell.mat-column-Id {
+        background: $labelBox-bgcolor !important;
+      }
+    }
+  }
+}
+
+app-special-preference {
+  app-preference-list {
+    .scroll {
+      .mat-table {
+        border-top: 0;
+        border-left: 0;
+        border-right: 1px solid $table-border;
+
+        .mat-header-row {
+
+          @include sticky();
+          top: 0px;
+          z-index: 101;
+          min-height: 0px;
+          background: $table-header-bgColor;
+          border-top: 1px solid $table-border;
+          border-bottom: 1px solid $table-border;
+
+          .mat-header-cell {
+            border-top: 0;
+            border-bottom: 0;
+
+            &:last-child {
+              border-right: 0;
+            }
+
+            &:nth-child(n+2) {
+              position: static;
+            }
+          }
+        }
+
+        .mat-row {
+          border-bottom: 1px solid $table-border;
+
+          .mat-cell {
+            border-bottom: 0;
+
+            &:last-child {
+              border-right: 0;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+/*app-contract-line-items {
+  app-edit-item {
+    .scroll {
+      &.resize-table {
+
+        .mat-table {
+
+          .mat-header-row {
+
+            .mat-header-cell {
+
+              &:nth-child(1) {
+                @include sticky();
+                left: 0px;
+                z-index: 102;
+              }
+
+              &:nth-child(2) {
+                @include sticky();
+                left: 85px;
+                z-index: 102;
+              }
+
+              &:nth-child(3) {
+                @include sticky();
+                left: 170px;
+                z-index: 102;
+              }
+
+              &:nth-child(1) {
+                border-left: 1px solid $table-border;
+              }
+            }
+          }
+
+          .mat-row {
+            .mat-cell {
+              background: $white;
+
+              &:nth-child(1) {
+                @include sticky();
+                left: 0px;
+                z-index: 100;
+              }
+
+              &:nth-child(2) {
+                @include sticky();
+                left: 85px;
+                z-index: 100;
+              }
+
+              &:nth-child(3) {
+                @include sticky();
+                left: 170px;
+                z-index: 100;
+              }
+
+              &:nth-child(1) {
+                border-left: 1px solid $table-border;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}*/
+.custom-flex-w-15 {
+  .card {
+    .card-body {
+      .list-group {
+        max-height: 250px;
+        overflow-y: auto;
+        border-radius: 0;
+
+        .list-group-item {
+          a, div {
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+            cursor: pointer;
+            display: block;
+          }
+        }
+      }
+    }
+  }
+}
+
+  .modal-body {
+    .scroll {
+      overflow-y: auto;
+      max-height: 400px;
+    }
+  }
+
+  @media screen and (max-width:1920px) {
+    .scroll {
+      max-height: 690px;
+    }
+  }
+
+  @media screen and (max-width:1366px) {
+    .scroll {
+      max-height: 418px;
+    }
+  }
+
+  @media screen and (max-width:1280px) {
+    .scroll {
+      max-height: 360px;
+    }
+  }
+
+  @media screen and (max-width:1024px) {
+    .scroll {
+      max-height: 360px;
+    }
+  }

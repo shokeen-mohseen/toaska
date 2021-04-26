@@ -1,0 +1,62 @@
+<form (ngSubmit)="passBack()" [formGroup]="UserForm">
+  <div class="modal-header">
+    <!-- <h4 class="modal-title" id="modal-basic-title" [innerHTML]="'partographChart.Key_TempratureChart' | translate"></h4> -->
+    <h5 class="modal-title" id="modal-basic-title">{{ 'key_ADDOBSERVATION' | translate }}</h5>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body modalbg">
+
+    <!--add time and user with comment history session-->
+    <div class="row">
+      <div class="col-sm-9">
+        <div class="form-group">
+          <label for="company">{{ 'key_EnterthedescriptionoftheMeasurement' | translate }}</label>
+          <input type="text" formControlName="HeadValue" class="HeartRate form-control" />
+          <app-control-messages [control]="f['HeadValue']"></app-control-messages>
+
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <div class="form-group">
+          <label for="company">{{ 'key_SelectValueType' | translate }}</label>
+          <select formControlName="SelectType" class="form-control">
+            <option *ngFor="let dprList of GetComplicationValues()" [value]="dprList.id">{{dprList.name}}</option>
+          </select>
+
+          <!--<select formControlName="SelectType" class="form-control">
+            <option *ngFor="let dprList of GetComplicationValues()" [value]="dprList.CId">{{dprList.CName}}</option>
+          </select>-->
+          <!--<select formControlName="SelectType" class="HeartRate form-control">
+            <option value="radio" selected="selected">Yes/No</option>
+            <option value="Hour">Hour</option>
+            <option value="CTemp">o C</option>
+            <option value="FTemp">o F</option>
+            <option value="None">None</option>
+          </select>-->
+          <app-control-messages [control]="f['SelectType']"></app-control-messages>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="form-group text-center">
+          <button type="submit" class=" btn btn-save popup-btn-width"
+                  [disabled]="!UserForm.valid">
+            <span [innerHTML]="'key_Save' | translate"></span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!--add time and user with comment history session-->
+    <!--end code-->
+    <!--Code comment template example -
+      Developer Name: Prabhash Poddar
+      Date: Aug 05 , 2020
+      TFS ID: 16715
+      Logic Description:Latent Phase - Temprature - Design the popup..
+      Code Start
+    -->
+    <!---TFS ID 16715 end code-->
+  </div>
+</form>

@@ -1,0 +1,11 @@
+.resize-table mat-cell, .resize-table mat-footer-cell,
+.resize-table mat-header-cell {
+  width: 155px;
+}
+
+@media(min-width:1600px) {
+  .resize-table mat-cell, .resize-table mat-footer-cell,
+  .resize-table mat-header-cell {
+    width: 177px;
+  }
+}

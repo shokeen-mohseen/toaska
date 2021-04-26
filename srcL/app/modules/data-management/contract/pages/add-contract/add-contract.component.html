@@ -1,0 +1,260 @@
+
+<div class="container-fluid p-0">
+  <div class="row mb-2 mt-2" *ngIf="savedData !=null">
+    <div class="col-md-6"><h4>{{ContractName}}-{{savedData.contractVersion}} &nbsp;&nbsp;&nbsp; <!--<strong class="text-danger">Expired</strong>--></h4></div>
+    <div class="col-md-6 text-right" >
+      <ng-container *ngIf="savedData.updatedBy != null && savedData.updatedBy != undefined">
+        <span class="fw600">{{'key_LastUpdated'| translate}}:	</span> {{savedData.updateDateTimeBrowser | date:'MM/dd/yyyy hh:mm:ss a'}}
+        <span class="fw600">By</span> {{savedData.updatedBy}}<br />
+      </ng-container>
+      <span class="fw600">Created On:	</span> {{savedData.createDateTimeBrowser | date:'MM/dd/yyyy hh:mm:ss a'}}
+      <span class="fw600">By</span> {{savedData.createdBy}}
+    </div>
+   
+
+  </div>
+  <div class="row mt-3">
+    <div class="col-md-3 custom-flex-w-15" *ngIf="EditList.length>0">
+      <div class="card">
+        <div class="card-header"> Edit List</div>
+        <div class="card-body p-0">
+          <ul class="list-group" #nextList>
+            <li class="list-group-item list-group-item-action" [ngClass]="[d.ID === ContractID ? 'active' : '']"
+                *ngFor="let d of EditList; let i = index" (click)="selected(d)">
+              <a title="{{d.Contract_No}}">{{d.Contract_No}}</a>
+              <button class="close" *ngIf="d.ID != ContractID" type="button" (click)="Remove(d)">
+                <i class="fa fa-times" aria-hidden="true"></i>
+              </button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12" [ngClass]="{'col-md-9 custom-flex-w-85': EditList.length>0}">
+
+      <div class="tab-content" id="nav-tabContent">
+        <div class="tab-pane pt-0 fade show active" id="editList-1" role="tabpanel">
+          <form [formGroup]="contractform" novalidate>
+            <div class="e-profile">
+              <div class="row">
+                <div class="col-md-4 col-sm-12">
+                  <div class="box-children">
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <label>{{'key_ContractType'| translate}}<sup class="text-danger font-weight-bold sup1">*</sup></label>
+                          <angular2-multiselect formControlName="ContractType" fixFilterBug [data]="itemContractType" [(ngModel)]="selectedContractType" [settings]="settingsA"
+                                                (onSelect)="onItemSelect($event)"
+                                                (onDeSelect)="OnItemDeSelect($event)"
+                                                (onSelectAll)="onSelectAll($event)"
+                                                (onDeSelectAll)="onDeSelectAll($event)" required>
+                          </angular2-multiselect>
+                        </div>
+                      </div>
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <label for="">
+                            {{'key_EffectiveStart'| translate}} <sup class="text-danger font-weight-bold sup1">*</sup>
+                          </label>
+                          <ejs-datetimepicker formControlName="EffectiveStart" [(ngModel)]="EffectiveStart" [format]='dateFormat1' [value]='' placeholder='MM-DD-YYYY HH:MM AM' required (change)='onStartDate($event)'></ejs-datetimepicker>
+                          <!--<p-calendar [(ngModel)]="EffectiveStart" appendTo="body" hourFormat="12" [showTime]="true" [showIcon]="true" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2030" inputId="time" required="true" placeholder="mm-dd-yy hh:mm"></p-calendar>-->
+
+                        </div>
+                      </div>
+
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <label>{{'key_EffectiveEnd'| translate}} <sup class="text-danger font-weight-bold sup1">*</sup> </label>
+                          <ejs-datetimepicker formControlName="EffectiveEnd" [(ngModel)]="EffectiveEnd" [format]='dateFormat1' [value]='' placeholder='MM-DD-YYYY HH:MM AM' required (change)='onEndDate($event)'></ejs-datetimepicker>
+                          <!-- <p-calendar [(ngModel)]="EffectiveEnd" appendTo="body" hourFormat="12" [showTime]="true" [showIcon]="true" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2030" inputId="time" required="true" placeholder="mm-dd-yy hh:mm"></p-calendar>-->
+                        </div>
+                      </div>
+
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <label>{{'key_EndAlertDays'| translate}}</label>
+                          <input type="text" formControlName="EndAlertDays" [(ngModel)]="EndAlertDays" autocomplete="off" (keypress)="numberOnly($event)" maxlength="4" value="" class="form-control" name="days" />
+                        </div>
+                      </div>
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <label>{{'key_TransportationComment'| translate}}</label>
+                          <textarea rows="2" formControlName="TransportationComment" class="form-control" [(ngModel)]="TransportationComment" placeholder="Transportation Comment..."></textarea>
+                        </div>
+                      </div>
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <label>{{'key_LoadingComment'| translate}}</label>
+                          <textarea rows="2" formControlName="LoadingComment" class="form-control" [(ngModel)]="LoadingComment" placeholder="Loading Comment..."></textarea>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="box-children pl-0 pr-0">
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label>{{'key_ContractName'| translate}}</label>
+                        <input class="form-control" formControlName="ContractName" title="{{ContractName}}" [(ngModel)]="ContractName" disabled>
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label>{{'key_CustomerShipToLocation'| translate}} <sup class="text-danger font-weight-bold sup1">*</sup></label>
+                        <angular2-multiselect formControlName="CustomerShip" fixFilterBug [data]="itemCustomerShipLocation" [(ngModel)]="selectedCustomerShipLocation" [settings]="settingsB"
+                                              (onSelect)="onItemSelectCustomerShip($event)"
+                                              (onDeSelect)="OnItemDeSelect($event)"
+                                              (onSelectAll)="onSelectAll($event)"
+                                              (onDeSelectAll)="onDeSelectAll($event)" required>
+                        </angular2-multiselect>
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label>{{'key_BusinessPartner'| translate}} <sup class="text-danger font-weight-bold sup1">*</sup></label>
+                        <angular2-multiselect formControlName="BusinessPartner" fixFilterBug [data]="itemBusinessPartner" [(ngModel)]="selectedBusinessPartner" [settings]="settingsC"
+                                              (onSelect)="onItemSelectBusinessPartner($event)"
+                                              (onDeSelect)="OnItemDeSelect($event)"
+                                              (onSelectAll)="onSelectAll($event)"
+                                              (onDeSelectAll)="onDeSelectAll($event)" required>
+                        </angular2-multiselect>
+                      </div>
+                    </div>
+
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label> {{'key_OrderComment'| translate}}- It is for internal Tosca use only.</label>
+                        <textarea rows="2" formControlName="OrderComment" class="form-control" [(ngModel)]="OrderComment" placeholder="Order Comment..."></textarea>
+                      </div>
+                    </div>
+
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label>{{'key_ContractComment'| translate}}</label>
+                        <textarea rows="2" formControlName="ContractComment" [(ngModel)]="ContractComment" class="form-control" placeholder="Contract Comment.."></textarea>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="box-children">
+                    <div class="p-0">
+                      <input type="submit" (click)="SendAproval()" [disabled]="SetUpButtonDisable()" value="Send for Approval" class="btn btn-next mb-3" name="send" />
+                    </div>
+
+                    <div class="col-md-12">
+                      <div class="form-group row">
+                        <span for="" class="fw600 mr-3">{{'key_Status'| translate}}</span>
+                        <span for="">{{ contractStatus }}</span>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="form-check checkbox pl-0">
+                        <label for="chkContractApprove" class="form-check-label mr-4 pr-1">{{'key_ContractApproved'|translate}}</label>
+                        <input type="checkbox" [disabled]="setUpCheckBoxDisable()" #chkContractApprove id="chkContractApprove" [checked]="ContractApprove" (change)="onContractApproveChanged(chkContractApprove.checked)" class="form-check-input">
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="form-group row">
+                        <label>{{'key_ContractApproved'| translate}} {{ApprovedBy}}</label>
+                        <input for="8/31/2020 7:05:24 IST" class="form-control" value="{{ContractApproveDate | date:'MM/dd/yyyy h:mm:ss a'}}" readonly />
+                      </div>
+                    </div>
+                    <table class="table table-bordered contract-record" *ngIf="(ContractViewModel.ContractTypeId==3 || ContractViewModel.ContractTypeId==4 || ContractViewModel.ContractTypeId==5) && FuelPriceViewModel.length > 0">
+                      <tr>
+                        <td> <label for="">Fuel charge avg. mile</label></td>
+                        <td>{{FuelPriceViewModel[0].propertyValue}}</td>
+                      </tr>
+                      <tr>
+                        <td><label for="">Current fuel charge(%)</label></td>
+                        <td>{{CurrentFuelPercent}}</td>
+                      </tr>
+                      <tr>
+                        <td><label for="">Fuel charge updated by</label></td>
+                        <td>{{FuelPriceViewModel[0].updatedBy}}</td>
+                      </tr>
+                      <tr>
+                        <td><label for="">Fuel charge updated datetime</label></td>
+                        <td>{{FuelPriceViewModel[0].updateDateTimeServer | date:'MM/dd/yyyy h:mm:ss'}}</td>
+                      </tr>
+                      <tr>
+                        <td><label for="">Previous fuel charge (%)</label></td>
+                        <td>                        
+                            {{PreviousFuelPercent}}                         
+                        </td>
+                      </tr>
+                    </table>
+                  </div>
+
+
+                </div>
+              </div>
+            </div>
+          </form>
+          <!--form-end-->
+        </div>
+        
+      </div>
+
+    </div>
+  </div>
+
+  <!--=================Accordian ==============-->
+
+  <div id="accordionTab1" class="accordion mt-3 p-0" [class.disabled-contenct]="IsLocationSelected()">
+    <!--[class.disabled-contenct]="isDisabledContent"-->
+    <div class="card col-sm-12 p-0 mb-0">
+      <!--accordion1-->
+      <div class="card-header collapsed" data-toggle="collapse" href="#collapseTwo">
+        <a class="card-title">{{'key_LineItems'| translate}}</a>
+      </div>
+      <div id="collapseTwo" class="card-body collapse" data-parent="#accordionTab1">
+        <app-contract-line-items [savedData]="savedData"></app-contract-line-items>
+      </div>
+
+      <!--accordion2-->
+      <div class="card-header collapsed" data-toggle="collapse" href="#characteristics">
+        <a class="card-title">
+          {{'key_DefiningCharacteristics'| translate}}
+        </a>
+      </div>
+      <div id="characteristics" class="card-body collapse" data-parent="#accordionTab1">
+        <app-contract-defining-characteristics [savedData]="savedData"></app-contract-defining-characteristics>
+      </div>
+
+      <!--accordion3-->
+      <div class="card-header collapsed" data-toggle="collapse" href="#address">
+        <a class="card-title">
+          {{'key_Documents'| translate}}
+        </a>
+      </div>
+      <div id="address" class="card-body collapse" data-parent="#accordionTab1">
+        <app-document></app-document>
+      </div>
+    </div>
+  </div>
+
+  <!--================= end  address and contact tabs ==============-->
+  <div class="row justify-content-center mt-3 pt-3 pb-3">
+    <div class="col-xl-2 col-lg-4 col-md-4 col-sm-12">
+      <button class="btn btn-block btn-save" type="submit" (click)="Save('saveonly')" [disabled]="Inactive || !IsContractReadWrite">
+        <span [hidden]="isLoading"> {{ 'key_Save' | translate }}</span>
+        <span [hidden]="!isLoading">
+          <i class="fa fa-asterisk fa-spin" aria-hidden="true"></i>
+        </span>
+      </button>
+    </div>
+    <div class="col-xl-2 col-lg-4 col-md-4 col-sm-12">
+      <button class="btn btn-block btn-next" [disabled]="this.SaveNext ==  'Add'?(Inactive && !IsContractReadWrite):(Inactive || !IsContractReadWrite)" (click)="Save(this.SaveNext ==  'Add'?'savenext':'editnext')">
+        <!--ContractNext()-->
+        <!-- [disabled]="buttonNext"-->
+        <span class="fw600" [hidden]="isLoadingNext">{{ this.SaveNext }}</span> <span class="fs-13" [hidden]="isLoadingNext"> > {{'key_Next' | translate}}</span>
+        <span [hidden]="!isLoadingNext">
+          <i class="fa fa-asterisk fa-spin" aria-hidden="true"></i>
+        </span>
+      </button>
+    </div>
+  </div>
+</div><!--container-fluid-->

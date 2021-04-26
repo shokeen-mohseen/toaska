@@ -1,0 +1,43 @@
+<!-- Modal Header -->
+<div class="modal-header">
+  <h5 class="modal-title">{{ 'key_LampsEditOnhandInventory' | translate }} </h5>
+  <button type="button" class="close" data-dismiss="modal" (click)="close()">&times;</button>
+</div>
+
+<!-- Modal body -->
+<form #inventoryedit="ngForm">
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="form-group">
+          <label> {{ 'key_LocationFunction' | translate }} <span class="text-danger">*</span> </label>
+          <input type="text" [(ngModel)]="selectedInventory.locationType" name="locfun" class="form-control" disabled />
+
+        </div>
+        <div class="form-group">
+          <label> {{ 'key_Location' | translate }} <span class="text-danger">*</span> </label>
+          <input type="text" [(ngModel)]="selectedInventory.location" name="loc" class="form-control" disabled />
+
+        </div>
+        <div class="form-group">
+          <label> {{ 'key_Materialname' | translate }} <span class="text-danger">*</span> </label>
+          <input type="text" [(ngModel)]="selectedInventory.materialName" name="material" class="form-control" disabled />
+
+        </div>
+        <div class="form-group">
+          <label> {{ 'key_Quantity' | translate }} <span class="text-danger">*</span> </label>
+          <input type="number" [(ngModel)]="selectedInventory.quantity" class="form-control" name="quantity" required />
+        </div>
+        <div class="form-group">
+          <label> {{ 'key_UOM' | translate }}</label>
+          <input type="text" [(ngModel)]="selectedInventory.uom" class="form-control" disabled name="uom" />
+        </div>        
+      </div>
+    </div>
+    <div class="row justify-content-center my-3">
+      <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 text-center">
+        <button class="btn btn-save popup-btn-width" (click)="updateInventory()" [disabled]="!inventoryedit.form.valid" type="button">{{ 'key_Update' | translate }}</button>
+      </div>
+    </div>
+  </div>
+</form>

@@ -1,0 +1,221 @@
+
+<div class="container-fluid p-0" >
+  <div class="row mb-2 mt-2" *ngIf="savedData !=null">
+    <div class="col-md-6"><h4>{{savedData.id}}-{{savedData.contractVersion}} &nbsp;&nbsp;&nbsp; <!--<strong class="text-danger">Expired</strong>--></h4></div>
+    <div class="col-md-6 text-right">
+      <span class="fw600">{{'key_LastUpdated'| translate}}:	</span> {{savedData.updateDateTimeServer}}
+      <br><span class="fw600">By</span> {{savedData.createdBy}}
+    </div>
+  </div>
+  <div class="row mt-3">
+    <div class="col-md-12">
+      <div class="tab-content" id="nav-tabContent">
+        <div class="tab-pane pt-0 fade show active" id="editList-1" role="tabpanel">
+          <form [formGroup]="contractform" novalidate>
+            <div class="e-profile">
+              <div class="row">
+                <div class="col-md-4 col-sm-12">
+                  <div class="box-children">
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <label>{{'key_ContractType'| translate}}<sup class="text-danger font-weight-bold sup1">*</sup></label>
+                          <angular2-multiselect formControlName="ContractType" [data]="itemContractType" [(ngModel)]="selectedContractType" [settings]="settingsA"
+                                                (onSelect)="onItemSelect($event)"
+                                                (onDeSelect)="OnItemDeSelect($event)"
+                                                (onSelectAll)="onSelectAll($event)"
+                                                (onDeSelectAll)="onDeSelectAll($event)">
+                          </angular2-multiselect>
+                        </div>
+                      </div>
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <label for="">
+                            {{'key_EffectiveStart'| translate}} <sup class="text-danger font-weight-bold sup1">*</sup>
+                          </label>
+                          <ejs-datetimepicker formControlName="EffectiveStart" [format]='dateFormat1' [value]='' placeholder='MM-DD-YYYY HH:MM AM' required></ejs-datetimepicker>
+                        </div>
+                      </div>
+
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <label>{{'key_EffectiveEnd'| translate}} <sup class="text-danger font-weight-bold sup1">*</sup> </label>
+                          <ejs-datetimepicker formControlName="EffectiveEnd" [format]='dateFormat1' [value]='' placeholder='MM-DD-YYYY HH:MM AM' required></ejs-datetimepicker>
+
+                        </div>
+                      </div>
+
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <label>{{'key_EndAlertDays'| translate}}</label>
+                          <input type="text" formControlName="EndAlertDays" autocomplete="off" (keypress)="numberOnly($event)" maxlength="4" value="" class="form-control" name="days" />
+                        </div>
+                      </div>
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <label>{{'key_TransportationComment'| translate}}</label>
+                          <textarea rows="2" formControlName="TransportationComment" class="form-control" [(ngModel)]="TransportationComment" placeholder="Transportation Comment..."></textarea>
+                        </div>
+                      </div>
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <label>{{'key_LoadingComment'| translate}}</label>
+                          <textarea rows="2" formControlName="LoadingComment" class="form-control" [(ngModel)]="LoadingComment" placeholder="Loading Comment..."></textarea>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="box-children pl-0 pr-0">
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label>{{'key_ContractName'| translate}} <sup class="text-danger font-weight-bold sup1">*</sup></label>
+                        <input class="form-control" formControlName="ContractName" [(ngModel)]="ContractName" disabled>
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label>{{'key_CustomerShipToLocation'| translate}} <sup class="text-danger font-weight-bold sup1">*</sup></label>
+                        <angular2-multiselect formControlName="CustomerShip" [data]="itemCustomerShipLocation" [(ngModel)]="selectedCustomerShipLocation" [settings]="settingsB"
+                                              (onSelect)="onItemSelectCustomerShip($event)"
+                                              (onDeSelect)="OnItemDeSelect($event)"
+                                              (onSelectAll)="onSelectAll($event)"
+                                              (onDeSelectAll)="onDeSelectAll($event)" required>
+                        </angular2-multiselect>
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label>{{'key_BusinessPartner'| translate}} <sup class="text-danger font-weight-bold sup1">*</sup></label>
+                        <angular2-multiselect formControlName="BusinessPartner" [data]="itemBusinessPartner" [(ngModel)]="selectedBusinessPartner" [settings]="settingsC"
+                                              (onSelect)="onItemSelectBusinessPartner($event)"
+                                              (onDeSelect)="OnItemDeSelect($event)"
+                                              (onSelectAll)="onSelectAll($event)"
+                                              (onDeSelectAll)="onDeSelectAll($event)" required>
+                        </angular2-multiselect>
+                      </div>
+                    </div>
+
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label> {{'key_OrderComment'| translate}}- It is for internal Tosca use only.</label>
+                        <textarea rows="2" formControlName="OrderComment" class="form-control" [(ngModel)]="OrderComment" placeholder="Order Comment..."></textarea>
+                      </div>
+                    </div>
+
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label>{{'key_ContractComment'| translate}}</label>
+                        <textarea rows="2" formControlName="ContractComment" value="" class="form-control" placeholder="Contract Comment.."></textarea>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="box-children">
+                    <div class="col-md-12 p-0">
+                      <input type="submit" value="Send for Approval" (click)="SendAproval()" [disabled]="ContractApproveStatus" class="btn btn-next mb-3" name="send" />
+                    </div>
+
+                    <div class="col-md-12">
+                      <div class="form-group row">
+                        <span for="" class="fw600 mr-3">{{'key_Status'| translate}}</span>
+                        <span for="">{{ 'key_Active' | translate }}</span>
+                      </div>
+                    </div>
+                    <!--  <div class="col-md-12">
+                        <div _ngcontent-bod-c522="" class="row form-group">
+                          <div _ngcontent-bod-c522="" class="form-check checkbox">
+                            <label _ngcontent-bod-c522="" for="check1" class="form-check-label"> Contract Approved</label>
+                            <input id="check1" type="checkbox" value="" class="form-check-input" disabled>
+                          </div>
+                        </div>
+                      </div>-->
+                    <div class="form-group">
+                      <div class="form-check checkbox pl-0">
+                        <label for="chkContractApprove" class="form-check-label">{{'key_ContractApproved'|translate}}</label>
+                        <input type="checkbox" [disabled]="ContractApproveStatus" #chkContractApprove id="chkContractApprove" [checked]="ContractApprove" (change)="onContractApproveChanged(chkContractApprove.checked)" class="form-check-input ml-2 ng-untouched ng-pristine ng-valid">
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="form-group row">
+                        <label> {{'key_ContractApproved'| translate}}:  By ADECTEC</label>
+                        <input for="8/31/2020 7:05:24 IST" class="form-control" value="{{ContractApproveDate}}" readonly/>
+                      </div>
+                    </div>
+                  </div>
+
+
+                </div>
+              </div>
+            </div>
+          </form>
+          <!--form-end-->
+        </div>
+        <div class="tab-pane fade" id="editList-2" role="tabpanel">
+          {{'key_Data'| translate}}
+        </div>
+        <div class="tab-pane fade" id="editList-3" role="tabpanel">
+          Data will soon..
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!--=================Accordian ==============-->
+
+  <div id="accordionTab1" class="accordion mt-3 p-0" [class.disabled-contenct]="isDisabledContent">
+    <div class="card col-sm-12 p-0 mb-0">
+      <!--accordion1-->
+      <div class="card-header collapsed" data-toggle="collapse" href="#collapseTwo">
+        <a class="card-title">{{'key_LineItems'| translate}}</a>
+      </div>
+      <div id="collapseTwo" class="card-body collapse" data-parent="#accordionTab1" >
+        <app-contract-line-items [savedData]="savedData"></app-contract-line-items>
+      </div>
+
+      <!--accordion2-->
+      <div class="card-header collapsed" data-toggle="collapse" href="#characteristics">
+        <a class="card-title">
+          {{'key_DefiningCharacteristics'| translate}}
+        </a>
+      </div>
+      <div id="characteristics" class="card-body collapse" data-parent="#accordionTab1">
+        <app-contract-defining-characteristics [savedData]="savedData"></app-contract-defining-characteristics>
+      </div>
+
+      <!--accordion3-->
+      <div class="card-header collapsed" data-toggle="collapse" href="#address">
+        <a class="card-title">
+          {{'key_Documents'| translate}}
+        </a>
+      </div>
+      <div id="address" class="card-body collapse" data-parent="#accordionTab1">
+        <app-document></app-document>
+      </div>
+    </div>
+  </div>
+
+  <!--================= end  address and contact tabs ==============-->
+  <div class="row justify-content-center mt-3 pt-3">
+    <div class="col-xl-2 col-lg-4 col-md-4 col-sm-12">
+      <button class="btn btn-block btn-save" type="submit" (click)="Save()">
+        <span [hidden]="isLoading"> {{ 'key_Save' | translate }}</span>
+        <span [hidden]="!isLoading">
+          <i class="fa fa-asterisk fa-spin" aria-hidden="true"></i>
+        </span>
+      </button>
+    </div>
+    <div class="col-xl-2 col-lg-4 col-md-4 col-sm-12">
+      <button class="btn btn-block btn-next" (click)="ContractNext()">
+        <span class="fw600" [hidden]="isLoadingNext">{{ 'key_Add' | translate }}</span> <span class="fs-13" [hidden]="isLoadingNext"> > {{'key_Next' | translate}}</span>
+        <span [hidden]="!isLoadingNext">
+          <i class="fa fa-asterisk fa-spin" aria-hidden="true"></i>
+        </span>
+      </button>
+    </div>
+  </div>
+</div><!--container-fluid-->

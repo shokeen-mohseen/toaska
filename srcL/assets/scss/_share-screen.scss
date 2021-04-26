@@ -1,0 +1,74 @@
+/*--Developer Name: Prabhash Poddar, Date: 05/03/2021, Logic Description: work on Share screen scss file and manage--*/
+app-share-screen {
+  image-drawing {
+    flex-direction: column-reverse !important;
+
+    .canvas-container {
+      width: 100% !important;
+      height: auto !important;
+
+      canvas {
+        position: relative !important;
+        width: 100% !important;
+        height: auto !important;
+      }
+
+      canvas + canvas {
+        position: absolute !important;
+      }
+    }
+
+    .toolbar {
+      .tools {
+        flex-direction: row !important;
+        padding: 0px 15px !important;
+        margin: 0px !important;
+        width: 500px;
+
+        .row {
+          width: 100% !important;
+          margin-bottom: 0 !important;
+
+          &:first-child {
+            margin-right: 10px;
+          }
+
+          i {
+            &[title="Undo"], &[title="Redo"] {
+              display: none !important;
+            }
+          }
+
+          .size {
+            &[title="Small"] {
+              width: 30px !important;
+              height: 12px !important;
+              border-radius: 6px !important;
+            }
+
+            &[title="Medium"] {
+              width: 30px !important;
+              height: 20px !important;
+              border-radius: 6px !important;
+            }
+
+            &[title="Large"] {
+              width: 35px !important;
+              height: 25px !important;
+              border-radius: 6px !important;
+            }
+          }
+        }
+      }
+
+      .buttons {
+        margin: 0 !important;
+
+        .button {
+          line-height: 32px !important;
+          background: #ec710a !important;
+        }
+      }
+    }
+  }
+}

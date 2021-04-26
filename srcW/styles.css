@@ -1,0 +1,226 @@
+
+
+
+/*--Developer Name: Rajesh vishvakarma, Date: 14/08/2020, TFS ID: 17121, Logic Description: Design main home page with sidebar menu--*/
+body {
+  margin: 0;
+  font-family: "Nunito", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  /*font-size: 1rem;*/
+  font-weight: 400;
+  line-height: 1.5;
+  /*color: #858796;*/
+  text-align: left;
+  background-color: #fff;
+}
+.bg-bodycolor { 
+  background-color: #eaeaea;
+}
+.primary-color {
+  color: #282828;
+}
+.highlight-color {
+  color: #b72f5f;
+}
+.shadow {
+    box-shadow: 0 .15rem 1.75rem 0 rgba(58,59,69,.15) !important;
+}
+
+
+/*--dashboard-css--*/
+.main .container-fluid {
+  padding: 0 15px;
+}
+.sidebar {
+  -webkit-transition: all 0.4s ease-in-out;
+  -moz-transition: all 0.4s ease-in-out;
+  -o-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
+  background: #ffffff;
+  position: absolute;
+  z-index: 1000;
+  box-shadow: 1px 0px 20px rgba(0, 0, 0, 0.05);
+}
+
+.app-header {
+  border-bottom: none;
+}
+
+rect.bar {
+  fill: #b72f5f;
+}
+.sidebar .sidebar-nav {
+  padding-top: 12px;
+  border: 1px solid #ddd; width:260px;
+  background-color: #f1f1f1;
+}
+.sidebar .nav {
+  width: 100%;
+}
+  .sidebar .nav-dropdown.open .nav-link {
+  color: #000;
+  border-left: 0;
+  background-color: #fff;
+  border-bottom: 1px solid #ddd;
+}
+  .sidebar .nav-dropdown.open .nav-link:hover {
+   background-color:#f1f1f1;
+  }
+  
+  .sidebar .nav-dropdown.open > .nav-dropdown-toggle {
+    background: rgb(182,23,79);
+    background: linear-gradient(0deg, rgba(182,23,79,1) 0%, rgba(135,16,58,1) 35%, rgba(175,11,68,1) 100%);
+    color: #fff !important;
+  }
+
+.sidebar .nav-link:hover {
+  background: #f1f1f1;
+  color: #000 !important
+}
+.sidebar .nav-dropdown.open {
+  background: #fff;
+}
+.sidebar .nav-dropdown-items {
+  padding: 0 5px;
+}
+  .sidebar .nav-dropdown-items .nav-dropdown-items {
+    padding-left: 10px; background-color:rgba(0, 0, 0, 0.05)
+  }
+.card-header {
+  background-color: #efefef;
+}
+
+.header-right li {
+   border-right:1px solid #ddd; padding: 5px;
+}
+.user-account img {
+  float: left;
+}
+
+.user-account .profile-description {
+  display: inline-block;
+  float: left; text-align:left;
+}
+.user-account .profile-name {
+    font-size: 12px;
+}
+.user-account .profile-detail {
+  font-size: 10px;
+  display: block;
+  width: 100%;
+}
+.header-right  .nav-item .nav-link i {
+  margin: 0px 10px 0px 10px;
+}
+app-footer.app-footer {
+  background-color: #ffffff;
+  color: #2d3b48;
+  padding: 15px 30px;
+  width: 100%;
+  position: relative;
+  display: block;
+  text-align: center;
+  font-size: 12px;
+  margin: 0 auto !important;
+}
+
+/*--Developer Name: Rajesh vishvakarma, Date: 17/08/2020, TFS ID: 17127,
+    Logic Description: Design sidebar menu--*/
+@media(min-width:992px) {
+  html:not([dir=rtl]) .sidebar-lg-show.sidebar-fixed .main {
+    margin-left: 260px;
+  }
+  .sidebar .nav-link {
+    padding: 0.55rem 1rem;
+    color: #000;
+  }
+    .brand-minimized .app-header .navbar-brand {
+    width: 150px;
+    height: 55px;
+    position: absolute;
+    padding: 0;
+    margin-right: 0;
+    background-color: transparent;
+  }
+  .sidebar-minimized .sidebar .sidebar-minimizer {
+     height: 100vh; width:52px;
+  }
+    body:not(.sidebar-minimized) .sidebar .sidebar-minimizer {
+    position: absolute !important;
+    top: 0%;
+    right: 0;
+  }
+  app-sidebar.primary-color.pt-4.sidebar {
+    position: fixed;
+    top: 0;
+    background-color: #eaeaea;
+    z-index: 9999;
+    height: 100vh; width:260px;
+  }
+  .sidebar-minimized app-sidebar.primary-color.pt-4.sidebar {
+    -webkit-transition: all 0.1s ease-in-out;
+    -moz-transition: all 0.1s ease-in-out;
+    -o-transition: all 0.1s ease-in-out;
+    transition: all 0.1s ease-in-out;
+    width: 0;
+  }
+  body:not(.sidebar-minimized) .sidebar .sidebar-minimizer::before {
+    content: "x";
+    background: none;
+    font-size: 24px;
+    font-weight: bold; color:#000;
+  }
+  body .sidebar .sidebar-minimizer::before {
+    content: "Navigation";
+    background: none ;
+    font-size: 20px; top:50%;
+    color: #fff; text-align:center; right: -9px;
+    transform: rotate(-90deg) !important;
+  }
+  body .sidebar .sidebar-minimizer:hover::before, body:not(.sidebar-minimized) .sidebar .sidebar-minimizer:hover::before {
+    background: none;
+  }
+  .app-body .main {
+      margin-left:50px;
+  }
+  .app-header .navbar-brand img {
+    margin-left: 100%; 
+  }
+  .brand-minimized .app-header .navbar-brand .navbar-brand-minimized {
+    padding-left: 0;
+  }
+  .app-header .navbar-brand .navbar-brand-minimized {
+    display: block;
+    padding-left: 25px;
+    height: 57px;
+  }
+  .side-title {
+    border-bottom: 1px solid #ddd;
+    margin-top: -7px;
+    padding-bottom: 16px;
+    margin-left: 7px;
+    color: #333;
+    font-size: 14px;
+  }
+  .home-blocks {
+    border-bottom: 1px solid #ddd;
+    padding: 10px 20px 5px 6px;
+    background-color: #ddd;
+  }
+  .home-blocks span {
+    margin: 0 7px; 
+  }
+    .home-blocks span a {
+      color: #000;
+      font-weight: normal; font-size:12px;
+    }
+  .sidebar-minimized .sidebar-header-inside { display:none; }
+  .sidebar .nav-link {
+    font-size: 12px;
+    border-bottom: 1px solid #ddd;
+  }
+  .sidebar .nav-dropdown.open > .nav-dropdown-items a.nav-link {
+    background: none !important;
+    color: #000 !important;
+  }
+
+  }/*--min-width:992px--*/

@@ -1,0 +1,201 @@
+
+<div class="modal-header">
+  <h4 class="modal-title" id="modal-basic-title">
+    {{modalData.modelStagename | translate}} {{modalData.modelName | translate}}
+
+  </h4>
+  <a class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </a>
+</div>
+<div class="modal-body modalbg">
+
+  <!--add time and user with comment history session-->
+  <div class="row">
+    <div class="col-md-8 col-sm-6 bg-whites pdr">
+      <div class="cardpdrtop card">
+        <div class="row">
+          <div class="col-lg-6 col-xs-6 col-sm-6 col-md-12">
+            <span><i class="fa fa-clock-o fa-3" aria-hidden="true"></i></span>
+            <span class="ml-1" [innerHTML]="modalData.DisplayTime +' '+ modalData.timeZone"> </span>
+          </div>
+          <div class="col-lg-6 col-xs-6 col-sm-6 col-md-12">
+            <span><i class="fa fa-user-circle-o" aria-hidden="true"></i></span>
+            <span class="ml-1">{{userName}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 col-sm-6 bg-whites pdrright">
+      <div class="cardpdrtop card">
+        <div class="row">
+          <div class="col-xs-6">
+            <span class="ml-3"><i class="fa fa-history" aria-hidden="true"></i></span>
+            <span class="ml-1">{{ 'key_Commenthistory' | translate }}</span>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--add time and user with comment history session-->
+
+  <div class="row">
+    <div class="col-md-8 col-sm-6 pdr">
+      <div class="panelbg card panelheights">
+        <form [formGroup]="drugForm" (ngSubmit)="onSubmit()">
+
+          <!--new design start here please conver old design pattern to new tiles design-->
+          <div id="tblpopupChart" formArrayName="drugSpecifications" *ngIf="drugForm">
+            <ngb-carousel #ngcarousel *ngIf="t" [showNavigationArrows]="showNavigationArrows" tabindex="-1">
+              <ng-container *ngFor="let ticket of t.controls; let i = index" [formGroupName]="i">
+                <ng-template ngbSlide id="{{i+1}}">
+                  <div class="row mb-2" id="one_{{i+1}}" >
+                    <div class="col-sm-12 col-lg-6">
+                      <div class="row boxshadow m">
+                        <div class="col-sm-12">
+                          <div class="form-group">
+                            <input formControlName="Drugs" (change)="checkfill1($event)" class="form-control" type="text" placeholder="Drugs" [ngClass]="{ 'is-invalid': submitted && ticket.controls.name.errors }">
+                            <app-control-messages [control]="ticket.get('Drugs')"></app-control-messages>
+                            <!-- <app-control-messages [control]="ticket['Drugs']"></app-control-messages>-->
+                          </div>
+                        </div>
+                        <div class="col-sm-12">
+                          <div class="form-group">
+                            <input formControlName="Dose" class="form-control" type="text" placeholder="Dose">
+                            <app-control-messages [control]="ticket.get('Dose')" ></app-control-messages>
+                          </div>
+                        </div>
+                        <div class="col-sm-12">
+                          <div class="form-group">
+                            <input formControlName="Route" class="form-control" type="text" placeholder="Route">
+                            <app-control-messages [control]="ticket.get('Route')" ></app-control-messages>
+                          </div>
+                        </div>
+                        <div class="col-sm-12">
+                          <div class="form-group">
+                            <input formControlName="Frequency" class="form-control" type="text" placeholder="Frequency">
+                            <app-control-messages [control]="ticket.get('Frequency')" ></app-control-messages>
+                          </div>
+                        </div>
+                        <div class="col-sm-12">
+                          <div class="form-group">
+                            <input formControlName="Days" class="form-control" type="text" placeholder="Days">
+                            <app-control-messages [control]="ticket.get('Days')" ></app-control-messages>
+                          </div>
+                        </div>
+                        <div class="col-sm-12">
+                          <div class="form-group">
+                            <textarea formControlName="Instructions" class="form-control" rows="2" placeholder="Instructions"></textarea>
+                            <app-control-messages [control]="ticket.get('Instructions')"></app-control-messages>
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+                    <div class="col-sm-12 col-lg-6">
+                      <div class="row boxshadow m">
+                        <div class="col-sm-12">
+                          <div class="form-group">
+                            <input formControlName="Drugs1" (change)="checkfill($event)" class="form-control" type="text" placeholder="Drugs">
+                            <app-control-messages [control]="ticket.get('Drugs1')"></app-control-messages>
+                          </div>
+                        </div>
+                        <div class="col-sm-12">
+                          <div class="form-group">
+                            <input formControlName="Dose1" class="form-control" type="text" placeholder="Dose">
+                            <app-control-messages [control]="ticket.get('Dose1')"></app-control-messages>
+                          </div>
+                        </div>
+                        <div class="col-sm-12">
+                          <div class="form-group">
+                            <input formControlName="Route1" class="form-control" type="text" placeholder="Route">
+                            <app-control-messages [control]="ticket.get('Route1')"></app-control-messages>
+                          </div>
+                        </div>
+                        <div class="col-sm-12">
+                          <div class="form-group">
+                            <input formControlName="Frequency1" class="form-control" type="text" placeholder="Frequency">
+                            <app-control-messages [control]="ticket.get('Frequency1')"></app-control-messages>
+                          </div>
+                        </div>
+                        <div class="col-sm-12">
+                          <div class="form-group">
+                            <input formControlName="Days1" class="form-control" type="text" placeholder="Days">
+                            <app-control-messages [control]="ticket.get('Days1')"></app-control-messages>
+                          </div>
+                        </div>
+                        <div class="col-sm-12">
+                          <div class="form-group">
+                            <textarea formControlName="Instructions1" class="form-control" rows="2" placeholder="Instructions"></textarea>
+                            <app-control-messages [control]="ticket.get('Instructions1')"></app-control-messages>
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </ng-template>
+
+              </ng-container>
+            </ngb-carousel>
+
+            <div class="text-center">
+              <a (click)="getToPrev()" *ngIf="IsPreviousDisplay" role="button" class="CrousalPos carousel-control-prev">
+                <span aria-hidden="true" class="carousel-control-prev-icon">
+                </span><span class="sr-only">Previous</span>
+              </a>
+              <a (click)="goToNext()" *ngIf="IsNextDisplay" role="button" class="CrousalPos carousel-control-next">
+                <span aria-hidden="true" class="carousel-control-next-icon"></span>
+                <span class="sr-only">Next</span>
+              </a>
+
+            </div>
+
+          </div>
+
+
+          <div class="form-group mt-3">
+            <label for="company">{{ 'key_Commentsarea' | translate }}</label>
+            <textarea [attr.placeholder]="'key_Comments' | translate" class="Comments form-control" formControlName="remarks" rows="3"></textarea>
+          </div>
+
+          <div class="form-group text-center" *ngIf="IsButtonDisplay">
+            <button type="submit" class="btn btn-pill btnsave btn-raised btnbg"
+                    [disabled]="!drugForm.valid">
+              <span [innerHTML]="'key_Save' | translate"></span>
+            </button>
+          </div>
+          <!--<div class="form-group text-center">
+            <input type="button"  class="btn btn-pill btnsave  btn-raised btnbg" [value]="'key_Save' | translate">
+          </div>-->
+        </form>
+      </div>
+    </div>
+    <div class="col-md-4 col-sm-6">
+      <div class="panelbg card panelheights">
+        <app-recentcomment></app-recentcomment>
+      </div>
+    </div>
+  </div>
+
+  <!--Code comment template example -
+    Developer Name: Satyen Singh
+    Date: July 07 , 2020
+    TFS ID: 16548
+      TFS ID TFS Task Id 16718 Latent Phase - Add all language  attributes
+  Logic Description:Design modal popup for drug and fluid..
+  Code Start
+  -->
+  <!---TFS ID 16717 end code-->
+
+
+
+
+
+
+
+
+</div>
+
+

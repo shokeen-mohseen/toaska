@@ -1,0 +1,34 @@
+/*--Developer Name: Prabhash Poddar, Date: 31/08/2020, TFS ID: 17221, Logic Description: change card scss file and manage--*/
+.card {
+  .card-header {
+    padding: 0.3rem 1rem;
+  }
+
+  .card-body {
+    padding: 0.9rem;
+
+    .btn-group-toggle {
+      button {
+        display: -ms-inline-flexbox;
+        display: inline-flex;
+        -ms-flex-direction: inherit;
+        flex-direction: inherit;
+        -ms-flex-pack: center;
+        justify-content: center;
+        -ms-flex-align: center;
+        align-items: center;
+
+        span {
+          margin-left: 5px;
+        }
+      }
+    }
+  }
+}
+.order-workbench .card {
+  border: none;
+  border-radius: 0;
+  background-color: #fff;
+  border-top: 1px solid pink;
+  margin: 0px;
+}

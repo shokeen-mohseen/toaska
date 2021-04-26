@@ -1,0 +1,88 @@
+<div class="e-profile">
+  <div class="row">
+    <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 d-flex w-100">
+      <div class="box-children w-100">
+        <div class="row">
+
+          <div class="col-md-3 col-sm-6">
+            <div class="form-group">
+              <label for="">{{ 'key_DateBetween' | translate }}</label>
+              <ejs-daterangepicker [format]='dateFormat' separator='to' placeholder='MM-DD-YYYY to MM-DD-YYYY' id="shipDate"></ejs-daterangepicker>
+            </div>
+          </div>
+          <div class="col-md-3 col-sm-6">
+            <div class="form-group">
+              <label for="">{{ 'key_Location' | translate }}</label>
+              <angular2-multiselect [data]="itemListB" [(ngModel)]="selectedItemsB" [settings]="settingsB"
+                                    (onSelect)="onItemSelect($event)"
+                                    (onDeSelect)="OnItemDeSelect($event)"
+                                    (onSelectAll)="onSelectAll($event)"
+                                    (onDeSelectAll)="onDeSelectAll($event)"
+                                    (onAddFilterNewItem)="onAddItemB($event)">
+              </angular2-multiselect>
+            </div>
+          </div>
+          <div class="col-md-3 col-sm-6">
+            <div class="form-group">
+              <label for="">{{ 'key_View' | translate }}</label>
+              <select class="form-control">
+                <option>Order</option>
+                <option>Material</option>
+                <option>Equipment</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="col-md-3 col-sm-6">
+            <div class="form-group">
+              <label for="">{{ 'key_UOM' | translate }}</label>
+              <select class="form-control">
+                <option>UOM</option>
+                <option>UOM</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-12 col-lg-12 row justify-content-center mt-3">
+    <div class="">
+      <button class="btn btn-save mr-2 font-weight-normal" type="button">{{ 'key_Display' | translate }}</button>
+    </div>
+  </div>
+</div>
+
+
+<div class="row mt-3">
+  <div class="card-body pl-0 pt-0 pb-1">
+    <div class="col-md-12">
+      <div class="row">
+        <div class="d-flex flex-nowrap justify-content-between align-items-center col-md-8">
+          <div class="btn-group  btn-group-md">
+            <button class="btn btn-outline-primary" type="button">
+              <i class="fa fa-plus-circle" aria-hidden="true"></i>
+              <span> {{'key_EditLine'| translate}}</span>
+            </button>
+            <button class="btn btn-outline-primary" type="button">
+              <i class="fa fa-lock" aria-hidden="true"></i>
+              <span> {{'key_Lock'| translate}}</span>
+            </button>
+            <button class="btn btn-outline-primary" type="button">
+              <i class="fa fa-unlock-alt" aria-hidden="true"></i>
+              <span> {{'key_unlockOffTime'| translate}}</span>
+            </button>
+            <button class="btn btn-outline-danger" type="button">
+              <i class="fa fa-times" aria-hidden="true"></i>
+              <span> {{'key_Delete'| translate}}</span>
+            </button>
+
+          </div>
+
+        </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+

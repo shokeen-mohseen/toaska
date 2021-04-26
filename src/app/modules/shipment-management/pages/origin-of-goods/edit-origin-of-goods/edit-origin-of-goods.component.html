@@ -1,0 +1,151 @@
+<div>
+
+  <div class="row">
+    <div class="col-md-6"></div>
+    <div class="col-md-6 text-right">
+      <span class="fw600">{{ 'key_LastUpdated1' | translate }}:</span> {{selectedOriginOfGoodsToEdit?.updateDateTimeBrowser |  momentDateWithZonePipe }}
+      <br><span class="fw600">{{ 'key_By' | translate }}</span> {{selectedOriginOfGoodsToEdit?.updatedBy}}
+
+    </div>
+  </div>
+  <!--Last Updated Section End//////////////-->
+
+
+  <div class="row mt-3">
+    <!--<div class="col-md-3 custom-flex-w-15">
+      <div class="card">
+        <div class="card-header">{{ 'key_EditOriginOfGoods' | translate }}</div>
+
+        <div class="card-body p-0">
+          <ul class="list-group" #nextList>
+            <li class="list-group-item list-group-item-action"
+                *ngFor="let OriginOfGoods of OriginOfGoodsToEdit; let i = index"
+                (click)="selectedOriginOfGoods(OriginOfGoods)">-->
+              <!--[ngClass]="{ 'active': OriginOfGoods.Id == selectedOriginOfGoodsToEdit.Id }">-->
+         
+              <!--<button class="close" *ngIf="OriginOfGoods.Id!=selectedOriginOfGoodsToEdit.Id" type="button"
+                      (click)="removeOriginOfGoodsFromEditList(OriginOfGoods)">
+                <i class="fa fa-times" aria-hidden="true"></i>
+              </button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>-->
+    <div class="col-md-12">
+      <div class="tab-content">
+        <!--=============== Start profile =================-->
+        <div class="e-profile">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="box-children">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label> {{ 'key_Material' | translate }} <span class="text-danger">*</span> </label>
+                      <angular2-multiselect fixFilterBug [data]="itemListA" [(ngModel)]="selectedItemsA" [settings]="{singleSelection: true, text: 'Select', enableSearchFilter: true, labelKey :'name', searchBy: ['name'], disabled: true }"
+                                            (onSelect)="onItemSelectA($event)"
+                                            (onDeSelect)="OnItemDeSelect($event)"
+                                            (onSelectAll)="onSelectAll($event)"
+                                            (onDeSelectAll)="onDeSelectAll($event)"
+                                            (onAddFilterNewItem)="onAddItem($event)" name="listA" required>
+                      </angular2-multiselect>
+                    </div>
+                    <div class="form-group">
+                      <label> {{ 'key_Country' | translate }} <span class="text-danger">*</span> </label>
+                      <angular2-multiselect fixFilterBug [data]="itemListB" [(ngModel)]="selectedItemsB" [settings]="{singleSelection: true, text: 'Select', enableSearchFilter: true, searchBy: ['CountryName'], labelKey :'CountryName' }"
+                                            (onSelect)="onItemSelectB($event)"
+                                            (onDeSelect)="OnItemDeSelect($event)"
+                                            (onSelectAll)="onSelectAll($event)"
+                                            (onDeSelectAll)="onDeSelectAll($event)"
+                                            (onAddFilterNewItem)="onAddItem($event)" name="listB" required>
+                      </angular2-multiselect>
+                    </div>
+                    <div class="form-group">
+                      <label> {{ 'key_Manufacturer' | translate }} <span class="text-danger">*</span> </label>
+                      <angular2-multiselect fixFilterBug [data]="itemListC" [(ngModel)]="selectedItemsC" [settings]="{singleSelection: true, text: 'Select', enableSearchFilter: true, searchBy: ['name'], labelKey :'name' }"
+                                            (onSelect)="onItemSelectC($event)"
+                                            (onDeSelect)="OnItemDeSelect($event)"
+                                            (onSelectAll)="onSelectAll($event)"
+                                            (onDeSelectAll)="onDeSelectAll($event)"
+                                            (onAddFilterNewItem)="onAddItem($event)" name="listC" required>
+                      </angular2-multiselect>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="box-children">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label> {{ 'key_MaterialPercentage' | translate }} (%) <span class="text-danger">*</span> </label>
+                      <input type="text" class="form-control" [(ngModel)]="selectedOriginOfGoodsToEdit.materialPercentage" maxlength="5" name="MatPercentage" value="" required (ngModelChange)="validation($event);" placeholder="{{selectedOriginOfGoodsToEdit?.materialPercentage}}" />
+                      <div *ngIf="!!selectedOriginOfGoodsToEdit.materialPercentage ? isPONo : false" class="errorMessage text-danger">
+                        {{'key_MaterialPercentagevalid' | translate }}
+                      </div>
+                    </div>
+                    <!--<div class="form-group">
+                      <label> {{ 'key_MaterialPercentage' | translate }} <span class="text-danger">*</span> </label>
+                      <input type="text" class="form-control" required placeholder="{{selectedOriginOfGoodsToEdit?.materialPercentage}}" />
+                    </div>-->
+                  <div class="form-group">
+                    <label> {{ 'key_Comment' | translate }} </label>
+                    <textarea class="form-control" rows="4"  [(ngModel)]="Comments" name="Comments"></textarea>
+                    <!--<textarea class="form-control" [(ngModel)]="Comments" name="Comment" placeholder="{{selectedOriginOfGoodsToEdit?.comment}}"></textarea>-->
+                  </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--<div class="col-md-4">
+              <div class="box-children">
+                <div class="row">-->
+                  <!--<div class="col-md-12">
+                    <div class="form-group">
+                      <span class="fw600 mr-3 " for="lastname"> {{ 'key_Status' | translate }} </span>
+                      <span for="lastname"> {{ 'key_Active' | translate }} </span>
+
+                    </div>
+                  </div>-->
+                  <!--<div class="col-md-12">
+                    <div class="form-group">
+                      <div class="form-check checkbox">
+                        <input class="form-check-input" id="check1" type="checkbox" value="" checked>
+                        <label class="form-check-label" for="check1"> {{ 'key_SetupCompleted' | translate }} </label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <span class="fw600 mr-3 " for="lastname"> {{ 'key_SetupDatetime' | translate }} </span>
+                      <span for="lastname"> 8/31/2020 7:05:24 IST </span>
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <span class="fw600 mr-3 " for="lastname"> {{ 'key_SetupCompletedby' | translate }} </span>
+                      <span for="lastname"> John</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>-->
+
+          </div>
+        </div>
+        <!--=============== End e-profile =================-->
+      </div>
+    </div>
+  </div>
+  <form (ngSubmit)="save()">
+    <div class="row justify-content-center my-5">
+      <div class="col-xl-2 col-lg-4 col-md-4 col-sm-12">
+        <button class="btn btn-block btn-save" type="submit" [disabled]="Inactive">{{ 'key_Save' | translate }}</button>
+      </div>
+
+    </div>
+  </form>
+</div>
+

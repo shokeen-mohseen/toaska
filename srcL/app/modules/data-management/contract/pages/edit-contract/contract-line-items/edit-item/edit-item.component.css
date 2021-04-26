@@ -1,0 +1,9 @@
+
+
+::ng-deep .mat-column-ShowOnBOL .mat-sort-header-arrow,
+::ng-deep .mat-column-AutoAdded .mat-sort-header-arrow,
+::ng-deep .mat-column-AddPallet .mat-sort-header-arrow,
+::ng-deep .mat-column-Add_New .mat-sort-header-arrow,
+::ng-deep .mat-column-Delete .mat-sort-header-arrow {
+  display: none !important;
+}

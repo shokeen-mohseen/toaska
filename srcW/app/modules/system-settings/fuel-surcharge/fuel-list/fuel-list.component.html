@@ -1,0 +1,140 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="firstname">{{'key_CustomerFuelCharge' | translate}}</label>
+        <input type="text" class="form-control" [(ngModel)]="fuelChargeAdditional" disabled/>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="firstname">{{'key_CarrierFuelSurcharge' | translate}}</label>
+        <input type="text" class="form-control" [(ngModel)]="carrierFuelSurCharge" disabled/>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="col-lg-12">
+    <div>
+      <app-table-filter (filterOn)="applyFilter($event)"></app-table-filter>
+    </div>
+    <div class="scroll resize-table">
+      <mat-table #table [dataSource]="dataSource" matSort (matSortChange)="customSort($event)">
+
+        <!-- Position Column -->
+        <!--<ng-container matColumnDef="selectRow">
+        <mat-header-cell class="t-center tw-5" *matHeaderCellDef>
+          <div class="form-check-inline">
+            <label class="form-check-label">
+              <input type="checkbox" class="form-check-input" value="" placement="top" ngbTooltip="Select all" (change)="$event ? masterToggle() : null"
+                     [checked]="selection.hasValue() && isAllSelected()"
+                     [indeterminate]="selection.hasValue() && !isAllSelected()">
+            </label>
+          </div>
+
+        </mat-header-cell>
+        <mat-cell class="t-center tw-5" *matCellDef="let row">
+          <div class="form-check-inline">
+            <label class="form-check-label">
+              <input type="checkbox" class="form-check-input" value="" (click)="$event.stopPropagation()"
+                     (change)="$event ? selection.toggle(row) : null"
+                     [checked]="selection.isSelected(row)">
+            </label>
+          </div>
+        </mat-cell>
+      </ng-container>-->
+        <ng-container *ngFor="let column of displayedColumns; let i=index;" [matColumnDef]="column">
+          <mat-header-cell *matHeaderCellDef mat-sort-header mwlResizable [enableGhostResize]="true" (resizeEnd)="onResizeEnd($event, column)"
+                           [resizeEdges]="{bottom: false, right: true, top: false, left: true}">
+
+            <div class="form-check-inline" *ngIf="column === selectRow">
+              <label class="form-check-label">
+                <input type="checkbox" class="form-check-input" value="" placement="top" ngbTooltip="Select all" (change)="$event ? masterToggle() : null"
+                       [checked]="selection.hasValue() && isAllSelected()"
+                       [indeterminate]="selection.hasValue() && !isAllSelected()">
+              </label>
+            </div>
+            <div *ngIf="column != selectRow"> {{ displayedColumnsReplace[i] | translate }}</div>
+          </mat-header-cell>
+          <mat-cell *matCellDef="let item">
+            <!--for-checkbox-->
+            <div class="form-check-inline" *ngIf="column === selectRow">
+              <label class="form-check-label">
+                <input type="checkbox" class="form-check-input" value="" (click)="$event.stopPropagation()"
+                       (change)="rowSelectionChange(item)"
+                       [checked]="selection.isSelected(item)">
+              </label>
+            </div>
+            <div class="form-check-inline" *ngIf="column === 'isActive' else commonData">
+              <input type="checkbox" class="" checked="{{item.isActive}}" disabled>
+            </div>
+            <ng-template #commonData>
+              {{ item[column] }}
+            </ng-template>
+
+          </mat-cell>
+        </ng-container>
+
+        <!--<ng-container matColumnDef="Fuelpricetype">
+        <mat-header-cell class="tw-12" *matHeaderCellDef mat-sort-header>{{'key_FuelPriceType' | translate}}</mat-header-cell>
+        <mat-cell class="tw-12" *matCellDef="let element"> {{element.Fuelpricetype}} </mat-cell>
+      </ng-container>
+
+
+      <ng-container matColumnDef="Fromfuel">
+        <mat-header-cell class="tw-12" *matHeaderCellDef mat-sort-header> {{'key_FromFuelPrice' | translate}} </mat-header-cell>
+        <mat-cell class="tw-12" *matCellDef="let element"> {{element.Fromfuel}} </mat-cell>
+      </ng-container>
+
+
+      <ng-container matColumnDef="Tofuel">
+        <mat-header-cell class="tw-12" *matHeaderCellDef mat-sort-header> {{'key_ToFuelPrice' | translate}}</mat-header-cell>
+        <mat-cell class="tw-12" *matCellDef="let element"> {{element.Tofuel}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Fuelprice">
+        <mat-header-cell class="tw-12" *matHeaderCellDef mat-sort-header> {{'key_FuelPriceUOM' | translate}} </mat-header-cell>
+        <mat-cell class="tw-12" *matCellDef="let element"> {{element.Fuelprice}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Permilecharge">
+        <mat-header-cell class="tw-12" *matHeaderCellDef mat-sort-header> {{'key_PerMileCharge' | translate}} </mat-header-cell>
+        <mat-cell class="tw-12" *matCellDef="let element"> {{element.Permilecharge}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Chargerate">
+        <mat-header-cell class="tw-12" *matHeaderCellDef mat-sort-header> {{'key_ChargeRateUOM' | translate}} </mat-header-cell>
+        <mat-cell class="tw-12" *matCellDef="let element"> {{element.Chargerate}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Effectivestart">
+        <mat-header-cell class="tw-12" *matHeaderCellDef mat-sort-header> {{'key_EffectiveStart' | translate}}</mat-header-cell>
+        <mat-cell class="tw-12" *matCellDef="let element"> {{element.Effectivestart}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="Effectiveend">
+        <mat-header-cell class="" *matHeaderCellDef mat-sort-header> {{'key_EffectiveEnd' | translate}} </mat-header-cell>
+        <mat-cell class="" *matCellDef="let element"> {{element.Effectiveend}} </mat-cell>
+      </ng-container>-->
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"
+                 [ngClass]="{hovered: row.hovered, highlighted: row.highlighted,
+                'inactive': row.status === 'Inactive' && !selection.isSelected(row),
+                'selected': selection.isSelected(row)}"
+                 (click)="onSelectionChange(row, row.isSelected)"
+                 (mouseover)="row.hovered = true" (mouseout)="row.hovered = false">
+        </mat-row>
+      </mat-table>
+    </div>
+    <div class="col-lg-12 text-center" ><!--*ngIf="dataSource.data.length == 0"--><p>No records to display.</p></div>
+    <mat-paginator #paginator
+                   [length]="paginationModel.itemsLength"
+                   [pageSize]="paginationModel.pageSize"
+                   [pageSizeOptions]="paginationModel.pageSizeOptions"
+                   (page)="onPaginationEvent($event)">
+    </mat-paginator>
+  </div>
+</div>

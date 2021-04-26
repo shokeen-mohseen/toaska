@@ -1,0 +1,54 @@
+<!--TFS ID: 17222, Author: Monu Ram Yadav, Date: 05-09-2020, Des: Design Material Screens-->
+<app-top-btn-group #btnBar [actionGroupConfig]="actionGroupConfig" (action)="actionHandler($event)" [ParentPageName]="MaterialGroupList"></app-top-btn-group>
+<h5>{{ 'key_MaterialGroup' | translate }}</h5>
+<mat-tab-group #tabGroupA class="mt-18" animationDuration="0ms">
+
+  <mat-tab>
+    <ng-template mat-tab-label>
+      {{ 'key_MaterialGrouplist' | translate }}
+    </ng-template>
+    <div class="tab-content">
+      <div class="tab-pane active" id="existingUsers">
+        <div class="row">
+          <div class="col-lg-12">
+            <app-table-filter (filterOn)="applyFilter($event)"></app-table-filter>
+            <div class="scroll">
+              <mat-table #table [dataSource]="dataSource" matSort>
+
+                <ng-container *ngFor="let column of displayColumnsNew; let i=index;" [matColumnDef]="column">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header [resizeColumn]="true" [index]="i">
+                    <div *ngIf="column != selectRow"> {{ displayedColumnsReplace[i] | translate }}</div>
+                  </mat-header-cell>
+                  <mat-cell *matCellDef="let item">
+                    <!--for-checkbox-->
+                    <div *ngIf="column === detail">
+                      <a class="a_link" (click)="opendetail(item)">Detail</a>
+                    </div>
+                    {{ item[column] }}
+                  </mat-cell>
+                </ng-container>
+
+                <mat-header-row *matHeaderRowDef="displayColumnsNew"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayColumnsNew;"></mat-row>
+              </mat-table>
+            </div>
+            <mat-paginator #paginator
+                           [length]="materialGroupModel.itemsLength"
+                           [pageSize]="materialGroupModel.pageSize"
+                           [pageSizeOptions]="materialGroupModel.pageSizeOptions"
+                           (page)="onPaginationEvent($event)">
+            </mat-paginator>
+
+
+          </div>
+        </div>
+        <!--Row End-->
+      </div>
+      <!--tab-pane End-->
+    </div>
+    <!--tab-content End-->
+  </mat-tab>
+ </mat-tab-group>
+    
+
+    <app-show-notes></app-show-notes>

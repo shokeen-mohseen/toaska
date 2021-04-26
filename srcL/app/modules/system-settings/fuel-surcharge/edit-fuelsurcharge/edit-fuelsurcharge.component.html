@@ -1,0 +1,150 @@
+<form #ngForm="ngForm">
+  <div class="row">
+    <div class="col-md-6"></div>
+    <div class="col-md-6 text-right">
+      <span class="fw600">{{'key_LastUpdated1' | translate}}:	</span> {{selectedFuelChargeToEdit.updateDateTimeBrowser | momentDateWithZonePipe}}
+      <br><span class="fw600">By</span> {{ lastUpdatedBy }}
+    </div>
+  </div>
+  <!--Last Updated Section End//////////////-->
+
+
+
+  <div class="row">
+    <div class="col-md-3 custom-flex-w-15">
+      <div class="card">
+        <div class="card-header">{{ 'key_EditList' | translate }}</div>
+        <div class="card-body p-0">
+          <ul class="list-group" #nextList *ngIf="fuelChargesToEdit && fuelChargesToEdit.length">
+            <li class="list-group-item list-group-item-action"
+                *ngFor="let fuelCharge of fuelChargesToEdit; let i = index"
+                (click)="selectedFuelCharge(fuelCharge)"
+                [ngClass]="{active: fuelCharge.id == selectedFuelChargeToEdit.id }">
+              <a title="{{fuelCharge.fuelPriceType}}">{{fuelCharge.fuelPriceType}}</a>
+              <button class="close" *ngIf="fuelCharge.id != selectedFuelChargeToEdit.id" type="button"
+                      (click)="removeFuelChargeFromEditList(fuelCharge)">
+                <i class="fa fa-times" aria-hidden="true"></i>
+              </button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-9 custom-flex-w-85">
+      <div class="tab-content">
+        <!--=============== Start profile =================-->
+        <div class="e-profile">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="box-children">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label for="firstname">{{'key_FuelPriceType' | translate}} <sup class="text-danger sup1">*</sup> </label>
+                      <angular2-multiselect fixFilterBug [data]="fuelPriceTypeList" [(ngModel)]="fuelPriceType" name="fuelPriceType"
+                                            [settings]="settingsA" required>
+                      </angular2-multiselect>
+                    </div>
+                  </div>
+
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label>{{'key_FromFuelPrice' | translate}} <sup class="text-danger sup1">*</sup></label>
+                      <input type="number" [(ngModel)]="selectedFuelChargeToEdit.fromFuelPrice"
+                             name="fromFuelPrice" class="form-control"
+                             step="0.01" (change)="setTwoNumberDecimal($event)" required />
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label>{{'key_ToFuelPrice' | translate}} <sup class="text-danger sup1">*</sup></label>
+                      <input type="number" [(ngModel)]="selectedFuelChargeToEdit.toFuelPrice"
+                             name="toFuelPrice" class="form-control"
+                            step="0.01" (change)="setTwoNumberDecimal($event)"  required />
+                    </div>
+                  </div>
+                  
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="box-children">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label>{{'key_FuelPriceUOM' | translate}} <sup class="text-danger sup1">*</sup></label>
+                      <angular2-multiselect fixFilterBug [data]="fuelPriceUOMList" [(ngModel)]="fuelPriceUOM" name="fuelPriceUOM"
+                                            [settings]="settingsA" required>
+                      </angular2-multiselect>
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label for="firstname">{{'key_PerMileCharge' | translate}}<sup class="text-danger sup1">*</sup> </label>
+                      <input type="number" [(ngModel)]="selectedFuelChargeToEdit.chargeRatePerMile"
+                             name="chargeRatePerMile" class="form-control"
+                             step="0.01" (change)="setTwoNumberDecimal($event)" required />
+                    </div>
+                  </div>
+
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label>{{'key_ChargeRateUOM' | translate}} <sup class="text-danger sup1">*</sup></label>
+                      <angular2-multiselect fixFilterBug class="right" [data]="fuelPriceUOMList" [(ngModel)]="chargeRateUom" name="chargeRateUom"
+                                            [settings]="settingsA" required>
+                      </angular2-multiselect>
+                    </div>
+                  </div>
+                  <!--<div class="col-md-12">
+    <div class="form-group">
+      <label>{{'key_EffectiveStart' | translate}} <sup class="text-danger sup1">*</sup></label>
+     <p-calendar [showIcon]="true" [monthNavigator]="true"  name="effectiveStartDate" [(ngModel)]="selectedFuelChargeToEdit.effectiveStartDate" [yearNavigator]="true" [required]="required1" yearRange="2000:2030" placeholder="MM-DD-YYYY" ></p-calendar>
+    </div>
+  </div>
+  <div class="col-md-12">
+    <div class="form-group">
+      <label>{{'key_EffectiveEnd' | translate}} <sup class="text-danger sup1">*</sup></label>
+      <p-calendar [showIcon]="true"  name="effectiveEndDate" [(ngModel)]="selectedFuelChargeToEdit.effectiveEndDate" [monthNavigator]="true" [yearNavigator]="true" [required]="required1" yearRange="2000:2030" placeholder="MM-DD-YYYY" ></p-calendar>
+    </div>
+  </div>-->
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--=============== End e-profile =================-->
+
+        </div>
+        <!--=============== End e-profile =================-->
+      </div>
+    </div>
+  </div>
+  <div class="row justify-content-center my-5">
+    <div class="col-xl-2 col-lg-4 col-md-4 col-sm-12">
+      <button class="btn btn-block btn-save" type="button" [disabled] ="inActive" (click)="submit(ngForm)">{{ 'key_Save' | translate }}</button>
+    </div>
+    <div class="col-xl-2 col-lg-4 col-md-4 col-sm-12">
+      <button class="btn btn-block btn-next" [disabled]="(fuelChargesToEdit.length<2) || inActive ? true:false" (click)="submit(ngForm, true)">
+        <span class="fw600">{{ 'key_Edit' | translate }}</span> <span class="fs-13"> > {{ 'key_Next' | translate }}</span>
+      </button>
+    </div>
+  </div>
+
+  </form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

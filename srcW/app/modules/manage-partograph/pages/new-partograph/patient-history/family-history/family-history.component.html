@@ -1,0 +1,59 @@
+<!--TFS ID:- 17414,
+  Date: 15-09-2020,
+  Author: Monu Ram YAdav,
+  Des:-  Fix Stepper Steps Data in Sub Component for Prepartum Care Section-->
+<div class="family-history">
+  <!---Heading start row-->
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="subHeading-red fw600">
+        {{ 'Key_FamilyHistory' | translate }}
+      </div>
+    </div>
+  </div>
+  <!---Heading end row-->
+  <div class="fs-16 fw600 mt-3">{{ 'Key_AnyFamilyHistoryof' | translate }} </div>
+  <!--row start-->
+  <div class="row mt-2">
+    <div class="col-sm-12">
+      <div class="form-check-inline mr-4 mb-2">
+        <label class="form-check-label">
+          <input type="checkbox" class="form-check-input" value="">{{ 'Key_Hypertension' | translate }}
+        </label>
+      </div>
+      <div class="form-check-inline mr-4 mb-2">
+        <label class="form-check-label">
+          <input type="checkbox" class="form-check-input" value="">{{ 'Key_Asthma' | translate }}
+        </label>
+      </div>
+      <div class="form-check-inline mr-4 mb-2">
+        <label class="form-check-label">
+          <input type="checkbox" class="form-check-input" value="">{{ 'Key_Diabetes' | translate }}
+        </label>
+      </div>
+      <div class="form-check-inline mr-4 mb-2">
+        <label class="form-check-label">
+          <input type="checkbox" class="form-check-input" value="">{{ 'Key_Others' | translate }}
+        </label>
+      </div>
+    </div>
+  </div>
+  <!--row end-->
+  <!--Row start-->
+  <div class="row mt-2">
+    <div class="col-lg-10 col-md-110 col-sm-12">
+      <div class="form-group">
+        <label for="">
+          {{ 'Key_PastTreatmentHistory' | translate }}
+        </label>
+        <textarea class="form-control" rows="4" placeholder="{{ 'key_AddCommentHere' | translate }}"></textarea>
+      </div>
+    </div>
+  </div>
+  <!--row end-->
+  <!--Row start for other-->
+  <div class="row">
+    <input type="button" class="btn btn-secondary ml-3 btnbrd" (click)="AddMoreComplication()" value="{{ 'key_AddNewParameter' | translate }}" />
+  </div>
+  <!--Row end for other-->
+</div>

@@ -1,0 +1,259 @@
+<div>
+  <div class="row">
+    <div class="col-md-6"></div>
+    <div class="col-md-6 text-right">
+      <span class="fw600">Last Updated:	</span>
+      {{selectedBpToEdit?.updateDateTimeBrowser | date:'MM-dd-yyyy hh:mm:ss'}}
+      <br><span class="fw600">By</span>  {{selectedBpToEdit?.updatedBy}}
+    </div>
+  </div>
+  <!--Last Updated Section End//////////////-->
+
+  <div class="row">
+    <div class="col-md-12 custom-flex-w-100">
+      <div class="card">
+        <div class="card-header">{{ 'key_EditList' | translate }}</div>
+        <div class="card-body p-0">
+          <div class="list-group">
+            <ul class="p-0 m-0">
+              <li class="list-group-item list-group-item-action"
+                  *ngFor="let bp of getRowsToEdit(); let i = index"
+                  (click)="selectedBPForEdit(bp)"
+                  [ngClass]="{ 'active': selectedBpToEdit && bp?.id == selectedBpToEdit?.id }">
+                <a>{{bp.businessPartnerName}}</a>
+                <button class="close" *ngIf="bp?.id != selectedBpToEdit?.id" type="button"
+                        (click)="removeBpFromEditList(bp)">
+                  <i class="fa fa-times" aria-hidden="true"></i>
+                </button>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12 custom-flex-w-100">
+      <div class="tab-content">
+        <!--=============== Start profile =================-->
+        <div class="e-profile">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="box-children">
+                <div class="row">
+                  <div class="col-md-12" *ngIf="!isCarrierTab">
+                    <div class="form-group">
+                      <label> {{ 'key_Businesspartner' | translate }} <sup class="text-danger sup1">*</sup></label>
+                      <angular2-multiselect [data]="bpTypeList"
+                                            [(ngModel)]="selectedBpType"
+                                            [settings]="settingsBpType"
+                                            (onSelect)="onBpTypeSelect($event)"
+                                            name="settingsBusinessPartner" required>
+                      </angular2-multiselect>
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label> {{ 'key_BusinessPartner' | translate }} <sup class="text-danger sup1">*</sup></label>
+                      <input type="text" class="form-control" value="{{selectedBpToEdit?.businessPartnerName}}" disabled>
+                    </div>
+                  </div>
+                  <div class="col-md-12" *ngIf="!isCarrierTab">
+                    <div class="form-group">
+                      <label> {{ 'key_TransportationComment' | translate }}</label>
+                      <textarea rows="2" class="form-control"
+                                [(ngModel)]="selectedBpToEdit.transportationComment"
+                                value=""></textarea>
+                    </div>
+                  </div>
+                  <div class="col-md-12" *ngIf="!isCarrierTab">
+                    <div class="form-group">
+                      <label> {{ 'key_LoadingComment' | translate }}</label>
+                      <textarea rows="2" class="form-control"
+                                [(ngModel)]="selectedBpToEdit.loadingComment"
+                                value=""></textarea>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="box-children">
+                <div class="d-flex flex-nowrap justify-content-between align-items-center">
+                  <h5>{{ 'key_Organization' | translate }}</h5>
+                </div>
+                <app-organizationinfo [viewMode]="true"
+                                      [PageActionType]="'Location'"
+                                      [organizationId]="selectedBpToEdit.organizationID"></app-organizationinfo>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="box-children">
+                <div class="form-group">
+                  <span class="fw600 mr-3 " for="lastname"> {{ 'key_Status' | translate }} </span>
+                  <span for="lastname">  {{selectedBpToEdit?.isActive ? 'Active': 'Inactive'}} </span>
+                </div>
+
+                <div class="form-group">
+                  <div class="form-check checkbox pl-0">
+                    <label class="form-check-label" for="check1"> {{ 'key_SetupCompleted' | translate }} </label>
+                    <input class="form-check-input ml-2" id="check1" type="checkbox"
+                           [(ngModel)]="setupDone" (change)="setupChange($event)"
+                           value="">
+                  </div>
+                </div>
+                <div class="form-group d-flex">
+                  <span class="fw600 mr-3" for="setupDateTime"> {{ 'key_SetupDatetime' | translate }} </span>
+                  <span for="lastname" class="text-break" [hidden]="!setupDone"> {{setupDoneDateTime | date:'MM-dd-yyyy hh:mm:ss'}}</span>
+                </div>
+                <div class="form-group d-flex">
+                  <span class="fw600 mr-3" for="lastname"> {{ 'key_SetupCompletedby' | translate }} </span>
+                  <span for="lastname" class="text-break" [hidden]="!setupDone"> {{setupDoneBy}}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--=============== End e-profile =================-->
+      </div>
+    </div>
+    <div class="col-lg-12">
+      <!--================= address and contact tabs ==============-->
+      <div id="accordionTab1" class="accordion mt-3">
+        <div class="card mb-0">
+          <div class="card-header collapsed" data-toggle="collapse" href="#collapseTwo">
+            <a class="card-title">
+              {{ 'key_Contact' | translate }} ({{this.contactCount}})
+            </a>
+          </div>
+          <div id="collapseTwo" class="card-body collapse" data-parent="#accordionTab1">
+            <app-contact-panel (listLength)="setContactCount($event)"
+                               [PageActionType]="pageActionType"
+                               [getContactById]="selectedBpToEdit.businessPartnerId"></app-contact-panel>
+          </div>
+
+          <div class="card-header collapsed" data-toggle="collapse" href="#address">
+            <a class="card-title">
+              {{ 'key_Address' | translate }} ({{this.addressCount}})
+            </a>
+          </div>
+          <div id="address" class="card-body collapse" data-parent="#accordionTab1">
+            <app-address-panel (addressListCount)="getAddressCount($event)"
+                               [getAddresById]="selectedBpToEdit.businessPartnerId"
+                               [PageActionType]="pageActionType"></app-address-panel>
+          </div>
+
+
+          <!--================add charactrics===-->
+          <div class="card-header collapsed" data-toggle="collapse" href="#Characteristics">
+            <a class="card-title">
+              {{ 'key_Characteristicss' | translate }}  {{statOfCharacteristics}}
+            </a>
+          </div>
+          <div id="Characteristics" class="card-body collapse" data-parent="#accordionTab1">
+            <app-business-characteristics-panel
+                                                [locationTypeCode]="!isCarrierTab?'BP':'Carrier'"
+                                                [getCharacteristicsById]="selectedBpToEdit.businessPartnerId"
+                                                (statOfCharacteristics)="setStatOfCharacteristics($event)">
+
+            </app-business-characteristics-panel>
+          </div>
+          <!--================add charactrics===-->
+          <!---======contacts read only--->
+          <!--================add charactrics===-->
+          <div class="card-header collapsed" data-toggle="collapse"
+               *ngIf="!isCarrierTab"
+               href="#Contracts">
+            <a class="card-title">
+              {{ 'key_Contracts' | translate }}  ({{this.contractCount}})
+            </a>
+          </div>
+          <div id="Contracts" class="card-body collapse" data-parent="#accordionTab1">
+            <app-contracts-panel [InputlocationId]="selectedBpToEdit.businessPartnerId"
+                                 [ScreenAction]="screenAction"
+                                 (contractListLength)="getContractCount($event)"></app-contracts-panel>
+
+          </div>
+          <!--================add charactrics===-->
+          <div class="card-header collapsed" data-toggle="collapse"
+               *ngIf="!isCarrierTab"
+               href="#Mapequipment">
+            <a class="card-title">
+              {{ 'key_MapEquipmentType' | translate }}  ({{this.preferredEquipmentListCount}})
+            </a>
+          </div>
+          <div id="Mapequipment" class="card-body collapse"
+               *ngIf="!isCarrierTab"
+               data-parent="#accordionTab1">
+            <div class="row">
+              <div class="col-md-12">
+                <app-map-equipment-type [InputlocationId]="selectedBpToEdit.businessPartnerId"
+                                        (listEquipmentLength)="getpreferredEquipmentCount($event)"></app-map-equipment-type>
+
+              </div>
+            </div>
+          </div>
+          <div class="card-header collapsed" data-toggle="collapse"
+               *ngIf="!isCarrierTab"
+               href="#Mapequipmentpallet">
+            <a class="card-title">
+              {{ 'key_Mapdefaultpallettype' | translate }}  ({{this.defaultPalletCount}})
+            </a>
+          </div>
+          <div id="Mapequipmentpallet" class="card-body collapse"
+               *ngIf="!isCarrierTab"
+               data-parent="#accordionTab1">
+            <div class="row">
+              <div class="col-md-12">
+                <app-map-pallet-type [InputlocationId]="selectedBpToEdit.businessPartnerId"
+                                     (listPalletLength)="getDefaultPalletCount($event)"></app-map-pallet-type>
+              </div>
+            </div>
+          </div>
+          <div class="card-header collapsed" data-toggle="collapse"
+               *ngIf="!isCarrierTab"
+               href="#Mapequipmentpreferred">
+            <a class="card-title">
+              {{ 'key_Mappre' | translate }}   ({{this.preferredMaterialListCount}})
+            </a>
+          </div>
+          <div id="Mapequipmentpreferred" class="card-body collapse"
+               *ngIf="!isCarrierTab"
+               data-parent="#accordionTab1">
+            <div class="row">
+              <div class="col-md-12">
+                <app-map-preferred-materials [ScreenAction]="screenAction"
+                                             [InputlocationId]="selectedBpToEdit.businessPartnerId"
+                                            (listMaterialLength)="getPreferredMaterialCount($event)"></app-map-preferred-materials>
+              </div>
+            </div>
+          </div>
+
+          <!---======contacts read only--->
+          <!----map equipment-->
+        </div>
+        <!--================= end  address and contact tabs ==============-->
+
+      </div>
+      <!--=============== End profile =================-->
+    </div>
+  </div>
+  <form (ngSubmit)="saveBusinessPartner()">
+    <div class="row justify-content-center my-5">
+      <!--<div class="col-xl-2 col-lg-4 col-md-4 col-sm-12">
+        <button class="btn btn-block btn-previous" type="submit">{{ 'key_Previous' | translate }}</button>
+      </div>-->
+      <div class="col-xl-2 col-lg-4 col-md-4 col-sm-12">
+        <button class="btn btn-block btn-save" type="submit">{{ 'key_Save' | translate }}</button>
+      </div>
+      <div class="col-xl-2 col-lg-4 col-md-4 col-sm-12">
+        <button class="btn btn-block btn-next"
+                (click)="saveAndNextBusinessPartner()"
+                type="button">
+          <span class="fw600">{{ 'key_Edit' | translate }}</span>
+          <span class="fs-13"> > {{ 'key_Next' | translate }}</span>
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

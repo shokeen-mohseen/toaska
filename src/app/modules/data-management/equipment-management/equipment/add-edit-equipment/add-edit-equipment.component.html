@@ -1,0 +1,169 @@
+<!--Author Name Satyen Singh--->
+<div>
+  <div class="row" *ngIf="editPage">
+    <div class="col-md-6"></div>
+    <div class="col-md-6 text-right">
+      <span class="fw600">Last Updated:	</span> 8/13/2020 8:35:24 IST
+      <br><span class="fw600">By</span> Jay Coleman (lampsdemo@osoftec.com)
+    </div>
+  </div>
+  <!--Last Updated Section End//////////////-->
+
+  <div class="row mt-3">
+    <div class="col-md-3 custom-flex-w-15">
+      <div class="card">
+        <div class="card-header" *ngIf="addPage">{{ 'key_AddedList' | translate }}</div>
+        <div class="card-header" *ngIf="editPage">{{ 'key_EditList' | translate }}</div>
+        <div class="card-body p-0">
+          <div class="list-group" #nextList>
+            <div class="list-group-item list-group-item-action active">
+              <a>Edit Name goes here</a>
+              <button class="close" type="button" *ngIf="editPage">
+                <i class="fa fa-times" aria-hidden="true"></i>
+              </button>
+            </div>
+            <div class="list-group-item list-group-item-action">
+              <a>Next Edit Name goes here</a>
+              <button class="close" type="button" *ngIf="editPage">
+                <i class="fa fa-times" aria-hidden="true"></i>
+              </button>
+            </div>
+            <div class="list-group-item list-group-item-action">
+              <a>Next Edit Name goes here</a>
+              <button class="close" type="button" *ngIf="editPage">
+                <i class="fa fa-times" aria-hidden="true"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-9 custom-flex-w-85">
+      <div class="tab-content">
+        <!--=============== Start profile =================-->
+        <div class="e-profile">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="box-children">
+                <div class="form-group">
+                  <label for="firstname">{{'key_Location' | translate}} <span class="text-danger">*</span></label>
+                  <angular2-multiselect [data]="itemListA" [(ngModel)]="selectedItemsA" [settings]="settingsA"
+                                        (onSelect)="onItemSelect($event)"
+                                        (onDeSelect)="OnItemDeSelect($event)"
+                                        (onSelectAll)="onSelectAll($event)"
+                                        (onDeSelectAll)="onDeSelectAll($event)"
+                                        (onAddFilterNewItem)="onAddItemA($event)" required>
+                  </angular2-multiselect>
+                </div>
+                <div class="form-group">
+                  <label for="firstname">{{'key_Equipmentclass' | translate}} <span class="text-danger">*</span></label>
+                  <angular2-multiselect [data]="itemListA" [(ngModel)]="selectedItemsA" [settings]="settingsA"
+                                        (onSelect)="onItemSelect($event)"
+                                        (onDeSelect)="OnItemDeSelect($event)"
+                                        (onSelectAll)="onSelectAll($event)"
+                                        (onDeSelectAll)="onDeSelectAll($event)"
+                                        (onAddFilterNewItem)="onAddItemA($event)" required>
+                  </angular2-multiselect>
+                </div>
+
+                <div class="form-group">
+                  <label for="firstname">{{'Key_EquipmentType' | translate}} <span class="text-danger">*</span></label>
+                  <angular2-multiselect [data]="itemListA" [(ngModel)]="selectedItemsA" [settings]="settingsA"
+                                        (onSelect)="onItemSelect($event)"
+                                        (onDeSelect)="OnItemDeSelect($event)"
+                                        (onSelectAll)="onSelectAll($event)"
+                                        (onDeSelectAll)="onDeSelectAll($event)"
+                                        (onAddFilterNewItem)="onAddItemA($event)" required>
+                  </angular2-multiselect>
+                </div>
+                <div class="form-group">
+                  <label>{{'key_Equipmentcode' | translate}} <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control" value="" required />
+                </div>
+                <div class="form-group">
+                  <label>{{'key_Equipmentname' | translate}} <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control" value="" required />
+                </div>
+                <div class="form-group">
+                  <label>{{'key_Description' | translate}}</label>
+                  <textarea class="form-control" cols="2"></textarea>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="col-md-4">
+              <div class="box-children">
+                <div class="form-group">
+                  <label>{{'key_Model' | translate}}</label>
+                  <input type="text" class="form-control" value="" />
+                </div>
+                <div class="form-group">
+                  <label>{{'key_Serialnumber' | translate}}</label>
+                  <input type="text" class="form-control" value="" />
+                </div>
+                <div class="form-group">
+                  <label>{{'key_Manufacturer' | translate}}</label>
+                  <input type="text" class="form-control" value="" />
+                </div>
+                <div class="form-group">
+                  <label>{{'key_OrderComments' | translate}}</label>
+                  <textarea class="form-control" rows="4"></textarea>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="box-children">
+                <div class="text-center">
+                  <i class="fa fa-qrcode fa-5x" aria-hidden="true"></i>
+                </div>
+                <div class="text-center">
+                  <button class="btn btn-outline-primary mt-2 text-center m-0-auto" type="button">{{ 'key_Print' | translate }}</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--=============== End e-profile =================-->
+      </div>
+    </div>
+    <!---bottom panel--->
+    <div class="col-lg-12">
+      <!--================= address and contact tabs ==============-->
+      <div id="accordionTab1" class="accordion mt-3">
+        <div class="card mb-0">
+          <div class="card-header collapsed" data-toggle="collapse" href="#collapseTwo">
+            <a class="card-title">
+              {{ 'key_DefineCharacteristics' | translate }} (2)
+            </a>
+          </div>
+          <div id="collapseTwo" class="card-body collapse" data-parent="#accordionTab1">
+            <app-add-define-characteristics-panel></app-add-define-characteristics-panel>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!---bottom panel--->
+  </div>
+  <div class="row justify-content-center my-5">
+    <div class="col-xl-2 col-lg-4 col-md-4 col-sm-12">
+      <button class="btn btn-block btn-save" type="submit">{{ 'key_Save' | translate }}</button>
+    </div>
+    <div class="col-xl-2 col-lg-4 col-md-4 col-sm-12" *ngIf="addPage">
+      <button class="btn btn-block btn-next" type="submit">
+        <span class="fw600">{{ 'key_Add' | translate }}</span> <span class="fs-13"> > {{ 'key_Next' | translate }}</span>
+      </button>
+    </div>
+    <div class="col-xl-2 col-lg-4 col-md-4 col-sm-12" *ngIf="editPage">
+      <button class="btn btn-block btn-next" type="submit">
+        <span class="fw600">{{ 'key_Edit' | translate }}</span> <span class="fs-13"> > {{ 'key_Next' | translate }}</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+

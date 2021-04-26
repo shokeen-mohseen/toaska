@@ -1,0 +1,259 @@
+<div class="container" style="padding-left: 30px; padding-right: 30px; padding-bottom: 10px;">
+
+  <div class="row justify-content-center mt-2">
+    <div class="col-xl-2 col-lg-4 col-md-4 col-sm-12">
+      <button type="button" (click)="downloadPdf()" class="btn btn-block btn-save">Download</button>
+    </div>
+    <div class="col-xl-2 col-lg-4 col-md-4 col-sm-12">
+      <button type="button" (click)="closeWindow()" class="btn btn-block btn-secondary">Close</button>
+    </div>
+  </div>
+  <!--</form>-->
+  <div id="viewNaftaReport" class="row justify-content-center reportContainer">
+    <div *ngFor="let order of naftaReportOrders; let i = index">
+
+      <table style="border: 2px solid black; padding: 0 10px; width: 100%; padding-bottom:100px;">
+        <tr>
+          <td>
+            <table style="width:100%; border: none;">
+              <tr>
+                <td style="width:5%; border: none;">&nbsp;</td>
+                <td style="width:75%; border: none;">
+                  <table style="border: none;">
+                    <tr><td style="font-size:22px; text-align:center;">DEPARTMENT OF HOMELAND SECURITY</td></tr>
+                    <tr><td style="font-size:22px; text-align:center;">U.S. Customer and Border Protection</td></tr>
+                    <tr><td style="font-size:22px; font-weight:bold; text-align:center;">NORTH AMERICAN FREE TRADE AGREEMENT<br> CERTIFICATE OF ORIGIN</td></tr>
+                  </table>
+                </td>
+                <td style="width:20%; border: none;">
+                  <table style="font-size:12px;border: none;">
+                    <tr>
+                      <td align="left">OMB No.</td>
+                      <td align="right"></td>
+                    </tr>
+                    <tr>
+                      <td align="left" colspan="2">Exp. &nbsp;&nbsp;&nbsp;&nbsp;{{order.expNo}}</td>
+                    </tr>
+                    <tr>
+                      <td colspan="2">See back of form for Paperwork Reduction Act Notice</td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
+
+            <table style="width:100%;  border: none;">
+              <tr>
+                <td style="width:33%;">Please print or type</td>
+                <td style="width:33%; text-align:center;"></td>
+                <td style="width:33%;">&nbsp;</td>
+              </tr>
+            </table>
+
+            <table style="width:100%; border:1px solid black;" cellpadding="0" cellspacing="0">
+              <tr>
+                <td style="border-right:1px solid black; width:50%;" cellpadding="0" cellspacing="0">
+                  <table style="width:100%;  padding:5px;  border: none;">
+                    <tr>
+                      <td style="font-weight:bold;">1. EXPORTER NAME AND ADDRESS</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        {{order.fromLocation?.name}} <br/>
+                        {{order.fromLocation?.address}} <br />
+                        {{order.fromLocation?.cityState}}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="padding-top:15px;">TAX IDENTIFICATION NUMBER: {{order.fromLocation?.tin}}</td>
+                    </tr>
+                  </table>
+                </td>
+                <td style="width:50%;">
+                  <table style="width:100%;  border: none;" cellpadding="0" cellspacing="0">
+                    <tr>
+                      <td style="font-weight:bold; border-bottom:1px solid black; padding-bottom:15px; padding-left:5px;">2. BLANKET PERIOD</td>
+                    </tr>
+                    <tr>
+                      <td style="padding-top:10px; padding-left:5px;">FROM  {{order.fromCalendarYear | date : "shortDate"}}</td>
+                    </tr>
+                    <tr>
+                      <td style="padding-top:10px; padding-left:5px;">To  {{order.toCalendarYear | date : "shortDate"}}</td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+              <tr>
+                <td style="border-right:1px solid black; border-top:1px solid black; vertical-align:top; width:50%;" cellpadding="0" cellspacing="0">
+                  <table style="width:100%;  padding:5px; border: none; ">
+                    <tr>
+                      <td style="font-weight:bold;">3. PRODUCER NAME AND ADDRESS</td>
+                    </tr>
+                    <tr>
+                      <td style="padding-left:5px;">{{order.orgAddress}}</td>
+                    </tr>
+                    <tr>
+                      <td style="padding-left:5px;">{{order.cityState}}</td>
+                    </tr>
+                    <tr>
+                      <td style="padding-top:15px;">TAX IDENTIFICATION NUMBER: {{order.tin}}</td>
+                    </tr>
+                  </table>
+                </td>
+                <td style="width:50%;  border-top:1px solid black;">
+                  <table style="width:100%;  border: none;" cellpadding="0" cellspacing="0">
+                    <tr>
+                      <td style="font-weight:bold; padding-left:5px;">4. IMPORTER NAME AND ADDRESS</td>
+                    </tr>
+                    <tr>
+                      <td style="padding-left:5px;">
+                        {{order.toLocation?.name}} <br />
+                        {{order.toLocation?.address}} <br />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="padding-left:5px;">
+                        {{order.toLocation?.cityState}}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="padding-top:15px; padding-left:5px; padding-bottom:10px;">
+                        TAX IDENTIFICATION NUMBER: {{order.toLocation?.tin}}
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
+            <br>
+            <table style="width:100%; border:1px solid black;" cellpadding="10" cellspacing="0" border="1">
+              <tr style="background-color:#1c3a70;">
+                <th style="text-align:center; color:white; font-size:12px; border-right:1px solid white;">5<br>DESCRIPTION OF GOOD(S)</th>
+                <th style="text-align:center; color:white; font-size:12px; border-right:1px solid white;">6 <br> HS TARIFF <br>CLASSIFICATION NO.</th>
+                <th style="text-align:center; color:white; font-size:12px; border-right:1px solid white;">7 <br> PREFERENCE <br>CRITERIA</th>
+                <th style="text-align:center; color:white; font-size:12px; border-right:1px solid white;">8 <br> PRODUCER</th>
+                <th style="text-align:center; color:white; font-size:12px; border-right:1px solid white;">9 <br> NET COST</th>
+                <th style="text-align:center; color:white; font-size:12px;">10 <br> COUNTRY OF ORIGIN</th>
+              </tr>
+              <tr>
+                <td>{{order.descriptionofGood}}</td>
+                <td>{{order.hsTariffClassificationNumber}}</td>
+                <td>{{order.preferenceCriterion}}</td>
+                <td>{{order.producer}}</td>
+                <td>{{order.netCost}}</td>
+                <td>{{order.countryofOrigin}}</td>
+              </tr>
+            </table>
+
+            <table style="width:100%; border:1px solid black;" cellpadding="10" cellspacing="0">
+              <tr>
+                <td>I CERTIFY THAT:</td>
+              <tr>
+              <tr>
+                <td>
+                  <ul style="margin:0;">
+                    <li>
+                      THE INFORMATION ON THIS DOCUMENT IS TRUE AND ACCURATE AND I ASSUME THE RESPONSIBILITY FOR PROVING SUCH REPRESENTATIONS.
+                      I UNDERSTAND THAT I AM LIABLE FOR ANY FALSE STATEMENTS OR MATERIAL OMISSIONS MADE ON OR IN CONNECTION WITH THIS DOCUMENT;
+                    </li>
+                    <br>
+                    <li>
+                      I AGREE TO MAINTAIN AND PRESENT UPON REQUEST, DOCUMENTATION NECESSARY TO SUPPORT THIS CERTIFICATE, AND TO INFORM, IN
+                      WRITING, ALL PERSONS TO WHOM THE CERTIFICATE WAS GIVEN OF ANY CHANGES THAT COULD AFFECT THE ACCURACY OF VALIDITY OF THIS
+                      CERTIFICATE;
+                    </li>
+                    <br>
+                    <li>
+                      THE GOODS ORIGINATED IN THE TERRITORY OF ONE OR MORE OF THE PARTIES, AND COMPLY WITH THE ORIGIN REQUIRMENTS SPECIFIED FOR
+                      THOSE GOODS IN THE NORTH AMERICAN FREE TRADE AGREEMENT AND UNLESS SPECIFICALLY EXEMPTED IN ARTICLE 411 OR ANNEX 401, THERE
+                      HAS BEEN NO FURTHER PRODUCTION OR ANY OTHER OPERATION OUTSIDE THE TERRITORIES OF THE PARTIES; AND
+                    </li>
+                    <br>
+                    <li>THIS CERTIFICATE CONSISTS OF [ &nbsp;&nbsp;&nbsp; ] PAGES, INCLUDING ALL ATTACHMENTS.</li>
+                  </ul>
+                </td>
+              </tr>
+            </table>
+            <table style="width:100%; border-left:1px solid black;
+                    border-right:1px solid black;
+                    border-bottom:1px solid black;" cellpadding="0" cellspacing="0">
+              <tr>
+                <td style="border-right:1px solid black; width:4%;" align="center">11</td>
+
+                <td style="border-right:1px solid black; width:43%; vertical-align:top;">
+                  <table style="width:100%;  border: none;" cellpadding="5" cellspacing="0">
+                    <tr style="">
+                      <td colspan="2" style="border-bottom:1px solid black; vertical-align:top; height:100px;">
+
+                      11a &nbsp;&nbsp;&nbsp;&nbsp; AUTHORIZED SIGNATURE <br><br>
+                        <img [src]="order.authorizedSignature">
+                      </td>
+                    </tr>
+                    <tr>
+                      <td colspan="2" style="border-bottom:1px solid black; vertical-align:top; height:100px;">
+                        11c &nbsp;&nbsp;&nbsp;&nbsp; NAME <br />
+                        <p style="padding-left: 48px;">{{order.name}}</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="border-bottom:1px solid black; border-right:1px solid black;">
+                        11e &nbsp;&nbsp;&nbsp;&nbsp; DATE(MM/DD/YYYY) 
+
+                      </td>
+                      <td style="border-bottom:1px solid black;">11f</td>
+                    </tr>
+                    <tr>
+                      <td style="border-right:1px solid black; padding-bottom:20px;">
+                        <p style="padding-left: 48px;">&nbsp;{{order.date | date : "shortDate"}}</p>
+                      </td>
+                      <td>TELEPHONE NO.</td>
+                    </tr>
+
+                  </table>
+                </td>
+                <td style="width:43%;" valign="top">
+                  <table style="width:100%;  border: none;" cellpadding="5" cellspacing="0">
+                    <tr>
+                      <td colspan="2" style="border-bottom:1px solid black; vertical-align:top; height:100px;">
+                        11b &nbsp;&nbsp;&nbsp;&nbsp; COMPANY <br><br>
+                        <p style="padding-left:48px;">{{order.companyName}}</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td colspan="2" style="border-bottom:1px solid black; vertical-align:top; height:100px;">
+                        11d &nbsp;&nbsp;&nbsp;&nbsp; TITLE <br />
+                        <p style="padding-left: 48px;">{{order.title}}</p>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td style="border-right:1px solid black; vertical-align:top; height:188px; padding-left:10px;">
+                        Voice <br />
+                        {{order.telephoneNumberVoice}}
+                      </td>
+                      <td style="vertical-align: top; padding-left:10px;">
+                        Facsimile <br />
+                        {{order.telephoneNumberFacsimile}}
+                      </td>
+                    </tr>
+
+                  </table>
+                </td>
+              <tr>
+
+            </table>
+
+            <table style="width:100%;  border-top:1px solid black;">
+              <tr>
+                <td align="right"> </td>
+              </tr>
+            </table>
+
+
+          </td>
+        </tr>
+      </table>
+
+    </div>
+  </div>
+</div>

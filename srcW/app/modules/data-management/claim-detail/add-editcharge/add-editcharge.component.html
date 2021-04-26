@@ -1,0 +1,74 @@
+
+<div class="modal-header">
+  <h4 class="modal-title">Add / Edit Charge Detail</h4>
+  <button type="button" class="close" data-dismiss="modal" (click)="activeModal.dismiss('Cross click')">&times;</button>
+</div>
+
+<!-- Modal body -->
+<div class="modal-body">
+  <div class="form-group">
+    <label>{{ 'key_MateriaList' | translate }} <sup class="text-danger sup1">*</sup></label>
+    <angular2-multiselect [data]="itemListA" [(ngModel)]="selectedItemsA" [settings]="settingsA"
+                          (onSelect)="onItemSelect($event)"
+                          (onDeSelect)="OnItemDeSelect($event)"
+                          (onSelectAll)="onSelectAll($event)"
+                          (onDeSelectAll)="onDeSelectAll($event)"
+                          (onAddFilterNewItem)="onAddItemA($event)" required>
+    </angular2-multiselect>
+  </div>
+  <div class="form-group">
+    <label>{{ 'key_ShippedQuantity' | translate }}</label>
+    <input type="text" class="form-control" />
+  </div>
+
+  <div class="form-group row">
+    <div class="col-6">
+      <label>{{ 'Key_InvoicedAmount' | translate }} </label>
+      <input type="text" class="form-control" />
+    </div>
+    <div class="col-6">
+      <label>{{ 'key_Quantity' | translate }}  </label>
+      <input type="text" class="form-control" />
+    </div>
+  </div> 
+  <div class="form-group row">
+    <div class="col-6">
+      <label>{{ 'key_Amountc' | translate }} </label>
+      <input type="text" class="form-control" />
+    </div>
+    <div class="col-6">
+      <label>{{ 'key_Recamount' | translate }}</label>
+      <input type="text" class="form-control" />
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-6">
+      <label>{{ 'key_Approvedmount' | translate }}</label>
+      <input type="text" class="form-control" />
+    </div>
+    <div class="col-6">
+      <label>{{ 'key_Invnumber' | translate }}</label>
+      <input type="text" class="form-control" />
+    </div>
+  </div>
+  <div class="form-group">
+    <label>{{ 'key_Statusgrd' | translate }} <sup class="text-danger sup1">*</sup></label>
+    <angular2-multiselect [data]="itemListA" [(ngModel)]="selectedItemsA" [settings]="settingsA"
+                          (onSelect)="onItemSelect($event)"
+                          (onDeSelect)="OnItemDeSelect($event)"
+                          (onSelectAll)="onSelectAll($event)"
+                          (onDeSelectAll)="onDeSelectAll($event)"
+                          (onAddFilterNewItem)="onAddItemA($event)" required>
+    </angular2-multiselect>
+  </div>
+  <div class="form-group">
+    <label>{{ 'key_ApproverComment' | translate }}</label>
+    <textarea rows="2" class="form-control"></textarea>
+  </div>
+</div>
+<div class="col-lg-12 text-center mt-4 mb-4">
+  <input type="button" id="btnSave" name="btnSave" class="btn btn-save mr-2 popup-btn-width" value="Save">
+
+</div>
+
+

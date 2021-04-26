@@ -1,0 +1,64 @@
+<app-top-btn-group #btnBar [actionGroupConfig]="actionGroupConfig" (action)="actionHandler($event)"></app-top-btn-group>
+
+<div class="mb-3">
+  <div class="form-area">
+    <div class="wrapper">
+      <div class="content-wrapper">
+        <div class="dashContent">
+          <div class="pt-0">
+            <div class="row ">
+              <div class="col-md-12">
+                <div class="d-flex justify-content-between">
+                  <div class="ion-text-center" style="max-width: 53%;">
+                    <h5><strong>Welcome,<br/> {{loginId}}</strong></h5>
+                    <strong class="profile-name font-weight-bold" *ngIf="isUserLogin">
+                      <!--{{currentUser.firstName+' '+ currentUser.lastName+' ('+currentUser.role+')'}}-->
+
+                    </strong>
+                  </div>
+                  <div>
+                    <div class="text-right" >
+                      <h5>
+                        <strong>{{ dateObj | date:'EEE d MMM, y' }}</strong>
+                        <!-- <strong>{{ dateObj | date:'fullDate' }}</strong> -->
+                                <br>
+                        <div class="ml-2 f-20 ion-text-center">
+                          <strong>{{ dateObj | date:'shortTime' }}</strong>
+                        </div>
+                      </h5>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Developer Name: Rajesh vishvakarma, Date: 14/08/2020, TFS ID: 17121, Logic Description: Design main home page with sidebar menu-->
+<!--<div class="container-fluid">
+  <div class="topNavHomeHeader">
+    <div class="row">
+      <div class="col-md-4 pt-3">
+        <h4><strong>Welcome, {{loginId}}</strong></h4>
+        <strong class="profile-name font-weight-bold" *ngIf="isUserLogin">-->
+<!--{{currentUser.firstName+' '+ currentUser.lastName+' ('+currentUser.role+')'}}-->
+<!--</strong>
+      </div>
+      <div class="col-md-5 pt-3">
+        <h4>
+          <strong>{{ dateObj | date:'fullDate' }}</strong>
+
+          <span class="ml-2 f-20">
+            <strong>{{ dateObj | date:'shortTime' }}</strong>
+          </span>
+        </h4>
+
+      </div>
+      <div class="col-md-3"></div>
+    </div>
+  </div>
+</div>-->

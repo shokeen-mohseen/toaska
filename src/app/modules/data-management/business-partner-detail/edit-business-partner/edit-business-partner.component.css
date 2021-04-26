@@ -1,0 +1,9 @@
+::ng-deep .edit .vertical-tab .mat-tab-group .mat-tab-labels .mat-tab-label:nth-child(1):before {
+  content: "Edit Business Partnber";
+  padding: 0.5rem 1.25rem;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  background: #c8ced3;
+  color: #5c6873;
+}

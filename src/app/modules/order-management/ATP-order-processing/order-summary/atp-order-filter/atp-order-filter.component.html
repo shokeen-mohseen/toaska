@@ -1,0 +1,104 @@
+<!--Filters-->
+<mat-accordion>
+  <mat-expansion-panel (opened)="panelOpenState = true"
+                       (closed)="panelOpenState = false" [expanded]="true">
+    <mat-expansion-panel-header>
+      <mat-panel-description>
+        {{panelOpenState ? '- Hide' : '+ Show'}} {{ 'key_Ordersummary' | translate }}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+  
+        <div class="row">
+          <div class="col-md-3 col-sm-12 col-lg-3 col-xl-3">
+            <div class="form-group">
+              <label for="shipfrom">{{ 'key_Shiploc' | translate }}</label>
+              <angular2-multiselect [data]="itemListA" [(ngModel)]="selectedItemsA" [settings]="settingsA"
+                                    (onSelect)="onItemSelect($event)"
+                                    (onDeSelect)="OnItemDeSelect($event)"
+                                    (onSelectAll)="onSelectAll($event)"
+                                    (onDeSelectAll)="onDeSelectAll($event)"
+                                    (onAddFilterNewItem)="onAddItemA($event)">
+              </angular2-multiselect>
+            </div>
+          </div>
+          <div class="col-md-3 col-sm-12 col-lg-3 col-xl-3">
+            <div class="form-group">
+              <label for="user">{{ 'key_User' | translate }}</label>
+              <angular2-multiselect [data]="itemListA" [(ngModel)]="selectedItemsA" [settings]="settingsA"
+                                    (onSelect)="onItemSelect($event)"
+                                    (onDeSelect)="OnItemDeSelect($event)"
+                                    (onSelectAll)="onSelectAll($event)"
+                                    (onDeSelectAll)="onDeSelectAll($event)"
+                                    (onAddFilterNewItem)="onAddItemA($event)">
+              </angular2-multiselect>
+            </div>
+          </div>
+          <div class="col-md-3 col-sm-12 col-lg-3 col-xl-3">
+            <div class="form-group">
+              <label for="Shipto">{{ 'key_Shipto' | translate }}</label>
+              <angular2-multiselect [data]="itemListA" [(ngModel)]="selectedItemsA" [settings]="settingsA"
+                                    (onSelect)="onItemSelect($event)"
+                                    (onDeSelect)="OnItemDeSelect($event)"
+                                    (onSelectAll)="onSelectAll($event)"
+                                    (onDeSelectAll)="onDeSelectAll($event)"
+                                    (onAddFilterNewItem)="onAddItemA($event)">
+              </angular2-multiselect>
+            </div>
+          </div>
+          <div class="col-md-3 col-sm-12 col-lg-3 col-xl-3 form-group">
+            <label for="fromdeleiver">{{ 'key_Fromdeliverydate' | translate }}</label>
+            <ejs-datepicker [format]='dateFormat' separator='to' placeholder='MM-DD-YYYY' id="dateRange"></ejs-datepicker>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-3 col-sm-12 col-lg-3 col-xl-3">
+            <div class="form-group">
+              <label for="shipfrom">{{ 'key_OrderStatus' | translate }}</label>
+              <angular2-multiselect [data]="itemListA" [(ngModel)]="selectedItemsA" [settings]="settingsA"
+                                    (onSelect)="onItemSelect($event)"
+                                    (onDeSelect)="OnItemDeSelect($event)"
+                                    (onSelectAll)="onSelectAll($event)"
+                                    (onDeSelectAll)="onDeSelectAll($event)"
+                                    (onAddFilterNewItem)="onAddItemA($event)">
+              </angular2-multiselect>
+            </div>
+          </div>
+          <div class="col-md-3 col-sm-12 col-lg-3 col-xl-3">
+            <div class="form-group">
+              <label for="user">{{ 'key_OrderNo' | translate }}</label>
+              <angular2-multiselect [data]="itemListA" [(ngModel)]="selectedItemsA" [settings]="settingsA"
+                                    (onSelect)="onItemSelect($event)"
+                                    (onDeSelect)="OnItemDeSelect($event)"
+                                    (onSelectAll)="onSelectAll($event)"
+                                    (onDeSelectAll)="onDeSelectAll($event)"
+                                    (onAddFilterNewItem)="onAddItemA($event)">
+              </angular2-multiselect>
+            </div>
+          </div>
+          <div class="col-md-3 col-sm-12 col-lg-3 col-xl-3">
+            <div class="form-group">
+              <label for="Shipto">{{ 'key_Material' | translate }}</label>
+              <angular2-multiselect [data]="itemListA" [(ngModel)]="selectedItemsA" [settings]="settingsA"
+                                    (onSelect)="onItemSelect($event)"
+                                    (onDeSelect)="OnItemDeSelect($event)"
+                                    (onSelectAll)="onSelectAll($event)"
+                                    (onDeSelectAll)="onDeSelectAll($event)"
+                                    (onAddFilterNewItem)="onAddItemA($event)">
+              </angular2-multiselect>
+            </div>
+          </div>
+          <div class="col-md-3 col-sm-12 col-lg-3 col-xl-3 form-group">
+            <label for="fromdeleiver">{{ 'key_Todeliverydate' | translate }}</label>
+            <ejs-datepicker [format]='dateFormat' separator='to' placeholder='MM-DD-YYYY' id="dateRange"></ejs-datepicker>
+          </div>
+        </div>
+     
+  
+    <div class="col-sm-12 col-lg-12 row justify-content-center mt-4 mb-3">
+      <div class=""><input type="button" class="btn btn-save mr-2 font-weight-normal" value="Apply Filter"></div>
+      <div class=""> <input type="button" class="btn btn-next mr-2 font-weight-normal" value="Reset Filter"></div>
+    </div>
+    <!--<app-filter></app-filter>-->
+  </mat-expansion-panel>
+</mat-accordion>
+<!--end filter-->

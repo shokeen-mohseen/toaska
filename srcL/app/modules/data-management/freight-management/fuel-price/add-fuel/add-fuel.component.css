@@ -1,0 +1,25 @@
+::ng-deep .mat-form-field-appearance-fill .mat-form-field-flex {
+  background: none;
+  padding: 0px;
+}
+
+::ng-deep .mat-form-field-wrapper {
+  padding-bottom: 0px;
+}
+
+::ng-deep .mat-calendar-content {
+  padding: 0px !important;
+}
+/* Change the white to any color ;) */
+::ng-deep input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {  
+  -webkit-box-shadow: 0 0 0px 1000px #ffe5ad inset;
+  transition: background-color 5000s ease-in-out 0s;
+}

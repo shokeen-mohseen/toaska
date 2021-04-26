@@ -1,0 +1,66 @@
+<!-- Modal Header -->
+<div class="modal-header">
+  <h5 class="modal-title">{{ 'key_OrderNumber' | translate }}: 40179.0</h5>
+  <button type="button" class="close" data-dismiss="modal" (click)="activeModal.dismiss('Cross click')">&times;</button>
+</div>
+
+<!-- Modal body -->
+<div class="modal-body">
+  <div class="row">
+    <div class="col-lg-12">
+
+      <div class="scroll">
+        <mat-table #table [dataSource]="dataSource" matSort>
+
+          <ng-container *ngFor="let column of displayedColumns; let i = index" [matColumnDef]="column">
+            <mat-header-cell *matHeaderCellDef mat-sort-header mwlResizable [enableGhostResize]="true" (resizeEnd)="onResizeEnd($event, column)"
+                             [resizeEdges]="{bottom: false, right: true, top: false, left: true}">
+
+              <div> {{ displayedColumnsReplace[i] | translate }}</div>
+            </mat-header-cell>
+
+            <mat-cell *matCellDef="let item">
+
+              <div class="t-right" *ngIf="column === 'OrderQuantity'">
+                {{item.OrderQuantity}}
+              </div>
+
+              <div class="t-right" *ngIf="column === 'ShippedQuantity'">
+                {{item.ShippedQuantity}}
+              </div>
+
+              <div class="dollar t-right" *ngIf="column === 'Amount'">
+                {{item.Amount}}
+              </div>
+
+              <div *ngIf="column != 'OrderQuantity' && column != 'ShippedQuantity' && column != 'Amount'">
+                {{ item[column] }}
+              </div>
+            </mat-cell>
+
+            <mat-footer-cell *matFooterCellDef>
+
+              {{column === 'Charge' ?  'Total' : ''}}
+              <div class="t-right" *ngIf="column === 'OrderQuantity'">
+                {{column === 'OrderQuantity' ?  getTotalCost() : ''}}
+              </div>
+              <div class="t-right" *ngIf="column === 'ShippedQuantity'">
+                {{column === 'ShippedQuantity' ?  getTotalCost1() : ''}}
+              </div>
+              <div class="dollar t-right" *ngIf="column === 'Amount'">
+                {{column === 'Amount' ?  getTotalCost2() : ''}}
+              </div>
+            </mat-footer-cell>
+
+          </ng-container>
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+          <mat-footer-row class="sticky-footer" *matFooterRowDef="displayedColumns; sticky: true"></mat-footer-row>
+        </mat-table>
+
+
+      </div>
+      
+    </div>
+  </div>
+</div>

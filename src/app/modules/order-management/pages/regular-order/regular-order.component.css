@@ -1,0 +1,58 @@
+.a_hover {
+  display: inline-block;
+  margin: 0 2px;
+}
+.mat-cell.mat-column-Action {
+  text-align: center;
+}
+::ng-deep .mat-expansion-panel-spacing {
+    margin:0; border-radius:0;
+}
+::ng-deep .mat-form-field-wrapper {
+  padding-bottom: 0 !important
+}
+
+::ng-deep .mat-form-field-appearance-fill .mat-form-field-flex {
+  border-radius: 0 !important;
+  padding: 0 !important;
+  background: none !important
+}
+
+::ng-deep .mat-form-field-suffix {
+  background: #ddd;
+  padding-top: 1px;
+  top: 4px;
+}
+
+/*.tosca .order-deails h4 {
+  font-size: 14px;
+  font-weight: 600
+}*/
+.lm {
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 12px;
+}
+.order-deails .greyBg {
+  background-color: #f9f9f9;
+  padding: 12px;
+}
+.accordion > .card > .card-header a {
+  font-size: 15px;
+  font-weight: 400;
+}
+
+.highlightrequiredControl {
+  background-color: #ffe5ad !important;
+}
+
+.mat-column-amount {
+  text-align: right;
+}
+
+.txt-credit-red {
+  color: indianred !important;
+}
+.greyBg .mat-table .mat-cell, .greyBg mat-footer-cell, .greyBg .fa{
+  font-size: 15px;
+  font-weight: 600 !important;
+}

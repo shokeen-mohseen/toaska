@@ -1,0 +1,184 @@
+<!--Filters-->
+<mat-accordion>
+  <mat-expansion-panel (opened)="panelOpenState = true"
+                       (closed)="panelOpenState = false" [expanded]="true">
+    <mat-expansion-panel-header>
+      <mat-panel-description>
+        {{panelOpenState ? '- Hide' : '+ Show'}} {{'key_ShipmentFilter'| translate}}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+
+    <div class="row custom-form">
+      <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 d-flex w-100">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">{{ 'key_ShipmentFilter' | translate }} </div>
+          </div>
+          <div class="card-body">
+            <div class="row">
+
+              <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                <div class="form-group">
+                  <label for="nf-password">{{ 'key_ShipmentNo' | translate }}</label>
+                  <input class="form-control" id="nf-number" type="text" name="nf-number" autocomplete="current-password">
+                </div>
+              </div>
+              <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                <div class="form-group">
+                  <label for="ccmonth">{{ 'key_ShipmentType' | translate }}</label>
+                  <angular2-multiselect [data]="itemListA" [(ngModel)]="selectedItemsA" [settings]="settingsA"
+                                        (onSelect)="onItemSelect($event)"
+                                        (onDeSelect)="OnItemDeSelect($event)"
+                                        (onSelectAll)="onSelectAll($event)"
+                                        (onDeSelectAll)="onDeSelectAll($event)"
+                                        (onAddFilterNewItem)="onAddItemA($event)">
+                  </angular2-multiselect>
+                </div>
+              </div>
+              <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                <div class="form-group">
+                  <label for="ccmonth">{{ 'key_TenderStatus' | translate }}</label>
+                  <angular2-multiselect [data]="itemListA" [(ngModel)]="selectedItemsA" [settings]="settingsA"
+                                        (onSelect)="onItemSelect($event)"
+                                        (onDeSelect)="OnItemDeSelect($event)"
+                                        (onSelectAll)="onSelectAll($event)"
+                                        (onDeSelectAll)="onDeSelectAll($event)"
+                                        (onAddFilterNewItem)="onAddItemA($event)">
+                  </angular2-multiselect>
+                </div>
+              </div>
+              <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                <div class="form-group">
+                  <label for="ccmonth">{{ 'key_Carrier' | translate }}</label>
+                  <angular2-multiselect [data]="itemListA" [(ngModel)]="selectedItemsA" [settings]="settingsA"
+                                        (onSelect)="onItemSelect($event)"
+                                        (onDeSelect)="OnItemDeSelect($event)"
+                                        (onSelectAll)="onSelectAll($event)"
+                                        (onDeSelectAll)="onDeSelectAll($event)"
+                                        (onAddFilterNewItem)="onAddItemA($event)">
+                  </angular2-multiselect>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 d-flex w-100">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">{{ 'key_ShipmentLocationFilter' | translate }}</div>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                
+                <div class="form-group row">
+                  <div class="col-md-6 pr-1">
+                    <label>{{'key_FromLocation' | translate}}</label>
+                    <angular2-multiselect [data]="itemListA" [(ngModel)]="selectedItemsA" [settings]="settingsA"
+                                          (onSelect)="onItemSelect($event)"
+                                          (onDeSelect)="OnItemDeSelect($event)"
+                                          (onSelectAll)="onSelectAll($event)"
+                                          (onDeSelectAll)="onDeSelectAll($event)"
+                                          (onAddFilterNewItem)="onAddItemA($event)">
+                    </angular2-multiselect>
+                  </div>
+                  <div class="col-md-6 pl-1">
+                    <label>{{'key_Location' | translate}}</label>
+                    <angular2-multiselect [data]="itemListA" [(ngModel)]="selectedItemsA" [settings]="settingsA"
+                                          (onSelect)="onItemSelect($event)"
+                                          (onDeSelect)="OnItemDeSelect($event)"
+                                          (onSelectAll)="onSelectAll($event)"
+                                          (onDeSelectAll)="onDeSelectAll($event)"
+                                          (onAddFilterNewItem)="onAddItemA($event)">
+                    </angular2-multiselect>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <div class="col-md-6 pr-1">
+                    <label>{{'key_ToLocation' | translate}}</label>
+                    <angular2-multiselect [data]="itemListA" [(ngModel)]="selectedItemsA" [settings]="settingsA"
+                                          (onSelect)="onItemSelect($event)"
+                                          (onDeSelect)="OnItemDeSelect($event)"
+                                          (onSelectAll)="onSelectAll($event)"
+                                          (onDeSelectAll)="onDeSelectAll($event)"
+                                          (onAddFilterNewItem)="onAddItemA($event)">
+                    </angular2-multiselect>
+                  </div>
+                  <div class="col-md-6 pl-1">
+                    <label>{{'key_Location' | translate}}</label>
+                    <angular2-multiselect [data]="itemListA" [(ngModel)]="selectedItemsA" [settings]="settingsA"
+                                          (onSelect)="onItemSelect($event)"
+                                          (onDeSelect)="OnItemDeSelect($event)"
+                                          (onSelectAll)="onSelectAll($event)"
+                                          (onDeSelectAll)="onDeSelectAll($event)"
+                                          (onAddFilterNewItem)="onAddItemA($event)">
+                    </angular2-multiselect>
+                  </div>
+                </div>
+
+
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+        </div>
+      <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4 d-flex w-100">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">{{ 'key_ShipmentDataFilter' | translate }}</div>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                <div class="form-group">
+                  <label for="ccmonth">{{ 'key_shipDate' | translate }}</label>
+                  <ejs-daterangepicker [format]='dateFormat' separator='to' placeholder='MM-DD-YYYY to MM-DD-YYYY' id="shipDate"></ejs-daterangepicker>
+                </div>
+              </div>
+
+              <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                <div class="form-group">
+                  <label for="ccmonth">{{ 'key_ReqDeliveryDate' | translate }}</label>
+                  <ejs-daterangepicker [format]='dateFormat' separator='to' placeholder='MM-DD-YYYY to MM-DD-YYYY' id="ReqDeliveryDate"></ejs-daterangepicker>
+                </div>
+              </div>
+
+              <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                <div class="form-group">
+                  <label for="ccmonth">{{ 'key_PickupAppointment' | translate }}</label>
+                  <ejs-daterangepicker [format]='dateFormat' separator='to' placeholder='MM-DD-YYYY to MM-DD-YYYY' id="PickupAppointment"></ejs-daterangepicker>
+                </div>
+              </div>
+
+              <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                <div class="form-group">
+                  <label for="ccmonth">{{ 'key_DeliveryAppointment' | translate }}</label>
+                  <ejs-daterangepicker [format]='dateFormat' separator='to' placeholder='MM-DD-YYYY to MM-DD-YYYY' id="DeliveryAppointment"></ejs-daterangepicker>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+        </div>
+        <div class="col-sm-12 col-lg-12 row justify-content-center mt-3">
+          <div class="">
+            <button class="btn btn-save mr-2 font-weight-normal" type="button">{{ 'key_ApplyFilter' | translate }}</button>
+          </div>
+          <div class="">
+            <button class="btn btn-next font-weight-normal" type="button">{{ 'key_ResetFilter' | translate }}</button>
+          </div>
+        </div>
+      </div>
+
+  </mat-expansion-panel>
+</mat-accordion>
+<!--end filter-->

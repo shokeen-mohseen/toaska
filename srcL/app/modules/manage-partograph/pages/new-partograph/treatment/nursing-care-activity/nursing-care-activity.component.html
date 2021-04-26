@@ -1,0 +1,105 @@
+<!--TFS ID:- 17413,
+  Date: 15-09-2020,
+  Author: Monu Ram YAdav,
+  Des:-  Need to convert table in Material Format for Prepartum Care-->
+<div class="row">
+  <div class="col-sm-12">
+    <div class="subHeading-red fw600">{{ 'key_ncap' | translate }}</div>
+  </div>
+</div>
+<!--Table Row Start-->
+<div class="row mt-3">
+  <div class="col-lg-12">
+    <div class="scroll resize-table">
+      <mat-table #table [dataSource]="dataSource" matSort>
+        <ng-container *ngFor="let column of displayedColumns; let i=index;" [matColumnDef]="column">
+          <mat-header-cell *matHeaderCellDef mat-sort-header mwlResizable [enableGhostResize]="true" (resizeEnd)="onResizeEnd($event, column)"
+                           [resizeEdges]="{bottom: false, right: true, top: false, left: true}">
+
+
+            <div *ngIf="column != selectRow"> {{ displayedColumnsReplace[i] | translate }}</div>
+          </mat-header-cell>
+          <mat-cell *matCellDef="let item">
+            <div class="py-1 w-100 justify-content-center d-flex" *ngIf="column === Action">
+              <span class="d-flex">
+                <a class="a_hover"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                <a class="a_hover ml-1"><i class="fa fa-trash" aria-hidden="true"></i></a>
+              </span>
+            </div>
+            <div class="py-1 w-100 justify-content-center d-flex" *ngIf="column === Add_New">
+              <a class="a_hover" (click)="addRow()"><i class="fa fa-plus" aria-hidden="true"></i></a>
+            </div>
+            {{ item[column] }}
+          </mat-cell>
+
+        </ng-container>
+        <!--<ng-container matColumnDef="SrNo">
+          <mat-header-cell class="tw-7" *matHeaderCellDef mat-sort-header> {{ 'Key_SrNo' | translate }} </mat-header-cell>
+          <mat-cell class="tw-7" *matCellDef="let element"> {{element.SrNo}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="ncap">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'key_ncap' | translate }} </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.ncap}} </mat-cell>
+        </ng-container>
+
+
+        <ng-container matColumnDef="DateTime">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'key_DateTime' | translate }} </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.DateTime}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="DateTime1">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'key_DateTime' | translate }} </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.DateTime1}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="DateTime2">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'key_DateTime' | translate }} </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.DateTime2}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="DateTime3">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'key_DateTime' | translate }} </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.DateTime3}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="DateTime4">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'key_DateTime' | translate }} </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.DateTime4}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="Action">
+          <mat-header-cell class="tw-8" *matHeaderCellDef mat-sort-header>{{ 'key_Action' | translate }}</mat-header-cell>
+          <mat-cell class="tw-8 text-center" *matCellDef="let element">
+            <a class="a_hover"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+            <a class="a_hover ml-1"><i class="fa fa-trash" aria-hidden="true"></i></a>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="Add_New">
+          <mat-header-cell class="tw-5" *matHeaderCellDef mat-sort-header>{{ 'key_addnew' | translate }}</mat-header-cell>
+          <mat-cell class="text-center tw-5" *matCellDef="let Add_New">
+            <a class="a_hover"><i class="fa fa-plus" aria-hidden="true"></i></a>
+          </mat-cell>
+        </ng-container>-->
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
+    </div>
+    <!--<mat-paginator #paginator
+                   [pageSize]="10"
+                   [pageSizeOptions]="[5, 10, 20]">
+    </mat-paginator>-->
+  </div>
+</div>
+<!--Table Row End/////-->
+
+<div class="row mt-3">
+  <div class="col-sm-12 col-md-2">
+    <input type="button" class="btn btn-secondary btnbrd" (click)="AddMoreComplication()" value="{{ 'key_AddNewParameter' | translate }}" />
+  </div>
+  <div class="col-sm-12 col-md-10">
+    <div class="form-group">
+      <textarea class="form-control" rows="3" placeholder="{{ 'key_AddCommentHere' | translate }}"></textarea>
+    </div>
+  </div>
+</div>
+<!--Row End-->

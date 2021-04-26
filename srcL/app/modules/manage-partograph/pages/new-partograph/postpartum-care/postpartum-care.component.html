@@ -1,0 +1,82 @@
+<app-top-btn-group #btnBar [actionGroupConfig]="actionGroupConfig" (action)="actionHandler($event)"></app-top-btn-group>
+<!--Author:- Monu Ram Yadav, date:09/09/20, 17314 TFS--Des:- remove jquery for patient registration, prepartum, partograph monitoring and postpartum-->
+<app-progress-bar></app-progress-bar>
+
+<div class="custom-tab">
+  <!--<ul class="nav nav-tabs" id="myTab" role="tablist">
+
+    <li class="nav-item">
+      <a class="cust-nav-link nav-link" data-toggle="tab" href="#PostpartumCareReport" role="tab" aria-controls="PostpartumCareReport" aria-selected="false">{{ 'key_PostpartumCareReport' | translate }}</a>
+    </li>
+    <li class="nav-item">
+      <a class="cust-nav-link nav-link" data-toggle="tab" href="#DischargeReport" role="tab" aria-controls="DischargeReport" aria-selected="false">{{ 'key_DischargeReport' | translate }}</a>
+    </li>
+  </ul>-->
+  <mat-tab-group #matgroup animationDuration="0ms" (selectedTabChange)="tabChange($event)">
+    <mat-tab>
+      <ng-template mat-tab-label>
+        {{ 'key_DeliveryReport' | translate }}
+      </ng-template>
+      <div class="tab-content pb-2" *ngIf="tab1Data">
+        <app-delivery-notes></app-delivery-notes>
+        <div class="mt-3 text-right">
+          <button class="next-btn nexttab" (click)="selectNext(matgroup)"><span class="fw600">{{ 'key_Next' | translate }}</span> <span class="fs-12"> > {{ 'key_BabyReport' | translate }}</span></button>
+        </div>
+      </div>
+    </mat-tab>
+    <mat-tab>
+      <ng-template mat-tab-label>
+        {{ 'key_BabyReport' | translate }}
+      </ng-template>
+      <div class="tab-content pb-2" *ngIf="tab2Data">
+        <app-baby-notes></app-baby-notes>
+        <div class="mt-3 text-right">
+          <button class="skip-btn nexttab mr-3" (click)="selectPrev(matgroup)"><span class="fw600">{{ 'key_Previous' | translate }}</span> <span class="fs-12"> < {{ 'key_DeliveryReport' | translate }}</span></button>
+          <button class="next-btn nexttab" (click)="selectNext(matgroup)"><span class="fw600">{{ 'key_Next' | translate }}</span> <span class="fs-12"> > {{ 'Key_Medication' | translate }} </span></button>
+        </div>
+      </div>
+    </mat-tab>
+    <mat-tab>
+      <ng-template mat-tab-label>
+        {{ 'Key_Medication' | translate }}
+      </ng-template>
+      <div class="tab-content pb-2" *ngIf="tab3Data">
+        <app-medication></app-medication>
+        <div class="mt-3 text-right">
+          <button class="skip-btn nexttab mr-3" (click)="selectPrev(matgroup)"><span class="fw600">{{ 'key_Previous' | translate }}</span> <span class="fs-12"> < {{ 'key_BabyReport' | translate }}</span></button>
+          <button class="next-btn nexttab" (click)="selectNext(matgroup)"><span class="fw600">{{ 'key_Next' | translate }}</span> <span class="fs-12"> > {{ 'key_PostpartumCareReport' | translate }} </span></button>
+        </div>
+      </div>
+    </mat-tab>
+    <mat-tab>
+      <ng-template mat-tab-label>
+        {{ 'key_PostpartumCareReport' | translate }}
+      </ng-template>
+      <div class="tab-content pb-2" *ngIf="tab4Data">
+        <app-postpartum-care-report></app-postpartum-care-report>
+        <div class="mt-3 text-right">
+          <button class="skip-btn nexttab mr-3" (click)="selectPrev(matgroup)"><span class="fw600">{{ 'key_Previous' | translate }}</span> <span class="fs-12"> < {{ 'Key_Medication' | translate }}</span></button>
+          <button class="next-btn nexttab" (click)="selectNext(matgroup)"><span class="fw600">{{ 'key_Next' | translate }}</span> <span class="fs-12"> > {{ 'key_DischargeReport' | translate }} </span></button>
+        </div>
+      </div>
+    </mat-tab>
+    <mat-tab>
+      <ng-template mat-tab-label>
+        {{ 'key_DischargeReport' | translate }}
+      </ng-template>
+      <div class="tab-content pb-2" *ngIf="tab5Data">
+        <app-discharge-report></app-discharge-report>
+        <div class="mt-3 text-right">
+          <button class="skip-btn nexttab mr-3" (click)="selectPrev(matgroup)"><span class="fw600">{{ 'key_Previous' | translate }}</span> <span class="fs-12"> < {{ 'key_PostpartumCareReport' | translate }}</span></button>
+        </div>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+
+</div>
+<!--Custom tab div end-->
+<!--show notes toggle section start-->
+<app-show-notes></app-show-notes>
+<!--show notes toggle section start-->
+
+<app-next-previous-button></app-next-previous-button>

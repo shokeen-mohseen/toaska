@@ -1,0 +1,450 @@
+<!---Author name- Satyen Singh
+TFS ID- 16750 Task
+13-7-2020
+Description- Latent Phase - Chart history - Create component
+TFS ID-16746 Task
+Latent Phase - Design Chart history grid.
+    Code start
+
+ TFS ID- 16750 Task
+Latent Phase - Chart history - Create component
+ TFS ID 16751 Task
+Latent Phase - Chart history - Make it responsive and check for cross browser compatibility.
+    modified by amit agrahari WI -16751 / Changeset 30602 / Date - 16/07/2020
+    TFS ID:-17008
+    Chart Hitory - Fetal Heart Rate text color is darker than other chart names. Remove "v-tab" class from other chart names li tags.
+--->
+
+
+<div id="accordion">
+  <div class="card">
+    <div class="card-header headerbg collapsed ch-hover" id="headingThree" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+      <h4 class="mb-0">
+        <a class="btn btn-link">
+          <i class="fa fa-plus"></i> {{ 'key_Charthistory' | translate }}
+
+        </a>
+      </h4>
+    </div>
+    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+      <div class="card-body cardbg">
+        <div class="panelbrd">
+          <div class="row">
+            <div class="col-md-2 mb-3 pdrtabs">
+              <ul class="nav nav-pills flex-column" id="myTab" role="tablist">
+                <li class="nav-item v-tab navbg">
+                  <a class="nav-link  active" id="home-tab" (click)="OnChartHistoryData('FH')" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">{{ 'partographChart.Key_FetalHeartChart' | translate }}</a>
+                </li>
+                <li class="nav-item v-tab navbg">
+                  <a class="nav-link" id="amniotic-tab" data-toggle="tab" (click)="OnChartHistoryData('AM')" href="#amniotic" role="tab" aria-controls="amniotic" aria-selected="false">{{ 'partographChart.Key_AmnioticChart' | translate }}</a>
+                </li>
+                <li class="nav-item v-tab navbg ">
+                  <a class="nav-link" id="moulding-tab" data-toggle="tab" (click)="OnChartHistoryData('MD')" href="#moulding" role="tab" aria-controls="moulding" aria-selected="false">{{ 'partographChart.Key_MouldingChart' | translate }}</a>
+                </li>
+                <li class="nav-item v-tab navbg ">
+                  <a class="nav-link" id="cervix-tab" data-toggle="tab" (click)="OnChartHistoryData('CR')" href="#cervix" role="tab" aria-controls="cervix" aria-selected="false">{{ 'partographChart.Key_CervixChart' | translate }}</a>
+                </li>
+                <li class="nav-item v-tab navbg ">
+                  <a class="nav-link" id="Descent-tab" data-toggle="tab" (click)="OnChartHistoryData('DS')" href="#Descent" role="tab" aria-controls="Descent" aria-selected="false">{{ 'partographChart.Key_DescentChart' | translate }}</a>
+                </li>
+                <li class="nav-item v-tab navbg ">
+                  <a class="nav-link" id="contraction-tab" data-toggle="tab" (click)="OnChartHistoryData('CN')" href="#contraction" role="tab" aria-controls="contraction" aria-selected="false">{{ 'partographChart.Key_ContractionChart' | translate }}</a>
+                </li>
+                <li class="nav-item v-tab navbg ">
+                  <a class="nav-link" id="Oxytocin-tab" data-toggle="tab" (click)="OnChartHistoryData('OX')" href="#Oxytocin" role="tab" aria-controls="Oxytocin" aria-selected="false">{{ 'partographChart.Key_OxytocinChart' | translate }}</a>
+                </li>
+                <li class="nav-item v-tab navbg ">
+                  <a class="nav-link" id="dropmin-tab" data-toggle="tab" (click)="OnChartHistoryData('DM')" href="#dropmin" role="tab" aria-controls="dropmin" aria-selected="false">{{ 'partographChart.Key_DropsChart' | translate }}</a>
+                </li>
+                <li class="nav-item v-tab navbg ">
+                  <a class="nav-link" id="drugs-tab" data-toggle="tab" (click)="OnChartHistoryData('DR')" href="#drugs" role="tab" aria-controls="drugs" aria-selected="false">{{ 'partographChart.key_DrugChart' | translate }}</a>
+                </li>
+                <li class="nav-item v-tab navbg ">
+                  <a class="nav-link" id="pluse-tab" data-toggle="tab" (click)="OnChartHistoryData('PL')" href="#pluse" role="tab" aria-controls="pluse" aria-selected="false">{{ 'partographChart.Key_PulseChart' | translate }}</a>
+                </li>
+
+                <li class="nav-item v-tab navbg ">
+                  <a class="nav-link" id="bp-tab" data-toggle="tab" (click)="OnChartHistoryData('BP')" href="#bp" role="tab" aria-controls="bp" aria-selected="false">{{ 'partographChart.key_BPChart' | translate }}</a>
+                </li>
+
+                <li class="nav-item v-tab navbg ">
+                  <a class="nav-link" id="Temperature-tab" data-toggle="tab" (click)="OnChartHistoryData('TP')" href="#Temperature" role="tab" aria-controls="Temperature" aria-selected="false">{{ 'partographChart.Key_TempratureChart' | translate }}</a>
+                </li>
+                <li class="nav-item v-tab navbg ">
+                  <a class="nav-link" id="Protein-tab" data-toggle="tab" (click)="OnChartHistoryData('PT')" href="#Protein" role="tab" aria-controls="Protein" aria-selected="false">{{ 'partographChart.key_ProtienChart' | translate }}</a>
+                </li>
+                <li class="nav-item v-tab navbg ">
+                  <a class="nav-link" id="Acetone-tab" data-toggle="tab" (click)="OnChartHistoryData('AC')" href="#Acetone" role="tab" aria-controls="Acetone" aria-selected="false">{{ 'partographChart.key_AcetoneChart' | translate }}</a>
+                </li>
+                <li class="nav-item v-tab navbg ">
+                  <a class="nav-link" id="Volume-tab" data-toggle="tab" (click)="OnChartHistoryData('VL')" href="#Volume" role="tab" aria-controls="Volume" aria-selected="false">{{ 'partographChart.key_VolumeChart' | translate }}</a>
+                </li>
+              </ul>
+
+            </div>
+            <!-- /.col-md-4 -->
+            <div class="col-md-10 mlpanel">
+              <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                  <div class="row hdr-chrt-hstry">
+                    <!--<div class="col"><strong>{{ 'key_Chartname' | translate }}</strong></div>-->
+
+                    <div class="col col-sm-1"><strong>{{ 'key_Value' | translate }}</strong></div>
+
+                    <div class="col col-sm-6"><strong>{{ 'key_Comment' | translate }}</strong></div>
+                    <div class="col"><strong>{{ 'key_InputBy' | translate }}</strong></div>
+                    <div class="col"><strong>{{ 'key_datetime' | translate }}</strong></div>
+                  </div>
+
+
+                  <div class="row p-10 brdbottom" *ngFor="let rData of tempList">
+                    <div class="col col-sm-1"> {{rData.yAxisPosition}}</div>
+                    <div class="col col-sm-6">{{rData.description}}</div>
+                    <div class="col">{{rData.createdBy}}</div>
+                    <div class="col">{{rData.createDateTimeServer | date:'medium'}} IST</div>
+                  </div>
+
+                  <div class="row p-10 brdbottom mat-error" *ngIf="tempList.length==0">
+                    No Data found!
+                  </div>
+
+
+                </div>
+
+                <div class="tab-pane fade" id="amniotic" role="tabpanel" aria-labelledby="profile-tab">
+                  <div class="row hdr-chrt-hstry">
+
+                    <div class="col-sm-2 col-md-3"><strong>{{ 'partographChart.Key_AmnioticChart' | translate }}</strong></div>
+                    <div class="col-sm-6"><strong>{{ 'key_Comment' | translate }}</strong></div>
+                    <div class="col"><strong>{{ 'key_InputBy' | translate }}</strong></div>
+                    <div class="col"><strong>{{ 'key_datetime' | translate }}</strong></div>
+                  </div>
+                  <div class="row p-10 brdbottom" *ngFor="let rData of tempList">
+                    <div class="col col-sm-1"> {{rData.chartValue}}</div>
+                    <div class="col col-sm-6">{{rData.description}}</div>
+                    <div class="col">{{rData.createdBy}}</div>
+                    <div class="col">{{rData.createDateTimeServer | date:'medium'}} IST</div>
+                  </div>
+
+                  <div class="row p-10 brdbottom mat-error" *ngIf="tempList.length==0">
+                    No Data found!
+                  </div>
+
+                </div>
+
+                <div class="tab-pane fade" id="moulding" role="tabpanel" aria-labelledby="moulding-tab">
+                  <div class="row hdr-chrt-hstry">
+
+                    <div class="col-sm-2"><strong>{{ 'partographChart.Key_MouldingChart' | translate }}</strong></div>
+                    <div class="col-sm-6"><strong>{{ 'key_Comment' | translate }}</strong></div>
+                    <div class="col"><strong>{{ 'key_InputBy' | translate }}</strong></div>
+                    <div class="col"><strong>{{ 'key_datetime' | translate }}</strong></div>
+                  </div>
+                  <div class="row p-10 brdbottom" *ngFor="let rData of tempList">
+                    <div class="col col-sm-1"> {{rData.chartValue}}</div>
+                    <div class="col col-sm-6">{{rData.description}}</div>
+                    <div class="col">{{rData.createdBy}}</div>
+                    <div class="col">{{rData.createDateTimeServer | date:'medium'}} IST</div>
+                  </div>
+
+                  <div class="row p-10 brdbottom mat-error" *ngIf="tempList.length==0">
+                    No Data found!
+                  </div>
+
+                </div>
+
+                <!---start cervix and descent-->
+                <div class="tab-pane fade" id="cervix" role="tabpanel" aria-labelledby="cervix-tab">
+                  <div class="row hdr-chrt-hstry">
+
+                    <div class="col col-sm-1"><strong>{{ 'partographChart.Key_CervixChart' | translate }}</strong></div>
+                    <!---<div class=" col-sm-2 text-center"><strong>//{{ 'partographChart.Key_DescentChart' | translate }}</strong></div>-->
+                    <div class="col col-sm-6"><strong>{{ 'key_Comment' | translate }}</strong></div>
+                    <div class="col"><strong>{{ 'key_InputBy' | translate }}</strong></div>
+                    <div class="col"><strong>{{ 'key_datetime' | translate }}</strong></div>
+                  </div>
+
+    <div class="row p-10 brdbottom" *ngFor="let rData of tempList">
+      <div class="col col-sm-1"> {{rData.chartValue}}</div>
+      <div class="col col-sm-6">{{rData.description}}</div>
+      <div class="col">{{rData.createdBy}}</div>
+      <div class="col">{{rData.createDateTimeServer | date:'medium'}} IST</div>
+    </div>
+
+
+    <div class="row p-10 brdbottom mat-error" *ngIf="tempList.length==0">
+      No Data found!
+    </div>
+  </div>
+
+  <div class="tab-pane fade" id="Descent" role="tabpanel" aria-labelledby="Descent-tab">
+    <div class="row hdr-chrt-hstry">
+      <div class=" col-sm-2 text-center"><strong>{{ 'partographChart.Key_DescentChart' | translate }}</strong></div>
+      <div class="col col-sm-6"><strong>{{ 'key_Comment' | translate }}</strong></div>
+      <div class="col"><strong>{{ 'key_InputBy' | translate }}</strong></div>
+      <div class="col"><strong>{{ 'key_datetime' | translate }}</strong></div>
+    </div>
+
+    <div class="row p-10 brdbottom" *ngFor="let rData of tempList">
+      <div class="col col-sm-1"> {{rData.chartValue}}</div>
+      <div class="col col-sm-6">{{rData.description}}</div>
+      <div class="col">{{rData.createdBy}}</div>
+      <div class="col">{{rData.createDateTimeServer | date:'medium'}} IST</div>
+    </div>
+    <div class="row p-10 brdbottom mat-error" *ngIf="tempList.length==0">
+      No Data found!
+    </div>
+  </div>
+
+
+  <!--end cervix and descent-->
+                    <!---start contraction and descent-->
+                    <div class="tab-pane fade" id="contraction" role="tabpanel" aria-labelledby="contact-tab">
+                      <div class="row hdr-chrt-hstry">
+
+                        <div class="col col-sm-2 text-center"><strong>{{ 'key_ContractionDuration' | translate }}</strong></div>
+                        <div class="col col-sm-2 text-center"><strong>{{ 'key_Contraction' | translate }}</strong></div>
+                        <div class="col col-sm-6"><strong>{{ 'key_Comment' | translate }}</strong></div>
+                        <div class="col"><strong>{{ 'key_InputBy' | translate }}</strong></div>
+                        <div class="col"><strong>{{ 'key_datetime' | translate }}</strong></div>
+                      </div>
+                      <div class="row p-10 brdbottom" *ngFor="let rData of tempList">
+                        <div class="col col-sm-1"> {{rData.chartValue}}</div>
+                        <div class="col col-sm-6">{{rData.description}}</div>
+                        <div class="col">{{rData.createdBy}}</div>
+                        <div class="col">{{rData.createDateTimeServer | date:'medium'}} IST</div>
+                      </div>
+
+                      <!--<div class="row p-10 brdbottom" *ngFor="let rData of tempList">
+      <div class="col col-sm-2">{{rData.ChartValue}}</div>
+      <div class="col col-sm-2">{{rData.PatternValue}}</div>
+      <div class="col col-sm-6">{{rData.CommentId}}</div>
+      <div class="col">{{rData.CreatedBy}}</div>
+      <div class="col">{{rData.UpdateDateTimeBrowser | date:'medium'}} IST</div>
+    </div>-->
+                      <div class="row p-10 brdbottom mat-error" *ngIf="tempList.length==0">
+                        No Data found!
+                      </div>
+
+                    </div>
+                    <!--end contraction and descent-->
+                    <!---start Oxytocin and descent-->
+                    <div class="tab-pane fade" id="Oxytocin" role="tabpanel" aria-labelledby="contact-tab">
+                      <div class="row hdr-chrt-hstry">
+                        <div class="col col-sm-2 text-center"><strong>{{ 'partographChart.Key_OxytocinChartLabel' | translate }}</strong></div>
+                        <div class="col col-sm-6"><strong>{{ 'key_Comment' | translate }}</strong></div>
+                        <div class="col"><strong>{{ 'key_InputBy' | translate }}</strong></div>
+                        <div class="col"><strong>{{ 'key_datetime' | translate }}</strong></div>
+                      </div>
+
+                      <div class="row p-10 brdbottom" *ngFor="let rData of tempList">
+                        <div class="col col-sm-1"> {{rData.chartValue}}</div>
+                        <div class="col col-sm-6">{{rData.description}}</div>
+                        <div class="col">{{rData.createdBy}}</div>
+                        <div class="col">{{rData.createDateTimeServer | date:'medium'}} IST</div>
+                      </div>
+
+                      <div class="row p-10 brdbottom mat-error" *ngIf="tempList.length==0">
+                        No Data found!
+                      </div>
+                    </div>
+                    <!--end contraction and descent-->
+                    <!---start Oxytocin and descent-->
+                    <div class="tab-pane fade" id="dropmin" role="tabpanel" aria-labelledby="dropmin-tab">
+                      <div class="row hdr-chrt-hstry">
+                        <div class="col-sm-2 text-box"><strong>{{ 'partographChart.Key_DropsChart' | translate }}</strong></div>
+                        <div class="col-sm-6"><strong>{{ 'key_Comment' | translate }}</strong></div>
+                        <div class="col"><strong>{{ 'key_InputBy' | translate }}</strong></div>
+                        <div class="col"><strong>{{ 'key_datetime' | translate }}</strong></div>
+                      </div>
+                      <div class="row p-10 brdbottom" *ngFor="let rData of tempList">
+                        <div class="col col-sm-1"> {{rData.chartValue}}</div>
+                        <div class="col col-sm-6">{{rData.description}}</div>
+                        <div class="col">{{rData.createdBy}}</div>
+                        <div class="col">{{rData.createDateTimeServer | date:'medium'}} IST</div>
+                      </div>
+
+                      <div class="row p-10 brdbottom mat-error" *ngIf="tempList.length==0">
+                        No Data found!
+                      </div>
+                    </div>
+                    <!--end contraction and descent-->
+                    <!---start Oxytocin and descent-->
+                    <div class="tab-pane tabpd fade" id="drugs" role="tabpanel" aria-labelledby="contact-tab">
+                      <table class="table table-responsive">
+                        <tr>
+                          <th>{{ 'key_Drugs' | translate }}</th>
+                          <th>{{ 'key_Dose' | translate }}</th>
+                          <th>{{ 'key_Route' | translate }}</th>
+                          <th>{{ 'key_Frequencys' | translate }}</th>
+                          <th>{{ 'key_Days' | translate }}</th>
+                          <th>{{ 'key_Instructions' | translate }}</th>
+                          <th>{{ 'key_Comment' | translate }}</th>
+                          <th>{{ 'key_InputBy' | translate }}</th>
+                          <th style="width: 214px;">{{ 'key_datetime' | translate }}</th>
+
+                        </tr>
+                        <tr>
+                          <td>Crocine</td>
+                          <td>5 ML</td>
+                          <td>Liquid</td>
+                          <td>500 MG</td>
+                          <td>1</td>
+                          <td>Lorem ipsum, or lipsum as it is sometimes known,</td>
+                          <td>Lorem ipsum, or lipsum as it is sometimes known,</td>
+                          <td>Dr. Sonelal Khurana</td>
+                          <td>July 12, 2020 1:30 PM IST</td>
+                        </tr>
+
+                      </table>
+
+                    </div>
+                    <!--end contraction and descent-->
+                    <!---start pluse and descent-->
+                    <div class="tab-pane fade" id="pluse" role="tabpanel" aria-labelledby="pluse-tab">
+                      <div class="row hdr-chrt-hstry">
+                        <div class="col col-sm-2 text-center"><strong>{{ 'key_Pulse' | translate }}</strong></div>
+                        <!--  <div class="col col-sm-2 text-center"><strong>{{ 'key_Blood' | translate }}</strong></div>-->
+                        <div class="col col-sm-6"><strong>{{ 'key_Comment' | translate }}</strong></div>
+                        <div class="col"><strong>{{ 'key_InputBy' | translate }}</strong></div>
+                        <div class="col"><strong>{{ 'key_datetime' | translate }}</strong></div>
+                      </div>
+
+                      <div class="row p-10 brdbottom" *ngFor="let rData of tempList">
+                        <div class="col col-sm-1"> {{rData.chartValue}}</div>
+                        <div class="col col-sm-6">{{rData.description}}</div>
+                        <div class="col">{{rData.createdBy}}</div>
+                        <div class="col">{{rData.createDateTimeServer | date:'medium'}} IST</div>
+                      </div>
+
+                      <div class="row p-10 brdbottom mat-error" *ngIf="tempList.length==0">
+                        No Data found!
+                      </div>
+
+                    </div>
+                    <!--end pluse bp and descent-->
+
+                    <div class="tab-pane fade" id="bp" role="tabpanel" aria-labelledby="bp-tab">
+                      <div class="row hdr-chrt-hstry">
+                        <div class="col col-sm-2"><strong>{{ 'key_Systolic' | translate }}</strong></div>
+                        <div class="col col-sm-2"><strong>{{ 'key_Diastolic' | translate }}</strong></div>
+                        <div class="col col-sm-6"><strong>{{ 'key_Comment' | translate }}</strong></div>
+                        <div class="col"><strong>{{ 'key_InputBy' | translate }}</strong></div>
+                        <div class="col"><strong>{{ 'key_datetime' | translate }}</strong></div>
+                      </div>
+
+                      <div class="row p-10 brdbottom" *ngFor="let rData of tempList">
+                        <div class="col col-sm-1"> {{rData.chartValue}}</div>
+                        <div class="col col-sm-6">{{rData.description}}</div>
+                        <div class="col">{{rData.createdBy}}</div>
+                        <div class="col">{{rData.createDateTimeServer | date:'medium'}} IST</div>
+                      </div>
+
+                      <div class="row p-10 brdbottom mat-error" *ngIf="tempList.length==0">
+                        No Data found!
+                      </div>
+
+                    </div>
+
+
+                    <!---start tempraeture and descent-->
+                    <div class="tab-pane fade" id="Temperature" role="tabpanel" aria-labelledby="Temperature-tab">
+                      <div class="row hdr-chrt-hstry">
+                        <div class="col col-sm-2"><strong>{{ 'partographChart.Key_TempratureChart' | translate }}</strong></div>
+                        <div class="col col-sm-6"><strong>{{ 'key_Comment' | translate }}</strong></div>
+                        <div class="col"><strong>{{ 'key_InputBy' | translate }}</strong></div>
+                        <div class="col"><strong>{{ 'key_datetime' | translate }}</strong></div>
+                      </div>
+                      <div class="row p-10 brdbottom" *ngFor="let rData of tempList">
+                        <div class="col col-sm-1"> {{rData.chartValue}}</div>
+                        <div class="col col-sm-6">{{rData.description}}</div>
+                        <div class="col">{{rData.createdBy}}</div>
+                        <div class="col">{{rData.createDateTimeServer | date:'medium'}} IST</div>
+                      </div>
+
+                      <div class="row p-10 brdbottom mat-error" *ngIf="tempList.length==0">
+                        No Data found!
+                      </div>
+
+                    </div>
+                    <!--end tempreture and descent-->
+                    <!---start protein and descent-->
+                    <div class="tab-pane fade" id="Protein" role="tabpanel" aria-labelledby="Protein-tab">
+                      <div class="row hdr-chrt-hstry">
+                        <div class="col col-sm-2"><strong>{{ 'partographChart.key_ProtienChart' | translate }}</strong></div>
+                        <div class="col col-sm-6"><strong>{{ 'key_Comment' | translate }}</strong></div>
+                        <div class="col"><strong>{{ 'key_InputBy' | translate }}</strong></div>
+                        <div class="col"><strong>{{ 'key_datetime' | translate }}</strong></div>
+                      </div>
+                      <div class="row p-10 brdbottom" *ngFor="let rData of tempList">
+                        <div class="col col-sm-1"> {{rData.chartValue}}</div>
+                        <div class="col col-sm-6">{{rData.description}}</div>
+                        <div class="col">{{rData.createdBy}}</div>
+                        <div class="col">{{rData.createDateTimeServer | date:'medium'}} IST</div>
+                      </div>
+
+                      <div class="row p-10 brdbottom mat-error" *ngIf="tempList.length==0">
+                        No Data found!
+                      </div>
+
+                    </div>
+                    <!--end protien and descent-->
+                    <!---start ascetone and descent-->
+                    <div class="tab-pane fade" id="Acetone" role="tabpanel" aria-labelledby="Acetone-tab">
+                      <div class="row hdr-chrt-hstry">
+                        <div class="col col-sm-2"><strong>{{ 'partographChart.key_AcetoneChart' | translate }}</strong></div>
+                        <div class="col col-sm-6"><strong>{{ 'key_Comment' | translate }}</strong></div>
+                        <div class="col"><strong>{{ 'key_InputBy' | translate }}</strong></div>
+                        <div class="col"><strong>{{ 'key_datetime' | translate }}</strong></div>
+                      </div>
+                      <div class="row p-10 brdbottom" *ngFor="let rData of tempList">
+                        <div class="col col-sm-1"> {{rData.chartValue}}</div>
+                        <div class="col col-sm-6">{{rData.description}}</div>
+                        <div class="col">{{rData.createdBy}}</div>
+                        <div class="col">{{rData.createDateTimeServer | date:'medium'}} IST</div>
+                      </div>
+
+                      <div class="row p-10 brdbottom mat-error" *ngIf="tempList.length==0">
+                        No Data found!
+                      </div>
+
+                    </div>
+                    <!--end ascetone and descent-->
+                    <!---start volume and descent-->
+                    <div class="tab-pane fade" id="Volume" role="tabpanel" aria-labelledby="Volume-tab">
+                      <div class="row hdr-chrt-hstry">
+                        <div class="col col-sm-2"><strong>{{ 'partographChart.key_VolumeChart' | translate }}</strong></div>
+                        <div class="col col-sm-6"><strong>{{ 'key_Comment' | translate }}</strong></div>
+                        <div class="col"><strong>{{ 'key_InputBy' | translate }}</strong></div>
+                        <div class="col"><strong>{{ 'key_datetime' | translate }}</strong></div>
+                      </div>
+                      <div class="row p-10 brdbottom" *ngFor="let rData of tempList">
+                        <div class="col col-sm-1"> {{rData.chartValue}}</div>
+                        <div class="col col-sm-6">{{rData.description}}</div>
+                        <div class="col">{{rData.createdBy}}</div>
+                        <div class="col">{{rData.createDateTimeServer | date:'medium'}} IST</div>
+                      </div>
+
+                      <div class="row p-10 brdbottom mat-error" *ngIf="tempList.length==0">
+                        No Data found!
+                      </div>
+
+                    </div>
+                    <!--end volume and descent-->
+
+                  </div>
+            </div>
+            <!-- /.col-md-8 -->
+          </div>
+        </div>
+        <!-- /.container -->
+        <!---vertical tabs-->
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+

@@ -1,0 +1,87 @@
+<!--TFS ID:18286
+ Date:28/10/2020
+ Aut:Monu Ram Yadav
+ Des:Design Download reports page
+-->
+<app-top-btn-group #btnBar [actionGroupConfig]="actionGroupConfig" (action)="actionHandler($event)"></app-top-btn-group>
+<!--End Btn Group Section-->
+
+
+<h5>{{ 'key_DownloadReports' | translate }}</h5>
+<mat-tab-group class="mt-18" animationDuration="0ms">
+
+  <mat-tab>
+    <ng-template mat-tab-label>
+      {{ 'key_DownloadReports' | translate }}
+    </ng-template>
+    <div class="tab-content">
+      <div class="row mb-4">
+        <div class="col-lg-12">
+          <div class="subHeading-red fw600">Select Filter To Download Report</div>
+          <div class="scroll">
+            <mat-table #table [dataSource]="dataSource" matSort>
+              <ng-container *ngFor="let column of displayedColumns; let i=index;" [matColumnDef]="column">
+                <mat-header-cell *matHeaderCellDef mat-sort-header mwlResizable [enableGhostResize]="true" (resizeEnd)="onResizeEnd($event, column)"
+                                 [resizeEdges]="{bottom: false, right: true, top: false, left: true}">
+                  <div *ngIf="column != selectRow"> {{ displayedColumnsReplace[i] | translate }}</div>
+                </mat-header-cell>
+                <mat-cell *matCellDef="let item">
+                  <!--for-checkbox-->
+                  <div class="form-check-inline" *ngIf="column === setupFilter">
+                    <a class="a_link" (click)="openfilter()">Filter</a>
+                  </div>
+                  {{ item[column] }}
+                </mat-cell>
+              </ng-container>
+
+
+              <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+
+              <mat-row *matRowDef="let row; columns: displayedColumns;">
+              </mat-row>
+
+            </mat-table>
+          </div>
+        </div>
+      </div>
+      <hr />
+      <!--Row End-->
+      <!--Report Status grid table will show after filter reports popup -->
+      <div class="row mt-4">
+        <div class="col-lg-12">
+          <div class="subHeading-red fw600">Report Status</div>
+          <div class="scroll">
+            <mat-table #table [dataSource]="dataSourcenew" matSort>
+              <ng-container *ngFor="let column of displayedColumnsnew; let i=index;" [matColumnDef]="column">
+                <mat-header-cell *matHeaderCellDef mat-sort-header mwlResizable [enableGhostResize]="true" (resizeEnd)="onResizeEnd($event, column)"
+                                 [resizeEdges]="{bottom: false, right: true, top: false, left: true}">
+                  <div *ngIf="column != selectRow"> {{ displayedColumnsReplacenew[i] | translate }}</div>
+                </mat-header-cell>
+                <mat-cell *matCellDef="let item">
+                  <div class="w-100 justify-content-around d-flex align-items-center" *ngIf="column === delete">
+                    <i class="fa fa-trash text-danger" aria-hidden="true"></i>
+                  </div>
+                  {{ item[column] }}
+                </mat-cell>
+              </ng-container>
+
+
+              <mat-header-row *matHeaderRowDef="displayedColumnsnew"></mat-header-row>
+
+              <mat-row *matRowDef="let row; columns: displayedColumnsnew;">
+              </mat-row>
+
+            </mat-table>
+          </div>
+          <mat-paginator #paginator
+                         [pageSize]="10"
+                         [pageSizeOptions]="[5, 10, 20]">
+          </mat-paginator>
+
+
+        </div>
+      </div>
+      <!--Row End-->
+    </div>
+  </mat-tab>
+</mat-tab-group>

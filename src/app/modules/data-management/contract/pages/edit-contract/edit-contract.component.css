@@ -1,0 +1,5 @@
+.contract-record tr td {
+  width: 50% !important;
+  display: table-cell;
+  word-break: break-all;
+}

@@ -1,0 +1,125 @@
+<app-top-btn-group #btnBar [actionGroupConfig]="actionGroupConfig" (action)="actionHandler($event)"></app-top-btn-group>
+
+<div style="margin-bottom:30px;">
+  <div class="form-area">
+    <div class="wrapper">
+      <div class="content-wrapper">
+        <div>
+          <h5>{{ 'key_OperatingLocation' | translate }}</h5>
+        </div>
+        <mat-tab-group #tabGroupA class="mt-18" animationDuration="0ms" (selectedTabChange)="tabChange($event)">
+          <mat-tab #tab1 *ngIf="tab1">
+            <ng-template mat-tab-label>
+              {{ 'key_Operatinglist' | translate }}
+            </ng-template>
+            <div class="tab-content" *ngIf="tab1Data">
+
+              <div class="row">
+                <div class="col-lg-12">
+                  <app-table-filter (filterOn)="applyFilter($event)"></app-table-filter>
+                                    
+                  <div class="scroll">
+                    <mat-table #table [dataSource]="dataSource" matSort (matSortChange)="customSort($event)">
+
+
+                      <ng-container *ngFor="let column of displayedColumns, let i=index;" [matColumnDef]="column">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header mwlResizable
+                                         [enableGhostResize]="true" (resizeEnd)="onResizeEnd($event, column)"
+                                         [resizeEdges]="{bottom: false, right: true, top: false, left: true}">
+
+                          <div class="form-check-inline" *ngIf="column === selectRow">
+                            <label class="form-check-label">
+                              <mat-checkbox class="form-check-input" value="" placement="top" ngbTooltip="Select all"
+                                            (change)="selectAll($event)" (click)="$event.stopPropagation()"></mat-checkbox>
+                            </label>
+                          </div>
+                          <div *ngIf="column != selectRow"> {{ displayedColumnsReplace[i] | translate }}</div>
+                        </mat-header-cell>
+                        <mat-cell *matCellDef="let item">
+                          <!--for-checkbox-->
+                          <div class="form-check-inline" *ngIf="column === selectRow">
+                            <label class="form-check-label">
+                              <input type="checkbox" class="form-check-input" value="" (click)="$event.stopPropagation()"
+                                     (change)="selectedCheckbox($event,item)"
+                                     [checked]="item.isSelected">
+                              <!--<mat-checkbox class="form-check-input" value="" (click)="$event.stopPropagation()"
+              (change)="selectedCheckbox($event, item)"
+              [checked]="item.isSelected"></mat-checkbox>-->
+
+                            </label>
+                          </div>
+
+                          <div *ngIf="column === 'setupCompletedDateTime' &&  column != 'isActive'">
+                            <span [ngClass]="{'BoldrowText': item.updatedBy == 'Interface'}">
+                              {{item.setupCompletedDateTime=='0001-01-01T00:00:00' ? '' : item.setupCompletedDateTime | date: 'MM/dd/yyyy hh:mm a'   }}
+
+                            </span>
+                          </div>
+
+                          <div *ngIf="column == 'isActive'">
+                            <span [ngClass]="{'BoldrowText': item.updatedBy == 'Interface'}">
+                              {{item.isActive == false ? 'Inactive' : 'Active'}}
+                            </span>
+                          </div>
+
+                          <div *ngIf="column != 'setupCompletedDateTime' &&  column != 'isActive'">
+                            <span [ngClass]="{'BoldrowText': item.updatedBy == 'Interface'}">
+                              {{ item[column] }}
+                            </span>
+                          </div>
+
+                        </mat-cell>
+                      </ng-container>
+
+                      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                      <mat-row *matRowDef="let row; columns: displayedColumns;"
+                               (click)="selectedCheckbox('row',row)"
+                               [ngClass]="getClass(row)">
+                      </mat-row>
+                    </mat-table>
+
+                  </div>
+                  <mat-paginator #paginator
+                                 [length]="operatingLocation.itemsLength"
+                                 [pageSize]="operatingLocation.pageSize"
+                                 [pageSizeOptions]="operatingLocation.pageSizeOptions"
+                                 (page)="onPaginationEvent($event)">
+                  </mat-paginator>
+                </div>
+              </div>
+
+
+              <!--<app-operating-list></app-operating-list>-->
+            </div>
+          </mat-tab>
+          <mat-tab #tab2 *ngIf="tab2">
+            <ng-template mat-tab-label animationDuration="0ms">
+              {{ 'key_Addnew' | translate }}
+              <button class="close" type="button" (click)="closeTab()">
+                <i class="fa fa-times-circle-o" aria-hidden="true"></i>
+              </button>
+            </ng-template>
+            <div class="tab-content" *ngIf="tab2Data">
+              <app-add-operating-location></app-add-operating-location>
+            </div>
+          </mat-tab>
+
+          <mat-tab #tab3 *ngIf="tab3">
+            <ng-template mat-tab-label animationDuration="0ms">
+              {{ 'key_Edit' | translate }}
+              <button class="close" type="button" (click)="closeTab()">
+                <i class="fa fa-times-circle-o" aria-hidden="true"></i>
+              </button>
+            </ng-template>
+            <div class="tab-content" *ngIf="tab3Data">
+              <app-edit-operating-location></app-edit-operating-location>
+            </div>
+          </mat-tab>
+
+        </mat-tab-group>
+
+      </div>
+    </div>
+  </div>
+</div>
+<app-show-notes></app-show-notes>

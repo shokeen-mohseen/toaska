@@ -1,0 +1,17 @@
+::ng-deep .mat-expansion-panel-body {
+  background-color: #f9f9f9;
+}
+::ng-deep .mat-tab-group .mat-tab-body-wrapper .mat-tab-body.mat-tab-body-active {
+  width: 100%;
+}
+::ng-deep .tosca .order-deails .form-group h5 {
+  font-size: 12px;
+  padding-top: 8px;
+  margin-bottom: 0;
+}
+ 
+
+::ng-deep .tosca .order-deails h4 {
+  font-size: 16px;
+}
+

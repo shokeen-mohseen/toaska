@@ -1,0 +1,179 @@
+<div>
+  <div class="row" *ngIf="!isAddNew">
+    <div class="col-md-6"></div>
+    <div class="col-md-6 text-right">
+      <span class="fw600">{{ 'key_LastUpdated1' | translate }}:	</span> {{ FreightViewModel.updateDateTimeBrowser | momentDateWithZonePipe }}
+      <br><span class="fw600">By</span> {{ FreightViewModel.updatedBy }}
+    </div>
+  </div>
+  <!--Last Updated Section End//////////////-->
+  <!--<app-freight-list (change)="setFreightDetails($event)" (checkBoxClick)="setFreightDetails($event)"></app-freight-list>-->
+
+  <form #formGroup="ngForm" (ngSubmit)="onSubmit(formGroup)">
+
+    <div class="row">
+      <div class="col-md-3 custom-flex-w-15">
+        <div class="card">
+          <div class="card-header" *ngIf="isAddNew">{{ 'key_AddedList' | translate }}</div>
+          <div class="card-header" *ngIf="!isAddNew">{{ 'key_EditList' | translate }}</div>
+          <div class="card-body p-0" #nextList>
+            <div class="list-group">
+
+              <!--<a href="javascript:void(0)" class="list-group-item list-group-item-action" [ngClass]="[Freight.id === id ? 'active' : '']"
+               *ngFor="let Freight of dataSource; let i = list">
+            </a>
+                        <a class="list-group-item list-group-item-action" [ngClass]="[users.userId === userId ? 'active' : '']"
+                           *ngFor="let users of dataSource; let i = index" (click)="selectedUser(i)">{{users.prefix}} {{users.firstName}}</a>
+            <a href="javascript:void(0)" class="list-group-item list-group-item-action active"></a>-->
+              <!--<mat-list-item *ngFor="let datasource of datasources">-->
+              <!--<div mat-line>{{datasource.id}}</div>
+            <div mat-line> {{datasource.name}} </div>-->
+
+
+              <div class="list-group-item list-group-item-action" [class.active]="FreightViewModel.id === datasource.id" *ngFor="let datasource of datasources , let i = index"
+                   (click)="selected(i)">
+                <a>{{datasource.name}}</a>
+                <button class="close" type="button" *ngIf="datasource.id!=FreightViewModel.id"
+                        (click)="removeFreightModeFromEditList(datasource)">
+                  <i class="fa fa-times" aria-hidden="true"></i>
+                </button>
+              </div>
+              <!--<a href="javascript:void(0)" class="list-group-item list-group-item-action"
+               *ngFor="let datasource of datasources , let i = index"
+               (click)="selected(i)">
+              {{datasource.name}}
+            </a>-->
+            </div>
+
+
+            <!--</mat-list-item>-->
+            <!--<div *ngFor="let Freight of dataSource;">
+
+          </div>-->
+            <!--<a href="javascript:void(0)" class="list-group-item list-group-item-action" [ngClass]="[Freight.name === name ? 'active' : '']"
+          *ngFor="let Freight of dataSource; let i = list" (click)="editfreight($event)"></a>-->
+            <!--<div class="list-group" #nextList>
+          <a href="javascript:void(0)" class="list-group-item list-group-item-action active">TL</a>
+          <a href="javascript:void(0)" class="list-group-item list-group-item-action">Next Edit Name goes here</a>
+          <a href="javascript:void(0)" class="list-group-item list-group-item-action">Next Edit Name goes here[ngClass]="[this.dataSource.length > 0 ? 'col-md-9' : 'col-md-12']"</a>-->
+
+          </div>
+        </div>
+      </div>
+
+
+      <div class="col-md-9 custom-flex-w-85">
+        <div class="tab-content">
+          <!--=============== Start profile =================-->
+
+          <div class="e-profile">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="box-children">
+                  <div class="form-group">
+                    <label for="name">
+                      {{ 'key_FreightModeName' | translate}} <span class="text-danger">*</span>
+                    </label>
+                    <input type="text" [(ngModel)]="FreightViewModel.name" id="name" name="nameCtrl" #nameCtrl="ngModel" class="form-control" required />
+                    <div *ngIf="nameCtrl.invalid && (nameCtrl.dirty || nameCtrl.touched)" class="errorMessage alert-danger">Freight Mode Name is required</div>
+                  </div>
+                  <div class="form-group">
+                    <label for="fuelSurchargePercentageRate">{{ 'key_FuelSurchargePercentageRate' | translate}} (%) <span class="text-danger">*</span></label>
+                    <input type="number" [(ngModel)]="FreightViewModel.fuelSurFreightModePercentageRate" id="fuelSurchargePercentageRate" name="fuelSurFreightModePercentageRateCtrl" #fuelSurFreightModePercentageRateCtrl="ngModel" class="form-control" required />
+                    <div *ngIf="fuelSurFreightModePercentageRateCtrl.invalid && (fuelSurFreightModePercentageRateCtrl.dirty || fuelSurFreightModePercentageRateCtrl.touched)" class="errorMessage alert-danger">Fuel Surcharge Percentage Rate is required</div>
+                  </div>
+                  <div class="form-group">
+                    <label for="milesPerGallon">{{ 'key_MilesPerGallon' | translate}} <span class="text-danger">*</span></label>
+                    <input type="number" [(ngModel)]="FreightViewModel.milesPerGallon" id="milesPerGallon" name="milesPerGallonCtrl" #milesPerGallonCtrl="ngModel" class="form-control" required />
+                    <div *ngIf="milesPerGallonCtrl.invalid && (milesPerGallonCtrl.dirty || milesPerGallonCtrl.touched)" class="errorMessage alert-danger">Miles Per Gallon is required</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="box-children">
+                  <div class="form-group">
+                    <label for="milesPerHour">{{ 'key_MilesPerHour' | translate}}</label>
+                    <input type="number" [(ngModel)]="FreightViewModel.milesPerHour" id="milesPerHour" name="milesPerHour" class="form-control" />
+                  </div>
+                  <div class="form-group">
+                    <label for="driverHoursPerDay">{{ 'key_DriverHoursPerDay' | translate}}</label>
+                    <input type="number" [(ngModel)]="FreightViewModel.driverHoursPerDay" id="driverHoursPerDay" name="driverHoursPerDay" class="form-control" />
+                  </div>
+                </div>
+              </div>
+
+              <!--<div class="col-md-4">
+            <div class="box-children">-->
+              <!--<div class="col-md-12">
+              <div class="form-group">
+                <span class="fw600 mr-3 " for="lastname"> {{ 'key_Status' | translate }} </span>
+                <span for="lastname"> {{ 'key_Active' | translate }} </span>
+
+              </div>
+            </div>-->
+              <!--<div class="form-group">
+                  <div class="form-check checkbox pl-0">
+                    <label class="form-check-label" for="check1"> {{ 'key_SetupCompleted' | translate }} </label>
+                    <input class="form-check-input ml-2" id="check1" type="checkbox" [ngModelOptions]="{standalone: true}" (change)="setupCompleteChange()" [(ngModel)]="FreightViewModel.setupComplete">
+                  </div>
+                </div>
+
+
+                <div class="form-group d-flex">
+                  <span class="fw600 mr-3 " for="lastname"> {{ 'key_SetupDatetime' | translate }} </span>
+                  <span class="text-break" for="lastname"> {{ FreightViewModel.setupCompleteDateTime }} </span>
+                </div>
+
+                <div class="form-group d-flex">
+                  <span class="fw600 mr-3 " for="lastname"> {{ 'key_SetupCompletedby' | translate }} </span>
+                  <span for="lastname" class="text-break"> {{ FreightViewModel.setupCompleteBy }}</span>
+                </div>
+
+
+              </div>
+            </div>-->
+
+            </div>
+          </div>
+          <!--=============== End e-profile =================-->
+        </div>
+      </div>
+    </div>
+    <div class="row justify-content-center my-5">
+
+      <!--<div class="col-xl-2 col-lg-4 col-md-4 col-sm-12">
+      <button class="btn btn-block btn-previous" type="submit" (click)="selectPrev()">{{ 'key_Previous' | translate }}</button>
+    </div>-->
+      <div class="col-xl-2 col-lg-4 col-md-4 col-sm-12">
+        <button class="btn btn-block btn-save" [disabled]="(formGroup.invalid) || inActive ? true:false" type="submit">{{ 'key_Save' | translate }}</button>
+      </div>
+
+
+      <div class="col-xl-2 col-lg-4 col-md-4 col-sm-12">
+        <button class="btn btn-block btn-next" [disabled]="(formGroup.invalid) || (!isAddNew && datasources.length < 2) || inActive ? true:false" type="button" id="next" (click)="onSubmit(formGroup, true)">
+          <span class="fw600" *ngIf="isAddNew">{{ 'key_Add' | translate }}</span>
+          <span class="fw600" *ngIf="!isAddNew">{{ 'key_Edit' | translate }}</span>
+          <span class="fs-13"> > {{ 'key_Next' | translate }}</span>
+        </button>
+
+      </div>
+    </div>
+  </form>
+    <div class="col-lg-12" *ngIf="editMode">
+      <div id="accordionMapEquipmentType" class="accordion">
+        <div class="card mb-3">
+          <div class="card-header collapsed" data-toggle="collapse" href="#MapEquipmentType" (click)="openAccordion('mapEquipmentType')">
+            <a class="card-title">
+              {{ 'key_MapEquipmentType' | translate}} - ( {{equipforfreight?.length}} )
+            </a>
+          </div>
+          <div id="MapEquipmentType" class="card-body collapse" data-parent="#accordionMapEquipmentType">
+            <div *ngIf="mapEquipmentType">
+              <app-map-equipment-type [sendIDToChild]="FreightViewModel?.id"></app-map-equipment-type>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+

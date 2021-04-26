@@ -1,0 +1,72 @@
+<section class="tosca-login d-flex align-items-center justify-content-center">
+  
+  <div class="login-screen">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="logo">
+          <img src="assets/images/tosca-logo.png" />
+        </div>
+      </div>
+      <div class="col-md-12">
+        <form class="form-area" (ngSubmit)="login()" [formGroup]="loginForm">
+          <div class="mb-1">
+            <h4 class="text-center">Login</h4>            
+              <div [hidden]="!error" class="alert alert-danger">
+                {{ error }}
+              </div>                
+
+          </div>
+          <div class="form-group">
+            <label>Login ID (E-mail)</label>
+            <input type="email" class="form-control" placeholder="Enter Login ID" formControlName="username" required>
+            <app-control-messages [control]="f['username']"></app-control-messages>
+          </div>
+          <div class="form-group">
+            <label>Password</label>
+            <div class="input-group">
+              <input [type]="password" class="form-control" placeholder="Enter your password" formControlName="password" required>
+              <div class="input-group-prepend">
+                <button type="button" class="btn btn-primary" placement="top" ngbTooltip="Show Password" (click)="showPassword()">
+                  <i class="fa fa-eye" aria-hidden="true" *ngIf="!show"></i>
+                  <i class="fa fa-eye-slash" aria-hidden="true" *ngIf="show"></i>
+                </button>
+              </div>
+            </div>
+            <app-control-messages [control]="f['password']"></app-control-messages>
+          </div>
+          <div class="form-group d-flex mb-4">
+            <div class="custom-control custom-checkbox custom-control-inline">
+              <input id="chk1" type="checkbox" name="chk" class="custom-control-input">
+              <label for="chk1" class="custom-control-label text-sm font-600">Remember me</label>
+            </div>
+            <a [routerLink]="['/auth/tosca-forgot-password']" class="ml-auto mb-0 text-sm text-red font-600">Forgot Password?</a>
+          </div>
+          <div class="form-group mt-4">
+            <button type="submit" class="btn btn-primary btn-block btn-login text-center" [disabled]="loginForm.invalid">
+              <span [hidden]="isLoading">Login</span>
+              <span [hidden]="!isLoading">
+                <i class="fa fa-asterisk fa-spin" aria-hidden="true"></i>
+              </span>
+            </button>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <p>
+                  <!--<a href="javascript:void(0)" (click)="multiple()"><i class="fa fa-shield"></i> Demo</a>-->
+                </p>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group text-right">
+                <p>
+                  <a [routerLink]="['/auth/tosca-register']">Register</a>
+                </p>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

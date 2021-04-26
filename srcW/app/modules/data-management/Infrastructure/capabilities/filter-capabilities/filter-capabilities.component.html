@@ -1,0 +1,42 @@
+<form #addOrderForm="ngForm" novalidate>
+  <div class="row custom-form mb-3">
+    <div class="col-md-4">
+      <div class="form-group">
+        <label for="ccmonth">{{ 'key_Location' | translate }}</label>
+        <angular2-multiselect [data]="itemListA" [(ngModel)]="selectedItemsA" [settings]="settingsA"
+                              (onSelect)="onItemSelect($event)"
+                              (onDeSelect)="OnItemDeSelect($event)"
+                              (onSelectAll)="onSelectAll($event)"
+                              (onDeSelectAll)="onDeSelectAll($event)"
+                              (onAddFilterNewItem)="onAddItemA($event)" name="equipmentclass">
+        </angular2-multiselect>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <label for="ccmonth">{{ 'Key_Resource' | translate }}</label>
+        <angular2-multiselect [data]="itemListA" [(ngModel)]="selectedItemsA" [settings]="settingsA"
+                              (onSelect)="onItemSelect($event)"
+                              (onDeSelect)="OnItemDeSelect($event)"
+                              (onSelectAll)="onSelectAll($event)"
+                              (onDeSelectAll)="onDeSelectAll($event)"
+                              (onAddFilterNewItem)="onAddItemA($event)" name="equipmenttype">
+        </angular2-multiselect>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <label for="ccmonth">{{ 'key_Capabilities' | translate }}</label>
+        <angular2-multiselect [data]="itemListB" [(ngModel)]="selectedItemsB" [settings]="settingsB"
+                              (onSelect)="onItemSelect($event)"
+                              (onDeSelect)="OnItemDeSelect($event)"
+                              (onSelectAll)="onSelectAll($event)"
+                              (onDeSelectAll)="onDeSelectAll($event)"
+                              (onAddFilterNewItem)="onAddItemB($event)" name="equipmenttype">
+        </angular2-multiselect>
+      </div>
+    </div>
+  </div>
+  <!-----------modal------------------->
+  <!--manage-filter-->
+</form>

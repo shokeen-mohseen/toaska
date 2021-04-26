@@ -1,0 +1,14 @@
+.box-children {
+  background-color: #f9f9f9;
+  padding: 30px;
+  margin: 14px 0px 0 0px;
+  border-bottom: 1px solid #dcdbdb;
+  box-shadow: 0px 0px 8px 3px rgba(0, 0, 0, 0.15);
+}
+
+  .box-children p {
+    margin-bottom: 6px;
+  }
+.bg-grey {cursor:pointer;}
+.bg-grey table{margin:auto}
+.tabletbl td{border:none;}

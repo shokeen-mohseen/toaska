@@ -1,0 +1,462 @@
+<!-- Modal Header -->
+<div class="modal-header">
+  <h5 class="modal-title">{{ 'key_Filter' | translate }}</h5>
+  <button type="button" class="close" data-dismiss="modal" (click)="activeModal.dismiss('Cross click')">&times;</button>
+</div>
+
+<!-- Modal body -->
+<div class="modal-body">
+  <div class="row" *ngIf="filterSettings == 'AR Charge Detail'">
+
+    <div class="col-md-6">
+      <div class="form-group">
+        <label> {{ 'key_FromShipmentDate' | translate }}</label>
+        <p-calendar [showIcon]="true" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2030" placeholder="MM-DD-YYYY"></p-calendar>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label>  {{ 'key_toShipmentDate' | translate }}</label>
+        <p-calendar [showIcon]="true" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2030" placeholder="MM-DD-YYYY"></p-calendar>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label> {{ 'key_FromReqDeliveryDate' | translate }}</label>
+        <p-calendar [showIcon]="true" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2030" placeholder="MM-DD-YYYY"></p-calendar>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label> {{ 'key_ToReqDeliveryDate' | translate }}</label>
+        <p-calendar [showIcon]="true" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2030" placeholder="MM-DD-YYYY"></p-calendar>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label>{{ 'key_Fromloctype' | translate }}</label>
+        <angular2-multiselect fixFilterBug [data]="itemList" [(ngModel)]="selectedItems" [settings]="settings"
+                              (onSelect)="onItemSelect($event)"
+                              (onDeSelect)="OnItemDeSelect($event)"
+                              (onSelectAll)="onSelectAll($event)"
+                              (onDeSelectAll)="onDeSelectAll($event)"
+                              (onAddFilterNewItem)="onAddItem($event)">
+        </angular2-multiselect>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label>{{ 'key_Toloctype' | translate }}</label>
+        <angular2-multiselect fixFilterBug [data]="itemList" [(ngModel)]="selectedItems" [settings]="settings"
+                              (onSelect)="onItemSelect($event)"
+                              (onDeSelect)="OnItemDeSelect($event)"
+                              (onSelectAll)="onSelectAll($event)"
+                              (onDeSelectAll)="onDeSelectAll($event)"
+                              (onAddFilterNewItem)="onAddItem($event)">
+        </angular2-multiselect>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label> {{ 'key_Shiploc' | translate }}</label>
+        <angular2-multiselect fixFilterBug [data]="itemList" [(ngModel)]="selectedItems" [settings]="settings"
+                              (onSelect)="onItemSelect($event)"
+                              (onDeSelect)="OnItemDeSelect($event)"
+                              (onSelectAll)="onSelectAll($event)"
+                              (onDeSelectAll)="onDeSelectAll($event)"
+                              (onAddFilterNewItem)="onAddItem($event)">
+        </angular2-multiselect>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label> {{ 'key_Shipto' | translate }}</label>
+        <angular2-multiselect fixFilterBug [data]="itemList" [(ngModel)]="selectedItems" [settings]="settings"
+                              (onSelect)="onItemSelect($event)"
+                              (onDeSelect)="OnItemDeSelect($event)"
+                              (onSelectAll)="onSelectAll($event)"
+                              (onDeSelectAll)="onDeSelectAll($event)"
+                              (onAddFilterNewItem)="onAddItem($event)">
+        </angular2-multiselect>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label> {{ 'key_Businesspartner' | translate }}</label>
+        <angular2-multiselect fixFilterBug [data]="itemList" [(ngModel)]="selectedItems" [settings]="settings"
+                              (onSelect)="onItemSelect($event)"
+                              (onDeSelect)="OnItemDeSelect($event)"
+                              (onSelectAll)="onSelectAll($event)"
+                              (onDeSelectAll)="onDeSelectAll($event)"
+                              (onAddFilterNewItem)="onAddItem($event)">
+        </angular2-multiselect>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label> {{ 'key_BusinessPartner' | translate }}</label>
+        <angular2-multiselect fixFilterBug [data]="itemList" [(ngModel)]="selectedItems" [settings]="settings"
+                              (onSelect)="onItemSelect($event)"
+                              (onDeSelect)="OnItemDeSelect($event)"
+                              (onSelectAll)="onSelectAll($event)"
+                              (onDeSelectAll)="onDeSelectAll($event)"
+                              (onAddFilterNewItem)="onAddItem($event)">
+        </angular2-multiselect>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="form-group">
+        <label>{{ 'key_OrderNo' | translate }}</label>
+        <input type="text" class="form-control" />
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label>{{ 'key_ShipmentNo' | translate }}</label>
+        <input type="text" class="form-control" />
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label>{{ 'key_Invoicenumber' | translate }}</label>
+        <angular2-multiselect fixFilterBug [data]="itemList" [(ngModel)]="selectedItems" [settings]="settings"
+                              (onSelect)="onItemSelect($event)"
+                              (onDeSelect)="OnItemDeSelect($event)"
+                              (onSelectAll)="onSelectAll($event)"
+                              (onDeSelectAll)="onDeSelectAll($event)"
+                              (onAddFilterNewItem)="onAddItem($event)">
+        </angular2-multiselect>
+      </div>
+    </div>
+    <div class="col-md-6">
+
+      <div class="form-group">
+        <label> {{ 'key_Status' | translate }}</label>
+        <angular2-multiselect fixFilterBug [data]="itemList" [(ngModel)]="selectedItems" [settings]="settings"
+                              (onSelect)="onItemSelect($event)"
+                              (onDeSelect)="OnItemDeSelect($event)"
+                              (onSelectAll)="onSelectAll($event)"
+                              (onDeSelectAll)="onDeSelectAll($event)"
+                              (onAddFilterNewItem)="onAddItem($event)">
+        </angular2-multiselect>
+      </div>
+    </div>
+  </div>
+  <!--Row End-->
+
+  <div class="row" *ngIf="filterSettings == 'AP Charge Detail'">
+
+    <div class="col-md-6">
+      <div class="form-group">
+        <label> {{ 'key_FromShipmentDate' | translate }}</label>
+        <p-calendar [showIcon]="true" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2030" placeholder="MM-DD-YYYY"></p-calendar>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label>  {{ 'key_toShipmentDate' | translate }}</label>
+        <p-calendar [showIcon]="true" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2030" placeholder="MM-DD-YYYY"></p-calendar>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label> {{ 'key_FromReqDeliveryDate' | translate }}</label>
+        <p-calendar [showIcon]="true" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2030" placeholder="MM-DD-YYYY"></p-calendar>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label> {{ 'key_ToReqDeliveryDate' | translate }}</label>
+        <p-calendar [showIcon]="true" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2030" placeholder="MM-DD-YYYY"></p-calendar>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label>{{ 'key_Fromloctype' | translate }}</label>
+        <angular2-multiselect fixFilterBug [data]="itemList" [(ngModel)]="selectedItems" [settings]="settings"
+                              (onSelect)="onItemSelect($event)"
+                              (onDeSelect)="OnItemDeSelect($event)"
+                              (onSelectAll)="onSelectAll($event)"
+                              (onDeSelectAll)="onDeSelectAll($event)"
+                              (onAddFilterNewItem)="onAddItem($event)">
+        </angular2-multiselect>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label>{{ 'key_Toloctype' | translate }}</label>
+        <angular2-multiselect fixFilterBug [data]="itemList" [(ngModel)]="selectedItems" [settings]="settings"
+                              (onSelect)="onItemSelect($event)"
+                              (onDeSelect)="OnItemDeSelect($event)"
+                              (onSelectAll)="onSelectAll($event)"
+                              (onDeSelectAll)="onDeSelectAll($event)"
+                              (onAddFilterNewItem)="onAddItem($event)">
+        </angular2-multiselect>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label> {{ 'key_Shiploc' | translate }}</label>
+        <angular2-multiselect fixFilterBug [data]="itemList" [(ngModel)]="selectedItems" [settings]="settings"
+                              (onSelect)="onItemSelect($event)"
+                              (onDeSelect)="OnItemDeSelect($event)"
+                              (onSelectAll)="onSelectAll($event)"
+                              (onDeSelectAll)="onDeSelectAll($event)"
+                              (onAddFilterNewItem)="onAddItem($event)">
+        </angular2-multiselect>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label> {{ 'key_Shipto' | translate }}</label>
+        <angular2-multiselect fixFilterBug [data]="itemList" [(ngModel)]="selectedItems" [settings]="settings"
+                              (onSelect)="onItemSelect($event)"
+                              (onDeSelect)="OnItemDeSelect($event)"
+                              (onSelectAll)="onSelectAll($event)"
+                              (onDeSelectAll)="onDeSelectAll($event)"
+                              (onAddFilterNewItem)="onAddItem($event)">
+        </angular2-multiselect>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label> {{ 'key_Businesspartner' | translate }}</label>
+        <angular2-multiselect fixFilterBug [data]="itemList" [(ngModel)]="selectedItems" [settings]="settings"
+                              (onSelect)="onItemSelect($event)"
+                              (onDeSelect)="OnItemDeSelect($event)"
+                              (onSelectAll)="onSelectAll($event)"
+                              (onDeSelectAll)="onDeSelectAll($event)"
+                              (onAddFilterNewItem)="onAddItem($event)">
+        </angular2-multiselect>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label> {{ 'key_BusinessPartner' | translate }}</label>
+        <angular2-multiselect fixFilterBug [data]="itemList" [(ngModel)]="selectedItems" [settings]="settings"
+                              (onSelect)="onItemSelect($event)"
+                              (onDeSelect)="OnItemDeSelect($event)"
+                              (onSelectAll)="onSelectAll($event)"
+                              (onDeSelectAll)="onDeSelectAll($event)"
+                              (onAddFilterNewItem)="onAddItem($event)">
+        </angular2-multiselect>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="form-group">
+        <label>{{ 'key_OrderNo' | translate }}</label>
+        <input type="text" class="form-control" />
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label>{{ 'key_ShipmentNo' | translate }}</label>
+        <input type="text" class="form-control" />
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label>{{ 'key_Invoicenumber' | translate }}</label>
+        <angular2-multiselect fixFilterBug [data]="itemList" [(ngModel)]="selectedItems" [settings]="settings"
+                              (onSelect)="onItemSelect($event)"
+                              (onDeSelect)="OnItemDeSelect($event)"
+                              (onSelectAll)="onSelectAll($event)"
+                              (onDeSelectAll)="onDeSelectAll($event)"
+                              (onAddFilterNewItem)="onAddItem($event)">
+        </angular2-multiselect>
+      </div>
+    </div>
+    <div class="col-md-6">
+
+      <div class="form-group">
+        <label> {{ 'key_Status' | translate }}</label>
+        <angular2-multiselect fixFilterBug [data]="itemList" [(ngModel)]="selectedItems" [settings]="settings"
+                              (onSelect)="onItemSelect($event)"
+                              (onDeSelect)="OnItemDeSelect($event)"
+                              (onSelectAll)="onSelectAll($event)"
+                              (onDeSelectAll)="onDeSelectAll($event)"
+                              (onAddFilterNewItem)="onAddItem($event)">
+        </angular2-multiselect>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="filterSettings == 'Freight Cost'">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label> {{ 'key_FromDate' | translate }}</label>
+        <p-calendar [showIcon]="true" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2030" placeholder="MM-DD-YYYY"></p-calendar>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label> {{ 'key_toDate' | translate }}</label>
+        <p-calendar [showIcon]="true" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2030" placeholder="MM-DD-YYYY"></p-calendar>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label>{{ 'key_Carrier' | translate }}</label>
+        <angular2-multiselect fixFilterBug [data]="itemList" [(ngModel)]="selectedItems" [settings]="settings"
+                              (onSelect)="onItemSelect($event)"
+                              (onDeSelect)="OnItemDeSelect($event)"
+                              (onSelectAll)="onSelectAll($event)"
+                              (onDeSelectAll)="onDeSelectAll($event)"
+                              (onAddFilterNewItem)="onAddItem($event)">
+        </angular2-multiselect>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label>{{ 'key_Origin' | translate }}</label>
+        <angular2-multiselect fixFilterBug [data]="itemList" [(ngModel)]="selectedItems" [settings]="settings"
+                              (onSelect)="onItemSelect($event)"
+                              (onDeSelect)="OnItemDeSelect($event)"
+                              (onSelectAll)="onSelectAll($event)"
+                              (onDeSelectAll)="onDeSelectAll($event)"
+                              (onAddFilterNewItem)="onAddItem($event)">
+        </angular2-multiselect>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label>{{ 'key_Destination' | translate }}</label>
+        <angular2-multiselect fixFilterBug [data]="itemList" [(ngModel)]="selectedItems" [settings]="settings"
+                              (onSelect)="onItemSelect($event)"
+                              (onDeSelect)="OnItemDeSelect($event)"
+                              (onSelectAll)="onSelectAll($event)"
+                              (onDeSelectAll)="onDeSelectAll($event)"
+                              (onAddFilterNewItem)="onAddItem($event)">
+        </angular2-multiselect>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label> {{ 'key_Status' | translate }}</label>
+        <angular2-multiselect fixFilterBug [data]="itemList" [(ngModel)]="selectedItems" [settings]="settings"
+                              (onSelect)="onItemSelect($event)"
+                              (onDeSelect)="OnItemDeSelect($event)"
+                              (onSelectAll)="onSelectAll($event)"
+                              (onDeSelectAll)="onDeSelectAll($event)"
+                              (onAddFilterNewItem)="onAddItem($event)">
+        </angular2-multiselect>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="filterSettings == 'Planned Order'">
+
+    <div class="col-md-6">
+      <div class="form-group">
+        <label> {{ 'key_FromShipmentDate' | translate }}</label>
+        <p-calendar [showIcon]="true" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2030" placeholder="MM-DD-YYYY"></p-calendar>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label>  {{ 'key_toShipmentDate' | translate }}</label>
+        <p-calendar [showIcon]="true" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2030" placeholder="MM-DD-YYYY"></p-calendar>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label> {{ 'key_FromReqDeliveryDate' | translate }}</label>
+        <p-calendar [showIcon]="true" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2030" placeholder="MM-DD-YYYY"></p-calendar>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label> {{ 'key_ToReqDeliveryDate' | translate }}</label>
+        <p-calendar [showIcon]="true" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2030" placeholder="MM-DD-YYYY"></p-calendar>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="form-group">
+        <label>{{ 'key_Salesmanager' | translate }}</label>
+        <angular2-multiselect fixFilterBug [data]="itemList" [(ngModel)]="selectedItems" [settings]="settings"
+                              (onSelect)="onItemSelect($event)"
+                              (onDeSelect)="OnItemDeSelect($event)"
+                              (onSelectAll)="onSelectAll($event)"
+                              (onDeSelectAll)="onDeSelectAll($event)"
+                              (onAddFilterNewItem)="onAddItem($event)">
+        </angular2-multiselect>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label>{{ 'key_Organization' | translate }}</label>
+        <angular2-multiselect fixFilterBug [data]="itemList" [(ngModel)]="selectedItems" [settings]="settings"
+                              (onSelect)="onItemSelect($event)"
+                              (onDeSelect)="OnItemDeSelect($event)"
+                              (onSelectAll)="onSelectAll($event)"
+                              (onDeSelectAll)="onDeSelectAll($event)"
+                              (onAddFilterNewItem)="onAddItem($event)">
+        </angular2-multiselect>
+      </div>
+    </div>
+   
+  </div>
+
+  <div class="row" *ngIf="filterSettings == 'Shipped Order'">
+
+
+    <div class="col-md-6">
+      <div class="form-group">
+        <label> {{ 'key_FromShipmentDate' | translate }}</label>
+        <p-calendar [showIcon]="true" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2030" placeholder="MM-DD-YYYY"></p-calendar>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label>  {{ 'key_toShipmentDate' | translate }}</label>
+        <p-calendar [showIcon]="true" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2030" placeholder="MM-DD-YYYY"></p-calendar>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label> {{ 'key_FromReqDeliveryDate' | translate }}</label>
+        <p-calendar [showIcon]="true" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2030" placeholder="MM-DD-YYYY"></p-calendar>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label> {{ 'key_ToReqDeliveryDate' | translate }}</label>
+        <p-calendar [showIcon]="true" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2030" placeholder="MM-DD-YYYY"></p-calendar>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="form-group">
+        <label>{{ 'key_Salesmanager' | translate }}</label>
+        <angular2-multiselect fixFilterBug [data]="itemList" [(ngModel)]="selectedItems" [settings]="settings"
+                              (onSelect)="onItemSelect($event)"
+                              (onDeSelect)="OnItemDeSelect($event)"
+                              (onSelectAll)="onSelectAll($event)"
+                              (onDeSelectAll)="onDeSelectAll($event)"
+                              (onAddFilterNewItem)="onAddItem($event)">
+        </angular2-multiselect>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label>{{ 'key_Organization' | translate }}</label>
+        <angular2-multiselect fixFilterBug [data]="itemList" [(ngModel)]="selectedItems" [settings]="settings"
+                              (onSelect)="onItemSelect($event)"
+                              (onDeSelect)="OnItemDeSelect($event)"
+                              (onSelectAll)="onSelectAll($event)"
+                              (onDeSelectAll)="onDeSelectAll($event)"
+                              (onAddFilterNewItem)="onAddItem($event)">
+        </angular2-multiselect>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="col-md-12 justify-content-center d-flex mt-3">
+    <button class="btn btn-save">{{ 'key_ExportToExcel' | translate}}</button>
+    <button class="btn btn-next ml-2" *ngIf="filterSettings == 'Planned Order'"> {{ 'key_ExporttoPDF' | translate}} </button>
+  </div>
+</div>

@@ -1,0 +1,124 @@
+/*--Developer Name: Rajesh vishvakarma, Date: 17/08/2020, TFS ID: 17127,
+    Logic Description: Design sidebar menu--*/
+
+@media(min-width:992px) {
+
+  html:not([dir=rtl]) .sidebar-lg-show.sidebar-fixed .main {
+    margin-left: 260px;
+  }
+
+  .sidebar .nav-link {
+    padding: 0.55rem 1rem;
+    color: $text-color !important;
+  }
+
+  .brand-minimized .app-header .navbar-brand {
+    width: 150px;
+    height: 55px;
+    position: absolute;
+    padding: 0;
+    margin-right: 0;
+    background-color: transparent;
+  }
+
+  .sidebar-minimized .sidebar .sidebar-minimizer {
+    height: 100vh;
+    width: 48px;
+  }
+
+  body:not(.sidebar-minimized) .sidebar .sidebar-minimizer {
+    position: absolute !important;
+    top: 0%;
+    right: 0;
+  }
+
+  app-sidebar.primary-color.pt-4.sidebar {
+    position: fixed;
+    top: 0;
+    background-color: $bg-color;
+    z-index: 999;
+    height: 100vh;
+    width: 260px;
+  }
+
+  .sidebar-minimized app-sidebar.primary-color.pt-4.sidebar {
+    -webkit-transition: all 0.1s ease-in-out;
+    -moz-transition: all 0.1s ease-in-out;
+    -o-transition: all 0.1s ease-in-out;
+    transition: all 0.1s ease-in-out;
+    width: 0;
+  }
+
+  body:not(.sidebar-minimized) .sidebar .sidebar-minimizer::before {
+    content: "x";
+    background: none;
+    font-size: 24px;
+    font-weight: bold;
+    color: $black-color;
+  }
+
+  body .sidebar .sidebar-minimizer::before {
+    content: "Navigation";
+    background: none;
+    font-size: 20px;
+    top: 50%;
+    color: $header-color;
+    text-align: center;
+    right: 0;
+    transform: rotate(-90deg) !important;
+    width: 42px;
+    height: 42px;
+  }
+
+  body .sidebar .sidebar-minimizer:hover::before, body:not(.sidebar-minimized) .sidebar .sidebar-minimizer:hover::before {
+    background: none;
+  }
+
+  .app-body .main {
+    margin-left: 50px;
+  }
+
+  .app-header .navbar-brand img {
+    margin-left: 100%;
+  }
+
+  .brand-minimized .app-header .navbar-brand .navbar-brand-minimized {
+    padding-left: 0;
+  }
+
+  .app-header .navbar-brand .navbar-brand-minimized {
+    display: block;
+    padding-left: 25px;
+    height: 57px;
+  }
+
+  .home-blocks {
+    border-bottom: 1px solid $dark-bg;
+    padding: 9px 5px 9px 6px;
+    background-color: $dark-bg;
+    display: inline-block;
+    width: 100%;
+
+    span {
+      margin: 0 7px;
+
+      a {
+        color: $text-color;
+        font-weight: bold;
+        text-decoration: none;
+        font-size: 12px;
+      }
+    }
+  }
+  .sidebar-header-inside {
+    margin-bottom: -7px;
+  }
+
+}
+/*--min-width:992px--*/
+@media (min-width: 992px){
+  .sidebar-minimized .sidebar .nav-item {
+    width: 46px;
+  }
+  .sidebar-minimized .sidebar .sidebar-nav { width: 48px; }
+    }

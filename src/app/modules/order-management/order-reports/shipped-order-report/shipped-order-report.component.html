@@ -1,0 +1,199 @@
+<app-top-btn-group #btnBar [actionGroupConfig]="actionGroupConfig" (action)="actionHandler($event)"></app-top-btn-group>
+<table style="width:100%; border: none;" border="0">
+  <tr>
+    <td style="width:36%;">
+      <img src="assets/images/toscaOnly.png" />
+    </td>
+    <td>
+      <table style="border: none;">
+        <tr>
+          <td>
+            <table style="border: none; width: 36%;">
+              <tr>
+                <td colspan="4" class="text-center"><h4>Shipped Order Report</h4></td>
+              </tr>
+              <tr>
+                <td style="font-weight:bold">From Ship Date</td>
+                <td>05/30/2020</td>
+                <td style="font-weight:bold">To Ship Date</td>
+                <td>06/05/2020</td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+
+<table style="width:100%;">
+  <tr>
+    <td>
+      <table style="width: 100%;" cellpadding="0" cellspacing="0" border="1px solid black">
+
+        <tr style="background-color: #7ed4f6; text-align:center;" border="10">
+          <th style="padding: 5px;">{{ 'key_Ordertype' | translate }}</th>
+          <th style="padding: 5px;">{{ 'key_Location' | translate }}</th>
+          <th style="padding: 5px;">{{ 'key_RequestedDeliveryDate' | translate }}</th>
+          <th style="padding: 5px;">{{ 'key_shipDate' | translate }}</th>
+          <th style="padding: 5px;">{{ 'key_MustArriveByDate' | translate }}</th>
+          <th style="padding: 5px;">{{ 'key_Modal' | translate }}</th>
+          <th style="padding: 5px;">{{ 'key_OrderQty' | translate }}</th>
+          <th style="padding: 5px;">{{ 'key_ShippedQty' | translate }}</th>
+          <th style="padding: 5px;">{{ 'key_po' | translate }}</th>
+          <th style="padding: 5px;">{{ 'key_EnteredBy' | translate }}</th>
+          <th style="padding: 5px;">{{ 'key_Status' | translate }}</th>
+          <th style="padding: 5px;">{{ 'key_Carrier' | translate }}</th>
+          <th style="padding: 5px;">{{ 'key_bl' | translate }}</th>
+        </tr>
+        <tr>
+          <td style="font-weight: bold; padding: 5px;" colspan="13">AH Lowe-Cranbury,NJ [AH Lowe & Sons]</td>
+        </tr>
+        <tr style="border-bottom:1px solid black;">
+          <td style="padding: 5px;">Customer</td>
+          <td style="padding: 5px;">RPC Services of GA</td>
+          <td style="padding: 5px;">Jun 01</td>
+          <td style="padding: 5px;">May 30</td>
+          <td style="padding: 5px;">Jun 01</td>
+          <td style="padding: 5px;">6428</td>
+          <td style="padding: 5px;">6,600</td>
+          <td style="padding: 5px;">6,600</td>
+          <td style="padding: 5px;">na</td>
+          <td style="padding: 5px;">camisha nelson</td>
+          <td style="padding: 5px;">Shipped</td>
+          <td style="padding: 5px;">PPAK - PROPAK LOGISTICS INC</td>
+          <td style="padding: 5px;">407203.0</td>
+        </tr>
+
+        <tr style="border-bottom:1px solid black;">
+          <td style="padding: 5px; text-align:right; font-weight: bold;" colspan="6">Location Total</td>
+          <td style="padding: 5px;font-weight: bold;">6,600</td>
+          <td style="padding: 5px;font-weight: bold;">6,600</td>
+          <td style="padding: 5px;" colspan="8">&nbsp;</td>
+        </tr>
+        <tr>
+          <td colspan="13" style="font-weight: bold; padding: 5px;">Hillandale Farms (Lebanon) CT [Hillandale Farms Conn]</td>
+        </tr>
+        <tr style="border-bottom:1px solid black;">
+          <td style="padding: 5px;">Customer</td>
+          <td style="padding: 5px;">Tosca Hazleton</td>
+          <td style="padding: 5px;">Jun 03</td>
+          <td style="padding: 5px;">May 31</td>
+          <td style="padding: 5px;">Jun 03</td>
+          <td style="padding: 5px;">6332</td>
+          <td style="padding: 5px;">5,760</td>
+          <td style="padding: 5px;">5,760</td>
+          <td style="padding: 5px;">80101482</td>
+          <td style="padding: 5px;">C Griffin</td>
+          <td style="padding: 5px;">Shipped</td>
+          <td style="padding: 5px;">CPYL - CENTRAL PENNSYLVANIA TRANSPORTATION, INC.</td>
+          <td style="padding: 5px;">406328.0</td>
+        </tr>
+        <tr style="border-bottom:1px solid black;">
+          <td style="padding: 5px; text-align:right; font-weight: bold;" colspan="6">Location Total</td>
+          <td style="padding: 5px;font-weight: bold;">5,760</td>
+          <td style="padding: 5px;font-weight: bold;">5,760</td>
+          <td style="padding: 5px;" colspan="8">&nbsp;</td>
+        </tr>
+
+        <tr>
+          <td colspan="13" style="font-weight: bold; padding: 5px;">Hillandale Farms (Lebanon) CT [Hillandale Farms Conn]</td>
+        </tr>
+        <tr style="border-bottom:1px solid black;">
+          <td style="padding: 5px;">Customer</td>
+          <td style="padding: 5px;">Tosca Hazleton</td>
+          <td style="padding: 5px;">Jun 01</td>
+          <td style="padding: 5px;">May 30</td>
+          <td style="padding: 5px;">Jun 01</td>
+          <td style="padding: 5px;">6332</td>
+          <td style="padding: 5px;">5,760</td>
+          <td style="padding: 5px;">5,760</td>
+          <td style="padding: 5px;">80901</td>
+          <td style="padding: 5px;">gettys</td>
+          <td style="padding: 5px;">Shipped</td>
+          <td style="padding: 5px;">CPY2 - CENTRAL PENNSYLVANIA -DEDICATED</td>
+          <td style="padding: 5px;">406747.0</td>
+        </tr>
+        <tr style="border-bottom:1px solid black;">
+          <td style="padding: 5px; text-align:right; font-weight: bold;" colspan="6">Location Total</td>
+          <td style="padding: 5px;font-weight: bold;">5,760</td>
+          <td style="padding: 5px;font-weight: bold;">5,760</td>
+          <td style="padding: 5px;" colspan="8">&nbsp;</td>
+        </tr>
+
+        <tr>
+          <td colspan="13" style="font-weight: bold; padding: 5px;">L&R Farms Inc. WM [L&R Farms Inc.]</td>
+        </tr>
+        <tr style="border-bottom:1px solid black;">
+          <td style="padding: 5px;">Customer</td>
+          <td style="padding: 5px;">RPC Services of GA</td>
+          <td style="padding: 5px;">Jun 01</td>
+          <td style="padding: 5px;">May 30</td>
+          <td style="padding: 5px;">Jun 01</td>
+          <td style="padding: 5px;">6332</td>
+          <td style="padding: 5px;">5,760</td>
+          <td style="padding: 5px;">5,760</td>
+          <td style="padding: 5px;">RW060120TOS</td>
+          <td style="padding: 5px;">Rwilliams</td>
+          <td style="padding: 5px;">Shipped</td>
+          <td style="padding: 5px;">FLCC - FLEET CONCEPTS, INC</td>
+          <td style="padding: 5px;">405949.0</td>
+        </tr>
+        <tr style="border-bottom:1px solid black;">
+          <td style="padding: 5px; text-align:right; font-weight: bold;" colspan="6">Location Total</td>
+          <td style="padding: 5px;font-weight: bold;">5,760</td>
+          <td style="padding: 5px;font-weight: bold;">5,760</td>
+          <td style="padding: 5px;" colspan="8">&nbsp;</td>
+        </tr>
+        <tr>
+          <td colspan="13" style="font-weight: bold; padding: 5px;">Moore Farms [Moore Farms]</td>
+        </tr>
+        <tr style="border-bottom:1px solid black;">
+          <td style="padding: 5px;">Customer</td>
+          <td style="padding: 5px;">RPC Services of GA</td>
+          <td style="padding: 5px;">May 20</td>
+          <td style="padding: 5px;">May 20</td>
+          <td style="padding: 5px;">May 29</td>
+          <td style="padding: 5px;">6332</td>
+          <td style="padding: 5px;">6,600</td>
+          <td style="padding: 5px;">6,600</td>
+          <td style="padding: 5px;">na</td>
+          <td style="padding: 5px;">camisha nelson</td>
+          <td style="padding: 5px;">Shipped</td>
+          <td style="padding: 5px;">BQSC - BROWN LOGISTICS SERVICES, INC.</td>
+          <td style="padding: 5px;">406590.0</td>
+        </tr>
+        <tr style="border-bottom:1px solid black;">
+          <td style="padding: 5px; text-align:right; font-weight: bold;" colspan="6">Location Total</td>
+          <td style="padding: 5px;font-weight: bold;">6,600</td>
+          <td style="padding: 5px;font-weight: bold;">6,600</td>
+          <td style="padding: 5px;" colspan="8">&nbsp;</td>
+        </tr>
+        <tr>
+          <td colspan="13" style="font-weight: bold; padding: 5px;">Norco Ranch DC (KR) [Norco Ranch]</td>
+        </tr>
+        <tr style="border-bottom:1px solid black;">
+          <td style="padding: 5px;">CPU Order</td>
+          <td style="padding: 5px;">Tosca San Bernardino</td>
+          <td style="padding: 5px;">May 30</td>
+          <td style="padding: 5px;">May 30</td>
+          <td style="padding: 5px;">May 30</td>
+          <td style="padding: 5px;">6332</td>
+          <td style="padding: 5px;">3,744</td>
+          <td style="padding: 5px;">3,744</td>
+          <td style="padding: 5px;">56359-1</td>
+          <td style="padding: 5px;">camisha nelson</td>
+          <td style="padding: 5px;">Shipped</td>
+          <td style="padding: 5px;">CPU1 - CPU (Customer Pick up)</td>
+          <td style="padding: 5px;">405801.0</td>
+        </tr>
+        <tr style="border-bottom:1px solid black;">
+          <td style="padding: 5px; text-align:right; font-weight: bold;" colspan="6">Location Total</td>
+          <td style="padding: 5px;font-weight: bold;">3,744</td>
+          <td style="padding: 5px;font-weight: bold;">3,744</td>
+          <td style="padding: 5px;" colspan="8">&nbsp;</td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>

@@ -1,0 +1,115 @@
+<div class="modal-header">
+  <h4 class="modal-title" id="modal-basic-title">
+    {{modalData.modelStagename | translate}} {{modalData.modelName | translate}}
+
+  </h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body modalbg">
+
+  <!--add time and user with comment history session-->
+  <div class="row">
+    <div class="col-sm-6 bg-whites pdr">
+      <div class="cardpdrtop card">
+        <div class="row">
+          <div class="col-lg-6 col-xs-6 col-sm-6 col-md-12">
+            <span><i class="fa fa-clock-o fa-3" aria-hidden="true"></i></span>
+            <span class="ml-1" [innerHTML]="modalData.DisplayTime +' '+ modalData.timeZone"> </span>
+          </div>
+          <div class="col-lg-6 col-xs-6 col-sm-6 col-md-12">
+            <span><i class="fa fa-user-circle-o" aria-hidden="true"></i></span>
+            <span class="ml-1">{{userName}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6 bg-whites pdrright">
+      <div class="cardpdrtop card">
+        <div class="row">
+          <div class="col-xs-6">
+            <span class="ml-3"><i class="fa fa-history" aria-hidden="true"></i></span>
+            <span class="ml-1">{{ 'key_Commenthistory' | translate }}</span>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--add time and user with comment history session-->
+
+  <div class="row">
+    <div class="col-sm-6 pdr  ">
+      <div class="panelbg panelbgcircle card commentheight">
+        <form (ngSubmit)="passBack()" [formGroup]="UserTempratureForm">
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="company">{{ 'Key_Temperature' | translate }}</label>
+                <input type="text" formControlName="value" (change)="TempValue($event)"  class="HeartRate form-control" #value />
+                <app-control-messages [control]="f['value']"></app-control-messages>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form formcircles cf">
+                <section class="plan cf">
+                 <ng-container *ngFor="let item of modalData.dtTempList">
+                    <input (change)="changeTemp(item.Id,value)" formControlName="TemperatureType" type="radio"
+
+                           id="basic_{{item.Id}}" value="{{item.Id}}">
+                    <label class="basic-label four cols" for="basic_{{item.Id}}">{{item.Name}}</label>
+                  </ng-container>
+
+                </section>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="form-group">
+            <label for="company">{{ 'key_Commentsarea' | translate }}</label>
+            <textarea [attr.placeholder]="'key_Comments' | translate" class="Comments form-control" formControlName="remarks" rows="3"></textarea>
+          </div>
+          <div class="form-group text-center">
+            <button type="submit" class="btn btn-pill btnsave  btn-raised btnbg"
+                   [disabled]="UserTempratureForm.invalid">
+              <span [innerHTML]="'key_Save' | translate"></span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="panelbg card commentheight">
+        <app-recentcomment [posts]="newtempData" [chartName]="validationModel.ChartName"></app-recentcomment>
+      </div>
+    </div>
+  </div>
+
+  <form>
+    <!--<div class="form-group row">
+      <div class="col-sm-4">
+        <input type="text" formControlName="inputBy" class="inputby form-control" />
+        <app-control-messages [control]="f['inputBy']"></app-control-messages>
+      </div>
+      <div class="col-sm-4">
+        <input type="text" formControlName="currentTime" class="time form-control" />
+        <app-control-messages [control]="f['currentTime']"></app-control-messages>
+      </div>
+    </div>-->
+</form>
+</div>
+     
+  <!--end code-->
+  <!--Code comment template example -
+    Developer Name: Satyen Singh
+    Date: July 07 , 2020
+    TFS ID: 16715
+    Logic Description:Latent Phase - Temprature - Design the popup..
+    Code Start
+  -->
+  <!---TFS ID 16715 end code-->
+
+
+

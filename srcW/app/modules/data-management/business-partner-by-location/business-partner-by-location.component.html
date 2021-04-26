@@ -1,0 +1,83 @@
+<app-top-btn-group #btnBar [actionGroupConfig]="actionGroupConfig" (action)="actionHandler($event)">
+
+</app-top-btn-group>
+
+<!-- <div style="margin-bottom:30px;"> -->
+<div style="">
+  <div class="form-area">
+    <div class="wrapper">
+      <div class="content-wrapper">
+        <div>
+          <h5> {{ 'key_business_partner' | translate }}</h5>
+        </div>
+        <mat-tab-group #tabGroupA class="mt-18 staper-bg" animationDuration="0ms"
+                       (selectedTabChange)="tabChange($event)">
+          <mat-tab #tab1 *ngIf="tabBusinessPartnerList" label="Location">
+            <ng-template mat-tab-label>
+              {{ 'key_Businesspartnerlist' | translate }}
+            </ng-template>
+            <div class="tab-content" *ngIf="tabBusinessPartnerListData">
+              <app-businesspartner-list [bpByLocationInEdit]="bpByLocationInEdit"
+                                        (selectedBpByLocation)="selectedBpByLocation($event)">
+
+              </app-businesspartner-list>
+            </div>
+          </mat-tab>
+          <mat-tab #tab4 *ngIf="tabCarrier" label="Carrier">
+            <ng-template mat-tab-label>
+              {{'key_CarrierList' | translate}}
+            </ng-template>
+            <div class="tab-content" *ngIf="tabCarrierData">
+              <app-carrierpartnerlist [bpByCarrierInEdit]="bpByCarrierInEdit"
+                                      (selectedBpByCarrier)="selectedBpByCarrier($event)">
+
+              </app-carrierpartnerlist>
+            </div>
+          </mat-tab>
+          <mat-tab #tab4A *ngIf="tabCarrierA" label="CarrierA">
+            <ng-template mat-tab-label>
+              {{'key_CarrierList' | translate}}
+            </ng-template>
+            <div class="tab-content" *ngIf="tabCarrierDataA">
+              <app-carrierpartnerlist [bpByCarrierInEdit]="bpByCarrierInEdit"
+                                      (selectedBpByCarrier)="selectedBpByCarrier($event)">
+
+              </app-carrierpartnerlist>
+            </div>
+          </mat-tab>
+
+          <mat-tab #tab2 *ngIf="tabAddBusinessPartner" label="Add">
+            <ng-template mat-tab-label animationDuration="0ms">
+              {{ 'key_Add' | translate }} {{ 'key_Carrier' | translate }}
+              <button class="close" type="button" (click)="closeTab()">
+                <i class="fa fa-times-circle-o" aria-hidden="true"></i>
+              </button>
+            </ng-template>
+            <div class="tab-content" *ngIf="tabAddBusinessPartnerData">
+              <app-add-business-partner></app-add-business-partner>
+            </div>
+          </mat-tab>
+
+          <mat-tab #tab3 *ngIf="tabEditBusinessPartner" label="Edit">
+            <ng-template mat-tab-label animationDuration="0ms">
+              {{ 'key_Edit' | translate }}
+              <button class="close" type="button" (click)="closeTab()">
+                <i class="fa fa-times-circle-o" aria-hidden="true"></i>
+              </button>
+            </ng-template>
+            <div class="tab-content" *ngIf="tabEditBusinessPartnerData">
+              <app-edit-business-partner  [isCarrierTab]="isCarrierTab"
+                                         [selectedBP]="getRowsSelected()"
+                                         (bpInEdit)="setBPInEdit($event)">
+
+              </app-edit-business-partner>
+            </div>
+          </mat-tab>
+
+        </mat-tab-group>
+
+      </div>
+    </div>
+  </div>
+</div>
+<app-show-notes></app-show-notes>

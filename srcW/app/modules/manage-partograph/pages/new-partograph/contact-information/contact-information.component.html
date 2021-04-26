@@ -1,0 +1,135 @@
+<div class="col-lg-12">
+  <!---============bottom panel===============-->
+  <div id="accordionTab1" class="accordion" [ngStyle]="{'pointer-events': pointerevents}">
+    <div class="card mb-0">
+      <div class="card-header collapsed" data-toggle="collapse" href="#collapseTwo">
+        <a class="card-title" disabled="disabled">
+          {{ 'key_Contact' | translate }} ({{this.listcontatLen}})
+        </a>
+      </div>
+      <div id="collapseTwo" class="card-body collapse" data-parent="#accordionTab1">
+        <app-contact-panel  [getContactById]="PatientId" [PageActionType]="pageActionTypePatient" (listLength)="GetCountCotact($event)"></app-contact-panel>
+      </div>
+      <!--=============address panel==================-->
+      <div class="card-header collapsed" data-toggle="collapse" href="#address">
+        <a class="card-title">
+          Address ({{this.listaddresstLen}})
+        </a>
+      </div>
+      <div id="address" class="card-body collapse" data-parent="#accordionTab1">
+        <app-address-panel [getAddresById]="this.PatientId" [PageActionType]="pageActionTypePatient" (addressListCount)="GetCountAddress($event)"></app-address-panel>
+      </div>
+      <!--============end addres panel==================-->
+
+      <div class="card-header collapsed" data-toggle="collapse" href="#Physicians">
+        <a class="card-title">
+          Physicians(primary & secondary) ({{this.physicianList.length}})
+        </a>
+      </div>
+      <div id="Physicians" class="card-body collapse" data-parent="#accordionTab1">
+        <!--<app-physicians></app-physicians>-->
+
+        <div class="row">
+          <div class="col-md-12">
+            <div class="d-flex flex-nowrap justify-content-between align-items-center mb-3">
+              <!--<div></div>-->
+              <div>
+                <div class="btn-group btn-group-toggle btn-group-md" data-toggle="buttons">
+                  <button id="addContactButton" class="btn btn-outline-primary" (click)="addPhy()" type="button" placement="bottom" ngbTooltip="Add New">
+                    <i class="fa fa-plus" aria-hidden="true"></i>
+                    <span>
+                      Add New
+                    </span>
+                  </button>
+
+                  <button id="deleteButton" class="btn btn btn-outline-danger" (click)="DeletePhysician()" [disabled]="buttonPhysicianEnableDisable" type="button" placement="bottom" ngbTooltip="Delete">
+                    <i class="fa fa-trash-o" aria-hidden="true"></i>
+                    <span>
+                      Delete
+                    </span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--<div class="col-md-12">
+            <table class="table table-striped table-bordered">
+              <thead>
+                <tr>
+                  <th class="no-sort" width="5%">
+                    <div class="form-check-inline">
+                      <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input" value="" data-toggle="tooltip" data-placement="top" title="Select all">
+                      </label>
+                    </div>
+                  </th>
+                  <th width="30%">Physician Type</th>
+                  <th width="35%">Physician Name</th>
+
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <div class="form-check-inline">
+                      <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input" value="">
+                      </label>
+                    </div>
+                  </td>
+                  <td>Primary Physician</td>
+                  <td>Dr. Jain</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>-->
+
+          <div class="col-md-12">
+            <table class="table table-striped table-bordered">
+              <thead>
+                <tr>
+                  <th class="no-sort" width="5%">
+                    <div class="form-check-inline">
+                      <label class="form-check-label">
+                        <input type="checkbox" (change)="selectPhysicianAll($event);"
+                               class="form-check-input" value="" data-toggle="tooltip"
+                               data-placement="top" title="Select all">
+                      </label>
+                    </div>
+                  </th>
+                  <th>{{ 'key_PhysicianType' | translate }} </th>
+                  <th>{{ 'key_PhysicianName' | translate }}   </th>
+
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of physicianList" (click)="selectPhysicianCheckbox($event,item)" [ngClass]="[item.isPhysicianSelected === true ? 'activeRow' : '']">
+                  <td>
+                    <div class="form-check-inline">
+                      <label class="form-check-label">
+                        <mat-checkbox [checked]="item.isPhysicianSelected" (click)="$event.stopPropagation()" class="form-check-input"
+                                      (change)="selectPhysicianCheckbox($event,item)"></mat-checkbox>
+                      </label>
+                    </div>
+                  </td>
+                  <td>
+                    {{item.physicianType}}
+                  </td>
+                  <td>
+                    {{item.physicianName}}
+
+                  </td>
+
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <!---============bottom panel===============-->
+</div>
+

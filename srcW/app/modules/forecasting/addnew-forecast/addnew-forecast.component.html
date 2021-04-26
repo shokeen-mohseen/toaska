@@ -1,0 +1,130 @@
+<!--TFS ID: 17435,
+  Author: Monu Ram Yadav,
+  Date: 16-09-2020,
+  Des: Design add new forecast screen -->
+<!-- Modal Header -->
+<div class="modal-header">
+  <h5 class="modal-title">{{ 'key_CreateNewForecast' | translate }}</h5>
+  <button type="button" class="close" data-dismiss="modal" (click)="activeModal.dismiss('Cross click')">&times;</button>
+</div>
+
+<!-- Modal body -->
+<div class="modal-body">
+  <div class="custom-tab row">
+    <div class="col-lg-12">
+      <div class="tab-pane">
+        <form (ngSubmit)="onSubmit(validForm, userData)" #validForm="ngForm">
+          <div class="row mt-3">
+            <div class="col-md-12">
+              <div class="e-profile">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-inline row">
+                      <div class="col-sm-12 col-md-4 pr-0">
+                        <label class="d-block text-right mr-3">{{ 'key_Name' | translate }} <span class="text-danger">*</span></label>
+                      </div>
+                      <div class="col-sm-12 col-md-7">
+                        <input type="text" class="form-control w-100 mb-0" placeholder="" required>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-inline row">
+                      <div class="col-sm-12 col-md-4 pr-0">
+                        <label> {{ 'key_Description' | translate }}<span class="text-danger">*</span></label>
+                      </div>
+                      <div class="col-sm-12 col-md-7">
+                        <input type="text" class="form-control w-100 mb-0" placeholder="" required>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row mt-3">
+                  <div class="col-md-6">
+                    <div class="box-children bg-grey">
+                      <h4 class="text-red"> {{ 'key_ForecastPeriod' | translate }}</h4>
+                      <div class="row">
+                        <div class="col-md-12">
+                          <div class="form-group">
+                            <label for="firstname"> {{ 'key_CalenderType' | translate }}</label>
+                            <angular2-multiselect [data]="itemList" [(ngModel)]="selectedItemsB" [settings]="settings"
+                                                  (onSelect)="onItemSelect($event)"
+                                                  (onDeSelect)="OnItemDeSelect($event)"
+                                                  (onSelectAll)="onSelectAll($event)"
+                                                  (onDeSelectAll)="onDeSelectAll($event)"
+                                                  (onAddFilterNewItem)="onAddItem($event)" name="itemListA">
+                            </angular2-multiselect>
+                          </div>
+                        </div>
+
+                        <div class="col-md-12">
+                          <div class="form-group">
+                            <label> {{ 'key_StartPeriod' | translate }}<span class="text-danger">*</span></label>
+                            <angular2-multiselect [data]="itemListB" [(ngModel)]="userData.itemListB" [settings]="settingsB"
+                                                  (onSelect)="onItemSelect($event)"
+                                                  (onDeSelect)="OnItemDeSelect($event)"
+                                                  (onSelectAll)="onSelectAll($event)"
+                                                  (onDeSelectAll)="onDeSelectAll($event)"
+                                                  (onAddFilterNewItem)="onAddItem($event)" name="itemListB" required>
+                            </angular2-multiselect>
+                          </div>
+                        </div>
+                        <div class="col-md-12">
+                          <div class="form-group">
+                            <label> {{ 'key_EndPeriod' | translate }}<span class="text-danger">*</span></label>
+                            <angular2-multiselect [data]="itemListB" [(ngModel)]="userData.itemListB" [settings]="settingsB"
+                                                  (onSelect)="onItemSelect($event)"
+                                                  (onDeSelect)="OnItemDeSelect($event)"
+                                                  (onSelectAll)="onSelectAll($event)"
+                                                  (onDeSelectAll)="onDeSelectAll($event)"
+                                                  (onAddFilterNewItem)="onAddItem($event)" name="itemListB" required>
+                            </angular2-multiselect>
+                          </div>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <div class="box-children bg-grey">
+                      <h4 class="text-red"> {{ 'key_Salesmanager' | translate }}</h4>
+                      <div class="row">
+                        <div class="col-md-12">
+                          <div class="form-group">
+                            <label>{{ 'key_Salesmanager' | translate }}<span class="text-danger">*</span></label>
+                            <angular2-multiselect [data]="itemList" [(ngModel)]="selectedItems" [settings]="settings"
+                                                  (onSelect)="onItemSelect($event)"
+                                                  (onDeSelect)="OnItemDeSelect($event)"
+                                                  (onSelectAll)="onSelectAll($event)"
+                                                  (onDeSelectAll)="onDeSelectAll($event)"
+                                                  (onAddFilterNewItem)="onAddItem($event)" name="itemListA">
+                            </angular2-multiselect>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row justify-content-center my-5">
+                <div class="col-xl-3 col-lg-4 col-md-4 col-sm-12">
+                </div>
+                <div class="col-xl-3 col-lg-4 col-md-4 col-sm-12">
+                  <button type="submit" class="btn btn-block btn-save">{{ 'key_Submit' | translate }}</button>
+                </div>
+                <div class="col-xl-3 col-lg-4 col-md-4 col-sm-12">
+                </div>
+              </div>
+            </div>
+            <!--right panel tab Section End//////-->
+          </div>
+          <!--Row End//////-->
+          </form>
+      </div>
+      <!--tab-pane stepper-child-content-wrap end/////-->
+    </div>
+  </div>
+
+</div>

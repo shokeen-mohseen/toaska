@@ -1,0 +1,51 @@
+<!--TFS ID: 18510,
+  Author: Monu Ram Yadav,
+  Date: 09-11-2020,
+  Des: Design define marco indicator screen-->
+
+<!-->>>>>>>>>Note:- This page will use for second release only<<<<<<<<<<<-->
+
+<app-top-btn-group #btnBar [actionGroupConfig]="actionGroupConfig" (action)="actionHandler($event)"></app-top-btn-group>
+<!--Button Action Section End/////////-->
+<div>
+  <h5>{{ 'key_macroindicator' | translate }}</h5>
+</div>
+<mat-tab-group #tabGroupA class="mt-18" animationDuration="0ms" (selectedTabChange)="tabChange($event)">
+
+  <mat-tab #tab1 *ngIf="tab1">
+    <ng-template mat-tab-label>
+      {{ 'key_macroindicatorlist' | translate }}
+    </ng-template>
+    <div class="tab-content" *ngIf="tab1Data">
+      <app-macro-indicator-list></app-macro-indicator-list>
+    </div>
+  </mat-tab>
+
+  <mat-tab #tab2 *ngIf="tab2">
+    <ng-template mat-tab-label>
+      {{ 'key_newmacroindicator' | translate }}
+      <button class="close" type="button" (click)="closeTab()">
+        <i class="fa fa-times-circle-o" aria-hidden="true"></i>
+      </button>
+    </ng-template>
+    <div class="tab-content" *ngIf="tab2Data">
+      <app-add-marco-indicator></app-add-marco-indicator>
+    </div>
+  </mat-tab>
+
+  <mat-tab #tab3 *ngIf="tab3">
+    <ng-template mat-tab-label>
+      {{ 'key_editmacroindicator' | translate }}
+      <button class="close" type="button" (click)="closeTab()">
+        <i class="fa fa-times-circle-o" aria-hidden="true"></i>
+      </button>
+    </ng-template>
+    <div class="tab-content" *ngIf="tab3Data">
+      <app-edit-marco-indicator></app-edit-marco-indicator>
+    </div>
+  </mat-tab>
+</mat-tab-group>
+
+
+
+<app-show-notes></app-show-notes>

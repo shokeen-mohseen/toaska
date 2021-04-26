@@ -1,0 +1,34 @@
+<div class="card-header">
+  {{'key_Showshipnofilter' | translate}}
+</div>
+<div class="box-children mb-3 border-0">
+  <div class="row">
+    <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4">
+      <div class="form-group">
+        <label>
+          {{'key_Fromshipdate' | translate}}
+        </label>
+        <p-calendar class="col-sm-12 ml-0 pl-0" [showIcon]="true"
+                    [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2030"
+                    placeholder="MM-DD-YYYY" name="Fromshipdatecalendar" [(ngModel)]="FromshipdatecalendarDate"></p-calendar>
+
+      </div>
+    </div>
+    <div class="col-md-4 col-sm-12 col-lg-4 col-xl-4">
+      <div class="form-group">
+        <label>
+          {{
+'key_Toshipdatee' | translate
+          }}
+        </label>
+        <p-calendar class="col-sm-12 ml-0 pl-0" [showIcon]="true" [monthNavigator]="true" [yearNavigator]="true"
+                    yearRange="2000:2030" placeholder="MM-DD-YYYY" name="Toshipdatecalendar" [(ngModel)]="ToshipdatecalendarDate"></p-calendar>
+      </div>
+    </div>
+    <div class="col-md-2 col-sm-12 col-lg-2 col-xl-2">
+      <div class="form-group mt-4">
+        <button class="btn btn-next btn-w-h font-weight-normal" (click)="SearchShipDate()">{{ 'key_Search' | translate }}</button>
+      </div>
+    </div>
+  </div>
+</div>

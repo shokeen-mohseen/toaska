@@ -1,0 +1,63 @@
+<!-- Modal Header -->
+<div class="modal-header">
+  <h4 class="modal-title">{{ 'key_EquipmentType' | translate }}</h4>
+  <button type="button" class="close" data-dismiss="modal" (click)="close()">&times;</button>
+</div>
+
+<!-- Modal body -->
+<div class="modal-body">
+
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="form-group mb-4">
+        <label>{{ 'key_EquipmentType' | translate }}</label>
+        <angular2-multiselect fixFilterBug [data]="itemListA" [(ngModel)]="selectedItemsA" [settings]="settings" 
+                              (onSelect)="onItemSelect()"
+                              (onDeSelect)="onItemSelect()"
+                              (onSelectAll)="onItemSelect()"
+                              (onDeSelectAll)="onItemSelect()"
+                              (onAddFilterNewItem)="onAddItem($event)">
+          
+        </angular2-multiselect>
+      </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-12">
+        <!--
+  <div>
+    <mat-form-field appearance="outline" fxFlex="100">
+      <mat-label>{{ 'key_Filter' | translate }}</mat-label>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="{{ 'key_Filter' | translate }}">
+    </mat-form-field>
+  </div>
+    -->
+        <div class="scroll">
+          <mat-table #table [dataSource]="dataSource" matSort>
+
+            <ng-container matColumnDef="EquipmentType">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'key_EquipmentType' | translate }} </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.EquipmentType}} </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+          </mat-table>
+        </div>
+        <!--
+  <mat-paginator #paginator
+                 [pageSize]="10"
+                 [pageSizeOptions]="[5, 10, 20]">
+  </mat-paginator>
+    -->
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12 text-center mt-4">
+        <button id="btnSave" name="btnSave" class="btn btn-save popup-btn-width" (click)="onfinish()">Save</button>
+        <!--<input type="button" id="btnSave" name="btnSave" class="btn btn-save popup-btn-width" value="Save" (click)="onfinish()">-->
+      </div>
+    </div>
+
+  </div>

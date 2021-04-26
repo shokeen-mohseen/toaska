@@ -1,0 +1,51 @@
+<app-top-btn-group #btnBar [actionGroupConfig]="actionGroupConfig" (action)="actionHandler($event)"></app-top-btn-group>
+<div style="margin-bottom:30px;">
+  <div class="form-area">
+    <div class="wrapper">
+      <div class="content-wrapper">
+        <div>
+          <h5> {{ 'key_Customerbylocation' | translate }}</h5>
+        </div>
+        <mat-tab-group #tabGroupA class="mt-18" animationDuration="0ms" (selectedTabChange)="tabChange($event)">
+          <mat-tab #tab1 *ngIf="tabCustomerView">
+            <ng-template mat-tab-label>
+              {{ 'key_Customerlocationlist' | translate }}
+            </ng-template>
+            <div class="tab-content" *ngIf="tabCustomerViewData">
+              <app-customer-list [customersInEdit]="customersInEdit"
+                                 (selectedCustomer)="selectedCustomer($event)" ></app-customer-list>
+            </div>
+          </mat-tab>
+
+          <mat-tab #tab2 *ngIf="tabAddCustomer">
+            <ng-template mat-tab-label animationDuration="0ms">
+              {{ 'key_Addnew' | translate }}
+              <button class="close" type="button" (click)="closeTab()">
+                <i class="fa fa-times-circle-o" aria-hidden="true"></i>
+              </button>
+            </ng-template>
+            <div class="tab-content" *ngIf="tabAddCustomerData">
+              <app-add-customer-partner></app-add-customer-partner>
+            </div>
+          </mat-tab>
+
+          <mat-tab #tab3 *ngIf="tabEditCustomer">
+            <ng-template mat-tab-label animationDuration="0ms">
+              {{ 'key_Edit' | translate }}
+              <button class="close" type="button" (click)="closeTab()">
+                <i class="fa fa-times-circle-o" aria-hidden="true"></i>
+              </button>
+            </ng-template>
+            <div class="tab-content" *ngIf="tabEditCustomerData">
+              <app-edit-customer-partner [selectedCustomers]="customersSelected"
+                                         (customersInEdit)="setCustomersInEdit($event)"></app-edit-customer-partner>
+            </div>
+          </mat-tab>
+
+        </mat-tab-group>
+
+      </div>
+    </div>
+  </div>
+</div>
+<app-show-notes></app-show-notes>

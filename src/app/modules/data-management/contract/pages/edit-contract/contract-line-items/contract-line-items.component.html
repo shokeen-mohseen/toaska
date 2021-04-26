@@ -1,0 +1,55 @@
+<section class="moreOptions tabls-inline col-md-12">
+  <div class="row pb-2" style="border-bottom:1px solid #ddd;">
+    <ul class="nav nav-tabs col-md-5" id="myTab" role="tablist">
+      <li class="nav-item">
+        <a class="nav-link" id="add-tab" data-toggle="tab" href="#add" role="tab" aria-controls="add" aria-selected="false" ngbTooltip="{{ 'key_Add' | translate }}" (click)="setChildComponent(1)">
+          <i class="fa fa-plus" aria-hidden="true"></i>  {{'key_Add' | translate}}
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link active" id="view-tab" data-toggle="tab" href="#view" role="tab" aria-controls="view" aria-selected="true" ngbTooltip="{{ 'key_View' | translate }}" (click)="setChildComponent(0)">
+          <i class="fa fa-eye" aria-hidden="true"></i> {{'key_View' | translate}}
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" id="edit-tab" data-toggle="tab" href="#edit" role="tab" aria-controls="edit" aria-selected="false" ngbTooltip="{{ 'key_Edit' | translate }}"  (click)="displayeditlineitem()">
+          <i class="fa fa-pencil" aria-hidden="true"></i>
+          {{'key_Edit' | translate}}
+        </a>
+      </li>
+    </ul>
+
+    <div class="col-md-7 pr-0">
+      <div class="row">
+        <div class="col-md-7 getCharge"><label>{{'key_CopyChargesAndCharacteristics' | translate}}</label></div>
+        <div class="col-md-5 topGetharge">
+          <angular2-multiselect class="right" fixFilterBug [data]="ContractDescription" [(ngModel)]="selectedContract" [settings]="settingsCharge"
+                                (onSelect)="onItemSelect($event)"
+                                (onDeSelect)="OnItemDeSelect($event)"
+                                (onSelectAll)="onSelectAll($event)"
+                                (onDeSelectAll)="onDeSelectAll($event)"
+                                (onAddFilterNewItem)="onAddItemA($event)" name="getMatCharge">
+          </angular2-multiselect>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tab-content pb-3 pt-3" id="myTabContent">
+    <div class="tab-pane fade" id="add" role="tabpanel" aria-labelledby="add-tab">
+      <div class="row"><app-add-item style="width:100%" [viewRef]="viewItem" [editRef]="editItem" #addItem></app-add-item></div>
+    </div>
+    <div class="tab-pane fade show active" id="view" role="tabpanel" aria-labelledby="view-tab" >
+      <div class="row">
+        <app-view-item style="width:100%" #viewItem></app-view-item>
+      </div>
+      </div>
+    <div class="tab-pane fade" id="edit" role="tabpanel" aria-labelledby="edit-tab" >
+      <div class="row">
+        <app-edit-item style="width:100%" [viewRef]="viewItem"  #editItem></app-edit-item>
+      </div>
+    </div>
+  </div>
+</section>
+

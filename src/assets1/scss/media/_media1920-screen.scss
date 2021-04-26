@@ -1,0 +1,78 @@
+@media(min-width:1651px) and (max-width:1920px) {
+  .editLineItems, .newOne {
+    mat-cell,
+    mat-footer-cell,
+    mat-header-cell {
+      width: 85px;
+    }
+  }
+
+  .editLineItems {
+    .mat-column-Quantity_per_UOM, .mat-column-Rate, .mat-column-UOM {
+      width: 105px;
+    }
+
+    .mat-column-Material, .mat-column-Charge {
+      width: 130px
+    }
+
+    .mat-column-ShowOnBOL, .mat-column-AutoAdded, .mat-column-AddPallet, .mat-column-Add_New, .mat-column-Delete {
+      width: 66px;
+    }
+  }
+
+  .sidebar-minimized {
+    .editLineItems {
+      .mat-column-Material, .mat-column-Charge, .mat-column-Commodity {
+        width: 145px
+      }
+
+      .mat-column-Quantity_per_UOM, .mat-column-Rate, .mat-column-Sales_Tax_Price {
+        width: 135px;
+      }
+
+      .mat-column-UOM {
+        width: 105px;
+      }
+    }
+  }
+
+  .newOne .mat-table {
+    .mat-column-Sales_Tax_Price, .mat-column-RateType,
+    .mat-column-Material, .mat-column-UOM {
+      width: 110px;
+    }
+
+    
+  }
+
+  .sidebar-minimized {
+    .newOne {
+      .mat-column-Sales_Tax_Price, .mat-column-RateType,
+      .mat-column-Material, .mat-column-UOM {
+        width: 165px;
+      }
+    }
+  }
+
+  .existing {
+    .mat-column-Sales_Tax_Price, .mat-column-RateType,
+    .mat-column-Material, .mat-column-UOM {
+      width: 110px;
+    }
+
+    .mat-column-Add_New, .mat-column-Delete {
+      width: 50px;
+    }
+  }
+
+  .sidebar-minimized {
+    .existing {
+      .mat-column-Sales_Tax_Price, .mat-column-RateType,
+      .mat-column-Material, .mat-column-UOM {
+        width: 170px;
+      }
+    }
+  }
+}
+/*--media-end-(min-width:1651px) and (max-width:1920px)--*/

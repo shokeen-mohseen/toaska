@@ -1,0 +1,15 @@
+<!-- Modal Header -->
+<div class="modal-header">
+  <h4 class="modal-title">Add / Edit Roles</h4>
+  <button type="button" class="close" data-dismiss="modal" (click)="activeModal.dismiss('Cross click')">&times;</button>
+</div>
+
+<!-- Modal body -->
+<div class="modal-body">
+  <app-role-management [data]="list"
+                       (addEntry)="addEditUserRolesList($event)"
+                       (deleteEntry)="deleteUserRolesList($event)"
+                       [userId]="userId"
+                       [currentTab]="currentTab"
+                       [existIds]="roleIds"></app-role-management>
+</div>

@@ -1,0 +1,40 @@
+<app-top-btn-group #btnBar [actionGroupConfig]="actionGroupConfig" (action)="actionHandler($event)" [ParentPageName]="ShipmentHistoryList"></app-top-btn-group>
+<div>
+  <div class="form-area">
+    <div class="wrapper">
+      <div class="content-wrapper">
+        <div>
+          <h5>{{ 'key_ShipmentHistory' | translate }}</h5>
+        </div>
+        <mat-tab-group #tabGroupA class="mt-18" animationDuration="0ms" (selectedTabChange)="tabChange($event)">
+
+          <mat-tab #tab1 *ngIf="tab1">
+            <ng-template mat-tab-label>
+              {{ 'key_ShipmentHistoryList' | translate }}
+            </ng-template>
+            <div class="tab-content" *ngIf="tab1Data">
+              <app-shipment-history-list></app-shipment-history-list>
+            </div>
+          </mat-tab>
+
+          <mat-tab #tab2 *ngIf="tab2">
+            <ng-template mat-tab-label>
+            
+              {{ 'key_Shipment' | translate }}<span> -- {{this.shipmentManagementService.EditingShipmentHistory}}  </span>
+              <button class="close" type="button" (click)="closeTab()">
+                <i class="fa fa-times-circle-o" aria-hidden="true"></i>
+              </button>
+            </ng-template>
+            <div class="tab-content" *ngIf="tab2Data">
+              <!--This component call here only for view all fields will be disabled or readonly-->
+              <app-shipment-show-detail></app-shipment-show-detail>
+            </div>
+          </mat-tab>
+
+        </mat-tab-group>
+
+      </div>
+    </div>
+  </div>
+</div>
+<app-show-notes></app-show-notes>

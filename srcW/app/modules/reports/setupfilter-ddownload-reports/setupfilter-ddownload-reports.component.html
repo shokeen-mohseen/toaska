@@ -1,0 +1,134 @@
+<!-- Modal Header -->
+<div class="modal-header">
+  <h5 class="modal-title">{{ 'key_Filter' | translate }}</h5>
+  <button type="button" class="close" data-dismiss="modal" (click)="activeModal.dismiss('Cross click')">&times;</button>
+</div>
+
+<!-- Modal body -->
+<div class="modal-body">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group">
+            <label> {{ 'key_FromShipmentDate' | translate }}</label>
+            <ejs-datepicker [format]='dateFormat' [enabled]=true placeholder='11-01-2020'></ejs-datepicker>
+          </div>
+          <div class="form-group">
+            <label> {{ 'key_FromReqDeliveryDate' | translate }}</label>
+            <ejs-datepicker [format]='dateFormat' [enabled]=true placeholder='MM-DD-YYYY'></ejs-datepicker>
+          </div>
+          <div class="form-group">
+            <label>{{ 'key_Fromloctype' | translate }}</label>
+            <angular2-multiselect [data]="itemList" [(ngModel)]="selectedItems" [settings]="settings"
+                                  (onSelect)="onItemSelect($event)"
+                                  (onDeSelect)="OnItemDeSelect($event)"
+                                  (onSelectAll)="onSelectAll($event)"
+                                  (onDeSelectAll)="onDeSelectAll($event)"
+                                  (onAddFilterNewItem)="onAddItem($event)">
+            </angular2-multiselect>
+          </div>
+          <div class="form-group">
+            <label>{{ 'key_Toloctype' | translate }}</label>
+            <angular2-multiselect [data]="itemList" [(ngModel)]="selectedItems" [settings]="settings"
+                                  (onSelect)="onItemSelect($event)"
+                                  (onDeSelect)="OnItemDeSelect($event)"
+                                  (onSelectAll)="onSelectAll($event)"
+                                  (onDeSelectAll)="onDeSelectAll($event)"
+                                  (onAddFilterNewItem)="onAddItem($event)">
+            </angular2-multiselect>
+          </div>
+          <div class="form-group">
+            <label>{{ 'key_Carrier' | translate }}</label>
+            <angular2-multiselect [data]="itemList" [(ngModel)]="selectedItems" [settings]="settings"
+                                  (onSelect)="onItemSelect($event)"
+                                  (onDeSelect)="OnItemDeSelect($event)"
+                                  (onSelectAll)="onSelectAll($event)"
+                                  (onDeSelectAll)="onDeSelectAll($event)"
+                                  (onAddFilterNewItem)="onAddItem($event)">
+            </angular2-multiselect>
+          </div>
+          <div class="form-group">
+            <label>{{ 'key_Ordno' | translate }}</label>
+            <input type="text" class="form-control" />
+          </div>
+          <div class="form-group">
+            <label>{{ 'key_Invoicenumber' | translate }}</label>
+            <angular2-multiselect [data]="itemList" [(ngModel)]="selectedItems" [settings]="settings"
+                                  (onSelect)="onItemSelect($event)"
+                                  (onDeSelect)="OnItemDeSelect($event)"
+                                  (onSelectAll)="onSelectAll($event)"
+                                  (onDeSelectAll)="onDeSelectAll($event)"
+                                  (onAddFilterNewItem)="onAddItem($event)">
+            </angular2-multiselect>
+          </div>
+        </div>
+        </div>
+      </div>
+    <div class="col-md-6">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group">
+            <label>  {{ 'key_toShipmentDate' | translate }}</label>
+            <ejs-datepicker [format]='dateFormat' [enabled]=true placeholder='11-30-2020'></ejs-datepicker>
+          </div>
+          <div class="form-group">
+            <label> {{ 'key_ToReqDeliveryDate' | translate }}</label>
+            <ejs-datepicker [format]='dateFormat' [enabled]=true placeholder='MM-DD-YYYY'></ejs-datepicker>
+          </div>
+          <div class="form-group">
+            <label> {{ 'key_Shiploc' | translate }}</label>
+            <angular2-multiselect [data]="itemList" [(ngModel)]="selectedItems" [settings]="settings"
+                                  (onSelect)="onItemSelect($event)"
+                                  (onDeSelect)="OnItemDeSelect($event)"
+                                  (onSelectAll)="onSelectAll($event)"
+                                  (onDeSelectAll)="onDeSelectAll($event)"
+                                  (onAddFilterNewItem)="onAddItem($event)">
+            </angular2-multiselect>
+          </div>
+          <div class="form-group">
+            <label> {{ 'key_Shipto' | translate }}</label>
+            <angular2-multiselect [data]="itemList" [(ngModel)]="selectedItems" [settings]="settings"
+                                  (onSelect)="onItemSelect($event)"
+                                  (onDeSelect)="OnItemDeSelect($event)"
+                                  (onSelectAll)="onSelectAll($event)"
+                                  (onDeSelectAll)="onDeSelectAll($event)"
+                                  (onAddFilterNewItem)="onAddItem($event)">
+            </angular2-multiselect>
+          </div>
+          <div class="form-group">
+            <label>{{ 'key_Salesmanager' | translate }}</label>
+            <angular2-multiselect [data]="itemList" [(ngModel)]="selectedItems" [settings]="settings"
+                                  (onSelect)="onItemSelect($event)"
+                                  (onDeSelect)="OnItemDeSelect($event)"
+                                  (onSelectAll)="onSelectAll($event)"
+                                  (onDeSelectAll)="onDeSelectAll($event)"
+                                  (onAddFilterNewItem)="onAddItem($event)">
+            </angular2-multiselect>
+          </div>
+          <div class="form-group">
+            <label> {{ 'key_ShipmentNo' | translate }}</label>
+            <input type="text" class="form-control" />
+          </div>
+          <div class="form-group">
+            <label> {{ 'key_Status' | translate }}</label>
+            <angular2-multiselect [data]="itemList" [(ngModel)]="selectedItems" [settings]="settings"
+                                  (onSelect)="onItemSelect($event)"
+                                  (onDeSelect)="OnItemDeSelect($event)"
+                                  (onSelectAll)="onSelectAll($event)"
+                                  (onDeSelectAll)="onDeSelectAll($event)"
+                                  (onAddFilterNewItem)="onAddItem($event)">
+            </angular2-multiselect>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+      <!--Row End-->
+
+      <div class="col-md-12 justify-content-center d-flex mt-3">
+        <input type="button" class="btn btn-save mr-2 popup-btn-width" value="Apply Filter">
+        <input type="button" class="btn btn-next mr-2 popup-btn-width" value="Reset Filter" (click)="activeModal.dismiss('Cross click')">
+      </div>
+
+    </div>

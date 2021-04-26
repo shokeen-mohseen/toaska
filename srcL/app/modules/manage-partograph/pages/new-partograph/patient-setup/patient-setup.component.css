@@ -1,0 +1,43 @@
+.Obstetric-Formula, .box-wrap {
+  background-color: transparent;
+  /* padding: 15px;
+  margin-bottom: 15px;
+  border: 1px solid #f7f7f7;
+  box-shadow: 0 10px 10px -10px #444;
+  border-top: 1px solid pink;
+  background-color: #fff; */
+}
+
+ /* .Obstetric-Formula h4, .box-wrap h4 {
+    margin: 10px 0px;
+    padding: 5px;
+    font-size: 1rem;
+  }*/
+
+.box-children {
+  background-color: #fff;
+  border: 1px solid #f7f7f7;
+  /*box-shadow: 0 10px 10px -10px #999;*/
+  border-top: 1px solid pink;
+  margin: 0px;
+  padding: 15px 0px 5px ;
+}
+
+.btnleft {
+  margin-left: 20%;
+}
+
+@media screen and (max-width: 900px) {
+  .btnleft {
+    margin-left: 25%;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .btnleft {
+    margin-left: auto;
+  }
+}
+.btn-inputgroup {
+  background: #dcdcdc;
+}

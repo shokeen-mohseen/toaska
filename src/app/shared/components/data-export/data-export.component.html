@@ -1,0 +1,788 @@
+
+<div class="modal-header">
+  <h4 class="modal-title"> {{DocumentSectionTitle}} Export</h4>
+  <button type="button" class="close" data-dismiss="modal" (click)="activeModal.dismiss('Cross click')">&times;</button>
+</div>
+
+<!-- Modal body -->
+<div class="modal-body">
+  <div>
+    <h4>{{PopuHeading}}</h4>
+    <div class="row">
+
+      <div class="col-sm-6" *ngIf="IsMaterialName">
+        <div class="form-group">
+          <label>{{ 'key_Materialname' | translate }} </label>
+          <angular2-multiselect fixFilterBug (onSelect)="materialSelectionHandler()" [data]="materialNameData" [(ngModel)]="materialNameDataModel" [settings]="{ singleSelection: false, text: 'Select Material Name',  selectAllText: 'Select All', unSelectAllText: 'UnSelect All',  enableSearchFilter: true, badgeShowLimit: 2,  searchBy: ['name'], labelKey: 'name'}">
+          </angular2-multiselect>
+        </div>
+      </div>
+
+      <div class="col-sm-6" *ngIf="IsMaterialHistory">
+        <div class="form-group">
+          <label>{{ 'key_materialHistory' | translate }} </label>
+          <angular2-multiselect fixFilterBug [data]="materialHierarchyData$ | async" [(ngModel)]="materialHierarchyDataModel" [settings]="{ singleSelection: false, text: 'Select Material Hierarchy',  selectAllText: 'Select All', unSelectAllText: 'UnSelect All',  enableSearchFilter: true, badgeShowLimit: 2,  searchBy: ['name'], labelKey: 'materialHierarchyName'}">
+          </angular2-multiselect>
+        </div>
+      </div>
+
+      <div class="col-sm-12" *ngIf="IsChargeCategory">
+        <div class="form-group">
+          <label>Charge Category</label>
+          <angular2-multiselect fixFilterBug [data]="chargeCategoryData" [(ngModel)]="chargeCategoryDataModel" [settings]="{ singleSelection: false, text: 'Select Charge Category',  selectAllText: 'Select All', unSelectAllText: 'UnSelect All',  enableSearchFilter: true, badgeShowLimit: 2,  searchBy: ['name'], labelKey: 'name'}">
+          </angular2-multiselect>
+        </div>
+      </div>
+
+      <div class="col-sm-12" *ngIf="IsOrgnization">
+        <div class="form-group">
+          <label>Orgnization</label>
+          <angular2-multiselect fixFilterBug [data]="IsOrgnizationData" [(ngModel)]="IsOrgnizationDataModel" [settings]="{ singleSelection: false, text: 'Select Orgnization',  selectAllText: 'Select All', unSelectAllText: 'UnSelect All',  enableSearchFilter: true, badgeShowLimit: 2,  searchBy: ['billingName'], labelKey: 'billingName'}">
+          </angular2-multiselect>
+        </div>
+      </div>
+
+
+      <div class="col-sm-12" *ngIf="IsCarrierBillingEntity">
+        <div class="form-group">
+          <label>{{ 'key_BillingEntity' | translate }} </label>
+          <angular2-multiselect fixFilterBug [data]="billingEntityCarrierData" [(ngModel)]="billingEntityCarrierDataModel" [settings]="{ singleSelection: false, text: 'Select Billing Entity',  selectAllText: 'Select All', unSelectAllText: 'UnSelect All',  enableSearchFilter: true, badgeShowLimit: 2,  searchBy: ['billingEntityName'], labelKey: 'billingEntityName'}">
+          </angular2-multiselect>
+        </div>
+      </div>
+
+      <div class="col-sm-6" *ngIf="IsBusinessPartner">
+        <div class="form-group">
+          <label>{{ 'key_Businesspartner' | translate }} </label>
+          <angular2-multiselect fixFilterBug (onSelect)="businessPartnerSelectionHandler()" [data]="businessPartnerTypeData" [(ngModel)]="businessPartnerTypeDataModel" [settings]="{ singleSelection: false, text: 'Select Business Partner Type',  selectAllText: 'Select All', unSelectAllText: 'UnSelect All',  enableSearchFilter: true, badgeShowLimit: 2,  searchBy: ['name'], labelKey: 'name'}">
+          </angular2-multiselect>
+        </div>
+      </div>
+
+      <div class="col-sm-6" *ngIf="IsBillingEntity">
+        <div class="form-group">
+          <label>{{ 'key_BillingEntity' | translate }} </label>
+          <angular2-multiselect fixFilterBug [data]="billEntityData$ | async" [(ngModel)]="billingEntityDataModel" [settings]="{ singleSelection: false, text: 'Select Billing Entity', selectAllText: 'Select All', unSelectAllText: 'UnSelect All',  enableSearchFilter: true, badgeShowLimit: 2,  searchBy: ['billingEntityName'], labelKey: 'billingEntityName'}">
+          </angular2-multiselect>
+        </div>
+      </div>
+
+      <div class="col-sm-6" *ngIf="IsLocationTypeOrder">
+        <div class="form-group">
+          <label>{{ 'key_LocationType' | translate }} </label>
+          <angular2-multiselect fixFilterBug (onSelect)="locationTypeSelectionHandler()" [data]="locationTypeData" [(ngModel)]="locationTypeDataModel" [settings]="{ singleSelection: false, text: 'Select Location Type',  selectAllText: 'Select All', unSelectAllText: 'UnSelect All',  enableSearchFilter: true, badgeShowLimit: 2,  searchBy: ['name'], labelKey: 'name'}">
+          </angular2-multiselect>
+        </div>
+      </div>
+
+      <div class="col-sm-6" *ngIf="IsLocationOrder">
+        <div class="form-group">
+          <label>{{ 'key_Location' | translate }} </label>
+          <angular2-multiselect fixFilterBug [data]="locationData$ | async" [(ngModel)]="locattionDataModel" [settings]="{ singleSelection: false, text: 'Select Location', selectAllText: 'Select All', unSelectAllText: 'UnSelect All',  enableSearchFilter: true, badgeShowLimit: 2,  searchBy: ['location'], labelKey: 'location'}">
+          </angular2-multiselect>
+        </div>
+      </div>
+
+      <div class="col-sm-6" *ngIf="IsBillingEntityCustomer">
+        <div class="form-group">
+          <label>Customer Billing Entity </label>
+          <angular2-multiselect fixFilterBug [data]="customerBillingEntityData" [(ngModel)]="customerBillingEntityDataModel" [settings]="{ singleSelection: false, text: 'Select Customer Billing Entity',  selectAllText: 'Select All', unSelectAllText: 'UnSelect All',  enableSearchFilter: true, badgeShowLimit: 2,  searchBy: ['billingEntityName'], labelKey: 'billingEntityName'}">
+          </angular2-multiselect>
+        </div>
+      </div>
+
+      <div class="col-sm-6" *ngIf="IsBillingEntityBusiness">
+        <div class="form-group">
+          <label>Business Partner Billing Entity </label>
+          <angular2-multiselect fixFilterBug [data]="businessBillingEntityData" [(ngModel)]="businessBillingEntityDataModel" [settings]="{ singleSelection: false, text: 'Select Business Partner Billing Entity',  selectAllText: 'Select All', unSelectAllText: 'UnSelect All',  enableSearchFilter: true, badgeShowLimit: 2,  searchBy: ['billingEntityName'], labelKey: 'billingEntityName'}">
+          </angular2-multiselect>
+        </div>
+      </div>
+
+      <div class="col-sm-6" *ngIf="IsSalesManagerOrder">
+        <div class="form-group">
+          <label>Sales Manager</label>
+          <angular2-multiselect fixFilterBug [data]="salesManagerData" [(ngModel)]="salesManagerDataModel" [settings]="{ singleSelection: false, text: 'Select Sales Manager',  selectAllText: 'Select All', unSelectAllText: 'UnSelect All',  enableSearchFilter: true, badgeShowLimit: 2,  searchBy: ['FirstName'], labelKey: 'FirstName'}">
+          </angular2-multiselect>
+        </div>
+      </div>
+
+      <div class="col-sm-6" *ngIf="IsBillingEntityCustomerLocation">
+        <div class="form-group">
+          <label>Customer Billing Entity </label>
+          <angular2-multiselect fixFilterBug [data]="customerBillingEntityData" [(ngModel)]="customerBillingEntityDataModel" [settings]="{ singleSelection: false, text: 'Select Customer Billing Entity',  selectAllText: 'Select All', unSelectAllText: 'UnSelect All',  enableSearchFilter: true, badgeShowLimit: 2,  searchBy: ['billingEntityName'], labelKey: 'billingEntityName'}">
+          </angular2-multiselect>
+        </div>
+      </div>
+
+      <div class="col-sm-6" *ngIf="IsSalesManagerCustomerLocation">
+        <div class="form-group">
+          <label>Sales Manager</label>
+          <angular2-multiselect fixFilterBug [data]="salesManagerData" [(ngModel)]="salesManagerDataModel" [settings]="{ singleSelection: false, text: 'Select Sales Manager',  selectAllText: 'Select All', unSelectAllText: 'UnSelect All',  enableSearchFilter: true, badgeShowLimit: 2,  searchBy: ['FirstName'], labelKey: 'FirstName'}">
+          </angular2-multiselect>
+        </div>
+      </div>
+
+
+      <div class="col-sm-6" *ngIf="IsFromCountry">
+        <div class="form-group">
+          <label for="Fromcountry">{{ 'key_Fromcountry' | translate }}</label>
+          <angular2-multiselect fixFilterBug [data]="FcountryList" [(ngModel)]="FCountryData" [settings]="settingsA"
+                                (onSelect)="FreightLaneChange($event,'STATE','COUNTRY')"
+                                (onDeSelect)="OnItemDeSelect($event)"
+                                (onSelectAll)="onSelectAll($event)"
+                                (onDeSelectAll)="onDeSelectAll($event)"
+                                (onAddFilterNewItem)="onAddItemA($event)" name="FcountryList">
+          </angular2-multiselect>
+        </div>
+      </div>
+
+      <div class="col-sm-6" *ngIf="IsFromState">
+        <div class="form-group">
+          <label for="Fromstate">{{ 'key_Fromstate' | translate }}</label>
+          <angular2-multiselect fixFilterBug [data]="FstateList" [(ngModel)]="FStateData" [settings]="settingsA"
+                                (onSelect)="FreightLaneChange($event,'CITY','STATE')"
+                                (onDeSelect)="OnItemDeSelect($event)"
+                                (onSelectAll)="onSelectAll($event)"
+                                (onDeSelectAll)="onDeSelectAll($event)"
+                                (onAddFilterNewItem)="onAddItemA($event)" name="FstateList">
+          </angular2-multiselect>
+        </div>
+      </div>
+
+      <div class="col-sm-6" *ngIf="IsFromCity">
+        <div class="form-group">
+          <label for="Fromcity">{{ 'key_Fromcity' | translate }}</label>
+          <angular2-multiselect fixFilterBug [data]="FcityList" [(ngModel)]="FCityData" [settings]="settingsA"
+                                (onSelect)="FreightLaneChange($event,'ZIP','CITY')"
+                                (onDeSelect)="OnItemDeSelect($event)"
+                                (onSelectAll)="onSelectAll($event)"
+                                (onDeSelectAll)="onDeSelectAll($event)"
+                                (onAddFilterNewItem)="onAddItemA($event)" name="FcityList">
+          </angular2-multiselect>
+        </div>
+      </div>
+
+      <div class="col-sm-6" *ngIf="IsFromZip">
+        <div class="form-group">
+          <label for="Fromzip">{{ 'key_Fromzip' | translate }}</label>
+          <angular2-multiselect class="right" fixFilterBug [data]="FzipList" [(ngModel)]="FZipData" [settings]="settingsA"
+                                (onSelect)="onItemSelect($event)"
+                                (onDeSelect)="OnItemDeSelect($event)"
+                                (onSelectAll)="onSelectAll($event)"
+                                (onDeSelectAll)="onDeSelectAll($event)"
+                                (onAddFilterNewItem)="onAddItemA($event)" name="FzipList">
+          </angular2-multiselect>
+        </div>
+      </div>
+
+      <div class="col-sm-6" *ngIf="IsToCountry">
+        <div class="form-group">
+          <label for="Tocountry">{{ 'key_Tocountry' | translate }}</label>
+          <angular2-multiselect fixFilterBug [data]="TcountryList" [(ngModel)]="TCountryData" [settings]="settingsA"
+                                (onSelect)="FreightLaneChange($event,'STATE','COUNTRY')"
+                                (onDeSelect)="OnItemDeSelect($event)"
+                                (onSelectAll)="onSelectAll($event)"
+                                (onDeSelectAll)="onDeSelectAll($event)"
+                                (onAddFilterNewItem)="onAddItemA($event)" name="TcountryList">
+          </angular2-multiselect>
+        </div>
+      </div>
+
+      <div class="col-sm-6" *ngIf="IsToState">
+        <div class="form-group">
+          <label for="Tostate">{{ 'key_Tostate' | translate }}</label>
+          <angular2-multiselect fixFilterBug [data]="TstateList" [(ngModel)]="TStateData" [settings]="settingsA"
+                                (onSelect)="FreightLaneChange($event,'CITY','STATE')"
+                                (onDeSelect)="OnItemDeSelect($event)"
+                                (onSelectAll)="onSelectAll($event)"
+                                (onDeSelectAll)="onDeSelectAll($event)"
+                                (onAddFilterNewItem)="onAddItemA($event)" name="TstateList">
+          </angular2-multiselect>
+        </div>
+      </div>
+
+      <div class="col-sm-6" *ngIf="IsToCity">
+        <div class="form-group">
+          <label for="Tocity">{{ 'key_Tocity' | translate }}</label>
+          <angular2-multiselect fixFilterBug [data]="TcityList" [(ngModel)]="TCityData" [settings]="settingsA"
+                                (onSelect)="FreightLaneChange($event,'ZIP','CITY')"
+                                (onDeSelect)="OnItemDeSelect($event)"
+                                (onSelectAll)="onSelectAll($event)"
+                                (onDeSelectAll)="onDeSelectAll($event)"
+                                (onAddFilterNewItem)="onAddItemA($event)" name="TcityList">
+          </angular2-multiselect>
+        </div>
+      </div>
+
+      <div class="col-sm-6" *ngIf="IsToZip">
+        <div class="form-group">
+          <label for="Tozip">{{ 'key_Tozip' | translate }}</label>
+          <angular2-multiselect fixFilterBug class="right" [data]="TzipList" [(ngModel)]="TZipData" [settings]="settingsA"
+                                (onSelect)="onItemSelect($event)"
+                                (onDeSelect)="OnItemDeSelect($event)"
+                                (onSelectAll)="onSelectAll($event)"
+                                (onDeSelectAll)="onDeSelectAll($event)"
+                                (onAddFilterNewItem)="onAddItemA($event)" name="TzipList">
+          </angular2-multiselect>
+        </div>
+      </div>
+
+      <div class="col-sm-6" *ngIf="IsMode">
+        <div class="form-group">
+          <label for="FreightMode">{{ 'key_FreightMode' | translate }}</label>
+          <angular2-multiselect fixFilterBug [data]="FreightModeList" [(ngModel)]="FreightModeData" [settings]="{singleSelection: true, text: 'Select', enableSearchFilter: true, labelKey :'name', searchBy: ['name'] }"
+                                (onSelect)="onItemSelect($event)"
+                                (onDeSelect)="OnItemDeSelect($event)"
+                                (onSelectAll)="onSelectAll($event)"
+                                (onDeSelectAll)="onDeSelectAll($event)"
+                                (onAddFilterNewItem)="onAddItemA($event)" name="FreightModeList">
+          </angular2-multiselect>
+        </div>
+      </div>
+
+      <div class="col-sm-6" *ngIf="IsType">
+        <div class="form-group">
+          <label>{{ 'key_Type' | translate }} </label>
+          <angular2-multiselect fixFilterBug [data]="contractTypeListData" [(ngModel)]="contractTypeListDataModel" [settings]="{ singleSelection: false, text: 'Select Contract Type',  selectAllText: 'Select All', unSelectAllText: 'UnSelect All',  enableSearchFilter: true, badgeShowLimit: 2,  searchBy: ['name'], labelKey: 'name'}">
+          </angular2-multiselect>
+        </div>
+      </div>
+      <div class="col-sm-6" *ngIf="IsSalesManagerContract">
+        <div class="form-group">
+          <label>Sales Manager</label>
+          <angular2-multiselect fixFilterBug [data]="salesManagerData" [(ngModel)]="salesManagerDataModel" [settings]="{ singleSelection: false, text: 'Select Sales Manager',  selectAllText: 'Select All', unSelectAllText: 'UnSelect All',  enableSearchFilter: true, badgeShowLimit: 2,  searchBy: ['FirstName'], labelKey: 'FirstName'}">
+          </angular2-multiselect>
+        </div>
+      </div>
+      <div class="col-sm-6" *ngIf="IsBusinessPartnerContract">
+        <div class="form-group">
+          <label>Business Partner </label>
+          <angular2-multiselect fixFilterBug [data]="itemBusinessPartner" [(ngModel)]="businessPartnerTypeDataModel" [settings]="settingsB">
+          </angular2-multiselect>
+        </div>
+      </div>
+      <div class="col-sm-6" *ngIf="IsCustomerContract">
+        <div class="form-group">
+          <label>Customer </label>
+          <angular2-multiselect fixFilterBug [data]="customerListData" [(ngModel)]="customerListDataModel" [settings]="settingsB">
+          </angular2-multiselect>
+        </div>
+      </div>
+      <div class="col-sm-6" *ngIf="IsContractStart">
+        <div class="form-group">
+          <label>From Contract End Date </label>
+          <p-calendar [showIcon]="true" (onSelect)="onSelectMethod($event)" [(ngModel)]="frmContractDateModel" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2030" placeholder='MM/DD/YYYY'></p-calendar>
+        </div>
+      </div>
+      <div class="col-sm-6" *ngIf="IsContractEnd">
+        <div class="form-group">
+          <label>To Contract End Date </label>
+          <p-calendar [showIcon]="true" (onSelect)="onSelectMethod($event)" [(ngModel)]="toContractDateModel" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2030" placeholder='MM/DD/YYYY'></p-calendar>
+        </div>
+      </div>
+
+      <div class="col-sm-6" *ngIf="IsOrderTypeShow">
+        <div class="form-group">
+          <label>{{ 'key_Ordertype' | translate }} </label>
+          <angular2-multiselect fixFilterBug [data]="OrderTypeData" [(ngModel)]="OrderTypeDataModel" [settings]="{ singleSelection: false, text: 'Select Order Type',  selectAllText: 'Select All', unSelectAllText: 'UnSelect All',  enableSearchFilter: true, badgeShowLimit: 2,  searchBy: ['name'], labelKey: 'name'}">
+          </angular2-multiselect>
+        </div>
+      </div>
+
+
+      <div class="col-sm-6" *ngIf="IsFromDelieverydate">
+        <div class="form-group">
+          <label>{{ 'key_Frmdeli' | translate }} </label>
+          <p-calendar [showIcon]="true" (onSelect)="onSelectMethod($event)" [(ngModel)]="fromDelevryDateModel" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2030" placeholder='MM/DD/YYYY'></p-calendar>
+        </div>
+      </div>
+
+      <div class="col-sm-6" *ngIf="IsToDelieverydate">
+        <div class="form-group">
+          <label>{{ 'key_Todeli' | translate }} </label>
+          <p-calendar [showIcon]="true" (onSelect)="onSelectMethod($event)" [(ngModel)]="toDelevryDateModel" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2030" placeholder='MM/DD/YYYY'></p-calendar>
+        </div>
+      </div>
+
+      <div class="col-sm-6" *ngIf="IsFrmdatec">
+        <div class="form-group">
+          <label>{{ 'key_Frmdatec' | translate }}</label>
+          <p-calendar [showIcon]="true" name="fromOrderDate" [(ngModel)]="fromOrderDateModel" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2030" placeholder='MM/DD/YYYY'></p-calendar>
+        </div>
+      </div>
+      <div class="col-sm-6" *ngIf="IsTodatec">
+        <div class="form-group">
+          <label>{{ 'key_Todatec' | translate }} </label>
+          <p-calendar [showIcon]="true" name="toOrderDate" [(ngModel)]="toOrderDateModel" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2030" placeholder='MM/DD/YYYY'></p-calendar>
+        </div>
+      </div>
+
+      <div class="col-sm-6" *ngIf="IsFrmschduledate">
+        <div class="form-group">
+          <label>{{ 'key_Frmschduledate' | translate }} </label>
+          <p-calendar [showIcon]="true" name="fromScheduleDate" [(ngModel)]="fromScheduleDateModel" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2030" placeholder='MM/DD/YYYY'></p-calendar>
+        </div>
+      </div>
+      <div class="col-sm-6" *ngIf="IsToscheduledate">
+        <div class="form-group">
+          <label>{{ 'key_Toscheduledate' | translate }} </label>
+          <p-calendar [showIcon]="true" name="toScheduleDate" [(ngModel)]="toScheduleDateModel" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2030" placeholder='MM/DD/YYYY'></p-calendar>
+        </div>
+      </div>
+
+
+
+      <div class="col-sm-6" *ngIf="IsFrmClaimdate">
+        <div class="form-group">
+          <label>From Claim Date </label>
+          <p-calendar [showIcon]="true" name="fromClaimDate" [(ngModel)]="fromClaimDateModel" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2030" placeholder='MM/DD/YYYY'></p-calendar>
+        </div>
+      </div>
+      <div class="col-sm-6" *ngIf="IsToClaimdate">
+        <div class="form-group">
+          <label>To Claim Date </label>
+          <p-calendar [showIcon]="true" name="toClaimDate" [(ngModel)]="toClaimDateModel" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2030" placeholder='MM/DD/YYYY'></p-calendar>
+        </div>
+      </div>
+
+      <div class="col-sm-12" *ngIf="IsForcast">
+        <div class="form-group">
+          <label>Forecast </label>
+          <angular2-multiselect fixFilterBug [data]="ForcastData" [(ngModel)]="ForcastDataModel" [settings]="{ singleSelection: true, text: 'Select Forcast',  selectAllText: 'Select All', unSelectAllText: 'UnSelect All',  enableSearchFilter: true, badgeShowLimit: 2,  searchBy: ['label'], labelKey: 'label'}">
+          </angular2-multiselect>
+        </div>
+      </div>
+
+      <div class="col-sm-6" *ngIf="IsFromAPShipdate">
+        <div class="form-group">
+          <label>From Shipment Date</label>
+          <p-calendar [showIcon]="true" name="fromShipDate" [(ngModel)]="fromShipDateModel" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2030" placeholder='MM/DD/YYYY'></p-calendar>
+        </div>
+      </div>
+      <div class="col-sm-6" *ngIf="IsToAPShipdate">
+        <div class="form-group">
+          <label>To Shipment Date</label>
+          <p-calendar [showIcon]="true" name="toShipDate" [(ngModel)]="toShipDateModel" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2030" placeholder='MM/DD/YYYY'></p-calendar>
+        </div>
+      </div>
+      <div class="col-sm-6" *ngIf="IsFromAPReqdate">
+        <div class="form-group">
+          <label>From Req. Delivery Date</label>
+          <p-calendar [showIcon]="true" name="fromReqDate" [(ngModel)]="fromReqDateModel" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2030" placeholder='MM/DD/YYYY'></p-calendar>
+        </div>
+      </div>
+      <div class="col-sm-6" *ngIf="IsToAPReqdate">
+        <div class="form-group">
+          <label>To Req. Delivery Date</label>
+          <p-calendar [showIcon]="true" name="toReqDate" [(ngModel)]="toReqDateModel" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2030" placeholder='MM/DD/YYYY'></p-calendar>
+        </div>
+      </div>
+
+      <div class="col-sm-6" *ngIf="IsFromARShipdate">
+        <div class="form-group">
+          <label>From Shipment Date</label>
+          <p-calendar [showIcon]="true" name="fromShipDate" [(ngModel)]="fromShipDateModel" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2030" placeholder='MM/DD/YYYY'></p-calendar>
+        </div>
+      </div>
+      <div class="col-sm-6" *ngIf="IsToARShipdate">
+        <div class="form-group">
+          <label>To Shipment Date</label>
+          <p-calendar [showIcon]="true" name="toShipDate" [(ngModel)]="toShipDateModel" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2030" placeholder='MM/DD/YYYY'></p-calendar>
+        </div>
+      </div>
+      <div class="col-sm-6" *ngIf="IsFromARReqdate">
+        <div class="form-group">
+          <label>From Req. Delivery Date</label>
+          <p-calendar [showIcon]="true" name="fromReqDate" [(ngModel)]="fromReqDateModel" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2030" placeholder='MM/DD/YYYY'></p-calendar>
+        </div>
+      </div>
+      <div class="col-sm-6" *ngIf="IsToARReqdate">
+        <div class="form-group">
+          <label>To Req. Delivery Date</label>
+          <p-calendar [showIcon]="true" name="toReqDate" [(ngModel)]="toReqDateModel" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2030" placeholder='MM/DD/YYYY'></p-calendar>
+        </div>
+      </div>
+      <div class="col-sm-6" *ngIf="IsFromFreightShipdate">
+        <div class="form-group">
+          <label>From Shipment Date</label>
+          <p-calendar [showIcon]="true" name="fromShipDate" [(ngModel)]="fromShipDateModel" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2030" placeholder='MM/DD/YYYY'></p-calendar>
+        </div>
+      </div>
+      <div class="col-sm-6" *ngIf="IsToFreightShipdate">
+        <div class="form-group">
+          <label>To Shipment Date</label>
+          <p-calendar [showIcon]="true" name="toShipDate" [(ngModel)]="toShipDateModel" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2030" placeholder='MM/DD/YYYY'></p-calendar>
+        </div>
+      </div>
+      <div class="col-sm-6" *ngIf="IsSalesManagerPlanOrder">
+        <div class="form-group">
+          <label>Sales Manager</label>
+          <angular2-multiselect fixFilterBug [data]="salesManagerData" [(ngModel)]="salesManagerDataModel" [settings]="{ singleSelection: false, text: 'Select Sales Manager',  selectAllText: 'Select All', unSelectAllText: 'UnSelect All',  enableSearchFilter: true, badgeShowLimit: 2,  searchBy: ['FirstName'], labelKey: 'FirstName'}">
+          </angular2-multiselect>
+        </div>
+      </div>
+      <div class="col-sm-6" *ngIf="IsLocationTypePlanOrder">
+        <div class="form-group">
+          <label>Location Type </label>
+          <angular2-multiselect fixFilterBug (onSelect)="businessPartnerSelectionHandler()" [data]="businessPartnerTypeData" [(ngModel)]="businessPartnerTypeDataModel" [settings]="{ singleSelection: false, text: 'Select Location Type',  selectAllText: 'Select All', unSelectAllText: 'UnSelect All',  enableSearchFilter: true, badgeShowLimit: 2,  searchBy: ['name'], labelKey: 'name'}">
+          </angular2-multiselect>
+        </div>
+      </div>
+
+      <div class="col-sm-6" *ngIf="IsLocationPlanOrder">
+        <div class="form-group">
+          <label>Location </label>
+          <angular2-multiselect fixFilterBug [data]="billEntityData$ | async" [(ngModel)]="billingEntityDataModel" [settings]="{ singleSelection: false, text: 'Select Location', selectAllText: 'Select All', unSelectAllText: 'UnSelect All',  enableSearchFilter: true, badgeShowLimit: 2,  searchBy: ['billingEntityName'], labelKey: 'billingEntityName'}">
+          </angular2-multiselect>
+        </div>
+      </div>
+      <div class="col-sm-6" *ngIf="IsFromdatePlanOrder">
+        <div class="form-group">
+          <label>From Date</label>
+          <p-calendar [showIcon]="true" name="fromShipDate" [(ngModel)]="fromShipDateModel" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2030" placeholder='MM/DD/YYYY'></p-calendar>
+        </div>
+      </div>
+      <div class="col-sm-6" *ngIf="IsStatusPlanOrder">
+        <div class="form-group">
+          <label>Status </label>
+          <angular2-multiselect fixFilterBug [data]="OrderStatusData" [(ngModel)]="OrderStatusDataModel" [settings]="{ singleSelection: false, text: 'Select Status',  selectAllText: 'Select All', unSelectAllText: 'UnSelect All',  enableSearchFilter: true, badgeShowLimit: 2,  searchBy: ['name'], labelKey: 'name'}">
+          </angular2-multiselect>
+        </div>
+      </div>
+      <div class="col-sm-6" *ngIf="IsTodatePlanOrder">
+        <div class="form-group">
+          <label>To Date</label>
+          <p-calendar [showIcon]="true" name="toShipDate" [(ngModel)]="toShipDateModel" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2030" placeholder='MM/DD/YYYY'></p-calendar>
+        </div>
+      </div>
+
+
+      <div class="col-sm-6" *ngIf="IsSalesManagerShipOrder">
+        <div class="form-group">
+          <label>Sales Manager</label>
+          <angular2-multiselect fixFilterBug [data]="salesManagerData" [(ngModel)]="salesManagerDataModel" [settings]="{ singleSelection: false, text: 'Select Sales Manager',  selectAllText: 'Select All', unSelectAllText: 'UnSelect All',  enableSearchFilter: true, badgeShowLimit: 2,  searchBy: ['FirstName'], labelKey: 'FirstName'}">
+          </angular2-multiselect>
+        </div>
+      </div>
+      <div class="col-sm-6" *ngIf="IsLocationTypeShipOrder">
+        <div class="form-group">
+          <label>Location Type </label>
+          <angular2-multiselect fixFilterBug (onSelect)="businessPartnerSelectionHandler()" [data]="businessPartnerTypeData" [(ngModel)]="businessPartnerTypeDataModel" [settings]="{ singleSelection: false, text: 'Select Location Type',  selectAllText: 'Select All', unSelectAllText: 'UnSelect All',  enableSearchFilter: true, badgeShowLimit: 2,  searchBy: ['name'], labelKey: 'name'}">
+          </angular2-multiselect>
+        </div>
+      </div>
+
+      <div class="col-sm-6" *ngIf="IsLocationShipOrder">
+        <div class="form-group">
+          <label>Location </label>
+          <angular2-multiselect fixFilterBug [data]="billEntityData$ | async" [(ngModel)]="billingEntityDataModel" [settings]="{ singleSelection: false, text: 'Select Location', selectAllText: 'Select All', unSelectAllText: 'UnSelect All',  enableSearchFilter: true, badgeShowLimit: 2,  searchBy: ['billingEntityName'], labelKey: 'billingEntityName'}">
+          </angular2-multiselect>
+        </div>
+      </div>
+      <div class="col-sm-6" *ngIf="IsFromdateShipOrder">
+        <div class="form-group">
+          <label>From Date</label>
+          <p-calendar [showIcon]="true" name="fromShipDate" [(ngModel)]="fromShipDateModel" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2030" placeholder='MM/DD/YYYY'></p-calendar>
+        </div>
+      </div>
+      <div class="col-sm-6" *ngIf="IsStatusShipOrder">
+        <div class="form-group">
+          <label>Status </label>
+          <angular2-multiselect fixFilterBug [data]="OrderStatusData" [(ngModel)]="OrderStatusDataModel" [settings]="{ singleSelection: false, text: 'Select Status',  selectAllText: 'Select All', unSelectAllText: 'UnSelect All',  enableSearchFilter: true, badgeShowLimit: 2,  searchBy: ['name'], labelKey: 'name'}">
+          </angular2-multiselect>
+        </div>
+      </div>
+      <div class="col-sm-6" *ngIf="IsTodateShipOrder">
+        <div class="form-group">
+          <label>To Date</label>
+          <p-calendar [showIcon]="true" name="toShipDate" [(ngModel)]="toShipDateModel" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2030" placeholder='MM/DD/YYYY'></p-calendar>
+        </div>
+      </div>
+
+
+      <div class="col-sm-6" *ngIf="IsShipType">
+        <div class="form-group">
+          <label>Shipment Type </label>
+          <angular2-multiselect fixFilterBug [data]="ShipmentTypeData" [(ngModel)]="ShipmentTypeDataModel" [settings]="{ singleSelection: false, text: 'Select Shipment Type',  selectAllText: 'Select All', unSelectAllText: 'UnSelect All',  enableSearchFilter: true, badgeShowLimit: 2,  searchBy: ['name'], labelKey: 'name'}">
+          </angular2-multiselect>
+        </div>
+      </div>
+      <div class="col-sm-6" *ngIf="IsFromShipDate">
+        <div class="form-group">
+          <label>From Ship Date</label>
+          <p-calendar [showIcon]="true" name="fromShipDate" [(ngModel)]="fromShipDateModel" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2030" placeholder='MM/DD/YYYY'></p-calendar>
+        </div>
+      </div>
+      <div class="col-sm-6" *ngIf="IsShipStatus">
+        <div class="form-group">
+          <label>Shipment Status </label>
+          <angular2-multiselect fixFilterBug [data]="ShipmentStatusData" [(ngModel)]="ShipmentStatusDataModel" [settings]="{ singleSelection: false, text: 'Select Shipment Status',  selectAllText: 'Select All', unSelectAllText: 'UnSelect All',  enableSearchFilter: true, badgeShowLimit: 2,  searchBy: ['name'], labelKey: 'name'}">
+          </angular2-multiselect>
+        </div>
+      </div>
+      <div class="col-sm-6" *ngIf="IsToShipDate">
+        <div class="form-group">
+          <label>To Ship Date</label>
+          <p-calendar [showIcon]="true" name="toShipDate" [(ngModel)]="toShipDateModel" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2030" placeholder='MM/DD/YYYY'></p-calendar>
+        </div>
+      </div>
+      <div class="col-sm-6" *ngIf="IsShipCondition">
+        <div class="form-group">
+          <label>Shipment Condition </label>
+          <angular2-multiselect fixFilterBug [data]="ShipmentConditionData" [(ngModel)]="ShipmentConditionDataModel" [settings]="{ singleSelection: false, text: 'Select Status',  selectAllText: 'Select All', unSelectAllText: 'UnSelect All',  enableSearchFilter: true, badgeShowLimit: 2,  searchBy: ['name'], labelKey: 'name'}">
+          </angular2-multiselect>
+        </div>
+      </div>
+      <div class="col-sm-6" *ngIf="IsFromDelivDate">
+        <div class="form-group">
+          <label>From Delivery Date</label>
+          <p-calendar [showIcon]="true" name="fromDelDate" [(ngModel)]="fromDelDateModel" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2030" placeholder='MM/DD/YYYY'></p-calendar>
+        </div>
+      </div>
+
+
+      <div class="col-sm-6" *ngIf="IsLocationTypeShip">
+        <div class="form-group">
+          <label>{{ 'key_LocationType' | translate }} </label>
+          <angular2-multiselect fixFilterBug (onSelect)="locationTypeSelectionHandler()" [data]="locationTypeData" [(ngModel)]="locationTypeDataModel" [settings]="{ singleSelection: false, text: 'Select Location Type',  selectAllText: 'Select All', unSelectAllText: 'UnSelect All',  enableSearchFilter: true, badgeShowLimit: 2,  searchBy: ['name'], labelKey: 'name'}">
+          </angular2-multiselect>
+        </div>
+      </div>
+
+      <div class="col-sm-6" *ngIf="IsToDelivDate">
+        <div class="form-group">
+          <label>To Delivery Date</label>
+          <p-calendar [showIcon]="true" name="toDelDate" [(ngModel)]="toDelDateModel" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2030" placeholder='MM/DD/YYYY'></p-calendar>
+        </div>
+      </div>
+
+      <div class="col-sm-6" *ngIf="IsLocationShip">
+        <div class="form-group">
+          <label>{{ 'key_Location' | translate }} </label>
+          <angular2-multiselect fixFilterBug [data]="locationData$ | async" [(ngModel)]="locattionDataModel" [settings]="{ singleSelection: false, text: 'Select Location', selectAllText: 'Select All', unSelectAllText: 'UnSelect All',  enableSearchFilter: true, badgeShowLimit: 2,  searchBy: ['location'], labelKey: 'location'}">
+          </angular2-multiselect>
+        </div>
+      </div>
+
+
+
+      <div class="col-sm-6" *ngIf="IsShipCusBillEntity">
+        <div class="form-group">
+          <label>Customer Billing Entity </label>
+          <angular2-multiselect fixFilterBug [data]="customerBillingEntityData" [(ngModel)]="customerBillingEntityDataModel" [settings]="{ singleSelection: false, text: 'Select Customer Billing Entity',  selectAllText: 'Select All', unSelectAllText: 'UnSelect All',  enableSearchFilter: true, badgeShowLimit: 2,  searchBy: ['billingEntityName'], labelKey: 'billingEntityName'}">
+          </angular2-multiselect>
+        </div>
+      </div>
+      <div class="col-sm-6" *ngIf="IsShipBusPartBillEntity">
+        <div class="form-group">
+          <label>Business Partner Billing Entity </label>
+          <angular2-multiselect fixFilterBug [data]="businessBillingEntityData" [(ngModel)]="businessBillingEntityDataModel" [settings]="{ singleSelection: false, text: 'Select Business Partner Billing Entity',  selectAllText: 'Select All', unSelectAllText: 'UnSelect All',  enableSearchFilter: true, badgeShowLimit: 2,  searchBy: ['name'], labelKey: 'billingEntityName'}">
+          </angular2-multiselect>
+        </div>
+      </div>
+
+      <div class="col-sm-6" *ngIf="IsLocationTypeMaterailPlanOrder">
+        <div class="form-group">
+          <label>Location Type </label>
+          <angular2-multiselect fixFilterBug (onSelect)="getLocationMaterial()" (onSelectAll)="getLocationMaterial()" (onDeSelectAll)="removeLocationMaterial()" [data]="businessPartnerTypeData" [(ngModel)]="businessPartnerTypeDataModel" [settings]="{ singleSelection: false, text: 'Select Location Type',  selectAllText: 'Select All', unSelectAllText: 'UnSelect All',  enableSearchFilter: true, badgeShowLimit: 2,  searchBy: ['name'], labelKey: 'name'}">
+          </angular2-multiselect>
+        </div>
+      </div>
+      <div class="col-sm-6" *ngIf="IsLocationMaterailPlanOrder">
+        <div class="form-group">
+          <label>From Location </label>
+          <angular2-multiselect fixFilterBug [data]="locationMat$ | async" [(ngModel)]="billingEntityDataModel" [settings]="{ singleSelection: false, text: 'Select Location', selectAllText: 'Select All', unSelectAllText: 'UnSelect All',  enableSearchFilter: true, badgeShowLimit: 2,  searchBy: ['name'], labelKey: 'name'}">
+          </angular2-multiselect>
+        </div>
+      </div>
+
+      <div class="col-sm-6" *ngIf="IsFromStartDate">
+        <div class="form-group">
+          <label>Start Date</label>
+          <p-calendar [showIcon]="true" name="fromStartDate" [(ngModel)]="fromStartDateModel" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2030" placeholder='MM/DD/YYYY'></p-calendar>
+        </div>
+      </div>
+      <div class="col-sm-6" *ngIf="IsNumberDays">
+        <div class="form-group">
+          <label>Next Number of Days </label>
+          <input type="number" class="form-control" name="numberDays" [(ngModel)]="numberDays" placeholder="Next Number of Days" />
+        </div>
+      </div>
+      <div class="col-md-6 col-sm-12" *ngIf="IsMaterailPlanOrderReport">
+        <label class="mt-1 mb-1"> {{ 'key_ReportType' | translate }} <sup class="text-danger font-weight-bold sup1">*</sup></label>
+        <div class="form-group">
+
+          <div class="d-flex align-items-center mb-2">
+
+            <input type="radio" class="mr-2 width-16" id="radio1" name="fulfillment" [checked]="isMultiple"
+                   (click)="MaterialPlanningReport()">
+            <label class="mb-0" for="radio1"> Material Planning Report</label>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-sm-12" *ngIf="IsMaterailSummary">
+        <label class="mt-1 mb-1"> &nbsp;</label>
+
+        <div class="form-group">
+          <div class="d-flex align-items-center mb-2">
+            <input type="radio" class="mr-2 width-16" id="radio2" name="fulfillment"
+                   (click)="MaterialSummary()" [checked]="!isMultiple">
+            <label class="mb-0" for="radio2">Material Summary</label>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-sm-12" *ngIf="IsOpenOrder">
+        <label class="mt-1 mb-1">Include Open Order <sup class="text-danger font-weight-bold sup1"></sup></label>
+
+        <div class="form-group">
+          <div class="d-flex align-items-center mb-2">
+            <input type="checkbox" class="mr-2 width-16" id="checkbox" name="OpenOrder"
+                   (change)="OpenOrderCheckBox(isChecked)" [checked]="isChecked">
+            <label class="mb-0" for="checkbox"> Open Order</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6" *ngIf="IsShipExpAllVer">
+        <div class="form-check form-check-inline mr-1 mt-2">
+          <label class="form-check-label  mr-1" for="inline-checkbox1">Export All Versions</label>
+          <input class="form-check-input" id="inline-checkbox1" type="checkbox" (ngModelChange)="ShipmentAllVersion = $event ? true : false" [(ngModel)]="ShipmentAllVersion">
+        </div>
+      </div>
+
+      <div class="col-md-6" *ngIf="IsARChargeExpAllVer">
+        <div class="form-check form-check-inline mr-1 mt-2">
+          <label class="form-check-label  mr-1" for="inline-checkbox1">Export All Versions</label>
+          <input class="form-check-input" id="inline-checkbox1" type="checkbox" (ngModelChange)="ArchargeAllVersion = $event ? true : false" [(ngModel)]="ArchargeAllVersion">
+        </div>
+      </div>
+
+      <div class="col-md-6" *ngIf="IsAPChargeExpAllVer">
+        <div class="form-check form-check-inline mr-1 mt-2">
+          <label class="form-check-label  mr-1" for="inline-checkbox1">Export All Versions</label>
+          <input class="form-check-input" id="inline-checkbox1" type="checkbox" (ngModelChange)="ApchargeAllVersion = $event ? true : false" [(ngModel)]="ApchargeAllVersion">
+        </div>
+      </div>
+
+      <div class="col-md-6" *ngIf="IsFreightExpAllVer">
+        <div class="form-check form-check-inline mr-1 mt-2">
+          <label class="form-check-label  mr-1" for="inline-checkbox1">Export All Versions</label>
+          <input class="form-check-input" id="inline-checkbox1" type="checkbox" (ngModelChange)="FreightCostAllVersion = $event ? true : false" [(ngModel)]="FreightCostAllVersion">
+        </div>
+      </div>
+
+      <div class="col-md-6" *ngIf="IsContractExpAllVer">
+        <div class="form-check form-check-inline mr-1 mt-2">
+          <label class="form-check-label  mr-1" for="inline-checkbox1">Export All Versions</label>
+          <input class="form-check-input" id="inline-checkbox1" type="checkbox" (ngModelChange)="ContractAllVersion = $event ? true : false" [(ngModel)]="ContractAllVersion">
+        </div>
+      </div>
+
+      <div class="col-md-6" *ngIf="IsApplyCustomFilter">
+        <div class="form-group ">
+          <label>Apply Custom Filter </label>
+          <angular2-multiselect fixFilterBug [data]="customFilterItemListData" [(ngModel)]="customFilterItemListDataModel" [settings]="{ singleSelection: true, text: 'Select Custom Filter',  selectAllText: 'Select All', unSelectAllText: 'UnSelect All',  enableSearchFilter: true, badgeShowLimit: 2,  searchBy: ['name'], labelKey: 'name'}">
+          </angular2-multiselect>
+        </div>
+      </div>
+      <!--<div class="col-md-6" *ngIf="IsApplyCustomFilter">
+    <div class="form-check form-check-inline mr-1 mt-2">
+      <label class="form-check-label  mr-1" for="inline-checkbox1">Export All Versions</label>
+      <input class="form-check-input" id="inline-checkbox1" type="checkbox" (ngModelChange)="ExportAllVersion = $event ? true : false" [(ngModel)]="ExportAllVersion">
+    </div>
+  </div>-->
+
+      <div class="col-md-6" *ngIf="IsOrderExpAllVer">
+        <div class="form-check form-check-inline mr-1 mt-2">
+          <label class="form-check-label  mr-1" for="inline-checkbox1">Export All Versions</label>
+          <input class="form-check-input" id="inline-checkbox1" type="checkbox" (ngModelChange)="OrderAllVersion = $event ? true : false" [(ngModel)]="OrderAllVersion">
+        </div>
+      </div>
+      <div class="col-md-12 text-center">
+        <button name="btnSave" class="btn popup-btn-width btn-next btn-sm mb-2" (click)="refreshButtonCall()">{{ 'key_Refresh' | translate }}</button>
+        <button id="" name="btnNext" (click)="exportReport()" class="btn popup-btn-width btn-save btn-sm mb-2 ml-2">{{ 'key_Export' | translate }}</button>
+      </div>
+
+    </div>
+  </div>
+  <div>
+  </div>
+
+  
+  <div class="row">
+    <div class="col-lg-12">
+      
+      <div class="scroll">
+        
+        <mat-table #table [dataSource]="dataSource" matSort>
+
+          <ng-container *ngFor="let column of displayedColumns; let i=index;" [matColumnDef]="column">
+
+            <mat-header-cell *matHeaderCellDef mat-sort-header mwlResizable [enableGhostResize]="true" (resizeEnd)="onResizeEnd($event, column)"
+                             [resizeEdges]="{bottom: false, right: true, top: false, left: true}">
+
+              <div class="form-check-inline" *ngIf="column === selectRow">
+                <label class="form-check-label">
+                  <input type="checkbox" class="form-check-input" value="" placement="top" ngbTooltip="Select all" container="body" (change)="$event ? masterToggle() : null"
+                         [checked]="selection.hasValue() && isAllSelected()"
+                         [indeterminate]="selection.hasValue() && !isAllSelected()">
+                </label>
+              </div>
+              <div *ngIf="column != selectRow"> {{ displayedColumnsReplace[i] | translate }}</div>
+            </mat-header-cell>
+            <mat-cell *matCellDef="let item">
+              <ng-container [ngSwitch]="column">
+                <!--for-checkbox-->
+                <div class="form-check-inline" *ngSwitchCase="'selectRow'">
+                  <label class="form-check-label">
+                    <input type="checkbox" class="form-check-input" value="" (click)="$event.stopPropagation()"
+                           (change)="$event ? selection.toggle(item) : null"
+                           [checked]="selection.isSelected(item)">
+                  </label>
+                </div>
+                <div *ngSwitchCase="'createDateTimeBrowser'">
+                  <span>
+                    {{item.createDateTimeBrowser | momentDateWithZonePipe   }}
+
+                  </span>
+                </div>
+                <div *ngSwitchCase="'delete'" class="text-center">
+                  <a ngbtooltip="Delete" class="a_hover" ngbTooltip="Delete" (click)="deleteFile(item)">
+                    <i aria-hidden="true" class="fa fa-trash text-danger"></i>
+                  </a>
+                </div>
+
+                <div *ngSwitchCase="'statusDescription'" class="text-center">
+                  {{ item[column]}}
+
+                </div>
+                <div *ngSwitchCase="'download'" class="text-center">
+                  <a Tooltip="Download" *ngIf="item['statusDescription'] === 'Available'" class="a_hover" (click)="downloadExcel(item['path'])">
+                    <i aria-hidden="true" class="fa fa-download text-primary"></i>
+                  </a>
+                </div>
+                <ng-container *ngSwitchDefault>
+                  {{ item[column]}}
+                </ng-container>
+              </ng-container>
+            </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;" 
+                   (click)="selection.toggle(row)"></mat-row>
+        </mat-table>
+      </div>
+      <mat-paginator #paginator
+                     [pageSize]="10"
+                     [pageSizeOptions]="[5, 10, 20]">
+      </mat-paginator>
+    </div>
+  </div>
+</div>
+

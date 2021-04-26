@@ -1,0 +1,191 @@
+<div>
+  <div class="row">
+    <div class="col-md-6"></div>
+    <div class="col-md-6 text-right" *ngIf="this.IsLastUpdated">
+      <span class="fw600">Last Updated:	</span> {{this.lastUpdate}}
+      <br><span class="fw600">By</span> {{this.lastUpdatedBy}}
+    </div>
+  </div>
+  <!--Last Updated Section End//////////////-->
+
+  <form (ngSubmit)="SaveOperatingLocation()" [formGroup]="p2form">
+    <div class="row">
+      <div class="col-md-3 custom-flex-w-15">
+        <div class="card">
+          <div class="card-header">{{ 'key_EditList' | translate }}</div>
+          <div class="card-body p-0">
+            <div class="card-body p-0">
+              <div class="list-group" #nextList>
+                <div class="list-group-item list-group-item-action" [ngClass]="[hospitalData.id === id ? 'active' : '']"
+                     *ngFor="let hospitalData of dataSource; let i = index" (click)="selectedHospital(i,0)">
+                  <a title="{{hospitalData.locationDescription}}">{{hospitalData.locationDescription}}</a>
+
+                  <button class="close" *ngIf="hospitalData?.id != id" type="button"
+                          (click)="removePatient(i)">
+                    <i class="fa fa-times" aria-hidden="true"></i>
+                  </button>
+                  <!--<button class="close" type="button" (click)="removePatient(i)">
+                    <i class="fa fa-times" aria-hidden="true"></i>
+                  </button>-->
+                </div>
+             </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-9 custom-flex-w-85">
+        <div class="tab-content">
+          <!--=============== Start profile =================-->
+          <div class="e-profile">
+            <div class="row">
+              <div class="col-md-4">
+                <div class="box-children">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label> {{ 'key_Function' | translate }} <span class="text-danger">*</span></label>
+                       
+                        <angular2-multiselect fixFilterBug [data]="itemLocationFunctionList"
+                                              formControlName="LocationFunction"
+                                              [settings]="settings"
+                                              (onSelect)="onItemSelect($event)"
+                                              (onDeSelect)="OnItemDeSelect($event)"
+                                              (onSelectAll)="onSelectAll($event)"
+                                              (onDeSelectAll)="onDeSelectAll($event)"
+                                              (onAddFilterNewItem)="onAddItem($event)" required>
+                        </angular2-multiselect>
+
+
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label> {{ 'key_Locationname' | translate }}</label>
+                        <textarea rows="2" class="form-control" value="" disabled formControlName="LocationDescription"></textarea>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="box-children">
+                  <div class="d-flex flex-nowrap justify-content-between align-items-center">
+                    <h5>{{ 'key_Organization' | translate }}</h5>
+                  </div>
+                  <app-organizationinfo [organizationId]="organizationId" [disabled]="disabled" (change)="isUpdateChange()" [PageActionType] ="PageActionType" [OrgLevel]="OrgLevel"
+                                          [viewMode]="viewMode" (changeSelected)="GetOrganization($event)"></app-organizationinfo>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="box-children">
+                  <div class="form-group">
+                    <span class="fw600 mr-3 " for="lastname"> {{ 'key_Status' | translate }} </span>
+                    <span for="lastname"> {{this.p2form.get('Active').value}} </span>
+                  </div>
+                  <div class="form-group">
+                    <div class="form-check checkbox pl-0">
+                      <label class="form-check-label" for="check1">{{ 'key_SetupCompleted' | translate }}</label>
+                      <input class="form-check-input ml-2" id="check1" (change)="isUpdateChangeCheckBox($event)" type="checkbox" formControlName="SetupCompletedStatus">
+                    </div>
+                  </div>
+                  <div class="form-group d-flex">
+                    <span class="fw600 p-0  col-md-5" for="lastname">{{ 'key_SetupDatetime' | translate }} </span>
+                    <span for="lastname" class="text-break col-md-7 pr-0" *ngIf="IssetupCompleted">{{this.SetupCompleteDate}} </span>
+                    <!--<span for="lastname"> 8/31/2020 7:05:24 IST </span>-->
+                  </div>
+                  <div class="form-group d-flex">
+                    <span class="fw600 p-0 col-md-5" for="lastname">{{ 'key_SetupCompletedby' | translate }} </span>
+                    <span for="lastname" class="text-break col-md-7 pr-0" *ngIf="IssetupCompleted">{{this.p2form.get('SetupCompleteBy').value}}</span>
+                    <!--<span for="lastname"> John</span>-->
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <!--=============== End e-profile =================-->
+        </div>
+      </div>
+
+      <div class="col-lg-12">
+        <div id="accordionTab1" class="accordion mt-3">
+          <div class="card mb-0">
+            <div class="card-header collapsed" data-toggle="collapse" href="#collapseTwo">
+              <a class="card-title">
+                {{ 'key_Contact' | translate }} ({{this.listcontatLen}})
+              </a>
+            </div>
+            <div id="collapseTwo" class="card-body collapse" data-parent="#accordionTab1">
+              <app-contact-panel [getContactById]="this.id" [PageActionType]="pageActionType" (listLength)="GetCountCotact($event)"> </app-contact-panel>
+            </div>
+
+            <div class="card-header collapsed" data-toggle="collapse" href="#address">
+              <a class="card-title">
+                {{ 'key_Address' | translate }} ({{this.listaddresstLen}})
+              </a>
+            </div>
+            <div id="address" class="card-body collapse" data-parent="#accordionTab1">
+              <app-address-panel  [getAddresById]="this.id" [PageActionType]="pageActionType" (addressListCount)="GetCountAddress($event)"></app-address-panel>
+            </div>
+
+            <!--================add charactrics===-->
+            <div class="card-header collapsed" data-toggle="collapse" href="#Characteristics">
+              <a class="card-title">
+                {{ 'key_Characteristicss' | translate }}  ({{statOfCharacteristics}})
+              </a>
+            </div>
+            <div id="Characteristics" class="card-body collapse" data-parent="#accordionTab1">
+              <!--<app-customer-characteristics-panel [customerId]="this.id"  [pageActionType]="pageActionType"
+                                                  (statOfCharacteristics)="setStatOfCharacteristics($event)">
+
+              </app-customer-characteristics-panel>-->
+              <app-operating-characteristics-panel [locationId]="this.id" (statOfCharacteristics)="setStatOfCharacteristics($event)"></app-operating-characteristics-panel>
+            </div>
+            <!--================add charactrics===-->
+            <!---======contacts read only--->
+            <!--================add charactrics===-->
+            <!--================add charactrics===-->
+            <div class="card-header collapsed" data-toggle="collapse" href="#Mapequipment">
+              <a class="card-title">
+                {{ 'key_MapEquipmentType' | translate }}  ({{this.preferredEquipmentListCount}})
+              </a>
+            </div>
+            <div id="Mapequipment" class="card-body collapse" data-parent="#accordionTab1">
+              <app-map-equipment-type [InputlocationId]="this.id"
+                                      (listEquipmentLength)="getpreferredEquipmentCount($event)"></app-map-equipment-type>
+            </div>
+          </div>
+          <!--================= end  address and contact tabs ==============-->
+        </div>
+      </div>
+    </div>
+
+    <div class="row justify-content-center my-5">
+      <div class="col-xl-2 col-lg-4 col-md-4 col-sm-12">
+        <!--<input type="submit" id="btnSave" name="btnSave"
+               [disabled]="isSubmitted==true ? true : (p2form.invalid==true ? true:p2form.invalid)"
+               class="btn btn-block btn-save" [value]="'key_Save' | translate" />-->
+
+        <button type="submit" id="btnSave" name="btnSave"
+               [disabled]="isSubmitted==true ? true : (p2form.invalid==true ? true:p2form.invalid) || InactiveOP"
+               class="btn btn-block btn-save">{{ 'key_Save' | translate }}</button>
+
+      </div>
+    <div class="col-xl-2 col-lg-4 col-md-4 col-sm-12">
+      <!--<input type="button" class="btn btn-block btn-next"
+             [value]="'key_NextUser' | translate"
+             [disabled]="isEditEnable==true ? true : (p2form.invalid==true ? true:p2form.invalid)"
+             (click)="selectNext(nextList)" />-->
+
+      <button type="button" class="btn btn-block btn-next"
+             [disabled]="isEditEnable==true ? true : (p2form.invalid==true ? true:p2form.invalid)"
+             (click)="saveAndNextOperatingLocation(nextList)">
+        <span class="fw600">{{ 'key_Edit' | translate }}</span> <span class="fs-13"> > {{ 'key_Next' | translate }}</span>
+      </button>
+
+    </div>
+    </div>
+  </form>
+</div>
+
+

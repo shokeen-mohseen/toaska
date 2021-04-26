@@ -1,0 +1,7 @@
+.mat-table .mat-row:last-child {
+  background-color: #716f6d;
+}
+  .mat-table .mat-row:last-child .mat-cell {
+    color: #fff !important;
+    font-weight: bold !important;
+  }

@@ -1,0 +1,25 @@
+<!---16685 Next/Previous/Save button Component - Make these buttons responsive.-->
+<!--WI-16907 | 20-07-2020 | Button color and size change | Amit Agrahari-->
+<div class="chart-btns">
+  <div class="row d-flex justify-content-center">
+    <div class="col-lg-2 col-md-2 col-sm-12 btn-previous-wrap" *ngIf="buttonState.btnPrevious">
+      <input type="button" id="btnPrevious" 
+             routerLinkActive="active" [routerLink]="[buttonState.previousPage]"
+             name="btnPrevious" class="btn btn-previous" [value]="'key_Previous' | translate" />
+    </div>
+    <div class="col-lg-2 col-md-2 col-sm-12" *ngIf="buttonState.btnSave">
+      <input type="button" id="btnSave" name="btnSave"
+             [disabled]="formData == undefined ? true : (formData.invalid == undefined ? true : formData.invalid)"
+             (click)="Save()"
+             class="btn btn-save" [value]="'key_Save' | translate" />
+    </div>
+
+    <!--[disabled]="form == undefined ? true : (form.IsEnable == undefined ? true : form.IsEnable)"-->
+    <div class="col-lg-2 col-md-2 col-sm-12" *ngIf="buttonState.btnNext">
+      <input type="button" id="btnNext" name="btnNext" [ngStyle]="{'pointer-events': (IsEnableTab$ | async) ? 'none': 'auto'}"
+             class="btn btn-next" routerLinkActive="active"
+             [routerLink]="[buttonState.nextPage]" [value]="'key_Next' | translate" />
+    </div>
+  </div>
+</div>
+

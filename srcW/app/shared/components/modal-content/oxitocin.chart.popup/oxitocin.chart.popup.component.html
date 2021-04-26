@@ -1,0 +1,110 @@
+<!--TFS Author name satyen Task Id 16881 Latent Phase - Oxytocin U / L  and  Drops / minute - Make changes to graph..-->
+<div class="modal-header">
+  <h4 class="modal-title" id="modal-basic-title" >
+    {{modalData.modelStagename | translate}} {{modalData.modelName | translate}}
+  </h4>
+  <a class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </a>
+</div>
+<div class="modal-body modalbg">
+  <div class="row">
+    <div class="col-sm-6 bg-whites pdr">
+      <div class="cardpdrtop card">
+        <div class="row">
+          <div class="col-lg-6 col-xs-6 col-sm-6 col-md-12">
+            <span><i class="fa fa-clock-o fa-3" aria-hidden="true"></i></span>
+            <span class="ml-1" [innerHTML]="modalData.DisplayTime +' '+ modalData.timeZone"> </span>
+          </div>
+          <div class="col-lg-6 col-xs-6 col-sm-6 col-md-12">
+            <span><i class="fa fa-user-circle-o" aria-hidden="true"></i></span>
+            <span class="ml-1">{{userName}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6 bg-whites pdrright">
+      <div class="cardpdrtop card">
+        <div class="row">
+          <div class="col-xs-6">
+            <span class="ml-3"><i class="fa fa-history" aria-hidden="true"></i></span>
+            <span class="ml-1">{{ 'key_Commenthistory' | translate }}</span>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-6 pdr">
+      <div class="panelbg card commentheight">
+        <form (ngSubmit)="passBack()" [formGroup]="UserEntryAreaForm">
+          <div class="form-group">
+            <label for="company" class=" font-600" [innerHTML]="modalData.labelKeyName | translate"></label>
+            <input type="text" formControlName="value" class="HeartRate form-control" />
+            <app-control-messages [control]="f['value']"></app-control-messages>
+          </div>
+          <div class="form-group">
+            <label for="company">{{ 'key_Commentsarea' | translate }}</label>
+            <textarea [attr.placeholder]="'key_Comments' | translate" class="Comments form-control" formControlName="remarks" rows="3"></textarea>
+          </div>
+          <div class="form-group text-center">
+            <button type="submit" class="btn  btn-pill btnsave btn-raised btnbg"
+                    [disabled]="UserEntryAreaForm.controls['value'].invalid" >
+              <span [innerHTML]="'key_Save' | translate"></span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="panelbg card commentheight">
+        <app-recentcomment [posts]="newOutputPost" [chartName]="validationModel.ChartName"></app-recentcomment>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--<form (ngSubmit)="passBack()" [formGroup]="UserEntryAreaForm">
+  <div class="form-group row">
+    <div class="col-sm-4">
+
+    </div>
+    <div class="col-sm-4">
+      <input type="text" formControlName="inputBy" class="inputby form-control" />
+      <app-control-messages [control]="f['inputBy']"></app-control-messages>
+    </div>
+    <div class="col-sm-4">
+      <input type="text" formControlName="currentTime" class="time form-control" />
+      <app-control-messages [control]="f['currentTime']"></app-control-messages>
+    </div>
+  </div>
+</form>-->
+<!--Code comment template example -
+  Developer Name: Satyen Singh
+  Date: July 07 , 2020
+  TFS ID: 16717
+  TFS ID: 16718
+  Logic Description: Latent Phase - Oxitocin U/L & Drops/min : Design Chart and Its Elements.
+  Code Start
+-->
+<!---TFS ID 16717 end code-->

@@ -1,0 +1,47 @@
+<div class="subHeading-red fw600">{{ 'key_DischargeReport' | translate }}</div>
+
+
+<div class="center-form formlabel-mb ">
+  <!--Row Start-->
+  <div class="row">
+    <div class="col-sm-12 col-md-12 col-lg-10">
+      <div class="form-inline row form-group">
+        <div class="col-sm-12 col-md-3 pr-0">
+          <label>{{ 'key_Dateandtimeofdischarge' | translate }}</label>
+        </div>
+        <div class="col-sm-12 col-md-5">
+          <input type="datetime-local" class="form-control w-100">
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--Row End-->
+  <div class="row">
+    <div class="col-sm-12 col-md-12 col-lg-10">
+      <div class="form-inline row form-group">
+        <div class="col-sm-12 col-md-3 pr-0">
+          <label>{{ 'key_Dischargedby' | translate }}</label>
+        </div>
+        <div class="col-sm-12 col-md-5">
+          <input type="text" class="form-control w-100">
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--Row End-->
+  <div class="row">
+    <div class="col-sm-12 col-md-12 col-lg-12">
+      <div class="form-group">
+        <label class="fw600">{{ 'key_DischargeInstructions' | translate }}</label>
+        <textarea class="form-control w-100" rows="3" placeholder="{{ 'key_AddInstructions' | translate }}"></textarea>
+      </div>
+    </div>
+  </div>
+  <!--Row End-->
+</div>
+
+<app-dynamic-webcontrol-parameter [stageModule]="stageCode"></app-dynamic-webcontrol-parameter>
+<!--Row End-->
+<!--<div class="row mt-4">
+  <input type="button" class="btn btn-secondary ml-3 btnbrd" (click)="AddMoreComplication()" value="{{ 'key_AddNewParameter' | translate }}" />
+</div>-->

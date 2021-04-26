@@ -1,0 +1,34 @@
+<mat-tab-group class="demo-tab-group" #matgroup (selectedTabChange)="tabChange($event)">
+  <mat-tab #tab1 *ngIf="tab1">
+    <ng-template mat-tab-label>
+      Tab1
+    </ng-template>
+    <div class="demo-tab-content" *ngIf="tab1Data">
+      <app-tab1></app-tab1>
+    </div>
+  </mat-tab>
+  <mat-tab #tab2 *ngIf="tab2">
+    <ng-template mat-tab-label>
+      Tab2
+    </ng-template>
+    <div class="demo-tab-content" *ngIf="tab2Data">
+      <app-tab2></app-tab2>
+    </div>
+  </mat-tab>
+  <mat-tab #tab3 *ngIf="tab3">
+    <ng-template mat-tab-label>
+      Tab3
+    </ng-template>
+    <div *ngIf="tab3Data">
+      <app-tab3></app-tab3>
+    </div>
+  </mat-tab>
+</mat-tab-group>
+
+<button (click)="open('add')">Add</button>
+<button (click)="open('edit')">Edit</button>
+
+<br />
+<br />
+<button (click)="selectPrev(matgroup)">Prev</button>
+<button (click)="selectNext(matgroup)">Just Next</button>

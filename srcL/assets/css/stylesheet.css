@@ -1,0 +1,816 @@
+/*.clock {
+width: 260px;
+margin: 0 auto;
+padding: 30px;
+color: #FFF;background:#333;
+}*/
+
+.gridpanelheight {
+    height: 267px;
+    overflow-y: scroll;
+}
+
+.divgap .media-body {
+    padding: 10px;
+    border-bottom: 1px solid #ccc
+}
+
+.tblcontrol {
+    float: right
+}
+
+.clock ul {
+    width: 250px;
+    margin: -9px auto;
+    padding: 0;
+    list-style: none;
+    text-align: center
+}
+
+    .clock ul li {
+        display: inline;
+        font-size: 18px;
+        text-align: center;
+        font-family: sans-serif;
+        font-weight: 800;
+        /*text-shadow: 0 2px 5px #55c6ff, 0 3px 6px #55c6ff, 0 4px 7px #55c6ff*/
+    }
+
+#Date {
+    font-family: sans-serif;
+    font-size: 16px;
+    text-align: center;
+    /*text-shadow: 0 2px 5px #55c6ff, 0 3px 6px #55c6ff;*/
+    padding-bottom: 0px;
+    font-weight: 800;
+}
+
+#point {
+    position: relative;
+    -moz-animation: mymove 1s ease infinite;
+    -webkit-animation: mymove 1s ease infinite;
+    padding-left: 10px;
+    padding-right: 10px
+}
+
+.ui-accordion .ui-accordion-content {
+    height: 300px;
+}
+
+.checkbox input[type="checkbox"] {
+    width: 3% !important;
+    height: 30px;
+}
+
+.modal-content input[type="checkbox"] {
+    width: 18px !important;
+    height: 30px;
+    margin-top: -3px;
+}
+
+.checkbox {
+    margin-top: 0px;
+}
+
+.headingreffred {
+    background: #ffeaee;
+    padding: 10px;
+}
+
+    .headingreffred h3 {
+        color: #000;
+    }
+
+.btn-default {
+    color: #131212 !important;
+    background: none;
+}
+
+.rowheading {
+    background: #ffeaee;
+    padding: 10px;
+    height: 60px;
+}
+
+    .rowheading h3 {
+        color: #000;
+    }
+
+.sidemenubarlink li {
+    padding: 6px;
+    list-style-type: none;
+    margin-left: -43px;
+}
+
+    .sidemenubarlink li a {
+        padding: 3px;
+        color: #585656;
+        font-size: 16px;
+        font-family: helvetica;
+        font-weight: 500;
+    }
+
+.tableinner p {
+    margin: 0px;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.line {
+    position: relative;
+}
+
+.expand-button {
+    position: relative;
+}
+
+.accordion-toggle .expand-button:after {
+    position: absolute;
+    left: .75rem;
+    top: 50%;
+    transform: translate(0, -50%);
+    content: '-';
+}
+
+.accordion-toggle.collapsed .expand-button:after {
+    content: '+';
+}
+
+
+#hrline {
+    width: 3px;
+    height: 275px;
+    position: absolute;
+    background-color: #191818;
+    -ms-transform: rotate(45deg);
+    -ms-transform-origin: 35% 70%;
+    transform: rotate(45deg);
+    transform-origin: 0% 100%;
+    top: -78px;
+}
+
+#hrlinetwo {
+    width: 3px;
+    height: 275px;
+    position: absolute;
+    background-color: #191818;
+    -ms-transform: rotate(45deg);
+    -ms-transform-origin: 35% 70%;
+    transform: rotate(45deg);
+    transform-origin: 0px 62vh;
+    top: -168px;
+}
+
+.fa-chevron-right {
+    padding: 2px 5px;
+}
+
+.sidebarheading h4 {
+    color: #f2a2b1;
+    font-size: 22px;
+    margin-left: -31px;
+}
+
+.sidediv {
+    border-right: 1px solid #ece9e9;
+    background: #f7f7f7;
+}
+
+    .sidediv .panel {
+        background: #f7f7f7;
+    }
+
+.panel-default {
+    border-color: #ddd;
+    border: 1px solid #ddd;
+}
+
+.fa-lg {
+    font-size: 24px !important;
+}
+.fas {
+    font-weight: 900;
+    font-size: 24px;
+}
+
+.ChartPopupControl {
+    width: 100px !important;
+}
+
+.chart {
+    width: 100%;
+}
+
+.modal-body .form-control{text-align:center;}
+
+.chartAmniotic {
+    width: 100%;
+}
+
+
+.AFMAction {
+    width: 20px;
+    text-align: center;
+}
+
+
+/* The Modal (background) */
+.modal {
+    _display: none; /* Hidden by default */
+    _position: fixed; /* Stay in place */
+    _z-index: 1; /* Sit on top */
+    _padding-top: 10px; /* Location of the box */
+    _left: 50%;
+    _top: 0;
+    _width: 50%; /* Full width */
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    border: 1px solid #888;
+    width: 100%;
+}
+
+/* The Close Button */
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+    .close:hover,
+    .close:focus {
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+
+.axis path,
+.axis line {
+    fill: none;
+    stroke: black;
+}
+
+path.line {
+    fill: none;
+    stroke: black;
+    stroke-width: 1px;
+    color: red;
+}
+
+.tick text {
+    font-size: 14px;
+}
+
+.tick textTime {
+    font-size: 12px;
+}
+
+.tick line {
+    opacity: 0.2;
+}
+
+.tbldatadesign th {
+    font-size: 18px;
+    text-align: center;
+    background: #f2a2b1;
+    color: #fff;
+}
+
+/*.tbldatadesign td {
+    border: 1px solid #f2a2b1 !important;
+}*/
+.tbldatadesign th {
+    font-size: 20px;
+    text-align: center;
+    background: #f1efef;
+    color: #0e0e0e;
+}
+
+.modal-content h2 {
+    margin-bottom: 11px;
+}
+
+.btnpopup {
+    width: 190px;
+    background-color: #e15a69;
+    background: -webkit-gradient(linear, left top, left bottom, from(#661c0f), to(#e15a69));
+    background: -webkit-linear-gradient(#661c0f, #e15a69);
+    background: linear-gradient(#661c0f, #e15a69);
+    /* font-weight: bold; */
+    color: white;
+    border: 0 none;
+    border-radius: 3px;
+    cursor: pointer;
+    padding: 9px 5px;
+    margin: 0px 4px 3px 4px;
+    _float: right;
+    font-size: 17px;
+    text-transform: uppercase;
+}
+
+.dividertop {
+    margin: 18px auto;
+}
+
+.sidebar {
+    height: 100vh;
+    width: 0;
+    position: absolute;
+    z-index: 1031;
+    top: 0px;
+    left: 63px;
+    background-color: #f9f9f9;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+
+@media only screen and (max-width: 600px) {
+    .sidebar {
+        height: 100%;
+        width: 0;
+        position: fixed;
+        z-index: 1031;
+        top: 44%;
+        left: 123px;
+        background-color: #111;
+        overflow-x: hidden;
+        transition: 0.5s;
+        padding-top: 60px;
+    }
+}
+
+.divrotate {
+    width: 100vh;
+    z-index: 100;
+    -webkit-backface-visibility: hidden;
+    -webkit-transform: translateX(-100%) rotate(-90deg);
+    -webkit-transform-origin: right top;
+    -moz-transform: translateX(-100%) rotate(-90deg);
+    -moz-transform-origin: right top;
+    -o-transform: translateX(-100%) rotate(-90deg);
+    -o-transform-origin: right top;
+    transform: translateX(-100%) rotate(-90deg);
+    transform-origin: right top;
+}
+
+
+.sidebar a {
+    padding: 3px 8px 8px 13px;
+    text-decoration: none;
+    font-size: 16px;
+    color: #000;
+    display: block;
+    transition: 0.3s;
+    border-bottom: 1px dotted #dedbdb;
+    font-weight: 400;
+}
+
+    .sidebar a:hover {
+        color: #484646;
+    }
+
+.sidebar .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+.openbtn {
+    font-size: 20px;
+    cursor: pointer;
+    background-color: #f2a2b1;
+    color: #000;
+    padding: 10px 15px;
+    border: none;
+}
+
+    .openbtn:hover {
+        background-color: #f4b0bd;
+    }
+
+#main {
+    transition: margin-left .5s;
+    padding: 16px;
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+    .sidebar {
+        padding-top: 15px;
+    }
+
+        .sidebar a {
+            font-size: 18px;
+        }
+}
+
+.text-primary {
+    color: #f5e67c;
+}
+
+.patientdata p {
+    font-size: 15px;
+    margin: 0px;
+}
+
+.patientdata {
+    margin-bottom: 5px;
+}
+
+    .patientdata b {
+        font-size: 17px;
+        font-weight: 500;
+    }
+
+    .patientdata td {
+        padding: 0px !important;
+    }
+
+.gridnotes {
+    position: absolute;
+    bottom: 107px;
+    height: 100px;
+    _border: 1px solid #ccc;
+    width: 100%;
+    padding:5px;
+}
+
+.gridnotealert {
+    height: 345px;
+    overflow-y: auto;
+}
+
+
+.btnplus {
+  color: #fffcfc !important;
+  background: #66a638 !important;
+  font-size: 16px;
+  height: 56px !important;
+}
+
+.media-body b {
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.notesicon .fa-stack {
+    display: inline-block;
+    height: 2em;
+    line-height: 2em;
+    position: relative;
+    vertical-align: middle;
+    width: 2.5em;
+    top: 0px;
+}
+.fa-stack {
+    display: inline-block;
+    height: 2em;
+    line-height: 2em;
+    position: relative;
+    vertical-align: middle;
+    width: 2.5em;
+    top: 8px;
+}
+
+.main-header .top-nav .notification-menu .dropdown-menu {
+    min-width: 755px;
+    height: 560px;
+    overflow-x: hidden;
+}
+.btnpattern {
+    width: 190px;
+    background-color: #e15a69;
+    background: -webkit-gradient(linear, left top, left bottom, from(#661c0f), to(#e15a69));
+    background: -webkit-linear-gradient(#661c0f, #e15a69);
+    background: linear-gradient(#661c0f, #e15a69);
+    /* font-weight: bold; */
+    color: white;
+    border: 0 none;
+    border-radius: 3px;
+    cursor: pointer;
+    padding: 9px 5px;
+    margin: 0px 4px 3px 4px;
+    _float: right;
+    font-size: 17px;
+    text-transform: uppercase;
+}
+
+.pdrpanel {
+    padding: 32px;
+}
+
+.annotationtbl td {
+    padding: 0px 0px 0px 8px !important;
+    cursor: pointer;
+    text-align:left
+}
+
+.annotationtbl {
+    margin-top: 10px;
+
+}
+
+    .annotationtbl th {
+        background: #f7f6f6 !important;
+        font-size: 17px;
+        color: #000;
+        font-family: sans-serif;
+        border: none !important;
+        padding:0px;
+    }
+
+.annotationdrp {
+    position: absolute;
+    display: inline-block;
+    top: auto;
+    right: 51px;
+}
+.divannotationdesign {
+    background: #f9f8f8;
+    padding: 12px;
+}
+.panelwidth {
+    width: 100%;
+    _overflow-y: scroll;
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25% 25%;
+}
+
+.mrgindiv {
+    border: 1px solid #ccc;
+    margin: 13px 12px 13px 0px;
+    box-shadow: 1px 4px 4px #ccc;
+}
+
+@media (min-width: 992px) {
+    .modal-lg {
+        width: 70%;
+    }
+}
+/* The container */
+.containercheck {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    margin-top: 12px;
+}
+
+    /* Hide the browser's default checkbox */
+    .containercheck input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+        height: 0;
+        width: 0;
+    }
+
+/* Create a custom checkbox */
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+}
+
+/* On mouse-over, add a grey background color */
+.containercheck:hover input ~ .checkmark {
+    background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.containercheck input:checked ~ .checkmark {
+    background-color: #2196F3;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the checkmark when checked */
+.containercheck input:checked ~ .checkmark:after {
+    display: block;
+}
+
+/* Style the checkmark/indicator */
+.containercheck .checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+
+
+
+/*.collapse {
+                width: 150px;
+                height: 40px;
+                padding-left: 8px;
+                padding-right: 8px;
+                background-color: #f3e1e1;
+                border-radius: 40px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                color: #7d5a5a;
+                cursor: pointer;
+            }
+
+                .collapse span:nth-last-of-type(1) {
+                    transform: translateX(-30px);
+                }
+
+                .collapse span:nth-last-of-type(2) {
+                    display: none;
+                }
+
+                .collapse span:nth-last-of-type(3) {
+                    display: none;
+                }
+
+                .collapse span:nth-last-of-type(4) {
+                    display: none;
+                }*/
+.axis path,
+.axis line {
+  fill: none;
+  stroke: black;
+}
+
+path.line {
+  fill: none;
+  stroke: black;
+  stroke-width: 1px;
+  color: red;
+}
+
+.tick text {
+  font-size: 16px;
+}
+
+.tick textTime {
+  font-size: 12px;
+}
+
+.tick line {
+  opacity: 0.2;
+}
+
+.dividertop {
+  margin: 18px auto;
+}
+
+
+.OxitocinAmniotic {
+  width: 1279px;
+  float: left;
+  margin-left: 100px;
+  height: 57px;
+}
+
+.OXAFMAction {
+  width: 2.5%;
+  max-width: 2.5%;
+  border-color: #DEDEDE;
+  height: 33px;
+}
+
+.DrugStyle {
+  width: 1279px;
+  float: left;
+  margin-left: 100px;
+}
+
+.DrugTD {
+  height: 150px;
+  width: 7.5%;
+  max-width: 7.5%;
+  border-color: #DEDEDE
+}
+
+.ChartPopupControl {
+  width: 100px !important;
+}
+
+#amnioticfluidtable {
+  border: 1px solid #ccc;
+}
+
+#mouldingTable {
+  border: 1px solid #ccc;
+}
+
+#tempratureTable {
+  border: 1px solid #ccc;
+}
+
+#DrugTable {
+  border: 1px solid #ccc;
+}
+
+#ProteinTable {
+  border: 1px solid #ccc;
+  margin-top: 15px;
+}
+
+#AcetonTable {
+  border: 1px solid #ccc;
+  margin-top: 15px;
+}
+
+#VolumeTable {
+  border: 1px solid #ccc;
+  margin-top: 15px;
+}
+/*.chart {
+                width: 100%;
+            }*/
+
+.chartAmniotic {
+  width: 1281px;
+  /*float: left;*/
+  margin-left: 100px;
+  height: 57px;
+}
+
+.chartTemp {
+  width: 1281px;
+  /*float: left;*/
+  margin-left: 100px;
+}
+
+
+.AFMAction {
+  width: 20px;
+  text-align: center;
+  height: 26px;
+}
+
+.TempTD {
+  width: 20px;
+  text-align: center;
+  height: 29px;
+  border-color: #DEDEDE
+}
+
+
+/* The Modal (background) */
+.modal {
+  _display: none; /* Hidden by default */
+  _position: fixed; /* Stay in place */
+  _z-index: 1; /* Sit on top */
+  _padding-top: 10px; /* Location of the box */
+  _left: 50%;
+  _top: 0;
+  _width: 50%; /* Full width */
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  border: 1px solid #888;
+  width: 100%;
+}
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+  .close:hover,
+  .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+

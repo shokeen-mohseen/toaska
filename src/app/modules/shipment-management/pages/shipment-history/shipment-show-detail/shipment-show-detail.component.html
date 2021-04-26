@@ -1,0 +1,653 @@
+
+<div class="row mb-2">
+  <div class="col-md-8 infoShip">
+
+ <!--   <div class="tooltip-col text-center">
+      <i class="fa fa-info-circle help-btns"></i>
+      <div class="tooltiptext" data-placement="right" data-toggle="tooltip" data-original-title="Tooltip on right">
+        <ul>
+          <li type>list1</li>
+          <li type>list1</li>
+        </ul>
+      </div>
+    </div>-->
+    <h4>  {{ShipmentDetailsHistory.shipmentNumber}} .{{ShipmentDetailsHistory.shipmentVersion}} ({{this.ShipmentDetailsHistory.shipmentStatusName}}) - {{ShipmentDetailsHistory.conditionName}} - {{this.ShipmentDetailsHistory.tenderStatusName}} </h4>
+  </div>
+  <div class="col-md-4 text-right">
+    <span class="fw600">{{'key_LastUpdated'| translate}}:	</span>
+    <br><span class="fw600">By </span>ship by
+  </div>
+</div>
+<div class="row mt-3">
+  <div class="col-md-3 custom-flex-w-15">
+    <div class="card">
+      <div class="card-header">{{ 'key_shipment' | translate }}</div>
+      <!--edit section-->
+      <div class="card-body p-0">
+        <div class="list-group" #nextList>
+          <div class="list-group-item list-group-item-action active" *ngFor="let shipment of SelectedShipmentsHistory">
+            <a (click)="GetShipmentHistory(shipment.shipmentNumber)" href="javascript:void(0)">{{shipment.shipmentNumber}}</a>
+            <button *ngIf="shipment.shipmentNumber!=EditingShipmentVersion" class="close" type="button"
+                    (click)="RemoveShipment(shipment.shipmentNumber)">
+              <i class="fa fa-times" aria-hidden="true"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-9 custom-flex-w-85">
+    <div class="tab-content" id="nav-tabContent">
+      <div class="tab-pane pt-0 fade show active" id="editList-1" role="tabpanel">
+        <div class="e-profile mb-4">
+          <div class="row">
+            <div class="col-md-4 col-sm-12">
+              <div class="box-children">
+                <div class="row">
+
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label>
+                        {{'key_ShipmentType'| translate}}
+                      </label>
+                      <input type="text" class="form-control" value={{this.ShipmentDetailsHistory.shipmentType}} name="" readonly>
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <!--  -->
+                      <label for="">
+                        {{'key_Status'| translate}}
+                      </label>
+                      <input type="text" class="form-control" value={{this.ShipmentDetailsHistory.shipmentStatusName}} name="" readonly>
+
+                    </div>
+                  </div>
+
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label>
+                        {{'key_Condition'| translate}}
+                      </label>
+                      <input type="text" class="form-control" value={{this.ShipmentDetailsHistory.conditionName}} name="" readonly>
+                    </div>
+                  </div>
+
+
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="box-children pl-0 pr-0">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label>
+                      {{'key_ShipDate'| translate}}
+                    </label>
+                    <input type="text" class="form-control" [value]="this.ShipmentDetailsHistory.shipDate | date:'MM/dd/yyyy'" name="" readonly>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label>
+                      {{'key_Carrier'| translate}}<sup class="sup1 text-danger font-weight-normal">*</sup>
+                    </label>
+                    <input id="carrierName" type="text" class="form-control" value={{this.ShipmentDetailsHistory.carrierName}} name="" readonly required>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            <div class="col-md-4">
+
+              <div class="box-children">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label>{{'key_TenderStatus'| translate}}</label>
+                      <!--<select name="" class="form-control h31"  disabled>
+                            <option>tender 1</option>
+                       </select>-->
+                      <input type="text" class="form-control" value={{this.ShipmentDetailsHistory.tenderStatusName}} name="" readonly required>
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label>{{'key_Equipment'| translate}}<sup class="sup1 text-danger font-weight-normal">*</sup></label>
+                      <input type="text" class="form-control" value={{this.ShipmentDetailsHistory.equipment}} name="" readonly required>
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label>{{'key_Mode'| translate}}<sup class="sup1 text-danger font-weight-normal">*</sup></label>
+                      <input type="text" class="form-control" value={{this.ShipmentDetailsHistory.mode}} name="" readonly required>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+<!--=================Accordian ==============-->
+
+<section id="finalOrderDetail">
+  <mat-accordion>
+    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" [expanded]="true">
+      <mat-expansion-panel-header>
+        <mat-panel-description>{{'key_ShipmentDetails'| translate}}</mat-panel-description>
+      </mat-expansion-panel-header>
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="scroll ship-detail">
+           
+        <mat-table #table [dataSource]="ShippmentSalesOrdersHistory" matSort>
+        <ng-container *ngFor="let column of SalesOrderColumns; let i=index;" [matColumnDef]="column">
+          <mat-header-cell *matHeaderCellDef mat-sort-header [resizeColumn]="true" [index]="i"> {{ SalesOrderColumnsReplace[i] | translate}} </mat-header-cell>
+          <mat-cell *matCellDef="let item">
+            {{ item[column] }}
+          </mat-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="SalesOrderColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: SalesOrderColumns;"> </mat-row>
+      </mat-table>
+          </div>
+        </div>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+<section id="shipment-comments" class="mt-3">
+  <mat-accordion>
+    <mat-expansion-panel (opened)="panelOpenState111 = true" (closed)="panelOpenState111 = false" [expanded]="true">
+      <mat-expansion-panel-header>
+        <mat-panel-description>{{'key_OrderComments' | translate}}</mat-panel-description>
+      </mat-expansion-panel-header>
+      <div *ngFor="let order of ShippmentSalesOrdersHistory">
+        <div class="col-sm-12">
+          <div class="row">
+            <div class="col-md-5">
+              <p class="row mb-1">{{order.toLocationName}}</p>
+            </div>
+            <div class="col-md-7 pr-0 mb-3 pl-0 d-flex justify-content-end">
+              <div class="form-inline">
+                <label class="mr-3">{{'key_Contract'| translate}} From</label>
+                <input type="text" [value]="order.fromBusinessPartnerContract" class="form-control" placeholder="contract" readonly>
+              </div>
+              <div class="form-inline">
+                <label class="mr-3 ml-3">{{'key_Contract'| translate}} To</label>
+                <input type="text" [value]="order.toBusinessPartnerContract" class="form-control" placeholder="contract" readonly>
+              </div>
+            </div>
+          </div>
+        </div>
+        <article class="pt-3 pb-3 bg-comment">
+          <div class="col-md-12 col-xl-12">
+            <div class="row">
+              <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                  <label for="Transportation Comment" class="">{{'key_TransportationComment'| translate}} </label>
+                  <textarea name="Transportation" rows="3" cols="50" class="f-12 form-control"   [value]="order.transportationComment"></textarea>
+                </div>
+              </div>
+              <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                  <label for="Transportation Comment Spanish" class="">{{'key_TransportationCommentSpanish'| translate}} </label>
+                  <textarea name="Transportation" rows="3" cols="50" class="f-12 form-control"  [value]="order.spanishTransportationComment" readonly></textarea>
+                </div>
+              </div>
+              <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                  <label for="Loading Comment" class="">{{'key_LoadingComment'| translate}}</label>
+                  <textarea name="Transportation" rows="3" cols="50" class="f-12 form-control"   [value]="order.loadingComment" disabled></textarea>
+                </div>
+              </div>
+              <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                  <label for="Transportation Comment Spanish" class="">{{'key_LoadingCommentSpanish'| translate}}</label>
+                  <textarea name="Transportation" rows="3" cols="50" class="f-12 form-control"   [value]="order.spanishLoadingComment" readonly></textarea>
+                </div>
+              </div>
+              <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                  <label for="Transportation Comment Spanish" class="">{{'key_orderComments'| translate}}</label>
+                  <textarea name="Transportation" rows="3" cols="50" class="f-12 form-control" [value]="order.orderComment" disabled></textarea>
+                </div>
+              </div>
+              <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                  <label for="Transportation Comment Spanish" class="">{{'key_OrderCommentSpanish'| translate}}	</label>
+                  <textarea name="Transportation" rows="3" cols="50" class="f-12 form-control"  [value]="order.ordercommentSpanish" readonly></textarea>
+                </div>
+              </div>
+              <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                  <label for="Transportation Comment Spanish" class="">{{'key_TransplaceOrderComment'| translate}}	 <small> {{'key_charactersmax'| translate}}</small></label>
+                  <input type="text" class="f-12 form-control" [value]="order.transplaceOrderComment" disabled />
+
+                </div>
+              </div>
+              <div class="col-md-6 col-sm-12">
+                <div class="form-group">
+                  <label for="Transportation Comment Spanish" class="">{{'key_TransplaceDeliveryComment'| translate}}<small> {{'key_charactersmax'| translate}}</small></label>
+                  <input type="text" cols="50" [value]="order.transplaceDeliveryComment" class="f-12 form-control" disabled />
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+        <hr />
+      </div>
+
+    </mat-expansion-panel>
+  </mat-accordion>
+
+</section>
+<div class="clear-fix"></div>
+
+<section class="moreOptions shipMoreOption mt-4" id="more-option">
+  <ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item">
+      <a class="nav-link active" id="Receiving-tab" data-toggle="tab" href="#Receiving" role="tab" aria-controls="Receiving" aria-selected="false">{{'key_ShippingReceiving'| translate}}</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link " id="Transportation-tab" data-toggle="tab" href="#Transportation" role="tab" aria-controls="Transportation" aria-selected="true">{{'key_Transportation'| translate}}</a>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link" id="Document-tab" data-toggle="tab" href="#Document" role="tab" aria-controls="Document" aria-selected="false">{{'key_Document'| translate}}</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="Tracking-tab" data-toggle="tab" href="#Tracking" role="tab" aria-controls="Tracking" aria-selected="false">{{'key_TrackingHistory'| translate}}</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="Tender-tab" data-toggle="tab" href="#Tender" role="tab" aria-controls="Tender" aria-selected="false">{{'key_TenderHistory'| translate}}</a>
+    </li>
+  </ul>
+
+  <div class="tab-content pb-3 pt-3" id="myTabContent">
+    <div class="tab-pane fade show active" id="Receiving" role="tabpanel" aria-labelledby="Receiving-tab">
+      shipping/receive-section-start
+      <div class="col-md-12 custom-form">
+        <div class="row">
+          <div class="col-md-3 col-sm-12 col-lg-3 col-xl-3 pr-1 d-flex w-100">
+            <div class="card">
+              <div class="card-header">
+                <div class="card-title mb-0">{{'key_EquipSealNo'| translate}}</div>
+              </div>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                    <div class="form-group">
+                      <label> {{'key_EquipNo'| translate}}</label>
+                      <input type="text"  [value]="ShipmentDetailsHistory.trailerNumber" class="form-control" disabled />
+                    </div>
+                  </div>
+                  <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                    <div class="form-group">
+                      <label>{{'key_SealNo'| translate}}</label>
+                      <input type="text"  [value]="ShipmentDetailsHistory.trailerSealNumber" class="form-control" disabled />
+                    </div>
+                  </div>
+                  <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                    <div class="form-group">
+                      <label>{{'key_EquipType'| translate}}</label>
+                      <input type="text"  [value]="ShipmentDetailsHistory.equipment" class="form-control" disabled />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <div class="col-md-3 col-sm-12 col-lg-3 col-xl-3 pl-1 pr-1 d-flex w-100">
+            <div class="card">
+              <div class="card-header">
+                <div class="card-title mb-0">{{'key_CarrierPickup'| translate}}</div>
+              </div>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                    <div class="form-group">
+                      <label>Select Start</label>
+                      <select name="" class="form-control" [(ngModel)]="CarrierPickupLocationID" (change)="GetStartTimings()" >
+                        <option [value]="location.fromLocationID"  *ngFor="let location of FromlocationforCarrierDD">{{location.fromLocationName}}</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                    <div class="form-group">
+                      <label>{{'key_CarrierInDateTime'| translate}}</label>
+                      <input type="text" class="form-control" [value]="CarrierPickupcidt" name="" value="carrier in date" disabled />
+                    </div>
+                  </div>
+                  <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                    <div class="form-group">
+                      <label>{{'key_CarrierOutDateTime'| translate}}<sup class="sup1 text-danger font-weight-bold">*</sup></label>
+                      <input type="text" [value]="CarrierPickupcodt"  class="form-control" disabled />
+                    </div>
+                  </div>
+                  <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                    <div class="form-group">
+                      <label>{{'key_CarrierWaitTime'| translate}}</label>
+                      <input type="text" [value]="CarrierPickupduration" class="form-control" [disabled]="true" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <div class="col-md-3 col-sm-12 col-lg-3 col-xl-3 pl-1 pr-1 d-flex w-100">
+            <div class="card">
+              <div class="card-header">
+                <div class="card-title mb-0">{{ 'key_CarrierStopDelivery' | translate }}</div>
+              </div>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                    <div class="form-group">
+                      <label for="ccmonth">{{ 'key_SelectStop' | translate }}</label>
+                      <select class="form-control" [(ngModel)]="CarrierStopDeliveryLocationID" (change)="GetStopTimings()" >
+                        <option [value]="location.toLocationID" *ngFor="let location of TolocationforCarrierDD">{{location.toLocationName}}</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                    <div class="form-group">
+                      <label for="ccmonth">{{ 'key_CarrierInDateTime' | translate }}<sup class="sup1 text-danger font-weight-bold">*</sup></label>
+                      <input type="text" [value]="CarrierStopDeliverycidt | date:'MM/dd/yyyy hh:mm a '"   class="form-control" disabled />
+
+                    </div>
+                  </div>
+                  <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                    <div class="form-group">
+                      <label for="ccmonth">{{ 'key_CarrierOutDateTime' | translate }} </label>
+                      <input type="text"  [value]="CarrierStopDeliverycodt" class="form-control" disabled />
+                    </div>
+                  </div>
+                  <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                    <div class="form-group">
+                      <label for="ccmonth">{{ 'key_CarrierWaitTime' | translate }}</label>
+                      <input type="text" [value]="CarrierStopDeliveryduration" class="form-control" [disabled]="true" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3 col-sm-12 col-lg-3 col-xl-3 pl-1 d-flex w-100">
+            <div class="card">
+              <div class="card-header">
+                <div class="card-title mb-0">{{ 'key_Dispatch' | translate }}</div>
+              </div>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                    <div class="form-group">
+                      <label for="ccmonth">{{ 'key_ApprovedDate' | translate }}</label>
+                      <input type="text" class="form-control" [disabled]="true" />
+                    </div>
+                  </div>
+                  <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                    <div class="form-group">
+                      <label for="ccmonth">{{ 'key_ApprovedBy' | translate }}</label>
+                      <input type="text" class="form-control" [disabled]="true" />
+                    </div>
+                  </div>
+                  <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                    <div class="form-group">
+                      <label for="ccmonth">{{ 'key_ToShip' | translate }}</label>
+                      <div class="form-check">
+                        <input type="checkbox" class="form-check-input check" id="" disabled>
+                        <label class="form-check-label ml-3 mt-2" for="compile"> {{'key_Compliedwithshippinginstructions'| translate}}</label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                    <div class="form-group">
+                      <label for="ccmonth">{{ 'key_ToReceive' | translate }}</label>
+                      <div class="form-check">
+                        <input type="checkbox" class="form-check-input check" disabled>
+                        <label class="form-check-label ml-3 mt-2" for="confirms"> {{'key_ConfirmedQtyreceived'| translate}}</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-12">
+        <div class="col-md-12 custom-form bg-white mb-3 pt-3">
+          <div class="row ">
+
+            <div class="col-md-3 col-sm-12 col-lg-3 col-xl-3 d-flex w-100 d-flex justify-content-end">
+
+              <div class="row">
+                <div class="col-md-12">
+                  <h5 class="pt-4 mt-4 pb-3">{{'key_OperationsTimeTracking'| translate}}</h5>
+
+                  <div class="form-group ml-3 pl-1">
+                    <input type="checkbox" id="checkI" class="form-check-input check" disabled />
+                    <label for="checkI" class="form-check-label ml-3 mt-2">{{'key_DropTrailer'| translate}}</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-3 col-sm-12 col-lg-3 col-xl-3 pr-1 d-flex w-100">
+              <div class="card">
+                <div class="card-header">
+                  <div class="card-title mb-0">{{'key_TrailerTimeTracking'| translate}}</div>
+                </div>
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                      <div class="form-group">
+                        <label> {{'key_TrailerCheckinTime'| translate}}</label>
+                        <input type="text" class="form-control" disabled />
+                      </div>
+                    </div>
+
+                    <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                      <div class="form-group">
+                        <label> {{'key_TrailerCheckoutTime'| translate}}</label>
+                        <input type="text" class="form-control" disabled />
+                      </div>
+                    </div>
+                    <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                      <div class="form-group">
+                        <label> {{'key_TotalTrailerTime'| translate}}</label>
+                        <input type="text" class="form-control" [disabled]="true" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="col-md-3 col-sm-12 col-lg-3 col-xl-3 pr-1 d-flex w-100">
+              <div class="card">
+                <div class="card-header">
+                  <div class="card-title mb-0">{{'key_SortTimeTracking'| translate}}</div>
+                </div>
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                      <div class="form-group">
+                        <label> {{'key_SortStartTime'| translate}}</label>
+                        <input type="text" class="form-control" disabled />
+                      </div>
+                    </div>
+                    <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                      <div class="form-group">
+                        <label> {{'key_SortEndTime'| translate}}</label>
+                        <input type="text" class="form-control" disabled />
+                      </div>
+                    </div>
+                    <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                      <div class="form-group">
+                        <label> {{'key_TotalSortTime'| translate}}</label>
+                        <input type="text" class="form-control" [disabled]="true" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-body pl-0 pt-0">
+        <div class="col-md-12">
+          <div class="d-flex flex-nowrap justify-content-between align-items-center">
+            <div class="btn-group btn-group-toggle btn-group-md" data-toggle="buttons">
+              <button id="btnRefresh" class="btn btn-outline-success" data-toggle="modal"
+                      type="button" placement="bottom" ngbTooltip="Add" [disabled]="true">
+                <i class="fa fa-plus" aria-hidden="true"></i>
+                <span>{{'key_add' | translate}}/{{'key_Edit' | translate}}</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="scroll col-sm-12">
+        <mat-table #table [dataSource]="dataSource4" id="FinalMaterial" matSort>
+          <ng-container *ngFor="let column of ShipmentReceiptColumns; let i=index;" [matColumnDef]="column">
+            <mat-header-cell *matHeaderCellDef [resizeColumn]="true" [index]="i">
+
+              {{ ShipmentReceiptColumnsHeaderCheck[i] | translate}}
+            </mat-header-cell>
+
+            <mat-cell *matCellDef="let itemss">
+              <div *ngIf="column === showOnBOL">
+
+                {{itemss.finalshowOnBOL}}
+
+              </div>
+              <div *ngIf="column === quantityDiff">
+
+                {{itemss.quantityDiff}}
+              </div>
+
+              <div *ngIf="column != showOnBOL && column!=quantityDiff">
+                {{ itemss[column] }}
+              </div>
+            </mat-cell>
+          </ng-container>
+          <mat-header-row *matHeaderRowDef="ShipmentReceiptColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: ShipmentReceiptColumns;">
+          </mat-row>
+        </mat-table>
+      </div>
+    </div>
+
+    <div class="tab-pane fade" id="Transportation" role="tabpanel" aria-labelledby="Transportation-tab">
+      <article class="col-md-12">
+        <div class="row">
+          <div class="col-sm-6 font-weight-bold">
+            {{'key_APCharge' | translate}}
+          </div>
+        </div>
+       
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="scroll">
+
+              <mat-table #table [dataSource]="apchargesDataTabHistory" matSort>
+
+                <ng-container matColumnDef="SNo">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> SNo. </mat-header-cell>
+                  <mat-cell *matCellDef="let element" align="right">{{ element.SNo }}</mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="businessPartner">
+                  <mat-header-cell class="" *matHeaderCellDef mat-sort-header> {{'key_BusinessPartner' | translate}}</mat-header-cell>
+                  <mat-cell class="" *matCellDef="let element"> {{element.businessPartnerName}} </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="billingEntity">
+                  <mat-header-cell class="" *matHeaderCellDef mat-sort-header>{{'key_BillingEntity' | translate}}</mat-header-cell>
+                  <mat-cell class="" *matCellDef="let element"> {{element.businessPartnerName}} </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="chargeType">
+                  <mat-header-cell class="" *matHeaderCellDef mat-sort-header>{{'key_ChargeType' | translate}}</mat-header-cell>
+                  <mat-cell class="" *matCellDef="let element">
+                    {{element.chargeTypeName}}
+                  </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="contractAmount">
+                  <mat-header-cell class="" *matHeaderCellDef mat-sort-header>{{'key_ContractAmount' | translate}}</mat-header-cell>
+                  <mat-cell class="" *matCellDef="let element"> {{element.chargeValue | currency}} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="modifiedAmount">
+                  <mat-header-cell class="" *matHeaderCellDef mat-sort-header>{{'key_ModifiedAmount' | translate}}</mat-header-cell>
+                  <mat-cell class="" *matCellDef="let element">
+                    {{element.chargeModifiedValue |  currency}}
+                  </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="uom">
+                  <mat-header-cell class="" *matHeaderCellDef mat-sort-header>{{'key_UOM' | translate}}</mat-header-cell>
+                  <mat-cell class="" *matCellDef="let element">
+                    {{element.chargeUOMName}}
+                  </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="salesTax">
+                  <mat-header-cell class="" *matHeaderCellDef mat-sort-header>{{'key_SalesTax' | translate}}</mat-header-cell>
+                  <mat-cell class="" *matCellDef="let element">
+                    {{element.salesTaxClassName}}
+                  </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="autoAdded">
+                  <mat-header-cell class="" *matHeaderCellDef mat-sort-header>{{'key_AutoAdded' | translate}}</mat-header-cell>
+                  <mat-cell class="" *matCellDef="let element">
+                    {{element.autoAdded}}
+                  </mat-cell>
+                </ng-container>
+
+                <mat-header-row *matHeaderRowDef="apchargesColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: apchargesColumns;">
+                </mat-row>
+              </mat-table>
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <div class="tab-pane fade" id="Document" role="tabpanel" aria-labelledby="Document-tab">
+      <div class="col-md-12">
+        <app-document></app-document>
+      </div>
+    </div>
+    <div class="tab-pane fade" id="Tracking" role="tabpanel" aria-labelledby="Tracking-tab">
+      <div class="col-sm-12">
+        <div class="well mt-2 mb-2" *ngFor="let item of StatusTrackingDataHistory;">
+          <span> {{item.comment}} </span> {{ htmlContent }}
+          <div>Updated By <strong>{{item.updatedby}} at {{item.updatedTime }}</strong></div>
+        </div>
+      </div>
+    </div>
+    <div class="tab-pane fade" id="Tender" role="tabpanel" aria-labelledby="Tender-tab">
+      <div class="col-sm-12">
+        <div class="well mt-2 mb-2" *ngFor="let item of TenderStatusTrackingDataHistory;">
+          <span><strong>{{item.updatedby}} </strong> updated Tender Status " <strong> {{item.trackingDetail}} "</strong> </span> {{ htmlContent }}
+          <div>{{item.updatedTime }}</div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

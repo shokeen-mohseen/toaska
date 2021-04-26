@@ -1,0 +1,374 @@
+
+<div class="modal-header">
+  <h5 class="modal-title" style=" font-size: 16px;">{{'key_recurrence'| translate}}</h5>
+  <button type="button" class="close" data-dismiss="modal" (click)="activeModal.dismiss('Cross click')">&times;</button>
+</div>
+<!-- Modal body -->
+<div class="modal-body col-md-12 recurrence">
+  
+  <div class="row">
+    <div class="moreOptions tabls-inline col-md-6">
+      <h4 class="f16">{{'key_Recurrencepattern' | translate}}</h4>
+      <hr />      
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" id="daily-tab" data-toggle="tab" href="#daily" role="tab" aria-controls="daily" aria-selected="false">
+              {{'key_Daily' | translate}}
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link " id="week-tab" data-toggle="tab" href="#week" role="tab" aria-controls="week" aria-selected="true">
+              {{'key_Weekly' | translate}}
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" id="month-tab" data-toggle="tab" href="#month" role="tab" aria-controls="month" aria-selected="false">
+              {{'key_Monthly' | translate}}
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="year-tab" data-toggle="tab" href="#year" role="tab" aria-controls="year" aria-selected="false">
+              {{'key_Yearly' | translate}}
+            </a>
+          </li>
+        </ul>
+     
+
+      <div class="tab-content pt-3" id="myTabContent">
+        <div class="tab-pane fade show active" id="daily" role="tabpanel" aria-labelledby="daily-tab">
+
+          <div class="col-md-12">
+            <div class="row">
+                <label class="mt-1">
+                  {{'key_Recursevery' | translate}} <sup class="sup1 font-weight-bold text-danger">*</sup>
+                 </label>         
+                <input type="text" name="" class="form-control col-md-4 ml-2" value=" 1" required />
+            </div>
+            <div class="mt-3 row">
+              <div class="form-check-inline mr-3">
+                <label class="form-check-label">
+                  <input type="radio" class="form-check-input" name="optradio"> {{'key_Everyday' | translate}}
+                </label>
+              </div>
+              <div class="form-check-inline">
+                <label class="form-check-label">
+                  <input type="radio" class="form-check-input" name="optradio">{{'key_Everyweekday' | translate}}
+                </label>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+
+        <div class="tab-pane fade" id="week" role="tabpanel" aria-labelledby="week-tab">
+
+          <div class="col-md-12">
+            <div class="row">
+              <label class="mt-1">
+                {{'key_Recursevery' | translate}} <sup class="sup1 font-weight-bold text-danger">*</sup>
+              </label>
+              <input type="text" name="" class="form-control col-md-4 ml-2 mr-2" value=" 1" required />
+              <label class ="mt-1">{{'key_Week' | translate}} on:</label>
+              </div>
+            <div class="mt-3 row">              
+              <ul class="pl-0">
+                <li class="form-check-inline col-md-3">
+                  <label class="form-check-label">
+                    <input type="checkbox" class="form-check-input" name="check">Monday
+                  </label>
+                </li>
+                <li class="form-check-inline col-md-3">
+                  <label class="form-check-label">
+                    <input type="checkbox" class="form-check-input" name="check">Tuesday
+                  </label>
+                </li>
+                <li class="form-check-inline col-md-3">
+                  <label class="form-check-label">
+                    <input type="checkbox" class="form-check-input" name="check">Wednesday
+                  </label>
+                </li>
+                <li class="form-check-inline col-md-3">
+                  <label class="form-check-label">
+                    <input type="checkbox" class="form-check-input" name="check">Thursday
+                  </label>
+                </li>
+                <li class="form-check-inline col-md-3">
+                  <label class="form-check-label">
+                    <input type="checkbox" class="form-check-input" name="check">Friday
+                  </label>
+                </li>
+                <li class="form-check-inline col-md-3">
+                  <label class="form-check-label">
+                    <input type="checkbox" class="form-check-input" name="check">Saturday
+                  </label>
+                </li>
+                <li class="form-check-inline col-md-3">
+                  <label class="form-check-label">
+                    <input type="checkbox" class="form-check-input" name="check">Sunday
+                  </label>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+        <div class="tab-pane fade" id="month" role="tabpanel" aria-labelledby="month-tab">
+
+          <div class="e-profile">
+                  <div class="form-group col-md-12">
+                    <div class="row ">
+                      <label class="mt-1">
+                        <input type="radio" class="mr-1" name="optradio">Day
+                        <sup class="sup1 text-danger font-weight-bold">*</sup>
+                      </label>
+                      <input type="text" class="form-control col-md-2 ml-2 mr-2" value="1" required />
+
+                      <label class="mt-1 mr-2">of every  <sup class="sup1 text-danger font-weight-bold">*</sup></label>
+                      <input type="text" class="form-control col-md-2" value="1" required />
+                      <label class="mt-1 ml-2">Month(s)</label>
+                    </div>
+                  </div>
+                  <div class="form-group col-md-12">
+                    <div class="row mt-1">
+                      <label class="mt-1 mr-2">
+                        <input type="radio" class="mr-1" name="optradio">The
+                      </label>
+                      <select class="form-control col-md-2">
+                        <option>First</option>
+                        <option>Second</option>
+                        <option>Third</option>
+                        <option>Fourth</option>
+                        <option>Last</option>
+                      </select>
+                      <select class="form-control col-md-2">
+                        <option>Sunday</option>
+                        <option>Monday</option>
+                        <option>Tuesday</option>
+                        <option>Wednessday</option>
+                        <option>Thursday</option>
+                        <option>Friday</option>
+                        <option>Saturday</option>
+                      </select>
+
+                      <label class="mt-1 ml-2 mr-2">of every  <sup class="sup1 text-danger font-weight-bold">*</sup></label>
+                      <input type="text" class="form-control col-md-2" value="1" required />
+                      <label class="mt-1 ml-2">Month(s)</label>
+                    </div>
+                   </div>
+          </div>
+
+        </div>
+        <div class="tab-pane fade" id="year" role="tabpanel" aria-labelledby="year-tab">
+          <div class="col-md-12 form-group">
+            <div class="row">
+              <label class="mt-1">
+                {{'key_Recursevery' | translate}} <sup class="sup1 font-weight-bold text-danger">*</sup>
+              </label>
+              <input type="text" name="" class="form-control col-md-4 ml-2" value=" 1" required />
+              <label class="mt-1 ml-2">Year(s)</label>
+            </div>
+            <div class="row mt-1">
+              <div class="form-check-inline">
+                <label class="form-check-label">
+                  <input type="radio" class="form-check-input" name="optradio">On <sup class="sup1 text-danger font-weight-bold">*</sup>
+                </label>
+                <select class="form-control col-md-4 ml-2">
+                    <option>January</option>
+                    <option>February</option>
+                    <option>March</option>
+                    <option>April</option>
+                    <option>May</option>
+                    <option>June</option>
+                    <option>July</option>
+                    <option>Augest</option>
+                    <option>September</option>
+                    <option>October</option>
+                    <option>November</option>
+                    <option>December</option>
+                  </select>
+                  <input type="text" class="form-control ml-2 col-md-3" value="1" required />
+                
+              </div>
+            </div>
+
+            <div class="row mt-1">
+           <div class="form-check-inline">
+                <label class="form-check-label mt-1">
+                <input type="radio" class="form-check-input" name="optradio">On the :
+              </label>
+              <select class="form-control col-md-2 ml-2">
+                    <option>First</option>
+                    <option>Second</option>
+                    <option>Third</option>
+                    <option>Fourth</option>
+                    <option>Last</option>
+                  </select>
+                  <select class="form-control col-md-3">
+                    <option>Sunday</option>
+                    <option>Monday</option>
+                    <option>Tuesday</option>
+                    <option>Wednessday</option>
+                    <option>Thursday</option>
+                    <option>Friday</option>
+                    <option>Saturday</option>
+                  </select>
+                
+              <label class="mt-1 mr-2 ml-2">of </label>
+              <select class="form-control col-md-3">
+                <option>January</option>
+                <option>February</option>
+                <option>March</option>
+                <option>April</option>
+                <option>May</option>
+                <option>June</option>
+                <option>July</option>
+                <option>Augest</option>
+                <option>September</option>
+                <option>October</option>
+                <option>November</option>
+                <option>December</option>
+              </select>
+            </div>
+              </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="col-md-1"></div>
+    <div class="col-md-5">
+      <h4 class="f16">{{'key_RangeOfRecurrence' | translate}}</h4>
+      <hr />
+      <div class="row">
+        <div class="form-group col-md-12">
+          <label>{{'key_Start'| translate}}<sup class="text-danger font-weight-bold sup1"> *</sup></label>
+          <input type="date" name="" class="form-control" />
+        </div>
+        <div class="col-md-6">
+          <div class="row">
+            <div class="col-md-6 text-right mt-1">
+              <input type="radio" class="form-check-input" name="optradio"> {{'key_EndAfter'| translate}}<sup class="sup1 text-danger font-weight-bold">*</sup>
+            </div>
+            <div class="col-md-6 pl-0">
+              <input type="text" class="form-control" value="1" /><small>{{'key_occurrences'| translate}}</small>
+              </div>
+            </div>
+          </div>
+        <div class="col-md-6">
+          <div class="row">
+            <div class="col-md-5 text-right mt-1">
+              <input type="radio" class="form-check-input" name="optradio">End By  <sup class="sup1 text-danger font-weight-bold">*</sup>
+              </div>
+            <div class="col-md-7 pl-0">
+              <input type="date" class="form-control" value="1" required />
+            </div>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <hr />
+  <mat-accordion>
+    <mat-expansion-panel (opened)="panelOpenState = true"
+                         (closed)="panelOpenState = false" [expanded]="true">
+      <mat-expansion-panel-header>
+        <mat-panel-description>
+          Recurring Items to Create
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <div class="card-body pt-0 pb-0">
+        <div class="row pl-0 pr-0">
+          <div class="d-flex flex-nowrap justify-content-between align-items-center mb-2">
+            <div class="btn-group btn-group-toggle btn-group-md" data-toggle="buttons">
+              <button id="editButton" class="btn btn-outline-primary" type="button" placement="bottom">
+                <i class="fa fa-pencil" aria-hidden="true"></i>
+                <span>
+                  {{ 'key_Edit' | translate }}
+                </span>
+              </button>
+              <button id="btnRefresh" class="btn btn-outline-primary" type="button" placement="bottom" ngbTooltip="Refresh">
+                <i class="fa fa-refresh" aria-hidden="true"></i>
+                <span>Refresh</span>
+              </button>
+              <button id="deleteButton" class="btn btn btn-outline-danger" type="button" placement="bottom" ngbTooltip="Delete">
+                <i class="fa fa-trash-o" aria-hidden="true"></i>
+                <span>
+                  Delete
+                </span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="scroll">
+        <mat-table #table [dataSource]="dataSource" matSort>
+          <ng-container matColumnDef="selectRow">
+            <mat-header-cell class="t-center tw-5" *matHeaderCellDef>
+              <div class="form-check-inline">
+                <label class="form-check-label">
+                  <input type="checkbox" class="form-check-input" value="" placement="top" ngbTooltip="Select all" (change)="$event ? masterToggle() : null"
+                         [checked]="selection.hasValue() && isAllSelected()"
+                         [indeterminate]="selection.hasValue() && !isAllSelected()">
+                </label>
+              </div>
+            </mat-header-cell>
+            <mat-cell class="t-center tw-5" *matCellDef="let row">
+              <div class="form-check-inline">
+                <label class="form-check-label">
+                  <input type="checkbox" class="form-check-input" value="" (click)="$event.stopPropagation()"
+                         (change)="$event ? selection.toggle(row) : null"
+                         [checked]="selection.isSelected(row)">
+                </label>
+              </div>
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="RequestedDeliveryDate">
+            <mat-header-cell class="" *matHeaderCellDef mat-sort-header>Requested Delivery Date</mat-header-cell>
+            <mat-cell class="" *matCellDef="let element"> {{element.RequestedDeliveryDate}} </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="OrderNumber">
+            <mat-header-cell class="" *matHeaderCellDef mat-sort-header>Order Number</mat-header-cell>
+            <mat-cell class="" *matCellDef="let element"> {{element.OrderNumber}} </mat-cell>
+          </ng-container>
+
+
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"
+                   [ngClass]="{hovered: row.hovered, highlighted: row.highlighted}"
+                   (click)="selection.toggle(row) || row.highlighted = !row.highlighted"
+                   (mouseover)="row.hovered = true" (mouseout)="row.hovered = false">
+          </mat-row>
+        </mat-table>
+      </div>
+     <!-- <mat-paginator #paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 20]"></mat-paginator>-->
+    </mat-expansion-panel>
+  </mat-accordion>
+
+</div>
+
+    <div class="modal-footer col-12 justify-content-center">
+      <div class="d-flex justify-content-center">
+        <button type="button" class="btn btn-next font-weight-normal mr-3">Calculate</button>
+      </div>
+      <div class="d-flex justify-content-center">
+        <div class="form-group">
+          <div class="form-check checkbox mt-2 mr-3">
+            <input id="check1" type="checkbox" value="" checked="" class="form-check-input">
+            <label for="check1" class="form-check-label"> Send Notification</label>
+          </div>
+        </div>
+      </div>
+      <div class="d-flex justify-content-center">
+        <button type="button" class="btn btn-save font-weight-normal mr-3">Create</button>
+      </div>
+      <div class="d-flex justify-content-center">
+        <button type="button" class="btn btn-next font-weight-normal" data-dismiss="modal" (click)="activeModal.dismiss('Cross click')">Cancel</button>
+      </div>
+    </div>

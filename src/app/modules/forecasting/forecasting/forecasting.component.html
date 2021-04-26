@@ -1,0 +1,169 @@
+<!--TFS ID: 17434,
+  Author: Monu Ram Yadav,
+  Date: 16-09-2020,
+  Des: Design - Forecast main listing page  -->
+
+<app-top-btn-group #btnBar [actionGroupConfig]="actionGroupConfig" (action)="actionHandler($event)" [ParentPageName]="ForecastingList"></app-top-btn-group>
+
+<h5>{{ 'key_Forecast' | translate }}</h5>
+<div *ngIf="mainPage">
+  <mat-tab-group animationDuration="0ms" #tabGroupA class="mt-18" (selectedTabChange)="tabChange($event)">
+
+    <mat-tab #tab1 *ngIf="tab1">
+      <ng-template mat-tab-label>
+        {{ 'key_ForcastList' | translate }}
+      </ng-template>
+
+      <div class="row">
+        <div class="col-md-6">
+          <h4>
+            <div *ngIf="updateinprogess">
+              <strong>{{forecastSelected?.name}}</strong><span>(Forecast update is in-progress ...)</span>
+            </div>
+             <div *ngIf="!updateinprogess && forecastSelected != null">
+                <strong>{{forecastSelected?.name}}</strong>
+                (<spam *ngIf="!forecastSelected.isPublished">
+                  Not Published
+                </spam>
+                <spam *ngIf="forecastSelected.isPublished">
+                  Published
+                </spam>
+                /<spam *ngIf="!forecastSelected.isLocked">
+                  Unlocked
+                </spam>
+                <spam *ngIf="forecastSelected.isLocked">
+                  Locked
+                </spam>)
+              </div>
+
+
+          </h4>
+
+          <!--({{forecastSelected?.isActive}})-->
+        </div>
+        <div class="col-md-6 text-right">
+          <span class="fw600"><strong>{{ 'key_LastUpdate' | translate }}:</strong> </span> {{forecastSelected?.updateDateTimeBrowser | momentDateWithZonePipe}}
+          <br><span class="fw600"><strong>{{ 'key_By' | translate }}:</strong> </span> {{forecastSelected?.updatedBy}}
+        </div>
+      </div>
+
+      <div class="tab-content" *ngIf="tab1Data">
+        <div class="filter-section" *ngIf="filter">
+          <mat-accordion>
+            <mat-expansion-panel (opened)="panelOpenState = true"
+                                 (closed)="panelOpenState = false" [expanded]="false">
+              <mat-expansion-panel-header>
+                <mat-panel-description>
+                  {{panelOpenState ? '- Hide' : '+ Show'}} {{ 'key_FilterForForecast' | translate }}
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+
+              <div class="row">
+
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label> {{ 'key_Forecast' | translate }}</label>
+                    <!--<angular2-multiselect fixFilterBug [data]="forecastList" [(ngModel)]="forecastListSelected" [settings]="forecastSettings">
+                    </angular2-multiselect>-->
+
+                    <angular2-multiselect (click)="onSearch($event)" fixFilterBug [data]="forecastList" [(ngModel)]="forecastListSelected" [settings]="forecastSettings">
+                      <!--<c-search>
+                        <ng-template>
+                          <input type="text" (keyup)="onSearch($event)" placeholder="Search" style="border: none;width: 100%; height: 100%;outline: none;" />
+                        </ng-template>
+                      </c-search>
+                      <c-item>
+                        <ng-template let-item="item">
+                          <label style="color: #333;width: 150px;">{{item.name}}</label>
+                        </ng-template>
+                      </c-item>-->                       
+                    </angular2-multiselect> 
+
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="d-block"> &nbsp; </label>
+                    <button class="btn btn-next font-weight-normal"  [disabled]="forecastListSelected.length==0"  (click)="applyFilter()"> {{ 'key_ApplyFilter' | translate }}</button>
+                  </div>
+                </div>
+              </div>
+
+
+              <!--<app-filter></app-filter>-->
+            </mat-expansion-panel>
+          </mat-accordion>
+          <!--///end filter for Forecast-->
+        </div>
+        <!--End Filter Section -->
+
+        <app-create-compute-sales-forecast [buttonBar]="btnBar" (selectedForecastList)="selectedForecastList($event)"></app-create-compute-sales-forecast>
+      </div>
+    </mat-tab>
+
+    <mat-tab #tab2 *ngIf="tab2">
+      <ng-template mat-tab-label>
+        {{ 'key_AddNewForecast' | translate }}
+        <button class="close" type="button" (click)="closeTab()">
+          <i class="fa fa-times-circle-o" aria-hidden="true"></i>
+        </button>
+      </ng-template>
+      <div class="tab-content" *ngIf="tab2Data">
+        <app-addnew-forecast></app-addnew-forecast>
+      </div>
+    </mat-tab>
+
+    <mat-tab #tab3 *ngIf="tab3">
+      <ng-template mat-tab-label>
+        {{ 'key_EditCharge' | translate }}
+        <button class="close" type="button" (click)="closeTab()">
+          <i class="fa fa-times-circle-o" aria-hidden="true"></i>
+        </button>
+      </ng-template>
+      <div class="tab-content" *ngIf="tab3Data">
+        <!--<app-edit-charge></app-edit-charge>-->
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</div>
+
+<div *ngIf="graphPage">
+  <mat-tab-group animationDuration="0ms" #tabGroupA class="mt-18" (selectedTabChange)="tabChange($event)">
+
+    <mat-tab *ngIf="tab1">
+
+      <ng-template mat-tab-label>
+        {{ 'key_Graph' | translate }}
+        <button class="close" type="button" (click)="closeTab1()">
+          <i class="fa fa-times-circle-o" aria-hidden="true"></i>
+        </button>
+      </ng-template>
+
+      <app-graph></app-graph>
+
+    </mat-tab>
+
+
+  </mat-tab-group>
+
+</div>
+<app-show-notes></app-show-notes>
+<div class="modal" id="deletePopup">
+  <div class="modal-dialog modal-xs">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">
+          {{'key_Confirmation'| translate}}
+        </h5>
+        <button type="button" for="confirms" class="close" data-dismiss="modal" #compilecheckclose>&times;</button>
+      </div>
+      <div class="modal-body text-center mt-4 mb-4">
+        <h5>{{this.DeleteForecastMessage}}</h5>
+        <div class="text-center mt-4">
+          <button class="btn btn-save mr-2" (click)="deleteForecast_Details()">Yes </button>
+          <button class="btn btn-next" (click)="closetonupopup()">No</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
